@@ -4,15 +4,15 @@
     <PackageVersion Include="Xamarin.AndroidX.CardView" Version="1.0.0.8" />
     <PackageVersion Include="Xamarin.AndroidX.Leanback" Version="1.0.0.7" />
     <PackageVersion Include="Xamarin.AndroidX.RecyclerView" Version="1.2.0" />
-    <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.2.0.7" />
-    <PackageVersion Include="Xamarin.AndroidX.Fragment" Version="1.3.3" />
+    <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.3.0" />
+    <PackageVersion Include="Xamarin.AndroidX.Fragment" Version="1.3.4" />
     <PackageVersion Include="Xamarin.AndroidX.ViewPager" Version="1.0.0.7" />
     <PackageVersion Include="Xamarin.AndroidX.Preference" Version="1.1.1.8" />
     <PackageVersion Include="Xamarin.AndroidX.ExifInterface" Version="1.3.2.2" />
-    <PackageVersion Include="Xamarin.AndroidX.MediaRouter" Version="1.2.2.1" />
+    <PackageVersion Include="Xamarin.AndroidX.MediaRouter" Version="1.2.3" />
     <PackageVersion Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.3.1" />
     <PackageVersion Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.7" />
-    <PackageVersion Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.2.0.7" />
+    <PackageVersion Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.3.0" />
     <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.3.0.1" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="117.6.0" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="118.0.0" />
@@ -25,10 +25,10 @@
     <PackageVersion Include="Roslynator.Analyzers" Version="3.1.0" />
     <PackageVersion Include="AsyncFixer" Version="1.5.1" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.22.0.31243" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.23.0.32424" />
     <PackageVersion Include="SourceLink.Create.CommandLine" Version="2.8.3" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.0.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     <PackageVersion Include="Moq" Version="4.16.1" />
     <PackageVersion Include="xunit" Version="2.4.1" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.3" />
