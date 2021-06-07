@@ -200,6 +200,7 @@
   <ItemGroup>
     <PackageReference Include="Serilog" />
     <PackageReference Include="Serilog.Sinks.Xamarin" />
+    <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Xamarin.FFImageLoading" />
     <PackageReference Include="Plugin.Permissions" />
     <PackageReference Include="Xamarin.GooglePlayServices.Basement" />

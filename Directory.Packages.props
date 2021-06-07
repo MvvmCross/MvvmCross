@@ -40,5 +40,6 @@
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="0.2.0.64"/>
     <PackageVersion Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="3.0.1" />
   </ItemGroup>
 </Project>
