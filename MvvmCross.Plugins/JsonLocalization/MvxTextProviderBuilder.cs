@@ -4,9 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Localization;
-using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin.JsonLocalization
 {
@@ -52,7 +52,7 @@ namespace MvvmCross.Plugin.JsonLocalization
                 }
                 catch (Exception exception)
                 {
-                    MvxPluginLog.Instance.Warn("Language file could not be loaded for {0}.{1} - {2}",
+                    MvxPluginLog.Instance?.Log(LogLevel.Warning, "Language file could not be loaded for {0}.{1} - {2}",
                                    whichLocalizationFolder, kvp.Key, exception.ToLongString());
                 }
             }

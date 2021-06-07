@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Plugin.Messenger.Subscriptions;
 using MvvmCross.Plugin.Messenger.ThreadRunners;
@@ -89,7 +90,7 @@ namespace MvvmCross.Plugin.Messenger
                     messageSubscriptions = new Dictionary<Guid, BaseSubscription>();
                     _subscriptions[typeof(TMessage)] = messageSubscriptions;
                 }
-                MvxPluginLog.Instance?.Trace("Adding subscription {0} for {1}", subscription.Id, typeof(TMessage).Name);
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "Adding subscription {0} for {1}", subscription.Id, typeof(TMessage).Name);
                 messageSubscriptions[subscription.Id] = subscription;
 
                 PublishSubscriberChangeMessage<TMessage>(messageSubscriptions);
@@ -114,7 +115,7 @@ namespace MvvmCross.Plugin.Messenger
                     typeof(TMessage), out Dictionary<Guid, BaseSubscription> messageSubscriptions) &&
                     messageSubscriptions.ContainsKey(subscriptionGuid))
                 {
-                    MvxPluginLog.Instance?.Trace("Removing subscription {0}", subscriptionGuid);
+                    MvxPluginLog.Instance?.Log(LogLevel.Trace, "Removing subscription {0}", subscriptionGuid);
                     messageSubscriptions.Remove(subscriptionGuid);
                     // Note - we could also remove messageSubscriptions if empty here
                     //      - but this isn't needed in our typical apps
@@ -209,7 +210,7 @@ namespace MvvmCross.Plugin.Messenger
         {
             if (typeof(TMessage) == typeof(MvxMessage))
             {
-                MvxPluginLog.Instance?.Warn(
+                MvxPluginLog.Instance?.Log(LogLevel.Warning,
                                "MvxMessage publishing not allowed - this normally suggests non-specific generic used in calling code - switching to message.GetType()");
                 Publish(message, message.GetType());
                 return;
@@ -240,7 +241,7 @@ namespace MvvmCross.Plugin.Messenger
 
             if (toNotify == null || toNotify.Count == 0)
             {
-                MvxPluginLog.Instance?.Trace("Nothing registered for messages of type {0}", messageType.Name);
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "Nothing registered for messages of type {0}", messageType.Name);
                 return;
             }
 
@@ -252,7 +253,7 @@ namespace MvvmCross.Plugin.Messenger
 
             if (!allSucceeded)
             {
-                MvxPluginLog.Instance?.Trace("One or more listeners failed - purge scheduled");
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "One or more listeners failed - purge scheduled");
                 SchedulePurge(messageType);
             }
         }
@@ -319,7 +320,7 @@ namespace MvvmCross.Plugin.Messenger
                     }
                 }
 
-                MvxPluginLog.Instance?.Trace("Purging {0} subscriptions", deadSubscriptionIds.Count);
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "Purging {0} subscriptions", deadSubscriptionIds.Count);
                 foreach (var id in deadSubscriptionIds)
                 {
                     messageSubscriptions.Remove(id);
