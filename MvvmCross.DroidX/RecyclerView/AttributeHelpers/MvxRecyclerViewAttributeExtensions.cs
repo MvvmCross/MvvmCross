@@ -6,6 +6,7 @@ using System;
 using Android.Content;
 using Android.Content.Res;
 using Android.Util;
+using Microsoft.Extensions.Logging;
 using MvvmCross.DroidX.RecyclerView.ItemTemplates;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
@@ -52,24 +53,25 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
 
             if (type == null)
             {
-                var message = $"Sorry but type with class name: {templateSelectorClassName} does not exist." +
-                             $"Make sure you have provided full Type name: namespace + class name, AssemblyName." +
-                              $"Example (check Example.Droid sample!): Example.Droid.Common.TemplateSelectors.MultiItemTemplateModelTemplateSelector, Example.Droid";
-                MvxAndroidLog.Instance.Error(message);
+                var message = 
+                    "Sorry but type with class name: {TemplateSelectorClassName} does not exist." +
+                    "Make sure you have provided full Type name: namespace + class name, AssemblyName." +
+                    "Example (check Example.Droid sample!): Example.Droid.Common.TemplateSelectors.MultiItemTemplateModelTemplateSelector, Example.Droid";
+                MvxAndroidLog.Instance.Log(LogLevel.Error, message, templateSelectorClassName);
                 throw new InvalidOperationException(message);
             }
          
             if (!typeof(IMvxTemplateSelector).IsAssignableFrom(type))
             {
-                string message = $"Sorry but type: {type} does not implement {nameof(IMvxTemplateSelector)} interface.";
-                MvxAndroidLog.Instance.Error(message);
+                string message = "Sorry but type: {Type} does not implement {TemplateSelectorType} interface.";
+                MvxAndroidLog.Instance.Log(LogLevel.Error, message, type, nameof(IMvxTemplateSelector));
                 throw new InvalidOperationException(message);
             }
 
             if (type.IsAbstract)
             {
-                string message = $"Sorry can not instatiate {nameof(IMvxTemplateSelector)} as provided type: {type} is abstract/interface.";
-                MvxAndroidLog.Instance.Error(message);
+                string message = "Sorry can not instatiate {TemplateSelectorType} as provided type: {Type} is abstract/interface.";
+                MvxAndroidLog.Instance.Log(LogLevel.Error, message, nameof(IMvxTemplateSelector), type);
                 throw new InvalidOperationException(message);
             }
 
