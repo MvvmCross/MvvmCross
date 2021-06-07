@@ -5,7 +5,6 @@
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Logging;
 using MvvmCross.Plugin;
 using Playground.Core;
 using Playground.Droid.Bindings;
@@ -14,7 +13,6 @@ using Serilog;
 using Serilog.Extensions.Logging;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.DroidX.RecyclerView;
-using MvvmCross.IoC;
 using Microsoft.Extensions.Logging;
 
 namespace Playground.Droid
