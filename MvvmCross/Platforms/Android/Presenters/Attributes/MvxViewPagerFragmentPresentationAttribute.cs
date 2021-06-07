@@ -10,6 +10,10 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxViewPagerFragmentPresentationAttribute : MvxFragmentPresentationAttribute
     {
+        public MvxViewPagerFragmentPresentationAttribute()
+        {
+        }
+
         public MvxViewPagerFragmentPresentationAttribute(
             string title,
             int viewPagerResourceId,
@@ -74,7 +78,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         /// <summary>
         /// The title for the ViewPager. Also used as Title for TabLayout when using MvxTabLayoutPresentationAttribute
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// The resource used to get the ViewPager from the view
