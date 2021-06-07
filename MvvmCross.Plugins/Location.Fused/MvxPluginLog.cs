@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Plugin.Location.Fused
 {
     internal static class MvxPluginLog
     {
-        internal static IMvxLog Instance { get; } = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor("MvxPlugin");
+        internal static ILogger Instance { get; } = Mvx.IoCProvider.Resolve<ILoggerFactory>().CreateLogger("MvxPlugin");
     }
 }
