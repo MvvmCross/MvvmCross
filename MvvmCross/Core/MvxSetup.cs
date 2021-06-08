@@ -584,16 +584,5 @@ namespace MvvmCross.Core
                 throw new ArgumentNullException(nameof(iocProvider));
         }
     }
-
-    public abstract class MvxSetup<TApplication> : MvxSetup
-        where TApplication : class, IMvxApplication, new()
-    {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
-
-        public override IEnumerable<Assembly> GetViewModelAssemblies()
-        {
-            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
-        }
-    }
 #nullable restore
 }
