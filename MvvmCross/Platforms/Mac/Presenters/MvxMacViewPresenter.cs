@@ -16,6 +16,7 @@ using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 using System.Threading.Tasks;
 using Foundation;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Mac.Presenters
 {
@@ -26,7 +27,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
-            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new window presentation");
+            MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. Assuming new window presentation", viewType.Name);
             return new MvxWindowPresentationAttribute();
         }
 
@@ -41,7 +42,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
                     if (presentationAttribute == null)
                     {
-                        MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
+                        MvxLogHost.Default?.Log(LogLevel.Warning, "Override PresentationAttribute null. Falling back to existing attribute.");
                     }
                     else
                     {

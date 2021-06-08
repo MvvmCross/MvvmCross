@@ -14,6 +14,7 @@ using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Wpf.Presenters
 {
@@ -77,13 +78,13 @@ namespace MvvmCross.Platforms.Wpf.Presenters
         {
             if (viewType.IsSubclassOf(typeof(Window)))
             {
-                MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. " +
-                    $"Assuming window presentation");
+                MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. " +
+                    "Assuming window presentation", viewType.Name);
                 return new MvxWindowPresentationAttribute();
             }
 
-            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. " +
-                    $"Assuming content presentation");
+            MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. " +
+                    "Assuming content presentation", viewType.Name);
             return new MvxContentPresentationAttribute();
         }
 
@@ -100,7 +101,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
 
                     if (presentationAttribute == null)
                     {
-                        MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
+                        MvxLogHost.Default?.Log(LogLevel.Warning, "Override PresentationAttribute null. Falling back to existing attribute.");
                     }
                     else
                     {
@@ -186,7 +187,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             if (FrameworkElementsDictionary.Any(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose) && await CloseContentView(toClose))
                 return true;
 
-            MvxLog.Instance.Warn($"Could not close ViewModel type {toClose.GetType().Name}");
+            MvxLogHost.Default?.Log(LogLevel.Warning, "Could not close ViewModel type {ViewModelTypeName}", toClose.GetType().Name);
             return false;
         }
 
