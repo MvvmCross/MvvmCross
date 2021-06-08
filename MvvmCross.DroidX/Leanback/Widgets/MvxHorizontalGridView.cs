@@ -14,6 +14,7 @@ using MvvmCross.DroidX.Leanback.Listeners;
 using MvvmCross.DroidX.RecyclerView;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.Views;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.DroidX.Leanback.Widgets
 {
@@ -21,7 +22,7 @@ namespace MvvmCross.DroidX.Leanback.Widgets
     /// This class is actually (almost) the same as MvxRecylerView. Please keep this in mind if fixing bugs or implementing improvements!
     /// </remarks>
     [Register("mvvmcross.droidx.leanback.widgets.MvxHorizontalGridView")]
-    public class MvxHorizontalGridView 
+    public class MvxHorizontalGridView
         : HorizontalGridView
     {
         #region ctor
@@ -38,43 +39,43 @@ namespace MvvmCross.DroidX.Leanback.Widgets
         {
         }
 
-		public MvxHorizontalGridView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle)
-		{
-			// Note: Any calling derived class passing a null adapter is responsible for setting
-			// it's own itemTemplateId
-			if (adapter == null)
-				return;
+        public MvxHorizontalGridView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle)
+        {
+            // Note: Any calling derived class passing a null adapter is responsible for setting
+            // it's own itemTemplateId
+            if (adapter == null)
+                return;
 
-			var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
+            var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
 
-			adapter.ItemTemplateId = itemTemplateId;
+            adapter.ItemTemplateId = itemTemplateId;
             Adapter = adapter;
 
-			var typedArray = context.ObtainStyledAttributes(attrs, Resource.Styleable.MvxHorizontalGridView);
-			try
-			{
-				FocusFirstChildOnLaidOut = typedArray.GetBoolean(Resource.Styleable.MvxHorizontalGridView_FocusFirstChildOnLaidOut, false);
-				if (FocusFirstChildOnLaidOut)
-				{
-					SetOnChildLaidOutListener(new MvxFocusFirstChildOnChildLaidOutListener());
-				}
-			}
-			finally
-			{
-				typedArray.Recycle();
-			}
+            var typedArray = context.ObtainStyledAttributes(attrs, Resource.Styleable.MvxHorizontalGridView);
+            try
+            {
+                FocusFirstChildOnLaidOut = typedArray.GetBoolean(Resource.Styleable.MvxHorizontalGridView_FocusFirstChildOnLaidOut, false);
+                if (FocusFirstChildOnLaidOut)
+                {
+                    SetOnChildLaidOutListener(new MvxFocusFirstChildOnChildLaidOutListener());
+                }
+            }
+            finally
+            {
+                typedArray.Recycle();
+            }
 
-			// We need this listener to get information about the currently _selected_ item
-			// Overriding setter of base.SelectedPosition is not enough!
-			OnChildViewHolderSelectedListener = new MvxOnChildViewHolderSelectedListener();
-			SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener);
-		}
+            // We need this listener to get information about the currently _selected_ item
+            // Overriding setter of base.SelectedPosition is not enough!
+            OnChildViewHolderSelectedListener = new MvxOnChildViewHolderSelectedListener();
+            SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener);
+        }
 
         #endregion ctor
-		/// <summary>
-		/// If true, the child at position 0 will request focus.
-		/// </summary>
-		public bool FocusFirstChildOnLaidOut { get; private set; }
+        /// <summary>
+        /// If true, the child at position 0 will request focus.
+        /// </summary>
+        public bool FocusFirstChildOnLaidOut { get; private set; }
 
         public new IMvxRecyclerAdapter Adapter
         {
@@ -107,24 +108,24 @@ namespace MvvmCross.DroidX.Leanback.Widgets
             }
         }
 
-		protected MvxOnChildViewHolderSelectedListener OnChildViewHolderSelectedListener { get; set; }
+        protected MvxOnChildViewHolderSelectedListener OnChildViewHolderSelectedListener { get; set; }
 
-		public new void SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener listener)
-		{
-            MvxAndroidLog.Instance.Warn("Overwriting OnChildViewHolderSelectedListener will possibly break ItemSelection command.");
-			base.SetOnChildViewHolderSelectedListener(listener);
-		}
+        public new void SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener listener)
+        {
+            MvxAndroidLog.Instance.Log(LogLevel.Warning, "Overwriting OnChildViewHolderSelectedListener will possibly break ItemSelection command.");
+            base.SetOnChildViewHolderSelectedListener(listener);
+        }
 
-		public new void SetOnChildLaidOutListener(IOnChildLaidOutListener listener)
-		{
-			if (FocusFirstChildOnLaidOut && !(listener is MvxFocusFirstChildOnChildLaidOutListener))
-			{
-                MvxAndroidLog.Instance.Warn("Overwriting OnChildLaidOutListener will possibly break focusing of first child!");
-			}
-			base.SetOnChildLaidOutListener(listener);
-		}
+        public new void SetOnChildLaidOutListener(IOnChildLaidOutListener listener)
+        {
+            if (FocusFirstChildOnLaidOut && !(listener is MvxFocusFirstChildOnChildLaidOutListener))
+            {
+                MvxAndroidLog.Instance.Log(LogLevel.Warning, "Overwriting OnChildLaidOutListener will possibly break focusing of first child!");
+            }
+            base.SetOnChildLaidOutListener(listener);
+        }
 
-		[MvxSetToNullAfterBinding]
+        [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
             get { return Adapter.ItemsSource; }
@@ -149,24 +150,24 @@ namespace MvvmCross.DroidX.Leanback.Widgets
             set { Adapter.ItemLongClick = value; }
         }
 
-		public ICommand ItemSelection
-		{
-			get { return OnChildViewHolderSelectedListener?.ItemSelection; }
-			set { OnChildViewHolderSelectedListener.ItemSelection = value; }
-		}
+        public ICommand ItemSelection
+        {
+            get { return OnChildViewHolderSelectedListener?.ItemSelection; }
+            set { OnChildViewHolderSelectedListener.ItemSelection = value; }
+        }
 
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				if (OnChildViewHolderSelectedListener != null)
-				{
-					OnChildViewHolderSelectedListener.Dispose();
-					OnChildViewHolderSelectedListener = null;
-				}
-			}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (OnChildViewHolderSelectedListener != null)
+                {
+                    OnChildViewHolderSelectedListener.Dispose();
+                    OnChildViewHolderSelectedListener = null;
+                }
+            }
 
-			base.Dispose(disposing);
-		}
+            base.Dispose(disposing);
+        }
     }
 }
