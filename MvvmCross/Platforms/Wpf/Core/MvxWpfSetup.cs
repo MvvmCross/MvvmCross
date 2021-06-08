@@ -112,7 +112,7 @@ namespace MvvmCross.Platforms.Wpf.Core
         {
             RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
         protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
@@ -160,10 +160,11 @@ namespace MvvmCross.Platforms.Wpf.Core
         }
     }
 
-    public class MvxWpfSetup<TApplication> : MvxWpfSetup
+    public abstract class MvxWpfSetup<TApplication> : MvxWpfSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

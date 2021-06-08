@@ -194,7 +194,8 @@ namespace MvvmCross.Platforms.Ios.Core
     public abstract class MvxIosSetup<TApplication> : MvxIosSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

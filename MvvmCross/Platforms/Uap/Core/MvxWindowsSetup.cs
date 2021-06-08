@@ -199,12 +199,13 @@ namespace MvvmCross.Platforms.Uap.Core
     public abstract class MvxWindowsSetup<TApplication> : MvxWindowsSetup
          where TApplication : class, IMvxApplication, new()
     {
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
+
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
-
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
     }
 #nullable restore
 }

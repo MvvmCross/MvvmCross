@@ -69,7 +69,7 @@ namespace MvvmCross.Core
             return instance;
         }
 
-        protected abstract IMvxApplication CreateApp();
+        protected abstract IMvxApplication CreateApp(IMvxIoCProvider iocProvider);
 
         protected abstract IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider);
 
@@ -170,13 +170,13 @@ namespace MvvmCross.Core
         {
             ValidateArguments(iocProvider);
 
-            var cache = CreateViewModelCache();
+            var cache = CreateViewModelCache(iocProvider);
             return cache;
         }
 
-        protected virtual IMvxChildViewModelCache CreateViewModelCache()
+        protected virtual IMvxChildViewModelCache CreateViewModelCache(IMvxIoCProvider iocProvider)
         {
-            return Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
+            return iocProvider.Resolve<IMvxChildViewModelCache>();
         }
 
         protected virtual IMvxSettings InitializeSettings(IMvxIoCProvider iocProvider)
@@ -277,7 +277,7 @@ namespace MvvmCross.Core
             iocProvider.LazyConstructAndRegisterSingleton<IMvxSettings, MvxSettings>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxStringToTypeParser, MvxStringToTypeParser>();
             iocProvider.RegisterSingleton<IMvxPluginManager>(() => new MvxPluginManager(GetPluginConfiguration));
-            iocProvider.RegisterSingleton(CreateApp);
+            iocProvider.RegisterSingleton(CreateApp(iocProvider));
             iocProvider.LazyConstructAndRegisterSingleton<IMvxViewModelLoader, MvxViewModelLoader>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxNavigationService, IMvxViewModelLoader, IMvxViewDispatcher>((loader, dispatcher) =>
                 new MvxNavigationService(loader, dispatcher));
