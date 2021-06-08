@@ -129,7 +129,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
         }
     }
 
-    public class MvxFormsAndroidSetup<TApplication, TFormsApplication> : MvxFormsAndroidSetup
+    public abstract class MvxFormsAndroidSetup<TApplication, TFormsApplication> : MvxFormsAndroidSetup
         where TApplication : class, IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
@@ -145,6 +145,6 @@ namespace MvvmCross.Forms.Platforms.Android.Core
 
         protected override Application CreateFormsApplication() => new TFormsApplication();
 
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) => iocProvider.IoCConstruct<TApplication>();
     }
 }

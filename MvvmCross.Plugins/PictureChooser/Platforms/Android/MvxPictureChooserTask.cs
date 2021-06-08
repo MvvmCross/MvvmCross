@@ -166,7 +166,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
                 var memoryStream = LoadInMemoryBitmap(uri);
                 if (memoryStream == null)
                 {
-                    MvxPluginLog.Instance?.Log(LogLevel.Trace, ("Loading InMemoryBitmap failed...");
+                    MvxPluginLog.Instance?.Log(LogLevel.Trace, "Loading InMemoryBitmap failed...");
                     return;
                 }
                 MvxPluginLog.Instance?.Log(LogLevel.Trace, "Loading InMemoryBitmap complete...");
