@@ -3,11 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using Microsoft.Extensions.Logging;
+using MvvmCross.Logging;
 
 namespace MvvmCross
 {
     internal static class MvxAndroidLog
     {
-        internal static ILogger Instance { get; } = Mvx.IoCProvider.Resolve<ILoggerFactory>().CreateLogger("MvxAndroid");
+        internal static ILogger Instance { get; } = MvxLogHost.GetLog("Material");
     }
 }
