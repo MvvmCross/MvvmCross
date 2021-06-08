@@ -18,6 +18,7 @@ using Stream = System.IO.Stream;
 using Uri = Android.Net.Uri;
 using ExifInterface = AndroidX.ExifInterface.Media.ExifInterface;
 using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
 {
@@ -106,7 +107,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
         {
             try
             {
-                MvxPluginLog.Instance.Trace("ProcessMvxIntentResult started...");
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "ProcessMvxIntentResult started...");
 
                 Uri uri;
 
@@ -120,7 +121,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
                         break;
                     default:
                         // ignore this result - it's not for us
-                        MvxPluginLog.Instance.Trace("Unexpected request received from MvxIntentResult - request was {0}",
+                        MvxPluginLog.Instance?.Log(LogLevel.Trace, "Unexpected request received from MvxIntentResult - request was {RequestCode}",
                                        result.RequestCode);
                         return;
                 }
@@ -132,7 +133,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
                 // TODO: We currently have no way of bubbling this up. Throwing here
                 // can crash the app :(
 
-                MvxPluginLog.Instance.ErrorException("Failed to process Intent from PictureChooser", e);
+                MvxPluginLog.Instance?.Log(LogLevel.Error, e, "Failed to process Intent from PictureChooser");
             }
         }
 
@@ -140,7 +141,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
         {
             if (_currentRequestParameters == null)
             {
-                MvxPluginLog.Instance.Error("Internal error - response received but _currentRequestParameters is null");
+                MvxPluginLog.Instance?.Log(LogLevel.Error, "Internal error - response received but _currentRequestParameters is null");
                 return; // we have not handled this - so we return null
             }
 
@@ -150,30 +151,29 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
                 // Note for furture bug-fixing/maintenance - it might be better to use var outputFileUri = data.GetParcelableArrayExtra("outputFileuri") here?
                 if (result.ResultCode != Result.Ok)
                 {
-                    MvxPluginLog.Instance.Trace("Non-OK result received from MvxIntentResult - {0} - request was {1}",
+                    MvxPluginLog.Instance?.Log(LogLevel.Trace, "Non-OK result received from MvxIntentResult - {ResultCode} - request was {RequestCode}",
                                    result.ResultCode, result.RequestCode);
                     return;
                 }
 
                 if (string.IsNullOrEmpty(uri?.Path))
                 {
-                    MvxPluginLog.Instance.Trace("Empty uri or file path received for MvxIntentResult");
+                    MvxPluginLog.Instance?.Log(LogLevel.Trace, "Empty uri or file path received for MvxIntentResult");
                     return;
                 }
 
-                MvxPluginLog.Instance.Trace("Loading InMemoryBitmap started...");
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "Loading InMemoryBitmap started...");
                 var memoryStream = LoadInMemoryBitmap(uri);
                 if (memoryStream == null)
                 {
-                    MvxPluginLog.Instance.Trace("Loading InMemoryBitmap failed...");
+                    MvxPluginLog.Instance?.Log(LogLevel.Trace, ("Loading InMemoryBitmap failed...");
                     return;
                 }
-                MvxPluginLog.Instance.Trace("Loading InMemoryBitmap complete...");
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "Loading InMemoryBitmap complete...");
                 responseSent = true;
-                MvxPluginLog.Instance.Trace("Sending pictureAvailable...");
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "Sending pictureAvailable...");
                 _currentRequestParameters.PictureAvailable(memoryStream, Path.GetFileNameWithoutExtension(uri.Path));
-                MvxPluginLog.Instance.Trace("pictureAvailable completed...");
-                return;
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "pictureAvailable completed...");
             }
             finally
             {
@@ -206,8 +206,8 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
             if (sampleSize < 1)
             {
                 // this shouldn't happen, but if it does... then trace the error and set sampleSize to 1
-                MvxPluginLog.Instance.Trace(
-                    "Warning - sampleSize of {0} was requested - how did this happen - based on requested {1} and returned image size {2}",
+                MvxPluginLog.Instance?.Log(LogLevel.Trace,
+                    "Warning - sampleSize of {SampleSize} was requested - how did this happen - based on requested {MaxPixelDimension} and returned image size {MaxDimensionSize}",
                     sampleSize,
                     _currentRequestParameters.MaxPixelDimension,
                     maxDimensionSize);
@@ -223,7 +223,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
             }
             catch (Exception pokemon)
             {
-                MvxPluginLog.Instance.Trace("Problem seem in Exit Rotate {0}", pokemon.ToLongString());
+                MvxPluginLog.Instance?.Log(LogLevel.Error, pokemon, "Problem seem in Exit Rotate");
                 return sampled;
             }
         }

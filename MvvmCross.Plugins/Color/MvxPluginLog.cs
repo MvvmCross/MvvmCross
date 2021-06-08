@@ -3,11 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using Microsoft.Extensions.Logging;
+using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin.Color
 {
     internal static class MvxPluginLog
     {
-        internal static ILogger Instance { get; } = Mvx.IoCProvider.Resolve<ILoggerFactory>().CreateLogger("MvxPlugin");
+        internal static ILogger Instance { get; } = MvxLogHost.GetLog("MvxPlugin.Color");
     }
 }

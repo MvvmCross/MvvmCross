@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin.Messenger
 #nullable enable
     internal static class MvxPluginLog
     {
-        internal static ILogger? Instance { get; } = MvxLogHost.GetLog("MvxPlugin");
+        internal static ILogger? Instance { get; } = MvxLogHost.GetLog("MvxPlugin.Messenger");
     }
 #nullable restore
 }
