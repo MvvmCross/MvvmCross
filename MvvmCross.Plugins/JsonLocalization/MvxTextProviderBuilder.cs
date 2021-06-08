@@ -47,8 +47,12 @@ namespace MvvmCross.Plugin.JsonLocalization
             {
                 try
                 {
-                    _textLoader.LoadJsonFromResource(_generalNamespaceKey, kvp.Key,
-                                                      GetResourceFilePath(whichLocalizationFolder, kvp.Value));
+                    var resourceFilePath = GetResourceFilePath(whichLocalizationFolder, kvp.Value);
+
+                    _textLoader.LoadJsonFromResource(
+                        _generalNamespaceKey,
+                        kvp.Key,
+                        resourceFilePath);
                 }
                 catch (Exception exception)
                 {

@@ -33,14 +33,14 @@ namespace MvvmCross.Plugin.JsonLocalization
             try
             {
                 string text = null;
-                Stream stream = Assembly.Load(new AssemblyName(namespaceKey)).GetManifestResourceStream(path);
+                var assembly = Assembly.Load(new AssemblyName(namespaceKey));
+
+                using Stream stream = assembly.GetManifestResourceStream(path);
                 if (stream == null)
                     return null;
 
-                using (var textReader = new StreamReader(stream))
-                {
-                    text = textReader.ReadToEnd();
-                }
+                using var textReader = new StreamReader(stream);
+                text = textReader.ReadToEnd();
 
                 return text;
             }
