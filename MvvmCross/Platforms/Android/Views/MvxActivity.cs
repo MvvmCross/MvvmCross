@@ -62,16 +62,24 @@ namespace MvvmCross.Platforms.Android.Views
 
         public IMvxBindingContext BindingContext { get; set; }
 
-        public override void SetContentView(int layoutResId)
+        public override void SetContentView(int layoutResID)
         {
-            _view = this.BindingInflate(layoutResId, null);
+            if (BaseContext is MvxContextWrapper)
+            {
+                _view = this.BindingInflate(layoutResID, null);
+                SetContentView(_view);
+                return;
+            }
 
-            SetContentView(_view);
+            base.SetContentView(layoutResID);
         }
 
         protected virtual void OnViewModelSet()
         {
         }
+
+        protected virtual Context BaseContextToAttach(Context @base)
+            => MvxContextWrapper.Wrap(@base, this);
 
         protected override void AttachBaseContext(Context @base)
         {
@@ -81,7 +89,7 @@ namespace MvvmCross.Platforms.Android.Views
                 base.AttachBaseContext(@base);
                 return;
             }
-            base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
+            base.AttachBaseContext(BaseContextToAttach(@base));
         }
 
         private readonly List<WeakReference<Fragment>> _fragList = new List<WeakReference<Fragment>>();
