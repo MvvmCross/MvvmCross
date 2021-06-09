@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -16,8 +16,8 @@ namespace MvvmCross.Platforms.Android.Views
             Extras = extras;
         }
 
-        public MvxActivityState ActivityState { get; private set; }
-        public Activity Activity { get; private set; }
-        public object Extras { get; private set; }
+        public MvxActivityState ActivityState { get; }
+        public Activity Activity { get; }
+        public object Extras { get; }
     }
 }
