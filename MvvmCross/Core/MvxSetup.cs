@@ -85,6 +85,8 @@ namespace MvvmCross.Core
             State = MvxSetupState.InitializingPrimary;
             _iocProvider = InitializeIoC();
 
+            InitializeLoggingServices(_iocProvider);
+
             // Register the default setup dependencies before
             // invoking the static call back.
             // Developers can either extend the MvxSetup and override
@@ -92,7 +94,6 @@ namespace MvvmCross.Core
             // callback method by setting the RegisterSetupDependencies method
             RegisterDefaultSetupDependencies(_iocProvider);
             RegisterSetupDependencies?.Invoke(_iocProvider);
-            InitializeLoggingServices(_iocProvider);
             SetupLog?.Log(LogLevel.Trace, "Setup: Primary start");
             SetupLog?.Log(LogLevel.Trace, "Setup: FirstChance start");
             InitializeFirstChance(_iocProvider);
