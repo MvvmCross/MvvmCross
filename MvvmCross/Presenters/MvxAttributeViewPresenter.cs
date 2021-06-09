@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.Presenters.Hints;
@@ -174,7 +175,7 @@ namespace MvvmCross.Presenters
                 return await Close(presentationHint.ViewModelToClose).ConfigureAwait(true);
             }
 
-            MvxLog.Instance?.Warn("Hint ignored {0}", hint.GetType().Name);
+            MvxLogHost.Default?.Log(LogLevel.Warning, "Hint ignored {name}", hint.GetType().Name);
             return false;
         }
 

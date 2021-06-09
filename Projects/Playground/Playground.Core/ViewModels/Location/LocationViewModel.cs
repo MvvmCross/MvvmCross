@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Location;
 using MvvmCross.ViewModels;
@@ -15,7 +15,7 @@ namespace Playground.Core.ViewModels.Location
         private readonly IMvxLocationWatcher _locationWatcher;
 
         public LocationViewModel(
-            IMvxLogProvider logProvider,
+            ILoggerFactory logProvider,
             IMvxNavigationService navigation,
             IMvxLocationWatcher locationWatcher)
             : base(logProvider, navigation)

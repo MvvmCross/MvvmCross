@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,6 +13,7 @@ using MvvmCross.Binding.Combiners;
 using MvvmCross.Platforms.Wpf.Binding.MvxBinding;
 using MvvmCross.Platforms.Wpf.Binding.MvxBinding.Target;
 using MvvmCross.Platforms.Wpf.Binding.WindowsBinding;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Wpf.Binding
 {
@@ -32,13 +33,13 @@ namespace MvvmCross.Platforms.Wpf.Binding
             _bindingType = bindingType;
         }
 
-        public override void DoRegistration()
+        public override void DoRegistration(IMvxIoCProvider iocProvider)
         {
-            base.DoRegistration();
+            base.DoRegistration(iocProvider);
             InitializeBindingCreator();
         }
 
-        protected override void RegisterBindingFactories()
+        protected override void RegisterBindingFactories(IMvxIoCProvider iocProvider)
         {
             switch (_bindingType)
             {
@@ -47,7 +48,7 @@ namespace MvvmCross.Platforms.Wpf.Binding
                     break;
 
                 case BindingType.MvvmCross:
-                    base.RegisterBindingFactories();
+                    base.RegisterBindingFactories(iocProvider);
                     break;
 
                 default:

@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Navigation;
 
 namespace MvvmCross.ViewModels
@@ -12,26 +12,26 @@ namespace MvvmCross.ViewModels
     public abstract class MvxNavigationViewModel
         : MvxViewModel
     {
-        private IMvxLog? _log;
+        private ILogger? _log;
 
-        protected MvxNavigationViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService)
+        protected MvxNavigationViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService)
         {
-            LogProvider = logProvider;
+            LoggerFactory = logFactory;
             NavigationService = navigationService;
         }
 
         protected virtual IMvxNavigationService NavigationService { get; }
 
-        protected virtual IMvxLogProvider LogProvider { get; }
+        protected virtual ILoggerFactory LoggerFactory { get; }
 
-        protected virtual IMvxLog Log => _log ??= LogProvider.GetLogFor(GetType());
+        protected virtual ILogger Log => _log ??= LoggerFactory.CreateLogger(GetType().Name);
     }
 
     public abstract class MvxNavigationViewModel<TParameter> : MvxNavigationViewModel, IMvxViewModel<TParameter>
         where TParameter : class
     {
-        protected MvxNavigationViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService)
-            : base(logProvider, navigationService)
+        protected MvxNavigationViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService)
+            : base(logFactory, navigationService)
         {
         }
 
@@ -41,8 +41,8 @@ namespace MvvmCross.ViewModels
     public abstract class MvxNavigationViewModelResult<TResult> : MvxNavigationViewModel, IMvxViewModelResult<TResult>
         where TResult : class
     {
-        protected MvxNavigationViewModelResult(IMvxLogProvider logProvider, IMvxNavigationService navigationService)
-            : base(logProvider, navigationService)
+        protected MvxNavigationViewModelResult(ILoggerFactory logFactory, IMvxNavigationService navigationService)
+            : base(logFactory, navigationService)
         {
         }
 
@@ -65,8 +65,8 @@ namespace MvvmCross.ViewModels
         where TParameter : class
         where TResult : class
     {
-        protected MvxNavigationViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService)
-            : base(logProvider, navigationService)
+        protected MvxNavigationViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService)
+            : base(logFactory, navigationService)
         {
         }
 

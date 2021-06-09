@@ -21,6 +21,7 @@ using MvvmCross.WeakSubscription;
 using Object = Java.Lang.Object;
 using ViewHolder = AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder;
 using RecyclerViewAdapter = AndroidX.RecyclerView.Widget.RecyclerView.Adapter;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.DroidX.RecyclerView
 {
@@ -71,7 +72,7 @@ namespace MvvmCross.DroidX.RecyclerView
                     return;
 
                 if (_itemClick != null && value != null)
-                    MvxAndroidLog.Instance.Warn("Changing ItemClick may cause inconsistencies where some items still call the old command.");
+                    MvxAndroidLog.Instance.Log(LogLevel.Warning, "Changing ItemClick may cause inconsistencies where some items still call the old command.");
 
                 _itemClick = value;
             }
@@ -90,7 +91,7 @@ namespace MvvmCross.DroidX.RecyclerView
                     return;
 
                 if (_itemLongClick != null && value != null)
-                    MvxAndroidLog.Instance.Warn("Changing ItemLongClick may cause inconsistencies where some items still call the old command.");
+                    MvxAndroidLog.Instance.Log(LogLevel.Warning, "Changing ItemLongClick may cause inconsistencies where some items still call the old command.");
 
                 _itemLongClick = value;
             }
@@ -273,8 +274,9 @@ namespace MvvmCross.DroidX.RecyclerView
             {
                 if (itemsSourcePosition >= 0 && itemsSourcePosition < items.Count)
                     return items[itemsSourcePosition];
-                MvxAndroidLog.Instance.Error(
-                    $"MvxRecyclerView GetItem index out of range. viewPosition:{viewPosition} itemsSourcePosition:{itemsSourcePosition} itemCount:{_itemsSource.Count()}");
+                MvxAndroidLog.Instance.Log(LogLevel.Error,
+                    "MvxRecyclerView GetItem index out of range. viewPosition: {ViewPosition}, itemsSourcePosition: {ItemsSourcePosition}, itemCount: {ItemsSourceCount}",
+                    viewPosition, itemsSourcePosition, _itemsSource.Count());
                 //We should trigger an exception instead of hiding it here, as it means you have bugs in your code.
                 return null;
             }
@@ -303,7 +305,7 @@ namespace MvvmCross.DroidX.RecyclerView
         {
             if (Looper.MainLooper != Looper.MyLooper())
             {
-                MvxAndroidLog.Instance.Error(
+                MvxAndroidLog.Instance.Log(LogLevel.Error,
                     "ItemsSource property set on a worker thread. This leads to crash in the RecyclerView. It must be set only from the main thread.");
             }
 
@@ -336,7 +338,7 @@ namespace MvvmCross.DroidX.RecyclerView
             }
             else
             {
-                MvxAndroidLog.Instance.Error(
+                MvxAndroidLog.Instance.Log(LogLevel.Error,
                     "ItemsSource collection content changed on a worker thread." +
                     "This leads to crash in the RecyclerView as it will not be aware of changes" +
                     "immediatly and may get a deleted item or update an item with a bad item template." +

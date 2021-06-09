@@ -13,34 +13,35 @@ using MvvmCross.Binding.Parse.Binding.Tibet;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.ValueConverters;
 using MvvmCross.Converters;
+using MvvmCross.IoC;
 using MvvmCross.Localization;
 
 namespace MvvmCross.Binding
 {
     public class MvxCoreBindingBuilder
     {
-        public virtual void DoRegistration()
+        public virtual void DoRegistration(IMvxIoCProvider iocProvider)
         {
             CreateSingleton();
-            RegisterCore();
-            RegisterValueConverterRegistryFiller();
-            RegisterValueConverterProvider();
-            RegisterValueCombinerRegistryFiller();
-            RegisterValueCombinerProvider();
-            RegisterAutoValueConverters();
-            RegisterBindingParser();
-            RegisterLanguageBindingParser();
-            RegisterBindingDescriptionParser();
-            RegisterExpressionParser();
-            RegisterSourcePropertyPathParser();
-            RegisterPlatformSpecificComponents();
-            RegisterBindingNameRegistry();
+            RegisterCore(iocProvider);
+            RegisterValueConverterRegistryFiller(iocProvider);
+            RegisterValueConverterProvider(iocProvider);
+            RegisterValueCombinerRegistryFiller(iocProvider);
+            RegisterValueCombinerProvider(iocProvider);
+            RegisterAutoValueConverters(iocProvider);
+            RegisterBindingParser(iocProvider);
+            RegisterLanguageBindingParser(iocProvider);
+            RegisterBindingDescriptionParser(iocProvider);
+            RegisterExpressionParser(iocProvider);
+            RegisterSourcePropertyPathParser(iocProvider);
+            RegisterPlatformSpecificComponents(iocProvider);
+            RegisterBindingNameRegistry(iocProvider);
         }
 
-        protected virtual void RegisterAutoValueConverters()
+        protected virtual void RegisterAutoValueConverters(IMvxIoCProvider iocProvider)
         {
             var autoValueConverters = CreateAutoValueConverters();
-            Mvx.IoCProvider.RegisterSingleton<IMvxAutoValueConverters>(autoValueConverters);
+            iocProvider.RegisterSingleton<IMvxAutoValueConverters>(autoValueConverters);
             FillAutoValueConverters(autoValueConverters);
         }
 
@@ -59,11 +60,11 @@ namespace MvvmCross.Binding
             MvxBindingSingletonCache.Initialize();
         }
 
-        protected virtual void RegisterValueConverterRegistryFiller()
+        protected virtual void RegisterValueConverterRegistryFiller(IMvxIoCProvider iocProvider)
         {
             var filler = CreateValueConverterRegistryFiller();
-            Mvx.IoCProvider.RegisterSingleton<IMvxNamedInstanceRegistryFiller<IMvxValueConverter>>(filler);
-            Mvx.IoCProvider.RegisterSingleton<IMvxValueConverterRegistryFiller>(filler);
+            iocProvider.RegisterSingleton<IMvxNamedInstanceRegistryFiller<IMvxValueConverter>>(filler);
+            iocProvider.RegisterSingleton<IMvxValueConverterRegistryFiller>(filler);
         }
 
         protected virtual IMvxValueConverterRegistryFiller CreateValueConverterRegistryFiller()
@@ -71,11 +72,11 @@ namespace MvvmCross.Binding
             return new MvxValueConverterRegistryFiller();
         }
 
-        protected virtual void RegisterValueCombinerRegistryFiller()
+        protected virtual void RegisterValueCombinerRegistryFiller(IMvxIoCProvider iocProvider)
         {
             var filler = CreateValueCombinerRegistryFiller();
-            Mvx.IoCProvider.RegisterSingleton<IMvxNamedInstanceRegistryFiller<IMvxValueCombiner>>(filler);
-            Mvx.IoCProvider.RegisterSingleton<IMvxValueCombinerRegistryFiller>(filler);
+            iocProvider.RegisterSingleton<IMvxNamedInstanceRegistryFiller<IMvxValueCombiner>>(filler);
+            iocProvider.RegisterSingleton<IMvxValueCombinerRegistryFiller>(filler);
         }
 
         protected virtual IMvxValueCombinerRegistryFiller CreateValueCombinerRegistryFiller()
@@ -83,24 +84,24 @@ namespace MvvmCross.Binding
             return new MvxValueCombinerRegistryFiller();
         }
 
-        protected virtual void RegisterExpressionParser()
+        protected virtual void RegisterExpressionParser(IMvxIoCProvider iocProvider)
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxPropertyExpressionParser>(new MvxPropertyExpressionParser());
+            iocProvider.RegisterType<IMvxPropertyExpressionParser, MvxPropertyExpressionParser>();
         }
 
-        protected virtual void RegisterCore()
+        protected virtual void RegisterCore(IMvxIoCProvider iocProvider)
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxBinder>(new MvxFromTextBinder());
-            Mvx.IoCProvider.RegisterType<IMvxBindingContext, MvxTaskBasedBindingContext>();
+            iocProvider.RegisterSingleton<IMvxBinder>(new MvxFromTextBinder());
+            iocProvider.RegisterType<IMvxBindingContext, MvxTaskBasedBindingContext>();
         }
 
-        protected virtual void RegisterValueConverterProvider()
+        protected virtual void RegisterValueConverterProvider(IMvxIoCProvider iocProvider)
         {
             var registry = CreateValueConverterRegistry();
-            Mvx.IoCProvider.RegisterSingleton<IMvxNamedInstanceLookup<IMvxValueConverter>>(registry);
-            Mvx.IoCProvider.RegisterSingleton<IMvxNamedInstanceRegistry<IMvxValueConverter>>(registry);
-            Mvx.IoCProvider.RegisterSingleton<IMvxValueConverterLookup>(registry);
-            Mvx.IoCProvider.RegisterSingleton<IMvxValueConverterRegistry>(registry);
+            iocProvider.RegisterSingleton<IMvxNamedInstanceLookup<IMvxValueConverter>>(registry);
+            iocProvider.RegisterSingleton<IMvxNamedInstanceRegistry<IMvxValueConverter>>(registry);
+            iocProvider.RegisterSingleton<IMvxValueConverterLookup>(registry);
+            iocProvider.RegisterSingleton<IMvxValueConverterRegistry>(registry);
             FillValueConverters(registry);
         }
 
@@ -115,13 +116,13 @@ namespace MvvmCross.Binding
             registry.AddOrOverwrite("Language", new MvxLanguageConverter());
         }
 
-        protected virtual void RegisterValueCombinerProvider()
+        protected virtual void RegisterValueCombinerProvider(IMvxIoCProvider iocProvider)
         {
             var registry = CreateValueCombinerRegistry();
-            Mvx.IoCProvider.RegisterSingleton<IMvxNamedInstanceLookup<IMvxValueCombiner>>(registry);
-            Mvx.IoCProvider.RegisterSingleton<IMvxNamedInstanceRegistry<IMvxValueCombiner>>(registry);
-            Mvx.IoCProvider.RegisterSingleton<IMvxValueCombinerLookup>(registry);
-            Mvx.IoCProvider.RegisterSingleton<IMvxValueCombinerRegistry>(registry);
+            iocProvider.RegisterSingleton<IMvxNamedInstanceLookup<IMvxValueCombiner>>(registry);
+            iocProvider.RegisterSingleton<IMvxNamedInstanceRegistry<IMvxValueCombiner>>(registry);
+            iocProvider.RegisterSingleton<IMvxValueCombinerLookup>(registry);
+            iocProvider.RegisterSingleton<IMvxValueCombinerRegistry>(registry);
             FillValueCombiners(registry);
         }
 
@@ -158,15 +159,15 @@ namespace MvvmCross.Binding
             //registry.AddOrOverwrite("ValueConverter", new MvxValueConverterValueCombiner());
         }
 
-        protected virtual void RegisterBindingParser()
+        protected virtual void RegisterBindingParser(IMvxIoCProvider iocProvider)
         {
-            if (Mvx.IoCProvider.CanResolve<IMvxBindingParser>())
+            if (iocProvider.CanResolve<IMvxBindingParser>())
             {
                 MvxBindingLog.Trace("Binding Parser already registered - so skipping Default parser");
                 return;
             }
             MvxBindingLog.Trace("Registering Default Binding Parser");
-            Mvx.IoCProvider.RegisterSingleton(CreateBindingParser());
+            iocProvider.RegisterSingleton(CreateBindingParser());
         }
 
         protected virtual IMvxBindingParser CreateBindingParser()
@@ -174,15 +175,15 @@ namespace MvvmCross.Binding
             return new MvxTibetBindingParser();
         }
 
-        protected virtual void RegisterLanguageBindingParser()
+        protected virtual void RegisterLanguageBindingParser(IMvxIoCProvider iocProvider)
         {
-            if (Mvx.IoCProvider.CanResolve<IMvxLanguageBindingParser>())
+            if (iocProvider.CanResolve<IMvxLanguageBindingParser>())
             {
                 MvxBindingLog.Trace("Binding Parser already registered - so skipping Language parser");
                 return;
             }
             MvxBindingLog.Trace("Registering Language Binding Parser");
-            Mvx.IoCProvider.RegisterSingleton(CreateLanguageBindingParser());
+            iocProvider.RegisterSingleton(CreateLanguageBindingParser());
         }
 
         protected virtual IMvxLanguageBindingParser CreateLanguageBindingParser()
@@ -190,10 +191,10 @@ namespace MvvmCross.Binding
             return new MvxLanguageBindingParser();
         }
 
-        protected virtual void RegisterBindingDescriptionParser()
+        protected virtual void RegisterBindingDescriptionParser(IMvxIoCProvider iocProvider)
         {
             var parser = CreateBindingDescriptionParser();
-            Mvx.IoCProvider.RegisterSingleton(parser);
+            iocProvider.RegisterSingleton(parser);
         }
 
         private static IMvxBindingDescriptionParser CreateBindingDescriptionParser()
@@ -202,10 +203,10 @@ namespace MvvmCross.Binding
             return parser;
         }
 
-        protected virtual void RegisterSourcePropertyPathParser()
+        protected virtual void RegisterSourcePropertyPathParser(IMvxIoCProvider iocProvider)
         {
             var tokeniser = CreateSourcePropertyPathParser();
-            Mvx.IoCProvider.RegisterSingleton<IMvxSourcePropertyPathParser>(tokeniser);
+            iocProvider.RegisterSingleton<IMvxSourcePropertyPathParser>(tokeniser);
         }
 
         protected virtual IMvxSourcePropertyPathParser CreateSourcePropertyPathParser()
@@ -213,11 +214,11 @@ namespace MvvmCross.Binding
             return new MvxSourcePropertyPathParser();
         }
 
-        protected virtual void RegisterBindingNameRegistry()
+        protected virtual void RegisterBindingNameRegistry(IMvxIoCProvider iocProvider)
         {
             var registry = new MvxBindingNameRegistry();
-            Mvx.IoCProvider.RegisterSingleton<IMvxBindingNameLookup>(registry);
-            Mvx.IoCProvider.RegisterSingleton<IMvxBindingNameRegistry>(registry);
+            iocProvider.RegisterSingleton<IMvxBindingNameLookup>(registry);
+            iocProvider.RegisterSingleton<IMvxBindingNameRegistry>(registry);
             FillDefaultBindingNames(registry);
         }
 
@@ -226,7 +227,7 @@ namespace MvvmCross.Binding
             // base class has nothing to register
         }
 
-        protected virtual void RegisterPlatformSpecificComponents()
+        protected virtual void RegisterPlatformSpecificComponents(IMvxIoCProvider iocProvider)
         {
             // nothing to do here
         }

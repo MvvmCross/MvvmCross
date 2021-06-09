@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,6 +7,7 @@ using System.Threading;
 using Android.Content;
 using Android.Locations;
 using Android.OS;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android;
@@ -38,7 +39,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
             _locationManager = (LocationManager)Context.GetSystemService(Context.LocationService);
             if (_locationManager == null)
             {
-                MvxPluginLog.Instance.Warn("Location Service Manager unavailable - returned null");
+                MvxPluginLog.Instance?.Log(LogLevel.Warning, "Location Service Manager unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }
@@ -49,7 +50,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
             _bestProvider = _locationManager.GetBestProvider(criteria, true);
             if (_bestProvider == null)
             {
-                MvxPluginLog.Instance.Warn("Location Service Provider unavailable - returned null");
+                MvxPluginLog.Instance?.Log(LogLevel.Warning, "Location Service Provider unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }
@@ -124,14 +125,14 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
         {
             if (androidLocation == null)
             {
-                MvxPluginLog.Instance.Trace("Android: Null location seen");
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "Android: Null location seen");
                 return;
             }
 
             if (androidLocation.Latitude == double.MaxValue
                 || androidLocation.Longitude == double.MaxValue)
             {
-                MvxPluginLog.Instance.Trace("Android: Invalid location seen");
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "Android: Invalid location seen");
                 return;
             }
 
@@ -146,7 +147,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
             }
             catch (Exception exception)
             {
-                MvxPluginLog.Instance.Trace("Android: Exception seen in converting location " + exception.ToLongString());
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "Android: Exception seen in converting location " + exception.ToLongString());
                 return;
             }
 

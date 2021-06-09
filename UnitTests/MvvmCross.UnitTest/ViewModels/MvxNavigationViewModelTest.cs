@@ -2,17 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Linq;
+using Microsoft.Extensions.Logging;
 using Moq;
-using MvvmCross.Core;
-using MvvmCross.Logging;
-using MvvmCross.Navigation;
-using MvvmCross.Tests;
-using MvvmCross.UnitTest.Mocks.Dispatchers;
-using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.UnitTest.Mocks.ViewModels;
-using MvvmCross.ViewModels;
 using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels
@@ -26,14 +18,7 @@ namespace MvvmCross.UnitTest.ViewModels
         {
             _fixture = fixture;
 
-            var logProvider = new Mock<IMvxLogProvider>();
-            logProvider.Setup(
-                l => l.GetLogFor(It.IsAny<Type>()))
-                      .Returns(() =>
-                      {
-                          var vm = new Mock<IMvxLog>();
-                          return vm.Object;
-                      });
+            var logProvider = new Mock<ILoggerProvider>();
             _fixture.Ioc.RegisterSingleton(logProvider.Object);
 
             fixture.Ioc.RegisterType<NavigationTestViewModel, NavigationTestViewModel>();

@@ -11,6 +11,7 @@ using Android.Views;
 using Java.Interop;
 using Java.Lang;
 using Java.Lang.Reflect;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.Binders;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -160,7 +161,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         protected override View? OnCreateView(View? parent, string? name, IAttributeSet? attrs)
         {
             if (Debug)
-                MvxLog.Instance?.Trace("{Tag} - ... OnCreateView 3 ... {name}", Tag, name);
+                MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... OnCreateView 3 ... {name}", Tag, name);
 
             return _bindingVisitor.OnViewCreated(
                 base.OnCreateView(parent, name, attrs),
@@ -171,7 +172,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         protected override View? OnCreateView(string? name, IAttributeSet? attrs)
         {
             if (Debug)
-                MvxLog.Instance?.Trace("{Tag} - ... OnCreateView 2 ... {name}", Tag, name);
+                MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... OnCreateView 2 ... {name}", Tag, name);
 
             View? view = null;
             if (name != null && Context != null && attrs != null)
@@ -186,7 +187,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         public override View? OnCreateView(Context viewContext, View? parent, string name, IAttributeSet? attrs)
         {
             if (Debug)
-                MvxLog.Instance?.Trace("{Tag} - ... OnCreateView 4 ... {name}", Tag, name);
+                MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... OnCreateView 4 ... {name}", Tag, name);
 
             return _bindingVisitor.OnViewCreated(
                 base.OnCreateView(viewContext, parent, name, attrs),
@@ -199,7 +200,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         private View? PhoneLayoutInflaterOnCreateView(string? name, IAttributeSet? attrs)
         {
             if (Debug)
-                MvxLog.Instance?.Trace("{Tag} - ... PhoneLayoutInflaterOnCreateView ... {name}", Tag, name);
+                MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... PhoneLayoutInflaterOnCreateView ... {name}", Tag, name);
 
             foreach (var prefix in ClassPrefixList)
             {
@@ -278,7 +279,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
             catch (Exception ex)
             {
-                MvxLog.Instance?.Warn("Cannot invoke LayoutInflater.setPrivateFactory :\n{0}", ex.StackTrace);
+                MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Warning, ex, "Cannot invoke LayoutInflater.setPrivateFactory :\n{0}", ex.StackTrace);
             }
 
             _setPrivateFactory = true;
@@ -288,7 +289,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             IAttributeSet attrs)
         {
             if (Debug)
-                MvxLog.Instance?.Trace("{Tag} - ... CreateCustomViewInternal ... {name}", Tag, name);
+                MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... CreateCustomViewInternal ... {name}", Tag, name);
 
             if (view == null &&
                 !string.IsNullOrWhiteSpace(name) &&
@@ -383,7 +384,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 if (Mvx.IoCProvider == null)
                 {
                     // if IoCProvider is null, Log instance will probably be null too
-                    MvxLog.Instance?.Error("{Tag} - ... AndroidViewFactory IoCProvider is null!", Tag);
+                    MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... AndroidViewFactory IoCProvider is null!", Tag);
                     return null;
                 }
                 
@@ -406,7 +407,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 if (Mvx.IoCProvider == null)
                 {
                     // if IoCProvider is null, Log instance will probably be null too
-                    MvxLog.Instance?.Error("{Tag} - ... FactoryFactory IoCProvider is null!", Tag);
+                    MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Error, "{Tag} - ... FactoryFactory IoCProvider is null!", Tag);
                     return null;
                 }
                 
@@ -435,7 +436,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             public View? OnCreateView(View? parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    MvxLog.Instance?.Trace("{Tag} - ... OnCreateView ... {name}", DelegateFactory2Tag, name);
+                    MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... OnCreateView ... {name}", DelegateFactory2Tag, name);
 
                 return _factoryPlaceholder.OnViewCreated(
                     _factory.OnCreateView(parent, name, context, attrs),
@@ -459,7 +460,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             public View? OnCreateView(View? parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    MvxLog.Instance?.Trace("{Tag} - ... OnCreateView ... {name}", DelegateFactory1Tag, name);
+                    MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... OnCreateView ... {name}", DelegateFactory1Tag, name);
 
                 return _factoryPlaceholder.OnViewCreated(
                     _factory.OnCreateView(name, context, attrs),
@@ -494,7 +495,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             public View? OnCreateView(string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    MvxLog.Instance?.Trace("{Tag} - ... OnCreateView 2 ... {name}", PrivateFactoryWrapper2Tag, name);
+                    MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... OnCreateView 2 ... {name}", PrivateFactoryWrapper2Tag, name);
 
                 return _bindingVisitor.OnViewCreated(
                     // The activity's OnCreateView
@@ -505,7 +506,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             public View? OnCreateView(View? parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    MvxLog.Instance?.Trace("{Tag} - ... OnCreateView 3 ... {name}", PrivateFactoryWrapper2Tag, name);
+                    MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... OnCreateView 3 ... {name}", PrivateFactoryWrapper2Tag, name);
 
                 return _bindingVisitor.OnViewCreated(
                     _inflater.CreateCustomViewInternal(

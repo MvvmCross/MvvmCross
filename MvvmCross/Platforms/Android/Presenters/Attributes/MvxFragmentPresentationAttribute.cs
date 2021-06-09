@@ -11,6 +11,10 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
     {
+        public MvxFragmentPresentationAttribute()
+        {
+        }
+
         public MvxFragmentPresentationAttribute(
             Type? activityHostViewModelType = null,
             int fragmentContentId = global::Android.Resource.Id.Content,

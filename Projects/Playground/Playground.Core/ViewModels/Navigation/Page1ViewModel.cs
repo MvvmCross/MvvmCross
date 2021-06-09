@@ -5,8 +5,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
@@ -16,7 +16,8 @@ namespace Playground.Core.ViewModels
     {
         public MvxCommand<int> HeaderTappedCommand { get; }
 
-        public Page1ViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        public Page1ViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService) 
+            : base(logProvider, navigationService)
         {
             HeaderTappedCommand = new MvxCommand<int>(DoHeaderTappedCommand);
 

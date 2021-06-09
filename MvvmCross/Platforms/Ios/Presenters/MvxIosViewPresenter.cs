@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
@@ -49,7 +50,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (MasterNavigationController == null &&
                 TabBarViewController?.CanShowChildView() != true)
             {
-                MvxLog.Instance?.Trace(
+                MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogTrace(
                     $"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. Assuming Root presentation");
                 return new MvxRootPresentationAttribute
                 {
@@ -57,7 +58,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 };
             }
 
-            MvxLog.Instance?.Trace(
+            MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogTrace(
                 $"PresentationAttribute not found for {viewType.Name}. Assuming animated Child presentation");
 
             return new MvxChildPresentationAttribute { ViewType = viewType, ViewModelType = viewModelType };
@@ -510,7 +511,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
-            MvxLog.Instance?.Warn($"Ignored attempt to close the window root (ViewModel type: {viewModel.GetType().Name}");
+            MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogWarning(
+                "Ignored attempt to close the window root (ViewModel type: {viewModelType}", viewModel.GetType().Name);
 
             return Task.FromResult(false);
         }

@@ -10,6 +10,10 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxDialogFragmentPresentationAttribute : MvxFragmentPresentationAttribute
     {
+        public MvxDialogFragmentPresentationAttribute()
+        {
+        }
+
         public MvxDialogFragmentPresentationAttribute(
             bool cancelable = true,
             Type? activityHostViewModelType = null,

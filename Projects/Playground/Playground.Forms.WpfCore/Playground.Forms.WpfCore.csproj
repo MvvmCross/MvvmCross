@@ -18,4 +18,10 @@
     <ProjectReference Include="..\Playground.Forms.UI\Playground.Forms.UI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Serilog.Extensions.Logging" />
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Sinks.Debug" />
+  </ItemGroup>
+
 </Project>

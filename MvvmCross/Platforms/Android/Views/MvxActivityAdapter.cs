@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,6 +11,7 @@ using MvvmCross.Platforms.Android;
 using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Views;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Android.Views
 {
@@ -40,8 +41,9 @@ namespace MvvmCross.Platforms.Android.Views
             switch (requestCode)
             {
                 case (int)MvxIntentRequestCode.PickFromFile:
-                    MvxLog.Instance.Warn("Warning - activity request code may clash with Mvx code for {0}",
-                                   (MvxIntentRequestCode)requestCode);
+                    MvxLogHost.GetLog<MvxActivityAdapter>()?.Log(LogLevel.Warning,
+                        "Warning - activity request code may clash with Mvx code for {requestCode}",
+                        (MvxIntentRequestCode)requestCode);
                     break;
             }
         }
@@ -84,7 +86,8 @@ namespace MvvmCross.Platforms.Android.Views
                 IMvxSavedStateConverter converter;
                 if (!Mvx.IoCProvider.TryResolve<IMvxSavedStateConverter>(out converter))
                 {
-                    MvxLog.Instance.Warn("Saved state converter not available - saving state will be hard");
+                    MvxLogHost.GetLog<MvxActivityAdapter>()?.Log(LogLevel.Warning,
+                        "Saved state converter not available - saving state will be hard");
                 }
                 else
                 {

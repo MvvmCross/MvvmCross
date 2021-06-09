@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
@@ -46,7 +47,8 @@ namespace MvvmCross.Platforms.Console.Views
         {
             if (await HandlePresentationChange(hint)) return true;
 
-            MvxLog.Instance?.Warn("Hint ignored {0}", hint.GetType().Name);
+            MvxLogHost.GetLog<MvxBaseConsoleContainer>()?.Log(LogLevel.Trace,
+                "Hint ignored {hintType}", hint.GetType().Name);
             return false;
         }
 

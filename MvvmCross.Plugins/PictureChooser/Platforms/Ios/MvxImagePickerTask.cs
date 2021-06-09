@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using CoreGraphics;
 using Foundation;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios;
 using MvvmCross.Platforms.Ios.Views;
@@ -168,14 +169,14 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
         private void SetCurrentlyActive()
         {
             if (_currentlyActive)
-                MvxPluginLog.Instance.Warn("MvxImagePickerTask called when task already active");
+                MvxPluginLog.Instance?.Log(LogLevel.Warning, "MvxImagePickerTask called when task already active");
             _currentlyActive = true;
         }
 
         private void ClearCurrentlyActive()
         {
             if (!_currentlyActive)
-                MvxPluginLog.Instance.Warn("Tried to clear currently active - but already cleared");
+                MvxPluginLog.Instance?.Log(LogLevel.Warning, "Tried to clear currently active - but already cleared");
             _currentlyActive = false;
         }
     }

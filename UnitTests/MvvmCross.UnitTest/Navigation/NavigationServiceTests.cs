@@ -85,7 +85,7 @@ namespace MvvmCross.UnitTest.Navigation
                       });
 
             MockDispatcher = new Mock<NavigationMockDispatcher>(MockBehavior.Loose) { CallBase = true };
-            var navigationService = new MvxNavigationService(MockLoader.Object, MockDispatcher.Object);
+            var navigationService = new MvxNavigationService(MockLoader.Object, MockDispatcher.Object, fixture.Ioc);
             fixture.Ioc.RegisterSingleton<IMvxNavigationService>(navigationService);
             fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
         }

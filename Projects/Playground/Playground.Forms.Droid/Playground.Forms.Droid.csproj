@@ -55,6 +55,11 @@
     <Reference Include="mscorlib" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Serilog.Extensions.Logging" />
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Sinks.Xamarin" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -128,7 +133,6 @@
     <PackageReference Include="Serilog" />
     <PackageReference Include="Serilog.Sinks.Xamarin" />
     <PackageReference Include="Xamarin.AndroidX.MediaRouter" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat.Resources" />
     <PackageReference Include="Xamarin.Google.Android.Material" />
   </ItemGroup>
   <ItemGroup>

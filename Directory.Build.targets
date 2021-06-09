@@ -42,6 +42,12 @@
     <TargetFrameworkIdentifier>Tizen</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
+  
+  <ItemGroup Condition="$(TargetFramework.StartsWith('xamarin.mac'))">
+    <Reference Include="netstandard">
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
 
   <Import Project="XamarinForms.targets" Condition="'$(IsXamarinForms)' == 'true'"/>
 

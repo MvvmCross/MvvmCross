@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 
@@ -26,14 +27,14 @@ namespace MvvmCross.IoC
                 // MvxLog.Instance can be null, when reflecting for Setup.cs
                 // Check for null
 
-                MvxLog.Instance?.Warn("ReflectionTypeLoadException masked during loading of {0} - error {1}",
+                MvxLogHost.Default?.Log(LogLevel.Warning, "ReflectionTypeLoadException masked during loading of {0} - error {1}",
                                       assembly.FullName, e.ToLongString());
 
                 if (e.LoaderExceptions != null)
                 {
                     foreach (var excp in e.LoaderExceptions)
                     {
-                        MvxLog.Instance?.Warn(excp.ToLongString());
+                        MvxLogHost.Default?.Log(LogLevel.Warning, excp.ToLongString());
                     }
                 }
 

@@ -1,8 +1,9 @@
 ---
 layout: documentation
-title: Diagnostic & Logging
+title: Diagnostic & Logging MvvmCross 7
 category: Fundamentals
-order: 7
+permalink: logging
+exclude: true
 ---
 
 A great option to log messages, info and errors to the console or other outputs is MvxLog! It is very extendable and easy to use.

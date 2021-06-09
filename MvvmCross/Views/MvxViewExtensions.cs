@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
@@ -25,7 +26,7 @@ namespace MvvmCross.Views
             var viewModel = viewModelLoader();
             if (viewModel == null)
             {
-                MvxLog.Instance?.Warn("ViewModel not loaded for view {0}", view.GetType().Name);
+                MvxLogHost.Default?.Log(LogLevel.Warning, "ViewModel not loaded for view {0}", view.GetType().Name);
                 return;
             }
 
@@ -34,7 +35,7 @@ namespace MvvmCross.Views
 
         public static void OnViewNewIntent(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
         {
-            MvxLog.Instance?.Warn(
+            MvxLogHost.Default?.Log(LogLevel.Warning,
                 "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
             throw new MvxException("OnViewNewIntent is not implemented");
         }
@@ -52,7 +53,7 @@ namespace MvvmCross.Views
             IMvxViewModelTypeFinder associatedTypeFinder;
             if (!Mvx.IoCProvider.TryResolve(out associatedTypeFinder))
             {
-                MvxLog.Instance?.Trace(
+                MvxLogHost.Default?.Log(LogLevel.Trace,
                     "No view model type finder available - assuming we are looking for a splash screen - returning null");
                 return typeof(MvxNullViewModel);
             }

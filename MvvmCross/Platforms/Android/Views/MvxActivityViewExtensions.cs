@@ -13,6 +13,7 @@ using MvvmCross.Platforms.Android.Core;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using MvvmCross.Core;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Android.Views
 {
@@ -55,7 +56,7 @@ namespace MvvmCross.Platforms.Android.Views
             IMvxSavedStateConverter converter;
             if (!Mvx.IoCProvider.TryResolve<IMvxSavedStateConverter>(out converter))
             {
-                MvxLog.Instance.Trace("No saved state converter available - this is OK if seen during start");
+                MvxLogHost.Default?.Log(LogLevel.Trace, "No saved state converter available - this is OK if seen during start");
                 return null;
             }
             var savedState = converter.Read(bundle);
@@ -64,7 +65,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public static void OnViewNewIntent(this IMvxAndroidView androidView)
         {
-            MvxLog.Instance.Trace("OnViewNewIntent called - MvvmCross lifecycle won't run automatically in this case.");
+            MvxLogHost.Default?.Log(LogLevel.Trace, "OnViewNewIntent called - MvvmCross lifecycle won't run automatically in this case.");
         }
 
         public static void OnViewDestroy(this IMvxAndroidView androidView)
@@ -131,8 +132,8 @@ namespace MvvmCross.Platforms.Android.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxLog.Instance.Trace("No ViewModel class specified for {0} in LoadViewModel",
-                               androidView.GetType().Name);
+                MvxLogHost.Default?.Log(LogLevel.Trace, "No ViewModel class specified for {0} in LoadViewModel",
+                    androidView.GetType().Name);
             }
 
             var translatorService = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelLoader>();

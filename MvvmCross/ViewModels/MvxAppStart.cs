@@ -4,6 +4,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -38,7 +39,7 @@ namespace MvvmCross.ViewModels
             var applicationHint = await ApplicationStartup(hint);
             if (applicationHint != null)
             {
-                MvxLog.Instance?.Trace("Hint ignored in default MvxAppStart");
+                MvxLogHost.Default?.Log(LogLevel.Trace, "Hint ignored in default MvxAppStart");
             }
 
             await NavigateToFirstViewModel(applicationHint);
@@ -111,7 +112,7 @@ namespace MvvmCross.ViewModels
                     NavigationService.Navigate<TViewModel, TParameter>(parameter).GetAwaiter().GetResult();
                 else
                 {
-                    MvxLog.Instance?.Trace($"Hint is not matching type of {nameof(TParameter)}. Doing navigation without typed parameter instead.");
+                    MvxLogHost.Default?.Log(LogLevel.Trace, "Hint is not matching type of {parameterName}. Doing navigation without typed parameter instead.", nameof(TParameter));
                     await base.NavigateToFirstViewModel(hint);
                 }
             }

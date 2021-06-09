@@ -4,8 +4,8 @@
 
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
@@ -24,7 +24,8 @@ namespace Playground.Core.ViewModels
             public Type ViewModelType { get; set; }
         }
 
-        public MixedNavMasterDetailViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        public MixedNavMasterDetailViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService) 
+            : base(logProvider, navigationService)
         {
             Menu = new[] {
                 new MenuItem { Title = "Root", Description = "The root page", ViewModelType = typeof(MixedNavMasterRootContentViewModel) },
@@ -45,14 +46,14 @@ namespace Playground.Core.ViewModels
 
         private IMvxAsyncCommand<MenuItem> OnSelectedChangedCommand {
             get {
-                return _onSelectedChangedCommand ?? (_onSelectedChangedCommand = new MvxAsyncCommand<MenuItem>(async (item) => 
+                return _onSelectedChangedCommand ??= new MvxAsyncCommand<MenuItem>(async (item) => 
                 {
                     if (item == null)
                         return;
 
                     var vmType = item.ViewModelType;
                     await NavigationService.Navigate(vmType);
-                }));
+                });
             }
         }
     }

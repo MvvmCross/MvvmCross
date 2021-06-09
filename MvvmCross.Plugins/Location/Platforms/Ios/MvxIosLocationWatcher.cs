@@ -5,6 +5,7 @@
 using System;
 using CoreLocation;
 using Foundation;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios;
@@ -50,7 +51,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Ios
                 _locationManager.DesiredAccuracy = options.Accuracy == MvxLocationAccuracy.Fine ? CLLocation.AccuracyBest : CLLocation.AccuracyKilometer;
                 if (options.TimeBetweenUpdates > TimeSpan.Zero)
                 {
-                    MvxPluginLog.Instance.Warn("TimeBetweenUpdates specified for MvxLocationOptions - but this is not supported in iOS");
+                    MvxPluginLog.Instance?.Log(LogLevel.Warning, "TimeBetweenUpdates specified for MvxLocationOptions - but this is not supported in iOS");
                 }
 
                 if (options.TrackingMode == MvxLocationTrackingMode.Background)
@@ -61,7 +62,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Ios
                     }
                     else
                     {
-                        MvxPluginLog.Instance.Warn("MvxLocationTrackingMode.Background is not supported for iOS before 8");
+                        MvxPluginLog.Instance?.Log(LogLevel.Warning, "MvxLocationTrackingMode.Background is not supported for iOS before 8");
                     }
                 }
                 else
@@ -173,7 +174,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Ios
                 // see https://github.com/slodge/MvvmCross/issues/92 and http://stackoverflow.com/questions/13262385/monotouch-cllocationmanagerdelegate-updatedlocation
                 if (locations.Length == 0)
                 {
-                    MvxPluginLog.Instance.Error("iOS has passed LocationsUpdated an empty array - this should never happen");
+                    MvxPluginLog.Instance?.Log(LogLevel.Error, "iOS has passed LocationsUpdated an empty array - this should never happen");
                     return;
                 }
 

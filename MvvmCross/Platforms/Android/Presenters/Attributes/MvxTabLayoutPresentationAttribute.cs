@@ -10,6 +10,10 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxTabLayoutPresentationAttribute : MvxViewPagerFragmentPresentationAttribute
     {
+        public MvxTabLayoutPresentationAttribute()
+        {
+        }
+
         public MvxTabLayoutPresentationAttribute(
             string title,
             int viewPagerResourceId,
