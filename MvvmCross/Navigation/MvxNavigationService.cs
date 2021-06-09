@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
+using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Navigation.EventArguments;
 using MvvmCross.Presenters.Hints;
@@ -25,6 +26,8 @@ namespace MvvmCross.Navigation
     /// <inheritdoc cref="IMvxNavigationService"/>
     public class MvxNavigationService : IMvxNavigationService
     {
+        private readonly IMvxIoCProvider _iocProvider;
+
         private readonly Lazy<ILogger?> _log = new Lazy<ILogger?>(() =>
             MvxLogHost.GetLog<MvxNavigationService>());
 
@@ -51,12 +54,16 @@ namespace MvvmCross.Navigation
 
         public event EventHandler<ChangePresentationEventArgs>? DidChangePresentation;
 
-        public MvxNavigationService(IMvxViewModelLoader viewModelLoader,
-            IMvxViewDispatcher viewDispatcher)
+        public MvxNavigationService(
+            IMvxViewModelLoader viewModelLoader,
+            IMvxViewDispatcher viewDispatcher,
+            IMvxIoCProvider iocProvider)
         {
+            _iocProvider = iocProvider;
+
             ViewModelLoader = viewModelLoader;
             ViewDispatcher = viewDispatcher;
-            ViewsContainer = new Lazy<IMvxViewsContainer>(() => Mvx.IoCProvider.Resolve<IMvxViewsContainer>());
+            ViewsContainer = new Lazy<IMvxViewsContainer>(() => _iocProvider.Resolve<IMvxViewsContainer>());
         }
 
         public void LoadRoutes(IEnumerable<Assembly> assemblies)
@@ -163,7 +170,7 @@ namespace MvvmCross.Navigation
 
             if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
-                var facade = (IMvxNavigationFacade)Mvx.IoCProvider.IoCConstruct(viewModelType);
+                var facade = (IMvxNavigationFacade)_iocProvider.IoCConstruct(viewModelType);
 
                 try
                 {
@@ -228,7 +235,7 @@ namespace MvvmCross.Navigation
 
             if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
-                var facade = (IMvxNavigationFacade)Mvx.IoCProvider.IoCConstruct(viewModelType);
+                var facade = (IMvxNavigationFacade)_iocProvider.IoCConstruct(viewModelType);
 
                 try
                 {
