@@ -32,7 +32,6 @@ namespace MvvmCross.Plugin.JsonLocalization
 
             try
             {
-                string text = null;
                 var assembly = Assembly.Load(new AssemblyName(namespaceKey));
 
                 using Stream stream = assembly.GetManifestResourceStream(path);
@@ -40,9 +39,7 @@ namespace MvvmCross.Plugin.JsonLocalization
                     return null;
 
                 using var textReader = new StreamReader(stream);
-                text = textReader.ReadToEnd();
-
-                return text;
+                return textReader.ReadToEnd();
             }
             catch (Exception ex)
             {

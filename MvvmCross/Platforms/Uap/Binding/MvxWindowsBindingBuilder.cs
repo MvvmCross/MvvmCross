@@ -51,7 +51,7 @@ namespace MvvmCross.Platforms.Uap.Binding
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new InvalidOperationException($"Unable to register binding factories for BindingType: {_bindingType}");
             }
         }
 
@@ -66,7 +66,7 @@ namespace MvvmCross.Platforms.Uap.Binding
                     return new MvxWindowsTargetBindingFactoryRegistry();
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new InvalidOperationException($"Unable to create target binding registry for BindingType: {_bindingType}");
             }
         }
 
@@ -87,7 +87,7 @@ namespace MvvmCross.Platforms.Uap.Binding
                     return new MvxMvvmCrossBindingCreator();
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new InvalidOperationException($"Unable to create binding creator for BindingType: {_bindingType}");
             }
         }
 

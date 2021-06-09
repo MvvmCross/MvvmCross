@@ -50,15 +50,15 @@ namespace MvvmCross.Platforms.Wpf
             instance.InitializeAndMonitor(null);
         }
 
-        class App : ViewModels.MvxApplication
+        private class App : ViewModels.MvxApplication
         {
         }
 
-        class Content : ContentControl
+        private class Content : ContentControl
         {
         }
 
-        class Setup : MvxWpfSetup<App>
+        private class Setup : MvxWpfSetup<App>
         {
             protected override ILoggerFactory CreateLogFactory()
             {
