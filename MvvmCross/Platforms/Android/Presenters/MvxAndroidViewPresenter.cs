@@ -536,7 +536,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (fragmentManager == null)
                 throw new ArgumentNullException(nameof(fragmentManager));
 
-            var fragmentName = attribute.ViewType.FragmentJavaName();
+            var fragmentName = attribute.Tag ?? attribute.ViewType.FragmentJavaName();
 
             IMvxFragmentView? fragmentView = null;
             if (attribute.IsCacheableFragment)
@@ -677,7 +677,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (attribute.ViewType == null)
                 throw new InvalidOperationException($"{nameof(MvxDialogFragmentPresentationAttribute)}.ViewType is null");
 
-            var fragmentName = attribute.ViewType.FragmentJavaName();
+            var fragmentName = attribute.Tag ?? attribute.ViewType.FragmentJavaName();
             IMvxFragmentView mvxFragmentView = CreateFragment(CurrentActivity.SupportFragmentManager, attribute, attribute.ViewType);
             var dialog = (DialogFragment)mvxFragmentView;
 
@@ -851,7 +851,7 @@ namespace MvvmCross.Platforms.Android.Presenters
         {
             ValidateArguments(attribute);
 
-            string tag = attribute.ViewType.FragmentJavaName();
+            string tag = attribute.Tag ?? attribute.ViewType.FragmentJavaName();
             var toClose = CurrentFragmentManager?.FindFragmentByTag(tag);
             if (toClose is DialogFragment dialog)
             {
@@ -916,7 +916,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             try
             {
-                var fragmentName = fragmentAttribute.ViewType.FragmentJavaName();
+                var fragmentName = fragmentAttribute.Tag ?? fragmentAttribute.ViewType.FragmentJavaName();
                 if (fragmentManager.BackStackEntryCount > 0)
                 {
                     PopOnBackstackEntries(fragmentName, fragmentManager, fragmentAttribute);
