@@ -315,18 +315,23 @@ namespace MvvmCross.Core
             ValidateArguments(iocProvider);
 
             var logProvider = CreateLogProvider();
-
             var loggerFactory = CreateLogFactory();
-            loggerFactory.AddProvider(logProvider);
 
-            iocProvider.RegisterSingleton(logProvider);
-            iocProvider.RegisterSingleton(loggerFactory);
+            if (logProvider != null)
+            {
+                iocProvider.RegisterSingleton(logProvider);
+                loggerFactory?.AddProvider(logProvider);
+            }
 
-            SetupLog = loggerFactory.CreateLogger<MvxSetup>();
+            if (loggerFactory != null)
+            {
+                iocProvider.RegisterSingleton(loggerFactory);
+                SetupLog = loggerFactory.CreateLogger<MvxSetup>();
+            }
         }
 
-        protected abstract ILoggerProvider CreateLogProvider();
-        protected abstract ILoggerFactory CreateLogFactory();
+        protected abstract ILoggerProvider? CreateLogProvider();
+        protected abstract ILoggerFactory? CreateLogFactory();
 
         protected virtual IMvxViewModelLoader CreateViewModelLoader(IMvxIoCProvider iocProvider)
         {
