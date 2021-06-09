@@ -497,9 +497,14 @@ namespace MvvmCross.Core
 
         public virtual IEnumerable<Assembly> GetViewModelAssemblies()
         {
-            var app = Mvx.IoCProvider.Resolve<IMvxApplication>();
-            var assembly = app.GetType().GetTypeInfo().Assembly;
-            return new[] { assembly };
+            var app = _iocProvider?.Resolve<IMvxApplication>();
+            if (app != null)
+            {
+                var assembly = app.GetType().GetTypeInfo().Assembly;
+                return new[] { assembly };
+            }
+
+            return Array.Empty<Assembly>();
         }
 
         protected virtual IEnumerable<Assembly> GetBootstrapOwningAssemblies()
