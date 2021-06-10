@@ -29,7 +29,6 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         {
             RegisterSetup();
             BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
         }
 
         public object DataContext
