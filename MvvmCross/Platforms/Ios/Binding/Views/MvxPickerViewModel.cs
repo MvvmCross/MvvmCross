@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,6 +11,7 @@ using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
 using MvvmCross.WeakSubscription;
 using UIKit;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
 {
@@ -77,7 +78,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
         protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            MvxLog.Instance.Trace(
+            MvxLogHost.Default?.LogTrace(
                 "CollectionChanged called inside MvxPickerViewModel - beware that this isn't fully tested - picker might not fully support changes while the picker is visible");
             Reload();
         }

@@ -7,10 +7,11 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
 {
+#nullable enable
     public class MvxPopToRootPresentationHint
         : MvxPresentationHint
     {
-        public MvxPopToRootPresentationHint(bool animated = true) : base()
+        public MvxPopToRootPresentationHint(bool animated = true)
         {
             Animated = animated;
         }
@@ -20,10 +21,12 @@ namespace MvvmCross.Presenters.Hints
             Animated = animated;
         }
 
-        public MvxPopToRootPresentationHint(IDictionary<string, string> hints, bool animated = true) : this(new MvxBundle(hints), animated)
+        public MvxPopToRootPresentationHint(IDictionary<string, string> hints, bool animated = true)
+            : this(new MvxBundle(hints), animated)
         {
         }
 
         public bool Animated { get; set; }
     }
+#nullable restore
 }

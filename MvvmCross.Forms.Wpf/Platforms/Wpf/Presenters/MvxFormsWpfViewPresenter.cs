@@ -5,8 +5,8 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Forms.Presenters;
-using MvvmCross.Logging;
 using MvvmCross.Platforms.Wpf.Presenters;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;
@@ -69,13 +69,13 @@ namespace MvvmCross.Forms.Platforms.Wpf.Presenters
 
         public virtual bool ShowPlatformHost(Type hostViewModel = null)
         {
-            MvxFormsLog.Instance.Trace($"Showing of native host View in Forms is not supported.");
+            MvxFormsLog.Instance?.Log(LogLevel.Trace, "Showing of native host View in Forms is not supported.");
             return false;
         }
 
         public virtual bool ClosePlatformViews()
         {
-            MvxFormsLog.Instance.Trace($"Closing of native Views in Forms is not supported.");
+            MvxFormsLog.Instance?.Log(LogLevel.Trace, "Closing of native Views in Forms is not supported.");
             return false;
         }
     }

@@ -6,7 +6,7 @@ using UIKit;
 namespace Playground.Forms.iOS
 {
     [Register("AppDelegate")]
-    public partial class AppDelegate : MvxFormsApplicationDelegate<MvxFormsIosSetup<Core.App, FormsApp>, Core.App, FormsApp>
+    public partial class AppDelegate : MvxFormsApplicationDelegate<Setup, Core.App, FormsApp>
     {
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {

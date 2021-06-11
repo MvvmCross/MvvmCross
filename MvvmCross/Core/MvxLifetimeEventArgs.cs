@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,6 +6,7 @@ using System;
 
 namespace MvvmCross.Core
 {
+#nullable enable
     public class MvxLifetimeEventArgs : EventArgs
     {
         public MvxLifetimeEventArgs(MvxLifetimeEvent lifetimeEvent)
@@ -13,6 +14,7 @@ namespace MvvmCross.Core
             LifetimeEvent = lifetimeEvent;
         }
 
-        public MvxLifetimeEvent LifetimeEvent { get; private set; }
+        public MvxLifetimeEvent LifetimeEvent { get; }
     }
+#nullable restore
 }

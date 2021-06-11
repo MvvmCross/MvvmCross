@@ -7,6 +7,7 @@ using System.Reflection;
 
 namespace MvvmCross.WeakSubscription
 {
+#nullable enable
     public class MvxGeneralEventSubscription
         : MvxWeakEventSubscription<object, EventArgs>
     {
@@ -23,7 +24,6 @@ namespace MvvmCross.WeakSubscription
         }
     }
 
-    /*
     public class MvxGeneralEventSubscription<TSource, TEventArgs>
         : MvxWeakEventSubscription<TSource, TEventArgs>
         where TSource : class
@@ -48,5 +48,5 @@ namespace MvvmCross.WeakSubscription
             return new EventHandler<TEventArgs>(OnSourceEvent);
         }
     }
-     */
+#nullable restore
 }

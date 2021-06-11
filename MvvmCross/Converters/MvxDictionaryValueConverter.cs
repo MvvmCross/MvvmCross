@@ -8,10 +8,15 @@ using System.Globalization;
 
 namespace MvvmCross.Converters
 {
+#nullable enable
     public class MvxDictionaryValueConverter<TKey, TValue> : MvxValueConverter<TKey, TValue>
+        where TKey : notnull
     {
-        protected override TValue Convert(TKey value, Type targetType, object parameter, CultureInfo culture)
+        protected override TValue Convert(TKey value, Type? targetType, object? parameter, CultureInfo? culture)
         {
+            if (parameter == null)
+                throw new ArgumentNullException(nameof(parameter), $"Dictionary Converter expected a parameter of type \"{typeof(Tuple<IDictionary<TKey, TValue>, TValue, bool>)}\" but received null");
+
             try
             {
                 var typedParameters = (Tuple<IDictionary<TKey, TValue>, TValue, bool>)parameter;
@@ -33,4 +38,5 @@ namespace MvvmCross.Converters
             }
         }
     }
+#nullable restore
 }

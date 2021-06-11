@@ -7,23 +7,25 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Core
 {
+#nullable enable
     public class MvxStringToTypeParser
         : IMvxStringToTypeParser, IMvxFillableStringToTypeParser
     {
         public interface IParser
         {
-            object ReadValue(string input, string fieldOrParameterName);
+            object? ReadValue(string input, string fieldOrParameterName);
         }
 
         public interface IExtraParser
         {
             bool Parses(Type t);
 
-            object ReadValue(Type t, string input, string fieldOrParameterName);
+            object? ReadValue(Type t, string input, string fieldOrParameterName);
         }
 
         public class EnumParser : IExtraParser
@@ -33,18 +35,19 @@ namespace MvvmCross.Core
                 return t.GetTypeInfo().IsEnum;
             }
 
-            public object ReadValue(Type t, string input, string fieldOrParameterName)
+            public object? ReadValue(Type t, string input, string fieldOrParameterName)
             {
-                object enumValue = null;
+                object? enumValue = null;
                 try
                 {
                     enumValue = Enum.Parse(t, input, true);
                 }
                 catch (Exception)
                 {
-                    MvxLog.Instance.Error("Failed to parse enum parameter {0} from string {1}",
-                                   fieldOrParameterName,
-                                   input);
+                    MvxLogHost.Default?.Log(LogLevel.Error,
+                        "Failed to parse enum parameter {fieldOrParameterName} from string {input}",
+                        fieldOrParameterName,
+                        input);
                 }
                 if (enumValue == null)
                 {
@@ -55,8 +58,9 @@ namespace MvvmCross.Core
                     }
                     catch (Exception)
                     {
-                        MvxLog.Instance.Error("Failed to create default enum value for {0} - will return null",
-                                       fieldOrParameterName);
+                        MvxLogHost.Default?.Log(LogLevel.Error,
+                            "Failed to create default enum value for {fieldOrParameterName} - will return null",
+                            fieldOrParameterName);
                     }
                 }
                 return enumValue;
@@ -65,7 +69,7 @@ namespace MvvmCross.Core
 
         public class StringParser : IParser
         {
-            public object ReadValue(string input, string fieldOrParameterName)
+            public object? ReadValue(string input, string fieldOrParameterName)
             {
                 return input;
             }
@@ -75,13 +79,14 @@ namespace MvvmCross.Core
         {
             protected abstract bool TryParse(string input, out object result);
 
-            public object ReadValue(string input, string fieldOrParameterName)
+            public object? ReadValue(string input, string fieldOrParameterName)
             {
                 object result;
                 if (!TryParse(input, out result))
                 {
-                    MvxLog.Instance.Error("Failed to parse {0} parameter {1} from string {2}",
-                                   GetType().Name, fieldOrParameterName, input);
+                    MvxLogHost.Default?.Log(LogLevel.Error,
+                        "Failed to parse {type} parameter {fieldOrParameterName} from string {input}",
+                        GetType().Name, fieldOrParameterName, input);
                 }
                 return result;
             }
@@ -94,7 +99,7 @@ namespace MvvmCross.Core
             // Charlie Brown(https://stackoverflow.com/users/825578/charlie-brown)'s answer
             public delegate bool TryParseHandler(string input, NumberStyles style, IFormatProvider provider, out T result);
 
-            private TryParseHandler _tryParseHandler;
+            private readonly TryParseHandler _tryParseHandler;
 
             public NumberParser(TryParseHandler handler) => _tryParseHandler = handler;
 
@@ -172,9 +177,9 @@ namespace MvvmCross.Core
             }
         }
 
-        public IDictionary<Type, IParser> TypeParsers { get; private set; }
+        public IDictionary<Type, IParser> TypeParsers { get; }
 
-        public IList<IExtraParser> ExtraParsers { get; private set; }
+        public IList<IExtraParser> ExtraParsers { get; }
 
         public MvxStringToTypeParser()
         {
@@ -212,7 +217,7 @@ namespace MvvmCross.Core
             return ExtraParsers.Any(x => x.Parses(targetType));
         }
 
-        public object ReadValue(string rawValue, Type targetType, string fieldOrParameterName)
+        public object? ReadValue(string rawValue, Type targetType, string fieldOrParameterName)
         {
             IParser parser;
             if (TypeParsers.TryGetValue(targetType, out parser))
@@ -226,9 +231,11 @@ namespace MvvmCross.Core
                 return extra.ReadValue(targetType, rawValue, fieldOrParameterName);
             }
 
-            MvxLog.Instance.Error("Parameter {0} is invalid targetType {1}", fieldOrParameterName,
-                           targetType.Name);
+            MvxLogHost.Default?.Log(LogLevel.Error,
+                "Parameter {parameterName} is invalid targetType {typeName}",
+                fieldOrParameterName, targetType.Name);
             return null;
         }
     }
+#nullable restore
 }

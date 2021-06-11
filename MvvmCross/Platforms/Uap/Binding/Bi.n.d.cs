@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using MvvmCross.Base;
@@ -75,7 +76,7 @@ namespace MvvmCross.Platforms.Uap.Binding
         private static IEnumerable<MvxBindingDescription> ParseBindingDescriptions(string bindingText)
         {
             if (MvxSingleton<IMvxBindingSingletonCache>.Instance == null)
-                return null;
+                return Array.Empty<MvxBindingDescription>();
 
             return MvxSingleton<IMvxBindingSingletonCache>.Instance.BindingDescriptionParser.Parse(bindingText);
         }

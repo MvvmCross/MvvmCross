@@ -64,11 +64,6 @@ namespace MvvmCross.Binding.BindingContext
             });
         }
 
-        ~MvxTaskBasedBindingContext()
-        {
-            Dispose(false);
-        }
-
         public void Dispose()
         {
             Dispose(true);

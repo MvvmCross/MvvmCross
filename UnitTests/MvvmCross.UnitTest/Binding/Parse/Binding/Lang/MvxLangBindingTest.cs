@@ -188,7 +188,8 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Lang
                 },
             };
 
-        public MvxLangBindingTest(MvxTestFixture fixture, ITestOutputHelper testOutputHelper) : base(fixture, testOutputHelper)
+        public MvxLangBindingTest(MvxTestFixture fixture)
+            : base(fixture)
         {
         }
     }

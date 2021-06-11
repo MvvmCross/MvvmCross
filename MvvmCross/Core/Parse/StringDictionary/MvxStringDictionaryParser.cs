@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,12 +8,13 @@ using MvvmCross.Exceptions;
 
 namespace MvvmCross.Core.Parse.StringDictionary
 {
+#nullable enable
     public class MvxStringDictionaryParser
         : MvxParser, IMvxStringDictionaryParser
     {
-        protected Dictionary<string, string> CurrentEntries { get; private set; }
+        protected Dictionary<string, string?>? CurrentEntries { get; private set; }
 
-        public IDictionary<string, string> Parse(string textToParse)
+        public IDictionary<string, string?> Parse(string textToParse)
         {
             Reset(textToParse);
 
@@ -23,12 +24,12 @@ namespace MvvmCross.Core.Parse.StringDictionary
                 SkipWhitespaceAndCharacters(';');
             }
 
-            return CurrentEntries;
+            return CurrentEntries!;
         }
 
         protected override void Reset(string textToParse)
         {
-            CurrentEntries = new Dictionary<string, string>();
+            CurrentEntries = new Dictionary<string, string?>();
             base.Reset(textToParse);
         }
 
@@ -44,29 +45,33 @@ namespace MvvmCross.Core.Parse.StringDictionary
             var key = ReadValue();
             if (!(key is string))
             {
-                throw new MvxException("Unexpected object in key for keyvalue pair {0} at position {1}",
-                                       key.GetType().Name, CurrentIndex);
+                throw new MvxException($"Unexpected object in key for keyvalue pair {key?.GetType().Name} at position {CurrentIndex}");
             }
 
             SkipWhitespace();
 
             if (CurrentChar != '=')
             {
-                throw new MvxException("Unexpected character in keyvalue pair {0} at position {1}", CurrentChar,
-                                       CurrentIndex);
+                throw new MvxException($"Unexpected character in keyvalue pair {CurrentChar} at position {CurrentIndex}");
             }
 
             MoveNext();
             SkipWhitespace();
 
             var value = ReadValue();
-            if (value != null && !(value is string))
+            if(value == null)
             {
-                throw new MvxException("Unexpected object in value for keyvalue pair {0} for key {1} at position {2}",
-                                       value.GetType().Name, key, CurrentIndex);
+                CurrentEntries![(string)key] = null;
             }
-
-            CurrentEntries[(string)key] = (string)value;
+            else if (value is string stringValue)
+            {
+                CurrentEntries![(string)key] = stringValue;
+            }
+            else
+            {
+                throw new MvxException($"Unexpected object in value for keyvalue pair {value?.GetType().Name} for key {key} at position {CurrentIndex}");
+            }
         }
     }
+#nullable restore
 }

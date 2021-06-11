@@ -1,4 +1,6 @@
 <Project>
+  <Import Project="..\Directory.Build.targets" />
+
   <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
     <DefineConstants>$(DefineConstants);NETSTANDARD;PORTABLE</DefineConstants>
   </PropertyGroup>

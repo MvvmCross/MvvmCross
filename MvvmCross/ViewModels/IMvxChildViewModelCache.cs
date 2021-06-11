@@ -3,17 +3,17 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.ViewModels;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public interface IMvxChildViewModelCache
     {
         int Cache(IMvxViewModel viewModel);
 
-        IMvxViewModel Get(int index);
+        IMvxViewModel? Get(int index);
 
-        IMvxViewModel Get(Type viewModelType);
+        IMvxViewModel? Get(Type viewModelType);
 
         void Remove(int index);
 
@@ -21,4 +21,5 @@ namespace MvvmCross.ViewModels
 
         bool Exists(Type viewModelType);
     }
+#nullable restore
 }

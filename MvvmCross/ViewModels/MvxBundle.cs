@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,6 +9,7 @@ using MvvmCross.Core;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public class MvxBundle
         : IMvxBundle
     {
@@ -17,15 +18,18 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        public MvxBundle(IDictionary<string, string> data)
+        public MvxBundle(IDictionary<string, string>? data)
         {
             Data = data ?? new Dictionary<string, string>();
         }
 
-        public IDictionary<string, string> Data { get; private set; }
+        public IDictionary<string, string> Data { get; }
 
         public void Write(object toStore)
         {
+            if (toStore == null)
+                throw new ArgumentNullException(nameof(toStore));
+
             Data.Write(toStore);
         }
 
@@ -40,9 +44,10 @@ namespace MvvmCross.ViewModels
             return Data.Read(type);
         }
 
-        public IEnumerable<object> CreateArgumentList(IEnumerable<ParameterInfo> requiredParameters, string debugText)
+        public IEnumerable<object> CreateArgumentList(IEnumerable<ParameterInfo> requiredParameters, string? debugText)
         {
             return Data.CreateArgumentList(requiredParameters, debugText);
         }
     }
+#nullable restore
 }

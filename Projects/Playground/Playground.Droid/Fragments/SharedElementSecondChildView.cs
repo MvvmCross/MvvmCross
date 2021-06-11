@@ -20,10 +20,7 @@ namespace Playground.Droid.Fragments
         {
             base.OnCreate(savedInstanceState);
 
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-            {
-                SharedElementEnterTransition = TransitionInflater.From(Activity).InflateTransition(Android.Resource.Transition.Move);
-            }
+            SharedElementEnterTransition = TransitionInflater.From(Activity).InflateTransition(Android.Resource.Transition.Move);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

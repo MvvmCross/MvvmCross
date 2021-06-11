@@ -13,9 +13,9 @@ using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platforms.Wpf.Bindings;
 using MvvmCross.Forms.Platforms.Wpf.Presenters;
 using MvvmCross.Forms.Presenters;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.Platforms.Wpf.Presenters;
-using MvvmCross.Platforms.Wpf.Views;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;
 
@@ -75,7 +75,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
         }
     }
 
-    public class MvxFormsWpfSetup<TApplication, TFormsApplication> : MvxFormsWpfSetup
+    public abstract class MvxFormsWpfSetup<TApplication, TFormsApplication> : MvxFormsWpfSetup
         where TApplication : class, IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
@@ -91,6 +91,6 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
 
         protected override Application CreateFormsApplication() => new TFormsApplication();
 
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) => iocProvider.IoCConstruct<TApplication>();
     }
 }

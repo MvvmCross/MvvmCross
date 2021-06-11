@@ -5,6 +5,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Localization;
@@ -34,7 +35,8 @@ namespace Playground.Core.ViewModels
             get { return new MvxLanguageBinder("Playground.Core", "Text"); }
         }
 
-        public RootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService, IMvxViewModelLoader mvxViewModelLoader) : base(logProvider, navigationService)
+        public RootViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService, IMvxViewModelLoader mvxViewModelLoader)
+            : base(logProvider, navigationService)
         {
             _mvxViewModelLoader = mvxViewModelLoader;
             try
@@ -196,7 +198,7 @@ namespace Playground.Core.ViewModels
 
         public override async Task Initialize()
         {
-            Log.Warn(() => "Testing log");
+            Log.LogWarning("Testing log");
 
             await base.Initialize();
 

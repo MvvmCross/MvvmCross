@@ -6,9 +6,10 @@ using System;
 
 namespace MvvmCross.Exceptions
 {
+#nullable enable
     public static class MvxExceptionExtensions
     {
-        public static string ToLongString(this Exception exception)
+        public static string ToLongString(this Exception? exception)
         {
             if (exception == null)
                 return "null exception";
@@ -40,4 +41,5 @@ namespace MvvmCross.Exceptions
             return new MvxException(exception, messageFormat, formatArguments);
         }
     }
+#nullable restore
 }

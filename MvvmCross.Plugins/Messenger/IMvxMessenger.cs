@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace MvvmCross.Plugin.Messenger
 {
+#nullable enable
     public interface IMvxMessenger
     {
         /// <summary>
@@ -17,7 +18,7 @@ namespace MvvmCross.Plugin.Messenger
         /// <param name="reference">Use a strong or weak reference to the deliveryAction</param>
         /// <param name="tag">An optional tag to include with this subscription</param>
         /// <returns>MessageSubscription used to unsubscribing</returns>
-        MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string tag = null)
+        MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string? tag = null)
             where TMessage : MvxMessage;
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace MvvmCross.Plugin.Messenger
         /// <param name="reference">Use a strong or weak reference to the deliveryAction</param>
         /// <param name="tag">An optional tag to include with this subscription</param>
         /// <returns>MessageSubscription used to unsubscribing</returns>
-        MvxSubscriptionToken SubscribeOnMainThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string tag = null)
+        MvxSubscriptionToken SubscribeOnMainThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string? tag = null)
              where TMessage : MvxMessage;
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace MvvmCross.Plugin.Messenger
         /// <param name="reference">Use a strong or weak reference to the deliveryAction</param>
         /// <param name="tag">An optional tag to include with this subscription</param>
         /// <returns>MessageSubscription used to unsubscribing</returns>
-        MvxSubscriptionToken SubscribeOnThreadPoolThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string tag = null)
+        MvxSubscriptionToken SubscribeOnThreadPoolThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string? tag = null)
              where TMessage : MvxMessage;
 
         /// <summary>
@@ -126,4 +127,5 @@ namespace MvvmCross.Plugin.Messenger
         /// </summary>
         void RequestPurgeAll();
     }
+#nullable restore
 }

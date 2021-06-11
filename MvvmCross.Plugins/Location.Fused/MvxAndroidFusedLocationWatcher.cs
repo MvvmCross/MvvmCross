@@ -5,36 +5,36 @@
 using System;
 using System.Threading;
 using Android.Content;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
-using MvvmCross.Logging;
 using MvvmCross.Platforms.Android;
 
 namespace MvvmCross.Plugin.Location.Fused
 {
     [Preserve(AllMembers = true)]
-	public class MvxAndroidFusedLocationWatcher
-		: MvxLocationWatcher
-	{
-		private Context _context;
-        private Context Context => _context ?? (_context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext);
+    public class MvxAndroidFusedLocationWatcher
+        : MvxLocationWatcher
+    {
+        private Context _context;
+        private Context Context => _context ??= Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext;
         private FusedLocationHandler _locationHandler;
 
-		protected override void PlatformSpecificStart(MvxLocationOptions options)
-		{
-			if (_locationHandler == null)
-				_locationHandler = new FusedLocationHandler(this, Context);
-            
+        protected override void PlatformSpecificStart(MvxLocationOptions options)
+        {
+            if (_locationHandler == null)
+                _locationHandler = new FusedLocationHandler(this, Context);
+
             _locationHandler.StartAsync(options).GetAwaiter();
-		}
+        }
 
         protected override void PlatformSpecificStop() => _locationHandler.StopAsync().GetAwaiter();
 
-        public override MvxGeoLocation CurrentLocation 
-		{
-			get 
-			{
-				if (_locationHandler == null)
-					throw new MvxException("Location Manager not started");
+        public override MvxGeoLocation CurrentLocation
+        {
+            get
+            {
+                if (_locationHandler == null)
+                    throw new MvxException("Location Manager not started");
 
                 var androidLocation = _locationHandler.LastKnownLocation;
                 if (androidLocation == null)
@@ -42,66 +42,66 @@ namespace MvvmCross.Plugin.Location.Fused
 
                 return CreateLocation(androidLocation);
             }
-		}
+        }
 
         internal void OnLocationUpdated(global::Android.Locations.Location androidLocation)
-		{
-			if (androidLocation == null)
-			{
-				MvxPluginLog.Instance.Warn("Android: Null location seen");
-				return;
-			}
+        {
+            if (androidLocation == null)
+            {
+                MvxPluginLog.Instance.Log(LogLevel.Warning, "Android: Null location seen");
+                return;
+            }
 
-			if (androidLocation.Latitude == double.MaxValue || 
+            if (androidLocation.Latitude == double.MaxValue ||
                 androidLocation.Longitude == double.MaxValue)
-			{
-				MvxPluginLog.Instance.Warn("Android: Invalid location seen");
-				return;
-			}
+            {
+                MvxPluginLog.Instance.Log(LogLevel.Warning, "Android: Invalid location seen");
+                return;
+            }
 
-			MvxGeoLocation location;
-			try
-			{
-				location = CreateLocation(androidLocation);
-			}
-			catch (ThreadAbortException)
-			{
-				throw;
-			}
-			catch (Exception exception)
-			{
-				MvxPluginLog.Instance.Error(exception, "Android: Exception seen in converting location");
-				return;
-			}
+            MvxGeoLocation location;
+            try
+            {
+                location = CreateLocation(androidLocation);
+            }
+            catch (ThreadAbortException)
+            {
+                throw;
+            }
+            catch (Exception exception)
+            {
+                MvxPluginLog.Instance.Log(LogLevel.Error, exception, "Android: Exception seen in converting location");
+                return;
+            }
 
-			SendLocation (location);
-		}
+            SendLocation(location);
+        }
 
         internal void OnLocationError(MvxLocationErrorCode errorCode) => SendError(errorCode);
 
-        internal void OnLocationAvailabilityChanged(bool isAvailable) => 
+        internal void OnLocationAvailabilityChanged(bool isAvailable) =>
             Permission = isAvailable ?
                 MvxLocationPermission.Granted :
                 MvxLocationPermission.Denied;
 
         private static MvxGeoLocation CreateLocation(global::Android.Locations.Location androidLocation)
-		{
-			var position = new MvxGeoLocation { Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc() };
-			var coords = position.Coordinates;
+        {
+            var position = new MvxGeoLocation { Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc() };
+            var coords = position.Coordinates;
 
             coords.Latitude = androidLocation.Latitude;
             coords.Longitude = androidLocation.Longitude;
 
             if (androidLocation.HasAltitude)
-				coords.Altitude = androidLocation.Altitude;
-			if (androidLocation.HasBearing)
-				coords.Heading = androidLocation.Bearing;
-			if (androidLocation.HasSpeed)
-				coords.Speed = androidLocation.Speed;
-			if (androidLocation.HasAccuracy)
-				coords.Accuracy = androidLocation.Accuracy;
+                coords.Altitude = androidLocation.Altitude;
+            if (androidLocation.HasBearing)
+                coords.Heading = androidLocation.Bearing;
+            if (androidLocation.HasSpeed)
+                coords.Speed = androidLocation.Speed;
+            if (androidLocation.HasAccuracy)
+                coords.Accuracy = androidLocation.Accuracy;
 
-			return position;
-		}
-	}
+            return position;
+        }
+    }
 }

@@ -99,7 +99,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();
     }
 
-    public class MvxFormsWindowsSetup<TApplication, TFormsApplication> : MvxFormsWindowsSetup
+    public abstract class MvxFormsWindowsSetup<TApplication, TFormsApplication> : MvxFormsWindowsSetup
         where TApplication : class, IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
@@ -115,6 +115,6 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
 
         protected override Application CreateFormsApplication() => new TFormsApplication();
 
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) => iocProvider.IoCConstruct<TApplication>();
     }
 }

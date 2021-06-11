@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views.Base
 {
-    public class MvxEventSourceMasterDetailPage : MasterDetailPage, IMvxEventSourcePage
+    public class MvxEventSourceMasterDetailPage : FlyoutPage, IMvxEventSourcePage
     {
         protected override void OnAppearing()
         {

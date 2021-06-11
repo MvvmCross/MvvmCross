@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public interface IMvxAppStart
     {
-        void Start(object hint = null);
+        void Start(object? hint = null);
 
-        Task StartAsync(object hint = null);
+        Task StartAsync(object? hint = null);
 
         bool IsStarted { get; }
 
         void ResetStart();
     }
+#nullable restore
 }

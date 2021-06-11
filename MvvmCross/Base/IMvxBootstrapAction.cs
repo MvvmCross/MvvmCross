@@ -4,8 +4,10 @@
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public interface IMvxBootstrapAction
     {
         void Run();
     }
+#nullable restore
 }

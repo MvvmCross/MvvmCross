@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 
 namespace MvvmCross.Exceptions
 {
+#nullable enable
     [Serializable]
     public class MvxIoCResolveException : MvxException
     {
@@ -37,6 +38,7 @@ namespace MvvmCross.Exceptions
 
         protected MvxIoCResolveException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-        }        
+        }
     }
+#nullable restore
 }

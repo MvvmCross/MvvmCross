@@ -1,13 +1,13 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using Android.Graphics;
 using Android.Widget;
-using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Binding;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
 {
@@ -36,7 +36,8 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             }
             catch (Exception ex)
             {
-                MvxLog.Instance.Error(ex.ToLongString());
+                MvxLogHost.GetLog<MvxBaseImageViewTargetBinding>()?
+                    .Log(LogLevel.Error, ex, "Failed to set bitmap on ImageView");
                 throw;
             }
         }

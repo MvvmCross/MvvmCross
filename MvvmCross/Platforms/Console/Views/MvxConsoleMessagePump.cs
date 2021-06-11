@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,17 +7,12 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.Console.Views
 {
+#nullable enable
     public class MvxConsoleMessagePump : IMvxConsoleCurrentView, IMvxMessagePump
     {
         private readonly MvxConsoleSystemMessageHandler _systemMessageHandler = new MvxConsoleSystemMessageHandler();
 
-        #region IMvxConsoleCurrentView Members
-
-        public IMvxConsoleView CurrentView { get; set; }
-
-        #endregion IMvxConsoleCurrentView Members
-
-        #region IMvxMessagePump Members
+        public IMvxConsoleView? CurrentView { get; set; }
 
         public void Run()
         {
@@ -44,7 +39,6 @@ namespace MvvmCross.Platforms.Console.Views
                 System.Console.WriteLine("Error - unknown input");
             }
         }
-
-        #endregion IMvxMessagePump Members
     }
+#nullable restore
 }

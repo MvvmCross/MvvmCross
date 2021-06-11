@@ -2,39 +2,41 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.IoC;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Binding
 {
     public class MvxBindingBuilder : MvxCoreBindingBuilder
     {
-        public override void DoRegistration()
+        public override void DoRegistration(IMvxIoCProvider iocProvider)
         {
-            base.DoRegistration();
-            RegisterBindingFactories();
+            base.DoRegistration(iocProvider);
+            RegisterBindingFactories(iocProvider);
         }
 
-        protected virtual void RegisterBindingFactories()
+        protected virtual void RegisterBindingFactories(IMvxIoCProvider iocProvider)
         {
-            RegisterMvxBindingFactories();
+            RegisterMvxBindingFactories(iocProvider);
         }
 
-        protected virtual void RegisterMvxBindingFactories()
+        protected virtual void RegisterMvxBindingFactories(IMvxIoCProvider iocProvider)
         {
-            RegisterSourceStepFactory();
-            RegisterSourceFactory();
-            RegisterTargetFactory();
+            RegisterSourceStepFactory(iocProvider);
+            RegisterSourceFactory(iocProvider);
+            RegisterTargetFactory(iocProvider);
         }
 
-        protected virtual void RegisterSourceStepFactory()
+        protected virtual void RegisterSourceStepFactory(IMvxIoCProvider iocProvider)
         {
             var sourceStepFactory = CreateSourceStepFactoryRegistry();
             FillSourceStepFactory(sourceStepFactory);
-            Mvx.IoCProvider.RegisterSingleton<IMvxSourceStepFactoryRegistry>(sourceStepFactory);
-            Mvx.IoCProvider.RegisterSingleton<IMvxSourceStepFactory>(sourceStepFactory);
+            iocProvider.RegisterSingleton<IMvxSourceStepFactoryRegistry>(sourceStepFactory);
+            iocProvider.RegisterSingleton<IMvxSourceStepFactory>(sourceStepFactory);
         }
 
         protected virtual void FillSourceStepFactory(IMvxSourceStepFactoryRegistry registry)
@@ -49,18 +51,18 @@ namespace MvvmCross.Binding
             return new MvxSourceStepFactory();
         }
 
-        protected virtual void RegisterSourceFactory()
+        protected virtual void RegisterSourceFactory(IMvxIoCProvider iocProvider)
         {
             var sourceFactory = CreateSourceBindingFactory();
-            Mvx.IoCProvider.RegisterSingleton<IMvxSourceBindingFactory>(sourceFactory);
+            iocProvider.RegisterSingleton<IMvxSourceBindingFactory>(sourceFactory);
             var extensionHost = sourceFactory as IMvxSourceBindingFactoryExtensionHost;
             if (extensionHost != null)
             {
                 RegisterSourceBindingFactoryExtensions(extensionHost);
-                Mvx.IoCProvider.RegisterSingleton<IMvxSourceBindingFactoryExtensionHost>(extensionHost);
+                iocProvider.RegisterSingleton<IMvxSourceBindingFactoryExtensionHost>(extensionHost);
             }
             else
-                MvxLog.Instance.Trace("source binding factory extension host not provided - so no source extensions will be used");
+                MvxLogHost.Default?.Log(LogLevel.Trace, "source binding factory extension host not provided - so no source extensions will be used");
         }
 
         protected virtual void RegisterSourceBindingFactoryExtensions(IMvxSourceBindingFactoryExtensionHost extensionHost)
@@ -73,12 +75,12 @@ namespace MvvmCross.Binding
             return new MvxSourceBindingFactory();
         }
 
-        protected virtual void RegisterTargetFactory()
+        protected virtual void RegisterTargetFactory(IMvxIoCProvider iocProvider)
         {
             var targetRegistry = CreateTargetBindingRegistry();
             FillTargetFactories(targetRegistry);
-            Mvx.IoCProvider.RegisterSingleton<IMvxTargetBindingFactoryRegistry>(targetRegistry);
-            Mvx.IoCProvider.RegisterSingleton<IMvxTargetBindingFactory>(targetRegistry);
+            iocProvider.RegisterSingleton<IMvxTargetBindingFactoryRegistry>(targetRegistry);
+            iocProvider.RegisterSingleton<IMvxTargetBindingFactory>(targetRegistry);
         }
 
         protected virtual IMvxTargetBindingFactoryRegistry CreateTargetBindingRegistry()

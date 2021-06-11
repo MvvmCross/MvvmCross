@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -18,6 +18,7 @@ using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.WeakSubscription;
+using Microsoft.Extensions.Logging;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platforms.Android.Binding.Views
@@ -101,7 +102,9 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             if (ReferenceEquals(_itemsSource, value)
                 && !ReloadOnAllItemsSourceSets)
+            {
                 return;
+            }
 
             _subscription?.Dispose();
             _subscription = null;
@@ -109,14 +112,16 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             _itemsSource = value;
 
             if (_itemsSource != null && !(_itemsSource is IList))
-                MvxBindingLog.Warning(
+            {
+                MvxLogHost.GetLog<MvxAdapter>()?.Log(LogLevel.Warning,
                   "You are currently binding to IEnumerable - " +
                   "this can be inefficient, especially for large collections. " +
                   "Binding to IList is more efficient.");
+            }
 
             if (_itemsSource is INotifyCollectionChanged newObservable)
                 _subscription = newObservable?.WeakSubscribe(OnItemsSourceCollectionChanged);
-            
+
             NotifyDataSetChanged();
         }
 
@@ -143,11 +148,8 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
             catch (Exception exception)
             {
-                MvxLog.Instance.Warn(
-                    "Exception masked during Adapter RealNotifyDataSetChanged " +
-                    "{0}. Are you trying to update your collection from a " +
-                    "background task? See http://goo.gl/0nW0L6",
-                    exception.ToLongString());
+                MvxLogHost.GetLog<MvxAdapter>()?.Log(LogLevel.Warning, exception,
+                    "Exception masked during Adapter RealNotifyDataSetChanged Are you trying to update your collection from a background task? See http://goo.gl/0nW0L6");
             }
         }
 

@@ -4,11 +4,12 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Commands
 {
+#nullable enable
     public class MvxCommandCollection
         : IMvxCommandCollection
     {
@@ -40,13 +41,12 @@ namespace MvvmCross.Commands
                 return;
             }
 
-            List<IMvxCommand> commands;
-            if (!_canExecuteLookup.TryGetValue(args.PropertyName, out commands))
-                return;
-
-            foreach (var command in commands)
+            if (_canExecuteLookup.TryGetValue(args.PropertyName, out List<IMvxCommand>? commands))
             {
-                command.RaiseCanExecuteChanged();
+                foreach (var command in commands)
+                {
+                    command.RaiseCanExecuteChanged();
+                }
             }
         }
 
@@ -58,54 +58,51 @@ namespace MvvmCross.Commands
             }
         }
 
-        public IMvxCommand this[string name]
+        public IMvxCommand? this[string name]
         {
             get
             {
-                if (!_commandLookup.Any())
+                if (_commandLookup.Count == 0)
                 {
-                    MvxLog.Instance.Trace("MvxCommandCollection is empty - did you forget to add your commands?");
+                    MvxLogHost.Default?.Log(LogLevel.Trace, "MvxCommandCollection is empty - did you forget to add your commands?");
                     return null;
                 }
 
-                IMvxCommand toReturn;
+                IMvxCommand? toReturn;
                 _commandLookup.TryGetValue(name, out toReturn);
                 return toReturn;
             }
         }
 
-        public void Add(IMvxCommand command, string name, string canExecuteName)
+        public void Add(IMvxCommand command, string name, string? canExecuteName)
         {
             AddToLookup(_commandLookup, command, name);
             AddToLookup(_canExecuteLookup, command, canExecuteName);
         }
 
-        private static void AddToLookup(IDictionary<string, IMvxCommand> lookup, IMvxCommand command, string name)
+        private static void AddToLookup(IDictionary<string, IMvxCommand> lookup, IMvxCommand command, string? name)
         {
             if (string.IsNullOrEmpty(name))
                 return;
 
-            if (lookup.ContainsKey(name))
+            if (lookup.ContainsKey(name!))
             {
-                MvxLog.Instance.Warn("Ignoring Commmand - it would overwrite the existing Command, name {0}", name);
+                MvxLogHost.Default?.Log(LogLevel.Warning, "Ignoring Commmand - it would overwrite the existing Command, name {name}", name);
                 return;
             }
-            lookup[name] = command;
+            lookup[name!] = command;
         }
 
-        private static void AddToLookup(IDictionary<string, List<IMvxCommand>> lookup, IMvxCommand command, string name)
+        private static void AddToLookup(IDictionary<string, List<IMvxCommand>> lookup, IMvxCommand command, string? name)
         {
             if (string.IsNullOrEmpty(name))
                 return;
 
-            // Get collection
-            List<IMvxCommand> commands;
-
             // If no collection exists, create a new one
-            if (!lookup.TryGetValue(name, out commands))
+            if (!lookup.TryGetValue(name!, out var commands))
             {
                 commands = new List<IMvxCommand>();
-                lookup[name] = commands;
+                lookup[name!] = commands;
             }
 
             // Protect against adding command twice
@@ -115,4 +112,5 @@ namespace MvvmCross.Commands
             }
         }
     }
+#nullable restore
 }

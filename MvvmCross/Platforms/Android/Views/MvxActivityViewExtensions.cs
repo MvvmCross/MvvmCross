@@ -7,40 +7,24 @@ using Android.App;
 using Android.OS;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using MvvmCross.Core;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Android.Views
 {
     public static class MvxActivityViewExtensions
     {
-        public static void AddEventListeners(this IMvxEventSourceActivity activity)
-        {
-            if (activity is IMvxAndroidView)
-            {
-                var adapter = new MvxActivityAdapter(activity);
-            }
-            if (activity is IMvxBindingContextOwner)
-            {
-                var bindingAdapter = new MvxBindingActivityAdapter(activity);
-            }
-            if (activity is IMvxChildViewModelOwner)
-            {
-                var childOwnerAdapter = new MvxChildViewModelOwnerAdapter(activity);
-            }
-        }
-
         public static void OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
         {
             androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity, bundle));
 
-            var cache = Mvx.IoCProvider.Resolve<IMvxSingleViewModelCache>();
-            var cached = cache.GetAndClear(bundle);
+            IMvxViewModel cached = null;
+            if (Mvx.IoCProvider.TryResolve<IMvxSingleViewModelCache>(out var cache))
+                cached = cache.GetAndClear(bundle);
 
             var view = (IMvxView)androidView;
             var savedState = GetSavedStateFromBundle(bundle);
@@ -52,10 +36,9 @@ namespace MvvmCross.Platforms.Android.Views
             if (bundle == null)
                 return null;
 
-            IMvxSavedStateConverter converter;
-            if (!Mvx.IoCProvider.TryResolve<IMvxSavedStateConverter>(out converter))
+            if (!Mvx.IoCProvider.TryResolve<IMvxSavedStateConverter>(out var converter))
             {
-                MvxLog.Instance.Trace("No saved state converter available - this is OK if seen during start");
+                MvxLogHost.Default?.Log(LogLevel.Trace, "No saved state converter available - this is OK if seen during start");
                 return null;
             }
             var savedState = converter.Read(bundle);
@@ -64,7 +47,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public static void OnViewNewIntent(this IMvxAndroidView androidView)
         {
-            MvxLog.Instance.Trace("OnViewNewIntent called - MvvmCross lifecycle won't run automatically in this case.");
+            MvxLogHost.Default?.Log(LogLevel.Trace, "OnViewNewIntent called - MvvmCross lifecycle won't run automatically in this case.");
         }
 
         public static void OnViewDestroy(this IMvxAndroidView androidView)
@@ -105,8 +88,9 @@ namespace MvvmCross.Platforms.Android.Views
             androidView.OnLifetimeEvent((listener, activity) => listener.OnPause(activity));
         }
 
-        private static void OnLifetimeEvent(this IMvxAndroidView androidView,
-                                            Action<IMvxAndroidActivityLifetimeListener, Activity> report)
+        private static void OnLifetimeEvent(
+            this IMvxAndroidView androidView,
+            Action<IMvxAndroidActivityLifetimeListener, Activity> report)
         {
             var activityTracker = Mvx.IoCProvider.Resolve<IMvxAndroidActivityLifetimeListener>();
             report(activityTracker, androidView.ToActivity());
@@ -131,8 +115,8 @@ namespace MvvmCross.Platforms.Android.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxLog.Instance.Trace("No ViewModel class specified for {0} in LoadViewModel",
-                               androidView.GetType().Name);
+                MvxLogHost.Default?.Log(LogLevel.Trace, "No ViewModel class specified for {0} in LoadViewModel",
+                    androidView.GetType().Name);
             }
 
             var translatorService = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelLoader>();

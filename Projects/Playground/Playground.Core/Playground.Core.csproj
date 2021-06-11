@@ -24,7 +24,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
+    <PackageReference Include="Plugin.Permissions" />
+    <PackageReference Include="Serilog.Extensions.Logging" />
   </ItemGroup>
 
 </Project>

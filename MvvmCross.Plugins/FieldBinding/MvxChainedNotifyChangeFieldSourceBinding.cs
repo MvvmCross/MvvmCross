@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
@@ -44,7 +45,8 @@ namespace MvvmCross.Plugin.FieldBinding
             if (secondAsIndexed == null)
                 return;
 
-            MvxBindingLog.Warning("Suspicious indexed binding seen to Value[] within INC binding - this may be OK, but is often a result of FluentBinding used on INC<T> - consider using INCList<TValue> or INCDictionary<TKey,TValue> instead - see https://github.com/slodge/MvvmCross/issues/353. This message can be disabled using DisableWarnIndexedValueBindingWarning");
+            MvxPluginLog.Instance?.Log(LogLevel.Warning,
+                "Suspicious indexed binding seen to Value[] within INC binding - this may be OK, but is often a result of FluentBinding used on INC<T> - consider using INCList<TValue> or INCDictionary<TKey,TValue> instead - see https://github.com/slodge/MvvmCross/issues/353. This message can be disabled using DisableWarnIndexedValueBindingWarning");
         }
 
         protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)
@@ -112,7 +114,8 @@ namespace MvvmCross.Plugin.FieldBinding
         {
             if (_currentChildBinding == null)
             {
-                MvxBindingLog.Warning("SetValue ignored in binding - target property path missing");
+                MvxPluginLog.Instance?.Log(LogLevel.Warning,
+                    "SetValue ignored in binding - target property path missing");
                 return;
             }
 

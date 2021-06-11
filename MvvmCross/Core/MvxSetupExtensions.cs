@@ -1,18 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MS-PL license.
+// See the LICENSE file in the project root for more information.
+
+using System;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using MvvmCross.Exceptions;
 using MvvmCross.IoC;
 
 namespace MvvmCross.Core
 {
+#nullable enable
     public static class MvxSetupExtensions
     {
-        public static void RegisterSetupType<TMvxSetup>(this object platformApplication,  params Assembly[] assemblies) where TMvxSetup : MvxSetup, new()
+        public static void RegisterSetupType<TMvxSetup>(this object platformApplication,  params Assembly[] assemblies)
+            where TMvxSetup : MvxSetup, new()
         {
-            MvxSetup.RegisterSetupType<TMvxSetup>(new[] { platformApplication.GetType().Assembly }.Union(assemblies ?? new Assembly[] { }).ToArray());
+            if (platformApplication == null)
+                throw new ArgumentNullException(nameof(platformApplication));
+
+            MvxSetup.RegisterSetupType<TMvxSetup>(
+                new[] { platformApplication.GetType().Assembly }.Union(assemblies ?? Array.Empty<Assembly>()).ToArray());
         }
 
         public static TSetup CreateSetup<TSetup>(Assembly assembly, params object[] parameters) where TSetup : MvxSetup
@@ -51,7 +59,7 @@ namespace MvvmCross.Core
             }
         }
 
-        public static Type FindSetupType<TSetup>(Assembly assembly)
+        public static Type? FindSetupType<TSetup>(Assembly assembly)
         {
             var query = from type in assembly.ExceptionSafeGetTypes()
                         where type.Name == "Setup"
@@ -61,7 +69,7 @@ namespace MvvmCross.Core
             return query.FirstOrDefault();
         }
 
-        public static Type FindSetupType<TSetup>()
+        public static Type? FindSetupType<TSetup>()
         {
             var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
                         from type in assembly.ExceptionSafeGetTypes()
@@ -72,4 +80,5 @@ namespace MvvmCross.Core
             return query.FirstOrDefault();
         }
     }
+#nullable restore
 }

@@ -23,24 +23,24 @@ namespace MvvmCross.Platforms.Android.Binding
     public class MvxAndroidBindingBuilder
         : MvxBindingBuilder
     {
-        public override void DoRegistration()
+        public override void DoRegistration(IMvxIoCProvider iocProvider)
         {
             InitializeAppResourceTypeFinder();
-            InitializeBindingResources();
-            InitializeLayoutInflation();
-            base.DoRegistration();
+            InitializeBindingResources(iocProvider);
+            InitializeLayoutInflation(iocProvider);
+            base.DoRegistration(iocProvider);
         }
 
-        protected virtual void InitializeLayoutInflation()
+        protected virtual void InitializeLayoutInflation(IMvxIoCProvider iocProvider)
         {
             var inflaterfactoryFactory = CreateLayoutInflaterFactoryFactory();
-            Mvx.IoCProvider.RegisterSingleton(inflaterfactoryFactory);
+            iocProvider.RegisterSingleton(inflaterfactoryFactory);
 
             var viewFactory = CreateAndroidViewFactory();
-            Mvx.IoCProvider.RegisterSingleton(viewFactory);
+            iocProvider.RegisterSingleton(viewFactory);
 
             var viewBinderFactory = CreateAndroidViewBinderFactory();
-            Mvx.IoCProvider.RegisterSingleton(viewBinderFactory);
+            iocProvider.RegisterSingleton(viewBinderFactory);
         }
 
         protected virtual IMvxAndroidViewBinderFactory CreateAndroidViewBinderFactory()
@@ -58,10 +58,10 @@ namespace MvvmCross.Platforms.Android.Binding
             return new MvxAndroidViewFactory();
         }
 
-        protected virtual void InitializeBindingResources()
+        protected virtual void InitializeBindingResources(IMvxIoCProvider iocProvider)
         {
             var mvxAndroidBindingResource = CreateAndroidBindingResource();
-            Mvx.IoCProvider.RegisterSingleton(mvxAndroidBindingResource);
+            iocProvider.RegisterSingleton(mvxAndroidBindingResource);
         }
 
         protected virtual IMvxAndroidBindingResource CreateAndroidBindingResource()
@@ -287,18 +287,18 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.AddOrOverwrite(typeof(WebView), MvxAndroidPropertyBinding.WebView_Uri);
         }
 
-        protected override void RegisterPlatformSpecificComponents()
+        protected override void RegisterPlatformSpecificComponents(IMvxIoCProvider iocProvider)
         {
-            base.RegisterPlatformSpecificComponents();
+            base.RegisterPlatformSpecificComponents(iocProvider);
 
-            InitializeViewTypeResolver();
-            InitializeContextStack();
+            InitializeViewTypeResolver(iocProvider);
+            InitializeContextStack(iocProvider);
         }
 
-        protected virtual void InitializeContextStack()
+        protected virtual void InitializeContextStack(IMvxIoCProvider iocProvider)
         {
             var stack = CreateContextStack();
-            Mvx.IoCProvider.RegisterSingleton(stack);
+            iocProvider.RegisterSingleton(stack);
         }
 
         protected virtual IMvxBindingContextStack<IMvxAndroidBindingContext> CreateContextStack()
@@ -306,20 +306,20 @@ namespace MvvmCross.Platforms.Android.Binding
             return new MvxAndroidBindingContextStack();
         }
 
-        protected virtual void InitializeViewTypeResolver()
+        protected virtual void InitializeViewTypeResolver(IMvxIoCProvider iocProvider)
         {
             var typeCache = CreateViewTypeCache();
-            Mvx.IoCProvider.RegisterSingleton<IMvxTypeCache<View>>(typeCache);
+            iocProvider.RegisterSingleton<IMvxTypeCache<View>>(typeCache);
 
             var fullNameViewTypeResolver = new MvxAxmlNameViewTypeResolver(typeCache);
-            Mvx.IoCProvider.RegisterSingleton<IMvxAxmlNameViewTypeResolver>(fullNameViewTypeResolver);
+            iocProvider.RegisterSingleton<IMvxAxmlNameViewTypeResolver>(fullNameViewTypeResolver);
             var listViewTypeResolver = new MvxNamespaceListViewTypeResolver(typeCache);
-            Mvx.IoCProvider.RegisterSingleton<IMvxNamespaceListViewTypeResolver>(listViewTypeResolver);
+            iocProvider.RegisterSingleton<IMvxNamespaceListViewTypeResolver>(listViewTypeResolver);
             var justNameTypeResolver = new MvxJustNameViewTypeResolver(typeCache);
 
             var composite = new MvxCompositeViewTypeResolver(fullNameViewTypeResolver, listViewTypeResolver, justNameTypeResolver);
             var cached = new MvxCachedViewTypeResolver(composite);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewTypeResolver>(cached);
+            iocProvider.RegisterSingleton<IMvxViewTypeResolver>(cached);
         }
 
         protected virtual IMvxTypeCache<View> CreateViewTypeCache()

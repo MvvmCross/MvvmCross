@@ -12,5 +12,38 @@ namespace MvvmCross.Forms.Presenters.Attributes
         public MvxModalPresentationAttribute()
         {
         }
+
+        /// <summary>
+        /// set the modal presentation style of the modal. This is used for iOS devices for setting different types of modals.
+        /// </summary>
+        public MvxFormsModalPresentationStyle PresentationStyle { get; set; }
+    }
+
+    public enum MvxFormsModalPresentationStyle
+    {
+        /// <summary>
+        /// A presentation style in which the presented view covers the screen.
+        /// </summary>
+        FullScreen = 0,
+
+        /// <summary>
+        /// A presentation style that displays the content centered in the screen.
+        /// </summary>
+        FormSheet = 1,
+
+        /// <summary>
+        /// The default presentation style chosen by the system.
+        /// </summary>
+        Automatic = 2,
+
+        /// <summary>
+        /// A view presentation style in which the presented view covers the screen.
+        /// </summary>
+        OverFullScreen = 3,
+
+        /// <summary>
+        /// A presentation style that partially covers the underlying content.
+        /// </summary>
+        PageSheet = 4
     }
 }

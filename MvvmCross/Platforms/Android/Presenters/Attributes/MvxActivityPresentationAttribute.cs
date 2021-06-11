@@ -3,14 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
 using Android.OS;
-using Android.Views;
-using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes
 {
+#nullable enable
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxActivityPresentationAttribute : MvxBasePresentationAttribute
     {
@@ -18,10 +16,12 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         {
         }
 
-        public static Bundle DefaultExtras = null;
+        public static Bundle? DefaultExtras { get; }
+
         /// <summary>
         /// Add extras to the Intent that will be started for this Activity
         /// </summary>
-        public Bundle Extras { get; set; } = DefaultExtras;
+        public Bundle? Extras { get; set; } = DefaultExtras;
     }
+#nullable restore
 }

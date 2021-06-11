@@ -15,7 +15,8 @@ namespace MvvmCross.Presenters
         private readonly Dictionary<Type, Func<MvxPresentationHint, Task<bool>>> _presentationHintHandlers =
             new Dictionary<Type, Func<MvxPresentationHint, Task<bool>>>();
 
-        public void AddPresentationHintHandler<THint>(Func<THint, Task<bool>> action) where THint : MvxPresentationHint
+        public void AddPresentationHintHandler<THint>(Func<THint, Task<bool>> action)
+            where THint : MvxPresentationHint
         {
             if (action == null)
                 throw new ArgumentNullException(nameof(action));

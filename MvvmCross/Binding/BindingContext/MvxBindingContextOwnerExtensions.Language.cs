@@ -19,8 +19,7 @@ namespace MvvmCross.Binding.BindingContext
                                                  , TTarget target
                                                  , string sourceKey)
         {
-            var parser = PropertyExpressionParser;
-            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+            var targetPath = MvxBindingSingletonCache.Instance?.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
             owner.BindLanguage(target, targetPath, sourceKey);
         }
 
@@ -29,8 +28,7 @@ namespace MvvmCross.Binding.BindingContext
                                                  , string sourceKey
                                                  , MvxBindingMode bindingMode)
         {
-            var parser = PropertyExpressionParser;
-            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+            var targetPath = MvxBindingSingletonCache.Instance?.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
             owner.BindLanguage(target, targetPath, sourceKey, bindingMode: bindingMode);
         }
 
@@ -41,7 +39,7 @@ namespace MvvmCross.Binding.BindingContext
                                                              , MvxBindingMode bindingMode = MvxBindingMode.OneTime)
         {
             var parser = PropertyExpressionParser;
-            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+            var targetPath = MvxBindingSingletonCache.Instance?.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
             var sourcePath = parser.Parse(textProvider).Print();
             owner.BindLanguage(target, targetPath, sourceKey, sourcePath, bindingMode: bindingMode);
         }
@@ -100,8 +98,8 @@ namespace MvvmCross.Binding.BindingContext
                                         , string converterName = null
                                         , MvxBindingMode bindingMode = MvxBindingMode.OneTime)
         {
-            converterName = converterName ?? LanguageParser.DefaultConverterName;
-            sourcePropertyName = sourcePropertyName ?? LanguageParser.DefaultTextSourceName;
+            converterName ??= LanguageParser.DefaultConverterName;
+            sourcePropertyName ??= LanguageParser.DefaultTextSourceName;
 
             var converter = ValueConverterLookup.Find(converterName);
 

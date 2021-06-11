@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Uap.Presenters
 {
@@ -25,10 +26,12 @@ namespace MvvmCross.Platforms.Uap.Presenters
         : MvxAttributeViewPresenter, IMvxWindowsViewPresenter
     {
         protected readonly IMvxWindowsFrame _rootFrame;
+        private readonly ILogger<MvxWindowsViewPresenter> _logger;
 
         public MvxWindowsViewPresenter(IMvxWindowsFrame rootFrame)
         {
             _rootFrame = rootFrame;
+            _logger = MvxLogHost.GetLog<MvxWindowsViewPresenter>();
 
             SystemNavigationManager.GetForCurrentView().BackRequested += BackButtonOnBackRequested;
         }
@@ -58,7 +61,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
-            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new page presentation");
+            _logger?.LogTrace("PresentationAttribute not found for {viewTypeName}. Assuming new page presentation", viewType.Name);
             return new MvxPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
         }
 
@@ -70,7 +73,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
             {
-                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe has no current page");
+                _logger?.LogWarning("Ignoring close for viewmodel - rootframe has no current page");
                 return;
             }
 
@@ -187,19 +190,19 @@ namespace MvvmCross.Platforms.Uap.Presenters
             var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
             {
-                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe has no current page");
+                _logger?.LogWarning("Ignoring close for viewmodel - rootframe has no current page");
                 return Task.FromResult(false);
             }
 
             if (currentView.ViewModel != viewModel)
             {
-                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
+                _logger?.LogWarning("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
                 return Task.FromResult(false);
             }
 
             if (!_rootFrame.CanGoBack)
             {
-                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe refuses to go back");
+                _logger?.LogWarning("Ignoring close for viewmodel - rootframe refuses to go back");
                 return Task.FromResult(false);
             }
 
@@ -224,8 +227,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             }
             catch (Exception exception)
             {
-                MvxLog.Instance.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
-                    exception.ToLongString());
+                _logger?.LogTrace(exception, "Error seen during navigation request to {viewModelTypeName}", request.ViewModelType.Name);
                 return Task.FromResult(false);
             }
         }
@@ -245,8 +247,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             }
             catch (Exception exception)
             {
-                MvxLog.Instance.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
-                    exception.ToLongString());
+                _logger?.LogTrace(exception, "Error seen during navigation request to {viewModelTypeName}", request.ViewModelType.Name);
                 return false;
             }
         }
