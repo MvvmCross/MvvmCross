@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Android.App;
 using Android.Views;
 using Android.Widget;
+using MvvmCross;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
@@ -111,7 +112,7 @@ namespace Playground.Droid
 
         public void Include(MvxNavigationService service, IMvxViewModelLoader loader, IMvxViewDispatcher viewDispatcher)
         {
-            service = new MvxNavigationService(null, viewDispatcher);
+            service = new MvxNavigationService(null, viewDispatcher, Mvx.IoCProvider);
         }
 
         public void Include(ConsoleColor color)

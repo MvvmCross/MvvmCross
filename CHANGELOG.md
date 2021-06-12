@@ -1,5 +1,19 @@
 # Changelog
 
+## [8.0.1](https://github.com/MvvmCross/MvvmCross/tree/8.0.1) (2021-06-12)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/8.0.0...8.0.1)
+
+**Fixed bugs:**
+
+- ILogger\<T\> cannot be resolved [\#4195](https://github.com/MvvmCross/MvvmCross/issues/4195)
+- BindingContext not set on MvxActivity [\#4194](https://github.com/MvvmCross/MvvmCross/issues/4194)
+
+**Merged pull requests:**
+
+- Fix binding context not set on Android Activities [\#4192](https://github.com/MvvmCross/MvvmCross/pull/4192)
+- Register generic logger [\#4193](https://github.com/MvvmCross/MvvmCross/pull/4193)
+
 ## [8.0.0](https://github.com/MvvmCross/MvvmCross/tree/8.0.0) (2021-06-11)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/7.1.0...8.0.0)
