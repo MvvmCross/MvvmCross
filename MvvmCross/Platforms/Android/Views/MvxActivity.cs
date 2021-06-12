@@ -33,6 +33,7 @@ namespace MvvmCross.Platforms.Android.Views
         protected MvxActivity()
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
+            this.AddEventListeners();
         }
 
         public object DataContext
