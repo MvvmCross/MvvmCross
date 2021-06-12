@@ -326,6 +326,7 @@ namespace MvvmCross.Core
             if (loggerFactory != null)
             {
                 iocProvider.RegisterSingleton(loggerFactory);
+                iocProvider.RegisterType(typeof(ILogger<>), typeof(Logger<>));
                 SetupLog = loggerFactory.CreateLogger<MvxSetup>();
             }
         }
