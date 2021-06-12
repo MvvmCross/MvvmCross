@@ -11,7 +11,7 @@ order: 7
 Since MvvmCross 8, we have switched to using [Microsoft.Extensions.Logging][dotnet-logging] instead of rolling our own interface for logging.
 This is a nice and stable API and has support for multiple third party logging providers. Similarly to what we had before with `IMvxLog` and `IMvxLogProvider`, just without the reflection to not directly depend on the third party providers.
 
-You will be able to inject either a `ILogger` or `ILoggerFactory` into your classes resolved through the MvvmCross IoC provider. This could be for ViewModels, Services, Repositories etc. Normal usage would look something like:
+You will be able to inject either a `ILogger<T>` or `ILoggerFactory` into your classes resolved through the MvvmCross IoC provider. This could be for ViewModels, Services, Repositories etc. Normal usage would look something like:
 
 ```csharp
 public class MyViewModel : MvxViewModel
@@ -27,7 +27,7 @@ public class MyViewModel : MvxViewModel
 }
 ```
 
-This will automatically scope the logging to the specific ViewModel such that it is easier to filter etc. You can opt to use a non-generic `ILogger` if you are not interested in the scope, or you can use `ILoggerFactory` to create multiple loggers as needed.
+This will automatically scope the logging to the specific ViewModel such that it is easier to filter etc. If you are not interested in scoping your log, you can use `ILoggerFactory` to create a non-scoped log or to create multiple loggers as needed.
 
 As a minimum you will need to provide implementations for two interfaces in your `MvxSetup` class, `ILoggerProvider` and `ILoggerFactory`, these are necessary to plumb the logging
 infrastuctore Microsoft.Extensions.Logging provides.
