@@ -12,11 +12,29 @@ using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using MvvmCross.Core;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Platforms.Android.Views.Base;
+using MvvmCross.Binding.BindingContext;
 
 namespace MvvmCross.Platforms.Android.Views
 {
     public static class MvxActivityViewExtensions
     {
+        public static void AddEventListeners(this IMvxEventSourceActivity activity)
+        {
+            if (activity is IMvxAndroidView)
+            {
+                var adapter = new MvxActivityAdapter(activity);
+            }
+            if (activity is IMvxBindingContextOwner)
+            {
+                var bindingAdapter = new MvxBindingActivityAdapter(activity);
+            }
+            if (activity is IMvxChildViewModelOwner)
+            {
+                var childOwnerAdapter = new MvxChildViewModelOwnerAdapter(activity);
+            }
+        }
+
         public static void OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
         {
             androidView.EnsureSetupInitialized();

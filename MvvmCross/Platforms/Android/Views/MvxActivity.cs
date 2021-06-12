@@ -33,6 +33,7 @@ namespace MvvmCross.Platforms.Android.Views
         protected MvxActivity()
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
+            this.AddEventListeners();
         }
 
         public object DataContext
@@ -60,7 +61,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public override void SetContentView(int layoutResID)
         {
-            if (BaseContext is MvxContextWrapper)
+            if (BaseContextToAttach(this) is MvxContextWrapper)
             {
                 _view = this.BindingInflate(layoutResID, null);
                 SetContentView(_view);
