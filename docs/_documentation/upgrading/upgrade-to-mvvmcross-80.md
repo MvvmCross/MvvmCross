@@ -5,6 +5,8 @@ category: Upgrading
 Order: 4
 ---
 
+> If you have other migration issues than described here. Please chime in on [this issue on GitHub][gh-docs-issue].
+
 A breaking change in MvvmCross 8 is that you now explicitly have to implement your own MvxSetup derivative and implement two logging related methods. MvvmCross doesn't provide any defaults for this.
 
 > An example of changes necessary to upgrade the TipCalc project from 7.1.2 to 8.0.1 can be found [here in this Pull Request][upgrade-pr].
@@ -50,5 +52,6 @@ Then instead of registering which setup class to use in your `Application` class
 public class MainApplication : MvxAndroidApplication<Setup, App>
 ```
 
+[gh-docs-issue]: https://github.com/MvvmCross/MvvmCross/issues/4201
 [upgrade-pr]: https://github.com/MvvmCross/MvvmCross-Samples/pull/159
 [logging-doc]: [old-doc]: {{ site.baseurl }}{% link _documentation/fundamentals/logging-new.md %}
