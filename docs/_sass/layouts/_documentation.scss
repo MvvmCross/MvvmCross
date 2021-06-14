@@ -47,7 +47,7 @@
 
   > .documentation {
     margin-top: $documentation-margin / 2;
-    margin-bottom: $documentation-margin;
+    padding-bottom: $documentation-margin / 2 + 40px + 30px;
 
     h1 {
       font-weight: $base-font-weight;
