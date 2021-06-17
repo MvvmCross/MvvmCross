@@ -17,8 +17,9 @@ namespace MvvmCross.Plugin.Messenger
         /// <param name="deliveryAction">Action to invoke when message is delivered</param>
         /// <param name="reference">Use a strong or weak reference to the deliveryAction</param>
         /// <param name="tag">An optional tag to include with this subscription</param>
+        /// <param name="isSticky">If true, immediately invokes the deliveryAction if a cached message exists</param>
         /// <returns>MessageSubscription used to unsubscribing</returns>
-        MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string? tag = null)
+        MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string? tag = null, bool isSticky = false)
             where TMessage : MvxMessage;
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace MvvmCross.Plugin.Messenger
         /// <param name="reference">Use a strong or weak reference to the deliveryAction</param>
         /// <param name="tag">An optional tag to include with this subscription</param>
         /// <returns>MessageSubscription used to unsubscribing</returns>
-        MvxSubscriptionToken SubscribeOnMainThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string? tag = null)
+        MvxSubscriptionToken SubscribeOnMainThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string? tag = null, bool isSticky = false)
              where TMessage : MvxMessage;
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace MvvmCross.Plugin.Messenger
         /// <param name="reference">Use a strong or weak reference to the deliveryAction</param>
         /// <param name="tag">An optional tag to include with this subscription</param>
         /// <returns>MessageSubscription used to unsubscribing</returns>
-        MvxSubscriptionToken SubscribeOnThreadPoolThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string? tag = null)
+        MvxSubscriptionToken SubscribeOnThreadPoolThread<TMessage>(Action<TMessage> deliveryAction, MvxReference reference = MvxReference.Weak, string? tag = null, bool isSticky = false)
              where TMessage : MvxMessage;
 
         /// <summary>
@@ -100,21 +101,24 @@ namespace MvvmCross.Plugin.Messenger
         /// </summary>
         /// <typeparam name="TMessage">Type of message</typeparam>
         /// <param name="message">Message to deliver</param>
-        void Publish<TMessage>(TMessage message) where TMessage : MvxMessage;
+        /// <param name="isSticky">If true, caches the message for sticky subscribers</param>
+        void Publish<TMessage>(TMessage message, bool isSticky = false) where TMessage : MvxMessage;
 
         /// <summary>
         /// Publish a message to any subscribers
         /// - GetType() will be used to determine the message type
         /// </summary>
         /// <param name="message">Message to deliver</param>
-        void Publish(MvxMessage message);
+        /// <param name="isSticky">If true, caches the message for sticky subscribers</param>
+        void Publish(MvxMessage message, bool isSticky = false);
 
         /// <summary>
         /// Publish a message to any subscribers
         /// </summary>
         /// <param name="message">Message to deliver</param>
         /// <param name="messageType">The type of the message to use for delivery - message should be of that class or a of a subclass</param>
-        void Publish(MvxMessage message, Type messageType);
+        /// <param name="isSticky">If true, caches the message for sticky subscribers</param>
+        void Publish(MvxMessage message, Type messageType, bool isSticky = false);
 
         /// <summary>
         /// Schedules a check on all subscribers for the specified messageType. If any are not alive, they will be removed
@@ -126,6 +130,12 @@ namespace MvvmCross.Plugin.Messenger
         /// Schedules a check on all subscribers for all messageType. If any are not alive, they will be removed
         /// </summary>
         void RequestPurgeAll();
+
+        /// <summary>
+        /// Removes the message type from the sticky cache.
+        /// </summary>
+        /// <typeparam name="TMessageType">The type of the message to remove</typeparam>
+        void RemoveSticky<TMessageType>() where TMessageType : MvxMessage;
     }
 #nullable restore
 }
