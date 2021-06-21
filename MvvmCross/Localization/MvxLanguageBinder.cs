@@ -35,7 +35,7 @@ namespace MvvmCross.Localization
                 if (_cachedTextProvider != null)
                     return _cachedTextProvider;
 
-                if (Mvx.IoCProvider.TryResolve(out IMvxTextProvider cachedTextProvider))
+                if (!Mvx.IoCProvider.TryResolve(out IMvxTextProvider cachedTextProvider))
                 {
                     throw new MvxException(
                         "Missing text provider - please initialize IoC with a suitable IMvxTextProvider");
