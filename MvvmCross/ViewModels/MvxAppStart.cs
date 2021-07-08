@@ -27,7 +27,7 @@ namespace MvvmCross.ViewModels
 
         public void Start(object? hint = null)
         {
-            StartAsync(hint).GetAwaiter().GetResult();
+            StartAsync(hint).GetAwaiter();
         }
 
         public async Task StartAsync(object? hint = null)
@@ -109,7 +109,7 @@ namespace MvvmCross.ViewModels
             try
             {
                 if (hint is TParameter parameter)
-                    NavigationService.Navigate<TViewModel, TParameter>(parameter).GetAwaiter().GetResult();
+                    await NavigationService.Navigate<TViewModel, TParameter>(parameter);
                 else
                 {
                     MvxLogHost.Default?.Log(LogLevel.Trace, "Hint is not matching type of {parameterName}. Doing navigation without typed parameter instead.", nameof(TParameter));
