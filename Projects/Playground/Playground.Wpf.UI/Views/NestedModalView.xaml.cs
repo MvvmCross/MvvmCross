@@ -1,6 +1,6 @@
 ﻿using MvvmCross.Platforms.Wpf.Presenters.Attributes;
 
-namespace Playground.WpfCore.Views
+namespace Playground.Wpf.UI.Views
 {
     [MvxContentPresentation(WindowIdentifier = nameof(ModalView))]
     public partial class NestedModalView

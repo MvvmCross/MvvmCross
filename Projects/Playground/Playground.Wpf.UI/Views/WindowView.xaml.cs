@@ -4,11 +4,11 @@ using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using Playground.Core.ViewModels;
 
-namespace Playground.WpfCore.Views
+namespace Playground.Wpf.UI.Views
 {
-    public partial class WindowChildView : IMvxOverridePresentationAttribute
+    public partial class WindowView : IMvxOverridePresentationAttribute
     {
-        public WindowChildView()
+        public WindowView()
         {
             InitializeComponent();
         }
@@ -16,12 +16,11 @@ namespace Playground.WpfCore.Views
         public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
         {
             var instanceRequest = request as MvxViewModelInstanceRequest;
-            var viewModel = instanceRequest?.ViewModelInstance as WindowChildViewModel;
+            var viewModel = instanceRequest?.ViewModelInstance as WindowViewModel;
 
-            return new MvxContentPresentationAttribute
+            return new MvxWindowPresentationAttribute
             {
-                WindowIdentifier = $"{nameof(WindowView)}.{viewModel?.ParentNo}",
-                StackNavigation = false
+                Identifier = $"{nameof(WindowView)}.{viewModel?.Count}"
             };
         }
     }

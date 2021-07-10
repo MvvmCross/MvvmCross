@@ -1,11 +1,11 @@
 ﻿using MvvmCross.Platforms.Wpf.Presenters.Attributes;
 
-namespace Playground.WpfCore.Views
+namespace Playground.Wpf.UI.Views
 {
     [MvxContentPresentation]
-    public partial class ChildView
+    public partial class SecondChildView
     {
-        public ChildView()
+        public SecondChildView()
         {
             InitializeComponent();
         }

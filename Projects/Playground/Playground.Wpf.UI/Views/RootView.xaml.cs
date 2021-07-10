@@ -2,7 +2,7 @@
 using MvvmCross.ViewModels;
 using Playground.Core.ViewModels;
 
-namespace Playground.Wpf.Views
+namespace Playground.Wpf.UI.Views
 {
     [MvxContentPresentation]
     [MvxViewFor(typeof(RootViewModel))]
