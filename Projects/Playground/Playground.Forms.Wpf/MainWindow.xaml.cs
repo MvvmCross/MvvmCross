@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using MvvmCross.Forms.Platforms.Wpf.Views;
+﻿using MvvmCross.Forms.Platforms.Wpf.Views;
 
 namespace Playground.Forms.Wpf
 {
