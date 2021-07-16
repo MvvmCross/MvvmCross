@@ -7,11 +7,11 @@ using UIKit;
 namespace MvvmCross.Platforms.Ios.Presenters
 {
 #nullable enable
-    public class MvxPopoverDelegate : UIPopoverPresentationControllerDelegate
+    public class MvxPopoverPresentationControllerDelegate : UIPopoverPresentationControllerDelegate
     {
         private readonly IMvxIosViewPresenter _presenter;
 
-        public MvxPopoverDelegate(IMvxIosViewPresenter presenter)
+        public MvxPopoverPresentationControllerDelegate(IMvxIosViewPresenter presenter)
         {
             _presenter = presenter;
         }
