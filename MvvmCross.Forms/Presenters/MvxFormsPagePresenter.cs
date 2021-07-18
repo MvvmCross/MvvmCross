@@ -585,6 +585,7 @@ namespace MvvmCross.Forms.Presenters
             }
             else
             {
+                var tabPage = page;
                 var tabHost = GetPageOfType<TabbedPage>();
                 if (tabHost == null)
                 {
@@ -593,7 +594,17 @@ namespace MvvmCross.Forms.Presenters
                     await PushOrReplacePage(FormsApplication.MainPage, tabHost, attribute);
                 }
 
-                tabHost.Children.Add(page);
+                if (attribute.WrapInNavigationPage)
+                {
+                    var navigationPage = CreateNavigationPage(page).Build(tp =>
+                    {
+                        tp.Title = page.Title;
+                        tp.IconImageSource = page.IconImageSource;
+                    });
+                    tabPage = navigationPage;
+                }
+
+                tabHost.Children.Add(tabPage);
             }
             return true;
         }
@@ -805,6 +816,19 @@ namespace MvvmCross.Forms.Presenters
                 {
                     var navMasterPage = TopNavigationPage(masterDetailsPage.Flyout);
                     if (navMasterPage != null) return navMasterPage;
+                }
+            }
+            
+            // The page isn't a MasterDetailPage, so check
+            // to see if it's a TabbedPage, and if so, check
+            // the current page for a navigation page.
+            if (rootPage is TabbedPage tabbedPage)
+            {
+                if (tabbedPage.CurrentPage != null)
+                {
+                    // Check if there's a nested navigation
+                    var navPage = TopNavigationPage(tabbedPage.CurrentPage);
+                    if (navPage != null) return navPage;
                 }
             }
 
