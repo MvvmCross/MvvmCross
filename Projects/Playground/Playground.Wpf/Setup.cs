@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.Plugin;
 using Serilog;
@@ -29,7 +31,14 @@ namespace Playground.Wpf
 
             pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.Messenger.Plugin>();
             pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.Json.Plugin>();
-            pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.ResourceLoader.Platforms.Wpf.Plugin>();
+        }
+
+        public override IEnumerable<Assembly> GetViewAssemblies()
+        {
+            var list = new List<Assembly>();
+            list.AddRange(base.GetViewAssemblies());
+            list.Add(typeof(Playground.Wpf.UI.Views.RootView).Assembly);
+            return list.ToArray();
         }
     }
 }

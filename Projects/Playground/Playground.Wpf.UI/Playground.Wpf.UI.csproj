@@ -1,9 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFrameworks>netcoreapp3.1;net472;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,12 +15,5 @@
     <ProjectReference Include="..\..\..\MvvmCross.Wpf\MvvmCross.Platforms.Wpf.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
-    <ProjectReference Include="..\Playground.Wpf.UI\Playground.Wpf.UI.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Serilog" />
-    <PackageReference Include="Serilog.Extensions.Logging" />
-    <PackageReference Include="Serilog.Sinks.Debug" />
   </ItemGroup>
 </Project>
