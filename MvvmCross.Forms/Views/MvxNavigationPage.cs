@@ -14,11 +14,15 @@ namespace MvvmCross.Forms.Views
         public MvxNavigationPage() : base()
         {
             this.AdaptForBinding();
+
+            this.Popped += OnViewPopped;
         }
 
         public MvxNavigationPage(Page root) : base(root)
         {
             this.AdaptForBinding();
+            
+            this.Popped += OnViewPopped;
         }
 
         public object DataContext
@@ -76,7 +80,7 @@ namespace MvvmCross.Forms.Views
                 OnViewModelSet();
             }
         }
-
+        
         protected virtual void OnViewModelSet()
         {
             ViewModel?.ViewCreated();
@@ -94,7 +98,15 @@ namespace MvvmCross.Forms.Views
             base.OnDisappearing();
             ViewModel?.ViewDisappearing();
             ViewModel?.ViewDisappeared();
-            ViewModel?.ViewDestroy();
+        }
+
+        private void OnViewPopped(object sender, NavigationEventArgs e)
+        {
+            if (e.Page is IMvxPage mvxPage
+                && mvxPage.ViewModel is IMvxViewModel pageViewModel)
+            {
+                pageViewModel.ViewDestroy(true);
+            }
         }
     }
 

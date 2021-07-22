@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using MvvmCross.Forms.Views;
+using MvvmCross.ViewModels;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Core
@@ -11,6 +13,7 @@ namespace MvvmCross.Forms.Core
     {
         protected MvxFormsApplication()
         {
+            ModalPopped += OnModalPopped;
         }
 
         public event EventHandler Start;
@@ -32,6 +35,22 @@ namespace MvvmCross.Forms.Core
         protected override void OnResume()
         {
             Resume?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected override void OnPropertyChanging(string propertyName = null)
+        {
+            if (propertyName == nameof(MainPage)
+                && MainPage is IMvxPage mvxPage
+                && mvxPage.ViewModel is IMvxViewModel mvxViewModel)
+                mvxViewModel.ViewDestroy(true);
+
+            base.OnPropertyChanging(propertyName);
+        }
+
+        private void OnModalPopped(object sender, ModalPoppedEventArgs e)
+        {
+            if (e.Modal is IMvxPage mvxPage && mvxPage.ViewModel is IMvxViewModel modalViewModel)
+                modalViewModel.ViewDestroy(true);
         }
     }
 }
