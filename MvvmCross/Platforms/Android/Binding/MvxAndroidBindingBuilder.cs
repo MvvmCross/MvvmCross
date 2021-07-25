@@ -225,19 +225,19 @@ namespace MvvmCross.Platforms.Android.Binding
                 registry.RegisterCustomBindingFactory<View>(
                     margin, view => new MvxViewMarginTargetBinding(view, margin));
             }
-            
+
             registry.RegisterCustomBindingFactory<View>(
                 MvxAndroidPropertyBinding.View_Focus,
                 view => new MvxViewFocusChangedTargetbinding(view));
-            
+
             registry.RegisterCustomBindingFactory<VideoView>(
                 MvxAndroidPropertyBinding.VideoView_Uri,
                 view => new MvxVideoViewUriTargetBinding(view));
-            
+
             registry.RegisterCustomBindingFactory<WebView>(
                 MvxAndroidPropertyBinding.WebView_Uri,
                 view => new MvxWebViewUriTargetBinding(view));
-            
+
             registry.RegisterCustomBindingFactory<WebView>(
                 MvxAndroidPropertyBinding.WebView_Html,
                 view => new MvxWebViewHtmlTargetBinding(view));
@@ -263,6 +263,10 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.RegisterCustomBindingFactory<Toolbar>(
                 MvxAndroidPropertyBinding.Toolbar_Subtitle,
                 toolbar => new MvxToolbarSubtitleBinding(toolbar));
+
+            registry.RegisterCustomBindingFactory<MvxAppCompatSearchViewQueryTextTargetBinding>(
+                MvxAndroidPropertyBinding.SearchView_Query,
+                searchView => new MvxAppCompatSearchViewQueryTextTargetBinding(searchView));
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
