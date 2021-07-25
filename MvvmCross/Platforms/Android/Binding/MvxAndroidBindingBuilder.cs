@@ -17,6 +17,7 @@ using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 using MvvmCross.Platforms.Android.Binding.Target;
 using MvvmCross.Platforms.Android.Binding.Views;
 using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
+using AppCompatSearchView = AndroidX.AppCompat.Widget.SearchView;
 
 namespace MvvmCross.Platforms.Android.Binding
 {
@@ -225,19 +226,19 @@ namespace MvvmCross.Platforms.Android.Binding
                 registry.RegisterCustomBindingFactory<View>(
                     margin, view => new MvxViewMarginTargetBinding(view, margin));
             }
-            
+
             registry.RegisterCustomBindingFactory<View>(
                 MvxAndroidPropertyBinding.View_Focus,
                 view => new MvxViewFocusChangedTargetbinding(view));
-            
+
             registry.RegisterCustomBindingFactory<VideoView>(
                 MvxAndroidPropertyBinding.VideoView_Uri,
                 view => new MvxVideoViewUriTargetBinding(view));
-            
+
             registry.RegisterCustomBindingFactory<WebView>(
                 MvxAndroidPropertyBinding.WebView_Uri,
                 view => new MvxWebViewUriTargetBinding(view));
-            
+
             registry.RegisterCustomBindingFactory<WebView>(
                 MvxAndroidPropertyBinding.WebView_Html,
                 view => new MvxWebViewHtmlTargetBinding(view));
@@ -263,6 +264,10 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.RegisterCustomBindingFactory<Toolbar>(
                 MvxAndroidPropertyBinding.Toolbar_Subtitle,
                 toolbar => new MvxToolbarSubtitleBinding(toolbar));
+
+            registry.RegisterCustomBindingFactory<MvxAppCompatSearchViewQueryTextTargetBinding>(
+                MvxAndroidPropertyBinding.SearchView_Query,
+                searchView => new MvxAppCompatSearchViewQueryTextTargetBinding(searchView));
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -281,6 +286,7 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.AddOrOverwrite(typeof(CompoundButton), MvxAndroidPropertyBinding.CompoundButton_Checked);
             registry.AddOrOverwrite(typeof(SeekBar), MvxAndroidPropertyBinding.SeekBar_Progress);
             registry.AddOrOverwrite(typeof(SearchView), MvxAndroidPropertyBinding.SearchView_Query);
+            registry.AddOrOverwrite(typeof(AppCompatSearchView), MvxAndroidPropertyBinding.SearchView_Query);
             registry.AddOrOverwrite(typeof(NumberPicker), MvxAndroidPropertyBinding.NumberPicker_Value);
             registry.AddOrOverwrite(typeof(NumberPicker), MvxAndroidPropertyBinding.NumberPicker_DisplayedValues);
             registry.AddOrOverwrite(typeof(VideoView), MvxAndroidPropertyBinding.VideoView_Uri);
