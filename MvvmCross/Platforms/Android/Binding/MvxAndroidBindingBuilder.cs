@@ -17,6 +17,7 @@ using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 using MvvmCross.Platforms.Android.Binding.Target;
 using MvvmCross.Platforms.Android.Binding.Views;
 using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
+using AppCompatSearchView = AndroidX.AppCompat.Widget.SearchView;
 
 namespace MvvmCross.Platforms.Android.Binding
 {
@@ -285,6 +286,7 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.AddOrOverwrite(typeof(CompoundButton), MvxAndroidPropertyBinding.CompoundButton_Checked);
             registry.AddOrOverwrite(typeof(SeekBar), MvxAndroidPropertyBinding.SeekBar_Progress);
             registry.AddOrOverwrite(typeof(SearchView), MvxAndroidPropertyBinding.SearchView_Query);
+            registry.AddOrOverwrite(typeof(AppCompatSearchView), MvxAndroidPropertyBinding.SearchView_Query);
             registry.AddOrOverwrite(typeof(NumberPicker), MvxAndroidPropertyBinding.NumberPicker_Value);
             registry.AddOrOverwrite(typeof(NumberPicker), MvxAndroidPropertyBinding.NumberPicker_DisplayedValues);
             registry.AddOrOverwrite(typeof(VideoView), MvxAndroidPropertyBinding.VideoView_Uri);
