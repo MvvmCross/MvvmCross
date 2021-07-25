@@ -1,18 +1,43 @@
 # Changelog
 
-## [8.0.1](https://github.com/MvvmCross/MvvmCross/tree/8.0.1) (2021-06-12)
+## [8.0.2](https://github.com/MvvmCross/MvvmCross/tree/8.0.2) (2021-07-25)
 
-[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/8.0.0...8.0.1)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/8.0.1...8.0.2)
+
+**Implemented enhancements:**
+
+- Sticky Messages [\#4207](https://github.com/MvvmCross/MvvmCross/pull/4207) ([Hackmodford](https://github.com/Hackmodford))
 
 **Fixed bugs:**
 
-- ILogger\<T\> cannot be resolved [\#4195](https://github.com/MvvmCross/MvvmCross/issues/4195)
-- BindingContext not set on MvxActivity [\#4194](https://github.com/MvvmCross/MvvmCross/issues/4194)
+- Navigation with param and result crash on back navigation [\#4226](https://github.com/MvvmCross/MvvmCross/issues/4226)
+- Localization feature doesn't work [\#4208](https://github.com/MvvmCross/MvvmCross/issues/4208)
+- Color plugin breaks WPF designer with NullReferenceException [\#4144](https://github.com/MvvmCross/MvvmCross/issues/4144)
+- Fix appcompat searchview query targetbinding not registered [\#4231](https://github.com/MvvmCross/MvvmCross/pull/4231) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix navigate with TParameter and TResult resulting in crash [\#4230](https://github.com/MvvmCross/MvvmCross/pull/4230) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix potential null ref in MvxColorValueConverter [\#4229](https://github.com/MvvmCross/MvvmCross/pull/4229) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix resolving of IMvxTextProvider [\#4209](https://github.com/MvvmCross/MvvmCross/pull/4209) ([2urbo](https://github.com/2urbo))
+
+
+**Closed issues:**
+
+- Undocumented MvxApplication\<TMvxUapSetup, TApplication\> changes [\#4199](https://github.com/MvvmCross/MvvmCross/issues/4199)
 
 **Merged pull requests:**
 
-- Fix binding context not set on Android Activities [\#4192](https://github.com/MvvmCross/MvvmCross/pull/4192)
-- Register generic logger [\#4193](https://github.com/MvvmCross/MvvmCross/pull/4193)
+- Bump SonarAnalyzer.CSharp from 8.25.0.33663 to 8.26.0.34506 [\#4224](https://github.com/MvvmCross/MvvmCross/pull/4224) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.Google.Android.Material from 1.3.0.1 to 1.4.0 [\#4222](https://github.com/MvvmCross/MvvmCross/pull/4222) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.Leanback from 1.0.0.8 to 1.0.0.9 [\#4219](https://github.com/MvvmCross/MvvmCross/pull/4219) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.GooglePlayServices.Basement from 117.6.0 to 117.6.0.1 [\#4218](https://github.com/MvvmCross/MvvmCross/pull/4218) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.Fragment from 1.3.4 to 1.3.5 [\#4213](https://github.com/MvvmCross/MvvmCross/pull/4213) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump SonarAnalyzer.CSharp from 8.24.0.32949 to 8.25.0.33663 [\#4212](https://github.com/MvvmCross/MvvmCross/pull/4212) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.MediaRouter from 1.2.3 to 1.2.4 [\#4211](https://github.com/MvvmCross/MvvmCross/pull/4211) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Roslynator.Analyzers from 3.1.0 to 3.2.0 [\#4198](https://github.com/MvvmCross/MvvmCross/pull/4198) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Microsoft.CodeAnalysis from 3.9.0 to 3.10.0 [\#4197](https://github.com/MvvmCross/MvvmCross/pull/4197) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.Leanback from 1.0.0.7 to 1.0.0.8 [\#4191](https://github.com/MvvmCross/MvvmCross/pull/4191) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.RecyclerView from 1.2.0 to 1.2.1 [\#4190](https://github.com/MvvmCross/MvvmCross/pull/4190) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.10.10 to 1.11.7 in /docs [\#4189](https://github.com/MvvmCross/MvvmCross/pull/4189) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rexml from 3.2.4 to 3.2.5 in /docs [\#4188](https://github.com/MvvmCross/MvvmCross/pull/4188) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [8.0.0](https://github.com/MvvmCross/MvvmCross/tree/8.0.0) (2021-06-11)
 

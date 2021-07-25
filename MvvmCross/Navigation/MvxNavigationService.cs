@@ -388,7 +388,14 @@ namespace MvvmCross.Navigation
 
             OnDidNavigate(this, args);
 
-            return (TResult?)await tcs.Task.ConfigureAwait(false);
+            try
+            {
+                return (TResult?)await tcs.Task.ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return default;
+            }
         }
 
         public virtual async Task<bool> Navigate(

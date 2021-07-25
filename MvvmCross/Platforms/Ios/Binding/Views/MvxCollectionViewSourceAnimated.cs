@@ -51,6 +51,12 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
         protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
+            if (!NSThread.IsMain)
+            {
+                BeginInvokeOnMainThread(() => CollectionChangedOnCollectionChanged(sender, args));
+                return;
+            }
+            
             var itemsSource = (ItemsSource as IEnumerable<object>)?.ToList();
             if (itemsSource == null)
                 throw new ArgumentException("ItemsSource must be convertible to IEnumerable<object>, as this code needs to take a snapshot of the list in order to be thread safe for the ios animations");
