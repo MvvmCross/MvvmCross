@@ -277,12 +277,12 @@ Mvx.IoCProvider.Resolve<IMvxNavigationService>().AfterClose += (object sender, I
 ```
 
 The events available are:
-* BeforeNavigate
-* AfterNavigate
-* BeforeClose
-* AfterClose
-* BeforeChangePresentation
-* AfterChangePresentation
+* WillNavigate
+* DidNavigate
+* WillClose
+* DidClose
+* WillChangePresentation
+* DidChangePresentation
 
 You might be using `Init()` or `Start()` methods in your ViewModels when updating from MvvmCross 4.x. These are now deprecated because it was done using reflection and therefore not very safe. When MvxNavigationService is used, a typed method called `Task Initialize()` will be available for you to perform any async heavy operations.
 
