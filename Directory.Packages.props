@@ -1,6 +1,6 @@
 <Project>
   <ItemGroup>
-    <PackageVersion Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.2" />
+    <PackageVersion Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.5" />
     <PackageVersion Include="Xamarin.AndroidX.CardView" Version="1.0.0.8" />
     <PackageVersion Include="Xamarin.AndroidX.Leanback" Version="1.0.0.9" />
     <PackageVersion Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1" />
