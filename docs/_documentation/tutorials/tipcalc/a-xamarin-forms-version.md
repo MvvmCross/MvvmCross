@@ -248,7 +248,7 @@ Add an axml file called `Tabbar.axml` within the Resources/Layout folder:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.TabLayout 
+<com.google.android.material.tabs.TabLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/sliding_tabs"
@@ -265,7 +265,7 @@ Now do the same with an axml file called `Toolbar.axml`:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
