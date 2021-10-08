@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -20,7 +21,8 @@ namespace Playground.Core.ViewModels
         private string _brokenTextValue;
         private string _anotherBrokenTextValue;
 
-        public ChildViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        public ChildViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
+            : base(logProvider, navigationService)
         {
             CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this, new SampleModel
             {

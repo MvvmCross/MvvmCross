@@ -27,45 +27,53 @@ using System.Linq;
 
 namespace MvvmCross.Platforms.Android.Core
 {
+#nullable enable
     public abstract class MvxAndroidSetup
         : MvxSetup, IMvxAndroidGlobals, IMvxAndroidSetup
     {
-        private Context _applicationContext;
-        private IMvxAndroidViewPresenter _presenter;
+        private Context? _applicationContext;
+        private IMvxAndroidViewPresenter? _presenter;
 
         public void PlatformInitialize(Context applicationContext)
         {
+            if (applicationContext == null)
+                throw new ArgumentNullException(nameof(applicationContext));
+
             _applicationContext = applicationContext;
         }
 
         public virtual Assembly ExecutableAssembly => ViewAssemblies?.FirstOrDefault() ?? GetType().Assembly;
 
-        public Context ApplicationContext => _applicationContext;
+        public Context? ApplicationContext => _applicationContext;
 
-        protected override void InitializeFirstChance()
+        protected override void InitializeFirstChance(IMvxIoCProvider iocProvider)
         {
-            InitializeLifetimeMonitor();
-            InitializeAndroidCurrentTopActivity();
-            RegisterPresenter();
+            ValidateArguments(iocProvider);
 
-            Mvx.IoCProvider.RegisterSingleton<IMvxAndroidGlobals>(this);
+            InitializeLifetimeMonitor(iocProvider);
+            InitializeAndroidCurrentTopActivity(iocProvider);
+            RegisterPresenter(iocProvider);
+
+            iocProvider.RegisterSingleton<IMvxAndroidGlobals>(this);
 
             var intentResultRouter = new MvxIntentResultSink();
-            Mvx.IoCProvider.RegisterSingleton<IMvxIntentResultSink>(intentResultRouter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxIntentResultSource>(intentResultRouter);
+            iocProvider.RegisterSingleton<IMvxIntentResultSink>(intentResultRouter);
+            iocProvider.RegisterSingleton<IMvxIntentResultSource>(intentResultRouter);
 
             var viewModelTemporaryCache = new MvxSingleViewModelCache();
-            Mvx.IoCProvider.RegisterSingleton<IMvxSingleViewModelCache>(viewModelTemporaryCache);
+            iocProvider.RegisterSingleton<IMvxSingleViewModelCache>(viewModelTemporaryCache);
 
             var viewModelMultiTemporaryCache = new MvxMultipleViewModelCache();
-            Mvx.IoCProvider.RegisterSingleton<IMvxMultipleViewModelCache>(viewModelMultiTemporaryCache);
-            base.InitializeFirstChance();
+            iocProvider.RegisterSingleton<IMvxMultipleViewModelCache>(viewModelMultiTemporaryCache);
+            base.InitializeFirstChance(iocProvider);
         }
 
-        protected virtual void InitializeAndroidCurrentTopActivity()
+        protected virtual void InitializeAndroidCurrentTopActivity(IMvxIoCProvider iocProvider)
         {
+            ValidateArguments(iocProvider);
+
             var currentTopActivity = CreateAndroidCurrentTopActivity();
-            Mvx.IoCProvider.RegisterSingleton<IMvxAndroidCurrentTopActivity>(currentTopActivity);
+            iocProvider.RegisterSingleton<IMvxAndroidCurrentTopActivity>(currentTopActivity);
         }
 
         protected virtual IMvxAndroidCurrentTopActivity CreateAndroidCurrentTopActivity()
@@ -83,12 +91,14 @@ namespace MvvmCross.Platforms.Android.Core
             }
         }
 
-        protected virtual void InitializeLifetimeMonitor()
+        protected virtual void InitializeLifetimeMonitor(IMvxIoCProvider iocProvider)
         {
+            ValidateArguments(iocProvider);
+
             var lifetimeMonitor = CreateLifetimeMonitor();
 
-            Mvx.IoCProvider.RegisterSingleton<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
-            Mvx.IoCProvider.RegisterSingleton<IMvxLifetime>(lifetimeMonitor);
+            iocProvider.RegisterSingleton<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
+            iocProvider.RegisterSingleton<IMvxLifetime>(lifetimeMonitor);
         }
 
         protected virtual MvxAndroidLifetimeMonitor CreateLifetimeMonitor()
@@ -96,10 +106,12 @@ namespace MvvmCross.Platforms.Android.Core
             return new MvxAndroidLifetimeMonitor();
         }
 
-        protected virtual void InitializeSavedStateConverter()
+        protected virtual void InitializeSavedStateConverter(IMvxIoCProvider iocProvider)
         {
+            ValidateArguments(iocProvider);
+
             var converter = CreateSavedStateConverter();
-            Mvx.IoCProvider.RegisterSingleton(converter);
+            iocProvider.RegisterSingleton(converter);
         }
 
         protected virtual IMvxSavedStateConverter CreateSavedStateConverter()
@@ -107,22 +119,32 @@ namespace MvvmCross.Platforms.Android.Core
             return new MvxSavedStateConverter();
         }
 
-        protected sealed override IMvxViewsContainer CreateViewsContainer()
+        protected sealed override IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider)
         {
+            ValidateArguments(iocProvider);
+
+            if (_applicationContext == null)
+                throw new InvalidOperationException("Cannot create Views Container without ApplicationContext");
+
             var container = CreateViewsContainer(_applicationContext);
-            Mvx.IoCProvider.RegisterSingleton<IMvxAndroidViewModelRequestTranslator>(container);
-            Mvx.IoCProvider.RegisterSingleton<IMvxAndroidViewModelLoader>(container);
+            iocProvider.RegisterSingleton<IMvxAndroidViewModelRequestTranslator>(container);
+            iocProvider.RegisterSingleton<IMvxAndroidViewModelLoader>(container);
             var viewsContainer = container as MvxViewsContainer;
             if (viewsContainer == null)
                 throw new MvxException("CreateViewsContainer must return an MvxViewsContainer");
             return viewsContainer;
         }
 
+        protected virtual IMvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)
+        {
+            return new MvxAndroidViewsContainer(applicationContext);
+        }
+
         protected IMvxAndroidViewPresenter Presenter
         {
             get
             {
-                _presenter = _presenter ?? CreateViewPresenter();
+                _presenter ??= CreateViewPresenter();
                 return _presenter;
             }
         }
@@ -137,51 +159,56 @@ namespace MvvmCross.Platforms.Android.Core
             return new MvxAndroidViewDispatcher(Presenter);
         }
 
-        protected virtual void RegisterPresenter()
+        protected virtual void RegisterPresenter(IMvxIoCProvider iocProvider)
         {
+            ValidateArguments(iocProvider);
+
             var presenter = Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            iocProvider.RegisterSingleton(presenter);
+            iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override void InitializeLastChance()
+        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
         {
-            InitializeSavedStateConverter();
+            ValidateArguments(iocProvider);
 
-            InitializeBindingBuilder();
-            base.InitializeLastChance();
+            InitializeSavedStateConverter(iocProvider);
+
+            InitializeBindingBuilder(iocProvider);
+            base.InitializeLastChance(iocProvider);
         }
 
-        protected virtual IMvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)
+        protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            return new MvxAndroidViewsContainer(applicationContext);
-        }
+            ValidateArguments(iocProvider);
 
-        protected virtual void InitializeBindingBuilder()
-        {
             var bindingBuilder = CreateBindingBuilder();
-            RegisterBindingBuilderCallbacks();
-            bindingBuilder.DoRegistration();
+            RegisterBindingBuilderCallbacks(iocProvider);
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
-        protected virtual void RegisterBindingBuilderCallbacks()
+        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
         {
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTypeCache<View>>(FillViewTypes);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxAxmlNameViewTypeResolver>(FillAxmlViewTypeResolver);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxNamespaceListViewTypeResolver>(FillNamespaceListViewTypeResolver);
+            ValidateArguments(iocProvider);
+
+            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            iocProvider.CallbackWhenRegistered<IMvxTypeCache<View>>(FillViewTypes);
+            iocProvider.CallbackWhenRegistered<IMvxAxmlNameViewTypeResolver>(FillAxmlViewTypeResolver);
+            iocProvider.CallbackWhenRegistered<IMvxNamespaceListViewTypeResolver>(FillNamespaceListViewTypeResolver);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
-            var bindingBuilder = new MvxAndroidBindingBuilder();
-            return bindingBuilder;
+            return new MvxAndroidBindingBuilder();
         }
 
         protected virtual void FillViewTypes(IMvxTypeCache<View> cache)
         {
+            if (cache == null)
+                throw new ArgumentNullException(nameof(cache));
+
             foreach (var assembly in AndroidViewAssemblies)
             {
                 cache.AddAssembly(assembly);
@@ -195,6 +222,9 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected virtual void FillAxmlViewTypeResolver(IMvxAxmlNameViewTypeResolver viewTypeResolver)
         {
+            if (viewTypeResolver == null)
+                throw new ArgumentNullException(nameof(viewTypeResolver));
+
             foreach (var kvp in ViewNamespaceAbbreviations)
             {
                 viewTypeResolver.ViewNamespaceAbbreviations[kvp.Key] = kvp.Value;
@@ -203,6 +233,9 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected virtual void FillNamespaceListViewTypeResolver(IMvxNamespaceListViewTypeResolver viewTypeResolver)
         {
+            if (viewTypeResolver == null)
+                throw new ArgumentNullException(nameof(viewTypeResolver));
+
             foreach (var viewNamespace in ViewNamespaces)
             {
                 viewTypeResolver.Add(viewNamespace);
@@ -211,6 +244,9 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
+            if (registry == null)
+                throw new ArgumentNullException(nameof(registry));
+
             registry.Fill(ValueConverterAssemblies);
             registry.Fill(ValueConverterHolders);
         }
@@ -230,8 +266,7 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected virtual IDictionary<string, string> ViewNamespaceAbbreviations => new Dictionary<string, string>
         {
-            { "Mvx", "mvvmcross.platforms.android.binding.views"
-            }
+            { "Mvx", "mvvmcross.platforms.android.binding.views" }
         };
 
         protected virtual IEnumerable<string> ViewNamespaces => new List<string>
@@ -261,14 +296,16 @@ namespace MvvmCross.Platforms.Android.Core
         }
     }
 
-    public class MvxAndroidSetup<TApplication> : MvxAndroidSetup
+    public abstract class MvxAndroidSetup<TApplication> : MvxAndroidSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
     }
+#nullable restore
 }

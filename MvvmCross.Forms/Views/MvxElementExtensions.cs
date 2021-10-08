@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Views.Base;
@@ -62,7 +63,7 @@ namespace MvvmCross.Forms.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxFormsLog.Instance.Trace("No ViewModel class specified for {0} in LoadViewModel",
+                MvxFormsLog.Instance?.Log(LogLevel.Trace, "No ViewModel class specified for {ElementName} in LoadViewModel",
                                element.GetType().Name);
                 return null;
             }

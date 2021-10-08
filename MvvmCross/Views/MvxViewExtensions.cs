@@ -3,12 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Views
 {
+#nullable enable
     public static class MvxViewExtensions
     {
         public static void OnViewCreate(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
@@ -24,7 +26,7 @@ namespace MvvmCross.Views
             var viewModel = viewModelLoader();
             if (viewModel == null)
             {
-                MvxLog.Instance.Warn("ViewModel not loaded for view {0}", view.GetType().Name);
+                MvxLogHost.Default?.Log(LogLevel.Warning, "ViewModel not loaded for view {0}", view.GetType().Name);
                 return;
             }
 
@@ -33,7 +35,7 @@ namespace MvvmCross.Views
 
         public static void OnViewNewIntent(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
         {
-            MvxLog.Instance.Warn(
+            MvxLogHost.Default?.Log(LogLevel.Warning,
                 "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
             throw new MvxException("OnViewNewIntent is not implemented");
         }
@@ -43,15 +45,15 @@ namespace MvvmCross.Views
             // nothing needed currently
         }
 
-        public static Type FindAssociatedViewModelTypeOrNull(this IMvxView view)
+        public static Type? FindAssociatedViewModelTypeOrNull(this IMvxView view)
         {
             if (view == null)
-                return null;
+                throw new ArgumentNullException(nameof(view));
 
             IMvxViewModelTypeFinder associatedTypeFinder;
             if (!Mvx.IoCProvider.TryResolve(out associatedTypeFinder))
             {
-                MvxLog.Instance.Trace(
+                MvxLogHost.Default?.Log(LogLevel.Trace,
                     "No view model type finder available - assuming we are looking for a splash screen - returning null");
                 return typeof(MvxNullViewModel);
             }
@@ -59,11 +61,11 @@ namespace MvvmCross.Views
             return associatedTypeFinder.FindTypeOrNull(view.GetType());
         }
 
-        public static IMvxViewModel ReflectionGetViewModel(this IMvxView view)
+        public static IMvxViewModel? ReflectionGetViewModel(this IMvxView view)
         {
             var propertyInfo = view?.GetType().GetProperty("ViewModel");
 
-            return (IMvxViewModel) propertyInfo?.GetGetMethod().Invoke(view, new object[] { });
+            return propertyInfo?.GetGetMethod().Invoke(view, Array.Empty<object>()) as IMvxViewModel;
         }
 
         public static IMvxBundle CreateSaveStateBundle(this IMvxView view)
@@ -75,4 +77,5 @@ namespace MvvmCross.Views
             return viewModel.SaveStateBundle();
         }
     }
+#nullable restore
 }

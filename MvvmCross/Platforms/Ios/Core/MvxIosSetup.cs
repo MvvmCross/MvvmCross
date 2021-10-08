@@ -6,13 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Converters;
-using MvvmCross.Plugin;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core;
-using MvvmCross.Platforms.Ios;
 using MvvmCross.Platforms.Ios.Binding;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Views;
@@ -24,13 +22,14 @@ using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Ios.Core
 {
+#nullable enable
     public abstract class MvxIosSetup
         : MvxSetup, IMvxIosSetup
     {
-        protected IMvxApplicationDelegate ApplicationDelegate { get; private set; }
-        protected UIWindow Window { get; private set; }
+        protected IMvxApplicationDelegate? ApplicationDelegate { get; private set; }
+        protected UIWindow? Window { get; private set; }
 
-        private IMvxIosViewPresenter _presenter;
+        private IMvxIosViewPresenter? _presenter;
 
         public virtual void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, UIWindow window)
         {
@@ -44,10 +43,10 @@ namespace MvvmCross.Platforms.Ios.Core
             _presenter = presenter;
         }
 
-        protected sealed override IMvxViewsContainer CreateViewsContainer()
+        protected sealed override IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider)
         {
             var container = CreateIosViewsContainer();
-            RegisterIosViewCreator(container);
+            RegisterIosViewCreator(iocProvider, container);
             return container;
         }
 
@@ -56,10 +55,12 @@ namespace MvvmCross.Platforms.Ios.Core
             return new MvxIosViewsContainer();
         }
 
-        protected virtual void RegisterIosViewCreator(IMvxIosViewsContainer container)
+        protected virtual void RegisterIosViewCreator(IMvxIoCProvider iocProvider, IMvxIosViewsContainer container)
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxIosViewCreator>(container);
-            Mvx.IoCProvider.RegisterSingleton<IMvxCurrentRequest>(container);
+            ValidateArguments(iocProvider);
+
+            iocProvider.RegisterSingleton<IMvxIosViewCreator>(container);
+            iocProvider.RegisterSingleton<IMvxCurrentRequest>(container);
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
@@ -67,18 +68,20 @@ namespace MvvmCross.Platforms.Ios.Core
             return new MvxIosViewDispatcher(Presenter);
         }
 
-        protected override void InitializeFirstChance()
+        protected override void InitializeFirstChance(IMvxIoCProvider iocProvider)
         {
-            RegisterPlatformProperties();
-            RegisterPresenter();
-            RegisterPopoverPresentationSourceProvider();
-            RegisterLifetime();
-            base.InitializeFirstChance();
+            RegisterPlatformProperties(iocProvider);
+            RegisterPresenter(iocProvider);
+            RegisterPopoverPresentationSourceProvider(iocProvider);
+            RegisterLifetime(iocProvider);
+            base.InitializeFirstChance(iocProvider);
         }
 
-        protected virtual void RegisterPlatformProperties()
+        protected virtual void RegisterPlatformProperties(IMvxIoCProvider iocProvider)
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxIosSystem>(CreateIosSystemProperties());
+            ValidateArguments(iocProvider);
+
+            iocProvider.RegisterSingleton<IMvxIosSystem>(CreateIosSystemProperties());
         }
 
         protected virtual MvxIosSystem CreateIosSystemProperties()
@@ -86,16 +89,18 @@ namespace MvvmCross.Platforms.Ios.Core
             return new MvxIosSystem();
         }
 
-        protected virtual void RegisterLifetime()
+        protected virtual void RegisterLifetime(IMvxIoCProvider iocProvider)
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxLifetime>(ApplicationDelegate);
+            ValidateArguments(iocProvider);
+
+            iocProvider.RegisterSingleton<IMvxLifetime>(ApplicationDelegate);
         }
 
         protected IMvxIosViewPresenter Presenter
         {
             get
             {
-                _presenter = _presenter ?? CreateViewPresenter();
+                _presenter ??= CreateViewPresenter();
                 return _presenter;
             }
         }
@@ -105,16 +110,20 @@ namespace MvvmCross.Platforms.Ios.Core
             return new MvxIosViewPresenter(ApplicationDelegate, Window);
         }
 
-        protected virtual void RegisterPresenter()
+        protected virtual void RegisterPresenter(IMvxIoCProvider iocProvider)
         {
+            ValidateArguments(iocProvider);
+
             var presenter = Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            iocProvider.RegisterSingleton(presenter);
+            iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected virtual void RegisterPopoverPresentationSourceProvider()
+        protected virtual void RegisterPopoverPresentationSourceProvider(IMvxIoCProvider iocProvider)
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxPopoverPresentationSourceProvider>(CreatePopoverPresentationSourceProvider());
+            ValidateArguments(iocProvider);
+
+            iocProvider.RegisterSingleton<IMvxPopoverPresentationSourceProvider>(CreatePopoverPresentationSourceProvider());
         }
 
         protected virtual IMvxPopoverPresentationSourceProvider CreatePopoverPresentationSourceProvider()
@@ -122,24 +131,24 @@ namespace MvvmCross.Platforms.Ios.Core
             return new MvxPopoverPresentationSourceProvider();
         }
 
-        protected override void InitializeLastChance()
+        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
         {
-            InitializeBindingBuilder();
-            base.InitializeLastChance();
+            InitializeBindingBuilder(iocProvider);
+            base.InitializeLastChance(iocProvider);
         }
 
-        protected virtual void InitializeBindingBuilder()
+        protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            RegisterBindingBuilderCallbacks();
+            RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
-        protected virtual void RegisterBindingBuilderCallbacks()
+        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
         {
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
@@ -182,14 +191,16 @@ namespace MvvmCross.Platforms.Ios.Core
         }
     }
 
-    public class MvxIosSetup<TApplication> : MvxIosSetup
+    public abstract class MvxIosSetup<TApplication> : MvxIosSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
     }
+#nullable restore
 }

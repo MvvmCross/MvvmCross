@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -47,13 +47,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 		protected virtual void SetImage(ImageView imageView, int id)
 		{
 			var context = imageView.Context;
-			Drawable drawable;
-			if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-				drawable = context?.Resources?.GetDrawable(id, context.Theme);
-			else
-#pragma warning disable CS0618 // Type or member is obsolete
-                drawable = context?.Resources?.GetDrawable(id);
-#pragma warning restore CS0618 // Type or member is obsolete
+			Drawable drawable = context?.Resources?.GetDrawable(id, context.Theme);
 
             if (drawable != null)
 				imageView.SetImageDrawable(drawable);

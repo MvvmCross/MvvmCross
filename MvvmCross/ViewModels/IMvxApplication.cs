@@ -7,6 +7,7 @@ using MvvmCross.Plugin;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public interface IMvxApplication : IMvxViewModelLocatorCollection
     {
         void LoadPlugins(IMvxPluginManager pluginManager);
@@ -20,6 +21,7 @@ namespace MvvmCross.ViewModels
 
     public interface IMvxApplication<THint> : IMvxApplication
     {
-        THint Startup(THint hint);
+        Task<THint> Startup(THint hint);
     }
+#nullable restore
 }

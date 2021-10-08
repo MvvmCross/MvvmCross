@@ -36,7 +36,7 @@ namespace MvvmCross.Forms.Bindings
                 {
                     //We might want to look into returning the platform specific Forms binder
                     var builder = new MvxBindingBuilder();
-                    builder.DoRegistration();
+                    builder.DoRegistration(Mvx.IoCProvider);
                 }
             }
             catch

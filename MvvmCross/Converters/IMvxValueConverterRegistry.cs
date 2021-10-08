@@ -6,7 +6,9 @@ using MvvmCross.Base;
 
 namespace MvvmCross.Converters
 {
+#nullable enable
     public interface IMvxValueConverterRegistry : IMvxNamedInstanceRegistry<IMvxValueConverter>
     {
     }
+#nullable restore
 }

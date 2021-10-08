@@ -4,6 +4,7 @@
 
 namespace MvvmCross.Navigation
 {
+#nullable enable
     public interface IMvxNavigationCache
     {
         /// <summary>
@@ -16,7 +17,7 @@ namespace MvvmCross.Navigation
         T GetValueOrDefault<T>(string key, T defaultValue = default(T));
 
         /// <summary>
-        /// Adds or updates the value 
+        /// Adds or updates the value
         /// </summary>
         /// <param name="key">Key</param>
         /// <param name="value">Value to set</param>
@@ -41,4 +42,5 @@ namespace MvvmCross.Navigation
         /// <returns>True if contains key, else false</returns>
         bool Contains(string key);
     }
+#nullable restore
 }

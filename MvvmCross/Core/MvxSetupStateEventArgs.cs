@@ -4,14 +4,17 @@
 
 using System;
 
-namespace MvvmCross.Logging
+namespace MvvmCross.Core
 {
 #nullable enable
-    public interface IMvxLog
+    public class MvxSetupStateEventArgs : EventArgs
     {
-        bool Log(MvxLogLevel logLevel, Func<string>? messageFunc, Exception? exception = null, params object[] formatParameters);
+        public MvxSetupStateEventArgs(MvxSetupState setupState)
+        {
+            SetupState = setupState;
+        }
 
-        bool IsLogLevelEnabled(MvxLogLevel logLevel);
+        public MvxSetupState SetupState { get; }
     }
 #nullable restore
 }

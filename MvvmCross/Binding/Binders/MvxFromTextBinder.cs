@@ -1,7 +1,8 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Bindings;
@@ -17,21 +18,21 @@ namespace MvvmCross.Binding.Binders
             return Bind(source, target, bindingDescriptions);
         }
 
+        public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
+                                                       IEnumerable<MvxBindingDescription> bindingDescriptions)
+        {
+            if (bindingDescriptions == null)
+                return Array.Empty<IMvxUpdateableBinding>();
+
+            return
+                bindingDescriptions.Select(description => BindSingle(new MvxBindingRequest(source, target, description)));
+        }
+
         public IEnumerable<IMvxUpdateableBinding> LanguageBind(object source, object target, string bindingText)
         {
             var bindingDescriptions =
                 MvxBindingSingletonCache.Instance.BindingDescriptionParser.LanguageParse(bindingText);
             return Bind(source, target, bindingDescriptions);
-        }
-
-        public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
-                                                       IEnumerable<MvxBindingDescription> bindingDescriptions)
-        {
-            if (bindingDescriptions == null)
-                return new IMvxUpdateableBinding[0];
-
-            return
-                bindingDescriptions.Select(description => BindSingle(new MvxBindingRequest(source, target, description)));
         }
 
         public IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName,

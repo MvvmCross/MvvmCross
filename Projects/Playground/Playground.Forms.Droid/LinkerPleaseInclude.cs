@@ -7,6 +7,7 @@ using Android.Widget;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace Playground.Forms.Droid
 {
@@ -107,9 +108,9 @@ namespace Playground.Forms.Droid
             context2.Dispose();
         }
 
-        public void Include(MvxNavigationService service, IMvxViewModelLoader loader)
+        public void Include(MvxNavigationService service, IMvxViewDispatcher dispatcher, IMvxViewModelLoader loader)
         {
-            service = new MvxNavigationService(null, loader);
+            service = new MvxNavigationService(null, dispatcher);
         }
 
         public void Include(ConsoleColor color)

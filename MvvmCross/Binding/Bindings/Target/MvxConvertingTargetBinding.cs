@@ -138,12 +138,9 @@ namespace MvvmCross.Binding.Bindings.Target
             var safeValue = MakeSafeValue(value);
 
             // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
-            if (_isUpdatingSource)
+            if (_isUpdatingSource && EqualityComparer<TValue>.Default.Equals(value, _updatingSourceWith))
             {
-                if (EqualityComparer<TValue>.Default.Equals(value, _updatingSourceWith))
-                {
-                    return;
-                }
+                return;
             }
 
             try

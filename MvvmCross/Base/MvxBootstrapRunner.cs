@@ -4,6 +4,7 @@
 
 using System;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
@@ -25,22 +26,27 @@ namespace MvvmCross.Base
 
         protected virtual void Run(Type type)
         {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
             try
             {
                 var toRun = Activator.CreateInstance(type);
                 var bootstrapAction = toRun as IMvxBootstrapAction;
                 if (bootstrapAction == null)
                 {
-                    MvxLog.Instance.Warn("Could not run startup task {0} - it's not a startup task", type.Name);
+                    MvxLogHost.Default?.Log(LogLevel.Trace, "Could not run startup task {0} - it's not a startup task", type.Name);
                     return;
                 }
 
                 bootstrapAction.Run();
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception exception)
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 // pokemon handling
-                MvxLog.Instance.Warn("Error running startup task {0} - error {1}", type.Name, exception.ToLongString());
+                MvxLogHost.Default?.Log(LogLevel.Trace, "Error running startup task {0} - error {1}", type.Name, exception.ToLongString());
             }
         }
     }

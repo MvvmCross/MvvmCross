@@ -4,6 +4,7 @@
 
 using System;
 using System.Text;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Localization;
 using MvvmCross.Logging;
 using Xamarin.Forms;
@@ -52,7 +53,7 @@ namespace MvvmCross.Forms.Bindings
                 }
                 else
                 {
-                    MvxFormsLog.Instance.Trace("Can only use MvxLang on a bindable type");
+                    MvxFormsLog.Instance?.Log(LogLevel.Trace, "Can only use MvxLang on a bindable type");
                 }
             }
             else if (!string.IsNullOrEmpty(Source) && Mvx.IoCProvider.CanResolve<IMvxTextProvider>())
@@ -65,7 +66,7 @@ namespace MvvmCross.Forms.Bindings
             }
             else
             {
-                MvxFormsLog.Instance.Trace("Can only use MvxLang on a bindable property");
+                MvxFormsLog.Instance?.Log(LogLevel.Trace, "Can only use MvxLang on a bindable property");
             }
 
             return null;

@@ -5,6 +5,7 @@
 using System;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -61,7 +62,7 @@ namespace MvvmCross.Core
             }
             catch (Exception ex)
             {
-                MvxLog.Instance.Error(ex, "Unable to cast setup to {0}", typeof(TMvxSetup));
+                MvxLogHost.Default?.Log(LogLevel.Error, ex, "Unable to cast setup to {0}", typeof(TMvxSetup));
                 throw;
             }
         }
@@ -110,7 +111,7 @@ namespace MvvmCross.Core
                         return;
                     }
 
-                    MvxLog.Instance.Trace("EnsureInitialized has already been called so now waiting for completion");
+                    MvxLogHost.Default?.Log(LogLevel.Trace, "EnsureInitialized has already been called so now waiting for completion");
                 }
             }
             IsInitialisedTaskCompletionSource.Task.GetAwaiter().GetResult();

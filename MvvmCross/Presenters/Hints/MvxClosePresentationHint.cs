@@ -7,10 +7,11 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
 {
+#nullable enable
     public class MvxClosePresentationHint
         : MvxPresentationHint
     {
-        public MvxClosePresentationHint(IMvxViewModel viewModelToClose) : base()
+        public MvxClosePresentationHint(IMvxViewModel viewModelToClose)
         {
             ViewModelToClose = viewModelToClose;
         }
@@ -24,6 +25,7 @@ namespace MvvmCross.Presenters.Hints
         {
         }
 
-        public IMvxViewModel ViewModelToClose { get; private set; }
+        public IMvxViewModel ViewModelToClose { get; }
     }
+#nullable restore
 }

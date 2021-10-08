@@ -8,10 +8,11 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
 {
+#nullable enable
     public class MvxPagePresentationHint
         : MvxPresentationHint
     {
-        public MvxPagePresentationHint(Type viewModel) : base()
+        public MvxPagePresentationHint(Type viewModel)
         {
             ViewModel = viewModel;
         }
@@ -25,6 +26,7 @@ namespace MvvmCross.Presenters.Hints
         {
         }
 
-        public Type ViewModel { get; private set; }
+        public Type ViewModel { get; }
     }
+#nullable restore
 }

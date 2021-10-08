@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
@@ -21,6 +23,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
 #nullable enable
     public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresenter
     {
+        private readonly MvxIosMajorVersionChecker _iosVersion13Checker = new MvxIosMajorVersionChecker(13);
+        
         protected IUIApplicationDelegate ApplicationDelegate { get; }
         protected UIWindow Window { get; }
 
@@ -49,7 +53,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (MasterNavigationController == null &&
                 TabBarViewController?.CanShowChildView() != true)
             {
-                MvxLog.Instance?.Trace(
+                MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogTrace(
                     $"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. Assuming Root presentation");
                 return new MvxRootPresentationAttribute
                 {
@@ -57,7 +61,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 };
             }
 
-            MvxLog.Instance?.Trace(
+            MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogTrace(
                 $"PresentationAttribute not found for {viewType.Name}. Assuming animated Child presentation");
 
             return new MvxChildPresentationAttribute { ViewType = viewType, ViewModelType = viewModelType };
@@ -418,6 +422,11 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
             viewController.ModalTransitionStyle = attribute.ModalTransitionStyle;
+            if (_iosVersion13Checker.IsVersionOrHigher)
+            {
+                viewController.PresentationController.Delegate =
+                    new MvxModalPresentationControllerDelegate(this, viewController, attribute);
+            }
 
             // Check if there is a modal already presented first. Otherwise use the window root
             var modalHost = ModalViewControllers.LastOrDefault() ?? Window.RootViewController;
@@ -470,7 +479,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             var sourceProvider = Mvx.IoCProvider.Resolve<IMvxPopoverPresentationSourceProvider>();
             sourceProvider.SetSource(presentationController);
-            presentationController.Delegate = new MvxPopoverDelegate(this);
+            presentationController.Delegate = new MvxPopoverPresentationControllerDelegate(this);
 
             PopoverViewController = viewController;
             await viewHost.PresentViewControllerAsync(viewController, attribute.Animated).ConfigureAwait(true);
@@ -510,7 +519,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
-            MvxLog.Instance?.Warn($"Ignored attempt to close the window root (ViewModel type: {viewModel.GetType().Name}");
+            MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogWarning(
+                "Ignored attempt to close the window root (ViewModel type: {viewModelType}", viewModel.GetType().Name);
 
             return Task.FromResult(false);
         }
@@ -640,7 +650,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             // check for plain popover
             if (PopoverViewController is IMvxIosView iosView && iosView.ViewModel == viewModel)
             {
-                return ClosePopoverViewController(viewModel, attribute);
+                return ClosePopoverViewController(PopoverViewController, attribute);
             }
 
             // check for popover navigation stack
@@ -831,6 +841,13 @@ namespace MvvmCross.Platforms.Ios.Presenters
         public virtual void ClosedPopoverViewController()
         {
             PopoverViewController = null;
+        }
+
+        // Called if the modal was dismissed by user (perhaps tapped background or form sheet swiped down)
+        public virtual ConfiguredTaskAwaitable<bool> ClosedModalViewController(UIViewController viewController,
+            MvxModalPresentationAttribute attribute)
+        {
+            return CloseModalViewController(viewController, attribute).ConfigureAwait(false);
         }
 
         private static void ValidateArguments(Type viewModelType, Type viewType)

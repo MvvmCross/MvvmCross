@@ -1,7 +1,8 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Platforms.Ios
@@ -21,7 +22,8 @@ namespace MvvmCross.Platforms.Ios
             Mvx.IoCProvider.TryResolve<IMvxIosSystem>(out iosSystem);
             if (iosSystem == null)
             {
-                MvxLog.Instance.Warn("IMvxIosSystem not found - so assuming we {1} on iOS {0} or later", target, defaultValue ? "are" : "are not");
+                MvxLogHost.Default?.LogWarning(
+                    "IMvxIosSystem not found - so assuming we {target} on iOS {default} or later", target, defaultValue ? "are" : "are not");
                 return defaultValue;
             }
 

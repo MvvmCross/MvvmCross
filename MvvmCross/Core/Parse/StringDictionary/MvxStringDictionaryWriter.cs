@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,12 +7,13 @@ using System.Text;
 
 namespace MvvmCross.Core.Parse.StringDictionary
 {
+#nullable enable
     public class MvxStringDictionaryWriter : IMvxStringDictionaryWriter
     {
-        public string Write(IDictionary<string, string> dictionary)
+        public string Write(IDictionary<string, string>? dictionary)
         {
-            if (dictionary == null
-                || dictionary.Count == 0)
+            if (dictionary == null ||
+                dictionary.Count == 0)
             {
                 return string.Empty;
             }
@@ -21,14 +22,14 @@ namespace MvvmCross.Core.Parse.StringDictionary
             foreach (var kvp in dictionary)
             {
                 if (output.Length > 0)
-                    output.Append(";");
+                    output.Append(';');
 
                 output.AppendFormat("{0}={1}", Quote(kvp.Key), Quote(kvp.Value));
             }
             return output.ToString();
         }
 
-        private string Quote(string input)
+        private static string Quote(string input)
         {
             if (input == null)
                 return "null";
@@ -56,4 +57,5 @@ namespace MvvmCross.Core.Parse.StringDictionary
             return output.ToString();
         }
     }
+#nullable restore
 }

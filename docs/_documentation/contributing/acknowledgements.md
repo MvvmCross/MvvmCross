@@ -16,9 +16,7 @@ who                                                    | contact
 
 ## And over 200 contributors!
 
-<a href="https://github.com/MvvmCross/MvvmCross/graphs/contributors" target="_blank">
-  <img width="1140" src="https://opencollective.com/mvvmcross/contributors.png?avatarHeight=36&amp;button=false&amp;width=1140&amp;margin=4"> 
-</a>
+[![](https://opencollective.com/MvvmCross/contributors.svg?width=890&button=false)](https://github.com/MvvmCross/MvvmCross/graphs/contributors)
 
 *Thanks everyone for their contributions!*
 

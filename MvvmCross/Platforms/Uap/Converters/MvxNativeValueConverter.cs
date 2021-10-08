@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using MvvmCross.Converters;
 using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Uap.Converters
 {
@@ -41,7 +42,8 @@ namespace MvvmCross.Platforms.Uap.Converters
         {
             if (toReturn == MvxBindingConstant.DoNothing)
             {
-                MvxLog.Instance.Trace("DoNothing does not have an equivalent in WinRT - returning UnsetValue instead");
+                MvxLogHost.GetLog<MvxNativeValueConverter>()?.Log(
+                    LogLevel.Trace, "DoNothing does not have an equivalent in WinRT - returning UnsetValue instead");
                 return DependencyProperty.UnsetValue;
             }
 

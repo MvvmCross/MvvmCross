@@ -1,10 +1,11 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Reflection;
 using System.Windows.Input;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.WeakSubscription;
 
@@ -36,24 +37,24 @@ namespace MvvmCross.Binding.ValueConverters
             CanExecuteChanged?.Invoke(this, eventArgs);
         }
 
-        public bool CanExecute(object parameter = null)
+        public bool CanExecute(object parameter)
         {
             if (_wrapped == null)
                 return false;
 
             if (parameter != null)
-                MvxLog.Instance.Warn("Non-null parameter will be ignored in MvxWrappingCommand.CanExecute");
+                MvxLogHost.Default?.Log(LogLevel.Warning, "Non-null parameter will be ignored in MvxWrappingCommand.CanExecute");
 
             return _wrapped.CanExecute(_commandParameterOverride);
         }
 
-        public void Execute(object parameter = null)
+        public void Execute(object parameter)
         {
             if (_wrapped == null)
                 return;
 
             if (parameter != null)
-                MvxLog.Instance.Warn("Non-null parameter overridden in MvxWrappingCommand");
+                MvxLogHost.Default?.Log(LogLevel.Warning, "Non-null parameter overridden in MvxWrappingCommand");
             _wrapped.Execute(_commandParameterOverride);
         }
 

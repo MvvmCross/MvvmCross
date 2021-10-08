@@ -5,35 +5,28 @@
 using System;
 using System.Linq;
 using Android.App;
-using MvvmCross.Logging;
 using MvvmCross.Presenters;
-using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes
 {
+#nullable enable
     public static class MvxAndroidPresentationAttributeExtensions
     {
-        private static Type GetActivityViewModelType(Type activityType)
-        {
-            if (Mvx.IoCProvider.TryResolve(out IMvxViewModelTypeFinder associatedTypeFinder))
-                return associatedTypeFinder.FindTypeOrNull(activityType);
-
-            MvxLog.Instance.Trace("No view model type finder available - assuming we are looking for a splash screen - returning null");
-            return typeof(MvxNullViewModel);
-        }
-
         public static bool IsFragmentCacheable(this Type fragmentType, Type fragmentActivityParentType)
         {
             if (!fragmentType.HasBasePresentationAttribute())
                 return false;
 
-            var fragmentAttributes = fragmentType.GetBasePresentationAttributes()
-                                                 .Select(baseAttribute => baseAttribute as MvxFragmentPresentationAttribute)
-                                                 .Where(fragmentAttribute => fragmentAttribute != null);
+            var fragmentAttributes =
+                fragmentType.GetBasePresentationAttributes()
+                    .Select(baseAttribute => baseAttribute as MvxFragmentPresentationAttribute)
+                    .Where(fragmentAttribute => fragmentAttribute != null);
 
-            var currentAttribute = fragmentAttributes.FirstOrDefault(fragmentAttribute => fragmentAttribute.ActivityHostViewModelType == fragmentActivityParentType);
+            var currentAttribute = fragmentAttributes.FirstOrDefault(
+                fragmentAttribute => fragmentAttribute != null &&
+                fragmentAttribute.ActivityHostViewModelType == fragmentActivityParentType);
 
-            return currentAttribute != null ? currentAttribute.IsCacheableFragment : false;
+            return currentAttribute?.IsCacheableFragment == true;
         }
 
         public static PopBackStackFlags ToNativePopBackStackFlags(this MvxPopBackStack mvxPopBackStack)
@@ -49,4 +42,5 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             }
         }
     }
+#nullable restore
 }

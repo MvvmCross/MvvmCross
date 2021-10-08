@@ -33,10 +33,10 @@ namespace MvvmCross.ViewModels
 
         Task Initialize();
 
-        MvxNotifyTask InitializeTask { get; set; }
+        MvxNotifyTask? InitializeTask { get; set; }
     }
 
-    public interface IMvxViewModel<TParameter>
+    public interface IMvxViewModel<in TParameter>
         : IMvxViewModel where TParameter : notnull
     {
         void Prepare(TParameter parameter);
@@ -46,10 +46,10 @@ namespace MvvmCross.ViewModels
         : IMvxViewModel
         where TResult : notnull
     {
-        TaskCompletionSource<object>? CloseCompletionSource { get; set; }
+        TaskCompletionSource<object?>? CloseCompletionSource { get; set; }
     }
 
-    public interface IMvxViewModel<TParameter, TResult>
+    public interface IMvxViewModel<in TParameter, TResult>
         : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult>
         where TParameter : notnull
         where TResult : notnull

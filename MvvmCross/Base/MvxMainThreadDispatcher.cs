@@ -4,33 +4,37 @@
 
 using System;
 using System.Reflection;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>, IMvxMainThreadDispatcher
     {
         public static void ExceptionMaskedAction(Action action, bool maskExceptions)
         {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
             try
             {
                 action();
             }
             catch (TargetInvocationException exception)
             {
-                MvxLog.Instance.TraceException("Exception throw when invoking action via dispatcher", exception);
+                MvxLogHost.Default?.Log(LogLevel.Warning, "Exception thrown when invoking action via dispatcher", exception);
                 if (maskExceptions)
-                    MvxLog.Instance.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
+                    MvxLogHost.Default?.Log(LogLevel.Warning, "TargetInvocationException masked " + exception.InnerException.ToLongString());
                 else
                     throw;
             }
             catch (Exception exception)
             {
-                MvxLog.Instance.TraceException("Exception throw when invoking action via dispatcher", exception);
+                MvxLogHost.Default?.Log(LogLevel.Warning, "Exception thrown when invoking action via dispatcher", exception);
                 if (maskExceptions)
-                    MvxLog.Instance.Warn("Exception masked " + exception.ToLongString());
+                    MvxLogHost.Default?.Log(LogLevel.Warning, "Exception masked " + exception.ToLongString());
                 else
                     throw;
             }
@@ -40,4 +44,5 @@ namespace MvvmCross.Base
 
         public abstract bool IsOnMainThread { get; }
     }
+#nullable restore
 }

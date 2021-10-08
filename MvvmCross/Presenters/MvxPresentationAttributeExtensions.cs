@@ -11,6 +11,7 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters
 {
+#nullable enable
     public static class MvxPresentationAttributeExtensions
     {
         public static bool HasBasePresentationAttribute(this Type candidateType)
@@ -23,7 +24,7 @@ namespace MvvmCross.Presenters
         {
             var attributes = fromViewType.GetCustomAttributes(typeof(MvxBasePresentationAttribute), true);
 
-            if (!attributes.Any())
+            if (attributes.Length == 0)
                 throw new InvalidOperationException($"Type does not have {nameof(MvxBasePresentationAttribute)} attribute!");
 
             return attributes.Cast<MvxBasePresentationAttribute>();
@@ -34,7 +35,7 @@ namespace MvvmCross.Presenters
             return fromViewType.GetBasePresentationAttributes().FirstOrDefault();
         }
 
-        public static Type GetViewModelType(this Type viewType)
+        public static Type? GetViewModelType(this Type viewType)
         {
             if (!viewType.HasBasePresentationAttribute())
                 return null;
@@ -47,15 +48,17 @@ namespace MvvmCross.Presenters
         public static void Register<TMvxPresentationAttribute>(
             this IDictionary<Type, MvxPresentationAttributeAction> attributeTypesToActionsDictionary,
             Func<Type, TMvxPresentationAttribute, MvxViewModelRequest, Task<bool>> showAction,
-            Func<IMvxViewModel, TMvxPresentationAttribute, Task<bool>> closeAction) where TMvxPresentationAttribute : class, IMvxPresentationAttribute
+            Func<IMvxViewModel, TMvxPresentationAttribute, Task<bool>> closeAction)
+                where TMvxPresentationAttribute : class, IMvxPresentationAttribute
         {
             attributeTypesToActionsDictionary.Add(
                 typeof(TMvxPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
-                    ShowAction = (view, attribute, request) => showAction(view, attribute as TMvxPresentationAttribute, request),
-                    CloseAction = (viewModel, attribute) => closeAction(viewModel, attribute as TMvxPresentationAttribute)
+                    ShowAction = (view, attribute, request) => showAction(view, (attribute as TMvxPresentationAttribute)!, request),
+                    CloseAction = (viewModel, attribute) => closeAction(viewModel, (attribute as TMvxPresentationAttribute)!)
                 });
         }
     }
+#nullable restore
 }

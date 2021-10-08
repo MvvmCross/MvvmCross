@@ -1,5 +1,4 @@
 ﻿using MvvmCross.Core;
-using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.Platforms.Wpf.Views;
 
 namespace Playground.Wpf
@@ -8,7 +7,7 @@ namespace Playground.Wpf
     {
         protected override void RegisterSetup()
         {
-            this.RegisterSetupType<MvxWpfSetup<Core.App>>();
+            this.RegisterSetupType<Setup>();
         }
     }
 }

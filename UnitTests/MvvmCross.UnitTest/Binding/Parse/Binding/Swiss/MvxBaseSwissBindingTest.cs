@@ -20,8 +20,8 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
         : MvxBindingTest
         where TParser : MvxSwissBindingParser, new()
     {
-        public MvxBaseSwissBindingTest(MvxTestFixture fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture, testOutputHelper)
+        public MvxBaseSwissBindingTest(MvxTestFixture fixture)
+            : base(fixture)
         {
 
         }
@@ -40,7 +40,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -60,7 +59,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -80,7 +78,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -100,7 +97,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -120,7 +116,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -140,7 +135,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -385,7 +379,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                 expectedLookup[testParams.Target] = CreateExpectedDesciption(testParams);
             }
 
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expectedLookup);
         }
 

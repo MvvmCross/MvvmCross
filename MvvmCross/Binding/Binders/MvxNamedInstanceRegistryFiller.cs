@@ -13,18 +13,6 @@ namespace MvvmCross.Binding.Binders
     public class MvxNamedInstanceRegistryFiller<T> : IMvxNamedInstanceRegistryFiller<T>
         where T : class
     {
-        public virtual void FillFrom(IMvxNamedInstanceRegistry<T> registry, Type type)
-        {
-            if (type.GetTypeInfo().IsAbstract)
-            {
-                FillFromStatic(registry, type);
-            }
-            else
-            {
-                FillFromInstance(registry, type);
-            }
-        }
-
         protected virtual void FillFromInstance(IMvxNamedInstanceRegistry<T> registry, Type type)
         {
             var instance = Activator.CreateInstance(type);
@@ -64,6 +52,18 @@ namespace MvvmCross.Binding.Binders
             foreach (var pair in pairs)
             {
                 registry.AddOrOverwrite(pair.Name, pair.Converter);
+            }
+        }
+
+        public virtual void FillFrom(IMvxNamedInstanceRegistry<T> registry, Type type)
+        {
+            if (type.GetTypeInfo().IsAbstract)
+            {
+                FillFromStatic(registry, type);
+            }
+            else
+            {
+                FillFromInstance(registry, type);
             }
         }
 

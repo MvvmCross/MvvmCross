@@ -5,12 +5,11 @@
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Plugin;
-using MvvmCross.Logging;
 using System;
-using static MvvmCross.Core.MvxSetup;
 
 namespace MvvmCross.Core
 {
+#nullable enable
     public interface IMvxSetup
     {
         void InitializePrimary();
@@ -25,9 +24,8 @@ namespace MvvmCross.Core
 
         void LoadPlugins(IMvxPluginManager pluginManager);
 
-        MvxLogProviderType GetDefaultLogProviderType();
-
-        event EventHandler<MvxSetupStateEventArgs> StateChanged;
+        event EventHandler<MvxSetupStateEventArgs>? StateChanged;
         MvxSetupState State { get; }
     }
+#nullable restore
 }

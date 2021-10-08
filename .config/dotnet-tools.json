@@ -3,13 +3,13 @@
   "isRoot": true,
   "tools": {
     "cake.tool": {
-      "version": "0.38.4",
+      "version": "1.0.0",
       "commands": [
         "dotnet-cake"
       ]
     },
     "dotnet-reportgenerator-globaltool": {
-      "version": "4.5.8",
+      "version": "4.8.5",
       "commands": [
         "reportgenerator"
       ]

@@ -71,8 +71,7 @@ namespace MvvmCross.Platforms.Android.Views
         /// <param name="transitionName">The name for the transition.</param>
         public static void SetTransitionNameSupport(this View view, string transitionName)
         {
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-                view.TransitionName = transitionName;
+            view.TransitionName = transitionName;
         }
 
         /// <summary>
@@ -82,10 +81,7 @@ namespace MvvmCross.Platforms.Android.Views
         /// <returns>The name for the transition.</returns>
         public static string GetTransitionNameSupport(this View view)
         {
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-                return view.TransitionName;
-
-            return string.Empty;
+            return view.TransitionName;
         }
     }
 }

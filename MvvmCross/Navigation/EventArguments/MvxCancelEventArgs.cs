@@ -7,6 +7,7 @@ using System.Threading;
 
 namespace MvvmCross.Navigation.EventArguments
 {
+#nullable enable
     public class MvxCancelEventArgs : CancelEventArgs
     {
         public MvxCancelEventArgs(CancellationToken cancellationToken = default)
@@ -22,4 +23,5 @@ namespace MvvmCross.Navigation.EventArguments
             Cancel = true;
         }
     }
+#nullable restore
 }

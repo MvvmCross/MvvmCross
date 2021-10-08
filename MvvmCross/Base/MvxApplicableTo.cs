@@ -4,13 +4,16 @@
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public abstract class MvxApplicableTo<T>
         : MvxApplicable,
           IMvxApplicableTo<T>
+        where T : notnull
     {
         public virtual void ApplyTo(T what)
         {
             SuppressFinalizer();
         }
     }
+#nullable restore
 }

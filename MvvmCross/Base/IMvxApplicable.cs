@@ -4,8 +4,10 @@
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public interface IMvxApplicable
     {
         void Apply();
     }
+#nullable restore
 }

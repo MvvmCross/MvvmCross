@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using Moq;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
@@ -442,7 +443,8 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                       });
             _fixture.Ioc.RegisterSingleton(binder.Object);
 
-            _fixture.Ioc.RegisterSingleton<IMvxPropertyExpressionParser>(new MvxPropertyExpressionParser());
+            var loggerFactory = new Mock<ILoggerFactory>();
+            _fixture.Ioc.RegisterSingleton<IMvxPropertyExpressionParser>(new MvxPropertyExpressionParser(loggerFactory.Object));
 
             var converterLookup = new MvxValueConverterRegistry();
             converterLookup.AddOrOverwrite("SampleConv", new SampleValueConverter());

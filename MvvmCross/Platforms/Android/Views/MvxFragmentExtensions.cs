@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -45,7 +46,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxLog.Instance.Trace("No ViewModel class specified for {0} in LoadViewModel",
+                MvxLogHost.Default?.Log(LogLevel.Trace, "No ViewModel class specified for {fragmentViewType} in LoadViewModel",
                     fragmentView.GetType().Name);
             }
 

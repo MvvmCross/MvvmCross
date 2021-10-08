@@ -6,6 +6,7 @@ using System;
 
 namespace MvvmCross.IoC
 {
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public abstract class MvxConditionalConventionalAttribute : Attribute
     {
         public abstract bool IsConditionSatisfied { get; }
