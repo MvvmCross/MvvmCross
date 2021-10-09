@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 
 namespace MvvmCross.IoC
 {
+#nullable enable
     public static class MvxTypeExtensions
     {
         public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
@@ -25,21 +27,21 @@ namespace MvvmCross.IoC
                 // MvxLog.Instance can be null, when reflecting for Setup.cs
                 // Check for null
 
-                MvxLog.Instance?.Warn("ReflectionTypeLoadException masked during loading of {0} - error {1}",
+                MvxLogHost.Default?.Log(LogLevel.Warning, "ReflectionTypeLoadException masked during loading of {0} - error {1}",
                                       assembly.FullName, e.ToLongString());
 
                 if (e.LoaderExceptions != null)
                 {
                     foreach (var excp in e.LoaderExceptions)
                     {
-                        MvxLog.Instance?.Warn(excp.ToLongString());
+                        MvxLogHost.Default?.Log(LogLevel.Warning, excp.ToLongString());
                     }
                 }
 
                 if (Debugger.IsAttached)
                     Debugger.Break();
 
-                return new Type[0];
+                return Array.Empty<Type>();
             }
         }
 
@@ -70,12 +72,12 @@ namespace MvvmCross.IoC
 
         public static IEnumerable<Type> InNamespace(this IEnumerable<Type> types, string namespaceBase)
         {
-            return types.Where(x => x.Namespace != null && x.Namespace.StartsWith(namespaceBase));
+            return types.Where(x => x.Namespace?.StartsWith(namespaceBase) == true);
         }
 
         public static IEnumerable<Type> WithAttribute(this IEnumerable<Type> types, Type attributeType)
         {
-            return types.Where(x => x.GetCustomAttributes(attributeType, true).Any());
+            return types.Where(x => x.GetCustomAttributes(attributeType, true).Length > 0);
         }
 
         public static IEnumerable<Type> WithAttribute<TAttribute>(this IEnumerable<Type> types)
@@ -110,7 +112,7 @@ namespace MvvmCross.IoC
             // optimisation - if we have 3 or more except cases, then use a dictionary
             if (except.Length >= 3)
             {
-                var lookup = except.ToDictionary(x => x, x => true);
+                var lookup = except.ToDictionary(x => x, _ => true);
                 return types.Where(x => !lookup.ContainsKey(x));
             }
             else
@@ -126,14 +128,14 @@ namespace MvvmCross.IoC
 
         public class ServiceTypeAndImplementationTypePair
         {
+            public List<Type> ServiceTypes { get; }
+            public Type ImplementationType { get; }
+
             public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes, Type implementationType)
             {
                 ImplementationType = implementationType;
                 ServiceTypes = serviceTypes;
             }
-
-            public List<Type> ServiceTypes { get; private set; }
-            public Type ImplementationType { get; private set; }
         }
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsTypes(this IEnumerable<Type> types)
@@ -148,7 +150,7 @@ namespace MvvmCross.IoC
             // optimisation - if we have 3 or more interfaces, then use a dictionary
             if (interfaces.Length >= 3)
             {
-                var lookup = interfaces.ToDictionary(x => x, x => true);
+                var lookup = interfaces.ToDictionary(x => x, _ => true);
                 return
                     types.Select(
                         t =>
@@ -170,11 +172,10 @@ namespace MvvmCross.IoC
             foreach (var pair in pairs)
             {
                 var excludedList = pair.ServiceTypes.Where(c => !toExclude.Contains(c)).ToList();
-                if (excludedList.Any())
+                if (excludedList.Count > 0)
                 {
-                    var newPair = new ServiceTypeAndImplementationTypePair(
+                    yield return new ServiceTypeAndImplementationTypePair(
                         excludedList, pair.ImplementationType);
-                    yield return newPair;
                 }
             }
         }
@@ -183,7 +184,7 @@ namespace MvvmCross.IoC
         {
             foreach (var pair in pairs)
             {
-                if (!pair.ServiceTypes.Any())
+                if (pair.ServiceTypes.Count == 0)
                     continue;
 
                 var instance = Mvx.IoCProvider.IoCConstruct(pair.ImplementationType);
@@ -222,7 +223,7 @@ namespace MvvmCross.IoC
             }
         }
 
-        public static object CreateDefault(this Type type)
+        public static object? CreateDefault(this Type type)
         {
             if (type == null)
             {
@@ -239,8 +240,8 @@ namespace MvvmCross.IoC
 
             return Activator.CreateInstance(type);
         }
-        
-        public static ConstructorInfo FindApplicableConstructor(this Type type, IDictionary<string, object> arguments)
+
+        public static ConstructorInfo? FindApplicableConstructor(this Type type, IDictionary<string, object> arguments)
         {
             var constructors = type.GetConstructors();
             if (arguments == null || arguments.Count == 0)
@@ -249,13 +250,14 @@ namespace MvvmCross.IoC
             }
 
             var unusedKeys = new List<string>(arguments.Keys);
-            
+
             foreach (var constructor in constructors)
             {
-                var parameters = constructor.GetParameters();
-                foreach (var parameter in parameters)
+                foreach (var parameter in constructor.GetParameters())
                 {
-                    if (unusedKeys.Contains(parameter.Name) && parameter.ParameterType.IsInstanceOfType(arguments[parameter.Name]))
+                    if (parameter?.Name != null &&
+                        unusedKeys.Contains(parameter.Name) &&
+                        parameter.ParameterType.IsInstanceOfType(arguments[parameter.Name]))
                     {
                         unusedKeys.Remove(parameter.Name);
                     }
@@ -269,15 +271,15 @@ namespace MvvmCross.IoC
 
             return null;
         }
-        
-        public static ConstructorInfo FindApplicableConstructor(this Type type, object[] arguments)
+
+        public static ConstructorInfo? FindApplicableConstructor(this Type type, object[] arguments)
         {
             var constructors = type.GetConstructors();
             if (arguments == null || arguments.Length == 0)
             {
                 return constructors.OrderBy(c => c.GetParameters().Length).FirstOrDefault();
             }
-            
+
             foreach (var constructor in constructors)
             {
                 var parameterTypes = constructor.GetParameters().Select(p => p.ParameterType);
@@ -301,4 +303,5 @@ namespace MvvmCross.IoC
             return null;
         }
     }
+#nullable restore
 }

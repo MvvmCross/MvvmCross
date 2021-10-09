@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,6 +8,7 @@ using MvvmCross.Core;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public class MvxViewModelRequest
     {
         public MvxViewModelRequest()
@@ -20,17 +21,17 @@ namespace MvvmCross.ViewModels
         }
 
         public MvxViewModelRequest(Type viewModelType,
-                                   IMvxBundle parameterBundle,
-                                   IMvxBundle presentationBundle)
+                                   IMvxBundle? parameterBundle,
+                                   IMvxBundle? presentationBundle)
         {
             ViewModelType = viewModelType;
             ParameterValues = parameterBundle.SafeGetData();
             PresentationValues = presentationBundle.SafeGetData();
         }
 
-        public Type ViewModelType { get; set; }
-        public IDictionary<string, string> ParameterValues { get; set; }
-        public IDictionary<string, string> PresentationValues { get; set; }
+        public Type? ViewModelType { get; set; }
+        public IDictionary<string, string>? ParameterValues { get; set; }
+        public IDictionary<string, string>? PresentationValues { get; set; }
 
         public static MvxViewModelRequest GetDefaultRequest(Type viewModelType)
         {
@@ -54,4 +55,5 @@ namespace MvvmCross.ViewModels
             return GetDefaultRequest(typeof(TViewModel));
         }
     }
+#nullable restore
 }

@@ -48,9 +48,9 @@ namespace MvvmCross.UnitTest.Navigation
         {
             var mockLocator = new Mock<IMvxViewModelLocator>();
             mockLocator.Setup(
-                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>())).Returns(() => new SimpleTestViewModel());
+                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>())).Returns(() => new ViewModelMock<SimpleTestViewModel>().Object);
             mockLocator.Setup(
-                m => m.Reload(It.IsAny<IMvxViewModel>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>())).Returns(() => new SimpleTestViewModel());
+                m => m.Reload(It.IsAny<IMvxViewModel>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>())).Returns(() => new ViewModelMock<SimpleTestViewModel>().Object);
 
             var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
@@ -60,10 +60,7 @@ namespace MvvmCross.UnitTest.Navigation
 
             var loader = new MvxViewModelLoader(mockCollection.Object);
             MockDispatcher = new Mock<NavigationMockDispatcher>(MockBehavior.Loose) { CallBase = true };
-            var navigationService = RoutingService = new MvxNavigationService(null, loader)
-            {
-                ViewDispatcher = MockDispatcher.Object,
-            };
+            var navigationService = RoutingService = new MvxNavigationService(loader, MockDispatcher.Object, fixture.Ioc);
             RoutingService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
             fixture.Ioc.RegisterSingleton(navigationService);
             fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());

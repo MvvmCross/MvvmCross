@@ -7,6 +7,7 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.Console.Views
 {
+#nullable enable
     public interface IMvxConsoleView : IMvxView
     {
         void HackSetViewModel(object viewModel);
@@ -19,4 +20,5 @@ namespace MvvmCross.Platforms.Console.Views
         , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
     {
     }
+#nullable restore
 }

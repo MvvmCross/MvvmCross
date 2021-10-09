@@ -22,3 +22,4 @@ Mvx.Picasso | Target Bindings for Picasso | Android | [Github](https://github.co
 ExRam.MvvmCross.ObservableBinding | Support MvvmCross-Bindings to IObservable&lt;T&gt;-properties in view models. | All | [Github](https://github.com/ExRam/ExRam.MvvmCross.ObservableBinding)
 FFImageLoading | Load images quickly and easy (even using data binding) using MvxCachedImageView | Android, iOS, Mac, Windows, Tizen | [Github](https://github.com/luberda-molinet/FFImageLoading/wiki/MvvmCross)
 Mvx.Brightness | Access the device's brightness | Android, iOS | [Nuget](https://www.nuget.org/packages/Mvx.Brightness/)
+Mvx.Plugin.QrCode | Scan QR Code or barcode | Android, iOS | [Github](https://github.com/HisCodeness/MvvmCross.Plugin.QRCode)

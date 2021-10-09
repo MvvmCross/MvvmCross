@@ -30,7 +30,7 @@ namespace MvvmCross.Platforms.Uap.Binding.MvxBinding.Target
             // Note: if we discover other issues here, then we should make a more flexible solution
             if (_actualPropertyType == typeof(ImageSource))
             {
-                _defaultBindingMode = MvxBindingMode.OneWay;
+                DefaultMode = MvxBindingMode.OneWay;
             }
         }
 
@@ -56,8 +56,8 @@ namespace MvvmCross.Platforms.Uap.Binding.MvxBinding.Target
         }
 
         public override Type TargetType => _actualPropertyType;
-        private MvxBindingMode _defaultBindingMode = MvxBindingMode.TwoWay;
-        public override MvxBindingMode DefaultMode => _defaultBindingMode;
+
+        public override MvxBindingMode DefaultMode { get; } = MvxBindingMode.TwoWay;
 
         protected virtual object GetValueByReflection()
         {

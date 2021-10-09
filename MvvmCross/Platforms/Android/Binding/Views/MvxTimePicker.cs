@@ -50,11 +50,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             get
             {
-                if (Build.VERSION.SdkInt <= BuildVersionCodes.LollipopMr1)
-#pragma warning disable CS0618
-                    return new TimeSpan((int)CurrentHour, (int)CurrentMinute, 0);
-                else
-                    return new TimeSpan(Hour, Minute, 0);
+                return new TimeSpan(Hour, Minute, 0);
             }
             set
             {
@@ -64,28 +60,13 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     _initialized = true;
                 }
 
-                if (Build.VERSION.SdkInt <= BuildVersionCodes.LollipopMr1)
+                if (Hour != value.Hours)
                 {
-#pragma warning disable CS0618
-                    if ((int)CurrentHour != value.Hours)
-                    {
-                        CurrentHour = (Java.Lang.Integer)value.Hours;
-                    }
-                    if ((int)CurrentMinute != value.Minutes)
-                    {
-                        CurrentMinute = (Java.Lang.Integer)value.Minutes;
-                    }
+                    Hour = value.Hours;
                 }
-                else
+                if (Minute != value.Minutes)
                 {
-                    if (Hour != value.Hours)
-                    {
-                        Hour = value.Hours;
-                    }
-                    if (Minute != value.Minutes)
-                    {
-                        Minute = value.Minutes;
-                    }
+                    Minute = value.Minutes;
                 }
             }
         }

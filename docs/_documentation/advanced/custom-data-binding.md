@@ -91,6 +91,17 @@ protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry reg
 }
 ```
 
+### Using a Custom Binding
+
+Once you have registered a custom binding target, you can use it in your views as follows:
+
+```C#
+MyView aView;
+set.Bind(aView).For("MyProperty").To(vm => vm.value);
+```
+
+If you do not wish to specify `For("MyProperty")` you can setup a default binding name in your `Setup` class. You can learn more about this [here](https://www.mvvmcross.com/documentation/advanced/customizing-using-App-and-Setup?scroll=76#registering-default-binding-names).
+
 ### Internals Of A Target Binding
 
 All target bindings are a subclass of `MvxTargetBinding`, there are a couple of subclasses of this, which MvvmCross provides, which contain some additions to help prevent issues such as infinte call loops. Adding support for converters, adding platform specifics and overcoming View quirks.
@@ -127,7 +138,7 @@ This class is a subclass of [`MvxConvertingTargetBinding`](#mvxconvertingtargetb
 
 #### MvxWithEventPropertyInfoTargetBinding
 
-This class is a subclass of [`MvxPropertyInfoTargetBinding`](#mvxpropertyinfotargetbinding), which is a shortcut to adding `TwoWay` bindings based on a specific event. Similarly to `MvxPropertyInfoTargetBinding` it uses the `PropertyInfo` to implement the `SetValue()` method. Additionally it implements the `SubscribeToEvents()` method, based on the assumption that there is an event which is called the same as the name of the property, postfixed with `Changed`. So if your property is called `MyProperty` it assumes that the corresponding event is called `MyPropertChanged`.
+This class is a subclass of [`MvxPropertyInfoTargetBinding`](#mvxpropertyinfotargetbinding), which is a shortcut to adding `TwoWay` bindings based on a specific event. Similarly to `MvxPropertyInfoTargetBinding` it uses the `PropertyInfo` to implement the `SetValue()` method. Additionally it implements the `SubscribeToEvents()` method, based on the assumption that there is an event which is called the same as the name of the property, postfixed with `Changed`. So if your property is called `MyProperty` it assumes that the corresponding event is called `MyPropertyChanged`.
 
 #### MvxEventNameTargetBinding
 

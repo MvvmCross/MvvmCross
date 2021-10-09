@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Threading.Tasks;
-using MvvmCross.Logging;
 using MvvmCross.Platforms.Tvos.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
@@ -23,11 +21,10 @@ namespace MvvmCross.Platforms.Tvos.Views
 
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
-            Func<Task> action = () =>
-                {
-                    MvxLog.Instance.Trace("tvOSNavigation", "Navigate requested");
-                    return _presenter.Show(request);
-                };
+            Task action()
+            {
+                return _presenter.Show(request);
+            }
             await ExecuteOnMainThreadAsync(action);
             return true;
         }

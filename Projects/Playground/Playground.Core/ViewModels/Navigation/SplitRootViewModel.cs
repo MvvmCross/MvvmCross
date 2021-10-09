@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
@@ -12,15 +12,16 @@ namespace Playground.Core.ViewModels
 {
     public class SplitRootViewModel : MvxNavigationViewModel
     {
-        public SplitRootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        public SplitRootViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
+            : base(logProvider, navigationService)
         {
             ShowInitialMenuCommand = new MvxAsyncCommand(ShowInitialViewModel);
             ShowDetailCommand = new MvxAsyncCommand(ShowDetailViewModel);
         }
 
-        public IMvxAsyncCommand ShowInitialMenuCommand { get; private set; }
+        public IMvxAsyncCommand ShowInitialMenuCommand { get; }
 
-        public IMvxAsyncCommand ShowDetailCommand { get; private set; }
+        public IMvxAsyncCommand ShowDetailCommand { get; }
 
         public override void ViewAppeared()
         {

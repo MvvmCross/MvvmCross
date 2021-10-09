@@ -8,13 +8,14 @@ using System.Windows.Input;
 
 namespace MvvmCross.WeakSubscription
 {
+#nullable enable
     public class MvxCanExecuteChangedEventSubscription
         : MvxWeakEventSubscription<ICommand, EventArgs>
     {
         private static readonly EventInfo CanExecuteChangedEventInfo = typeof(ICommand).GetEvent("CanExecuteChanged");
 
-        public MvxCanExecuteChangedEventSubscription(ICommand source,
-                                                    EventHandler<EventArgs> eventHandler)
+        public MvxCanExecuteChangedEventSubscription(
+            ICommand source, EventHandler<EventArgs> eventHandler)
             : base(source, CanExecuteChangedEventInfo, eventHandler)
         {
         }
@@ -24,4 +25,5 @@ namespace MvvmCross.WeakSubscription
             return new EventHandler(OnSourceEvent);
         }
     }
+#nullable restore
 }

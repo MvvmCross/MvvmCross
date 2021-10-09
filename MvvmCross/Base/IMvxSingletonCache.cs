@@ -7,10 +7,12 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public interface IMvxSingletonCache
     {
         IMvxSettings Settings { get; }
         IMvxInpcInterceptor InpcInterceptor { get; }
         IMvxStringToTypeParser Parser { get; }
     }
+#nullable restore
 }

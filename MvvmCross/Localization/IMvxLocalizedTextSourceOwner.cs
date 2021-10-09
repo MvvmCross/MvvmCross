@@ -4,8 +4,10 @@
 
 namespace MvvmCross.Localization
 {
+#nullable enable
     public interface IMvxLocalizedTextSourceOwner
     {
         IMvxLanguageBinder LocalizedTextSource { get; }
     }
+#nullable restore
 }

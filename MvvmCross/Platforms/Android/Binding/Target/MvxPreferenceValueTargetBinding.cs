@@ -4,13 +4,12 @@
 
 using System;
 using AndroidX.Preference;
-using MvvmCross.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
 {
-    public class MvxPreferenceValueTargetBinding 
+    public class MvxPreferenceValueTargetBinding
         : MvxAndroidTargetBinding
     {
         private IDisposable _subscription;
@@ -55,7 +54,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            MvxBindingLog.Instance.Warn("SetValueImpl called on generic Preference target");
+            MvxBindingLog.Warning("SetValueImpl called on generic Preference target");
         }
     }
 }

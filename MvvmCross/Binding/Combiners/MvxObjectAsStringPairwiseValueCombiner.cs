@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -30,19 +30,19 @@ namespace MvvmCross.Binding.Combiners
             return CombineStringAndString(object1.ToString(), object2.ToString(), out value);
         }
 
-        protected sealed override bool CombineLongAndObject(long int1, object object1, out object value)
+        protected sealed override bool CombineLongAndObject(long input1, object input2, out object value)
         {
-            return CombineLongAndString(int1, object1.ToString(), out value);
+            return CombineLongAndString(input1, input2.ToString(), out value);
         }
 
-        protected sealed override bool CombineDoubleAndObject(double double1, object object1, out object value)
+        protected sealed override bool CombineDoubleAndObject(double input1, object input2, out object value)
         {
-            return CombineDoubleAndString(double1, object1.ToString(), out value);
+            return CombineDoubleAndString(input1, input2.ToString(), out value);
         }
 
-        protected sealed override bool CombineDecimalAndObject(decimal decimal1, object object1, out object value)
+        protected sealed override bool CombineDecimalAndObject(decimal object1, object object2, out object value)
         {
-            return CombineDecimalAndString(decimal1, object1.ToString(), out value);
+            return CombineDecimalAndString(object1, object2.ToString(), out value);
         }
 
         protected sealed override bool CombineNullAndObject(object object1, out object value)

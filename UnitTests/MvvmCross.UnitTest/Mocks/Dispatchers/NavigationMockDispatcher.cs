@@ -41,13 +41,6 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
 
         public virtual Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
-            var debugString = $"ShowViewModel: '{request.ViewModelType.Name}' ";
-            if (request.ParameterValues != null)
-                debugString += $"with parameters: {string.Join(",", request.ParameterValues.Select(pair => $"{{ {pair.Key}={pair.Value} }}"))}";
-            else
-                debugString += "without parameters";
-            MvxTestLog.Instance.Log(MvxLogLevel.Debug, () => debugString);
-
             Requests.Add(request);
             return Task.FromResult(true);
         }

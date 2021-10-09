@@ -4,9 +4,11 @@ using System.Windows.Input;
 using Android.App;
 using Android.Views;
 using Android.Widget;
+using MvvmCross;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace Playground.Droid
 {
@@ -108,9 +110,9 @@ namespace Playground.Droid
             context2.Dispose();
         }
 
-        public void Include(MvxNavigationService service, IMvxViewModelLoader loader)
+        public void Include(MvxNavigationService service, IMvxViewModelLoader loader, IMvxViewDispatcher viewDispatcher)
         {
-            service = new MvxNavigationService(null, loader);
+            service = new MvxNavigationService(null, viewDispatcher, Mvx.IoCProvider);
         }
 
         public void Include(ConsoleColor color)

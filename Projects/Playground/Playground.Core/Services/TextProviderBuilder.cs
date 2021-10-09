@@ -20,11 +20,7 @@ namespace Playground.Core.Services
         {
             get
             {
-                var dictionary = GetType().GetTypeInfo()
-                                     .Assembly
-                                     .CreatableTypes()
-                                     .Where(t => t.Name.EndsWith("ViewModel"))
-                                     .ToDictionary(t => t.Name, t => t.Name);
+                var dictionary = new Dictionary<string, string>();
 
                 dictionary.Add("Text", "Text");
 

@@ -5,6 +5,7 @@
 using System;
 using Android.OS;
 using AndroidX.Fragment.App;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
@@ -36,7 +37,8 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             var hostMvxView = Fragment.Activity as IMvxAndroidView;
             if (hostMvxView == null)
             {
-                MvxLog.Instance.Warn($"Fragment host for fragment type {Fragment.GetType()} is not of type IMvxAndroidView");
+                MvxLogHost.GetLog<MvxBindingFragmentAdapter>()?.Log(LogLevel.Warning,
+                    "Fragment host for fragment type {fragmentType} is not of type IMvxAndroidView", Fragment.GetType());
                 return;
             }
 
@@ -47,7 +49,9 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
 
             if (viewModelType == null)
             {
-                MvxLog.Instance.Warn($"ViewModel type for Activity {Fragment.Activity.GetType()} not found when trying to show fragment: {Fragment.GetType()}");
+                MvxLogHost.GetLog<MvxBindingFragmentAdapter>()?.Log(LogLevel.Warning,
+                    "ViewModel type for Activity {fragmentActivityType} not found when trying to show fragment: {fragmentType}",
+                    Fragment.Activity.GetType(), Fragment.GetType());
                 return;
             }
 
@@ -70,7 +74,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
                         IMvxNavigationSerializer serializer;
                         if (!Mvx.IoCProvider.TryResolve(out serializer))
                         {
-                            MvxLog.Instance.Warn(
+                            MvxLogHost.GetLog<MvxBindingFragmentAdapter>()?.Log(LogLevel.Warning,
                                 "Navigation Serializer not available, deserializing ViewModel Request will be hard");
                         }
                         else
@@ -84,7 +88,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             IMvxSavedStateConverter converter;
             if (!Mvx.IoCProvider.TryResolve(out converter))
             {
-                MvxLog.Instance.Warn("Saved state converter not available - saving state will be hard");
+                MvxLogHost.GetLog<MvxBindingFragmentAdapter>()?.Log(LogLevel.Warning, "Saved state converter not available - saving state will be hard");
             }
             else
             {
@@ -113,7 +117,8 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
                 IMvxSavedStateConverter converter;
                 if (!Mvx.IoCProvider.TryResolve(out converter))
                 {
-                    MvxLog.Instance.Warn("Saved state converter not available - saving state will be hard");
+                    MvxLogHost.GetLog<MvxBindingFragmentAdapter>()?.Log(LogLevel.Warning,
+                        "Saved state converter not available - saving state will be hard");
                 }
                 else
                 {

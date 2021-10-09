@@ -116,7 +116,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
         }
     }
 
-    public class MvxFormsMacSetup<TApplication, TFormsApplication> : MvxFormsMacSetup
+    public abstract class MvxFormsMacSetup<TApplication, TFormsApplication> : MvxFormsMacSetup
         where TApplication : class, IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
@@ -132,6 +132,6 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
 
         protected override Application CreateFormsApplication() => new TFormsApplication();
 
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) => iocProvider.IoCConstruct<TApplication>();
     }
 }

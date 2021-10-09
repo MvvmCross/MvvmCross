@@ -8,6 +8,7 @@ using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public static class MvxInteractionExtensions
     {
         public static IDisposable WeakSubscribe(this IMvxInteraction interaction, EventHandler<EventArgs> action)
@@ -28,4 +29,5 @@ namespace MvvmCross.ViewModels
             return interaction.WeakSubscribe(wrappedAction);
         }
     }
+#nullable restore
 }

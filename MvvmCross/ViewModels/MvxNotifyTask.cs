@@ -8,19 +8,20 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     /// <summary>
     /// Watches a task and raises property-changed notifications when the task completes.
     /// </summary>
     public sealed class MvxNotifyTask : INotifyPropertyChanged
     {
-        private Action<Exception> _onException;
+        private readonly Action<Exception>? _onException;
 
         /// <summary>
         /// Initializes a task notifier watching the specified task.
         /// </summary>
         /// <param name="task">The task to watch.</param>
         /// <param name="onException">Callback to be run when an error happens</param>
-        private MvxNotifyTask(Task task, Action<Exception> onException)
+        private MvxNotifyTask(Task task, Action<Exception>? onException)
         {
             Task = task;
             _onException = onException;
@@ -47,15 +48,15 @@ namespace MvvmCross.ViewModels
         private void NotifyProperties(Task task)
         {
             var propertyChanged = PropertyChanged;
-            if(propertyChanged == null)
+            if (propertyChanged == null)
                 return;
 
-            if(task.IsCanceled)
+            if (task.IsCanceled)
             {
                 propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Status)));
                 propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(IsCanceled)));
             }
-            else if(task.IsFaulted)
+            else if (task.IsFaulted)
             {
                 propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Exception)));
                 propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(InnerException)));
@@ -75,12 +76,12 @@ namespace MvvmCross.ViewModels
         /// <summary>
         /// Gets the task being watched. This property never changes and is never <c>null</c>.
         /// </summary>
-        public Task Task { get; private set; }
+        public Task Task { get; }
 
         /// <summary>
         /// Gets a task that completes successfully when <see cref="Task"/> completes (successfully, faulted, or canceled). This property never changes and is never <c>null</c>.
         /// </summary>
-        public Task TaskCompleted { get; private set; }
+        public Task TaskCompleted { get; }
 
         /// <summary>
         /// Gets the current task status. This property raises a notification when the task completes.
@@ -120,24 +121,24 @@ namespace MvvmCross.ViewModels
         /// <summary>
         /// Gets the original faulting exception for the task. Returns <c>null</c> if the task is not faulted. This property raises a notification only if the task faults (i.e., if the value changes to non-<c>null</c>).
         /// </summary>
-        public Exception InnerException { get { return (Exception == null) ? null : Exception.InnerException; } }
+        public Exception? InnerException { get { return (Exception == null) ? null : Exception.InnerException; } }
 
         /// <summary>
         /// Gets the error message for the original faulting exception for the task. Returns <c>null</c> if the task is not faulted. This property raises a notification only if the task faults (i.e., if the value changes to non-<c>null</c>).
         /// </summary>
-        public string ErrorMessage { get { return (InnerException == null) ? null : InnerException.Message; } }
+        public string? ErrorMessage { get { return (InnerException == null) ? null : InnerException.Message; } }
 
         /// <summary>
         /// Event that notifies listeners of property value changes.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Creates a new task notifier watching the specified task.
         /// </summary>
         /// <param name="task">The task to watch.</param>
         /// <param name="onException">Callback to be run when an error happens</param>
-        public static MvxNotifyTask Create(Task task, Action<Exception> onException = null)
+        public static MvxNotifyTask Create(Task task, Action<Exception>? onException = null)
         {
             return new MvxNotifyTask(task, onException);
         }
@@ -149,7 +150,11 @@ namespace MvvmCross.ViewModels
         /// <param name="task">The task to watch.</param>
         /// <param name="defaultResult">The default "result" value for the task while it is not yet complete.</param>
         /// <param name="onException">Callback to be run when an error happens</param>
-        public static MvxNotifyTask<TResult> Create<TResult>(Task<TResult> task, TResult defaultResult = default(TResult), Action<Exception> onException = null)
+        public static MvxNotifyTask<TResult> Create<TResult>(
+            Task<TResult> task,
+            TResult? defaultResult = default,
+            Action<Exception>? onException = null)
+            where TResult : class
         {
             return new MvxNotifyTask<TResult>(task, defaultResult, onException);
         }
@@ -159,7 +164,7 @@ namespace MvvmCross.ViewModels
         /// </summary>
         /// <param name="asyncAction">The asynchronous code to execute.</param>
         /// <param name="onException">Callback to be run when an error happens</param>
-        public static MvxNotifyTask Create(Func<Task> asyncAction, Action<Exception> onException = null)
+        public static MvxNotifyTask Create(Func<Task> asyncAction, Action<Exception>? onException = null)
         {
             return Create(asyncAction(), onException);
         }
@@ -170,7 +175,11 @@ namespace MvvmCross.ViewModels
         /// <param name="asyncAction">The asynchronous code to execute.</param>
         /// <param name="defaultResult">The default "result" value for the task while it is not yet complete.</param>
         /// <param name="onException">Callback to be run when an error happens</param>
-        public static MvxNotifyTask<TResult> Create<TResult>(Func<Task<TResult>> asyncAction, TResult defaultResult = default(TResult), Action<Exception> onException = null)
+        public static MvxNotifyTask<TResult> Create<TResult>(
+            Func<Task<TResult>> asyncAction,
+            TResult? defaultResult = default,
+            Action<Exception>? onException = null)
+            where TResult : class
         {
             return Create(asyncAction(), defaultResult, onException);
         }
@@ -181,13 +190,14 @@ namespace MvvmCross.ViewModels
     /// </summary>
     /// <typeparam name="TResult">The type of the task result.</typeparam>
     public sealed class MvxNotifyTask<TResult> : INotifyPropertyChanged
+        where TResult : class
     {
+        private readonly Action<Exception>? _onException;
+
         /// <summary>
         /// The "result" of the task when it has not yet completed.
         /// </summary>
-        private readonly TResult _defaultResult;
-
-        private Action<Exception> _onException;
+        private readonly TResult? _defaultResult;
 
         /// <summary>
         /// Initializes a task notifier watching the specified task.
@@ -195,7 +205,7 @@ namespace MvvmCross.ViewModels
         /// <param name="task">The task to watch.</param>
         /// <param name="defaultResult">The value to return from <see cref="Result"/> while the task is not yet complete.</param>
         /// <param name="onException">Callback to be run when an error happens</param>
-        internal MvxNotifyTask(Task<TResult> task, TResult defaultResult, Action<Exception> onException)
+        internal MvxNotifyTask(Task<TResult> task, TResult? defaultResult, Action<Exception>? onException)
         {
             _defaultResult = defaultResult;
             Task = task;
@@ -223,15 +233,15 @@ namespace MvvmCross.ViewModels
         private void NotifyProperties(Task task)
         {
             var propertyChanged = PropertyChanged;
-            if(propertyChanged == null)
+            if (propertyChanged == null)
                 return;
 
-            if(task.IsCanceled)
+            if (task.IsCanceled)
             {
                 propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Status)));
                 propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(IsCanceled)));
             }
-            else if(task.IsFaulted)
+            else if (task.IsFaulted)
             {
                 propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Exception)));
                 propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(InnerException)));
@@ -252,17 +262,17 @@ namespace MvvmCross.ViewModels
         /// <summary>
         /// Gets the task being watched. This property never changes and is never <c>null</c>.
         /// </summary>
-        public Task<TResult> Task { get; private set; }
+        public Task<TResult> Task { get; }
 
         /// <summary>
         /// Gets a task that completes successfully when <see cref="Task"/> completes (successfully, faulted, or canceled). This property never changes and is never <c>null</c>.
         /// </summary>
-        public Task TaskCompleted { get; private set; }
+        public Task TaskCompleted { get; }
 
         /// <summary>
         /// Gets the result of the task. Returns the "default result" value specified in the constructor if the task has not yet completed successfully. This property raises a notification when the task completes successfully.
         /// </summary>
-        public TResult Result { get { return (Task.Status == TaskStatus.RanToCompletion) ? Task.Result : _defaultResult; } }
+        public TResult? Result { get { return (Task.Status == TaskStatus.RanToCompletion) ? Task.Result : _defaultResult; } }
 
         /// <summary>
         /// Gets the current task status. This property raises a notification when the task completes.
@@ -297,21 +307,22 @@ namespace MvvmCross.ViewModels
         /// <summary>
         /// Gets the wrapped faulting exception for the task. Returns <c>null</c> if the task is not faulted. This property raises a notification only if the task faults (i.e., if the value changes to non-<c>null</c>).
         /// </summary>
-        public AggregateException Exception { get { return Task.Exception; } }
+        public AggregateException? Exception { get { return Task.Exception; } }
 
         /// <summary>
         /// Gets the original faulting exception for the task. Returns <c>null</c> if the task is not faulted. This property raises a notification only if the task faults (i.e., if the value changes to non-<c>null</c>).
         /// </summary>
-        public Exception InnerException { get { return (Exception == null) ? null : Exception.InnerException; } }
+        public Exception? InnerException { get { return (Exception == null) ? null : Exception.InnerException; } }
 
         /// <summary>
         /// Gets the error message for the original faulting exception for the task. Returns <c>null</c> if the task is not faulted. This property raises a notification only if the task faults (i.e., if the value changes to non-<c>null</c>).
         /// </summary>
-        public string ErrorMessage { get { return (InnerException == null) ? null : InnerException.Message; } }
+        public string? ErrorMessage { get { return (InnerException == null) ? null : InnerException.Message; } }
 
         /// <summary>
         /// Event that notifies listeners of property value changes.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
     }
+#nullable restore
 }

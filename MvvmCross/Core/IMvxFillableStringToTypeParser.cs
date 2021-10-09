@@ -7,9 +7,11 @@ using System.Collections.Generic;
 
 namespace MvvmCross.Core
 {
+#nullable enable
     public interface IMvxFillableStringToTypeParser
     {
         IDictionary<Type, MvxStringToTypeParser.IParser> TypeParsers { get; }
         IList<MvxStringToTypeParser.IExtraParser> ExtraParsers { get; }
     }
+#nullable restore
 }

@@ -1,7 +1,9 @@
-#tool nuget:?package=GitVersion.CommandLine&version=5.0.1
-#tool nuget:?package=vswhere&version=2.7.1
+#module nuget:?package=Cake.DotNetTool.Module&version=0.4.0
+#tool dotnet:n?package=GitVersion.Tool&version=5.6.6
+#tool nuget:?package=vswhere&version=2.8.4
+#tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.8.0
 #addin nuget:?package=Cake.Figlet&version=1.3.1
-#addin nuget:?package=Cake.Git&version=0.21.0
+#addin nuget:?package=Cake.Sonar&version=1.1.25
 
 var solutionName = "MvvmCross";
 var repoName = "mvvmcross/mvvmcross";
@@ -14,12 +16,13 @@ var outputDir = new DirectoryPath(artifactsDir);
 var gitVersionLog = new FilePath("./gitversion.log");
 var nuspecDir = new DirectoryPath("./nuspec");
 var verbosity = Verbosity.Minimal;
+var sonarKey = Argument("sonarKey", "");
 
 var githubToken = Argument("github_token", "");
 var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
 var sinceTag = Argument("since_tag", "");
 
-var isRunningOnPipelines = TFBuild.IsRunningOnAzurePipelines || TFBuild.IsRunningOnAzurePipelinesHosted;
+var isRunningOnPipelines = AzurePipelines.IsRunningOnAzurePipelines || AzurePipelines.IsRunningOnAzurePipelinesHosted;
 GitVersion versionInfo = null;
 
 Setup(context => 
@@ -33,9 +36,9 @@ Setup(context =>
 
     if (isRunningOnPipelines)
     {
-        var buildNumber = versionInfo.InformationalVersion + "-" + TFBuild.Environment.Build.Number;
+        var buildNumber = versionInfo.InformationalVersion + "-" + AzurePipelines.Environment.Build.Number;
         buildNumber = buildNumber.Replace("/", "-");
-        TFBuild.Commands.UpdateBuildNumber(buildNumber);
+        AzurePipelines.Commands.UpdateBuildNumber(buildNumber);
     }
 
     var cakeVersion = typeof(ICakeContext).Assembly.GetName().Version.ToString();
@@ -50,12 +53,13 @@ Setup(context =>
     verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
 });
 
-Task("Clean").Does(() =>
+Task("Clean")
+    .Does(() =>
 {
     EnsureDirectoryExists(outputDir.FullPath);
 
-    CleanDirectories("./**/bin");
-    CleanDirectories("./**/obj");
+    CleanDirectories("MvvmCross*/**/bin");
+    CleanDirectories("MvvmCross*/**/obj");
     CleanDirectories(outputDir.FullPath);
 
     CopyFile(gitVersionLog, outputDir + "/gitversion.log");
@@ -93,8 +97,45 @@ Task("Restore")
 Task("PatchBuildProps")
     .Does(() => 
 {
-    var buildProp = new FilePath("./Directory.build.props");
+    var buildProp = new FilePath("./Directory.Build.props");
     XmlPoke(buildProp, "//Project/PropertyGroup/Version", versionInfo.SemVer);
+});
+
+Task("SonarStart")
+    .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
+    .Does(() => 
+{
+    var settings = new SonarBeginSettings
+    {
+        Key = "MvvmCross_MvvmCross",
+        Url = "https://sonarcloud.io",
+        Organization = "mvx",
+        Login = sonarKey,
+        XUnitReportsPath = new DirectoryPath(outputDir + "/Tests/").FullPath
+    };
+
+    if (AzurePipelines.Environment.PullRequest.IsPullRequest)
+    {
+        settings.PullRequestKey = AzurePipelines.Environment.PullRequest.Number;
+        settings.PullRequestBranch = AzurePipelines.Environment.PullRequest.SourceBranch;
+        settings.PullRequestBase = AzurePipelines.Environment.PullRequest.TargetBranch;
+    }
+    else
+    {
+        settings.Branch = versionInfo.BranchName;
+    }
+
+    SonarBegin(settings);
+});
+
+Task("SonarEnd")
+    .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
+    .Does(() => 
+{   
+    SonarEnd(new SonarEndSettings
+    {
+        Login = sonarKey
+    });
 });
 
 Task("Build")
@@ -121,8 +162,6 @@ Task("UnitTest")
     EnsureDirectoryExists(outputDir + "/Tests/");
 
     var testPaths = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
-    var testsFailed = false;
-
     var settings = new DotNetCoreTestSettings
     {
         Configuration = configuration,
@@ -133,32 +172,29 @@ Task("UnitTest")
     {
         var projectName = project.GetFilenameWithoutExtension();
         var testXml = MakeAbsolute(new FilePath(outputDir + "/Tests/" + projectName + ".xml"));
-        settings.Logger = $"xunit;LogFilePath={testXml.FullPath}";
+        settings.Loggers = new string[] { $"xunit;LogFilePath={testXml.FullPath}" };
         try 
         {
             DotNetCoreTest(project.ToString(), settings);
         }
         catch
         {
-            testsFailed = true;
+            // ignore
         }
     }
 
     if (isRunningOnPipelines)
     {
-        var data = new TFBuildPublishTestResultsData
+        var data = new AzurePipelinesPublishTestResultsData
         {
             Configuration = configuration,
             TestResultsFiles = GetFiles(outputDir + "/Tests/*.xml").ToList(),
-            TestRunner = TFTestRunnerType.XUnit,
+            TestRunner = AzurePipelinesTestRunnerType.XUnit,
             TestRunTitle = "MvvmCross Unit Tests",
             MergeTestResults = true
         };
-        TFBuild.Commands.PublishTestResults(data);
+        AzurePipelines.Commands.PublishTestResults(data);
     }
-
-    if (testsFailed)
-        throw new Exception("Tests failed :(");
 });
 
 Task("CopyPackages")
@@ -185,8 +221,8 @@ Task("UpdateChangelog")
         "t/question",
         "s/wont-fix",
         "s/duplicate",
-        "s/deprecated",
-        "s/invalid"
+        "s/invalid",
+        "s/needs-more-info",
     };
     arguments.Append("--exclude-labels {0}", string.Join(",", excludeLabels));
 
@@ -220,7 +256,18 @@ Task("UpdateChangelog")
     }
 });
 
+Task("Sonar")
+    .IsDependentOn("Clean")
+    .IsDependentOn("SonarStart")
+    .IsDependentOn("Build")
+    .IsDependentOn("UnitTest")
+    .IsDependentOn("SonarEnd")
+    .Does(() => 
+{
+});
+
 Task("Default")
+    .IsDependentOn("Clean")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
     .IsDependentOn("CopyPackages")
@@ -239,9 +286,9 @@ MSBuildSettings GetDefaultBuildSettings()
         Verbosity = verbosity
     };
 
-    // workaround for derped Java Home ENV vars
-    if (IsRunningOnWindows() && isRunningOnPipelines)
+    if (isRunningOnPipelines)
     {
+        // remove this when Xamarin.Android supports JDK11
         var javaSdkDir = EnvironmentVariable("JAVA_HOME_8_X64");
         Information("Setting JavaSdkDirectory to: " + javaSdkDir);
         settings = settings.WithProperty("JavaSdkDirectory", javaSdkDir);

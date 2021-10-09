@@ -8,7 +8,7 @@ using Android.Content;
 using Android.Runtime;
 using Android.Util;
 
-namespace MvvmCross.DroidX 
+namespace MvvmCross.DroidX
 {
     [Register("mvvmcross.droidx.MvxSwipeRefreshLayout")]
     public class MvxSwipeRefreshLayout : AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout 
@@ -42,7 +42,7 @@ namespace MvvmCross.DroidX
                 _refreshCommand = value;
                 if (_refreshCommand != null)
                     EnsureRefreshCommandOverloaded();
-            }		
+            }
         }
 
         private void EnsureRefreshCommandOverloaded()

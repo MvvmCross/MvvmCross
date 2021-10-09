@@ -5,10 +5,10 @@
 using Android.OS;
 using Android.Transitions;
 using Android.Views;
-using MvvmCross.DroidX.Fragments;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Platforms.Android.Views.Fragments;
 using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Fragments
@@ -20,10 +20,7 @@ namespace Playground.Droid.Fragments
         {
             base.OnCreate(savedInstanceState);
 
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-            {
-                SharedElementEnterTransition = TransitionInflater.From(Activity).InflateTransition(Android.Resource.Transition.Move);
-            }
+            SharedElementEnterTransition = TransitionInflater.From(Activity).InflateTransition(Android.Resource.Transition.Move);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

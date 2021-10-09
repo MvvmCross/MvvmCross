@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     // Note: The long term goal should be to deprecate IMvxMainThreadDispatcher
     // As such, even though the implementation of this interface also implements
     // IMvxMainThreadDispatcher, this interface should not inherit from IMvxMainThreadDispatcher
@@ -16,4 +17,5 @@ namespace MvvmCross.Base
         Task ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true);
         bool IsOnMainThread { get; }
     }
+#nullable restore
 }

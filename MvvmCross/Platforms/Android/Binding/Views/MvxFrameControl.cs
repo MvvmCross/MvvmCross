@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,6 +13,7 @@ using MvvmCross.Logging;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Android.Binding.Views
 {
@@ -43,7 +44,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 {
                     if (Content == null && _templateId != 0)
                     {
-                        MvxLog.Instance.Trace("DataContext is {0}", DataContext?.ToString() ?? "Null");
+                        MvxLogHost.GetLog<MvxFrameControl>()?.Log(LogLevel.Trace, "DataContext is {dataContext}", DataContext?.ToString() ?? "Null");
                         Content = _bindingContext.BindingInflate(_templateId, this);
                     }
                 });

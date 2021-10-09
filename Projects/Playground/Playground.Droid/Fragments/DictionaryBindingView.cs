@@ -8,12 +8,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.DroidX.Fragments;
 using Playground.Core.ViewModels;
 using System.Collections.Generic;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using MvvmCross.Platforms.Android.Views.Fragments;
 
 namespace Playground.Droid.Fragments
 {

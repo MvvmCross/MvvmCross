@@ -5,33 +5,22 @@ category: Fundamentals
 order: 3
 ---
 
-Alongside the new [MvxNavigationService](https://www.mvvmcross.com/documentation/fundamentals/navigation), MvvmCross provides a new lifecycle for ViewModels with many enhancements such as async initialization. The standard lifecycle is:
-
-1. Construction: Called when the object is instantiated. You can use Dependency Injection here to introduce all dependencies!
-2. Prepare: The initial point for your ViewModel. You can use this method to receive and store all parameters (it is your responsibility to handle them).
-3. Initialize: All heavy work should be run here. This method returns a Task, which means you can mark it as async and use await safely. If this method fails, the `Navigate` call that you are probably awaiting will fail, so you might want to catch that exception.
+The `MvxViewModel` includes a powerful set of lifecycle methods. It helps track the state of the corresponding view and provides helper methods for more common functionality. `MvxViewModel` works in conjunction with the new [MvxNavigationService](https://www.mvvmcross.com/documentation/fundamentals/navigation), introduced in v5.0.0.
 
 ### Construction
 
-When you want to navigate to a certain ViewModel, you will typically do it through the MvxNavigationService:
-
-```c#
-private async Task MyMethodAsync()
-{
-    await _navigationService.Navigate<MyViewModel>();
-}
-```
-
-Inside that call, MvvmCross will instantiate `MyViewModel` using the IoC container and use the Dependency Injection engine to inject all its dependencies. This is how `MyViewModel` could look like:
+MvvmCross will instantiate an `MvxViewModel` using the IoC container, and will use our Dependency Injection engine to inject all its specified dependencies. A real-world implementation will look similar to:
 
 ```c#
 public class MyViewModel : MvxViewModel
 {
     private readonly IMyService _myService;
+    private readonly IMvxLog logger;
 
-    public MyViewModel(IMyService myService)
+    public MyViewModel(IMyService myService, IMvxLog logger)
     {
         _myService = myService;
+        _logger = logger;
     }
 
     // ...
@@ -40,7 +29,7 @@ public class MyViewModel : MvxViewModel
 
 ### Prepare
 
-If you need to send some parameters to a ViewModel, you will want to use this method. MvxViewModel can have two Prepare methods:
+Use Prepare to pass parameters into your viewmodel. `MvxViewModel` has two Prepare methods:
 
 - Parameterless `Prepare`: Called in every scenario.
 - `Prepare(TParameter parameter)`: Called when you are navigating to a ViewModel with initial parameters and after the parameterless version of it. You shouldn't perform any logics on this method more than saving the parameters.
@@ -77,9 +66,41 @@ private async Task MyMethodAsync()
 
 ### Initialize
 
-This method is called right after Prepare, and since it returns a Task, you can mark it as async and await operations inside of it. All heavy loading operations should be made inside this method.
+Initialize is called after the native navigation has take place. It returns a Task, so can safely be marked async and used for heavy loading operations (such as hitting a backend API), without blocking the UI thread.
 
-When Initialize is fired from MvxViewModelLoader, there is a MvxNotifyTask called InitializeTask that will watch its state and fire property changed events (you can even bind View properties to InitializeTask properties!).
+The new UI (e.g. `ViewController` in iOS) has been created by the time `Initialize` is called, so calling long running tasks won't block the navigation attempt.
+
+```c#
+public class MyViewModel : ApiViewModel
+{
+    private readonly IApiService _apiService;
+    private readonly IMvxLog _logger;
+
+    public MyViewModel(IApiService apiService, IMvxLog logger)
+    {
+        _apiService = apiService;
+        _logger = logger;
+    }
+
+    public override async Task Initialize()
+    {
+        await base.Initialize();
+        
+        try
+        {
+            await apiService.GetMyProfileAsync();
+        }
+        catch (Exception e)
+        {
+            logger.Debug(e.Message);
+        }
+    }
+    // ...
+}
+```
+
+Under-the-hood, the `Initialize` method is used to build `MvxNotifyTask` called `InitializeTask`. This is exposed publically on a `MvxViewModel`, which means that you can bind to it directly from your view! (For example, you could use this to show a loading spinner whilst the `Intialize` method is executing).
+
 
 ## Tombstoning: Saving and restoring the ViewModel's state
 

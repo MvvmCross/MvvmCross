@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using CoreGraphics;
 using Foundation;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios;
 using MvvmCross.Platforms.Ios.Views;
@@ -27,14 +28,6 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
         private Action<Stream, string> _pictureAvailable;
         private Action _assumeCancelled;
 
-        #region Event subscriptions
-
-        private IDisposable _mediaSubscription;
-        private IDisposable _imageSubscription;
-        private IDisposable _cancelledSubscription;
-
-        #endregion
-        
         private UIImagePickerController EnsurePickerController()
         {
             if (_picker != null)
@@ -52,23 +45,16 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
 
         private void SubscribeEvents()
         {
-            _mediaSubscription = _picker.WeakSubscribe<UIImagePickerController, UIImagePickerMediaPickedEventArgs>(
-                nameof(_picker.FinishedPickingMedia), Picker_FinishedPickingMedia);
-            
-            _imageSubscription = _picker.WeakSubscribe<UIImagePickerController, UIImagePickerImagePickedEventArgs>(
-                nameof(_picker.FinishedPickingImage), Picker_FinishedPickingImage);
-            
-            _cancelledSubscription = _picker.WeakSubscribe(nameof(_picker.Canceled), Picker_Canceled);
+            _picker.FinishedPickingMedia += Picker_FinishedPickingMedia;
+            _picker.FinishedPickingImage += Picker_FinishedPickingImage;
+            _picker.Canceled += Picker_Canceled;
         }
 
         private void UnsubscribeEvents()
         {
-            _mediaSubscription?.Dispose();
-            _mediaSubscription = null;
-            _imageSubscription?.Dispose();
-            _imageSubscription = null;
-            _cancelledSubscription?.Dispose();
-            _cancelledSubscription = null;
+            _picker.FinishedPickingMedia -= Picker_FinishedPickingMedia;
+            _picker.FinishedPickingImage -= Picker_FinishedPickingImage;
+            _picker.Canceled -= Picker_Canceled;
         }
         
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
@@ -183,14 +169,14 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
         private void SetCurrentlyActive()
         {
             if (_currentlyActive)
-                MvxPluginLog.Instance.Warn("MvxImagePickerTask called when task already active");
+                MvxPluginLog.Instance?.Log(LogLevel.Warning, "MvxImagePickerTask called when task already active");
             _currentlyActive = true;
         }
 
         private void ClearCurrentlyActive()
         {
             if (!_currentlyActive)
-                MvxPluginLog.Instance.Warn("Tried to clear currently active - but already cleared");
+                MvxPluginLog.Instance?.Log(LogLevel.Warning, "Tried to clear currently active - but already cleared");
             _currentlyActive = false;
         }
     }

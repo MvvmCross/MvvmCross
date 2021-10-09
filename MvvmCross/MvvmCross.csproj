@@ -9,6 +9,7 @@
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Uap' ">netstandard2.0;uap10.0.16299</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">netstandard2.0;xamarin.ios10</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Tizen' ">netstandard2.0;tizen40</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Mac' ">netstandard2.0;xamarin.mac20</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -42,7 +43,7 @@ This package contains the 'Core' libraries for MvvmCross</Description>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
     <Compile Include="Platforms\Net\**\*.cs" />
     <Compile Include="Platforms\Console\**\*.cs" />
-    <PackageReference Include="System.Console" Version="4.3.1" />
+    <PackageReference Include="System.Console" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
@@ -85,14 +86,19 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
   
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0" />
-    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.2.4" />
-    <PackageReference Include="Xamarin.AndroidX.Preference" Version="1.1.1" />
-    <PackageReference Include="Xamarin.AndroidX.ViewPager" Version="1.0.0" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment" />
+    <PackageReference Include="Xamarin.AndroidX.Preference" />
+    <PackageReference Include="Xamarin.AndroidX.ViewPager" />
+    <PackageReference Include="Xamarin.Google.Android.Material" />
   </ItemGroup>
   
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
     <Compile Include="Platforms\Tizen\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -30,9 +30,9 @@ namespace MvvmCross.Forms.Views
             sb.AppendLine($"{prefix} {page.GetType().Name}({page.NavigationPageType()})");
             prefix = new string(' ', (prefix + page.GetType().Name).Length);
 
-            if (page is MasterDetailPage masterDetail)
+            if (page is FlyoutPage masterDetail)
             {
-                masterDetail.Master.PrintHierarchy(sb, prefix + "Master:");
+                masterDetail.Flyout.PrintHierarchy(sb, prefix + "Master:");
                 masterDetail.Detail.PrintHierarchy(sb, prefix + "Detail:");
             }
 
@@ -68,7 +68,7 @@ namespace MvvmCross.Forms.Views
 
         private static string NavigationPageType(this Page page)
         {
-            if (page is MasterDetailPage) return "Master-Detail";
+            if (page is FlyoutPage) return "Master-Detail";
             if (page is TabbedPage) return "Tabbed";
             if (page is CarouselPage) return "Carousel";
             if (page is NavigationPage) return "Navigation";

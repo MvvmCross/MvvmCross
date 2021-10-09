@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
@@ -14,19 +13,20 @@ namespace Playground.Core.ViewModels
 {
     public class TabsRootBViewModel : MvxNavigationViewModel
     {
-        public TabsRootBViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        public TabsRootBViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
+            : base(logProvider, navigationService)
         {
             ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
         }
 
-        public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
+        public IMvxAsyncCommand ShowInitialViewModelsCommand { get; }
 
-        private async Task ShowInitialViewModels()
+        private Task ShowInitialViewModels()
         {
             var tasks = new List<Task>();
             tasks.Add(NavigationService.Navigate<Tab1ViewModel, string>("test"));
             tasks.Add(NavigationService.Navigate<Tab2ViewModel>());
-            await Task.WhenAll(tasks);
+            return Task.WhenAll(tasks);
         }
 
         private int _itemIndex;
@@ -38,7 +38,7 @@ namespace Playground.Core.ViewModels
             {
                 if (_itemIndex == value) return;
                 _itemIndex = value;
-                Log.Trace("Tab item changed to {0}", _itemIndex.ToString());
+                Log.LogTrace("Tab item changed to {ItemIndex}", _itemIndex);
                 RaisePropertyChanged(() => ItemIndex);
             }
         }

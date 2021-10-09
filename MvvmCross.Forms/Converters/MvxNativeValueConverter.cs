@@ -1,11 +1,11 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Globalization;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Converters;
-using MvvmCross.Logging;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Converters
@@ -34,7 +34,7 @@ namespace MvvmCross.Forms.Converters
 
         private static object MapIfSpecialValue(object toReturn)
         {
-            MvxLog.Instance.Trace("DoNothing and UnsetValue is not available in Xamarin.Forms - returning empty object instead");
+            MvxFormsLog.Instance?.Log(LogLevel.Trace, "DoNothing and UnsetValue is not available in Xamarin.Forms - returning empty object instead");
             if (toReturn == MvxBindingConstant.DoNothing || toReturn == MvxBindingConstant.UnsetValue)
             {
                 return new object();

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,6 +13,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Platforms.Wpf.Converters;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Wpf.Binding.WindowsBinding
 {
@@ -24,20 +25,20 @@ namespace MvvmCross.Platforms.Wpf.Binding.WindowsBinding
             DependencyProperty dependencyProperty = actualType.FindDependencyProperty(bindingDescription.TargetName);
             if (dependencyProperty == null)
             {
-                MvxLog.Instance.Warn("Dependency property not found for {0}", bindingDescription.TargetName);
+                MvxLogHost.Default?.Log(LogLevel.Warning, "Dependency property not found for {0}", bindingDescription.TargetName);
                 return;
             }
 
             var property = actualType.FindActualProperty(bindingDescription.TargetName);
             if (property == null)
             {
-                MvxLog.Instance.Warn("Property not returned {0} - may cause issues", bindingDescription.TargetName);
+                MvxLogHost.Default?.Log(LogLevel.Warning, "Property not returned {0} - may cause issues", bindingDescription.TargetName);
             }
 
             var sourceStep = bindingDescription.Source as MvxPathSourceStepDescription;
             if (sourceStep == null)
             {
-                MvxLog.Instance.Warn("Binding description for {0} is not a simple path - Windows Binding cannot cope with this", bindingDescription.TargetName);
+                MvxLogHost.Default?.Log(LogLevel.Warning, "Binding description for {0} is not a simple path - Windows Binding cannot cope with this", bindingDescription.TargetName);
                 return;
             }
 
@@ -95,7 +96,7 @@ namespace MvvmCross.Platforms.Wpf.Binding.WindowsBinding
                     return BindingMode.OneTime;
 
                 case MvxBindingMode.OneWayToSource:
-                    MvxLog.Instance.Warn("WinPhone doesn't support OneWayToSource");
+                    MvxLogHost.Default?.Log(LogLevel.Warning, "WinPhone doesn't support OneWayToSource");
                     return BindingMode.TwoWay;
 
                 default:

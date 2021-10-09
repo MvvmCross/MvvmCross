@@ -8,10 +8,12 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Views
 {
+#nullable enable
     public interface IMvxViewDispatcher : IMvxMainThreadAsyncDispatcher, IMvxMainThreadDispatcher
     {
         Task<bool> ShowViewModel(MvxViewModelRequest request);
 
         Task<bool> ChangePresentation(MvxPresentationHint hint);
     }
+#nullable restore
 }

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,9 +11,9 @@ namespace MvvmCross.Binding.Binders
 {
     public static class MvxRegistryFillerExtensions
     {
-        public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IEnumerable<Assembly> assemblies,
-                                IEnumerable<Type> types)
-            where T : class
+        public static void Fill<T>(
+            this IMvxNamedInstanceRegistry<T> registry, IEnumerable<Assembly> assemblies, IEnumerable<Type> types)
+            where T : notnull
         {
             var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, assemblies);
@@ -21,6 +21,7 @@ namespace MvvmCross.Binding.Binders
         }
 
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IEnumerable<Assembly> assemblies)
+            where T : notnull
         {
             if (assemblies == null)
                 return;
@@ -29,8 +30,10 @@ namespace MvvmCross.Binding.Binders
             registry.Fill(filler, assemblies);
         }
 
-        public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
-                                IEnumerable<Assembly> assemblies)
+        public static void Fill<T>(
+            this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
+            IEnumerable<Assembly> assemblies)
+            where T : notnull
         {
             if (assemblies == null)
                 return;
@@ -42,6 +45,7 @@ namespace MvvmCross.Binding.Binders
         }
 
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, Assembly assembly)
+            where T : notnull
         {
             var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, assembly);
@@ -49,11 +53,13 @@ namespace MvvmCross.Binding.Binders
 
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
                                 Assembly assembly)
+            where T : notnull
         {
             filler.FillFrom(registry, assembly);
         }
 
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IEnumerable<Type> types)
+            where T : notnull
         {
             if (types == null)
                 return;
@@ -74,13 +80,15 @@ namespace MvvmCross.Binding.Binders
             }
         }
 
-        public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
-                                Type type)
+        public static void Fill<T>(
+            this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler, Type type)
+            where T : notnull
         {
             filler.FillFrom(registry, type);
         }
 
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, Type type)
+            where T : notnull
         {
             var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, type);

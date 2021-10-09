@@ -44,9 +44,9 @@ namespace MvvmCross.IoC
             return _provider.CanResolve<T>();
         }
 
-        public bool CanResolve(Type t)
+        public bool CanResolve(Type type)
         {
-            return _provider.CanResolve(t);
+            return _provider.CanResolve(type);
         }
 
         public bool TryResolve<T>(out T resolved)
@@ -66,9 +66,9 @@ namespace MvvmCross.IoC
             return _provider.Resolve<T>();
         }
 
-        public object Resolve(Type t)
+        public object Resolve(Type type)
         {
-            return _provider.Resolve(t);
+            return _provider.Resolve(type);
         }
 
         public T GetSingleton<T>()
@@ -77,9 +77,9 @@ namespace MvvmCross.IoC
             return _provider.GetSingleton<T>();
         }
 
-        public object GetSingleton(Type t)
+        public object GetSingleton(Type type)
         {
-            return _provider.GetSingleton(t);
+            return _provider.GetSingleton(type);
         }
 
         public T Create<T>()
@@ -88,9 +88,9 @@ namespace MvvmCross.IoC
             return _provider.Create<T>();
         }
 
-        public object Create(Type t)
+        public object Create(Type type)
         {
-            return _provider.Create(t);
+            return _provider.Create(type);
         }
 
         public void RegisterType<TInterface, TToConstruct>()
@@ -111,9 +111,9 @@ namespace MvvmCross.IoC
             _provider.RegisterType(t, constructor);
         }
 
-        public void RegisterType(Type interfaceType, Type constructType)
+        public void RegisterType(Type tFrom, Type tTo)
         {
-            _provider.RegisterType(interfaceType, constructType);
+            _provider.RegisterType(tFrom, tTo);
         }
 
         public void RegisterSingleton<TInterface>(TInterface theObject)
@@ -122,9 +122,9 @@ namespace MvvmCross.IoC
             _provider.RegisterSingleton(theObject);
         }
 
-        public void RegisterSingleton(Type interfaceType, object theObject)
+        public void RegisterSingleton(Type tInterface, object theObject)
         {
-            _provider.RegisterSingleton(interfaceType, theObject);
+            _provider.RegisterSingleton(tInterface, theObject);
         }
 
         public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
@@ -133,9 +133,9 @@ namespace MvvmCross.IoC
             _provider.RegisterSingleton(theConstructor);
         }
 
-        public void RegisterSingleton(Type interfaceType, Func<object> theConstructor)
+        public void RegisterSingleton(Type tInterface, Func<object> theConstructor)
         {
-            _provider.RegisterSingleton(interfaceType, theConstructor);
+            _provider.RegisterSingleton(tInterface, theConstructor);
         }
 
         public T IoCConstruct<T>()
@@ -164,7 +164,7 @@ namespace MvvmCross.IoC
             return _provider.IoCConstruct<T>(arguments);
         }
 
-        public object IoCConstruct(Type type, IDictionary<string, object> arguments = null)
+        public object IoCConstruct(Type type, IDictionary<string, object>? arguments = null)
         {
             return _provider.IoCConstruct(type, arguments);
         }

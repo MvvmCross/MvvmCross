@@ -8,9 +8,10 @@ using MvvmCross.Base;
 
 namespace MvvmCross.Commands
 {
+#nullable enable
     public interface IMvxCommandHelper
     {
-        event EventHandler CanExecuteChanged;
+        event EventHandler? CanExecuteChanged;
 
         void RaiseCanExecuteChanged(object sender);
     }
@@ -18,7 +19,7 @@ namespace MvvmCross.Commands
     public class MvxStrongCommandHelper
         : IMvxCommandHelper
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
         public void RaiseCanExecuteChanged(object sender)
         {
@@ -32,7 +33,7 @@ namespace MvvmCross.Commands
         private readonly List<WeakReference> _eventHandlers = new List<WeakReference>();
         private readonly object _syncRoot = new object();
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add
             {
@@ -72,8 +73,8 @@ namespace MvvmCross.Commands
                         deadEntries.Add(thing);
                         continue;
                     }
-                    var eventHandler = (EventHandler)thing.Target;
-                    if (eventHandler != null)
+
+                    if (thing.Target is EventHandler eventHandler)
                     {
                         toReturn.Add(eventHandler);
                     }
@@ -103,27 +104,24 @@ namespace MvvmCross.Commands
     {
         private readonly IMvxCommandHelper _commandHelper;
 
-        public MvxCommandBase()
+        protected MvxCommandBase()
         {
             // fallback on MvxWeakCommandHelper if no IoC has been set up
-            if (!Mvx.IoCProvider?.TryResolve(out _commandHelper) ?? true)
+            if (Mvx.IoCProvider == null)
+                _commandHelper = new MvxWeakCommandHelper();
+            else if (!Mvx.IoCProvider.TryResolve(out _commandHelper))
                 _commandHelper = new MvxWeakCommandHelper();
 
             // default to true if no Singleton Cache has been set up
-            var alwaysOnUIThread = MvxSingletonCache.Instance?.Settings.AlwaysRaiseInpcOnUserInterfaceThread ?? true;
+            var alwaysOnUIThread =
+                MvxSingletonCache.Instance?.Settings.AlwaysRaiseInpcOnUserInterfaceThread ?? true;
             ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
         }
 
         public event EventHandler CanExecuteChanged
         {
-            add
-            {
-                _commandHelper.CanExecuteChanged += value;
-            }
-            remove
-            {
-                _commandHelper.CanExecuteChanged -= value;
-            }
+            add => _commandHelper.CanExecuteChanged += value;
+            remove => _commandHelper.CanExecuteChanged -= value;
         }
 
         public bool ShouldAlwaysRaiseCECOnUserInterfaceThread { get; set; }
@@ -145,27 +143,22 @@ namespace MvvmCross.Commands
         : MvxCommandBase
         , IMvxCommand
     {
-        private readonly Func<bool> _canExecute;
+        private readonly Func<bool>? _canExecute;
         private readonly Action _execute;
 
-        public MvxCommand(Action execute)
-            : this(execute, null)
-        {
-        }
-
-        public MvxCommand(Action execute, Func<bool> canExecute)
+        public MvxCommand(Action execute, Func<bool>? canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
             => _canExecute == null || _canExecute();
 
         public bool CanExecute()
             => CanExecute(null);
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             if (CanExecute(parameter))
             {
@@ -181,15 +174,10 @@ namespace MvvmCross.Commands
         : MvxCommandBase
         , IMvxCommand, IMvxCommand<T>
     {
-        private readonly Func<T, bool> _canExecute;
+        private readonly Func<T, bool>? _canExecute;
         private readonly Action<T> _execute;
 
-        public MvxCommand(Action<T> execute)
-            : this(execute, null)
-        {
-        }
-
-        public MvxCommand(Action<T> execute, Func<T, bool> canExecute)
+        public MvxCommand(Action<T> execute, Func<T, bool>? canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
@@ -199,7 +187,7 @@ namespace MvvmCross.Commands
             => _canExecute == null || _canExecute((T)typeof(T).MakeSafeValueCore(parameter));
 
         public bool CanExecute()
-            => CanExecute(null);
+            => CanExecute(default(T)!);
 
         public bool CanExecute(T parameter)
             => _canExecute == null || _canExecute(parameter);
@@ -212,7 +200,7 @@ namespace MvvmCross.Commands
         }
 
         public void Execute()
-            => Execute(null);
+            => Execute(default(T)!);
 
         public void Execute(T parameter)
         {
@@ -221,4 +209,5 @@ namespace MvvmCross.Commands
             _execute(parameter);
         }
     }
+#nullable restore
 }

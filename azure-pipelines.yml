@@ -17,10 +17,12 @@ pr:
     - '**/*.md'
     - docs/*
 
+variables:
+  DOTNET_NOLOGO: true
+  NUGET_PACKAGES: '$(Pipeline.Workspace)/.nuget/packages'
+
 stages:
 - stage: Build
-  variables:
-    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
   jobs:
   - job: Build
@@ -28,18 +30,9 @@ stages:
       vmImage: windows-latest
 
     steps:
-    - task: UseDotNet@2
-      displayName: 'Use .NET Core sdk'
-      inputs:
-        packageType: sdk
-        version: 3.1.x
+    - template: azure-pipelines-shared.yml
 
-    - task: PowerShell@2
-      displayName: 'Run Cake Build'
-      inputs:
-        targetType: filePath
-        filePath: .\build.ps1
-        arguments: "--verbosity=Normal --artifactsDir=$(Build.ArtifactStagingDirectory)"
+    - script: dotnet cake --verbosity=Normal --artifactsDir=$(Build.ArtifactStagingDirectory)
 
     - task: PublishBuildArtifacts@1
       inputs:

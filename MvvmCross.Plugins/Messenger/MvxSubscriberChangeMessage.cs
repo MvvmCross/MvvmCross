@@ -6,11 +6,12 @@ using System;
 
 namespace MvvmCross.Plugin.Messenger
 {
+#nullable enable
     [Preserve(AllMembers = true)]
 	public class MvxSubscriberChangeMessage : MvxMessage
     {
-        public Type MessageType { get; private set; }
-        public int SubscriberCount { get; private set; }
+        public Type MessageType { get; }
+        public int SubscriberCount { get; }
 
         public MvxSubscriberChangeMessage(object sender, Type messageType, int countSubscribers = 0)
             : base(sender)
@@ -19,4 +20,5 @@ namespace MvvmCross.Plugin.Messenger
             MessageType = messageType;
         }
     }
+#nullable restore
 }

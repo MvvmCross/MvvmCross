@@ -20,7 +20,6 @@ namespace MvvmCross.Binding.Bindings.Target
             if (target == null)
             {
                 MvxBindingLog.Error("Error - target is null in MvxWithEventPropertyInfoTargetBinding");
-                return;
             }
         }
 
@@ -126,11 +125,8 @@ namespace MvvmCross.Binding.Bindings.Target
         {
             if (isDisposing)
             {
-                if (_subscription != null)
-                {
-                    _subscription.Dispose();
-                    _subscription = null;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
 
             base.Dispose(isDisposing);

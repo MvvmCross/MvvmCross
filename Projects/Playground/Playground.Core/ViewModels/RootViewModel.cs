@@ -4,15 +4,14 @@
 
 using System;
 using System.Diagnostics;
-using System.Net;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Localization;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
-using MvvmCross.Plugin.Network.Rest;
 using MvvmCross.ViewModels;
 using Playground.Core.Models;
 using Playground.Core.Services;
@@ -36,7 +35,8 @@ namespace Playground.Core.ViewModels
             get { return new MvxLanguageBinder("Playground.Core", "Text"); }
         }
 
-        public RootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService, IMvxViewModelLoader mvxViewModelLoader) : base(logProvider, navigationService)
+        public RootViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService, IMvxViewModelLoader mvxViewModelLoader)
+            : base(logProvider, navigationService)
         {
             _mvxViewModelLoader = mvxViewModelLoader;
             try
@@ -198,7 +198,7 @@ namespace Playground.Core.ViewModels
 
         public override async Task Initialize()
         {
-            Log.Warn(() => "Testing log");
+            Log.LogWarning("Testing log");
 
             await base.Initialize();
 
@@ -212,8 +212,6 @@ namespace Playground.Core.ViewModels
                     Value = 2
                 },
                 null);
-
-            await MakeRequest();
         }
 
         public override void ViewAppearing()
@@ -254,26 +252,6 @@ namespace Playground.Core.ViewModels
             catch (Exception)
             {
             }
-        }
-
-        public async Task<MvxRestResponse> MakeRequest()
-        {
-            try
-            {
-                var request = new MvxRestRequest("http://github.com/asdsadadad");
-                if (Mvx.IoCProvider.TryResolve(out IMvxRestClient client))
-                {
-                    var task = client.MakeRequestAsync(request);
-
-                    var result = await task;
-
-                    return result;
-                }
-            }
-            catch (WebException webException)
-            {
-            }
-            return default(MvxRestResponse);
         }
 
         private async Task RegisterAndResolveWithReflection()

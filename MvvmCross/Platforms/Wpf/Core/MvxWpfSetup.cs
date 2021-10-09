@@ -24,12 +24,13 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.Wpf.Core
 {
+#nullable enable
     public abstract class MvxWpfSetup
-    : MvxSetup, IMvxWpfSetup
+        : MvxSetup, IMvxWpfSetup
     {
-        private Dispatcher _uiThreadDispatcher;
-        private ContentControl _root;
-        private IMvxWpfViewPresenter _presenter;
+        private Dispatcher? _uiThreadDispatcher;
+        private ContentControl? _root;
+        private IMvxWpfViewPresenter? _presenter;
 
         public void PlatformInitialize(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
         {
@@ -48,10 +49,12 @@ namespace MvvmCross.Platforms.Wpf.Core
             return base.GetViewAssemblies().Union(new[] { Assembly.GetEntryAssembly() });
         }
 
-        protected sealed override IMvxViewsContainer CreateViewsContainer()
+        protected sealed override IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider)
         {
+            ValidateArguments(iocProvider);
+
             var toReturn = CreateWpfViewsContainer();
-            Mvx.IoCProvider.RegisterSingleton<IMvxWpfViewLoader>(toReturn);
+            iocProvider.RegisterSingleton<IMvxWpfViewLoader>(toReturn);
             return toReturn;
         }
 
@@ -64,7 +67,7 @@ namespace MvvmCross.Platforms.Wpf.Core
         {
             get
             {
-                _presenter = _presenter ?? CreateViewPresenter(_root);
+                _presenter ??= CreateViewPresenter(_root);
                 return _presenter;
             }
         }
@@ -79,11 +82,13 @@ namespace MvvmCross.Platforms.Wpf.Core
             return new MvxWpfViewDispatcher(_uiThreadDispatcher, Presenter);
         }
 
-        protected virtual void RegisterPresenter()
+        protected virtual void RegisterPresenter(IMvxIoCProvider iocProvider)
         {
+            ValidateArguments(iocProvider);
+
             var presenter = Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            iocProvider.RegisterSingleton(presenter);
+            iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()
@@ -91,30 +96,32 @@ namespace MvvmCross.Platforms.Wpf.Core
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Control");
         }
 
-        protected override void InitializeFirstChance()
+        protected override void InitializeFirstChance(IMvxIoCProvider iocProvider)
         {
-            RegisterPresenter();
-            base.InitializeFirstChance();
+            RegisterPresenter(iocProvider);
+            base.InitializeFirstChance(iocProvider);
         }
 
-        protected override void InitializeLastChance()
+        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
         {
-            InitializeBindingBuilder();
-            base.InitializeLastChance();
+            InitializeBindingBuilder(iocProvider);
+            base.InitializeLastChance(iocProvider);
         }
 
-        protected virtual void InitializeBindingBuilder()
+        protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            RegisterBindingBuilderCallbacks();
+            RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
-        protected virtual void RegisterBindingBuilderCallbacks()
+        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
         {
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            ValidateArguments(iocProvider);
+
+            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
@@ -153,14 +160,16 @@ namespace MvvmCross.Platforms.Wpf.Core
         }
     }
 
-    public class MvxWpfSetup<TApplication> : MvxWpfSetup
+    public abstract class MvxWpfSetup<TApplication> : MvxWpfSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
     }
+#nullable restore
 }

@@ -4,8 +4,10 @@
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public interface IMvxDataConsumer
     {
-        object DataContext { get; set; }
+        object? DataContext { get; set; }
     }
+#nullable restore
 }
