@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,6 +13,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Platforms.Uap.Converters;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Uap.Binding
 {
@@ -24,20 +25,23 @@ namespace MvvmCross.Platforms.Uap.Binding
             DependencyProperty dependencyProperty = actualType.FindDependencyProperty(bindingDescription.TargetName);
             if (dependencyProperty == null)
             {
-                MvxLog.Instance.Warn("Dependency property not found for {0}", bindingDescription.TargetName);
+                MvxLogHost.GetLog<MvxWindowsBindingCreator>()?.Log(LogLevel.Warning,
+                    "Dependency property not found for {targetName}", bindingDescription.TargetName);
                 return;
             }
 
             var property = actualType.FindActualProperty(bindingDescription.TargetName);
             if (property == null)
             {
-                MvxLog.Instance.Warn("Property not returned {0} - may cause issues", bindingDescription.TargetName);
+                MvxLogHost.GetLog<MvxWindowsBindingCreator>()?.Log(LogLevel.Warning,
+                    "Property not returned for target {targetName} - may cause issues", bindingDescription.TargetName);
             }
 
             var sourceStep = bindingDescription.Source as MvxPathSourceStepDescription;
             if (sourceStep == null)
             {
-                MvxLog.Instance.Warn("Binding description for {0} is not a simple path - Windows Binding cannot cope with this", bindingDescription.TargetName);
+                MvxLogHost.GetLog<MvxWindowsBindingCreator>()?.Log(LogLevel.Warning,
+                    "Binding description for {targetName} is not a simple path - Windows Binding cannot cope with this", bindingDescription.TargetName);
                 return;
             }
 
@@ -96,7 +100,8 @@ namespace MvvmCross.Platforms.Uap.Binding
                     return BindingMode.OneTime;
 
                 case MvxBindingMode.OneWayToSource:
-                    MvxLog.Instance.Warn("WinPhone doesn't support OneWayToSource");
+                    MvxLogHost.GetLog<MvxWindowsBindingCreator>()?.Log(LogLevel.Warning,
+                        "WinPhone doesn't support OneWayToSource");
                     return BindingMode.TwoWay;
 
                 default:

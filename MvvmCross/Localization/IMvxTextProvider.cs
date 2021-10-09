@@ -4,14 +4,16 @@
 
 namespace MvvmCross.Localization
 {
+#nullable enable
     public interface IMvxTextProvider
     {
-        string GetText(string namespaceKey, string typeKey, string name);
+        string? GetText(string? namespaceKey, string? typeKey, string name);
 
-        string GetText(string namespaceKey, string typeKey, string name, params object[] formatArgs);
+        string? GetText(string? namespaceKey, string? typeKey, string name, params object[] formatArgs);
 
         bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name);
 
         bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name, params object[] formatArgs);
     }
+#nullable restore
 }

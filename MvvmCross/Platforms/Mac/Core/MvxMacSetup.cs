@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using AppKit;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
@@ -22,23 +21,16 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.Mac.Core
 {
+#nullable enable
     public abstract class MvxMacSetup
         : MvxSetup, IMvxMacSetup
     {
-        private IMvxApplicationDelegate _applicationDelegate;
-        private NSWindow _window;
-
-        private IMvxMacViewPresenter _presenter;
+        private IMvxApplicationDelegate? _applicationDelegate;
+        private IMvxMacViewPresenter? _presenter;
 
         public void PlatformInitialize(IMvxApplicationDelegate applicationDelegate)
         {
             _applicationDelegate = applicationDelegate;
-        }
-
-        public void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, NSWindow window)
-        {
-            PlatformInitialize(applicationDelegate);
-            _window = window;
         }
 
         public void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
@@ -47,12 +39,7 @@ namespace MvvmCross.Platforms.Mac.Core
             _presenter = presenter;
         }
 
-        protected NSWindow Window
-        {
-            get { return _window; }
-        }
-
-        protected IMvxApplicationDelegate ApplicationDelegate
+        protected IMvxApplicationDelegate? ApplicationDelegate
         {
             get { return _applicationDelegate; }
         }
@@ -62,10 +49,10 @@ namespace MvvmCross.Platforms.Mac.Core
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "ViewController");
         }
 
-        protected sealed override IMvxViewsContainer CreateViewsContainer()
+        protected sealed override IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider)
         {
             var container = CreateMacViewsContainer();
-            RegisterMacViewCreator(container);
+            RegisterMacViewCreator(iocProvider, container);
             return container;
         }
 
@@ -74,10 +61,12 @@ namespace MvvmCross.Platforms.Mac.Core
             return new MvxMacViewsContainer();
         }
 
-        protected void RegisterMacViewCreator(IMvxMacViewsContainer container)
+        protected virtual void RegisterMacViewCreator(IMvxIoCProvider iocProvider, IMvxMacViewsContainer container)
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxMacViewCreator>(container);
-            Mvx.IoCProvider.RegisterSingleton<IMvxCurrentRequest>(container);
+            ValidateArguments(iocProvider);
+
+            iocProvider.RegisterSingleton<IMvxMacViewCreator>(container);
+            iocProvider.RegisterSingleton<IMvxCurrentRequest>(container);
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
@@ -85,23 +74,25 @@ namespace MvvmCross.Platforms.Mac.Core
             return new MvxMacViewDispatcher(_presenter);
         }
 
-        protected override void InitializeFirstChance()
+        protected override void InitializeFirstChance(IMvxIoCProvider iocProvider)
         {
-            RegisterPresenter();
-            RegisterLifetime();
-            base.InitializeFirstChance();
+            RegisterPresenter(iocProvider);
+            RegisterLifetime(iocProvider);
+            base.InitializeFirstChance(iocProvider);
         }
 
-        protected virtual void RegisterLifetime()
+        protected virtual void RegisterLifetime(IMvxIoCProvider iocProvider)
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
+            ValidateArguments(iocProvider);
+
+            iocProvider.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
         }
 
         protected IMvxMacViewPresenter Presenter
         {
             get
             {
-                _presenter = _presenter ?? CreateViewPresenter();
+                _presenter ??= CreateViewPresenter();
                 return _presenter;
             }
         }
@@ -111,37 +102,40 @@ namespace MvvmCross.Platforms.Mac.Core
             return new MvxMacViewPresenter(_applicationDelegate);
         }
 
-        protected virtual void RegisterPresenter()
+        protected virtual void RegisterPresenter(IMvxIoCProvider iocProvider)
         {
-            var presenter = this.Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            ValidateArguments(iocProvider);
+
+            var presenter = Presenter;
+            iocProvider.RegisterSingleton(presenter);
+            iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override void InitializeLastChance()
+        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
         {
-            InitialiseBindingBuilder();
-            base.InitializeLastChance();
+            InitialiseBindingBuilder(iocProvider);
+            base.InitializeLastChance(iocProvider);
         }
 
-        protected virtual void InitialiseBindingBuilder()
+        protected virtual void InitialiseBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            RegisterBindingBuilderCallbacks();
+            RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
-        protected virtual void RegisterBindingBuilderCallbacks()
+        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
         {
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(this.FillValueConverters);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(this.FillTargetFactories);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(this.FillBindingNames);
+            ValidateArguments(iocProvider);
+
+            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
-            var bindingBuilder = new MvxMacBindingBuilder();
-            return bindingBuilder;
+            return new MvxMacBindingBuilder();
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
@@ -166,10 +160,7 @@ namespace MvvmCross.Platforms.Mac.Core
             }
         }
 
-        protected virtual IEnumerable<Type> ValueConverterHolders
-        {
-            get { return null; }
-        }
+        protected virtual IEnumerable<Type> ValueConverterHolders => Array.Empty<Type>();
 
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
@@ -177,14 +168,16 @@ namespace MvvmCross.Platforms.Mac.Core
         }
     }
 
-    public class MvxMacSetup<TApplication> : MvxMacSetup
+    public abstract class MvxMacSetup<TApplication> : MvxMacSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
     }
+#nullable restore
 }

@@ -4,20 +4,23 @@
 
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin
 {
+#nullable enable
     public class MvxPluginManager : IMvxPluginManager
     {
+        private readonly object _lockObject = new object();
         private readonly HashSet<Type> _loadedPlugins = new HashSet<Type>();
 
-        public Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; }
+        public Func<Type, IMvxPluginConfiguration?> ConfigurationSource { get; }
 
         public IEnumerable<Type> LoadedPlugins => _loadedPlugins;
 
-        public MvxPluginManager(Func<Type, IMvxPluginConfiguration> configurationSource)
+        public MvxPluginManager(Func<Type, IMvxPluginConfiguration?> configurationSource)
         {
             ConfigurationSource = configurationSource;
         }
@@ -29,8 +32,9 @@ namespace MvvmCross.Plugin
 
         public virtual void EnsurePluginLoaded(Type type, bool forceLoad = false)
         {
-            if (forceLoad == false && IsPluginLoaded(type)) return;
-            
+            if (!forceLoad && IsPluginLoaded(type))
+                return;
+
             var plugin = Activator.CreateInstance(type) as IMvxPlugin;
             if (plugin == null)
                 throw new MvxException($"Type {type} is not an IMvxPlugin");
@@ -38,22 +42,27 @@ namespace MvvmCross.Plugin
             if (plugin is IMvxConfigurablePlugin configurablePlugin)
             {
                 var configuration = ConfigurationFor(type);
-                configurablePlugin.Configure(configuration);
+                if (configuration != null)
+                    configurablePlugin.Configure(configuration);
             }
 
             plugin.Load();
 
-            _loadedPlugins.Add(type);
+            lock (_lockObject)
+            {
+                _loadedPlugins.Add(type);
+            }
         }
 
-        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad) => ConfigurationSource?.Invoke(toLoad);
+        protected IMvxPluginConfiguration? ConfigurationFor(Type toLoad) =>
+            ConfigurationSource.Invoke(toLoad);
 
-        public bool IsPluginLoaded<T>() where T : IMvxPlugin    
+        public bool IsPluginLoaded<T>() where T : IMvxPlugin
             => IsPluginLoaded(typeof(T));
 
         public bool IsPluginLoaded(Type type)
         {
-            lock (this)
+            lock (_lockObject)
             {
                 return _loadedPlugins.Contains(type);
             }
@@ -71,9 +80,10 @@ namespace MvvmCross.Plugin
             }
             catch (Exception ex)
             {
-                MvxLog.Instance.Warn("Failed to load plugin {0} with exception {1}", type.FullName, ex.ToLongString());
+                MvxLogHost.Default?.Log(LogLevel.Warning, ex, "Failed to load plugin {fullPluginName}", type.FullName);
                 return false;
             }
         }
     }
+#nullable restore
 }

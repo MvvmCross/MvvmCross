@@ -9,6 +9,7 @@
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Uap' ">netstandard2.0;uap10.0.16299</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">netstandard2.0;xamarin.ios10</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Tizen' ">netstandard2.0;tizen40</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Mac' ">netstandard2.0;xamarin.mac20</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -81,7 +82,7 @@ This package contains the 'PictureChooser' plugin for MvvmCross</Description>
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
-    <PackageReference Include="Xamarin.AndroidX.ExifInterface" Version="1.1.0" />
+    <PackageReference Include="Xamarin.AndroidX.ExifInterface" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">

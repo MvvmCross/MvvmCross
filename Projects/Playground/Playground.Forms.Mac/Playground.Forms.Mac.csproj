@@ -120,6 +120,8 @@
       <Name>Playground.Forms.UI</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\..\..\XamarinForms.targets" />
+  <ItemGroup>
+    <PackageReference Include="Plugin.Permissions"/>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
 </Project>

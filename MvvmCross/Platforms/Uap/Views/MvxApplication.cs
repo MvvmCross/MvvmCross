@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Threading.Tasks;
 using MvvmCross.Core;
+using MvvmCross.Exceptions;
 using MvvmCross.Platforms.Uap.Core;
 using MvvmCross.Platforms.Uap.Views.Suspension;
 using MvvmCross.ViewModels;
@@ -22,7 +22,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected Frame RootFrame { get; set; }
 
-        public MvxApplication()
+        protected MvxApplication()
         {
             RegisterSetup();
             EnteredBackground += OnEnteredBackground;
@@ -35,17 +35,17 @@ namespace MvvmCross.Platforms.Uap.Views
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
-        /// <param name="activationArgs">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs activationArgs)
+        /// <param name="args">Details about the launch request and process.</param>
+        protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
-            base.OnLaunched(activationArgs);
-            ActivationArguments = activationArgs;
+            base.OnLaunched(args);
+            ActivationArguments = args;
 
-            var rootFrame = InitializeFrame(activationArgs);
+            _ = InitializeFrame(args);
 
-            if (activationArgs.PrelaunchActivated == false)
+            if (!args.PrelaunchActivated)
             {
-                RunAppStart(activationArgs);
+                RunAppStart(args);
             }
 
             Window.Current.Activate();
@@ -56,7 +56,7 @@ namespace MvvmCross.Platforms.Uap.Views
             base.OnActivated(activationArgs);
             ActivationArguments = activationArgs;
 
-            var rootFrame = InitializeFrame(activationArgs);
+            _ = InitializeFrame(activationArgs);
             RunAppStart(activationArgs);
 
             Window.Current.Activate();
@@ -118,7 +118,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName, e.Exception);
+            throw new MvxException($"Failed to load Page {e.SourcePageType.FullName}", e.Exception);
         }
 
         protected virtual async void OnEnteredBackground(object sender, EnteredBackgroundEventArgs e)
@@ -178,10 +178,10 @@ namespace MvvmCross.Platforms.Uap.Views
             }
         }
 
-        protected virtual async void OnResuming(object sender, object e)
+        protected virtual void OnResuming(object sender, object e)
         {
             var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
-            await Resume(suspension);
+            Task.Run(() => Resume(suspension));
         }
 
         protected virtual Task Resume(IMvxSuspensionManager suspensionManager)

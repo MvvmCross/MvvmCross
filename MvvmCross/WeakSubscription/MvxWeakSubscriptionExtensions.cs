@@ -12,6 +12,7 @@ using MvvmCross.Base;
 
 namespace MvvmCross.WeakSubscription
 {
+#nullable enable
     public static class MvxWeakSubscriptionExtensions
     {
         public static MvxNotifyPropertyChangedEventSubscription WeakSubscribe(this INotifyPropertyChanged source,
@@ -72,4 +73,5 @@ namespace MvvmCross.WeakSubscription
             return new MvxWeakEventSubscription<TSource, TEventArgs>(source, eventName, eventHandler);
         }
     }
+#nullable restore
 }

@@ -154,7 +154,7 @@ As an example, a `LengthValueConverter` which is only used to help display the l
 public class LengthValueConverter
     : MvxValueConverter<string, int>
 {
-    protected override int Converter(string value, Type targetType, object parameter, CultureInfo cultureInfo)
+    protected override int Convert(string value, Type targetType, object parameter, CultureInfo cultureInfo)
     {
         if (value == null)
             return 0;

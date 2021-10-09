@@ -1,8 +1,5 @@
-﻿using System.Windows;
-using MvvmCross.Core;
-using MvvmCross.Forms.Platforms.Wpf.Core;
+﻿using MvvmCross.Core;
 using MvvmCross.Platforms.Wpf.Views;
-using Playground.Forms.UI;
 
 namespace Playground.Forms.Wpf
 {
@@ -10,7 +7,7 @@ namespace Playground.Forms.Wpf
     {
         protected override void RegisterSetup()
         {
-            this.RegisterSetupType<MvxFormsWpfSetup<Core.App, FormsApp>>();
+            this.RegisterSetupType<Setup>();
         }
     }
 }

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Binders;
@@ -24,7 +25,7 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _bindingParser = _bindingParser ?? Mvx.IoCProvider.Resolve<IMvxBindingParser>();
+                _bindingParser ??= Mvx.IoCProvider.Resolve<IMvxBindingParser>();
                 return _bindingParser;
             }
         }
@@ -35,7 +36,7 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _languageBindingParser = _languageBindingParser ?? Mvx.IoCProvider.Resolve<IMvxLanguageBindingParser>();
+                _languageBindingParser ??= Mvx.IoCProvider.Resolve<IMvxLanguageBindingParser>();
                 return _languageBindingParser;
             }
         }
@@ -44,7 +45,7 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _valueConverterLookup = _valueConverterLookup ?? Mvx.IoCProvider.Resolve<IMvxValueConverterLookup>();
+                _valueConverterLookup ??= Mvx.IoCProvider.Resolve<IMvxValueConverterLookup>();
                 return _valueConverterLookup;
             }
         }
@@ -72,28 +73,27 @@ namespace MvvmCross.Binding.Parse.Binding
             return Parse(text, parser);
         }
 
-        public IEnumerable<MvxBindingDescription> LanguageParse(string text)
-        {
-            var parser = LanguageBindingParser;
-            return Parse(text, parser);
-        }
-
         public IEnumerable<MvxBindingDescription> Parse(string text, IMvxBindingParser parser)
         {
             MvxSerializableBindingSpecification specification;
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
-                MvxBindingLog.Error(
-                                      "Failed to parse binding specification starting with {0}",
-                                      text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
-                return null;
+                MvxBindingLog.Error("Failed to parse binding description starting with {0}",
+                    GetErrorTextParameter(text));
+                return Array.Empty<MvxBindingDescription>();
             }
 
             if (specification == null)
-                return null;
+                return Array.Empty<MvxBindingDescription>();
 
             return from item in specification
                    select SerializableBindingToBinding(item.Key, item.Value);
+        }
+
+        public IEnumerable<MvxBindingDescription> LanguageParse(string text)
+        {
+            var parser = LanguageBindingParser;
+            return Parse(text, parser);
         }
 
         public MvxBindingDescription ParseSingle(string text)
@@ -102,9 +102,8 @@ namespace MvvmCross.Binding.Parse.Binding
             var parser = BindingParser;
             if (!parser.TryParseBindingDescription(text, out description))
             {
-                MvxBindingLog.Error(
-                                      "Failed to parse binding description starting with {0}",
-                                      text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
+                MvxBindingLog.Error("Failed to parse binding description starting with {0}",
+                    GetErrorTextParameter(text));
                 return null;
             }
 
@@ -114,8 +113,19 @@ namespace MvvmCross.Binding.Parse.Binding
             return SerializableBindingToBinding(null, description);
         }
 
-        public MvxBindingDescription SerializableBindingToBinding(string targetName,
-                                                                  MvxSerializableBindingDescription description)
+        private string GetErrorTextParameter(string text)
+        {
+            if (text == null)
+                return string.Empty;
+
+            if (text.Length > 20)
+                return text.Substring(0, 20);
+
+            return text;
+        }
+
+        public MvxBindingDescription SerializableBindingToBinding(
+            string targetName, MvxSerializableBindingDescription description)
         {
             return new MvxBindingDescription
             {

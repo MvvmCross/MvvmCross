@@ -38,16 +38,13 @@ namespace MvvmCross.Platforms.Android.Views
 
         public object DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get => BindingContext.DataContext;
+            set => BindingContext.DataContext = value;
         }
 
         public IMvxViewModel ViewModel
         {
-            get
-            {
-                return DataContext as IMvxViewModel;
-            }
+            get => DataContext as IMvxViewModel;
             set
             {
                 DataContext = value;
@@ -62,16 +59,24 @@ namespace MvvmCross.Platforms.Android.Views
 
         public IMvxBindingContext BindingContext { get; set; }
 
-        public override void SetContentView(int layoutResId)
+        public override void SetContentView(int layoutResID)
         {
-            _view = this.BindingInflate(layoutResId, null);
+            if (BaseContextToAttach(this) is MvxContextWrapper)
+            {
+                _view = this.BindingInflate(layoutResID, null);
+                SetContentView(_view);
+                return;
+            }
 
-            SetContentView(_view);
+            base.SetContentView(layoutResID);
         }
 
         protected virtual void OnViewModelSet()
         {
         }
+
+        protected virtual Context BaseContextToAttach(Context @base)
+            => MvxContextWrapper.Wrap(@base, this);
 
         protected override void AttachBaseContext(Context @base)
         {
@@ -81,7 +86,7 @@ namespace MvvmCross.Platforms.Android.Views
                 base.AttachBaseContext(@base);
                 return;
             }
-            base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
+            base.AttachBaseContext(BaseContextToAttach(@base));
         }
 
         private readonly List<WeakReference<Fragment>> _fragList = new List<WeakReference<Fragment>>();
@@ -110,9 +115,9 @@ namespace MvvmCross.Platforms.Android.Views
             }
         }
 
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(bundle);
+            base.OnCreate(savedInstanceState);
             ViewModel?.ViewCreated();
         }
 
@@ -147,18 +152,25 @@ namespace MvvmCross.Platforms.Android.Views
         }
     }
 
-    public abstract class MvxActivity<TViewModel> : MvxActivity, IMvxAndroidView<TViewModel> 
+    public abstract class MvxActivity<TViewModel> : MvxActivity, IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel)base.ViewModel;
+            set => base.ViewModel = value;
+        }
+
+        protected MvxActivity()
+        {
+        }
+
+        protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
         }
 
         public MvxFluentBindingDescriptionSet<IMvxAndroidView<TViewModel>, TViewModel> CreateBindingSet()
-        {
-            return this.CreateBindingSet<IMvxAndroidView<TViewModel>, TViewModel>();
-        }
+            => this.CreateBindingSet<IMvxAndroidView<TViewModel>, TViewModel>();
     }
 }

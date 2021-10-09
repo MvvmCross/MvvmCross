@@ -20,9 +20,9 @@ namespace Playground.Forms.UI.Pages
 
         public void ToggleClicked(object sender, EventArgs e)
         {
-            if(Parent is MasterDetailPage md)
+            if(Parent is FlyoutPage md)
             {
-                md.MasterBehavior = MasterBehavior.Popover;
+                md.FlyoutLayoutBehavior = FlyoutLayoutBehavior.Popover;
                 md.IsPresented = !md.IsPresented;
             }
         }

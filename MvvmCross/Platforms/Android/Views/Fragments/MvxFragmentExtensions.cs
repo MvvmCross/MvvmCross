@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Views;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -47,7 +48,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             view.OnViewCreate(() => cached ?? fragmentView.LoadViewModel(bundle, fragment.Activity.GetType(), request));
         }
 
-        public static Fragment ToFragment(this IMvxFragmentView fragmentView)
+        public static Fragment? ToFragment(this IMvxFragmentView fragmentView)
         {
             return fragmentView as Fragment;
         }
@@ -109,7 +110,8 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             var fragment = activity.SupportFragmentManager.FindFragmentById(resourceId);
             if (fragment == null)
             {
-                MvxLog.Instance.Warn("Failed to find fragment id {0} in {1}", resourceId, activity.GetType().Name);
+                MvxLogHost.Default?.Log(LogLevel.Warning,
+                    "Failed to find fragment id {resourceId} in {activityTypeName}", resourceId, activity.GetType().Name);
                 return default(TFragment);
             }
 
@@ -122,7 +124,8 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             var fragment = activity.SupportFragmentManager.FindFragmentByTag(tag);
             if (fragment == null)
             {
-                MvxLog.Instance.Warn("Failed to find fragment tag {0} in {1}", tag, activity.GetType().Name);
+                MvxLogHost.Default?.Log(LogLevel.Warning,
+                    "Failed to find fragment tag {tag} in {activityTypeName}", tag, activity.GetType().Name);
                 return default(TFragment);
             }
 
@@ -133,8 +136,9 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         {
             if (!(fragment is TFragment))
             {
-                MvxLog.Instance.Warn("Fragment type mismatch got {0} but expected {1}", fragment.GetType().FullName,
-                            typeof(TFragment).FullName);
+                MvxLogHost.Default?.Log(LogLevel.Warning,
+                    "Fragment type mismatch got {fragmentType} but expected {expectedType}",
+                    fragment.GetType().FullName, typeof(TFragment).FullName);
                 return default(TFragment);
             }
 
@@ -147,7 +151,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             var viewModel = loader.LoadViewModel(request, savedState);
             if (viewModel == null)
             {
-                MvxLog.Instance.Warn("ViewModel not loaded for {0}", request.ViewModelType.FullName);
+                MvxLogHost.Default?.Log(LogLevel.Warning, "ViewModel not loaded for {viewModelType}", request.ViewModelType.FullName);
                 return;
             }
 

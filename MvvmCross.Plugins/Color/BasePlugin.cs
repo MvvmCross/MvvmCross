@@ -15,12 +15,14 @@ namespace MvvmCross.Plugin.Color
 
         private void RegisterValueConverters()
         {
-            var registry = Mvx.IoCProvider.Resolve<IMvxValueConverterRegistry>();
-            registry.AddOrOverwrite("ARGB", new MvxARGBValueConverter());
-            registry.AddOrOverwrite("NativeColor", new MvxNativeColorValueConverter());
-            registry.AddOrOverwrite("RGBA", new MvxRGBAValueConverter());
-            registry.AddOrOverwrite("RGB", new MvxRGBValueConverter());
-            registry.AddOrOverwrite("RGBIntColor", new MvxRGBIntColorValueConverter());
+            if (Mvx.IoCProvider.TryResolve<IMvxValueConverterRegistry>(out var registry))
+            {
+                registry.AddOrOverwrite("ARGB", new MvxARGBValueConverter());
+                registry.AddOrOverwrite("NativeColor", new MvxNativeColorValueConverter());
+                registry.AddOrOverwrite("RGBA", new MvxRGBAValueConverter());
+                registry.AddOrOverwrite("RGB", new MvxRGBValueConverter());
+                registry.AddOrOverwrite("RGBIntColor", new MvxRGBIntColorValueConverter());
+            }
         }
     }
 }

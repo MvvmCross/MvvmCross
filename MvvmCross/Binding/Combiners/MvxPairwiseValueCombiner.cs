@@ -1,10 +1,11 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Converters;
 using MvvmCross.Logging;
@@ -16,18 +17,12 @@ namespace MvvmCross.Binding.Combiners
     {
         public override void SetValue(IEnumerable<IMvxSourceStep> steps, object value)
         {
-            MvxLog.Instance.Trace("The Add Combiner does not support SetValue");
+            MvxLogHost.Default?.Log(LogLevel.Trace, "The Add Combiner does not support SetValue");
         }
 
         public override Type SourceType(IEnumerable<IMvxSourceStep> steps)
         {
             return steps.First().SourceType;
-        }
-
-        private class ResultPair
-        {
-            public bool IsAvailable { get; set; }
-            public object Value { get; set; }
         }
 
         private static Type GetLookupTypeFor(object value)
@@ -174,7 +169,8 @@ namespace MvvmCross.Binding.Combiners
                 CombinerFunc<object, object> combinerFunc;
                 if (!_combinerActions.TryGetValue(new TypeTuple(firstType, secondType), out combinerFunc))
                 {
-                    MvxLog.Instance.Error("Unknown type pair in Pairwise combiner {0}, {1}", firstType, secondType);
+                    MvxLogHost.Default?.Log(LogLevel.Error, "Unknown type pair in Pairwise combiner {firstType}, {secondType}",
+                        firstType, secondType);
                     value = MvxBindingConstant.UnsetValue;
                     return true;
                 }

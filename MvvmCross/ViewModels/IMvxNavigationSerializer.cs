@@ -6,8 +6,10 @@ using MvvmCross.Base;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public interface IMvxNavigationSerializer
     {
         IMvxTextSerializer Serializer { get; }
     }
+#nullable restore
 }

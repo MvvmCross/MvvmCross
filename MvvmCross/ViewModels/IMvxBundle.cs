@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,6 +8,7 @@ using System.Reflection;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public interface IMvxBundle
     {
         IDictionary<string, string> Data { get; }
@@ -18,6 +19,7 @@ namespace MvvmCross.ViewModels
 
         object Read(Type type);
 
-        IEnumerable<object> CreateArgumentList(IEnumerable<ParameterInfo> requiredParameters, string debugText);
+        IEnumerable<object> CreateArgumentList(IEnumerable<ParameterInfo> requiredParameters, string? debugText);
     }
+#nullable restore
 }

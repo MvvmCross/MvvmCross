@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,34 +10,35 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Core.Parse.StringDictionary
 {
+#nullable enable
     public class MvxViewModelRequestCustomTextSerializer
         : IMvxTextSerializer
     {
-        private IMvxViewModelByNameLookup _byNameLookup;
+        private IMvxViewModelByNameLookup? _byNameLookup;
 
         protected IMvxViewModelByNameLookup ByNameLookup
         {
             get
             {
-                _byNameLookup = _byNameLookup ?? Mvx.IoCProvider.Resolve<IMvxViewModelByNameLookup>();
+                _byNameLookup ??= Mvx.IoCProvider.Resolve<IMvxViewModelByNameLookup>();
                 return _byNameLookup;
             }
+        }
+
+        public string SerializeObject(object toSerialise)
+        {
+            if (toSerialise is MvxViewModelRequest viewModelRequest)
+                return Serialize(viewModelRequest);
+
+            if (toSerialise is IDictionary<string, string> stringDictionary)
+                return Serialize(stringDictionary);
+
+            throw new MvxException("This serializer only knows about MvxViewModelRequest and IDictionary<string,string>");
         }
 
         public T DeserializeObject<T>(string inputText)
         {
             return (T)DeserializeObject(typeof(T), inputText);
-        }
-
-        public string SerializeObject(object toSerialise)
-        {
-            if (toSerialise is MvxViewModelRequest)
-                return Serialize((MvxViewModelRequest)toSerialise);
-
-            if (toSerialise is IDictionary<string, string>)
-                return Serialize((IDictionary<string, string>)toSerialise);
-
-            throw new MvxException("This serializer only knows about MvxViewModelRequest and IDictionary<string,string>");
         }
 
         public object DeserializeObject(Type type, string inputText)
@@ -78,6 +79,9 @@ namespace MvvmCross.Core.Parse.StringDictionary
 
         protected virtual string Serialize(MvxViewModelRequest toSerialise)
         {
+            if (toSerialise == null)
+                throw new ArgumentNullException(nameof(toSerialise));
+
             var stringDictionaryWriter = new MvxStringDictionaryWriter();
 
             var dictionary = new Dictionary<string, string>();
@@ -87,8 +91,11 @@ namespace MvvmCross.Core.Parse.StringDictionary
             return stringDictionaryWriter.Write(dictionary);
         }
 
-        protected virtual string SerializeViewModelName(Type viewModelType)
+        protected virtual string SerializeViewModelName(Type? viewModelType)
         {
+            if (viewModelType == null)
+                throw new ArgumentNullException(nameof(viewModelType));
+
             return viewModelType.FullName;
         }
 
@@ -100,12 +107,12 @@ namespace MvvmCross.Core.Parse.StringDictionary
             return toReturn;
         }
 
-        private string SafeGetValue(IDictionary<string, string> dictionary, string key)
+        private static string SafeGetValue(IDictionary<string, string> dictionary, string key)
         {
-            string value;
-            if (!dictionary.TryGetValue(key, out value))
+            if (!dictionary.TryGetValue(key, out var value))
                 throw new MvxException("Dictionary missing required keyvalue pair for key {0}", key);
             return value;
         }
     }
+#nullable restore
 }

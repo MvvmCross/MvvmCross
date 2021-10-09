@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public abstract class MvxMainThreadAsyncDispatcher : MvxMainThreadDispatcher, IMvxMainThreadAsyncDispatcher
     {
         public Task ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true)
         {
+            if (action == null)
+                return Task.CompletedTask;
+
             var asyncAction = new Func<Task>(() =>
             {
                 action();
@@ -21,6 +25,9 @@ namespace MvvmCross.Base
 
         public async Task ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true)
         {
+            if (action == null)
+                return;
+
             var completion = new TaskCompletionSource<bool>();
             var syncAction = new Action(async () =>
             {
@@ -42,4 +49,5 @@ namespace MvvmCross.Base
 
         public abstract override bool IsOnMainThread { get; }
     }
+#nullable restore
 }

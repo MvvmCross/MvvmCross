@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -195,15 +196,15 @@ namespace MvvmCross.IoC
             return CanResolve(typeof(T));
         }
 
-        public bool CanResolve(Type t)
+        public bool CanResolve(Type type)
         {
             lock (_lockObject)
             {
-                if (_resolvers.ContainsKey(t))
+                if (_resolvers.ContainsKey(type))
                 {
                     return true;
                 }
-                if (_parentProvider != null && _parentProvider.CanResolve(t))
+                if (_parentProvider != null && _parentProvider.CanResolve(type))
                 {
                     return true;
                 }
@@ -242,14 +243,14 @@ namespace MvvmCross.IoC
             return (T)Resolve(typeof(T));
         }
 
-        public object Resolve(Type t)
+        public object Resolve(Type type)
         {
             lock (_lockObject)
             {
                 object resolved;
-                if (!InternalTryResolve(t, out resolved))
+                if (!InternalTryResolve(type, out resolved))
                 {
-                    throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
+                    throw new MvxIoCResolveException("Failed to resolve type {0}", type.FullName);
                 }
                 return resolved;
             }
@@ -261,14 +262,14 @@ namespace MvvmCross.IoC
             return (T)GetSingleton(typeof(T));
         }
 
-        public object GetSingleton(Type t)
+        public object GetSingleton(Type type)
         {
             lock (_lockObject)
             {
                 object resolved;
-                if (!InternalTryResolve(t, ResolverType.Singleton, out resolved))
+                if (!InternalTryResolve(type, ResolverType.Singleton, out resolved))
                 {
-                    throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
+                    throw new MvxIoCResolveException("Failed to resolve type {0}", type.FullName);
                 }
                 return resolved;
             }
@@ -280,14 +281,14 @@ namespace MvvmCross.IoC
             return (T)Create(typeof(T));
         }
 
-        public object Create(Type t)
+        public object Create(Type type)
         {
             lock (_lockObject)
             {
                 object resolved;
-                if (!InternalTryResolve(t, ResolverType.DynamicPerResolve, out resolved))
+                if (!InternalTryResolve(type, ResolverType.DynamicPerResolve, out resolved))
                 {
-                    throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
+                    throw new MvxIoCResolveException("Failed to resolve type {0}", type.FullName);
                 }
                 return resolved;
             }
@@ -321,19 +322,19 @@ namespace MvvmCross.IoC
             InternalSetResolver(t, resolver);
         }
 
-        public void RegisterType(Type interfaceType, Type constructType)
+        public void RegisterType(Type tFrom, Type tTo)
         {
             IResolver resolver = null;
-            if (interfaceType.GetTypeInfo().IsGenericTypeDefinition)
+            if (tFrom.GetTypeInfo().IsGenericTypeDefinition)
             {
-                resolver = new ConstructingOpenGenericResolver(constructType, this);
+                resolver = new ConstructingOpenGenericResolver(tTo, this);
             }
             else
             {
-                resolver = new ConstructingResolver(constructType, this);
+                resolver = new ConstructingResolver(tTo, this);
             }
 
-            InternalSetResolver(interfaceType, resolver);
+            InternalSetResolver(tFrom, resolver);
         }
 
         public void RegisterSingleton<TInterface>(TInterface theObject)
@@ -342,9 +343,9 @@ namespace MvvmCross.IoC
             RegisterSingleton(typeof(TInterface), theObject);
         }
 
-        public void RegisterSingleton(Type interfaceType, object theObject)
+        public void RegisterSingleton(Type tInterface, object theObject)
         {
-            InternalSetResolver(interfaceType, new SingletonResolver(theObject));
+            InternalSetResolver(tInterface, new SingletonResolver(theObject));
         }
 
         public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
@@ -353,9 +354,9 @@ namespace MvvmCross.IoC
             RegisterSingleton(typeof(TInterface), theConstructor);
         }
 
-        public void RegisterSingleton(Type interfaceType, Func<object> theConstructor)
+        public void RegisterSingleton(Type tInterface, Func<object> theConstructor)
         {
-            InternalSetResolver(interfaceType, new ConstructingSingletonResolver(theConstructor));
+            InternalSetResolver(tInterface, new ConstructingSingletonResolver(theConstructor));
         }
 
         public object IoCConstruct(Type type)
@@ -526,38 +527,6 @@ namespace MvvmCross.IoC
             return InternalTryResolve(type, resolver, out resolved);
         }
 
-        private bool TryGetResolver(Type type, out IResolver resolver)
-        {
-            if (_resolvers.TryGetValue(type, out resolver))
-            {
-                return true;
-            }
-
-            if (!type.GetTypeInfo().IsGenericType)
-            {
-                return false;
-            }
-
-            return _resolvers.TryGetValue(type.GetTypeInfo().GetGenericTypeDefinition(), out resolver);
-        }
-
-        private bool ShouldDetectCircularReferencesFor(IResolver resolver)
-        {
-            switch (resolver.ResolveType)
-            {
-                case ResolverType.DynamicPerResolve:
-                    return Options.TryToDetectDynamicCircularReferences;
-
-                case ResolverType.Singleton:
-                    return Options.TryToDetectSingletonCircularReferences;
-
-                case ResolverType.Unknown:
-                    throw new MvxException("A resolver must have a known type - error in {0}", resolver.GetType().Name);
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(resolver), "unknown resolveType of " + resolver.ResolveType);
-            }
-        }
-
         private bool InternalTryResolve(Type type, IResolver resolver, out object resolved)
         {
             var detectingCircular = ShouldDetectCircularReferencesFor(resolver);
@@ -572,7 +541,7 @@ namespace MvvmCross.IoC
                     // the item already exists in the lookup table
                     // - this is "game over" for the IoC lookup
                     // - see https://github.com/MvvmCross/MvvmCross/issues/553
-                    MvxLog.Instance.Error("IoC circular reference detected - cannot currently resolve {0}", type.Name);
+                    MvxLogHost.Default?.Log(LogLevel.Error, "IoC circular reference detected - cannot currently resolve {typeName}", type.Name);
                     resolved = type.CreateDefault();
                     return false;
                 }
@@ -605,6 +574,38 @@ namespace MvvmCross.IoC
                 {
                     _circularTypeDetection.Remove(type);
                 }
+            }
+        }
+
+        private bool TryGetResolver(Type type, out IResolver resolver)
+        {
+            if (_resolvers.TryGetValue(type, out resolver))
+            {
+                return true;
+            }
+
+            if (!type.GetTypeInfo().IsGenericType)
+            {
+                return false;
+            }
+
+            return _resolvers.TryGetValue(type.GetTypeInfo().GetGenericTypeDefinition(), out resolver);
+        }
+
+        private bool ShouldDetectCircularReferencesFor(IResolver resolver)
+        {
+            switch (resolver.ResolveType)
+            {
+                case ResolverType.DynamicPerResolve:
+                    return Options.TryToDetectDynamicCircularReferences;
+
+                case ResolverType.Singleton:
+                    return Options.TryToDetectSingletonCircularReferences;
+
+                case ResolverType.Unknown:
+                    throw new MvxException("A resolver must have a known type - error in {0}", resolver.GetType().Name);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(resolver), "unknown resolveType of " + resolver.ResolveType);
             }
         }
 

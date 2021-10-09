@@ -1,5 +1,312 @@
 # Changelog
 
+## [8.0.2](https://github.com/MvvmCross/MvvmCross/tree/8.0.2) (2021-07-25)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/8.0.1...8.0.2)
+
+**Implemented enhancements:**
+
+- Sticky Messages [\#4207](https://github.com/MvvmCross/MvvmCross/pull/4207) ([Hackmodford](https://github.com/Hackmodford))
+
+**Fixed bugs:**
+
+- Navigation with param and result crash on back navigation [\#4226](https://github.com/MvvmCross/MvvmCross/issues/4226)
+- Localization feature doesn't work [\#4208](https://github.com/MvvmCross/MvvmCross/issues/4208)
+- Color plugin breaks WPF designer with NullReferenceException [\#4144](https://github.com/MvvmCross/MvvmCross/issues/4144)
+- Fix appcompat searchview query targetbinding not registered [\#4231](https://github.com/MvvmCross/MvvmCross/pull/4231) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix navigate with TParameter and TResult resulting in crash [\#4230](https://github.com/MvvmCross/MvvmCross/pull/4230) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix potential null ref in MvxColorValueConverter [\#4229](https://github.com/MvvmCross/MvvmCross/pull/4229) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix resolving of IMvxTextProvider [\#4209](https://github.com/MvvmCross/MvvmCross/pull/4209) ([2urbo](https://github.com/2urbo))
+
+
+**Closed issues:**
+
+- Undocumented MvxApplication\<TMvxUapSetup, TApplication\> changes [\#4199](https://github.com/MvvmCross/MvvmCross/issues/4199)
+
+**Merged pull requests:**
+
+- Bump SonarAnalyzer.CSharp from 8.25.0.33663 to 8.26.0.34506 [\#4224](https://github.com/MvvmCross/MvvmCross/pull/4224) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.Google.Android.Material from 1.3.0.1 to 1.4.0 [\#4222](https://github.com/MvvmCross/MvvmCross/pull/4222) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.Leanback from 1.0.0.8 to 1.0.0.9 [\#4219](https://github.com/MvvmCross/MvvmCross/pull/4219) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.GooglePlayServices.Basement from 117.6.0 to 117.6.0.1 [\#4218](https://github.com/MvvmCross/MvvmCross/pull/4218) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.Fragment from 1.3.4 to 1.3.5 [\#4213](https://github.com/MvvmCross/MvvmCross/pull/4213) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump SonarAnalyzer.CSharp from 8.24.0.32949 to 8.25.0.33663 [\#4212](https://github.com/MvvmCross/MvvmCross/pull/4212) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.MediaRouter from 1.2.3 to 1.2.4 [\#4211](https://github.com/MvvmCross/MvvmCross/pull/4211) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Roslynator.Analyzers from 3.1.0 to 3.2.0 [\#4198](https://github.com/MvvmCross/MvvmCross/pull/4198) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Microsoft.CodeAnalysis from 3.9.0 to 3.10.0 [\#4197](https://github.com/MvvmCross/MvvmCross/pull/4197) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.Leanback from 1.0.0.7 to 1.0.0.8 [\#4191](https://github.com/MvvmCross/MvvmCross/pull/4191) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.RecyclerView from 1.2.0 to 1.2.1 [\#4190](https://github.com/MvvmCross/MvvmCross/pull/4190) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.10.10 to 1.11.7 in /docs [\#4189](https://github.com/MvvmCross/MvvmCross/pull/4189) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rexml from 3.2.4 to 3.2.5 in /docs [\#4188](https://github.com/MvvmCross/MvvmCross/pull/4188) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [8.0.0](https://github.com/MvvmCross/MvvmCross/tree/8.0.0) (2021-06-11)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/7.1.0...8.0.0)
+
+**Breaking changes:**
+
+- Switch to Microsoft.Logging.Abstractions [\#4141](https://github.com/MvvmCross/MvvmCross/pull/4141) ([Cheesebaron](https://github.com/Cheesebaron))
+- Add more nullable attributes [\#4078](https://github.com/MvvmCross/MvvmCross/pull/4078) ([Cheesebaron](https://github.com/Cheesebaron))
+- Warnings cleanup \(+semver: breaking\) [\#3967](https://github.com/MvvmCross/MvvmCross/pull/3967) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Implemented enhancements:**
+
+- PresentationStyle for MvxModalPresentationAttribute for iOS devices on Xamarin Forms [\#3973](https://github.com/MvvmCross/MvvmCross/pull/3973) ([patrick11994](https://github.com/patrick11994))
+
+**Fixed bugs:**
+
+- PreferenceFragment target bindings missing after migration to AndroidX [\#4094](https://github.com/MvvmCross/MvvmCross/issues/4094)
+- Fragment with Tag-Property of MvxFragmentPresentation-Attribute not found using FindFragmentByTag [\#3999](https://github.com/MvvmCross/MvvmCross/issues/3999)
+- Respect Tag in attribute when set [\#4187](https://github.com/MvvmCross/MvvmCross/pull/4187) ([Cheesebaron](https://github.com/Cheesebaron))
+- Add back preferences related bindings and helpers [\#4186](https://github.com/MvvmCross/MvvmCross/pull/4186) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix null ref in mvxmessenger using logger [\#4074](https://github.com/MvvmCross/MvvmCross/pull/4074) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix exception disposing weakevent on disposed source [\#4073](https://github.com/MvvmCross/MvvmCross/pull/4073) ([Cheesebaron](https://github.com/Cheesebaron))
+- Correct ios freezing when take photo. [\#4033](https://github.com/MvvmCross/MvvmCross/pull/4033) ([PierreYvesBl](https://github.com/PierreYvesBl))
+- Fix crash when trying to close plain iOS popover [\#4001](https://github.com/MvvmCross/MvvmCross/pull/4001) ([Hackmodford](https://github.com/Hackmodford))
+- Fix numberOfItemsInSection not implemented warning in MvxBaseCollectionViewSource [\#3981](https://github.com/MvvmCross/MvvmCross/pull/3981) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix for Forms Modal Back Navigation \#3914 [\#3976](https://github.com/MvvmCross/MvvmCross/pull/3976) ([patrick11994](https://github.com/patrick11994))
+- Change ViewModel Parameters and Result constraints from class to notnull [\#3970](https://github.com/MvvmCross/MvvmCross/pull/3970) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Closed issues:**
+
+- ViewModel Constructor Dependency Injection with a base ViewModel when upgrading from 6.3.1 to 7.1.2 [\#4183](https://github.com/MvvmCross/MvvmCross/issues/4183)
+- Warning GC27A339F: method 'collectionView:numberOfItemsInSection:' in protocol 'UICollectionViewDataSource' [\#3979](https://github.com/MvvmCross/MvvmCross/issues/3979)
+
+**Merged pull requests:**
+
+- Bump Xamarin.AndroidX.Leanback from 1.0.0.7 to 1.0.0.8 [\#4191](https://github.com/MvvmCross/MvvmCross/pull/4191) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.RecyclerView from 1.2.0 to 1.2.1 [\#4190](https://github.com/MvvmCross/MvvmCross/pull/4190) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.10.10 to 1.11.7 in /docs [\#4189](https://github.com/MvvmCross/MvvmCross/pull/4189) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rexml from 3.2.4 to 3.2.5 in /docs [\#4188](https://github.com/MvvmCross/MvvmCross/pull/4188) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Logging cleanup [\#4185](https://github.com/MvvmCross/MvvmCross/pull/4185) ([Cheesebaron](https://github.com/Cheesebaron))
+- Initialize logging as early as possible [\#4184](https://github.com/MvvmCross/MvvmCross/pull/4184) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump SonarAnalyzer.CSharp from 8.23.0.32424 to 8.24.0.32949 [\#4182](https://github.com/MvvmCross/MvvmCross/pull/4182) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.Fragment from 1.3.3 to 1.3.4 [\#4181](https://github.com/MvvmCross/MvvmCross/pull/4181) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.AppCompat.AppCompatResources from 1.2.0.7 to 1.3.0 [\#4180](https://github.com/MvvmCross/MvvmCross/pull/4180) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.AppCompat from 1.2.0.7 to 1.3.0 [\#4179](https://github.com/MvvmCross/MvvmCross/pull/4179) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Microsoft.NET.Test.Sdk from 16.9.4 to 16.10.0 [\#4178](https://github.com/MvvmCross/MvvmCross/pull/4178) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.MediaRouter from 1.2.2.1 to 1.2.3 [\#4177](https://github.com/MvvmCross/MvvmCross/pull/4177) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump SonarAnalyzer.CSharp from 8.22.0.31243 to 8.23.0.32424 [\#4176](https://github.com/MvvmCross/MvvmCross/pull/4176) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.Lifecycle.LiveData from 2.3.0.1 to 2.3.1 [\#4170](https://github.com/MvvmCross/MvvmCross/pull/4170) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.Leanback from 1.0.0.6 to 1.0.0.7 [\#4168](https://github.com/MvvmCross/MvvmCross/pull/4168) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump SonarAnalyzer.CSharp from 8.20.0.28934 to 8.22.0.31243 [\#4167](https://github.com/MvvmCross/MvvmCross/pull/4167) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.GooglePlayServices.Location from 117.1.0 to 118.0.0 [\#4166](https://github.com/MvvmCross/MvvmCross/pull/4166) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.AndroidX.Fragment from 1.3.0.1 to 1.3.3 [\#4165](https://github.com/MvvmCross/MvvmCross/pull/4165) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.CodeAnalysis from 3.8.0 to 3.9.0 [\#4164](https://github.com/MvvmCross/MvvmCross/pull/4164) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Upgrade to GitHub-native Dependabot [\#4163](https://github.com/MvvmCross/MvvmCross/pull/4163) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump XunitXml.TestLogger from 3.0.62 to 3.0.66 [\#4159](https://github.com/MvvmCross/MvvmCross/pull/4159) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.ExifInterface from 1.3.2.1 to 1.3.2.2 [\#4158](https://github.com/MvvmCross/MvvmCross/pull/4158) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Moq from 4.16.0 to 4.16.1 [\#4157](https://github.com/MvvmCross/MvvmCross/pull/4157) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NET.Test.Sdk from 16.8.3 to 16.9.4 [\#4155](https://github.com/MvvmCross/MvvmCross/pull/4155) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump SonarAnalyzer.CSharp from 8.18.0.27296 to 8.20.0.28934 [\#4153](https://github.com/MvvmCross/MvvmCross/pull/4153) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.RecyclerView from 1.1.0.8 to 1.2.0 [\#4152](https://github.com/MvvmCross/MvvmCross/pull/4152) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Fix misunderstanding sentence in Value Combiners documentation [\#4121](https://github.com/MvvmCross/MvvmCross/pull/4121) ([hieuwu](https://github.com/hieuwu))
+- Bump packages [\#4120](https://github.com/MvvmCross/MvvmCross/pull/4120) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Xamarin.GooglePlayServices.Basement from 117.5.0 to 117.6.0 [\#4106](https://github.com/MvvmCross/MvvmCross/pull/4106) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Add caching to pipeline [\#4098](https://github.com/MvvmCross/MvvmCross/pull/4098) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Microsoft.NETCore.UniversalWindowsPlatform from 6.2.11 to 6.2.12 [\#4086](https://github.com/MvvmCross/MvvmCross/pull/4086) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Fragment from 1.2.5.4 to 1.2.5.5 [\#4085](https://github.com/MvvmCross/MvvmCross/pull/4085) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump SonarAnalyzer.CSharp from 8.17.0.26580 to 8.18.0.27296 [\#4084](https://github.com/MvvmCross/MvvmCross/pull/4084) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump XunitXml.TestLogger from 2.1.45 to 3.0.62 [\#4082](https://github.com/MvvmCross/MvvmCross/pull/4082) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Test improvement [\#4081](https://github.com/MvvmCross/MvvmCross/pull/4081) ([epsmae](https://github.com/epsmae))
+- Bump Roslynator.Analyzers from 3.0.0 to 3.1.0 [\#4079](https://github.com/MvvmCross/MvvmCross/pull/4079) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.MediaRouter from 1.2.0.1 to 1.2.1 [\#4076](https://github.com/MvvmCross/MvvmCross/pull/4076) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Add More Nullable Attributes [\#4075](https://github.com/MvvmCross/MvvmCross/pull/4075) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Xamarin.AndroidX.MediaRouter from 1.2.0.1 to 1.2.1 [\#4072](https://github.com/MvvmCross/MvvmCross/pull/4072) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump XunitXml.TestLogger from 2.1.26 to 2.1.45 [\#4070](https://github.com/MvvmCross/MvvmCross/pull/4070) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump AsyncFixer from 1.4.1 to 1.5.1 [\#4069](https://github.com/MvvmCross/MvvmCross/pull/4069) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Update Getting Started Doc [\#4068](https://github.com/MvvmCross/MvvmCross/pull/4068) ([Hackmodford](https://github.com/Hackmodford))
+- Update Custom Data Binding documentation [\#4067](https://github.com/MvvmCross/MvvmCross/pull/4067) ([Hackmodford](https://github.com/Hackmodford))
+- Update upgrade-to-mvvmcross-60.md [\#4064](https://github.com/MvvmCross/MvvmCross/pull/4064) ([igormoiseev](https://github.com/igormoiseev))
+- Bump SonarAnalyzer.CSharp from 8.16.0.25740 to 8.17.0.26580 [\#4061](https://github.com/MvvmCross/MvvmCross/pull/4061) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump AsyncFixer from 1.4.0 to 1.4.1 [\#4060](https://github.com/MvvmCross/MvvmCross/pull/4060) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump AsyncFixer from 1.3.0 to 1.4.0 [\#4059](https://github.com/MvvmCross/MvvmCross/pull/4059) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Moq from 4.15.2 to 4.16.0 [\#4058](https://github.com/MvvmCross/MvvmCross/pull/4058) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Update Package List Documentation [\#4055](https://github.com/MvvmCross/MvvmCross/pull/4055) ([Hackmodford](https://github.com/Hackmodford))
+- Feature/visual studio build improvement [\#4054](https://github.com/MvvmCross/MvvmCross/pull/4054) ([epsmae](https://github.com/epsmae))
+- Improve MethodBinding Documentation [\#4052](https://github.com/MvvmCross/MvvmCross/pull/4052) ([Hackmodford](https://github.com/Hackmodford))
+- fix MvxValueConverter example code in docs [\#4050](https://github.com/MvvmCross/MvvmCross/pull/4050) ([Hackmodford](https://github.com/Hackmodford))
+- fix for contributors not appearing in docs [\#4049](https://github.com/MvvmCross/MvvmCross/pull/4049) ([Hackmodford](https://github.com/Hackmodford))
+- Update MvxPresentationHint Documentation [\#4047](https://github.com/MvvmCross/MvvmCross/pull/4047) ([Hackmodford](https://github.com/Hackmodford))
+- Bump MSBuild.Sdk.Extras from 3.0.22 to 3.0.23 [\#4044](https://github.com/MvvmCross/MvvmCross/pull/4044) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.CodeAnalysis.NetAnalyzers from 5.0.1 to 5.0.3 [\#4042](https://github.com/MvvmCross/MvvmCross/pull/4042) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Add docs for MvxPopoverPresentationAttribute [\#4039](https://github.com/MvvmCross/MvvmCross/pull/4039) ([Hackmodford](https://github.com/Hackmodford))
+- Bump Xamarin.GooglePlayServices.Basement from 117.4.0 to 117.5.0 [\#4038](https://github.com/MvvmCross/MvvmCross/pull/4038) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.Google.Android.Material from 1.2.1 to 1.2.1.1 [\#4037](https://github.com/MvvmCross/MvvmCross/pull/4037) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump deps [\#4036](https://github.com/MvvmCross/MvvmCross/pull/4036) ([Cheesebaron](https://github.com/Cheesebaron))
+- Nuget manage packages centrally [\#4035](https://github.com/MvvmCross/MvvmCross/pull/4035) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Xamarin.AndroidX.MediaRouter from 1.2.0 to 1.2.0.1 [\#4030](https://github.com/MvvmCross/MvvmCross/pull/4030) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Legacy.Support.V4 from 1.0.0.5 to 1.0.0.6 [\#4025](https://github.com/MvvmCross/MvvmCross/pull/4025) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Lifecycle.LiveData from 2.2.0.3 to 2.2.0.4 [\#4024](https://github.com/MvvmCross/MvvmCross/pull/4024) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.GooglePlayServices.Basement from 117.2.1 to 117.4.0 [\#4015](https://github.com/MvvmCross/MvvmCross/pull/4015) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.Google.Android.Material from 1.1.0.5 to 1.2.1 [\#4013](https://github.com/MvvmCross/MvvmCross/pull/4013) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.ExifInterface from 1.3.1 to 1.3.2 [\#4012](https://github.com/MvvmCross/MvvmCross/pull/4012) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump MSBuild.Sdk.Extras from 2.1.2 to 3.0.22 [\#4008](https://github.com/MvvmCross/MvvmCross/pull/4008) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.CodeAnalysis.FxCopAnalyzers from 3.3.1 to 3.3.2 [\#4006](https://github.com/MvvmCross/MvvmCross/pull/4006) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NET.Test.Sdk from 16.8.0 to 16.8.3 [\#4002](https://github.com/MvvmCross/MvvmCross/pull/4002) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Moq from 4.15.1 to 4.15.2 [\#4000](https://github.com/MvvmCross/MvvmCross/pull/4000) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump SonarAnalyzer.CSharp from 8.14.0.22654 to 8.15.0.24505 [\#3998](https://github.com/MvvmCross/MvvmCross/pull/3998) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NETCore.UniversalWindowsPlatform from 6.2.10 to 6.2.11 [\#3996](https://github.com/MvvmCross/MvvmCross/pull/3996) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.CodeAnalysis from 3.7.0 to 3.8.0 [\#3994](https://github.com/MvvmCross/MvvmCross/pull/3994) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Moq from 4.14.7 to 4.15.1 [\#3992](https://github.com/MvvmCross/MvvmCross/pull/3992) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.Google.Android.Material from 1.0.0.1 to 1.1.0.5 [\#3991](https://github.com/MvvmCross/MvvmCross/pull/3991) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NET.Test.Sdk from 16.7.1 to 16.8.0 [\#3990](https://github.com/MvvmCross/MvvmCross/pull/3990) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Fix memory leak in MvxMacViewPresenter [\#3989](https://github.com/MvvmCross/MvvmCross/pull/3989) ([ivmirx](https://github.com/ivmirx))
+- Bump Xamarin.AndroidX.AppCompat from 1.2.0.4 to 1.2.0.5 [\#3987](https://github.com/MvvmCross/MvvmCross/pull/3987) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.SwipeRefreshLayout from 1.0.0.5 to 1.1.0 [\#3986](https://github.com/MvvmCross/MvvmCross/pull/3986) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.ExifInterface from 1.1.0.5 to 1.3.1 [\#3985](https://github.com/MvvmCross/MvvmCross/pull/3985) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.MediaRouter from 1.1.0.5 to 1.2.0 [\#3984](https://github.com/MvvmCross/MvvmCross/pull/3984) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.CodeAnalysis.FxCopAnalyzers from 3.3.0 to 3.3.1 [\#3977](https://github.com/MvvmCross/MvvmCross/pull/3977) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Xamarin Forms 5.0 Support [\#3972](https://github.com/MvvmCross/MvvmCross/pull/3972) ([epsmae](https://github.com/epsmae))
+- Bump Xamarin.GooglePlayServices.Basement from 117.1.1 to 117.2.1 [\#3971](https://github.com/MvvmCross/MvvmCross/pull/3971) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+## [7.1.0](https://github.com/MvvmCross/MvvmCross/tree/7.1.0) (2020-10-21)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/7.0.1...7.1.0)
+
+**Breaking changes:**
+
+- Enable nullable attributes on MvxIosViewPresenter and friends [\#3961](https://github.com/MvvmCross/MvvmCross/pull/3961) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix Mac playground and MvxMacViewPresenter [\#3959](https://github.com/MvvmCross/MvvmCross/pull/3959) ([ivmirx](https://github.com/ivmirx))
+- Enable Nullable References on MvxDefaultViewModelLocator [\#3934](https://github.com/MvvmCross/MvvmCross/pull/3934) ([Cheesebaron](https://github.com/Cheesebaron))
+- Remove Network and File plugins [\#3932](https://github.com/MvvmCross/MvvmCross/pull/3932) ([Cheesebaron](https://github.com/Cheesebaron))
+- Mark MvxAndroidViewPresenter nullable and fix all the null issues [\#3916](https://github.com/MvvmCross/MvvmCross/pull/3916) ([Cheesebaron](https://github.com/Cheesebaron))
+- Clean up Android Presenter [\#3912](https://github.com/MvvmCross/MvvmCross/pull/3912) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Implemented enhancements:**
+
+- Added MvxPopoverPresentationAttribute [\#3857](https://github.com/MvvmCross/MvvmCross/pull/3857) ([Hackmodford](https://github.com/Hackmodford))
+
+**Fixed bugs:**
+
+- No windows is presented when trying to launch Mac app [\#3830](https://github.com/MvvmCross/MvvmCross/issues/3830)
+- fix for adjusting scrollview insets twice [\#3950](https://github.com/MvvmCross/MvvmCross/pull/3950) ([Hackmodford](https://github.com/Hackmodford))
+
+**Closed issues:**
+
+- Fragment.Instantiate is deprecated [\#3949](https://github.com/MvvmCross/MvvmCross/issues/3949)
+- Poll: Removal of Plugins File and Network [\#3915](https://github.com/MvvmCross/MvvmCross/issues/3915)
+
+**Merged pull requests:**
+
+- Bump Xamarin.GooglePlayServices.Basement from 71.1620.4 to 117.1.1 [\#3965](https://github.com/MvvmCross/MvvmCross/pull/3965) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Moq from 4.14.5 to 4.14.7 [\#3964](https://github.com/MvvmCross/MvvmCross/pull/3964) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- CI and project updates [\#3962](https://github.com/MvvmCross/MvvmCross/pull/3962) ([Cheesebaron](https://github.com/Cheesebaron))
+- Change Slack links to Discord links in the docs [\#3960](https://github.com/MvvmCross/MvvmCross/pull/3960) ([ivmirx](https://github.com/ivmirx))
+- Fix nullable references in Android Presenter [\#3956](https://github.com/MvvmCross/MvvmCross/pull/3956) ([Cheesebaron](https://github.com/Cheesebaron))
+- Replace deprecated Fragment.Instantiate by FragmentFactory.Instantiate [\#3953](https://github.com/MvvmCross/MvvmCross/pull/3953) ([Prin53](https://github.com/Prin53))
+- Bump Xamarin.AndroidX.Lifecycle.LiveData from 2.2.0.2 to 2.2.0.3 [\#3944](https://github.com/MvvmCross/MvvmCross/pull/3944) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Legacy.Support.V4 from 1.0.0.4 to 1.0.0.5 [\#3943](https://github.com/MvvmCross/MvvmCross/pull/3943) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.MediaRouter from 1.1.0.4 to 1.1.0.5 [\#3940](https://github.com/MvvmCross/MvvmCross/pull/3940) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Serilog from 2.9.0 to 2.10.0 [\#3929](https://github.com/MvvmCross/MvvmCross/pull/3929) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Roslynator.Analyzers from 2.3.0 to 3.0.0 [\#3928](https://github.com/MvvmCross/MvvmCross/pull/3928) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Add ability to Add fragment instead of always replacing it [\#3911](https://github.com/MvvmCross/MvvmCross/pull/3911) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Microsoft.NET.Test.Sdk from 16.7.0 to 16.7.1 [\#3895](https://github.com/MvvmCross/MvvmCross/pull/3895) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Move Sonar into own pipeline [\#3891](https://github.com/MvvmCross/MvvmCross/pull/3891) ([Cheesebaron](https://github.com/Cheesebaron))
+- Centralize NuGet package versions + bump AndroidX packages [\#3890](https://github.com/MvvmCross/MvvmCross/pull/3890) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Xamarin.AndroidX.MediaRouter from 1.1.0.1 to 1.1.0.2 [\#3886](https://github.com/MvvmCross/MvvmCross/pull/3886) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Legacy.Support.V4 from 1.0.0.1 to 1.0.0.2 [\#3882](https://github.com/MvvmCross/MvvmCross/pull/3882) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Lifecycle.LiveData from 2.2.0.1 to 2.2.0.2 [\#3881](https://github.com/MvvmCross/MvvmCross/pull/3881) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+## [7.0.1](https://github.com/MvvmCross/MvvmCross/tree/7.0.1) (2020-09-19)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/7.0.0...7.0.1)
+
+**Fixed bugs:**
+
+- Revert change to InflateViewForHolder in \#3802 [\#3930](https://github.com/MvvmCross/MvvmCross/pull/3930) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Merged pull requests:**
+
+- Update release 7.0.0 blog post with more type changes [\#3875](https://github.com/MvvmCross/MvvmCross/pull/3875) ([Cheesebaron](https://github.com/Cheesebaron))
+
+## [7.0.0](https://github.com/MvvmCross/MvvmCross/tree/7.0.0) (2020-08-14)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.4.2...7.0.0)
+
+**Breaking changes:**
+
+- Remove support for Framework Fragments. Everything now uses AndroidX Fragments! [\#3750](https://github.com/MvvmCross/MvvmCross/pull/3750) ([Cheesebaron](https://github.com/Cheesebaron))
+- Remove monodroid9.0 TFM and update packages [\#3741](https://github.com/MvvmCross/MvvmCross/pull/3741) ([martijn00](https://github.com/martijn00))
+- Preliminary Android X support [\#3709](https://github.com/MvvmCross/MvvmCross/pull/3709) ([Cheesebaron](https://github.com/Cheesebaron))
+- Remove obsolete platform services method [\#3674](https://github.com/MvvmCross/MvvmCross/pull/3674) ([Strifex](https://github.com/Strifex))
+
+**Implemented enhancements:**
+
+- Binding : Binding Set Creation [\#3693](https://github.com/MvvmCross/MvvmCross/issues/3693)
+
+**Fixed bugs:**
+
+- MvxIosViewPresenter fails to close all modal ViewControllers [\#3826](https://github.com/MvvmCross/MvvmCross/issues/3826)
+- EXC\_BAD\_ACCESS on MvxPathSourceStep.ClearPathSourceBinding [\#3784](https://github.com/MvvmCross/MvvmCross/issues/3784)
+- Conflict calls to SaveAsync\(\) in MvxSuspensionManager [\#3772](https://github.com/MvvmCross/MvvmCross/issues/3772)
+- Exception Java.Lang.NoSuchMethodError: no method with name='isDestroyed' occurs on API 16 [\#3727](https://github.com/MvvmCross/MvvmCross/issues/3727)
+- Use dedicated object to acquire lock [\#3810](https://github.com/MvvmCross/MvvmCross/pull/3810) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix NoSuchMethodError exception when calling IsDestroyed [\#3729](https://github.com/MvvmCross/MvvmCross/pull/3729) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix rethrowing exceptions [\#3683](https://github.com/MvvmCross/MvvmCross/pull/3683) ([sm-g](https://github.com/sm-g))
+
+**Closed issues:**
+
+- Mistake in documentation [\#3690](https://github.com/MvvmCross/MvvmCross/issues/3690)
+
+**Merged pull requests:**
+
+- Bump Microsoft.CodeAnalysis.FxCopAnalyzers from 3.0.0 to 3.3.0 [\#3864](https://github.com/MvvmCross/MvvmCross/pull/3864) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NET.Test.Sdk from 16.6.1 to 16.7.0 [\#3860](https://github.com/MvvmCross/MvvmCross/pull/3860) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.CodeAnalysis from 3.6.0 to 3.7.0 [\#3859](https://github.com/MvvmCross/MvvmCross/pull/3859) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump xunit.runner.visualstudio from 2.4.2 to 2.4.3 [\#3856](https://github.com/MvvmCross/MvvmCross/pull/3856) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump MSBuild.Sdk.Extras from 2.0.54 to 2.1.2 [\#3848](https://github.com/MvvmCross/MvvmCross/pull/3848) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.GooglePlayServices.Basement from 71.1620.2 to 71.1620.4 [\#3843](https://github.com/MvvmCross/MvvmCross/pull/3843) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.GooglePlayServices.Location from 71.1600.1 to 71.1600.4 [\#3842](https://github.com/MvvmCross/MvvmCross/pull/3842) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Fix iOS Modal ViewController closing issue [\#3827](https://github.com/MvvmCross/MvvmCross/pull/3827) ([Gaisuru](https://github.com/Gaisuru))
+- Fix SonarCube failing PR builds [\#3823](https://github.com/MvvmCross/MvvmCross/pull/3823) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Moq from 4.14.4 to 4.14.5 [\#3818](https://github.com/MvvmCross/MvvmCross/pull/3818) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Moq from 4.14.3 to 4.14.4 [\#3815](https://github.com/MvvmCross/MvvmCross/pull/3815) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Moq from 4.14.2 to 4.14.3 [\#3813](https://github.com/MvvmCross/MvvmCross/pull/3813) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.MediaRouter from 1.1.0 to 1.1.0.1 [\#3812](https://github.com/MvvmCross/MvvmCross/pull/3812) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Moq from 4.14.1 to 4.14.2 [\#3809](https://github.com/MvvmCross/MvvmCross/pull/3809) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Preference from 1.1.1 to 1.1.1.1 [\#3808](https://github.com/MvvmCross/MvvmCross/pull/3808) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Fragment from 1.2.4 to 1.2.4.1 [\#3807](https://github.com/MvvmCross/MvvmCross/pull/3807) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Fix Playground.Forms.Droid sample [\#3806](https://github.com/MvvmCross/MvvmCross/pull/3806) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Xamarin.AndroidX.ViewPager from 1.0.0 to 1.0.0.1 [\#3800](https://github.com/MvvmCross/MvvmCross/pull/3800) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.ExifInterface from 1.1.0 to 1.1.0.1 [\#3799](https://github.com/MvvmCross/MvvmCross/pull/3799) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.RecyclerView from 1.1.0 to 1.1.0.1 [\#3798](https://github.com/MvvmCross/MvvmCross/pull/3798) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Leanback from 1.0.0 to 1.0.0.1 [\#3797](https://github.com/MvvmCross/MvvmCross/pull/3797) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.CardView from 1.0.0 to 1.0.0.1 [\#3796](https://github.com/MvvmCross/MvvmCross/pull/3796) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.Google.Android.Material from 1.0.0 to 1.0.0.1 [\#3795](https://github.com/MvvmCross/MvvmCross/pull/3795) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Legacy.Support.V4 from 1.0.0 to 1.0.0.1 [\#3794](https://github.com/MvvmCross/MvvmCross/pull/3794) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.SwipeRefreshLayout from 1.0.0 to 1.0.0.1 [\#3793](https://github.com/MvvmCross/MvvmCross/pull/3793) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.AppCompat from 1.1.0 to 1.1.0.1 [\#3792](https://github.com/MvvmCross/MvvmCross/pull/3792) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Lifecycle.LiveData from 2.2.0 to 2.2.0.1 [\#3791](https://github.com/MvvmCross/MvvmCross/pull/3791) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump xunit.runner.visualstudio from 2.4.1 to 2.4.2 [\#3788](https://github.com/MvvmCross/MvvmCross/pull/3788) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump AsyncFixer from 1.1.6 to 1.3.0 [\#3786](https://github.com/MvvmCross/MvvmCross/pull/3786) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Lifecycle.LiveData from 2.1.0 to 2.2.0 [\#3782](https://github.com/MvvmCross/MvvmCross/pull/3782) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Fix Android Playground after migration to AndroidX [\#3781](https://github.com/MvvmCross/MvvmCross/pull/3781) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Microsoft.CodeAnalysis from 3.5.0 to 3.6.0 [\#3776](https://github.com/MvvmCross/MvvmCross/pull/3776) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.GooglePlayServices.Location from 71.1600.0 to 71.1600.1 [\#3771](https://github.com/MvvmCross/MvvmCross/pull/3771) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.GooglePlayServices.Basement from 71.1620.0 to 71.1620.2 [\#3770](https://github.com/MvvmCross/MvvmCross/pull/3770) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Moq from 4.14.0 to 4.14.1 [\#3765](https://github.com/MvvmCross/MvvmCross/pull/3765) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.CodeAnalysis.FxCopAnalyzers from 2.9.8 to 3.0.0 [\#3764](https://github.com/MvvmCross/MvvmCross/pull/3764) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Fragment from 1.2.2 to 1.2.4 [\#3763](https://github.com/MvvmCross/MvvmCross/pull/3763) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NET.Test.Sdk from 16.6.0 to 16.6.1 [\#3762](https://github.com/MvvmCross/MvvmCross/pull/3762) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Preference from 1.1.0 to 1.1.1 [\#3761](https://github.com/MvvmCross/MvvmCross/pull/3761) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Moq from 4.13.1 to 4.14.0 [\#3760](https://github.com/MvvmCross/MvvmCross/pull/3760) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NET.Test.Sdk from 16.5.0 to 16.6.0 [\#3756](https://github.com/MvvmCross/MvvmCross/pull/3756) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Serilog.Sinks.Xamarin from 0.1.37 to 0.2.0.64 [\#3755](https://github.com/MvvmCross/MvvmCross/pull/3755) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Plugin.Permissions from 6.0.0-beta to 6.0.1 [\#3749](https://github.com/MvvmCross/MvvmCross/pull/3749) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Fragment from 1.2.2 to 1.2.3 [\#3744](https://github.com/MvvmCross/MvvmCross/pull/3744) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Fragment from 1.1.0 to 1.2.2 [\#3738](https://github.com/MvvmCross/MvvmCross/pull/3738) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NETCore.UniversalWindowsPlatform from 6.2.9 to 6.2.10 [\#3737](https://github.com/MvvmCross/MvvmCross/pull/3737) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.CodeAnalysis from 3.4.0 to 3.5.0 [\#3736](https://github.com/MvvmCross/MvvmCross/pull/3736) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.Build.Download from 0.9.0 to 0.10.0 [\#3732](https://github.com/MvvmCross/MvvmCross/pull/3732) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump SidebarNavigation from 2.0.0 to 2.1.0 [\#3731](https://github.com/MvvmCross/MvvmCross/pull/3731) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Modify docs. Typo. [\#3703](https://github.com/MvvmCross/MvvmCross/pull/3703) ([jz5](https://github.com/jz5))
+- \#3690: Fixed class name [\#3696](https://github.com/MvvmCross/MvvmCross/pull/3696) ([markuspalme](https://github.com/markuspalme))
+- Fix MvxLayoutInflater nullref [\#3688](https://github.com/MvvmCross/MvvmCross/pull/3688) ([Cheesebaron](https://github.com/Cheesebaron))
+- Update singleton registering sample in the docs [\#3687](https://github.com/MvvmCross/MvvmCross/pull/3687) ([PoLaKoSz](https://github.com/PoLaKoSz))
+- Bump Xamarin.Build.Download from 0.4.11 to 0.8.0 [\#3681](https://github.com/MvvmCross/MvvmCross/pull/3681) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Downgrade Xamarin.Build.Download to 0.4.11 as latest has a bug [\#3679](https://github.com/MvvmCross/MvvmCross/pull/3679) ([Cheesebaron](https://github.com/Cheesebaron))
+
 ## [6.4.2](https://github.com/MvvmCross/MvvmCross/tree/6.4.2) (2020-01-03)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.4.1...6.4.2)

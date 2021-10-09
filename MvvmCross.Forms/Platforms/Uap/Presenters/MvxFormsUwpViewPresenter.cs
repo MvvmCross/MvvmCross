@@ -4,13 +4,12 @@
 
 using MvvmCross.Forms.Presenters;
 using System;
-using MvvmCross.Forms.Core;
-using MvvmCross.Logging;
 using MvvmCross.Platforms.Uap.Presenters;
 using MvvmCross.Platforms.Uap.Views;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Forms.Platforms.Uap.Presenters
 {
@@ -65,13 +64,13 @@ namespace MvvmCross.Forms.Platforms.Uap.Presenters
 
         public virtual bool ShowPlatformHost(Type hostViewModel = null)
         {
-            MvxFormsLog.Instance.Trace($"Showing of native host View in Forms is not supported.");
+            MvxFormsLog.Instance?.Log(LogLevel.Trace, "Showing of native host View in Forms is not supported");
             return false;
         }
 
         public virtual bool ClosePlatformViews()
         {
-            MvxFormsLog.Instance.Trace($"Closing of native Views in Forms is not supported.");
+            MvxFormsLog.Instance?.Log(LogLevel.Trace, "Closing of native Views in Forms is not supported.");
             return false;
         }
     }

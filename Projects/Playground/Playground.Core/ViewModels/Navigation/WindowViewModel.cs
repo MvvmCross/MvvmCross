@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using MvvmCross.Commands;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Playground.Core.ViewModels
 {
@@ -81,7 +81,8 @@ namespace Playground.Core.ViewModels
 
         public int Count { get; set; }
 
-        public WindowViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        public WindowViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
+            : base(logProvider, navigationService)
         {
             _count++;
             Count = _count;
@@ -95,7 +96,7 @@ namespace Playground.Core.ViewModels
                 });
             });
 
-            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
 
             ToggleSettingCommand = new MvxAsyncCommand(async () => 
             {
@@ -106,9 +107,8 @@ namespace Playground.Core.ViewModels
             });
         }
 
-        public IMvxAsyncCommand CloseCommand { get; private set; }
-        public IMvxAsyncCommand<int> ShowWindowChildCommand { get; private set; }
-
-        public IMvxAsyncCommand ToggleSettingCommand { get; private set; }    
+        public IMvxAsyncCommand CloseCommand { get; }
+        public IMvxAsyncCommand<int> ShowWindowChildCommand { get; }
+        public IMvxAsyncCommand ToggleSettingCommand { get; }
     }
 }

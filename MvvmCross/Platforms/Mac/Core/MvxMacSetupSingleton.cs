@@ -18,13 +18,6 @@ namespace MvvmCross.Platforms.Mac.Core
             return instance;
         }
 
-        public static MvxMacSetupSingleton EnsureSingletonAvailable(IMvxApplicationDelegate applicationDelegate, NSWindow window)
-        {
-            var instance = EnsureSingletonAvailable<MvxMacSetupSingleton>();
-            instance.PlatformSetup<MvxMacSetup>()?.PlatformInitialize(applicationDelegate, window);
-            return instance;
-        }
-
         public static MvxMacSetupSingleton EnsureSingletonAvailable(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
         {
             var instance = EnsureSingletonAvailable<MvxMacSetupSingleton>();

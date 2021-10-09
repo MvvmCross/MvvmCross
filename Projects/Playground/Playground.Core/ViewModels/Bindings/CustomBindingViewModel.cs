@@ -1,6 +1,6 @@
 ﻿using System;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
@@ -17,7 +17,8 @@ namespace Playground.Core.ViewModels.Bindings
 
         private string _hello = "Hello MvvmCross";
 
-        public CustomBindingViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        public CustomBindingViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService) 
+            : base(logFactory, navigationService)
         {
         }
 
@@ -27,9 +28,8 @@ namespace Playground.Core.ViewModels.Bindings
             set => SetProperty(ref _hello, value);
         }
 
-        public IMvxAsyncCommand CloseCommand => _closeCommand ??
-                                                (_closeCommand = new MvxAsyncCommand(async () =>
-                                                    await NavigationService.Close(this)));
+        public IMvxAsyncCommand CloseCommand =>
+            _closeCommand ??= new MvxAsyncCommand(() => NavigationService.Close(this));
 
         public int Counter
         {

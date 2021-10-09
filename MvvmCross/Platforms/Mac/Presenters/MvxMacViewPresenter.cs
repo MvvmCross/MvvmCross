@@ -15,6 +15,8 @@ using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 using System.Threading.Tasks;
+using Foundation;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Mac.Presenters
 {
@@ -25,7 +27,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
-            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new window presentation");
+            MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. Assuming new window presentation", viewType.Name);
             return new MvxWindowPresentationAttribute();
         }
 
@@ -40,7 +42,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
                     if (presentationAttribute == null)
                     {
-                        MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
+                        MvxLogHost.Default?.Log(LogLevel.Warning, "Override PresentationAttribute null. Falling back to existing attribute.");
                     }
                     else
                     {
@@ -60,11 +62,14 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
         protected virtual INSApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
-        protected virtual List<NSWindow> Windows => NSApplication.SharedApplication.Windows.ToList();
+        protected virtual List<NSWindow> Windows { get; } = new List<NSWindow>();
+
+        protected virtual NSWindow MainWindow => NSApplication.SharedApplication.MainWindow;
 
         public MvxMacViewPresenter(INSApplicationDelegate applicationDelegate)
         {
             _applicationDelegate = applicationDelegate;
+            NSWindow.Notifications.ObserveWillClose(OnWindowWillCloseNotification);
         }
 
         public override void RegisterAttributeTypes()
@@ -140,6 +145,9 @@ namespace MvvmCross.Platforms.Mac.Presenters
                 UpdateWindow(attribute, window);
             }
 
+            if (!Windows.Contains(window))
+                Windows.Add(window);
+
             window.Identifier = attribute.Identifier ?? viewController.GetType().Name;
 
             if (!string.IsNullOrEmpty(viewController.Title))
@@ -204,12 +212,17 @@ namespace MvvmCross.Platforms.Mac.Presenters
             return windowController;
         }
 
+        protected virtual MvxWindowController CreateWindowController(NSWindow window)
+        {
+            return new MvxWindowController(window);
+        }
+
         protected virtual Task<bool> ShowContentViewController(
             NSViewController viewController,
             MvxContentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var window = Windows.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();
+            var window = FindPresentingWindow(attribute.WindowIdentifier, viewController);
 
             if (!string.IsNullOrEmpty(viewController.Title))
                 window.Title = viewController.Title;
@@ -224,7 +237,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var window = Windows.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();
+            var window = FindPresentingWindow(attribute.WindowIdentifier, viewController);
 
             window.ContentViewController.PresentViewControllerAsModalWindow(viewController);
             return Task.FromResult(true);
@@ -235,7 +248,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             MvxSheetPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var window = Windows.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();
+            var window = FindPresentingWindow(attribute.WindowIdentifier, viewController);
 
             window.ContentViewController.PresentViewControllerAsSheet(viewController);
             return Task.FromResult(true);
@@ -246,57 +259,72 @@ namespace MvvmCross.Platforms.Mac.Presenters
             MvxTabPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var window = Windows.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();
+            var window = FindPresentingWindow(attribute.WindowIdentifier, viewController);
 
             var tabViewController = window.ContentViewController as IMvxTabViewController;
             if (tabViewController == null)
-                throw new MvxException($"trying to display a tab but there is no TabViewController! View type: {viewController.GetType()}");
+                throw new MvxException($"Trying to display a tab but there is no TabViewController to host it! View type: {viewController.GetType()}");
 
             tabViewController.ShowTabView(viewController, attribute.TabTitle);
             return Task.FromResult(true);
         }
 
+        protected virtual NSWindow FindPresentingWindow(string identifier, NSViewController viewController)
+        {
+            NSWindow window = null;
+
+            if (!string.IsNullOrEmpty(identifier))
+                window = Windows.FirstOrDefault(w => w.Identifier == identifier);
+
+            if (window == null)
+                window = MainWindow ?? Windows.LastOrDefault();
+
+            if (window == null)
+                throw new MvxException($"Could not find a window with identifier '{identifier}' to display view '{viewController.GetType()}'");
+
+            return window;
+        }
+
         public override Task<bool> Close(IMvxViewModel viewModel)
         {
-            var currentWindows = Windows;
-            for (int i = currentWindows.Count - 1; i >= 0; i--)
+            for (int i = Windows.Count - 1; i >= 0; i--)
             {
-                var window = currentWindows[i];
-
-                // if toClose is a sheet or modal
-                if (window.ContentViewController.PresentedViewControllers.Any())
-                {
-                    var modal = window.ContentViewController.PresentedViewControllers
-                                      .Select(v => v as MvxViewController)
-                                      .FirstOrDefault(v => v.ViewModel == viewModel);
-
-                    if (modal != null)
-                    {
-                        window.ContentViewController.DismissViewController(modal);
-                        return Task.FromResult(true);
-                    }
-                }
-                // if toClose is a tab
+                var window = Windows[i];
+                
+                // closing controller is a tab
                 var tabViewController = window.ContentViewController as IMvxTabViewController;
                 if (tabViewController != null && tabViewController.CloseTabView(viewModel))
                 {
                     return Task.FromResult(true);
                 }
 
-                // toClose is a content
                 var controller = window.ContentViewController as MvxViewController;
+
+                // if closing controller is a sheet or modal, it must have a presenting parent
+                var presentedController = controller.PresentedViewControllers?.FirstOrDefault(c => ((MvxViewController)c).ViewModel == viewModel);
+                if (presentedController != null)
+                {
+                    controller.DismissViewController(presentedController);
+                    return Task.FromResult(true);
+                }
+
+                // closing controller is content in a regular window
                 if (controller != null && controller.ViewModel == viewModel)
                 {
+                    Windows.Remove(window);
                     window.Close();
                     return Task.FromResult(true);
                 }
             }
-            return Task.FromResult(true);
+
+            throw new MvxException($"Could not find and close a view for '{viewModel.GetType()}'");
         }
 
-        protected virtual MvxWindowController CreateWindowController(NSWindow window)
+        protected void OnWindowWillCloseNotification(object sender, NSNotificationEventArgs e)
         {
-            return new MvxWindowController(window);
+            var window = e.Notification.Object as NSWindow;
+            if (Windows.Contains(window))
+                Windows.Remove(window);
         }
     }
 }

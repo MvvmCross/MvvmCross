@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
@@ -11,33 +11,19 @@ namespace Playground.Core.ViewModels
 {
     public class ModalViewModel : MvxNavigationViewModel
     {
-        public ModalViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        public ModalViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            ShowTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootViewModel>());
+            ShowTabsCommand = new MvxAsyncCommand(() => NavigationService.Navigate<TabsRootViewModel>());
 
-            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
 
-            ShowNestedModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<NestedModalViewModel>());
+            ShowNestedModalCommand = new MvxAsyncCommand(() => NavigationService.Navigate<NestedModalViewModel>());
         }
 
-        public override System.Threading.Tasks.Task Initialize()
-        {
-            return base.Initialize();
-        }
+        public IMvxAsyncCommand ShowTabsCommand { get; }
 
-        public void Init()
-        {
-        }
+        public IMvxAsyncCommand CloseCommand { get; }
 
-        public override void Start()
-        {
-            base.Start();
-        }
-
-        public IMvxAsyncCommand ShowTabsCommand { get; private set; }
-
-        public IMvxAsyncCommand CloseCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowNestedModalCommand { get; private set; }
+        public IMvxAsyncCommand ShowNestedModalCommand { get; }
     }
 }

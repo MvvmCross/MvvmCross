@@ -12,34 +12,41 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Navigation
 {
-    public delegate void BeforeNavigateEventHandler(object sender, IMvxNavigateEventArgs e);
-
-    public delegate void AfterNavigateEventHandler(object sender, IMvxNavigateEventArgs e);
-
-    public delegate void BeforeCloseEventHandler(object sender, IMvxNavigateEventArgs e);
-
-    public delegate void AfterCloseEventHandler(object sender, IMvxNavigateEventArgs e);
-
-    public delegate void BeforeChangePresentationEventHandler(object sender, ChangePresentationEventArgs e);
-
-    public delegate void AfterChangePresentationEventHandler(object sender, ChangePresentationEventArgs e);
-
+#nullable enable
     /// <summary>
     /// Allows for Task and URI based navigation in MvvmCross
     /// </summary>
     public interface IMvxNavigationService
     {
-        event BeforeNavigateEventHandler BeforeNavigate;
+        /// <summary>
+        /// Event that triggers right before navigation happens
+        /// </summary>
+        event EventHandler<IMvxNavigateEventArgs>? WillNavigate;
 
-        event AfterNavigateEventHandler AfterNavigate;
+        /// <summary>
+        /// Event that triggers right after navigation did occur
+        /// </summary>
+        event EventHandler<IMvxNavigateEventArgs>? DidNavigate;
 
-        event BeforeCloseEventHandler BeforeClose;
+        /// <summary>
+        /// Event that triggers right before Closing
+        /// </summary>
+        event EventHandler<IMvxNavigateEventArgs>? WillClose;
 
-        event AfterCloseEventHandler AfterClose;
+        /// <summary>
+        /// Event that triggers right after did happen
+        /// </summary>
+        event EventHandler<IMvxNavigateEventArgs>? DidClose;
 
-        event BeforeChangePresentationEventHandler BeforeChangePresentation;
+        /// <summary>
+        /// Event that triggers when presentation will change
+        /// </summary>
+        event EventHandler<ChangePresentationEventArgs>? WillChangePresentation;
 
-        event AfterChangePresentationEventHandler AfterChangePresentation;
+        /// <summary>
+        /// Event that triggers when presentation changed
+        /// </summary>
+        event EventHandler<ChangePresentationEventArgs>? DidChangePresentation;
 
         /// <summary>
         /// Loads all navigation routes based on the referenced assemblies
@@ -50,22 +57,24 @@ namespace MvvmCross.Navigation
         /// <summary>
         /// Navigates to an instance of a ViewModel
         /// </summary>
-        /// <param name="viewModel"></param>
-        /// <param name="presentationBundle"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="viewModel">ViewModel to navigate to</param>
+        /// <param name="presentationBundle">(optional) presentation bundle</param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns>Boolean indicating successful navigation</returns>
-        Task<bool> Navigate(IMvxViewModel viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool> Navigate(IMvxViewModel viewModel, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Navigates to an instance of a ViewModel and passes TParameter
         /// </summary>
         /// <typeparam name="TParameter"></typeparam>
-        /// <param name="viewModel"></param>
-        /// <param name="param"></param>
-        /// <param name="presentationBundle"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="viewModel">ViewModel to navigate to</param>
+        /// <param name="param">ViewModel parameter</param>
+        /// <param name="presentationBundle">(optional) presentation bundle</param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns>Boolean indicating successful navigation</returns>
-        Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param,
+            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TParameter : notnull;
 
         /// <summary>
         /// Navigates to an instance of a ViewModel and returns TResult
@@ -73,9 +82,11 @@ namespace MvvmCross.Navigation
         /// <typeparam name="TResult"></typeparam>
         /// <param name="viewModel"></param>
         /// <param name="presentationBundle"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns></returns>
-        Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<TResult?> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel, IMvxBundle? presentationBundle = null,
+            CancellationToken cancellationToken = default)
+            where TResult : class;
 
         /// <summary>
         /// Navigates to an instance of a ViewModel passes TParameter and returns TResult
@@ -85,18 +96,21 @@ namespace MvvmCross.Navigation
         /// <param name="viewModel"></param>
         /// <param name="param"></param>
         /// <param name="presentationBundle"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns></returns>
-        Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<TResult?> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param,
+            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TParameter : notnull
+            where TResult : class;
 
         /// <summary>
         /// Navigates to a ViewModel Type
         /// </summary>
         /// <param name="viewModelType"></param>
         /// <param name="presentationBundle"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns>Boolean indicating successful navigation</returns>
-        Task<bool> Navigate(Type viewModelType, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool> Navigate(Type viewModelType, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Navigates to a ViewModel Type and passes TParameter
@@ -105,9 +119,10 @@ namespace MvvmCross.Navigation
         /// <param name="viewModelType"></param>
         /// <param name="param"></param>
         /// <param name="presentationBundle"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns>Boolean indicating successful navigation</returns>
-        Task<bool> Navigate<TParameter>(Type viewModelType, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool> Navigate<TParameter>(Type viewModelType, TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TParameter : notnull;
 
         /// <summary>
         /// Navigates to a ViewModel Type passes and returns TResult
@@ -115,9 +130,10 @@ namespace MvvmCross.Navigation
         /// <typeparam name="TResult"></typeparam>
         /// <param name="viewModelType"></param>
         /// <param name="presentationBundle"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns></returns>
-        Task<TResult> Navigate<TResult>(Type viewModelType, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<TResult?> Navigate<TResult>(Type viewModelType, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TResult : class;
 
         /// <summary>
         /// Navigates to a ViewModel Type passes TParameter and returns TResult
@@ -127,18 +143,22 @@ namespace MvvmCross.Navigation
         /// <param name="viewModelType"></param>
         /// <param name="param"></param>
         /// <param name="presentationBundle"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns></returns>
-        Task<TResult> Navigate<TParameter, TResult>(Type viewModelType, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<TResult?> Navigate<TParameter, TResult>(Type viewModelType, TParameter param,
+            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TParameter : notnull
+            where TResult : class;
 
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
         /// </summary>
         /// <param name="path">URI to route</param>
         /// <param name="presentationBundle"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns>Boolean indicating successful navigation</returns>
-        Task<bool> Navigate(string path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool> Navigate(
+            string path, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
@@ -147,9 +167,11 @@ namespace MvvmCross.Navigation
         /// <param name="path"></param>
         /// <param name="param"></param>
         /// <param name="presentationBundle"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns>Boolean indicating successful navigation</returns>
-        Task<bool> Navigate<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool> Navigate<TParameter>(string path, TParameter param,
+            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TParameter : notnull;
 
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
@@ -157,9 +179,11 @@ namespace MvvmCross.Navigation
         /// <typeparam name="TResult"></typeparam>
         /// <param name="path"></param>
         /// <param name="presentationBundle"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns></returns>
-        Task<TResult> Navigate<TResult>(string path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<TResult?> Navigate<TResult>(string path, IMvxBundle? presentationBundle = null,
+            CancellationToken cancellationToken = default)
+            where TResult : class;
 
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
@@ -169,21 +193,66 @@ namespace MvvmCross.Navigation
         /// <param name="path"></param>
         /// <param name="param"></param>
         /// <param name="presentationBundle"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns></returns>
-        Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<TResult?> Navigate<TParameter, TResult>(string path, TParameter param,
+            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TParameter : notnull
+            where TResult : class;
 
-        Task<bool> Navigate<TViewModel>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+        /// <summary>
+        /// Navigate to a ViewModel determined by its type
+        /// </summary>
+        /// <param name="presentationBundle">(optional) presentation bundle</param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
+        /// <typeparam name="TViewModel">Type of <see cref="IMvxViewModel"/></typeparam>
+        /// <returns>Boolean indicating successful navigation</returns>
+        Task<bool> Navigate<TViewModel>(
+            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
             where TViewModel : IMvxViewModel;
 
-        Task<bool> Navigate<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
-            where TViewModel : IMvxViewModel<TParameter>;
+        /// <summary>
+        /// Navigate to a ViewModel determined by its type, with parameter
+        /// </summary>
+        /// <param name="param">ViewModel parameter</param>
+        /// <param name="presentationBundle">(optional) presentation bundle</param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
+        /// <typeparam name="TViewModel">Type of <see cref="IMvxViewModel{Parameter}"/></typeparam>
+        /// <typeparam name="TParameter">Parameter passed to ViewModel</typeparam>
+        /// <returns>Boolean indicating successful navigation</returns>
+        Task<bool> Navigate<TViewModel, TParameter>(
+            TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TViewModel : IMvxViewModel<TParameter>
+            where TParameter : notnull;
 
-        Task<TResult> Navigate<TViewModel, TResult>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
-            where TViewModel : IMvxViewModelResult<TResult>;
+        /// <summary>
+        /// Navigate to a ViewModel determined by its type, which returns a result.
+        /// </summary>
+        /// <param name="presentationBundle">(optional) presentation bundle</param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
+        /// <typeparam name="TViewModel">Type of <see cref="IMvxViewModel"/></typeparam>
+        /// <typeparam name="TResult">Result from the ViewModel</typeparam>
+        /// <returns>Returns a <see cref="Task{Task}"/> with <see cref="TResult"/></returns>
+        Task<TResult?> Navigate<TViewModel, TResult>(
+            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TViewModel : IMvxViewModelResult<TResult>
+            where TResult : class;
 
-        Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
-            where TViewModel : IMvxViewModel<TParameter, TResult>;
+        /// <summary>
+        /// Navigate to a ViewModel determined by its type, with parameter and which returns a result.
+        /// </summary>
+        /// <param name="param">ViewModel parameter</param>
+        /// <param name="presentationBundle">(optional) presentation bundle</param>
+        /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
+        /// <typeparam name="TViewModel">Type of <see cref="IMvxViewModel{Parameter,Result}"/></typeparam>
+        /// <typeparam name="TParameter">Parameter passed to ViewModel</typeparam>
+        /// <typeparam name="TResult">Result from the ViewModel</typeparam>
+        /// <returns>Returns a <see cref="Task{Task}"/> with <see cref="TResult"/></returns>
+        Task<TResult?> Navigate<TViewModel, TParameter, TResult>(
+            TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TViewModel : IMvxViewModel<TParameter, TResult>
+            where TParameter : notnull
+            where TResult : class;
 
         /// <summary>
         /// Verifies if the provided Uri can be routed to a ViewModel request.
@@ -196,7 +265,8 @@ namespace MvvmCross.Navigation
         /// Verifies if the provided viewmodel is available
         /// </summary>
         /// <returns>True if the ViewModel is available</returns>
-        Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
+        Task<bool> CanNavigate<TViewModel>()
+            where TViewModel : IMvxViewModel;
 
         /// <summary>
         /// Verifies if the provided viewmodel is available
@@ -211,17 +281,18 @@ namespace MvvmCross.Navigation
         /// <param name="viewModel"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<bool> Close(IMvxViewModel viewModel, CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool> Close(IMvxViewModel viewModel, CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Closes the View attached to the ViewModel and returns a result to the underlaying ViewModel
+        /// Closes the View attached to the ViewModel and returns a result to the underlying ViewModel
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="viewModel"></param>
         /// <param name="result"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result, CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult? result, CancellationToken cancellationToken = default)
+            where TResult : class;
 
         /// <summary>
         /// Dispatches a ChangePresentation with Hint
@@ -229,6 +300,7 @@ namespace MvvmCross.Navigation
         /// <param name="hint"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<bool> ChangePresentation(MvxPresentationHint hint, CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool> ChangePresentation(MvxPresentationHint hint, CancellationToken cancellationToken = default);
     }
+#nullable restore
 }

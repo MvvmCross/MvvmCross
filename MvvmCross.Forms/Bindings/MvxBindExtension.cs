@@ -4,6 +4,7 @@
 
 using System;
 using System.Text;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -49,7 +50,7 @@ namespace MvvmCross.Forms.Bindings
                 }
                 else
                 {
-                    MvxFormsLog.Instance.Trace("Can only use MvxBind on a bindable view");
+                    MvxFormsLog.Instance?.Log(LogLevel.Trace, "Can only use MvxBind on a bindable view");
                 }
             }
             else if (BindableObjectRaw is IMarkupExtension ext)
@@ -58,7 +59,7 @@ namespace MvvmCross.Forms.Bindings
             }
             else
             {
-                MvxFormsLog.Instance.Trace("Can only use MvxBind on a bindable property");
+                MvxFormsLog.Instance?.Log(LogLevel.Trace, "Can only use MvxBind on a bindable property");
             }
 
             return null;

@@ -44,8 +44,12 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 
         public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
         {
-            var fragmentInfo = FragmentsInfo.ElementAt(position);
-            var fragment = Fragment.Instantiate(_context, fragmentInfo.FragmentType.FragmentJavaName());
+            var fragmentInfo = FragmentsInfo[position];
+            var fragmentClass = Class.FromType(fragmentInfo.FragmentType);
+            var fragment = FragmentFactory.Instantiate(
+                fragmentClass.ClassLoader,
+                fragmentClass.Name
+            );
 
             if (!(fragment is IMvxFragmentView mvxFragment))
             {

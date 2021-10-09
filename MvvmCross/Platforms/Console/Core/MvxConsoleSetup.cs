@@ -2,16 +2,18 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Plugin;
 using MvvmCross.Core;
 using MvvmCross.Platforms.Console.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using System.Collections.Generic;
 using System.Reflection;
+using MvvmCross.IoC;
+using System;
 
 namespace MvvmCross.Platforms.Console.Core
 {
+#nullable enable
     public abstract class MvxConsoleSetup
         : MvxSetup
     {
@@ -20,17 +22,23 @@ namespace MvvmCross.Platforms.Console.Core
             return new MvxPostfixAwareViewToViewModelNameMapping("View");
         }
 
-        public virtual void InitializeMessagePump()
+        public virtual void InitializeMessagePump(IMvxIoCProvider iocProvider)
         {
+            if (iocProvider == null)
+                throw new ArgumentNullException(nameof(iocProvider));
+
             var messagePump = new MvxConsoleMessagePump();
-            Mvx.IoCProvider.RegisterSingleton<IMvxMessagePump>(messagePump);
-            Mvx.IoCProvider.RegisterSingleton<IMvxConsoleCurrentView>(messagePump);
+            iocProvider.RegisterSingleton<IMvxMessagePump>(messagePump);
+            iocProvider.RegisterSingleton<IMvxConsoleCurrentView>(messagePump);
         }
 
-        protected override IMvxViewsContainer CreateViewsContainer()
+        protected override IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider)
         {
+            if (iocProvider == null)
+                throw new ArgumentNullException(nameof(iocProvider));
+
             var container = CreateConsoleContainer();
-            Mvx.IoCProvider.RegisterSingleton<IMvxConsoleNavigation>(container);
+            iocProvider.RegisterSingleton<IMvxConsoleNavigation>(container);
             return container;
         }
 
@@ -44,20 +52,22 @@ namespace MvvmCross.Platforms.Console.Core
             return new MvxConsoleContainer();
         }
 
-        protected override void InitializeLastChance()
+        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
         {
-            InitializeMessagePump();
+            InitializeMessagePump(iocProvider);
         }
     }
 
-    public class MvxConsoleSetup<TApplication> : MvxConsoleSetup
+    public abstract class MvxConsoleSetup<TApplication> : MvxConsoleSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
     }
+#nullable restore
 }

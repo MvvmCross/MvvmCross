@@ -4,6 +4,7 @@
 
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Bindings;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Tizen.Binding;
 
 namespace MvvmCross.Forms.Platforms.Tizen.Bindings
@@ -14,9 +15,9 @@ namespace MvvmCross.Forms.Platforms.Tizen.Bindings
         {
         }
 
-        public override void DoRegistration()
+        public override void DoRegistration(IMvxIoCProvider iocProvider)
         {
-            base.DoRegistration();
+            base.DoRegistration(iocProvider);
             InitializeBindingCreator();
         }
 

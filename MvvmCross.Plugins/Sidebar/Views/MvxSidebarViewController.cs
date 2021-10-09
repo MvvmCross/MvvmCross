@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Views;
@@ -73,7 +74,8 @@ namespace MvvmCross.Plugin.Sidebar.Views
 
             if (leftSideMenu == null && rightSideMenu == null)
             {
-                MvxPluginLog.Instance.Warn($"No sidemenu found. To use a sidemenu decorate the viewcontroller class with the 'MvxPanelPresentationAttribute' class and set the panel to 'Left' or 'Right'.");
+                MvxPluginLog.Instance?.Log(LogLevel.Warning,
+                    "No sidemenu found. To use a sidemenu decorate the viewcontroller class with the 'MvxPanelPresentationAttribute' class and set the panel to 'Left' or 'Right'.");
                 AttachNavigationController();
                 return;
             }
@@ -122,7 +124,8 @@ namespace MvvmCross.Plugin.Sidebar.Views
 
             if (types != null && types.Length > 1)
             {
-                MvxPluginLog.Instance.Warn($"Found more then one {location.ToString()} panel, using the first one in the array ({types[0].ToString()}).");
+                MvxPluginLog.Instance?.Log(LogLevel.Warning,
+                    "Found more then one {Location} panel, using the first one in the array ({FirstLocation}).", location, types[0]);
             }
 
             return CreateInstance(types[0]) as UIViewController;

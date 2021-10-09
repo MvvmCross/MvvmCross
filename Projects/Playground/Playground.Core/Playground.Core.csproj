@@ -18,14 +18,14 @@
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Messenger\MvvmCross.Plugin.Messenger.csproj" />
-    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Network\MvvmCross.Plugin.Network.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Location\MvvmCross.Plugin.Location.csproj" />
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
+    <PackageReference Include="Plugin.Permissions" />
+    <PackageReference Include="Serilog.Extensions.Logging" />
   </ItemGroup>
 
 </Project>

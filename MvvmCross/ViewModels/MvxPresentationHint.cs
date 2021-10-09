@@ -6,9 +6,10 @@ using System.Collections.Generic;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public abstract class MvxPresentationHint
     {
-        protected MvxPresentationHint(MvxBundle body = default)
+        protected MvxPresentationHint(MvxBundle? body = default)
         {
             Body = body;
         }
@@ -18,6 +19,7 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        public MvxBundle Body { get; private set; }
+        public MvxBundle? Body { get; }
     }
+#nullable restore
 }

@@ -4,9 +4,8 @@
 
 using System;
 using System.Threading.Tasks;
-using MvvmCross.Forms.Core;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Forms.Presenters;
-using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.ViewModels;
 using UIKit;
@@ -41,7 +40,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Presenters
         {
             if (!await FormsPagePresenter.Show(request)) return false;
 
-            if (_window.RootViewController == null)
+            if (Window.RootViewController == null)
                 SetWindowRootViewController(FormsApplication.MainPage.CreateViewController());
             return true;
         }
@@ -65,7 +64,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Presenters
 
         public virtual bool ShowPlatformHost(Type hostViewModel = null)
         {
-            MvxFormsLog.Instance.Trace($"Showing of native host View in Forms is not supported.");
+            MvxFormsLog.Instance?.Log(LogLevel.Trace, "Showing of native host View in Forms is not supported");
             return false;
         }
 

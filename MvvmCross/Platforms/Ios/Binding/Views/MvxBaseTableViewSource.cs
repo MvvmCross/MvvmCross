@@ -9,25 +9,29 @@ using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
 using UIKit;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
 {
     public abstract class MvxBaseTableViewSource : UITableViewSource
     {
-        [Weak] private UITableView _tableView;
+        public event EventHandler SelectedItemChanged;
+        private object _selectedItem;
 
         protected MvxBaseTableViewSource(UITableView tableView)
         {
-            _tableView = tableView;
+            TableView = tableView;
         }
 
         protected MvxBaseTableViewSource(IntPtr handle)
             : base(handle)
         {
-            MvxLog.Instance.Warn("MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+            MvxLogHost.GetLog<MvxBaseTableViewSource>()?.Log(LogLevel.Warning,
+                "MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
-        protected UITableView TableView => _tableView;
+        [field: Weak]
+        protected UITableView TableView { get; }
 
         public bool DeselectAutomatically { get; set; }
 
@@ -56,13 +60,10 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
             catch (Exception exception)
             {
-                MvxLog.Instance.Warn("Exception masked during TableView ReloadData {0}", exception.ToLongString());
+                MvxLogHost.GetLog<MvxBaseTableViewSource>()?.Log(LogLevel.Warning, exception,
+                    "Exception masked during TableView ReloadData");
             }
         }
-
-        protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
-
-        protected abstract object GetItemAt(NSIndexPath indexPath);
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
@@ -74,7 +75,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             var item = GetItemAt(indexPath);
 
             var command = SelectionChangedCommand;
-            if (command != null && command.CanExecute(item))
+            if (command?.CanExecute(item) == true)
                 command.Execute(item);
 
             SelectedItem = item;
@@ -94,8 +95,6 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
         }
 
-        private object _selectedItem;
-
         public object SelectedItem
         {
             get
@@ -107,35 +106,16 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
                 // note that we only expect this to be called from the control/Table
                 // we don't have any multi-select or any scroll into view functionality here
                 _selectedItem = value;
-                var handler = SelectedItemChanged;
-                handler?.Invoke(this, EventArgs.Empty);
+                SelectedItemChanged?.Invoke(this, EventArgs.Empty);
             }
         }
-
-        public event EventHandler SelectedItemChanged;
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             var item = GetItemAt(indexPath);
             var cell = GetOrCreateCellFor(tableView, indexPath, item);
 
-            if (cell is IMvxBindable bindable)
-            {
-                var bindingContext = bindable.BindingContext as MvxTaskBasedBindingContext;
-
-                var isTaskBasedBindingContextAndHasAutomaticDimension = bindingContext != null && tableView.RowHeight == UITableView.AutomaticDimension;
-
-                // RunSynchronously must be called before DataContext is set
-                if (isTaskBasedBindingContextAndHasAutomaticDimension)
-                    bindingContext.RunSynchronously = true;
-
-                bindable.DataContext = item;
-
-                // If AutomaticDimension is used, xib based cells need to re-layout everything after bindings are applied
-                // otherwise the cell height will be wrong
-                if (isTaskBasedBindingContextAndHasAutomaticDimension)
-                    cell.LayoutIfNeeded();
-            }
+            BindCell(tableView, cell, item);
 
             return cell;
         }
@@ -154,6 +134,32 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         public override nint NumberOfSections(UITableView tableView)
         {
             return 1;
+        }
+
+        protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
+
+        protected abstract object GetItemAt(NSIndexPath indexPath);
+
+        private static void BindCell(UITableView tableView, UITableViewCell cell, object item)
+        {
+            if (cell is IMvxBindable bindable)
+            {
+                var bindingContext = bindable.BindingContext as MvxTaskBasedBindingContext;
+
+                var isTaskBasedBindingContextAndHasAutomaticDimension =
+                    bindingContext != null && tableView.RowHeight == UITableView.AutomaticDimension;
+
+                // RunSynchronously must be called before DataContext is set
+                if (isTaskBasedBindingContextAndHasAutomaticDimension)
+                    bindingContext.RunSynchronously = true;
+
+                bindable.DataContext = item;
+
+                // If AutomaticDimension is used, xib based cells need to re-layout everything after bindings are applied
+                // otherwise the cell height will be wrong
+                if (isTaskBasedBindingContextAndHasAutomaticDimension)
+                    cell.LayoutIfNeeded();
+            }
         }
     }
 }

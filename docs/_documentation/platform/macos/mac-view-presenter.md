@@ -30,7 +30,7 @@ You can customize how the window will look through the following properties:
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| Identifier | `string` | Window identifier, used to identify the window for other attributes. If an identifier is not provided by the developer, it will be set to the name of the view class. |
+| Identifier | `string` | Window identifier, used to identify the window for other attributes. If an identifier is not provided by the developer, it will be set to the name of the view class. In apps with multiple identical windows you should [generate unique window identifier at runtime](#override-a-presentation-attribute-at-runtime). |
 | WindowStyle | `NSWindowStyle?` | Used to set the NSWindowStyle. Default value is `NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled`. |
 | BufferingType | `NSBackingStore?` | Used to set the NSBackingStore. Default value is `NSBackingStore.Buffered`. |
 | PositionX | `float` | Default value is 200. |
@@ -52,15 +52,15 @@ will set the CustomWindow Width to 800.
 ### MvxContentPresentationAttribute
 
 Used to set a view as content of a _Window_. Please notice that changing the content of a window does not automatically generate a navigation stack as it would be on iOS. Changing the content of a window dismisses the old content.
-You can choose in which window should this view be displayed by using the `WindowIdentifier` property of the attribute. If the identifier is not provided, the view will be displayed in the last opened window.
+You can choose in which window should this view be displayed by using the `WindowIdentifier` property of the attribute. If the identifier is not provided, the view will be displayed in the [main window](https://developer.apple.com/documentation/appkit/nsapplication/1428723-mainwindow), and if no windows are focused it will be displayed in the last opened window.
 
 ### MvxModalPresentationAttribute
 
-Used to display a view as _Modal_. Same as with content, you can choose through the `WindowIdentifier` property from which window should the modal be opened. If the identifier is not provided, the view will be displayed in the last opened window.
+Used to display a view as _Modal_. Same as with content, you can choose through the `WindowIdentifier` property from which window should the modal be opened. If the identifier is not provided, the view will be displayed in the [main window](https://developer.apple.com/documentation/appkit/nsapplication/1428723-mainwindow), and if no windows are focused it will be displayed in the last opened window.
 
 ### MvxSheetPresentationAttribute
 
-MacOS uses the concept of _sheets_ to prompt the user with messages or small forms. If you use this attribute over a view class, it will be displayed as a sheet. You can choose from which window should it be opened through the `WindowIdentifier` property. If the identifier is not provided, the view will be displayed in the last opened window.
+MacOS uses the concept of _sheets_ to prompt the user with messages or small forms. If you use this attribute over a view class, it will be displayed as a sheet. You can choose from which window should it be opened through the `WindowIdentifier` property. If the identifier is not provided, the view will be displayed in the [main window](https://developer.apple.com/documentation/appkit/nsapplication/1428723-mainwindow), and if no windows are focused it will be displayed in the last opened window.
 
 ### MvxTabPresentationAttribute
 

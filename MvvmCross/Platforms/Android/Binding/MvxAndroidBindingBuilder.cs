@@ -17,30 +17,31 @@ using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 using MvvmCross.Platforms.Android.Binding.Target;
 using MvvmCross.Platforms.Android.Binding.Views;
 using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
+using AppCompatSearchView = AndroidX.AppCompat.Widget.SearchView;
 
 namespace MvvmCross.Platforms.Android.Binding
 {
     public class MvxAndroidBindingBuilder
         : MvxBindingBuilder
     {
-        public override void DoRegistration()
+        public override void DoRegistration(IMvxIoCProvider iocProvider)
         {
             InitializeAppResourceTypeFinder();
-            InitializeBindingResources();
-            InitializeLayoutInflation();
-            base.DoRegistration();
+            InitializeBindingResources(iocProvider);
+            InitializeLayoutInflation(iocProvider);
+            base.DoRegistration(iocProvider);
         }
 
-        protected virtual void InitializeLayoutInflation()
+        protected virtual void InitializeLayoutInflation(IMvxIoCProvider iocProvider)
         {
             var inflaterfactoryFactory = CreateLayoutInflaterFactoryFactory();
-            Mvx.IoCProvider.RegisterSingleton(inflaterfactoryFactory);
+            iocProvider.RegisterSingleton(inflaterfactoryFactory);
 
             var viewFactory = CreateAndroidViewFactory();
-            Mvx.IoCProvider.RegisterSingleton(viewFactory);
+            iocProvider.RegisterSingleton(viewFactory);
 
             var viewBinderFactory = CreateAndroidViewBinderFactory();
-            Mvx.IoCProvider.RegisterSingleton(viewBinderFactory);
+            iocProvider.RegisterSingleton(viewBinderFactory);
         }
 
         protected virtual IMvxAndroidViewBinderFactory CreateAndroidViewBinderFactory()
@@ -58,10 +59,10 @@ namespace MvvmCross.Platforms.Android.Binding
             return new MvxAndroidViewFactory();
         }
 
-        protected virtual void InitializeBindingResources()
+        protected virtual void InitializeBindingResources(IMvxIoCProvider iocProvider)
         {
             var mvxAndroidBindingResource = CreateAndroidBindingResource();
-            Mvx.IoCProvider.RegisterSingleton(mvxAndroidBindingResource);
+            iocProvider.RegisterSingleton(mvxAndroidBindingResource);
         }
 
         protected virtual IMvxAndroidBindingResource CreateAndroidBindingResource()
@@ -225,19 +226,19 @@ namespace MvvmCross.Platforms.Android.Binding
                 registry.RegisterCustomBindingFactory<View>(
                     margin, view => new MvxViewMarginTargetBinding(view, margin));
             }
-            
+
             registry.RegisterCustomBindingFactory<View>(
                 MvxAndroidPropertyBinding.View_Focus,
                 view => new MvxViewFocusChangedTargetbinding(view));
-            
+
             registry.RegisterCustomBindingFactory<VideoView>(
                 MvxAndroidPropertyBinding.VideoView_Uri,
                 view => new MvxVideoViewUriTargetBinding(view));
-            
+
             registry.RegisterCustomBindingFactory<WebView>(
                 MvxAndroidPropertyBinding.WebView_Uri,
                 view => new MvxWebViewUriTargetBinding(view));
-            
+
             registry.RegisterCustomBindingFactory<WebView>(
                 MvxAndroidPropertyBinding.WebView_Html,
                 view => new MvxWebViewHtmlTargetBinding(view));
@@ -263,6 +264,10 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.RegisterCustomBindingFactory<Toolbar>(
                 MvxAndroidPropertyBinding.Toolbar_Subtitle,
                 toolbar => new MvxToolbarSubtitleBinding(toolbar));
+
+            registry.RegisterCustomBindingFactory<MvxAppCompatSearchViewQueryTextTargetBinding>(
+                MvxAndroidPropertyBinding.SearchView_Query,
+                searchView => new MvxAppCompatSearchViewQueryTextTargetBinding(searchView));
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -281,24 +286,25 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.AddOrOverwrite(typeof(CompoundButton), MvxAndroidPropertyBinding.CompoundButton_Checked);
             registry.AddOrOverwrite(typeof(SeekBar), MvxAndroidPropertyBinding.SeekBar_Progress);
             registry.AddOrOverwrite(typeof(SearchView), MvxAndroidPropertyBinding.SearchView_Query);
+            registry.AddOrOverwrite(typeof(AppCompatSearchView), MvxAndroidPropertyBinding.SearchView_Query);
             registry.AddOrOverwrite(typeof(NumberPicker), MvxAndroidPropertyBinding.NumberPicker_Value);
             registry.AddOrOverwrite(typeof(NumberPicker), MvxAndroidPropertyBinding.NumberPicker_DisplayedValues);
             registry.AddOrOverwrite(typeof(VideoView), MvxAndroidPropertyBinding.VideoView_Uri);
             registry.AddOrOverwrite(typeof(WebView), MvxAndroidPropertyBinding.WebView_Uri);
         }
 
-        protected override void RegisterPlatformSpecificComponents()
+        protected override void RegisterPlatformSpecificComponents(IMvxIoCProvider iocProvider)
         {
-            base.RegisterPlatformSpecificComponents();
+            base.RegisterPlatformSpecificComponents(iocProvider);
 
-            InitializeViewTypeResolver();
-            InitializeContextStack();
+            InitializeViewTypeResolver(iocProvider);
+            InitializeContextStack(iocProvider);
         }
 
-        protected virtual void InitializeContextStack()
+        protected virtual void InitializeContextStack(IMvxIoCProvider iocProvider)
         {
             var stack = CreateContextStack();
-            Mvx.IoCProvider.RegisterSingleton(stack);
+            iocProvider.RegisterSingleton(stack);
         }
 
         protected virtual IMvxBindingContextStack<IMvxAndroidBindingContext> CreateContextStack()
@@ -306,20 +312,20 @@ namespace MvvmCross.Platforms.Android.Binding
             return new MvxAndroidBindingContextStack();
         }
 
-        protected virtual void InitializeViewTypeResolver()
+        protected virtual void InitializeViewTypeResolver(IMvxIoCProvider iocProvider)
         {
             var typeCache = CreateViewTypeCache();
-            Mvx.IoCProvider.RegisterSingleton<IMvxTypeCache<View>>(typeCache);
+            iocProvider.RegisterSingleton<IMvxTypeCache<View>>(typeCache);
 
             var fullNameViewTypeResolver = new MvxAxmlNameViewTypeResolver(typeCache);
-            Mvx.IoCProvider.RegisterSingleton<IMvxAxmlNameViewTypeResolver>(fullNameViewTypeResolver);
+            iocProvider.RegisterSingleton<IMvxAxmlNameViewTypeResolver>(fullNameViewTypeResolver);
             var listViewTypeResolver = new MvxNamespaceListViewTypeResolver(typeCache);
-            Mvx.IoCProvider.RegisterSingleton<IMvxNamespaceListViewTypeResolver>(listViewTypeResolver);
+            iocProvider.RegisterSingleton<IMvxNamespaceListViewTypeResolver>(listViewTypeResolver);
             var justNameTypeResolver = new MvxJustNameViewTypeResolver(typeCache);
 
             var composite = new MvxCompositeViewTypeResolver(fullNameViewTypeResolver, listViewTypeResolver, justNameTypeResolver);
             var cached = new MvxCachedViewTypeResolver(composite);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewTypeResolver>(cached);
+            iocProvider.RegisterSingleton<IMvxViewTypeResolver>(cached);
         }
 
         protected virtual IMvxTypeCache<View> CreateViewTypeCache()

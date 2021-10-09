@@ -7,7 +7,12 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.UnitTest.Mocks.ViewModels
 {
-    public class SimpleResultTestViewModel : MvxViewModelResult<bool>
+    public class SimpleResult
+    {
+        public bool Result { get; set; }
+    }
+
+    public class SimpleResultTestViewModel : MvxViewModelResult<SimpleResult>
     {
         public SimpleResultTestViewModel()
         {
@@ -18,7 +23,7 @@ namespace MvvmCross.UnitTest.Mocks.ViewModels
             await base.Initialize();
 
             await Task.Delay(2000);
-            CloseCompletionSource.SetResult(true);
+            CloseCompletionSource.SetResult(new SimpleResult { Result = true });
         }
     }
 }

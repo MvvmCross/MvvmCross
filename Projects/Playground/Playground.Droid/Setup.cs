@@ -5,36 +5,25 @@
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.DroidX.AppCompat;
-using MvvmCross.Droid.Support.V7.RecyclerView;
-using MvvmCross.Logging;
 using MvvmCross.Plugin;
 using Playground.Core;
 using Playground.Droid.Bindings;
 using Playground.Droid.Controls;
 using Serilog;
+using Serilog.Extensions.Logging;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.DroidX.RecyclerView;
+using Microsoft.Extensions.Logging;
 
 namespace Playground.Droid
 {
-    public class Setup : MvxAppCompatSetup<App>
+    public class Setup : MvxAndroidSetup<App>
     {
         protected override IEnumerable<Assembly> AndroidViewAssemblies =>
             new List<Assembly>(base.AndroidViewAssemblies)
             {
                 typeof(MvxRecyclerView).Assembly
             };
-
-        public override MvxLogProviderType GetDefaultLogProviderType()
-            => MvxLogProviderType.Serilog;
-
-        protected override IMvxLogProvider CreateLogProvider()
-        {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.AndroidLog()
-                .CreateLogger();
-            return base.CreateLogProvider();
-        }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
@@ -50,6 +39,21 @@ namespace Playground.Droid
             base.LoadPlugins(pluginManager);
 
             pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.Location.Fused.Plugin>();
+        }
+
+        protected override ILoggerProvider CreateLogProvider()
+        {
+            return new SerilogLoggerProvider();
+        }
+
+        protected override ILoggerFactory CreateLogFactory()
+        {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.AndroidLog()
+                .CreateLogger();
+
+            return new SerilogLoggerFactory();
         }
     }
 }

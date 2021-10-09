@@ -4,9 +4,8 @@
 
 using System;
 using System.Threading.Tasks;
-using MvvmCross.Forms.Core;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Forms.Presenters;
-using MvvmCross.Logging;
 using MvvmCross.Platforms.Tizen.Presenters;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;
@@ -60,7 +59,7 @@ namespace MvvmCross.Forms.Platforms.Tizen.Presenters
 
         public virtual bool ShowPlatformHost(Type hostViewModel = null)
         {
-            MvxFormsLog.Instance.Trace($"Showing of native host View in Forms is not supported.");
+            MvxFormsLog.Instance?.Log(LogLevel.Trace, "Showing of native host View in Forms is not supported");
             return false;
         }
 

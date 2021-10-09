@@ -10,8 +10,7 @@ namespace MvvmCross.Platforms.Mac.Core
 {
     public interface IMvxMacSetup : IMvxSetup
     {
-        void PlatformInitialize(IMvxApplicationDelegate applicationDelegate);        
-        void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, NSWindow window);
+        void PlatformInitialize(IMvxApplicationDelegate applicationDelegate);
         void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter);
     }
 }

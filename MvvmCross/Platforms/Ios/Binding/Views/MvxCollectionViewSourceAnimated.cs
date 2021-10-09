@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -12,12 +12,15 @@ using Foundation;
 using MvvmCross.Logging;
 using MvvmCross.Binding.Extensions;
 using UIKit;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
 {
     public class MvxCollectionViewSourceAnimated : MvxCollectionViewSource
     {
         private readonly object collectionChangedLock = new object();
+        private readonly ILogger<MvxCollectionViewSourceAnimated> _logger;
+
         private Task runningChangeTask = Task.FromResult(true);
 
         /// <summary>
@@ -34,16 +37,26 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         /// </summary>
         public int MaxAnimatedItems { get; set; } = 10;
 
-        public MvxCollectionViewSourceAnimated(UICollectionView collectionView) : base(collectionView)
+        public MvxCollectionViewSourceAnimated(UICollectionView collectionView)
+            : base(collectionView)
         {
+            _logger = MvxLogHost.GetLog<MvxCollectionViewSourceAnimated>();
         }
 
-        public MvxCollectionViewSourceAnimated(UICollectionView collectionView, NSString defaultCellIdentifier) : base(collectionView, defaultCellIdentifier)
+        public MvxCollectionViewSourceAnimated(UICollectionView collectionView, NSString defaultCellIdentifier)
+            : base(collectionView, defaultCellIdentifier)
         {
+            _logger = MvxLogHost.GetLog<MvxCollectionViewSourceAnimated>();
         }
 
         protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
+            if (!NSThread.IsMain)
+            {
+                BeginInvokeOnMainThread(() => CollectionChangedOnCollectionChanged(sender, args));
+                return;
+            }
+            
             var itemsSource = (ItemsSource as IEnumerable<object>)?.ToList();
             if (itemsSource == null)
                 throw new ArgumentException("ItemsSource must be convertible to IEnumerable<object>, as this code needs to take a snapshot of the list in order to be thread safe for the ios animations");
@@ -69,9 +82,11 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
         private async Task CollectionChangedOnCollectionChangedAsync(NotifyCollectionChangedEventArgs args, Task existingTask, IEnumerable itemsSource)
         {
-            MvxLog.Instance.Trace($"CollectionChanged received action:{args.Action} newItems:{args.NewItems?.Count} oldItems:{args.OldItems?.Count} itemsSourceCount:{itemsSource.Count()}");
+            _logger?.LogTrace(
+                "CollectionChanged received action:{action} newItems:{newItemsCount} oldItems:{oldItemsCount} itemsSourceCount:{itemsSourceCount}",
+                args.Action, args.NewItems?.Count ?? 0, args.OldItems?.Count ?? 0, itemsSource.Count());
             await existingTask;
-            MvxLog.Instance.Trace($"CollectionChanged starting action:{args.Action}");
+            _logger?.LogTrace("CollectionChanged starting action:{action}", args.Action);
             itemsSourceBeforeAnimation = itemsSource;
 
             if (args.NewItems?.Count > MaxAnimatedItems || args.OldItems?.Count > MaxAnimatedItems)
@@ -86,7 +101,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
                 {
                     if (args.NewItems.Count != 1 && args.OldItems.Count != 1)
                     {
-                        MvxLog.Instance.Trace($"CollectionChanged {args.Action} action called with more than one movement. All data will be reloaded");
+                        _logger?.LogTrace("CollectionChanged {action} action called with more than one movement. All data will be reloaded", args.Action);
                         CollectionView.ReloadData();
                         return;
                     }
@@ -125,7 +140,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
 
             itemsSourceBeforeAnimation = null;
-            MvxLog.Instance.Trace($"CollectionChanged done action:{args.Action} newItems:{args.NewItems?.Count} oldItems:{args.OldItems?.Count}");
+            _logger?.LogTrace("CollectionChanged done action:{action} newItems:{newItemsCount} oldItems:{oldItemsCount}",
+                args.Action, args.NewItems?.Count ?? 0, args.OldItems?.Count ?? 0);
         }
     }
 }
