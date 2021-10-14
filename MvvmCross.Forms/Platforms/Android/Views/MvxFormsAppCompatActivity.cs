@@ -98,7 +98,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         {
             // ensuring mvvmcross is running here is required
             // otherwise app will crash when inflating the view because of the Forms base class
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
             setup.EnsureInitialized();
 
             base.OnCreate(bundle);
