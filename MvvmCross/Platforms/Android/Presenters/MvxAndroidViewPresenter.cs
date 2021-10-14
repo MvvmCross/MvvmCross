@@ -341,8 +341,18 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             var bundle = Bundle.Empty!;
 
-            if (CurrentActivity.IsActivityAlive() &&
-                CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity)
+            if (!(CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity))
+            {
+                return bundle;
+            }
+
+            if (Build.VERSION.SdkInt < BuildVersionCodes.Lollipop)
+            {
+                _logger.Value?.Log(LogLevel.Warning, "Shared element transition requires Android v21+.");
+                return bundle;
+            }
+
+            if (CurrentActivity.IsActivityAlive())
             {
                 var (elements, transitionElementPairs) =
                     GetTransitionElements(attribute, request, sharedElementsActivity);
@@ -356,10 +366,6 @@ namespace MvvmCross.Platforms.Android.Presenters
                 var transitionElementsBundle = CreateTransitionElementsBundle(intent, transitionElementPairs, elements);
                 if (transitionElementsBundle != null)
                     return transitionElementsBundle;
-            }
-            else
-            {
-                _logger.Value?.Log(LogLevel.Warning, "Shared element transition requires Android v21+.");
             }
 
             return bundle;
