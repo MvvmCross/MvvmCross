@@ -80,12 +80,12 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             {
                 MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. " +
                     "Assuming window presentation", viewType.Name);
-                return new MvxWindowPresentationAttribute();
+                return new MvxWindowPresentationAttribute { ViewModelType = viewModelType, ViewType = viewType };
             }
 
             MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. " +
                     "Assuming content presentation", viewType.Name);
-            return new MvxContentPresentationAttribute();
+            return new MvxContentPresentationAttribute { ViewType = viewType, ViewModelType = viewModelType };
         }
 
         public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
