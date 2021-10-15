@@ -422,7 +422,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
             viewController.ModalTransitionStyle = attribute.ModalTransitionStyle;
-            if (_iosVersion13Checker.IsVersionOrHigher)
+            if (_iosVersion13Checker.IsVersionOrHigher && viewController.PresentationController != null)
             {
                 viewController.PresentationController.Delegate =
                     new MvxModalPresentationControllerDelegate(this, viewController, attribute);
