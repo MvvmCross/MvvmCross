@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Commands;
 using MvvmCross.IoC;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
@@ -45,6 +46,12 @@ namespace MvvmCross.Core
 
         public static void RegisterSetupType<TMvxSetup>(params Assembly[] assemblies) where TMvxSetup : MvxSetup, new()
         {
+            if (SetupCreator != null)
+            {
+                MvxLogHost.Default.LogInformation("Setup: RegisterSetupType already called");
+                return;
+            }
+
             ViewAssemblies.AddRange(assemblies);
             if (ViewAssemblies.Count == 0)
             {
