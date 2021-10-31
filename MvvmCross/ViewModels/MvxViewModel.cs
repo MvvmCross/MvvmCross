@@ -90,27 +90,5 @@ namespace MvvmCross.ViewModels
     {
         public abstract void Prepare(TParameter parameter);
     }
-
-    public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult>
-    {
-        public TaskCompletionSource<object?>? CloseCompletionSource { get; set; }
-
-        public override void ViewDestroy(bool viewFinishing = true)
-        {
-            if (viewFinishing && CloseCompletionSource != null &&
-                !CloseCompletionSource.Task.IsCompleted &&
-                !CloseCompletionSource.Task.IsFaulted)
-            {
-                CloseCompletionSource.TrySetCanceled();
-            }
-
-            base.ViewDestroy(viewFinishing);
-        }
-    }
-
-    public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult>
-    {
-        public abstract void Prepare(TParameter parameter);
-    }
 #nullable restore
 }

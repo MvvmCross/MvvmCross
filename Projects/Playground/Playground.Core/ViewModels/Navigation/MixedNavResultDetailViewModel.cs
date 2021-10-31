@@ -5,26 +5,14 @@ using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class MixedNavResultDetailViewModel : MvxNavigationViewModelResult<DetailResultResult>
+    public class MixedNavResultDetailViewModel : MvxNavigationViewModel
     {
         public MixedNavResultDetailViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
-            CloseViewModelCommand = new MvxAsyncCommand(() => NavigationService.Close(this, DetailResultResult.Build()));
+            CloseViewModelCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
         }
 
         public IMvxAsyncCommand CloseViewModelCommand { get; }
-    }
-
-    public class DetailResultParams
-    {
-    }
-
-    public class DetailResultResult
-    {
-        public static DetailResultResult Build()
-        {
-            return new DetailResultResult();
-        }
     }
 }
