@@ -476,14 +476,6 @@ namespace MvvmCross.Navigation
             DidChangePresentation?.Invoke(sender, e);
         }
 
-        private static void ValidateArguments<TParameter>(MvxViewModelRequest request, IMvxViewModel viewModel, TParameter param)
-        {
-            ValidateArguments(request, viewModel);
-
-            if (param == null)
-                throw new ArgumentNullException(nameof(param));
-        }
-
         private static void ValidateArguments(MvxViewModelRequest request, IMvxViewModel viewModel)
         {
             if (request == null)
