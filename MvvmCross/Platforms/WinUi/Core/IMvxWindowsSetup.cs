@@ -14,6 +14,6 @@ namespace MvvmCross.Platforms.WinUi.Core
         void PlatformInitialize(Frame rootFrame, string activatedEventArgs, string suspensionManagerSessionStateKey = null);
         void PlatformInitialize(Frame rootFrame, string suspensionManagerSessionStateKey = null);
         void PlatformInitialize(IMvxWindowsFrame rootFrame);
-        void UpdateActivationArguments(IActivatedEventArgs e);
+        void UpdateActivationArguments(string e);
     }
 }

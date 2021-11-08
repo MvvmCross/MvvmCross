@@ -51,7 +51,7 @@ namespace MvvmCross.Platforms.WinUi.Core
             _rootFrame = rootFrame;
         }
 
-        public virtual void UpdateActivationArguments(IActivatedEventArgs e)
+        public virtual void UpdateActivationArguments(string e)
         {
             ActivationArguments = e;
         }

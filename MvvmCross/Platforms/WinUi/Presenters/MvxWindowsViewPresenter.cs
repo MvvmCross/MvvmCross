@@ -243,6 +243,12 @@ namespace MvvmCross.Platforms.WinUi.Presenters
             try
             {
                 var contentDialog = (ContentDialog)CreateControl(viewType, request, attribute);
+
+                if (_rootFrame.UnderlyingControl is Frame frame)
+                {
+                    contentDialog.XamlRoot = frame.XamlRoot;
+                }
+                
                 if (contentDialog != null)
                 {
                     await contentDialog.ShowAsync(attribute.Placement);
@@ -281,7 +287,10 @@ namespace MvvmCross.Platforms.WinUi.Presenters
 
         protected virtual Task<bool> CloseDialog(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
         {
-            var popups = VisualTreeHelper.GetOpenPopups(Window.Current).FirstOrDefault(p =>
+            if (!(_rootFrame.UnderlyingControl is Frame frame))
+                return Task.FromResult(false);
+
+            var popups = VisualTreeHelper.GetOpenPopupsForXamlRoot(frame.XamlRoot).FirstOrDefault(p =>
             {
                 if (attribute.ViewType.IsAssignableFrom(p.Child.GetType())
                     && p.Child is IMvxWindowsContentDialog dialog)
