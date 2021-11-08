@@ -42,5 +42,8 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
     <PackageVersion Include="Serilog.Extensions.Logging" Version="3.0.1" />
     <PackageVersion Include="Serilog.Sinks.Debug" Version="2.0.0" />
+    <PackageVersion Include="Microsoft.ProjectReunion" Version="0.8.5" />
+    <PackageVersion Include="Microsoft.ProjectReunion.Foundation" Version="0.8.5" />
+    <PackageVersion Include="Microsoft.ProjectReunion.WinUI" Version="0.8.5" />
   </ItemGroup>
 </Project>

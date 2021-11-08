@@ -1,0 +1,10 @@
+﻿<mvx:MvxApplication x:Class="Playground.WinUi.App"
+                        xmlns:mvx="using:MvvmCross.Platforms.WinUi.Views"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:local="using:Playground.WinUi"
+                        RequestedTheme="Light">
+    <Application.Resources>
+        <x:String x:Key="WelcomeText">Hello World!</x:String>
+    </Application.Resources>
+</mvx:MvxApplication>

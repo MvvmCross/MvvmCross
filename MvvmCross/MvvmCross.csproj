@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
-    <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;xamarin.tvos10;xamarin.watchos10;monoandroid10.0;tizen40;netcoreapp3.1;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;xamarin.tvos10;xamarin.watchos10;monoandroid10.0;tizen40;netcoreapp3.1;net461;net5.0-windows10.0.19041.0</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.16299;$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
@@ -10,6 +10,7 @@
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">netstandard2.0;xamarin.ios10</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Tizen' ">netstandard2.0;tizen40</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Mac' ">netstandard2.0;xamarin.mac20</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'WinUi' ">netstandard2.0;net5.0-windows10.0.19041.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -52,6 +53,25 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <Page Include="Platforms\Uap\**\*.xaml" SubType="Designer" Generator="MSBuild:Compile" />
     <None Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
     <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('net5.0-windows')) "> 
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>MvvmCross</RootNamespace>
+    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <UseWinUI>true</UseWinUI>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('net5.0-windows')) ">
+    <Compile Include="Platforms\Windows\**\*.cs" />
+    <Compile Include="Platforms\WinUi\**\*.cs" />
+    <Page Include="Platforms\WinUi\**\*.xaml" SubType="Designer" Generator="MSBuild:Compile" />
+    <None Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
+    <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
+
+    <PackageReference Include="Microsoft.ProjectReunion"  />
+    <PackageReference Include="Microsoft.ProjectReunion.Foundation" />
+    <PackageReference Include="Microsoft.ProjectReunion.WinUI" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
