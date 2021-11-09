@@ -285,13 +285,5 @@ MSBuildSettings GetDefaultBuildSettings()
         Verbosity = verbosity
     };
 
-    if (isRunningOnPipelines)
-    {
-        // remove this when Xamarin.Android supports JDK11
-        var javaSdkDir = EnvironmentVariable("JAVA_HOME_8_X64");
-        Information("Setting JavaSdkDirectory to: " + javaSdkDir);
-        settings = settings.WithProperty("JavaSdkDirectory", javaSdkDir);
-    }
-
     return settings;
 }
