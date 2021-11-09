@@ -20,7 +20,6 @@
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Messenger\MvvmCross.Plugin.Messenger.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
-    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Location\MvvmCross.Plugin.Location.csproj" />
   </ItemGroup>
   
   <ItemGroup>

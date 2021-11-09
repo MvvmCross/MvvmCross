@@ -192,10 +192,6 @@
       <Project>{fe374d1a-1a19-49bc-8e93-d52399a9c3f3}</Project>
       <Name>Playground.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Location.Fused\MvvmCross.Plugin.Location.Fused.csproj">
-      <Project>{DFFD6E95-ED3B-47B6-AA09-7A261367C262}</Project>
-      <Name>MvvmCross.Plugin.Location.Fused</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" />
