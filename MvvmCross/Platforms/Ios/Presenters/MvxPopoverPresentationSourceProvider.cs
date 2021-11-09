@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,26 +10,36 @@ namespace MvvmCross.Platforms.Ios.Presenters
 #nullable enable
     public class MvxPopoverPresentationSourceProvider : IMvxPopoverPresentationSourceProvider
     {
-        [Weak] private UIView? _sourceView;
-        [Weak] private UIBarButtonItem? _sourceBarButtonItem;
+        private readonly WeakReference<UIView?> _sourceView = new WeakReference<UIView?>(null);
+        private readonly WeakReference<UIBarButtonItem?> _sourceBarButtonItem = new WeakReference<UIBarButtonItem?>(null);
 
         public UIView? SourceView
         {
-            get => _sourceView;
+            get
+            {
+                if (_sourceView.TryGetTarget(out var view))
+                    return view;
+                return null;
+            }
             set
             {
-                _sourceBarButtonItem = null;
-                _sourceView = value;
+                _sourceBarButtonItem.SetTarget(null);
+                _sourceView.SetTarget(value);
             }
         }
 
         public UIBarButtonItem? SourceBarButtonItem
         {
-            get => _sourceBarButtonItem;
+            get
+            {
+                if (_sourceBarButtonItem.TryGetTarget(out var view))
+                    return view;
+                return null;
+            }
             set
             {
-                _sourceView = null;
-                _sourceBarButtonItem = value;
+                _sourceView.SetTarget(null);
+                _sourceBarButtonItem.SetTarget(value);
             }
         }
 

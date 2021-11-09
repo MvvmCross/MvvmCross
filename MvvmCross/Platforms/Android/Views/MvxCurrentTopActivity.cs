@@ -14,26 +14,33 @@ namespace MvvmCross.Platforms.Android.Views
     public class MvxCurrentTopActivity
         : Java.Lang.Object, Application.IActivityLifecycleCallbacks, IMvxAndroidCurrentTopActivity
     {
-        [Weak]
-        private Activity? _lastSeenActivity;
+        private readonly WeakReference<Activity?> _lastSeenActivity = new WeakReference<Activity?>(null);
 
-        public Activity? Activity => _lastSeenActivity;
+        public Activity? Activity
+        {
+            get
+            {
+                if (_lastSeenActivity?.TryGetTarget(out var activity) ?? false)
+                    return activity;
+                return null;
+            }
+        }
 
         public static bool Initialized { get; set; }
 
         public void OnActivityCreated(Activity activity, Bundle? savedInstanceState)
         {
-            _lastSeenActivity = activity;
+            _lastSeenActivity.SetTarget(activity);
         }
 
         public void OnActivityPaused(Activity activity)
         {
-            _lastSeenActivity = activity;
+            _lastSeenActivity.SetTarget(activity);
         }
 
         public void OnActivityResumed(Activity activity)
         {
-            _lastSeenActivity = activity;
+            _lastSeenActivity.SetTarget(activity);
         }
 
         public void OnActivityDestroyed(Activity activity)

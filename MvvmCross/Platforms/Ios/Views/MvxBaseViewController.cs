@@ -160,7 +160,7 @@ namespace MvvmCross.Platforms.Ios.Views
         }
 
         private CGRect _lastKeyboardFrame = CGRect.Empty;
-        [Weak] private UIView _lastActiveView;
+        private WeakReference<UIView?> _lastActiveView = new WeakReference<UIView?>(null);
 
         /// <summary>
         /// Override this method to apply custom logic when the keyboard is shown/hidden
@@ -177,7 +177,7 @@ namespace MvvmCross.Platforms.Ios.Views
             if (activeView == null)
             {
                 _lastKeyboardFrame = CGRect.Empty;
-                _lastActiveView = null;
+                _lastActiveView.SetTarget(null);
                 return;
             }
 
@@ -185,27 +185,27 @@ namespace MvvmCross.Platforms.Ios.Views
             if (scrollView == null)
             {
                 _lastKeyboardFrame = CGRect.Empty;
-                _lastActiveView = null;
+                _lastActiveView.SetTarget(null);
                 return;
             }
 
             if (!visible)
             {
                 _lastKeyboardFrame = CGRect.Empty;
-                _lastActiveView = null;
+                _lastActiveView.SetTarget(null);
                 scrollView.RestoreScrollPosition();
             }
             else
             {
                 //avoid recalculation if the activeView is the same.
-                if (_lastKeyboardFrame == keyboardFrame &&
-                    _lastActiveView?.Equals(activeView) == true)
+                if (_lastKeyboardFrame == keyboardFrame && _lastActiveView.TryGetTarget(out var lastActiveView) &&
+                    lastActiveView?.Equals(activeView) == true)
                 {
                     return;
                 }
 
                 _lastKeyboardFrame = keyboardFrame;
-                _lastActiveView = activeView;
+                _lastActiveView.SetTarget(activeView);
                 if (_iosVersion11Checker.IsVersionOrHigher)
                     keyboardFrame.Height -= scrollView.SafeAreaInsets.Bottom;
                 scrollView.CenterView(activeView, keyboardFrame);
