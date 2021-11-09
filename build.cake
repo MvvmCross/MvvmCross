@@ -1,8 +1,7 @@
-#module nuget:?package=Cake.DotNetTool.Module&version=0.4.0
-#tool dotnet:n?package=GitVersion.Tool&version=5.6.6
+#tool dotnet:n?package=GitVersion.Tool&version=5.7.0
 #tool nuget:?package=vswhere&version=2.8.4
 #tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.8.0
-#addin nuget:?package=Cake.Figlet&version=1.3.1
+#addin nuget:?package=Cake.Figlet&version=2.0.1
 #addin nuget:?package=Cake.Sonar&version=1.1.25
 
 var solutionName = "MvvmCross";
