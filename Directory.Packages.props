@@ -16,7 +16,7 @@
     <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.4.0.4" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="117.6.0.2" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="118.0.0.1" />
-    <PackageVersion Include="Microsoft.CodeAnalysis" Version="3.11.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis" Version="4.0.1" />
     <PackageVersion Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageVersion Include="SidebarNavigation" Version="2.1.0" />
     <PackageVersion Include="Xamarin.Build.Download" Version="0.10.0" />
