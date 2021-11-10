@@ -10,21 +10,23 @@ namespace MvvmCross.Platforms.Ios.Presenters
 #nullable enable
     public class MvxPopoverPresentationSourceProvider : IMvxPopoverPresentationSourceProvider
     {
-        private readonly WeakReference<UIView?> _sourceView = new WeakReference<UIView?>(null);
-        private readonly WeakReference<UIBarButtonItem?> _sourceBarButtonItem = new WeakReference<UIBarButtonItem?>(null);
+        private readonly WeakReference<UIView?> _sourceViewWeakReference = new WeakReference<UIView?>(null);
+        private readonly WeakReference<UIBarButtonItem?> _sourceBarButtonItemWeakReference = new WeakReference<UIBarButtonItem?>(null);
 
         public UIView? SourceView
         {
             get
             {
-                if (_sourceView.TryGetTarget(out var view))
+                if (_sourceViewWeakReference.TryGetTarget(out var view))
                     return view;
+#pragma warning disable S1168 // Empty arrays and collections should be returned instead of null
                 return null;
+#pragma warning restore S1168 // Empty arrays and collections should be returned instead of null
             }
             set
             {
-                _sourceBarButtonItem.SetTarget(null);
-                _sourceView.SetTarget(value);
+                _sourceBarButtonItemWeakReference.SetTarget(null);
+                _sourceViewWeakReference.SetTarget(value);
             }
         }
 
@@ -32,14 +34,14 @@ namespace MvvmCross.Platforms.Ios.Presenters
         {
             get
             {
-                if (_sourceBarButtonItem.TryGetTarget(out var view))
+                if (_sourceBarButtonItemWeakReference.TryGetTarget(out var view))
                     return view;
                 return null;
             }
             set
             {
-                _sourceView.SetTarget(null);
-                _sourceBarButtonItem.SetTarget(value);
+                _sourceViewWeakReference.SetTarget(null);
+                _sourceBarButtonItemWeakReference.SetTarget(value);
             }
         }
 
