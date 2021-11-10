@@ -89,7 +89,6 @@
     <Compile Include="Fragments\NestedChildView.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="TemplateSelectors\AnimalTemplateSelector.cs" />
-    <Compile Include="Fragments\LocationView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
