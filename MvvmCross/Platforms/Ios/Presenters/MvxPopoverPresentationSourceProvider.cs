@@ -19,6 +19,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
             {
                 if (_sourceViewWeakReference.TryGetTarget(out var view))
                     return view;
+
+                // This is not a array Sonar. You are drunk...
 #pragma warning disable S1168 // Empty arrays and collections should be returned instead of null
                 return null;
 #pragma warning restore S1168 // Empty arrays and collections should be returned instead of null

@@ -41,7 +41,11 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             {
                 if (_collectionView.TryGetTarget(out var collectionView))
                     return collectionView;
+
+                // This is not a array Sonar. You are drunk...
+#pragma warning disable S1168 // Empty arrays and collections should be returned instead of null
                 return null;
+#pragma warning restore S1168 // Empty arrays and collections should be returned instead of null
             }
         }
 

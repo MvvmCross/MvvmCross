@@ -5,7 +5,6 @@
 using System;
 using CoreGraphics;
 using Foundation;
-using MvvmCross.Platforms.Ios;
 using MvvmCross.ViewModels;
 using UIKit;
 
@@ -17,12 +16,17 @@ namespace MvvmCross.Platforms.Ios.Views
 	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : IMvxViewModel
     {
         private readonly MvxIosMajorVersionChecker _iosVersion11Checker = new MvxIosMajorVersionChecker(11);
-    
-        public MvxBaseViewController()
+        private readonly WeakReference<UIView?> _lastActiveView = new WeakReference<UIView?>(null);
+
+        private NSObject _keyboardShowObserver;
+        private NSObject _keyboardHideObserver;
+        private CGRect _lastKeyboardFrame = CGRect.Empty;
+
+        protected MvxBaseViewController()
         {
         }
 
-        public MvxBaseViewController(NSCoder coder) : base(coder)
+        protected MvxBaseViewController(NSCoder coder) : base(coder)
         {
         }
 
@@ -30,11 +34,11 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxBaseViewController(IntPtr handle) : base(handle)
+        protected MvxBaseViewController(IntPtr handle) : base(handle)
         {
         }
 
-        public MvxBaseViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        protected MvxBaseViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
         {
         }
 
@@ -53,12 +57,12 @@ namespace MvvmCross.Platforms.Ios.Views
         /// <summary>
         /// The view to center on keyboard shown
         /// </summary>
-        protected UIView ViewToCenterOnKeyboardShown;
+        protected UIView ViewToCenterOnKeyboardShown { get; set; }
 
         /// <summary>
         /// The scroll to center on keyboard shown
         /// </summary>
-        protected UIScrollView ScrollToCenterOnKeyboardShown;
+        protected UIScrollView ScrollToCenterOnKeyboardShown { get; set; }
 
         /// <summary>
 		/// Initialises the keyboard handling.  The view must also contain a UIScrollView for this to work.  You must also override HandlesKeyboardNotifications() and return true from that method.
@@ -86,9 +90,6 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             return false;
         }
-
-        private NSObject _keyboardShowObserver;
-        private NSObject _keyboardHideObserver;
 
         protected virtual void RegisterForKeyboardNotifications()
         {
@@ -148,19 +149,16 @@ namespace MvvmCross.Platforms.Ios.Views
             UIView.SetAnimationDuration(UIKeyboard.AnimationDurationFromNotification(notification));
             UIView.SetAnimationCurve((UIViewAnimationCurve)UIKeyboard.AnimationCurveFromNotification(notification));
 
-            //Pass the notification, calculating keyboard height, etc.
-            var keyboardFrame = visible
-                ? UIKeyboard.FrameEndFromNotification(notification)
-                : UIKeyboard.FrameBeginFromNotification(notification);
+                //Pass the notification, calculating keyboard height, etc.
+                var keyboardFrame = visible
+                    ? UIKeyboard.FrameEndFromNotification(notification)
+                    : UIKeyboard.FrameBeginFromNotification(notification);
 
-            OnKeyboardChanged(visible, keyboardFrame);
+                OnKeyboardChanged(visible, keyboardFrame);
 
             //Commit the animation
             UIView.CommitAnimations();
         }
-
-        private CGRect _lastKeyboardFrame = CGRect.Empty;
-        private WeakReference<UIView?> _lastActiveView = new WeakReference<UIView?>(null);
 
         /// <summary>
         /// Override this method to apply custom logic when the keyboard is shown/hidden
@@ -224,25 +222,25 @@ namespace MvvmCross.Platforms.Ios.Views
             View.AddGestureRecognizer(tap);
         }
 
-		/// <summary>
-		/// Selects next TextField to become FirstResponder.
-		/// Usage: textField.ShouldReturn += TextFieldShouldReturn;
-		/// </summary>
-		/// <returns></returns>
-		/// <param name="textField">The TextField</param>
-		public bool TextFieldShouldReturn(UITextField textField)
-		{
-			var nextTag = textField.Tag + 1;
-			UIResponder nextResponder = View.ViewWithTag(nextTag);
-			if (nextResponder != null)
-			{
-				nextResponder.BecomeFirstResponder();
-			}
-			else {
-				// Not found, so remove keyboard.
-				textField.ResignFirstResponder();
-			}
-			return false; // We do not want UITextField to insert line-breaks.
-		}
+        /// <summary>
+        /// Selects next TextField to become FirstResponder.
+        /// Usage: textField.ShouldReturn += TextFieldShouldReturn;
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="textField">The TextField</param>
+        public bool TextFieldShouldReturn(UITextField textField)
+        {
+            var nextTag = textField.Tag + 1;
+            UIResponder nextResponder = View.ViewWithTag(nextTag);
+            if (nextResponder != null)
+            {
+                nextResponder.BecomeFirstResponder();
+            }
+            else {
+                // Not found, so remove keyboard.
+                textField.ResignFirstResponder();
+            }
+            return false; // We do not want UITextField to insert line-breaks.
+        }
     }
 }
