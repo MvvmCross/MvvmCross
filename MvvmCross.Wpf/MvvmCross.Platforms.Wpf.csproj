@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp3.1;net5.0-windows;net6.0-windows</TargetFrameworks>
     <AssemblyName>MvvmCross.Platforms.Wpf</AssemblyName>
     <RootNamespace>MvvmCross.Platforms.Wpf</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
@@ -20,5 +20,5 @@ This package contains the 'MvvmCross.Platforms.Wpf' libraries for MvvmCross</Des
     <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
     <None Include="..\MvvmCross\readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
-  
+
 </Project>
