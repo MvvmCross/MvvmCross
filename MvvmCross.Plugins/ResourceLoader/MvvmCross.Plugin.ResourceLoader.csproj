@@ -99,13 +99,11 @@ This package contains the 'ResourceLoader' plugin for MvvmCross</Description>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('monoandroid')) ">
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-android')) ">
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
