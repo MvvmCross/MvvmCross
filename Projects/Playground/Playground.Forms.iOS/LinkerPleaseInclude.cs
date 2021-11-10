@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Windows.Input;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.IoC;
 using MvvmCross.Navigation;
 using MvvmCross.Platforms.Ios.Views;
 using MvvmCross.ViewModels;
@@ -118,9 +119,9 @@ namespace Playground.Forms.iOS
             changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
         }
 
-        public void Include(MvxNavigationService service, IMvxViewModelLoader loader, MvvmCross.Views.IMvxViewDispatcher dispatcher)
+        public void Include(MvxNavigationService service, IMvxViewModelLoader loader, MvvmCross.Views.IMvxViewDispatcher dispatcher, IMvxIoCProvider ioc)
         {
-            service = new MvxNavigationService(null, dispatcher);
+            service = new MvxNavigationService(null, dispatcher, ioc);
         }
 
         public void Include(ConsoleColor color)
