@@ -69,9 +69,8 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <None Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
     <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
 
-    <PackageReference Include="Microsoft.ProjectReunion"  />
-    <PackageReference Include="Microsoft.ProjectReunion.Foundation" />
-    <PackageReference Include="Microsoft.ProjectReunion.WinUI" />
+    <PackageReference Include="Microsoft.WindowsAppSDK"  />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
