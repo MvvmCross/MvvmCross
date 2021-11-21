@@ -5,6 +5,12 @@ steps:
     packageType: sdk
     version: 3.1.402
 
+- task: UseDotNet@2
+  displayName: 'Install .NET 5.0'
+  inputs:
+    packageType: sdk
+    version: 5.0.x
+    
 - task: Cache@2
   displayName: Cache NuGet packages
   inputs:
