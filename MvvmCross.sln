@@ -3507,7 +3507,6 @@ Global
 		{7EC523B3-3A6B-4182-98E9-AC232135E068}.Release|iPhone.ActiveCfg = Release|x86
 		{7EC523B3-3A6B-4182-98E9-AC232135E068}.Release|iPhoneSimulator.ActiveCfg = Release|x86
 		{7EC523B3-3A6B-4182-98E9-AC232135E068}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{7EC523B3-3A6B-4182-98E9-AC232135E068}.Release|Mixed Platforms.Build.0 = Release|x86
 		{7EC523B3-3A6B-4182-98E9-AC232135E068}.Release|x64.ActiveCfg = Release|x64
 		{7EC523B3-3A6B-4182-98E9-AC232135E068}.Release|x64.Build.0 = Release|x64
 		{7EC523B3-3A6B-4182-98E9-AC232135E068}.Release|x86.ActiveCfg = Release|x86
