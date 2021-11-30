@@ -8,7 +8,7 @@ using Playground.Core;
 namespace Playground.Mac
 {
     [Register("AppDelegate")]
-    public class AppDelegate : MvxApplicationDelegate<MvxMacSetup<App>, App>
+    public class AppDelegate : MvxApplicationDelegate<Setup, App>
     {
         public AppDelegate()
         {
