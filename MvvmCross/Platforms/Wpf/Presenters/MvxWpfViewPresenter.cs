@@ -59,18 +59,18 @@ namespace MvvmCross.Platforms.Wpf.Presenters
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Register<MvxWindowPresentationAttribute>(
-                    (viewType, attribute, request) =>
+                    (_, attribute, request) =>
                     {
                         var view = WpfViewLoader.CreateView(request);
-                        return ShowWindow(view, (MvxWindowPresentationAttribute)attribute, request);
+                        return ShowWindow(view, attribute, request);
                     },
-                    (viewModel, attribute) => CloseWindow(viewModel));
+                    (viewModel, _) => CloseWindow(viewModel));
 
             AttributeTypesToActionsDictionary.Register<MvxContentPresentationAttribute>(
-                    (viewType, attribute, request) =>
+                    (_, attribute, request) =>
                     {
                         var view = WpfViewLoader.CreateView(request);
-                        return ShowContentView(view, (MvxContentPresentationAttribute)attribute, request);
+                        return ShowContentView(view, attribute, request);
                     },
                     (viewModel, attribute) => CloseContentView(viewModel));
             AttributeTypesToActionsDictionary.Register<MvxRegionPresentationAttribute>(
@@ -88,12 +88,12 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             {
                 MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. " +
                     "Assuming window presentation", viewType.Name);
-                return new MvxWindowPresentationAttribute();
+                return new MvxWindowPresentationAttribute { ViewModelType = viewModelType, ViewType = viewType };
             }
 
             MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. " +
                     "Assuming content presentation", viewType.Name);
-            return new MvxContentPresentationAttribute();
+            return new MvxContentPresentationAttribute { ViewType = viewType, ViewModelType = viewModelType };
         }
 
         public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
@@ -185,17 +185,17 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             return Task.FromResult(true);
         }
 
-        public override async Task<bool> Close(IMvxViewModel toClose)
+        public override async Task<bool> Close(IMvxViewModel viewModel)
         {
             // toClose is window
-            if (FrameworkElementsDictionary.Any(i => (i.Key as IMvxWpfView)?.ViewModel == toClose) && await CloseWindow(toClose))
+            if (FrameworkElementsDictionary.Any(i => (i.Key as IMvxWpfView)?.ViewModel == viewModel) && await CloseWindow(viewModel))
                 return true;
 
             // toClose is content
-            if (FrameworkElementsDictionary.Any(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose) && await CloseContentView(toClose))
+            if (FrameworkElementsDictionary.Any(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == viewModel) && await CloseContentView(viewModel))
                 return true;
 
-            MvxLogHost.Default?.Log(LogLevel.Warning, "Could not close ViewModel type {ViewModelTypeName}", toClose.GetType().Name);
+            MvxLogHost.Default?.Log(LogLevel.Warning, "Could not close ViewModel type {ViewModelTypeName}", viewModel.GetType().Name);
             return false;
         }
 

@@ -12,7 +12,7 @@ using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
-    public class ChildViewModel : MvxNavigationViewModel<SampleModel, SampleModel>
+    public class ChildViewModel : MvxNavigationViewModel<SampleModel>
     {
         public string BrokenTextValue { get => _brokenTextValue; set => SetProperty(ref _brokenTextValue, value); }
         public string AnotherBrokenTextValue { get => _anotherBrokenTextValue; set => SetProperty(ref _anotherBrokenTextValue, value); }
@@ -24,15 +24,11 @@ namespace Playground.Core.ViewModels
         public ChildViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
-            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this, new SampleModel
-            {
-                Message = "This returned correctly",
-                Value = 5.67m
-            }));
+            CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
 
-            ShowSecondChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SecondChildViewModel>());
+            ShowSecondChildCommand = new MvxAsyncCommand(() => NavigationService.Navigate<SecondChildViewModel>());
 
-            ShowRootCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>());
+            ShowRootCommand = new MvxAsyncCommand(() => NavigationService.Navigate<RootViewModel>());
 
             PropertyChanged += ChildViewModel_PropertyChanged;
         }
