@@ -19,7 +19,6 @@
 
 This package contains the 'Core' libraries for MvvmCross</Description>
     <PackageId>MvvmCross</PackageId>
-    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
     <GenerateLibraryLayout Condition="$(TargetFramework.StartsWith('uap'))">true</GenerateLibraryLayout>
   </PropertyGroup>
 

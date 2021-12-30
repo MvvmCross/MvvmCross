@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Commands;
 using MvvmCross.IoC;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
@@ -22,6 +23,7 @@ namespace MvvmCross.Core
     {
         public event EventHandler<MvxSetupStateEventArgs>? StateChanged;
 
+        private static readonly object _lock = new object();
         private MvxSetupState _state;
         private IMvxIoCProvider? _iocProvider;
 
@@ -45,18 +47,33 @@ namespace MvvmCross.Core
 
         public static void RegisterSetupType<TMvxSetup>(params Assembly[] assemblies) where TMvxSetup : MvxSetup, new()
         {
-            ViewAssemblies.AddRange(assemblies);
-            if (ViewAssemblies.Count == 0)
+            // We are using double-checked locking here to avoid overhead of locking if the
+            // SetupCreator is already created
+            if (SetupCreator is null)
             {
-                // fall back to all assemblies. Assembly.GetEntryAssembly() always returns
-                // null on Xamarin platforms do not use it!
-                ViewAssemblies.AddRange(AppDomain.CurrentDomain.GetAssemblies());
+                lock (_lock)
+                {
+                    if (SetupCreator is null)
+                    {
+                        ViewAssemblies.AddRange(assemblies);
+                        if (ViewAssemblies.Count == 0)
+                        {
+                            // fall back to all assemblies. Assembly.GetEntryAssembly() always returns
+                            // null on Xamarin platforms do not use it!
+                            ViewAssemblies.AddRange(AppDomain.CurrentDomain.GetAssemblies());
+                        }
+
+                        // Avoid creating the instance of Setup right now, instead
+                        // take a reference to the type in a way that we can avoid
+                        // using reflection to create the instance.
+                        SetupCreator = () => new TMvxSetup();
+
+                        return;
+                    }
+                }
             }
 
-            // Avoid creating the instance of Setup right now, instead
-            // take a reference to the type in a way that we can avoid
-            // using reflection to create the instance.
-            SetupCreator = () => new TMvxSetup();
+            MvxLogHost.Default.LogInformation("Setup: RegisterSetupType already called");
         }
 
         public static IMvxSetup Instance()

@@ -4,7 +4,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Wpf.Views
 {
-    [MvxContentPresentation]
+    //[MvxContentPresentation]
     [MvxViewFor(typeof(RootViewModel))]
     public partial class RootView
     {
