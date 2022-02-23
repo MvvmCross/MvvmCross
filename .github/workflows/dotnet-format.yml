@@ -14,7 +14,7 @@ on:
       - develop
 
 jobs:
-  build:
+  lint:
 
     runs-on: windows-latest
 
