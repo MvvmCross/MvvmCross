@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using Foundation;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
@@ -82,8 +83,8 @@ namespace MvvmCross.Platforms.Ios.Views
         }
     }
 
-    public class MvxSplitViewController<TViewModel> : MvxSplitViewController
-        where TViewModel : IMvxViewModel
+    public class MvxSplitViewController<TViewModel> : MvxSplitViewController, IMvxIosView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
         public MvxSplitViewController()
         {
@@ -109,6 +110,11 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxIosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxIosView<TViewModel>, TViewModel>();
         }
     }
 }
