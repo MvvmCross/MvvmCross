@@ -3,15 +3,21 @@
   "isRoot": true,
   "tools": {
     "cake.tool": {
-      "version": "1.0.0",
+      "version": "2.1.0",
       "commands": [
         "dotnet-cake"
       ]
     },
     "dotnet-reportgenerator-globaltool": {
-      "version": "4.8.5",
+      "version": "5.0.4",
       "commands": [
         "reportgenerator"
+      ]
+    },
+    "dotnet-format": {
+      "version": "5.1.250801",
+      "commands": [
+        "dotnet-format"
       ]
     }
   }

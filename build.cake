@@ -1,9 +1,8 @@
-#module nuget:?package=Cake.DotNetTool.Module&version=0.4.0
-#tool dotnet:n?package=GitVersion.Tool&version=5.6.6
-#tool nuget:?package=vswhere&version=2.8.4
+#tool dotnet:n?package=GitVersion.Tool&version=5.8.2
+#tool nuget:?package=vswhere&version=2.9.3-g21bcdb639c
 #tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.8.0
-#addin nuget:?package=Cake.Figlet&version=1.3.1
-#addin nuget:?package=Cake.Sonar&version=1.1.25
+#addin nuget:?package=Cake.Figlet&version=2.0.1
+#addin nuget:?package=Cake.Sonar&version=1.1.30
 
 var solutionName = "MvvmCross";
 var repoName = "mvvmcross/mvvmcross";
@@ -22,7 +21,7 @@ var githubToken = Argument("github_token", "");
 var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
 var sinceTag = Argument("since_tag", "");
 
-var isRunningOnPipelines = AzurePipelines.IsRunningOnAzurePipelines || AzurePipelines.IsRunningOnAzurePipelinesHosted;
+var isRunningOnPipelines = AzurePipelines.IsRunningOnAzurePipelines;
 GitVersion versionInfo = null;
 
 Setup(context => 
