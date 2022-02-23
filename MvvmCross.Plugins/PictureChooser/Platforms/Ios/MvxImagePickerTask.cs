@@ -18,7 +18,7 @@ using UIKit;
 namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
 {
     [MvvmCross.Preserve(AllMembers = true)]
-	public class MvxImagePickerTask
+    public class MvxImagePickerTask
         : MvxIosTask, IMvxPictureChooserTask
     {
         private UIImagePickerController _picker;
@@ -56,7 +56,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
             _picker.FinishedPickingImage -= Picker_FinishedPickingImage;
             _picker.Canceled -= Picker_Canceled;
         }
-        
+
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
                                      Action assumeCancelled)
         {
@@ -109,7 +109,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
             _assumeCancelled = assumeCancelled;
 
             var picker = EnsurePickerController();
-            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(picker, true, null);            
+            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(picker, true, null);
         }
 
         private void HandleImagePick(UIImagePickerController picker, UIImage image, string name)
@@ -163,7 +163,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
             UnsubscribeEvents();
             ClearCurrentlyActive();
             _assumeCancelled?.Invoke();
-            ((UIImagePickerController) sender).DismissViewController(true, () => { });        
+            ((UIImagePickerController)sender).DismissViewController(true, () => { });
         }
 
         private void SetCurrentlyActive()

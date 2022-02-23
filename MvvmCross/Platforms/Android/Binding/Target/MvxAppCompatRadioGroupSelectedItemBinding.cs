@@ -3,12 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using AndroidX.AppCompat.Widget;
 using Android.Views;
 using Android.Widget;
+using AndroidX.AppCompat.Widget;
 using MvvmCross.Binding;
-using MvvmCross.WeakSubscription;
 using MvvmCross.Platforms.Android.Binding.Views;
+using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
 {

@@ -15,7 +15,7 @@ namespace MvvmCross.Plugin.JsonLocalization
             : base(maskErrors)
         {
         }
-        
+
         private IMvxJsonConverter _jsonConvert;
         protected IMvxJsonConverter JsonConvert
         {
@@ -25,7 +25,7 @@ namespace MvvmCross.Plugin.JsonLocalization
                 return _jsonConvert;
             }
         }
-        
+
         public abstract void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath);
 
         public virtual void LoadJsonFromText(string namespaceKey, string typeKey, string rawJson)

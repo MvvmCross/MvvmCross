@@ -5,7 +5,7 @@
 namespace MvvmCross.Plugin.Location
 {
     [Preserve(AllMembers = true)]
-	public class MvxLocationError
+    public class MvxLocationError
     {
         public MvxLocationError(MvxLocationErrorCode code)
         {

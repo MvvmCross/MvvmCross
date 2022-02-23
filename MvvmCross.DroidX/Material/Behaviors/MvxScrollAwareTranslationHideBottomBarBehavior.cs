@@ -15,7 +15,7 @@ using Object = Java.Lang.Object;
 namespace MvvmCross.DroidX.Material.Behaviors
 {
     [Register("mvvmcross.droidx.material.behaviors.MvxScrollAwareTranslationAutoHideBehavior")]
-    public class MvxScrollAwareTranslationHideBottomBarBehavior 
+    public class MvxScrollAwareTranslationHideBottomBarBehavior
         : CoordinatorLayout.Behavior
     {
         private static readonly float MinimalScrollDistance = 25;

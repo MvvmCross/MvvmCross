@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Ios.Views
 	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : IMvxViewModel
     {
         private readonly MvxIosMajorVersionChecker _iosVersion11Checker = new MvxIosMajorVersionChecker(11);
-    
+
         public MvxBaseViewController()
         {
         }
@@ -224,25 +224,26 @@ namespace MvvmCross.Platforms.Ios.Views
             View.AddGestureRecognizer(tap);
         }
 
-		/// <summary>
-		/// Selects next TextField to become FirstResponder.
-		/// Usage: textField.ShouldReturn += TextFieldShouldReturn;
-		/// </summary>
-		/// <returns></returns>
-		/// <param name="textField">The TextField</param>
-		public bool TextFieldShouldReturn(UITextField textField)
-		{
-			var nextTag = textField.Tag + 1;
-			UIResponder nextResponder = View.ViewWithTag(nextTag);
-			if (nextResponder != null)
-			{
-				nextResponder.BecomeFirstResponder();
-			}
-			else {
-				// Not found, so remove keyboard.
-				textField.ResignFirstResponder();
-			}
-			return false; // We do not want UITextField to insert line-breaks.
-		}
+        /// <summary>
+        /// Selects next TextField to become FirstResponder.
+        /// Usage: textField.ShouldReturn += TextFieldShouldReturn;
+        /// </summary>
+        /// <returns></returns>
+        /// <param name="textField">The TextField</param>
+        public bool TextFieldShouldReturn(UITextField textField)
+        {
+            var nextTag = textField.Tag + 1;
+            UIResponder nextResponder = View.ViewWithTag(nextTag);
+            if (nextResponder != null)
+            {
+                nextResponder.BecomeFirstResponder();
+            }
+            else
+            {
+                // Not found, so remove keyboard.
+                textField.ResignFirstResponder();
+            }
+            return false; // We do not want UITextField to insert line-breaks.
+        }
     }
 }

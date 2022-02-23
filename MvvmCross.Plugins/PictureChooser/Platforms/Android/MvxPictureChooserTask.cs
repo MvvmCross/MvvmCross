@@ -10,20 +10,20 @@ using Android.Content;
 using Android.Graphics;
 using Android.Media;
 using Android.Provider;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Platforms.Android;
 using MvvmCross.Platforms.Android.Views.Base;
+using ExifInterface = AndroidX.ExifInterface.Media.ExifInterface;
 using Path = System.IO.Path;
 using Stream = System.IO.Stream;
 using Uri = Android.Net.Uri;
-using ExifInterface = AndroidX.ExifInterface.Media.ExifInterface;
-using MvvmCross.Logging;
-using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
 {
     [Preserve(AllMembers = true)]
-    public class MvxPictureChooserTask 
+    public class MvxPictureChooserTask
         : MvxAndroidTask, IMvxPictureChooserTask
     {
         private Uri _cachedUriLocation;

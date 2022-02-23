@@ -8,7 +8,7 @@ namespace MvvmCross.Plugin.Messenger
 {
 #nullable enable
     [Preserve(AllMembers = true)]
-	public class MvxSubscriberChangeMessage : MvxMessage
+    public class MvxSubscriberChangeMessage : MvxMessage
     {
         public Type MessageType { get; }
         public int SubscriberCount { get; }

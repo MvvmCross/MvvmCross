@@ -26,7 +26,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
         {
             if (target == null)
             {
-                MvxBindingLog.Error( "Error - TextView is null in MvxTextViewTextTargetBinding");
+                MvxBindingLog.Error("Error - TextView is null in MvxTextViewTextTargetBinding");
                 return;
             }
 

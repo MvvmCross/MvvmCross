@@ -28,7 +28,8 @@ namespace MvvmCross.Base
 
         public static MethodInfo? GetAddMethod(this EventInfo eventInfo, bool nonPublic = false)
         {
-            if (eventInfo?.AddMethod == null || (!nonPublic && !eventInfo.AddMethod.IsPublic)) {
+            if (eventInfo?.AddMethod == null || (!nonPublic && !eventInfo.AddMethod.IsPublic))
+            {
                 return null;
             }
 
@@ -37,7 +38,8 @@ namespace MvvmCross.Base
 
         public static MethodInfo? GetRemoveMethod(this EventInfo eventInfo, bool nonPublic = false)
         {
-            if (eventInfo?.RemoveMethod == null || (!nonPublic && !eventInfo.RemoveMethod.IsPublic)) {
+            if (eventInfo?.RemoveMethod == null || (!nonPublic && !eventInfo.RemoveMethod.IsPublic))
+            {
                 return null;
             }
 
@@ -46,7 +48,8 @@ namespace MvvmCross.Base
 
         public static MethodInfo? GetGetMethod(this PropertyInfo property, bool nonPublic = false)
         {
-            if (property?.GetMethod == null || (!nonPublic && !property.GetMethod.IsPublic)) {
+            if (property?.GetMethod == null || (!nonPublic && !property.GetMethod.IsPublic))
+            {
                 return null;
             }
 

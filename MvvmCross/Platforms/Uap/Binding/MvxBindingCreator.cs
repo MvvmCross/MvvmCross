@@ -4,10 +4,10 @@
 
 using System;
 using System.Collections.Generic;
-using Windows.UI.Xaml;
-using MvvmCross.Binding.Bindings;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Binding.Bindings;
 using MvvmCross.Logging;
+using Windows.UI.Xaml;
 
 namespace MvvmCross.Platforms.Uap.Binding
 {

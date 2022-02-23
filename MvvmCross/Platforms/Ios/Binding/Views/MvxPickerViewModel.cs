@@ -6,12 +6,12 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Windows.Input;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
+using MvvmCross.Logging;
 using MvvmCross.WeakSubscription;
 using UIKit;
-using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
 {

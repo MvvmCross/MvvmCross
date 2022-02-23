@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -38,7 +38,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             var view = View;
             if (view == null)
             {
-                MvxBindingLog.Error( "Error - NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
+                MvxBindingLog.Error("Error - NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
                 return;
             }
 
@@ -47,8 +47,10 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             {
                 ((MvxEventSourceTabViewController)view).DidSelectCalled += HandleValueChanged;
             }
-            else {
-                try {
+            else
+            {
+                try
+                {
                     view.TabView.DidSelect += HandleValueChanged;
                 }
                 catch (Exception ex)

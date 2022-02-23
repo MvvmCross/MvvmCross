@@ -7,7 +7,7 @@ using System;
 namespace MvvmCross.Plugin.Location
 {
     [Preserve(AllMembers = true)]
-	public class MvxLocationOptions
+    public class MvxLocationOptions
     {
         public MvxLocationAccuracy Accuracy { get; set; }
 

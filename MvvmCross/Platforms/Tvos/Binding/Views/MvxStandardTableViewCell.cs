@@ -41,7 +41,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
         }
-        
+
         public string TitleText
         {
             get { return TextLabel.Text; }

@@ -121,7 +121,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             }
 
 #if DEBUG
-            MvxLogHost.GetLog<MvxCachingFragmentPagerAdapter>()?.Log(LogLevel.Trace, 
+            MvxLogHost.GetLog<MvxCachingFragmentPagerAdapter>()?.Log(LogLevel.Trace,
                 "Adding item #{position}: f={fragment} t={tag}", position, fragment, fragmentTag);
 #endif
 

@@ -8,7 +8,7 @@ namespace MvvmCross.Plugin.Visibility.Platforms.Android
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class Plugin : BasePlugin          
+    public class Plugin : BasePlugin
     {
         public override void Load()
         {

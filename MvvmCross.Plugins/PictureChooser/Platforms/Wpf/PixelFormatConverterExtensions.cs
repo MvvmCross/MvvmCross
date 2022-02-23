@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -37,7 +37,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Wpf
                 return PixelFormats.Indexed4;
             if (pixelFormat == PixelFormat.Format8bppIndexed)
                 return PixelFormats.Indexed8;
-            
+
             if (pixelFormat == PixelFormat.Format24bppRgb)
                 return PixelFormats.Bgr24;
 
@@ -53,7 +53,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Wpf
 
             if (pixelFormat == PixelFormat.Format64bppArgb)
                 return PixelFormats.Prgba64;
-            
+
             if (pixelFormat == PixelFormat.Undefined)
                 return PixelFormats.Default;
 

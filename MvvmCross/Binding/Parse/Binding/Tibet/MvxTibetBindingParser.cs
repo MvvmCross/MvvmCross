@@ -42,7 +42,7 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
 
         private char[] _terminatingCharacters;
 
-        protected override IEnumerable<char> TerminatingCharacters() => 
+        protected override IEnumerable<char> TerminatingCharacters() =>
             _terminatingCharacters ?? (_terminatingCharacters = base.TerminatingCharacters().Union(OperatorCharacters).ToArray());
 
         protected override void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)

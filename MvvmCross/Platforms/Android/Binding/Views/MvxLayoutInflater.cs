@@ -177,7 +177,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             View? view = null;
             if (name != null && Context != null && attrs != null)
                 view = AndroidViewFactory?.CreateView(null, name, Context, attrs);
-            
+
             view ??= PhoneLayoutInflaterOnCreateView(name, attrs) ?? base.OnCreateView(name, attrs);
 
             return _bindingVisitor.OnViewCreated(view, Context, attrs);
@@ -337,7 +337,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 _constructorArgs.Accessible = true;
             }
 
-            var constructorArgsArr = (Object[]?) _constructorArgs!.Get(this);
+            var constructorArgsArr = (Object[]?)_constructorArgs!.Get(this);
             var lastContext = constructorArgsArr?[0];
 
             // The LayoutInflater actually finds out the correct context to use. We just need to set
@@ -387,7 +387,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... AndroidViewFactory IoCProvider is null!", Tag);
                     return null;
                 }
-                
+
                 if (Mvx.IoCProvider.TryResolve(out IMvxAndroidViewFactory viewFactory))
                 {
                     _androidViewFactory = viewFactory;
@@ -410,7 +410,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Error, "{Tag} - ... FactoryFactory IoCProvider is null!", Tag);
                     return null;
                 }
-                
+
                 if (Mvx.IoCProvider.TryResolve(out IMvxLayoutInflaterHolderFactoryFactory factoryFactory))
                 {
                     _layoutInflaterHolderFactoryFactory = factoryFactory;

@@ -5,7 +5,7 @@
 namespace MvvmCross.Plugin.Location
 {
     [Preserve(AllMembers = true)]
-	public class MvxCoordinates
+    public class MvxCoordinates
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }

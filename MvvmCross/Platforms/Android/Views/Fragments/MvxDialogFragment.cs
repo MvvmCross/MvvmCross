@@ -99,7 +99,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         }
     }
 
-    public abstract class MvxDialogFragment<TViewModel> : MvxDialogFragment, IMvxFragmentView<TViewModel> 
+    public abstract class MvxDialogFragment<TViewModel> : MvxDialogFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxDialogFragment()

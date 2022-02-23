@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,7 +10,7 @@ using MvvmCross.Converters;
 namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
 {
     [Preserve(AllMembers = true)]
-	public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], Bitmap>
+    public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], Bitmap>
     {
         protected override Bitmap Convert(byte[] value, Type targetType, object parameter, CultureInfo culture)
         {

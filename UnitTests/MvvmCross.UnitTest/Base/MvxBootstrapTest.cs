@@ -8,7 +8,7 @@ using Xunit;
 
 namespace MvvmCross.UnitTest.Base
 {
-    
+
     public class MvxBootstrapTest
     {
         [Fact]

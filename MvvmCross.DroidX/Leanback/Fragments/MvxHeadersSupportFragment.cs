@@ -79,14 +79,14 @@ namespace MvvmCross.DroidX.Leanback.Fragments
         public string UniqueImmutableCacheTag => Tag;
     }
 
-    public abstract class MvxHeadersSupportFragment<TViewModel> : MvxHeadersSupportFragment, IMvxFragmentView<TViewModel> 
+    public abstract class MvxHeadersSupportFragment<TViewModel> : MvxHeadersSupportFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxHeadersSupportFragment()
         {
         }
 
-        protected MvxHeadersSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) 
+        protected MvxHeadersSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }

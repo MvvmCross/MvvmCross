@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,7 +11,7 @@ using UIKit;
 namespace MvvmCross.Plugin.Share.Platforms.Ios
 {
     [MvvmCross.Preserve(AllMembers = true)]
-	public class MvxShareTask
+    public class MvxShareTask
         : MvxIosTask, IMvxShareTask
     {
         private TWTweetComposeViewController _tweet;
@@ -29,7 +29,7 @@ namespace MvvmCross.Plugin.Share.Platforms.Ios
             _tweet.SetInitialText(message);
             _tweet.CompletionHandler = TWTweetComposeHandler;
 
-            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(_tweet, true, null);                        
+            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(_tweet, true, null);
         }
 
         public void ShareLink(string title, string message, string link)
@@ -41,8 +41,8 @@ namespace MvvmCross.Plugin.Share.Platforms.Ios
             _tweet.SetInitialText(title + " " + message);
             _tweet.AddUrl(new NSUrl(link));
             _tweet.CompletionHandler = TWTweetComposeHandler;
-            
-            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(_tweet, true, null);                        
+
+            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(_tweet, true, null);
         }
 
         private void TWTweetComposeHandler(TWTweetComposeViewControllerResult result)

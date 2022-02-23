@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,7 +8,7 @@ using MvvmCross.Platforms.Android;
 namespace MvvmCross.Plugin.Share.Platforms.Android
 {
     [Preserve(AllMembers = true)]
-	public class MvxShareTask
+    public class MvxShareTask
         : MvxAndroidTask, IMvxShareTask
     {
         public void ShareShort(string message)

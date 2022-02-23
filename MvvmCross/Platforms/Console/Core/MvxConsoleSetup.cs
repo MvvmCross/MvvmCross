@@ -2,14 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using MvvmCross.Core;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Console.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using System.Collections.Generic;
-using System.Reflection;
-using MvvmCross.IoC;
-using System;
 
 namespace MvvmCross.Platforms.Console.Core
 {

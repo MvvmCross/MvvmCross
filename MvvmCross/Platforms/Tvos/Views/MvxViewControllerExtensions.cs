@@ -24,14 +24,14 @@ namespace MvvmCross.Platforms.Tvos.Views
             }
 
             var instanceRequest = tvOSView.Request as MvxViewModelInstanceRequest;
-            if(instanceRequest != null)
+            if (instanceRequest != null)
             {
                 return instanceRequest.ViewModelInstance;
             }
 
             var loader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(tvOSView.Request, null /* no saved state on tvOS currently */);
-            if(viewModel == null)
+            if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + tvOSView.Request.ViewModelType);
             return viewModel;
         }

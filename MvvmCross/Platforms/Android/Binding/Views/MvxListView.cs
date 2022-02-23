@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -61,7 +61,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     value.ItemTemplateId = existing.ItemTemplateId;
                     value.ItemsSource = existing.ItemsSource;
                 }
-                
+
                 base.Adapter = value;
 
                 if (existing != null)
@@ -72,7 +72,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get => Adapter.ItemsSource; 
+            get => Adapter.ItemsSource;
             set => Adapter.ItemsSource = value;
         }
 
@@ -89,7 +89,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             {
                 _itemClick = value;
                 if (_itemClick != null)
-                    EnsureItemClickOverloaded(); 
+                    EnsureItemClickOverloaded();
             }
         }
 

@@ -12,7 +12,7 @@ namespace Playground.Core.ViewModels
 {
     public class MixedNavMasterRootContentViewModel : MvxNavigationViewModel
     {
-        public MixedNavMasterRootContentViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService) 
+        public MixedNavMasterRootContentViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
             ShowModalCommand = new MvxAsyncCommand(() => NavigationService.Navigate<ModalNavViewModel>());

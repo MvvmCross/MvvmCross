@@ -17,7 +17,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Presenters
         : MvxIosViewPresenter
         , IMvxFormsViewPresenter
     {
-        public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window, Application formsApplication) : base (applicationDelegate, window)
+        public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window, Application formsApplication) : base(applicationDelegate, window)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }

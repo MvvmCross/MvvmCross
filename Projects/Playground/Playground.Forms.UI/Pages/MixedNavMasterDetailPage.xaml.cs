@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Forms.Views;
 using MvvmCross.Forms.Presenters.Attributes;
+using MvvmCross.Forms.Views;
 using Playground.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -27,7 +27,8 @@ namespace Playground.Forms.UI.Pages
         protected override void OnViewModelSet()
         {
             base.OnViewModelSet();
-            ViewModel.PropertyChanged += (sender, e) => {
+            ViewModel.PropertyChanged += (sender, e) =>
+            {
                 if (e.PropertyName == nameof(ViewModel.SelectedMenu))
                 {
                     if (Parent is FlyoutPage master)

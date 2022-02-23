@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -51,7 +51,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Wpf
                         var encoder = GetBitmapEncoder(filePicker.FileName, percentQuality);
                         if (encoder == null)
                             throw new NotSupportedException("The image file is invalid. Please, select a jpg, jpeg, gif, png or tiff file.");
-                        
+
                         MemoryStream stream = new MemoryStream();
                         encoder.Frames.Add(BitmapFrame.Create(transformBM));
                         encoder.Save(stream);

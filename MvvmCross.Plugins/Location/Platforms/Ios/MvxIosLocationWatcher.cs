@@ -13,7 +13,7 @@ using MvvmCross.Platforms.Ios;
 namespace MvvmCross.Plugin.Location.Platforms.Ios
 {
     [MvvmCross.Preserve(AllMembers = true)]
-	public sealed class MvxIosLocationWatcher
+    public sealed class MvxIosLocationWatcher
         : MvxLocationWatcher
     {
         private CLLocationManager _locationManager;
@@ -185,12 +185,12 @@ namespace MvvmCross.Plugin.Location.Platforms.Ios
 
             public override void Failed(CLLocationManager manager, NSError error)
             {
-                _owner.SendError (ToMvxLocationErrorCode (manager, error));
+                _owner.SendError(ToMvxLocationErrorCode(manager, error));
             }
 
             public override void MonitoringFailed(CLLocationManager manager, CLRegion region, NSError error)
             {
-                _owner.SendError (ToMvxLocationErrorCode (manager, error, region));
+                _owner.SendError(ToMvxLocationErrorCode(manager, error, region));
             }
 
             public override void AuthorizationChanged(CLLocationManager manager, CLAuthorizationStatus status)
@@ -216,19 +216,22 @@ namespace MvvmCross.Plugin.Location.Platforms.Ios
                 }
             }
 
-            private MvxLocationErrorCode ToMvxLocationErrorCode (CLLocationManager manager, NSError error, CLRegion region = null)
+            private MvxLocationErrorCode ToMvxLocationErrorCode(CLLocationManager manager, NSError error, CLRegion region = null)
             {
                 var errorType = (CLError)(int)error.Code;
 
-                if (errorType == CLError.Denied) {
+                if (errorType == CLError.Denied)
+                {
                     return MvxLocationErrorCode.PermissionDenied;
                 }
 
-                if (errorType == CLError.Network) {
+                if (errorType == CLError.Network)
+                {
                     return MvxLocationErrorCode.Network;
                 }
 
-                if (errorType == CLError.DeferredCanceled) {
+                if (errorType == CLError.DeferredCanceled)
+                {
                     return MvxLocationErrorCode.Canceled;
                 }
 

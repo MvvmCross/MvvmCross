@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace MvvmCross.Plugin.Json
 {
     [Preserve(AllMembers = true)]
-	public class MvxEnumJsonConverter : JsonConverter
+    public class MvxEnumJsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {

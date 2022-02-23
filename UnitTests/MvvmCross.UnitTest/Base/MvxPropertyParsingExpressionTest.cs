@@ -7,7 +7,7 @@ using Xunit;
 
 namespace MvvmCross.UnitTest.Base
 {
-    
+
     public class MvxPropertyNameFromExpressionTests
     {
         public class TestClass

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -27,7 +27,7 @@ namespace MvvmCross.Plugin.Accelerometer.Platforms.Android
             }
 
             var globals = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>();
-            _sensorManager = (SensorManager) globals.ApplicationContext.GetSystemService(Context.SensorService);
+            _sensorManager = (SensorManager)globals.ApplicationContext.GetSystemService(Context.SensorService);
             if (_sensorManager == null)
                 throw new MvxException("Failed to find SensorManager");
 
@@ -76,11 +76,11 @@ namespace MvvmCross.Plugin.Accelerometer.Platforms.Android
         private static MvxAccelerometerReading ToReading(double x, double y, double z)
         {
             var reading = new MvxAccelerometerReading
-                {
-                    X = x,
-                    Y = y,
-                    Z = z
-                };
+            {
+                X = x,
+                Y = y,
+                Z = z
+            };
             return reading;
         }
 

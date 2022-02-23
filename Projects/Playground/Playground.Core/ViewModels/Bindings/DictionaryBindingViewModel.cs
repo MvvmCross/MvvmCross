@@ -35,7 +35,7 @@ namespace Playground.Core.ViewModels
 
         private void Increment()
         {
-            if(Value < 3)
+            if (Value < 3)
             {
                 Value++;
             }

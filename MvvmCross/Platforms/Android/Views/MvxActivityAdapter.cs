@@ -5,12 +5,12 @@
 using System;
 using Android.Content;
 using Android.OS;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Logging;
-using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.Views;
-using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Android.Views
 {

@@ -12,7 +12,7 @@ using MvvmCross.Platforms.Android;
 namespace MvvmCross.Plugin.PhoneCall.Platforms.Android
 {
     [Preserve(AllMembers = true)]
-	public class MvxPhoneCallTask
+    public class MvxPhoneCallTask
         : MvxAndroidTask, IMvxPhoneCallTask
     {
         public void MakePhoneCall(string name, string number)

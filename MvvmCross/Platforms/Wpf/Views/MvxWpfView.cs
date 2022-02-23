@@ -81,7 +81,7 @@ namespace MvvmCross.Platforms.Wpf.Views
         }
     }
 
-    public class MvxWpfView<TViewModel> : MvxWpfView, IMvxWpfView<TViewModel> 
+    public class MvxWpfView<TViewModel> : MvxWpfView, IMvxWpfView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel

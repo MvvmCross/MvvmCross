@@ -21,11 +21,11 @@ namespace MvvmCross.Binding.BindingContext
         {
             _bindingContextOwner = bindingContextOwner;
         }
-        public MvxFluentBindingDescriptionSet(TOwningTarget bindingContextOwner, string clearBindingKey):this (bindingContextOwner)
+        public MvxFluentBindingDescriptionSet(TOwningTarget bindingContextOwner, string clearBindingKey) : this(bindingContextOwner)
         {
             _clearBindingKey = clearBindingKey;
         }
-            public MvxFluentBindingDescription<TOwningTarget, TSource> Bind()
+        public MvxFluentBindingDescription<TOwningTarget, TSource> Bind()
         {
             var toReturn = new MvxFluentBindingDescription<TOwningTarget, TSource>(_bindingContextOwner,
                                                                                    _bindingContextOwner);

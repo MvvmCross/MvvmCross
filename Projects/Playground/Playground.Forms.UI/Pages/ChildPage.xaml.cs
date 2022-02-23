@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Forms.Views;
+using System;
 using MvvmCross.Forms.Presenters.Attributes;
+using MvvmCross.Forms.Views;
 using Playground.Core.ViewModels;
 using Xamarin.Forms;
-using System;
 
 namespace Playground.Forms.UI.Pages
 {
@@ -23,7 +23,7 @@ namespace Playground.Forms.UI.Pages
         private void BrokenTextLabel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             // This demonstrates how MvxFullBinding captures UI exception
-            if(e.PropertyName==nameof(BrokenTextLabel.Text))
+            if (e.PropertyName == nameof(BrokenTextLabel.Text))
                 throw new NotImplementedException();
         }
     }

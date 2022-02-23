@@ -41,7 +41,7 @@ namespace MvvmCross.ViewModels
             // Make sure we have a bundle that matches function parameters
             if (bundle == null && parameters.Length > 0)
                 return;
-            
+
             if (bundle != null && parameters.Length == 1)
             {
                 if (parameters[0].ParameterType == typeof(IMvxBundle))

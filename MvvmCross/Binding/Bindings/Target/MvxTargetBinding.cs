@@ -46,13 +46,13 @@ namespace MvvmCross.Binding.Bindings.Target
             _target = new WeakReference<TTarget>(target);
         }
 
-        protected TTarget Target 
-        { 
-            get 
+        protected TTarget Target
+        {
+            get
             {
                 _target.TryGetTarget(out var target);
                 return target;
-            } 
+            }
         }
 
         public virtual void SubscribeToEvents()

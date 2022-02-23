@@ -2,14 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Forms.Presenters;
 using System;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.Platforms.Uap.Presenters;
 using MvvmCross.Platforms.Uap.Views;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Forms.Platforms.Uap.Presenters
 {
@@ -33,7 +33,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Presenters
         {
             get
             {
-                if(_formsPagePresenter == null)
+                if (_formsPagePresenter == null)
                     throw new ArgumentNullException(nameof(FormsPagePresenter), "IMvxFormsPagePresenter cannot be null. Set the value in CreateViewPresenter in the setup.");
                 return _formsPagePresenter;
             }

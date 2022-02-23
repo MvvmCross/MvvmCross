@@ -7,7 +7,7 @@ using System.IO;
 namespace MvvmCross.Plugin.Email
 {
     [Preserve(AllMembers = true)]
-	public class EmailAttachment
+    public class EmailAttachment
     {
         public string ContentType { get; set; }
         public string FileName { get; set; }

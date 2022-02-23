@@ -95,7 +95,7 @@ namespace MvvmCross.Platforms.Android.Views
         {
             if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup))
             {
-                if(!startup.IsStarted)
+                if (!startup.IsStarted)
                 {
                     await startup.StartAsync(GetAppStartHint(bundle));
                 }

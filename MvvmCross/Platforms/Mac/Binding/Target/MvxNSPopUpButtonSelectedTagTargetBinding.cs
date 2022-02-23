@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -37,7 +37,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             var popupButton = View;
             if (popupButton == null)
             {
-                MvxBindingLog.Error( "Error - NSPopUpButton is null in MvxNSPopUpButtonSelectedTagTargetBinding");
+                MvxBindingLog.Error("Error - NSPopUpButton is null in MvxNSPopUpButtonSelectedTagTargetBinding");
                 return;
             }
 
@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             var view = target as NSPopUpButton;
             if (view == null)
                 return;
-            
+
             view.SelectItemWithTag((int)value);
         }
 

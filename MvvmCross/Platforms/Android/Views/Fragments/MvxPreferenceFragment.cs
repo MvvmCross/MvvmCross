@@ -37,7 +37,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             set
             {
                 _dataContext = value;
-                if(BindingContext != null)
+                if (BindingContext != null)
                     BindingContext.DataContext = value;
             }
         }
@@ -98,7 +98,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         }
     }
 
-    public abstract class MvxPreferenceFragment<TViewModel> : MvxPreferenceFragment, IMvxFragmentView<TViewModel> 
+    public abstract class MvxPreferenceFragment<TViewModel> : MvxPreferenceFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxPreferenceFragment()

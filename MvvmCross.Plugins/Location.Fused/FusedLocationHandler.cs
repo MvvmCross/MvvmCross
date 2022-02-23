@@ -13,7 +13,7 @@ using MvvmCross.Exceptions;
 namespace MvvmCross.Plugin.Location.Fused
 {
     [Preserve(AllMembers = true)]
-    public class FusedLocationHandler 
+    public class FusedLocationHandler
         : LocationCallback
     {
         private FusedLocationProviderClient _client;

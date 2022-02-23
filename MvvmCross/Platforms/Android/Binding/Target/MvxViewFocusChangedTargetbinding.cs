@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows.Input;
 using Android.Views;
 using MvvmCross.Binding;
@@ -38,7 +38,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
         {
             _command = value as ICommand;
         }
-        
+
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)

@@ -15,7 +15,7 @@ using MvvmCross.Platforms.Android;
 namespace MvvmCross.Plugin.Location.Platforms.Android
 {
     [Preserve(AllMembers = true)]
-	public sealed class MvxAndroidLocationWatcher
+    public sealed class MvxAndroidLocationWatcher
         : MvxLocationWatcher, IMvxLocationReceiver
     {
         private Context _context;
@@ -44,9 +44,9 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
                 return;
             }
             var criteria = new Criteria()
-                {
-                    Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse
-                };
+            {
+                Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse
+            };
             _bestProvider = _locationManager.GetBestProvider(criteria, true);
             if (_bestProvider == null)
             {
@@ -56,14 +56,14 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
             }
 
             _locationManager.RequestLocationUpdates(
-                _bestProvider, 
+                _bestProvider,
                 (long)options.TimeBetweenUpdates.TotalMilliseconds,
-                options.MovementThresholdInM, 
+                options.MovementThresholdInM,
                 _locationListener);
 
-			Permission = _locationManager.IsProviderEnabled (_bestProvider)
-				? MvxLocationPermission.Granted
-				: MvxLocationPermission.Denied;
+            Permission = _locationManager.IsProviderEnabled(_bestProvider)
+                ? MvxLocationPermission.Granted
+                : MvxLocationPermission.Denied;
         }
 
         protected override void PlatformSpecificStop()
@@ -104,8 +104,8 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
             return position;
         }
 
-        public override MvxGeoLocation CurrentLocation 
-        { 
+        public override MvxGeoLocation CurrentLocation
+        {
             get
             {
                 if (_locationManager == null || _bestProvider == null)
@@ -156,13 +156,13 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
 
         public void OnProviderDisabled(string provider)
         {
-			Permission = MvxLocationPermission.Denied;
+            Permission = MvxLocationPermission.Denied;
             SendError(MvxLocationErrorCode.ServiceUnavailable);
         }
 
         public void OnProviderEnabled(string provider)
         {
-			Permission = MvxLocationPermission.Granted;
+            Permission = MvxLocationPermission.Granted;
         }
 
         public void OnStatusChanged(string provider, Availability status, Bundle extras)

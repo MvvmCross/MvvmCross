@@ -14,7 +14,7 @@ using MvvmCross.Converters;
 namespace MvvmCross.Plugin.FieldBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxChainedNotifyChangeFieldSourceBinding
+    public class MvxChainedNotifyChangeFieldSourceBinding
         : MvxNotifyChangeFieldSourceBinding
     {
         public static bool DisableWarnIndexedValueBindingWarning = false;

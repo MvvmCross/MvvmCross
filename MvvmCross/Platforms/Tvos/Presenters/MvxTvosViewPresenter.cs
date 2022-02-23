@@ -5,17 +5,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CoreGraphics;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Tvos.Presenters.Attributes;
 using MvvmCross.Platforms.Tvos.Views;
-using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
-using UIKit;
 using MvvmCross.Presenters.Attributes;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+using MvvmCross.ViewModels;
+using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Presenters
 {
@@ -366,9 +366,9 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
             await SetupWindowRootNavigation(viewController, attribute);
 
-            if(!(await CloseModalViewControllers()))return false;
-            if(!(await CloseTabBarViewController()))return false;
-            if(!(await CloseSplitViewController()))return false;
+            if (!(await CloseModalViewControllers())) return false;
+            if (!(await CloseTabBarViewController())) return false;
+            if (!(await CloseSplitViewController())) return false;
             return true;
         }
 
@@ -625,7 +625,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         {
             while (ModalViewControllers.Any())
             {
-                if(!(await CloseModalViewController(ModalViewControllers.LastOrDefault())))return false;
+                if (!(await CloseModalViewController(ModalViewControllers.LastOrDefault()))) return false;
             }
             return true;
         }

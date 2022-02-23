@@ -109,7 +109,7 @@ namespace MvvmCross.Platforms.Mac.Views
         }
     }
 
-    public class MvxViewController<TViewModel> : MvxViewController, IMvxMacView<TViewModel> 
+    public class MvxViewController<TViewModel> : MvxViewController, IMvxMacView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public MvxViewController()

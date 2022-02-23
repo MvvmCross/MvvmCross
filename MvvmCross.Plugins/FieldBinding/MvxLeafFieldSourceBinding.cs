@@ -9,7 +9,7 @@ using MvvmCross.Binding.Extensions;
 namespace MvvmCross.Plugin.FieldBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxLeafFieldSourceBinding
+    public class MvxLeafFieldSourceBinding
         : MvxFieldSourceBinding
     {
         public MvxLeafFieldSourceBinding(object source, FieldInfo fieldInfo)

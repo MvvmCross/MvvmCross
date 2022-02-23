@@ -93,7 +93,7 @@ namespace MvvmCross.Forms.Views
         }
     }
 
-    public class MvxPage<TViewModel> : MvxPage, IMvxPage<TViewModel> 
+    public class MvxPage<TViewModel> : MvxPage, IMvxPage<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(TViewModel), typeof(IMvxElement<TViewModel>), default(TViewModel), BindingMode.Default, null, ViewModelChanged, null, null);

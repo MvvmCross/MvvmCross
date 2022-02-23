@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Forms.Views;
-using Xamarin.Forms;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Forms.Views;
 using Playground.Core.ViewModels;
+using Xamarin.Forms;
 
 namespace Playground.Forms.UI.Pages
 {

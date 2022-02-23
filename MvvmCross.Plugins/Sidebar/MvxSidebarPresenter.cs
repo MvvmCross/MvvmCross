@@ -43,7 +43,7 @@ namespace MvvmCross.Plugin.Sidebar
             MvxViewModelRequest request)
         {
             if (!await CloseModalViewControllers()) return false;
-            
+
             if (SideBarViewController == null)
             {
                 if (!await ShowRootViewController(new MvxSidebarViewController(), null, request)) return false;
@@ -170,7 +170,7 @@ namespace MvvmCross.Plugin.Sidebar
             {
                 SideBarViewController = null;
                 MasterNavigationController = null;
-            
+
                 return await base.ShowRootViewController(viewController, attribute, request);
             }
         }

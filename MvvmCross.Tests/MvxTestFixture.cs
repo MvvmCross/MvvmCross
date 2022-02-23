@@ -25,7 +25,7 @@ namespace MvvmCross.Tests
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing) 
+            if (disposing)
             {
                 Reset();
             }
