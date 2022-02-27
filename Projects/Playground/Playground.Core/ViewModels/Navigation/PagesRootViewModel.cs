@@ -13,7 +13,7 @@ namespace Playground.Core.ViewModels
 {
     public class PagesRootViewModel : MvxNavigationViewModel
     {
-        public PagesRootViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService) 
+        public PagesRootViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
             ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);

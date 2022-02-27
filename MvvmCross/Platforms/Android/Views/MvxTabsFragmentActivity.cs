@@ -92,7 +92,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public override void SetContentView(int layoutResId)
         {
-           var view = this.BindingInflate(layoutResId, null);
+            var view = this.BindingInflate(layoutResId, null);
 
             SetContentView(view);
         }

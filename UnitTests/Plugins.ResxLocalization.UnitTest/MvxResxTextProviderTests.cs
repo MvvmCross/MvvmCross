@@ -8,12 +8,12 @@ using Xunit;
 
 namespace MvvmCross.Plugin.ResxLocalization.UnitTest
 {
-    
+
     public class MvxResxTextProviderTests
     {
         private MockResourceManager _resourceManager;
 
-        
+
         public MvxResxTextProviderTests()
         {
             _resourceManager = new MockResourceManager();

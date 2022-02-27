@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -27,7 +27,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             var segmentedControl = View;
             if (segmentedControl == null)
             {
-                MvxBindingLog.Error( "Error - UISegmentedControl is null in MvxUISegmentedControlSelectedSegmentTargetBinding");
+                MvxBindingLog.Error("Error - UISegmentedControl is null in MvxUISegmentedControlSelectedSegmentTargetBinding");
                 return;
             }
 

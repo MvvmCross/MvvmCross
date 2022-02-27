@@ -29,7 +29,7 @@ namespace MvvmCross.Base
         }
 
         public static void ApplyTo<T>(this IEnumerable<IMvxApplicableTo<T>> toApply, T what)
-            where T: notnull
+            where T : notnull
         {
             if (toApply == null)
                 throw new ArgumentNullException(nameof(toApply));

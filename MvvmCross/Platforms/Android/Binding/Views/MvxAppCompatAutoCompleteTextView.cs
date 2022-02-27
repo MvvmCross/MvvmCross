@@ -6,9 +6,9 @@ using System;
 using System.Collections;
 using Android.Content;
 using Android.Runtime;
-using AndroidX.AppCompat.Widget;
 using Android.Util;
 using Android.Widget;
+using AndroidX.AppCompat.Widget;
 using MvvmCross.Binding.Attributes;
 
 namespace MvvmCross.Platforms.Android.Binding.Views

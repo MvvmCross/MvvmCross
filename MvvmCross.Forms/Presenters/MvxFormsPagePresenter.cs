@@ -818,7 +818,7 @@ namespace MvvmCross.Forms.Presenters
                     if (navMasterPage != null) return navMasterPage;
                 }
             }
-            
+
             // The page isn't a MasterDetailPage, so check
             // to see if it's a TabbedPage, and if so, check
             // the current page for a navigation page.

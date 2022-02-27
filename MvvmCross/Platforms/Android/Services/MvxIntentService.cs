@@ -26,6 +26,6 @@ namespace MvvmCross.Platforms.Android.Services
         {
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.EnsureInitialized();
-       }
+        }
     }
 }

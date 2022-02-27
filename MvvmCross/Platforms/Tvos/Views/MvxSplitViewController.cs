@@ -3,19 +3,17 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-
 using Foundation;
-using UIKit;
-
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.ViewModels;
 using MvvmCross.Platforms.Tvos.Views.Base;
+using MvvmCross.ViewModels;
+using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Views
 {
-    public class MvxSplitViewController 
+    public class MvxSplitViewController
         : MvxEventSourceSplitViewController
-        ,IMvxTvosView
+        , IMvxTvosView
     {
         public MvxSplitViewController()
         {

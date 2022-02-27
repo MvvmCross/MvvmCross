@@ -4,16 +4,16 @@
 
 using System;
 using System.Collections.Generic;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
-using MvvmCross.Converters;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Converters;
+using MvvmCross.Logging;
 using MvvmCross.Platforms.Uap.Converters;
-using Microsoft.Extensions.Logging;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media;
 
 namespace MvvmCross.Platforms.Uap.Binding
 {

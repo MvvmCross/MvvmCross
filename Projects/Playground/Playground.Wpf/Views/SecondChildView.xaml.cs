@@ -4,7 +4,7 @@ namespace Playground.Wpf.Views
 {
 
     [MvxContentPresentation]
-    public partial class SecondChildView 
+    public partial class SecondChildView
     {
         public SecondChildView()
         {

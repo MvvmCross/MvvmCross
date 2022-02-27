@@ -114,14 +114,14 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         }
     }
 
-    public abstract class MvxFragment<TViewModel> : MvxFragment, IMvxFragmentView<TViewModel> 
+    public abstract class MvxFragment<TViewModel> : MvxFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxFragment()
         {
         }
 
-        protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer): base(javaReference, transfer)
+        protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 

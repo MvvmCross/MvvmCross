@@ -21,7 +21,6 @@
       This package contains MvvmCross to use with Xamarin.Forms
     </Description>
     <PackageId>MvvmCross.Forms</PackageId>
-    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
 
   <ItemGroup>

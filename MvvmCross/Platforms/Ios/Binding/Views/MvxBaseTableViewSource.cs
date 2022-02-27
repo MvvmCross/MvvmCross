@@ -5,10 +5,10 @@
 using System;
 using System.Windows.Input;
 using Foundation;
-using MvvmCross.Logging;
-using MvvmCross.Binding.BindingContext;
-using UIKit;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Logging;
+using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
 {

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,16 +13,16 @@ using Object = Java.Lang.Object;
 namespace MvvmCross.Platforms.Android.Binding.Views
 {
     [Register("mvvmcross.platforms.android.binding.views.MvxListItemView")]
-    public class MvxListItemView : Object, IMvxListItemView, 
+    public class MvxListItemView : Object, IMvxListItemView,
         IMvxBindingContextOwner, View.IOnAttachStateChangeListener
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
         private View _content;
-		private object _cachedDataContext;
-		private bool _isAttachedToWindow;
+        private object _cachedDataContext;
+        private bool _isAttachedToWindow;
 
         public MvxListItemView(Context context,
-            IMvxLayoutInflaterHolder layoutInflaterHolder, object dataContext, 
+            IMvxLayoutInflaterHolder layoutInflaterHolder, object dataContext,
             ViewGroup parent, int templateId)
         {
             _bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
@@ -47,7 +47,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         public IMvxBindingContext BindingContext
         {
-            get => _bindingContext; 
+            get => _bindingContext;
             set => throw new NotImplementedException("BindingContext is readonly in the list item");
         }
 

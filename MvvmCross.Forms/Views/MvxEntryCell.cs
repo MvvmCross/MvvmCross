@@ -92,7 +92,7 @@ namespace MvvmCross.Forms.Views
         }
     }
 
-    public class MvxEntryCell<TViewModel> : MvxEntryCell, IMvxElement<TViewModel> 
+    public class MvxEntryCell<TViewModel> : MvxEntryCell, IMvxElement<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(TViewModel), typeof(IMvxElement<TViewModel>), default(TViewModel), BindingMode.Default, null, ViewModelChanged, null, null);

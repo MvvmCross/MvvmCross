@@ -93,7 +93,7 @@ namespace MvvmCross.Forms.Views
         }
     }
 
-    public class MvxImageCell<TViewModel> : MvxImageCell, IMvxElement<TViewModel> 
+    public class MvxImageCell<TViewModel> : MvxImageCell, IMvxElement<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(TViewModel), typeof(IMvxElement<TViewModel>), default(TViewModel), BindingMode.Default, null, ViewModelChanged, null, null);

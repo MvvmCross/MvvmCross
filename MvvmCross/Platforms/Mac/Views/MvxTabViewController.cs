@@ -124,7 +124,7 @@ namespace MvvmCross.Platforms.Mac.Views
         }
     }
 
-    public class MvxTabViewController<TViewModel> : MvxTabViewController, IMvxMacView<TViewModel> 
+    public class MvxTabViewController<TViewModel> : MvxTabViewController, IMvxMacView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public MvxTabViewController()

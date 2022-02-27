@@ -4,9 +4,9 @@
 
 using System;
 using MvvmCross.Forms.Core;
-using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
+using MvvmCross.ViewModels;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenters

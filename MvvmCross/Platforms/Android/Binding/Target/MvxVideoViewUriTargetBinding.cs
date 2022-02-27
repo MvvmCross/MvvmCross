@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Android.Widget;
 using MvvmCross.Platforms.Android.Binding.Target;
 using AndroidUri = Android.Net.Uri;

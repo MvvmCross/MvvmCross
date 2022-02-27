@@ -119,7 +119,7 @@ namespace MvvmCross.DroidX.Material
         }
     }
 
-    public abstract class MvxBottomSheetDialogFragment<TViewModel> : MvxBottomSheetDialogFragment, IMvxFragmentView<TViewModel> 
+    public abstract class MvxBottomSheetDialogFragment<TViewModel> : MvxBottomSheetDialogFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public MvxBottomSheetDialogFragment()

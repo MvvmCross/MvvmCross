@@ -68,7 +68,8 @@ namespace MvvmCross.UnitTest.ViewModels
         public void AddRangeIsAddActionTest()
         {
             var collection = new MvxObservableCollection<string>();
-            collection.CollectionChanged += (s, e) => {
+            collection.CollectionChanged += (s, e) =>
+            {
                 Assert.Equal(NotifyCollectionChangedAction.Add, e.Action);
             };
             collection.AddRange(new[] { "Bar", "Baz", "Herp", "Derp" });
@@ -94,7 +95,8 @@ namespace MvvmCross.UnitTest.ViewModels
 
             collection.CollectionChanged -= handler;
 
-            handler = (s, a) => {
+            handler = (s, a) =>
+            {
                 Assert.Equal(newStartIndex, a.NewStartingIndex);
                 Assert.Equal(newItems.Length, a.NewItems.Count);
             };
@@ -112,7 +114,7 @@ namespace MvvmCross.UnitTest.ViewModels
         }
 
         [Theory]
-        [InlineData(-1, 0, new [] { "foo" })]
+        [InlineData(-1, 0, new[] { "foo" })]
         [InlineData(0, 4, new[] { "foo", "bar", "baz" })]
         [InlineData(0, 0, new[] { "foo" })]
         [InlineData(0, -1, new[] { "foo" })]

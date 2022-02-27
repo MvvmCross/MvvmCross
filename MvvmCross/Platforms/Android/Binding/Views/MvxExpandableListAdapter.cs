@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -20,7 +20,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             : base(context)
         {
         }
-        
+
         public MvxExpandableListAdapter(Context context, IMvxAndroidBindingContext bindingContext)
             : base(context, bindingContext)
         {
@@ -71,7 +71,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         public virtual View GetGroupView(int groupPosition, bool isExpanded, View convertView, ViewGroup parent)
         {
             var item = GetRawGroup(groupPosition);
-			return GetBindableView(convertView, item, parent, GroupTemplateId);
+            return GetBindableView(convertView, item, parent, GroupTemplateId);
         }
 
         public virtual long GetGroupId(int groupPosition)
@@ -118,7 +118,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             var item = GetRawItem(groupPosition, childPosition);
 
-			return GetBindableView(convertView, item, parent, ItemTemplateId);
+            return GetBindableView(convertView, item, parent, ItemTemplateId);
         }
 
         public virtual int GetChildrenCount(int groupPosition)

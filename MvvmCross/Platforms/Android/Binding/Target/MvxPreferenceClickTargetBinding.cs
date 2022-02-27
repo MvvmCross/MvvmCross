@@ -1,8 +1,8 @@
-﻿using AndroidX.Preference;
+﻿using System;
+using System.Windows.Input;
+using AndroidX.Preference;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.WeakSubscription;
-using System;
-using System.Windows.Input;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
 {

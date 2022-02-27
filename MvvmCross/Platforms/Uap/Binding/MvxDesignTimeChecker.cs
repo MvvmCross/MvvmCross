@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Windows.ApplicationModel;
 using MvvmCross.Base;
-using MvvmCross.IoC;
 using MvvmCross.Binding.Parse.Binding;
+using MvvmCross.IoC;
+using Windows.ApplicationModel;
 
 namespace MvvmCross.Platforms.Uap.Binding
 {

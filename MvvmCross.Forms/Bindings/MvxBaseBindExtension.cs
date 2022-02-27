@@ -76,7 +76,7 @@ namespace MvvmCross.Forms.Bindings
             }
             else if (BindablePropertyRaw is PropertyInfo pi)
                 PropertyName = pi.Name;
-            else if(BindablePropertyRaw != null)
+            else if (BindablePropertyRaw != null)
                 PropertyName = BindablePropertyRaw.ToString();
 
             if (rootObject is Page providedPage)

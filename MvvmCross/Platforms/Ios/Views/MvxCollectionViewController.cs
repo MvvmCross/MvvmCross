@@ -104,7 +104,7 @@ namespace MvvmCross.Platforms.Ios.Views
         }
     }
 
-    public class MvxCollectionViewController<TViewModel> : MvxCollectionViewController, IMvxIosView<TViewModel> 
+    public class MvxCollectionViewController<TViewModel> : MvxCollectionViewController, IMvxIosView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public MvxCollectionViewController()

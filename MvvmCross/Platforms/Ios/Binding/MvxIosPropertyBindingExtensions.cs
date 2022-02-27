@@ -70,7 +70,7 @@ namespace MvvmCross.Platforms.Ios.Binding
 
         public static string BindDate(this UIDatePicker uiDatePicker)
             => MvxIosPropertyBinding.UIDatePicker_Date;
-        
+
         public static string BindCountDownDuration(this UIDatePicker uiDatePicker)
             => MvxIosPropertyBinding.UIDatePicker_CountDownDuration;
 

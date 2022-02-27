@@ -179,7 +179,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         }
     }
 
-    public class MvxFormsAppCompatActivity<TViewModel> : MvxFormsAppCompatActivity, IMvxAndroidView<TViewModel> 
+    public class MvxFormsAppCompatActivity<TViewModel> : MvxFormsAppCompatActivity, IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel

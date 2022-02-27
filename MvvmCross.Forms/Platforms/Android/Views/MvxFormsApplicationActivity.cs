@@ -209,7 +209,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         }
     }
 
-    public class MvxFormsApplicationActivity<TViewModel> : MvxFormsApplicationActivity, IMvxAndroidView<TViewModel> 
+    public class MvxFormsApplicationActivity<TViewModel> : MvxFormsApplicationActivity, IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel

@@ -9,7 +9,7 @@ using Xamarin.Forms.Platform.iOS;
 namespace MvvmCross.Forms.Platforms.Ios.Views
 {
     public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
-    {            
+    {
         public object DataContext
         {
             get

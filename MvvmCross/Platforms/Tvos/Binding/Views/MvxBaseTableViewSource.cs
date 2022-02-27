@@ -5,11 +5,11 @@
 using System;
 using System.Windows.Input;
 using Foundation;
+using Microsoft.Extensions.Logging;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Binding.BindingContext;
 using UIKit;
-using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Views
 {

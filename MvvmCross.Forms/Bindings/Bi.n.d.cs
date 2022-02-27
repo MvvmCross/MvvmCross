@@ -20,7 +20,7 @@ namespace MvvmCross.Forms.Bindings
         }
 
         // ReSharper disable once InconsistentNaming
-        public static readonly BindableProperty ndProperty = 
+        public static readonly BindableProperty ndProperty =
             BindableProperty.CreateAttached("nd",
                                             typeof(string),
                                             typeof(Bi),

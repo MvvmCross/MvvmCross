@@ -689,7 +689,7 @@ namespace MvvmCross.UnitTest.Binding.Binders
             Assert.Equal(43, value);
 
             var changed = -99;
-            sourceStep.Changed += (sender, args) => changed = (int) sourceStep.GetValue();
+            sourceStep.Changed += (sender, args) => changed = (int)sourceStep.GetValue();
 
             source.IntProperty1 = 71;
             Assert.Equal(72, changed);

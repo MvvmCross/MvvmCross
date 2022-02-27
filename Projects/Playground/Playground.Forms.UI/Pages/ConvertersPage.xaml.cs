@@ -10,12 +10,12 @@ using Xamarin.Forms.Xaml;
 
 namespace Playground.Forms.UI.Pages
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ConvertersPage : MvxContentPage<ConvertersViewModel>
-	{
-		public ConvertersPage ()
-		{
-			InitializeComponent ();
-		}
-	}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ConvertersPage : MvxContentPage<ConvertersViewModel>
+    {
+        public ConvertersPage()
+        {
+            InitializeComponent();
+        }
+    }
 }

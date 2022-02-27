@@ -3,7 +3,7 @@
 namespace Playground.Wpf.Views
 {
     [MvxContentPresentation(WindowIdentifier = nameof(ModalView))]
-    public partial class NestedModalView 
+    public partial class NestedModalView
     {
         public NestedModalView()
         {

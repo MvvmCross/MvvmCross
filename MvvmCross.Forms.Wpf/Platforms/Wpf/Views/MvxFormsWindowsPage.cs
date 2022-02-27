@@ -3,13 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Windows;
 using System.Threading.Tasks;
+using System.Windows;
 using MvvmCross.Forms.Platforms.Wpf.Presenters;
 using MvvmCross.Forms.Presenters;
+using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.ViewModels;
 using Xamarin.Forms.Platform.WPF;
-using MvvmCross.Platforms.Wpf.Core;
 
 namespace MvvmCross.Forms.Platforms.Wpf.Views
 {
@@ -44,7 +44,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
         {
             MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, this).EnsureInitialized();
 
-            if(Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
                 startup.Start(GetAppStartHint(hint));
 
             LoadFormsApplication();

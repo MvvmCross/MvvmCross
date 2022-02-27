@@ -10,7 +10,7 @@ using MvvmCross.Localization;
 namespace MvvmCross.Plugin.ResxLocalization
 {
     [Preserve(AllMembers = true)]
-	public class MvxResxTextProvider :
+    public class MvxResxTextProvider :
         IMvxTextProvider
     {
         protected readonly IList<ResourceManager> _resourceManagers;
@@ -21,7 +21,7 @@ namespace MvvmCross.Plugin.ResxLocalization
             CurrentLanguage = CultureInfo.CurrentUICulture;
         }
 
-        public MvxResxTextProvider(ResourceManager resourceManager) : this (new List<ResourceManager>(){ resourceManager })
+        public MvxResxTextProvider(ResourceManager resourceManager) : this(new List<ResourceManager>() { resourceManager })
         {
         }
 
@@ -35,7 +35,7 @@ namespace MvvmCross.Plugin.ResxLocalization
             {
                 resolvedKey = $"{typeKey}.{resolvedKey}";
             }
-        
+
             if (!string.IsNullOrEmpty(namespaceKey))
             {
                 resolvedKey = $"{namespaceKey}.{resolvedKey}";
@@ -70,7 +70,7 @@ namespace MvvmCross.Plugin.ResxLocalization
 
         public virtual bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name, params object[] formatArgs)
         {
-            if(!TryGetText(out textValue, namespaceKey, typeKey, name))
+            if (!TryGetText(out textValue, namespaceKey, typeKey, name))
                 return false;
 
             // Key is found but matching value is empty. Don't format but return true.

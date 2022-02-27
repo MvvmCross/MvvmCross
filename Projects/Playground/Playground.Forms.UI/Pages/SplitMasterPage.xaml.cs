@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Forms.Views;
 using MvvmCross.Forms.Presenters.Attributes;
+using MvvmCross.Forms.Views;
 using Playground.Core.ViewModels;
 using Xamarin.Forms;
 
@@ -20,7 +20,7 @@ namespace Playground.Forms.UI.Pages
 
         public void ToggleClicked(object sender, EventArgs e)
         {
-            if(Parent is FlyoutPage md)
+            if (Parent is FlyoutPage md)
             {
                 md.FlyoutLayoutBehavior = FlyoutLayoutBehavior.Popover;
                 md.IsPresented = !md.IsPresented;

@@ -6,7 +6,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Wpf.Views
 {
-    public partial class WindowChildView :  IMvxOverridePresentationAttribute
+    public partial class WindowChildView : IMvxOverridePresentationAttribute
     {
         public WindowChildView()
         {

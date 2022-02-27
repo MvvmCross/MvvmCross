@@ -16,7 +16,7 @@ namespace MvvmCross.Forms.Platforms.Tizen.Presenters
         : MvxTizenViewPresenter
         , IMvxFormsViewPresenter
     {
-        public MvxFormsTizenViewPresenter(Application formsApplication) : base ()
+        public MvxFormsTizenViewPresenter(Application formsApplication) : base()
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }

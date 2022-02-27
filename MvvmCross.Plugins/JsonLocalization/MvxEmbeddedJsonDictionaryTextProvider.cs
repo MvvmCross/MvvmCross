@@ -10,7 +10,7 @@ using MvvmCross.Exceptions;
 namespace MvvmCross.Plugin.JsonLocalization
 {
     [Preserve(AllMembers = true)]
-	public class MvxEmbeddedJsonDictionaryTextProvider
+    public class MvxEmbeddedJsonDictionaryTextProvider
         : MvxJsonDictionaryTextProvider
     {
         public MvxEmbeddedJsonDictionaryTextProvider(bool maskErrors = true)

@@ -55,7 +55,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     var items = results.Values as MvxReplaceableJavaContainer;
                     if (items != null)
                     {
-                        lock(_owner._syncLock)
+                        lock (_owner._syncLock)
                         {
                             _owner.FilteredItemsSource = items.Object as IEnumerable;
                             _owner.NotifyDataSetChanged();
@@ -85,7 +85,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             get => base.ItemsSource;
             set
             {
-                lock(_syncLock)
+                lock (_syncLock)
                 {
                     FilteredItemsSource = value;
                 }
@@ -129,7 +129,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             FilterPredicate = DefaultFilterPredicate;
             Filter = new MyFilter(this);
         }
-        
+
         protected MvxFilteringAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
@@ -158,7 +158,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         public override object GetRawItem(int position)
         {
-            lock(_syncLock)
+            lock (_syncLock)
             {
                 var element = FilteredItemsSource?.ElementAt(position);
                 return element;
@@ -178,7 +178,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             get
             {
-                lock(_syncLock)
+                lock (_syncLock)
                 {
                     return FilteredItemsSource?.Count() ?? 0;
                 }

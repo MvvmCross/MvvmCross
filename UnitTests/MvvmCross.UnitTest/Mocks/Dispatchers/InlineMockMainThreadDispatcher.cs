@@ -12,7 +12,7 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
     {
         public override bool IsOnMainThread => true;
 
-        public override bool RequestMainThreadAction(Action action, 
+        public override bool RequestMainThreadAction(Action action,
             bool maskExceptions = true)
         {
             ExceptionMaskedAction(action, maskExceptions);

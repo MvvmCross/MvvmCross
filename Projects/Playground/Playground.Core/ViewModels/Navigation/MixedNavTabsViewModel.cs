@@ -12,7 +12,7 @@ namespace Playground.Core.ViewModels
 {
     public class MixedNavTabsViewModel : MvxNavigationViewModel
     {
-        public MixedNavTabsViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService) 
+        public MixedNavTabsViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
         }

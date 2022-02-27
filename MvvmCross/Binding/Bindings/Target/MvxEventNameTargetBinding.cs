@@ -29,7 +29,7 @@ namespace MvvmCross.Binding.Bindings.Target
         {
             if (isDisposing)
                 _eventSubscription.Dispose();
-            
+
             base.Dispose(isDisposing);
         }
 

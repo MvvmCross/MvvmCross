@@ -236,7 +236,8 @@ namespace MvvmCross.Platforms.Ios.Views
             {
                 nextResponder.BecomeFirstResponder();
             }
-            else {
+            else
+            {
                 // Not found, so remove keyboard.
                 textField.ResignFirstResponder();
             }

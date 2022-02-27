@@ -16,13 +16,13 @@ namespace MvvmCross.Forms.Core
         {
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxListViewItemClickPropertyTargetBinding),
-                typeof(MvxListView), 
+                typeof(MvxListView),
                 MvxFormsPropertyBinding.MvxListView_ItemClick);
         }
 
         public static void FillBindingNames(IMvxBindingNameRegistry registry)
         {
-            
+
         }
     }
 }

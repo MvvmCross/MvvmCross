@@ -4,11 +4,11 @@
 
 using System;
 using System.Globalization;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Converters;
 using MvvmCross.Logging;
-using Microsoft.Extensions.Logging;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
 
 namespace MvvmCross.Platforms.Uap.Converters
 {

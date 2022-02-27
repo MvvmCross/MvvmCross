@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
-    public class MvxMasterDetailPage : MvxEventSourceMasterDetailPage, IMvxPage 
+    public class MvxMasterDetailPage : MvxEventSourceMasterDetailPage, IMvxPage
     {
         public MvxMasterDetailPage()
         {
