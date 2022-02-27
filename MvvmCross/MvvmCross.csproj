@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
     <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;xamarin.tvos10;xamarin.watchos10;monoandroid10.0;net6.0;net6.0-android;net6.0-ios;net6.0-tvos;net6.0-macos;tizen40;netcoreapp3.1;net5.0</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net461;net472;uap10.0.19041;$(TargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net48;uap10.0.19041;$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetsToBuild)' != 'All' ">
