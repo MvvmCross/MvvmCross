@@ -133,13 +133,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
         public override void CellDisplayingEnded(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
         {
-            //Don't bind to NULL to speed up cells in lists when fast scrolling
-            //There should be almost no scenario in which this is required
-            //If it is required, do this in your own subclass using this code:
-
-            //var bindable = cell as IMvxDataConsumer;
-            //if (bindable != null)
-            //    bindable.DataContext = null;
+            // Don't bind to NULL to speed up cells in lists when fast scrolling
+            // There should be almost no scenario in which this is required
         }
 
         public override nint NumberOfSections(UITableView tableView)

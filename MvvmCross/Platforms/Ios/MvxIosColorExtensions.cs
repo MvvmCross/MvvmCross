@@ -4,6 +4,7 @@
 
 using System;
 using UIKit;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Ios
 {

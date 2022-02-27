@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using MvvmCross.Converters;
 using MvvmCross.IoC;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Ios.Binding.ValueConverters
 {
