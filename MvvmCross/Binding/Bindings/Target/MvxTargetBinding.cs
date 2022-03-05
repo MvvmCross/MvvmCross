@@ -67,7 +67,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
         public abstract MvxBindingMode DefaultMode { get; }
 
-        public Type TargetType => typeof(TTarget);
+        public Type TargetType => typeof(TValue);
 
         public event EventHandler<MvxTargetChangedEventArgs> ValueChanged;
 
