@@ -57,6 +57,8 @@ namespace MvvmCross.Platforms.Android.Binding.Target
                     layoutParameters.MarginStart = pxMargin;
                     break;
             }
+
+            view.LayoutParameters = layoutParameters;
         }
 
         private int DpToPx(int dp)
