@@ -8,7 +8,7 @@ namespace MvvmCross.Binding.Bindings.Target
 {
     public interface IMvxTargetBinding : IMvxBinding
     {
-        Type TargetType { get; }
+        Type TargetValueType { get; }
         MvxBindingMode DefaultMode { get; }
 
         void SetValue(object value);

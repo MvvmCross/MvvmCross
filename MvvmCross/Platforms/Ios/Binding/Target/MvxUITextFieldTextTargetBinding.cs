@@ -47,7 +47,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             _subscriptionEndEditing = target.WeakSubscribe(nameof(target.EditingDidEnd), HandleEditTextValueChanged);
         }
 
-        public override Type TargetType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
             => this.ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(target, value);

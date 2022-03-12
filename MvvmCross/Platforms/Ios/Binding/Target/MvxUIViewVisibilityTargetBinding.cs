@@ -21,7 +21,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof(MvxVisibility);
+        public override Type TargetValueType => typeof(MvxVisibility);
 
         protected override void SetValueImpl(object target, object value)
         {

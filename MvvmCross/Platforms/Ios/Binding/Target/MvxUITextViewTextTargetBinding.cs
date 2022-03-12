@@ -53,7 +53,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             _subscription = textStorage.WeakSubscribe<NSTextStorage, NSTextStorageEventArgs>(nameof(textStorage.DidProcessEditing), EditTextOnChanged);
         }
 
-        public override Type TargetType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
         protected override void SetValueImpl(object target, object value)
         {

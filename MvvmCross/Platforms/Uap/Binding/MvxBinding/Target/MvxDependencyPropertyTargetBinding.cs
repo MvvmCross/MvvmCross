@@ -55,7 +55,7 @@ namespace MvvmCross.Platforms.Uap.Binding.MvxBinding.Target
             frameworkElement.SetBinding(attachedProperty, listenerBinding);
         }
 
-        public override Type TargetType => _actualPropertyType;
+        public override Type TargetValueType => _actualPropertyType;
 
         public override MvxBindingMode DefaultMode { get; } = MvxBindingMode.TwoWay;
 

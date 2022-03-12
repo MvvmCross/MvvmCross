@@ -45,7 +45,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             ratingBar.Rating = (float)value;
         }
 
-        public override Type TargetType => typeof(float);
+        public override Type TargetValueType => typeof(float);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 

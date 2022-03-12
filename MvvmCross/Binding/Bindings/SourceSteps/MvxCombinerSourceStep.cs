@@ -43,7 +43,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             base.OnFirstChangeListenerAdded();
         }
 
-        public override Type TargetType
+        public override Type TargetValueType
         {
             get
             {
