@@ -53,7 +53,7 @@ namespace MvvmCross.Platforms.Wpf.Binding.MvxBinding.Target
             frameworkElement.SetBinding(attachedProperty, listenerBinding);
         }
 
-        public override Type TargetType => _actualPropertyType;
+        public override Type TargetValueType => _actualPropertyType;
 
         private MvxBindingMode _defaultBindingMode = MvxBindingMode.TwoWay;
         public override MvxBindingMode DefaultMode => _defaultBindingMode;

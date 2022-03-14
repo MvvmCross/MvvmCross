@@ -30,7 +30,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             _command.Execute(e.HasFocus);
         }
 
-        public override Type TargetType => typeof(ICommand);
+        public override Type TargetValueType => typeof(ICommand);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 

@@ -34,7 +34,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             _canExecuteEventHandler = OnCanExecuteChanged;
         }
 
-        public override Type TargetType => typeof(ICommand);
+        public override Type TargetValueType => typeof(ICommand);
 
         protected override void SetValueImpl(object target, object value)
         {

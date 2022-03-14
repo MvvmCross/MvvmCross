@@ -45,7 +45,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             _command = command;
         }
 
-        public override Type TargetType => typeof(ICommand);
+        public override Type TargetValueType => typeof(ICommand);
 
         protected override void Dispose(bool isDisposing)
         {

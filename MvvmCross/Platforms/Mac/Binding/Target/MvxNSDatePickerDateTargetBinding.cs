@@ -26,7 +26,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             datePicker.DateValue = (NSDate)((DateTime)value);
         }
 
-        public override Type TargetType
+        public override Type TargetValueType
         {
             get { return typeof(DateTime); }
         }

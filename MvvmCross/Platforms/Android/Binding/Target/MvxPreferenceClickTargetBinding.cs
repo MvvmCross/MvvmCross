@@ -65,7 +65,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof(ICommand);
+        public override Type TargetValueType => typeof(ICommand);
 
         protected override void Dispose(bool isDisposing)
         {

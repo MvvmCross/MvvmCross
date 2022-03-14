@@ -78,7 +78,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
         protected virtual object MakeSafeValue(object value)
         {
-            var safeValue = TargetType.MakeSafeValue(value);
+            var safeValue = TargetValueType.MakeSafeValue(value);
             return safeValue;
         }
 
@@ -166,7 +166,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
         protected virtual TValue MakeSafeValue(TValue value)
         {
-            var safeValue = (TValue)TargetType.MakeSafeValue(value);
+            var safeValue = (TValue)TargetValueType.MakeSafeValue(value);
             return safeValue;
         }
 

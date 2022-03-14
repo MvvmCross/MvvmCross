@@ -29,7 +29,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 
         protected MvxExpandableListView ListView => (MvxExpandableListView)Target;
 
-        public override Type TargetType => typeof(object);
+        public override Type TargetValueType => typeof(object);
 
         protected override void SetValueImpl(object target, object value)
         {

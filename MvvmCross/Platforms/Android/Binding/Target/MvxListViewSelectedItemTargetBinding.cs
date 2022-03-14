@@ -66,7 +66,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             _subscription = listView.WeakSubscribe<ListView, AdapterView.ItemClickEventArgs>(nameof(listView.ItemClick), OnItemClick);
         }
 
-        public override Type TargetType => typeof(object);
+        public override Type TargetValueType => typeof(object);
 
         protected override void Dispose(bool isDisposing)
         {

@@ -33,7 +33,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             _isEditTextBinding = target is EditText;
         }
 
-        public override Type TargetType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
         {

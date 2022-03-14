@@ -22,6 +22,6 @@ namespace MvvmCross.Plugin.Color.Platforms.Android.BindingTargets
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof(global::Android.Graphics.Color);
+        public override Type TargetValueType => typeof(global::Android.Graphics.Color);
     }
 }

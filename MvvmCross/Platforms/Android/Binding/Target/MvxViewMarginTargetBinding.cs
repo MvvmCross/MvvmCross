@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             _whichMargin = whichMargin;
         }
 
-        public override Type TargetType => typeof(float);
+        public override Type TargetValueType => typeof(float);
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         protected override void SetValueImpl(object target, object value)

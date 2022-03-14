@@ -32,7 +32,7 @@ namespace MvvmCross.Binding.Bindings.Target
             addMethod.Invoke(target, new[] { _eventHandler });
         }
 
-        public override Type TargetType => typeof(ICommand);
+        public override Type TargetValueType => typeof(ICommand);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 

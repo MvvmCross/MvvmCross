@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 
         protected EditText TextField => Target as EditText;
 
-        public override Type TargetType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
