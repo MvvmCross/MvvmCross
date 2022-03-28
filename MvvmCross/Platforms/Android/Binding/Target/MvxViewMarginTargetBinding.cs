@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             _whichMargin = whichMargin;
         }
 
-        public override Type TargetType => typeof(int);
+        public override Type TargetValueType => typeof(float);
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         protected override void SetValueImpl(object target, object value)
@@ -30,7 +30,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             var layoutParameters = view.LayoutParameters as ViewGroup.MarginLayoutParams;
             if (layoutParameters == null) return;
 
-            var dpMargin = (int)value;
+            var dpMargin = (float)value;
             var pxMargin = DpToPx(dpMargin);
 
             switch (_whichMargin)
@@ -57,9 +57,11 @@ namespace MvvmCross.Platforms.Android.Binding.Target
                     layoutParameters.MarginStart = pxMargin;
                     break;
             }
+
+            view.LayoutParameters = layoutParameters;
         }
 
-        private int DpToPx(int dp)
+        private int DpToPx(float dp)
             => (int)(dp * Resources.System.DisplayMetrics.Density);
     }
 }

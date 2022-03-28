@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
         {
         }
 
-        public override Type TargetType => typeof(Bitmap);
+        public override Type TargetValueType => typeof(Bitmap);
 
         protected override bool GetBitmap(object value, out Bitmap bitmap)
         {

@@ -21,7 +21,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 
         public Preference Preference => Target as Preference;
 
-        public override Type TargetType => typeof(Preference);
+        public override Type TargetValueType => typeof(Preference);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 

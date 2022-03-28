@@ -36,7 +36,7 @@ namespace MvvmCross.Forms.Bindings.Target
             _propertyChangedSubscription = bindableObject.WeakSubscribe(OnBindableObjectPropertyChanged);
         }
 
-        public override Type TargetType => _actualPropertyType;
+        public override Type TargetValueType => _actualPropertyType;
 
         private MvxBindingMode _defaultBindingMode = MvxBindingMode.TwoWay;
         public override MvxBindingMode DefaultMode => _defaultBindingMode;

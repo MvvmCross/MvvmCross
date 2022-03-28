@@ -109,7 +109,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
-        public override Type TargetType => typeof(object);
+        public override Type TargetValueType => typeof(object);
 
         protected override void Dispose(bool isDisposing)
         {

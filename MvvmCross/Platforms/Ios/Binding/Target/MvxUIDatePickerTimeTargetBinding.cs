@@ -24,7 +24,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             return valueLocal.TimeOfDay;
         }
 
-        //public override Type TargetType => typeof(TimeSpan);
+        //public override Type TargetValueType => typeof(TimeSpan);
 
         protected override object MakeSafeValue(object value)
         {

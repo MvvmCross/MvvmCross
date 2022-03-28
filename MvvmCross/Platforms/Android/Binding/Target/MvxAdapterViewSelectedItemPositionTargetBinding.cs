@@ -44,7 +44,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
                 nameof(adapterView.ItemSelected), AdapterViewOnItemSelected);
         }
 
-        public override Type TargetType => typeof(int);
+        public override Type TargetValueType => typeof(int);
 
         protected override void Dispose(bool isDisposing)
         {

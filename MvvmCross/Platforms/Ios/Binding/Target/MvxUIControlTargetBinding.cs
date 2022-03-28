@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof(ICommand);
+        public override Type TargetValueType => typeof(ICommand);
 
         protected override void SetValueImpl(object target, object value)
         {

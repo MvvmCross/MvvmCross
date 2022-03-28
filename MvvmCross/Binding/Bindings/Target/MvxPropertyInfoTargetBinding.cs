@@ -34,7 +34,7 @@ namespace MvvmCross.Binding.Bindings.Target
             base.Dispose(isDisposing);
         }
 
-        public override Type TargetType => TargetPropertyInfo.PropertyType;
+        public override Type TargetValueType => TargetPropertyInfo.PropertyType;
 
         protected PropertyInfo TargetPropertyInfo => _targetPropertyInfo;
 
