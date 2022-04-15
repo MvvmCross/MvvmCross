@@ -35,6 +35,10 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
+        public MvxSplitViewController(UISplitViewControllerStyle style) : base(style)
+        {
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
