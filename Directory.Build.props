@@ -1,4 +1,4 @@
-<Project>
+﻿<Project>
   <PropertyGroup>
     <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
     <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/MvvmCross/MvvmCross</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <Version>7.0.0</Version>
+    <Version>8.1.0-net6.1</Version>
 
     <!--<Nullable>enable</Nullable>-->
     <LangVersion>latest</LangVersion>

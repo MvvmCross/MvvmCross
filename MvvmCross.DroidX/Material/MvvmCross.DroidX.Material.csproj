@@ -1,6 +1,6 @@
-﻿<Project Sdk="Xamarin.Legacy.Sdk">
+﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>monoandroid12.0;net6.0-android</TargetFrameworks>
+    <TargetFramework>net6.0-android</TargetFramework>
     <AssemblyName>MvvmCross.DroidX.Material</AssemblyName>
     <RootNamespace>MvvmCross.DroidX.Material</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.

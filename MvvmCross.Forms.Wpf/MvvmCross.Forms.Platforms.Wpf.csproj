@@ -16,7 +16,6 @@ This package contains the 'MvvmCross.Forms.Platforms.Wpf' libraries for MvvmCros
 
   <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
     <Compile Include="Platforms\Wpf\**\*.cs" />
-    <ProjectReference Include="..\MvvmCross.Forms\MvvmCross.Forms.csproj" />
     <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\MvvmCross.Wpf\MvvmCross.Platforms.Wpf.csproj" />
   </ItemGroup>
