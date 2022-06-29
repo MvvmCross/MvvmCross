@@ -19,7 +19,8 @@
     <Version>7.0.0</Version>
 
     <!--<Nullable>enable</Nullable>-->
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>true</ImplicitUsings>
     <NoWarn>$(NoWarn);1591;1701;1702;1705;VSX1000;CS0109;CS0108;CS0618;CS0114;NU1603</NoWarn>
     <Platform>AnyCPU</Platform>
 
@@ -42,10 +43,6 @@
 
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild Condition=" '$(IsTestProject)' != 'true'">true</GeneratePackageOnBuild>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(IsTestProject)' != 'true' and '$(TF_BUILD)' == 'true'">
@@ -75,7 +72,5 @@
   <PropertyGroup Condition=" '$(Configuration)' != 'Debug' ">
     <TargetsToBuild>All</TargetsToBuild>
   </PropertyGroup>
-
-
 
 </Project>
