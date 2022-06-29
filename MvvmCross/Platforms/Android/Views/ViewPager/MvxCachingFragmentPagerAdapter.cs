@@ -2,9 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -13,6 +10,9 @@ using AndroidX.ViewPager.Widget;
 using Java.Lang;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
+using Fragment = AndroidX.Fragment.App.Fragment;
+using FragmentManager = AndroidX.Fragment.App.FragmentManager;
+using FragmentTransaction = AndroidX.Fragment.App.FragmentTransaction;
 
 namespace MvvmCross.Platforms.Android.Views.ViewPager
 {

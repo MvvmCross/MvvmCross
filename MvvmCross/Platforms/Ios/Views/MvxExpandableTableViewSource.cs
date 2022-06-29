@@ -13,6 +13,7 @@ using MvvmCross.Base;
 using MvvmCross.Platforms.Ios.Binding.Views;
 using MvvmCross.Platforms.Ios.Views.Expandable;
 using MvvmCross.Platforms.Ios.Views.Expandable.Controllers;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views

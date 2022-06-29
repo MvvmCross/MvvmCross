@@ -5,7 +5,6 @@
 using System;
 using CoreGraphics;
 using Foundation;
-using MvvmCross.Platforms.Ios;
 using MvvmCross.ViewModels;
 using UIKit;
 
@@ -16,13 +15,11 @@ namespace MvvmCross.Platforms.Ios.Views
 	/// </summary>
 	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : IMvxViewModel
     {
-        private readonly MvxIosMajorVersionChecker _iosVersion11Checker = new MvxIosMajorVersionChecker(11);
-
-        public MvxBaseViewController()
+        protected MvxBaseViewController()
         {
         }
 
-        public MvxBaseViewController(NSCoder coder) : base(coder)
+        protected MvxBaseViewController(NSCoder coder) : base(coder)
         {
         }
 
@@ -30,11 +27,11 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxBaseViewController(IntPtr handle) : base(handle)
+        protected MvxBaseViewController(IntPtr handle) : base(handle)
         {
         }
 
-        public MvxBaseViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        protected MvxBaseViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
         {
         }
 
@@ -50,15 +47,23 @@ namespace MvvmCross.Platforms.Ios.Views
             set { base.ViewModel = value; }
         }
 
+#if !MACCATALYST
+        private readonly MvxIosMajorVersionChecker _iosVersion11Checker = new MvxIosMajorVersionChecker(11);
+        private readonly WeakReference<UIView?> _lastActiveView = new WeakReference<UIView?>(null);
+
+        private NSObject _keyboardShowObserver;
+        private NSObject _keyboardHideObserver;
+        private CGRect _lastKeyboardFrame = CGRect.Empty;
+
         /// <summary>
         /// The view to center on keyboard shown
         /// </summary>
-        protected UIView ViewToCenterOnKeyboardShown;
+        protected UIView ViewToCenterOnKeyboardShown { get; set; }
 
         /// <summary>
         /// The scroll to center on keyboard shown
         /// </summary>
-        protected UIScrollView ScrollToCenterOnKeyboardShown;
+        protected UIScrollView ScrollToCenterOnKeyboardShown { get; set; }
 
         /// <summary>
 		/// Initialises the keyboard handling.  The view must also contain a UIScrollView for this to work.  You must also override HandlesKeyboardNotifications() and return true from that method.
@@ -86,9 +91,6 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             return false;
         }
-
-        private NSObject _keyboardShowObserver;
-        private NSObject _keyboardHideObserver;
 
         protected virtual void RegisterForKeyboardNotifications()
         {
@@ -159,9 +161,6 @@ namespace MvvmCross.Platforms.Ios.Views
             UIView.CommitAnimations();
         }
 
-        private CGRect _lastKeyboardFrame = CGRect.Empty;
-        [Weak] private UIView _lastActiveView;
-
         /// <summary>
         /// Override this method to apply custom logic when the keyboard is shown/hidden
         /// </summary>
@@ -177,7 +176,7 @@ namespace MvvmCross.Platforms.Ios.Views
             if (activeView == null)
             {
                 _lastKeyboardFrame = CGRect.Empty;
-                _lastActiveView = null;
+                _lastActiveView.SetTarget(null);
                 return;
             }
 
@@ -185,27 +184,27 @@ namespace MvvmCross.Platforms.Ios.Views
             if (scrollView == null)
             {
                 _lastKeyboardFrame = CGRect.Empty;
-                _lastActiveView = null;
+                _lastActiveView.SetTarget(null);
                 return;
             }
 
             if (!visible)
             {
                 _lastKeyboardFrame = CGRect.Empty;
-                _lastActiveView = null;
+                _lastActiveView.SetTarget(null);
                 scrollView.RestoreScrollPosition();
             }
             else
             {
                 //avoid recalculation if the activeView is the same.
-                if (_lastKeyboardFrame == keyboardFrame &&
-                    _lastActiveView?.Equals(activeView) == true)
+                if (_lastKeyboardFrame == keyboardFrame && _lastActiveView.TryGetTarget(out var lastActiveView) &&
+                    lastActiveView?.Equals(activeView) == true)
                 {
                     return;
                 }
 
                 _lastKeyboardFrame = keyboardFrame;
-                _lastActiveView = activeView;
+                _lastActiveView.SetTarget(activeView);
                 if (_iosVersion11Checker.IsVersionOrHigher)
                     keyboardFrame.Height -= scrollView.SafeAreaInsets.Bottom;
                 scrollView.CenterView(activeView, keyboardFrame);
@@ -223,6 +222,7 @@ namespace MvvmCross.Platforms.Ios.Views
             tap.ShouldReceiveTouch = (recognizer, touch) => !(touch.View is UIControl || touch.View.FindSuperviewOfType(View, typeof(UITableViewCell)) != null);
             View.AddGestureRecognizer(tap);
         }
+#endif
 
         /// <summary>
         /// Selects next TextField to become FirstResponder.

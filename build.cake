@@ -1,5 +1,4 @@
-#tool dotnet:n?package=GitVersion.Tool&version=5.8.2
-#tool nuget:?package=vswhere&version=2.9.3-g21bcdb639c
+#tool dotnet:n?package=GitVersion.Tool&version=5.10.3
 #tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.8.0
 #addin nuget:?package=Cake.Figlet&version=2.0.1
 #addin nuget:?package=Cake.Sonar&version=1.1.30
@@ -64,33 +63,10 @@ Task("Clean")
     CopyFile(gitVersionLog, outputDir + "/gitversion.log");
 });
 
-FilePath msBuildPath;
-Task("ResolveBuildTools")
-    .WithCriteria(() => IsRunningOnWindows())
-    .Does(() => 
-{
-    var vsWhereSettings = new VSWhereLatestSettings
-    {
-        IncludePrerelease = true,
-        Requires = "Component.Xamarin"
-    };
-    
-    var vsLatest = VSWhereLatest(vsWhereSettings);
-    msBuildPath = (vsLatest == null)
-        ? null
-        : vsLatest.CombineWithFilePath("./MSBuild/Current/Bin/MSBuild.exe");
-
-    if (msBuildPath != null)
-        Information("Found MSBuild at {0}", msBuildPath.ToString());
-});
-
 Task("Restore")
-    .IsDependentOn("ResolveBuildTools")
-    .Does(() => 
+    .Does(() =>
 {
-    var settings = GetDefaultBuildSettings()
-        .WithTarget("Restore");
-    MSBuild(sln, settings);
+    DotNetRestore(sln.ToString());
 });
 
 Task("PatchBuildProps")
@@ -138,20 +114,26 @@ Task("SonarEnd")
 });
 
 Task("Build")
-    .IsDependentOn("ResolveBuildTools")
     .IsDependentOn("Clean")
     .IsDependentOn("PatchBuildProps")
     .IsDependentOn("Restore")
-    .Does(() =>  {
+    .Does(() =>
+{
 
-    var settings = GetDefaultBuildSettings()
-        .WithProperty("Version", versionInfo.SemVer)
-        .WithProperty("PackageVersion", versionInfo.SemVer)
-        .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
-        .WithProperty("NoPackageAnalysis", "True")
-        .WithTarget("Build");
-	
-    MSBuild(sln, settings);
+    var msBuildSettings = new DotNetMSBuildSettings
+    {
+        Version = versionInfo.SemVer,
+        PackageVersion = versionInfo.SemVer,
+        InformationalVersion = versionInfo.InformationalVersion
+    };
+
+    var settings = new DotNetBuildSettings
+    {
+         Configuration = configuration,
+         MSBuildSettings = msBuildSettings
+    };
+
+    DotNetBuild(sln.ToString(), settings);
 });
 
 Task("UnitTest")
@@ -275,23 +257,3 @@ Task("Default")
 });
 
 RunTarget(target);
-
-MSBuildSettings GetDefaultBuildSettings()
-{
-    var settings = new MSBuildSettings 
-    {
-        Configuration = configuration,
-        ToolPath = msBuildPath,
-        Verbosity = verbosity
-    };
-
-    if (isRunningOnPipelines)
-    {
-        // remove this when Xamarin.Android supports JDK11
-        var javaSdkDir = EnvironmentVariable("JAVA_HOME_8_X64");
-        Information("Setting JavaSdkDirectory to: " + javaSdkDir);
-        settings = settings.WithProperty("JavaSdkDirectory", javaSdkDir);
-    }
-
-    return settings;
-}
