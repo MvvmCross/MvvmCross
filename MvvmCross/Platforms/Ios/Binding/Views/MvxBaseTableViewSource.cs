@@ -7,7 +7,6 @@ using System.Windows.Input;
 using Foundation;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using UIKit;
 
@@ -17,10 +16,11 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
     {
         public event EventHandler SelectedItemChanged;
         private object _selectedItem;
+        private readonly WeakReference<UITableView> _tableView;
 
         protected MvxBaseTableViewSource(UITableView tableView)
         {
-            TableView = tableView;
+            _tableView = new WeakReference<UITableView>(tableView);
         }
 
         protected MvxBaseTableViewSource(IntPtr handle)
@@ -30,8 +30,19 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
                 "MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
-        [field: Weak]
-        protected UITableView TableView { get; }
+        protected UITableView TableView
+        {
+            get
+            {
+                if (_tableView.TryGetTarget(out var tableView))
+                    return tableView;
+
+                // This is not a array Sonar. You are drunk...
+#pragma warning disable S1168 // Empty arrays and collections should be returned instead of null
+                return null;
+#pragma warning restore S1168 // Empty arrays and collections should be returned instead of null
+            }
+        }
 
         public bool DeselectAutomatically { get; set; }
 
@@ -122,13 +133,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
         public override void CellDisplayingEnded(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
         {
-            //Don't bind to NULL to speed up cells in lists when fast scrolling
-            //There should be almost no scenario in which this is required
-            //If it is required, do this in your own subclass using this code:
-
-            //var bindable = cell as IMvxDataConsumer;
-            //if (bindable != null)
-            //    bindable.DataContext = null;
+            // Don't bind to NULL to speed up cells in lists when fast scrolling
+            // There should be almost no scenario in which this is required
         }
 
         public override nint NumberOfSections(UITableView tableView)

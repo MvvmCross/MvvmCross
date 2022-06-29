@@ -4,7 +4,6 @@
 
 using Android.Views;
 using AndroidX.Leanback.Widget;
-using Java.Lang;
 
 namespace MvvmCross.DroidX.Leanback.Listeners
 {
@@ -12,7 +11,7 @@ namespace MvvmCross.DroidX.Leanback.Listeners
     /// Requests focus for first laid out child.
     /// </summary>
     public class MvxFocusFirstChildOnChildLaidOutListener
-        : Object, IOnChildLaidOutListener
+        : Java.Lang.Object, IOnChildLaidOutListener
     {
         public void OnChildLaidOut(ViewGroup parent, View view, int position, long id)
         {

@@ -22,7 +22,7 @@ variables:
   NUGET_PACKAGES: '$(Pipeline.Workspace)/.nuget/packages'
 
 pool:
-  vmImage: windows-latest
+  vmImage: windows-2022
 
 steps:
 - template: azure-pipelines-shared.yml
@@ -30,7 +30,7 @@ steps:
 - pwsh: |
     $jdkPath = $env:JAVA_HOME_11_X64
     Write-Host "##vso[task.setvariable variable=JAVA_HOME]$jdkPath"
-  displayName: "Use JDK11 by default"        
+  displayName: "Use JDK11 in JAVA_HOME env var"
 
 - script: dotnet tool restore
   displayName: Restore dotnet tools

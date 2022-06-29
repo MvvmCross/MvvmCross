@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
     public class MvxFilteringAdapter
         : MvxAdapter, IFilterable
     {
-        private object _syncLock = new object();
+        private readonly object _syncLock = new object();
 
         private class MyFilter : Filter
         {
@@ -67,7 +67,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             #endregion Overrides of Filter
         }
 
-        public Func<object, string, bool> DefaultFilterPredicate = (item, filterString) => item.ToString().ToLowerInvariant().Contains(filterString.ToLowerInvariant());
+        public Func<object, string, bool> DefaultFilterPredicate = (item, filterString) => item.ToString().Contains(filterString, StringComparison.InvariantCultureIgnoreCase);
         public Func<object, string, bool> FilterPredicate { get; set; }
 
         protected virtual (int, IEnumerable) FilterValues(string constraint)

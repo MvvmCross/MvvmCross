@@ -34,13 +34,6 @@ namespace Playground.Droid
             base.FillTargetFactories(registry);
         }
 
-        public override void LoadPlugins(IMvxPluginManager pluginManager)
-        {
-            base.LoadPlugins(pluginManager);
-
-            pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.Location.Fused.Plugin>();
-        }
-
         protected override ILoggerProvider CreateLogProvider()
         {
             return new SerilogLoggerProvider();
