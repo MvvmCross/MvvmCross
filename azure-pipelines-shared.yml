@@ -22,6 +22,7 @@ steps:
     dotnet workload install ios
     dotnet workload install tvos
     dotnet workload install macos
+    dotnet workload install maccatalyst
 
 - task: Cache@2
   displayName: Cache NuGet packages
