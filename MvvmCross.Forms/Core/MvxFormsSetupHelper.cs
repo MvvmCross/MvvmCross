@@ -22,7 +22,7 @@ namespace MvvmCross.Forms.Core
 
         public static void FillBindingNames(IMvxBindingNameRegistry registry)
         {
-
+            // Method intentionally left empty.
         }
     }
 }

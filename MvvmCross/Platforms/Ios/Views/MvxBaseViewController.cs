@@ -150,12 +150,12 @@ namespace MvvmCross.Platforms.Ios.Views
             UIView.SetAnimationDuration(UIKeyboard.AnimationDurationFromNotification(notification));
             UIView.SetAnimationCurve((UIViewAnimationCurve)UIKeyboard.AnimationCurveFromNotification(notification));
 
-                //Pass the notification, calculating keyboard height, etc.
-                var keyboardFrame = visible
-                    ? UIKeyboard.FrameEndFromNotification(notification)
-                    : UIKeyboard.FrameBeginFromNotification(notification);
+            //Pass the notification, calculating keyboard height, etc.
+            var keyboardFrame = visible
+                ? UIKeyboard.FrameEndFromNotification(notification)
+                : UIKeyboard.FrameBeginFromNotification(notification);
 
-                OnKeyboardChanged(visible, keyboardFrame);
+            OnKeyboardChanged(visible, keyboardFrame);
 
             //Commit the animation
             UIView.CommitAnimations();

@@ -10,9 +10,9 @@ using AndroidX.ViewPager.Widget;
 using Java.Lang;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
-using FragmentTransaction = AndroidX.Fragment.App.FragmentTransaction;
 using Fragment = AndroidX.Fragment.App.Fragment;
 using FragmentManager = AndroidX.Fragment.App.FragmentManager;
+using FragmentTransaction = AndroidX.Fragment.App.FragmentTransaction;
 
 namespace MvvmCross.Platforms.Android.Views.ViewPager
 {

@@ -398,7 +398,7 @@ namespace MvvmCross.IoC
 
             if (selectedConstructor == null)
             {
-                throw new MvxIoCResolveException($"Failed to find constructor for type { type.FullName } with arguments: { arguments.Select(x => x.GetType().Name + ", ") }");
+                throw new MvxIoCResolveException($"Failed to find constructor for type {type.FullName} with arguments: {arguments.Select(x => x.GetType().Name + ", ")}");
             }
 
             var parameters = GetIoCParameterValues(type, selectedConstructor, arguments);

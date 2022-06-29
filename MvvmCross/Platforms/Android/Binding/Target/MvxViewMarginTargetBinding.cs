@@ -11,7 +11,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 {
     public class MvxViewMarginTargetBinding : MvxAndroidTargetBinding
     {
-        private string _whichMargin;
+        private readonly string _whichMargin;
 
         public MvxViewMarginTargetBinding(View target, string whichMargin) : base(target)
         {

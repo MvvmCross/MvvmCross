@@ -11,9 +11,9 @@ using Java.Lang;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.ViewModels;
-using Object = Java.Lang.Object;
-using FragmentTransaction = AndroidX.Fragment.App.FragmentTransaction;
 using Fragment = AndroidX.Fragment.App.Fragment;
+using FragmentTransaction = AndroidX.Fragment.App.FragmentTransaction;
+using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platforms.Android.Views
 {
