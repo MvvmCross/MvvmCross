@@ -104,7 +104,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
     public abstract class MvxFormsApplicationDelegate<TMvxMacSetup, TApplication, TFormsApplication> : MvxFormsApplicationDelegate
     where TMvxMacSetup : MvxFormsMacSetup<TApplication, TFormsApplication>, new()
     where TApplication : class, IMvxApplication, new()
-    where TFormsApplication : Application, new()
+    where TFormsApplication : Xamarin.Forms.Application, new()
     {
         protected override void RegisterSetup()
         {

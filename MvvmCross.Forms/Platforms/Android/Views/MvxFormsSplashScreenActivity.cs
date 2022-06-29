@@ -6,14 +6,13 @@ using MvvmCross.Core;
 using MvvmCross.Forms.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
-using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platforms.Android.Views
 {
     public abstract class MvxFormsSplashScreenActivity<TMvxAndroidSetup, TApplication, TFormsApplication> : MvxSplashScreenActivity
             where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
             where TApplication : class, IMvxApplication, new()
-            where TFormsApplication : Application, new()
+            where TFormsApplication : Xamarin.Forms.Application, new()
     {
         protected MvxFormsSplashScreenActivity(int resourceId = NoContent) : base(resourceId)
         {

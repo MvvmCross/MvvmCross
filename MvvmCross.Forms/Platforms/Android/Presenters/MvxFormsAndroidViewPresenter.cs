@@ -18,11 +18,11 @@ namespace MvvmCross.Forms.Platforms.Android.Presenters
     public class MvxFormsAndroidViewPresenter
         : MvxAndroidViewPresenter, IMvxFormsViewPresenter
     {
-        public MvxFormsAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies, Application formsApplication) : base(androidViewAssemblies)
+        public MvxFormsAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies, Xamarin.Forms.Application formsApplication) : base(androidViewAssemblies)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
-        public Application FormsApplication { get; set; }
+        public Xamarin.Forms.Application FormsApplication { get; set; }
 
         private IMvxFormsPagePresenter _formsPagePresenter;
         public virtual IMvxFormsPagePresenter FormsPagePresenter

@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Core
 {
-    public class MvxFormsApplication : Application
+    public class MvxFormsApplication : Xamarin.Forms.Application
     {
         protected MvxFormsApplication()
         {

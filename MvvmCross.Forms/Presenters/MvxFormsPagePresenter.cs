@@ -35,8 +35,8 @@ namespace MvvmCross.Forms.Presenters
 
         protected IMvxFormsViewPresenter PlatformPresenter { get; }
 
-        private Application _formsApplication;
-        public Application FormsApplication
+        private Xamarin.Forms.Application _formsApplication;
+        public Xamarin.Forms.Application FormsApplication
         {
             get
             {

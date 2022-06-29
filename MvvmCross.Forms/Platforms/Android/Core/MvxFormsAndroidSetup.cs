@@ -25,7 +25,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
     public abstract class MvxFormsAndroidSetup : MvxAndroidSetup, IMvxFormsSetup
     {
         private List<Assembly> _viewAssemblies;
-        private Application _formsApplication;
+        private Xamarin.Forms.Application _formsApplication;
 
         public override IEnumerable<Assembly> GetViewAssemblies()
         {
@@ -50,7 +50,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public virtual Application FormsApplication
+        public virtual Xamarin.Forms.Application FormsApplication
         {
             get
             {
@@ -72,7 +72,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             }
         }
 
-        protected abstract Application CreateFormsApplication();
+        protected abstract Xamarin.Forms.Application CreateFormsApplication();
 
         protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
         {
@@ -131,7 +131,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
 
     public abstract class MvxFormsAndroidSetup<TApplication, TFormsApplication> : MvxFormsAndroidSetup
         where TApplication : class, IMvxApplication, new()
-        where TFormsApplication : Application, new()
+        where TFormsApplication : Xamarin.Forms.Application, new()
     {
         public override IEnumerable<Assembly> GetViewAssemblies()
         {
@@ -143,7 +143,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
 
-        protected override Application CreateFormsApplication() => new TFormsApplication();
+        protected override Xamarin.Forms.Application CreateFormsApplication() => new TFormsApplication();
 
         protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) => iocProvider.IoCConstruct<TApplication>();
     }

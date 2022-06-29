@@ -3,13 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
-    public class MvxListView : ListView
+    public class MvxListView : Xamarin.Forms.ListView
     {
-        public MvxListView(ListViewCachingStrategy strategy) : base(strategy)
+        public MvxListView(Xamarin.Forms.ListViewCachingStrategy strategy) : base(strategy)
         {
         }
 

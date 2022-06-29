@@ -16,7 +16,6 @@ using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
-using Application = Xamarin.Forms.Application;
 
 namespace MvvmCross.Forms.Platforms.Android.Views
 {
@@ -49,8 +48,8 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             }
         }
 
-        private Application _formsApplication;
-        protected Application FormsApplication
+        private Xamarin.Forms.Application _formsApplication;
+        protected Xamarin.Forms.Application FormsApplication
         {
             get
             {
@@ -227,7 +226,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
     public abstract class MvxFormsApplicationActivity<TMvxAndroidSetup, TApplication, TFormsApplication> : MvxFormsApplicationActivity
         where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
         where TApplication : class, IMvxApplication, new()
-        where TFormsApplication : Application, new()
+        where TFormsApplication : Xamarin.Forms.Application, new()
     {
         protected override void RegisterSetup()
         {
@@ -238,7 +237,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
     public abstract class MvxFormsApplicationActivity<TMvxAndroidSetup, TApplication, TFormsApplication, TViewModel> : MvxFormsApplicationActivity<TViewModel>
         where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
         where TApplication : class, IMvxApplication, new()
-        where TFormsApplication : Application, new()
+        where TFormsApplication : Xamarin.Forms.Application, new()
         where TViewModel : class, IMvxViewModel
     {
         protected override void RegisterSetup()

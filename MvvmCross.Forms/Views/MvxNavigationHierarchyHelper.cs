@@ -10,7 +10,7 @@ namespace MvvmCross.Forms.Views
 {
     public static class MvxNavigationHierarchyHelper
     {
-        public static string Hierarchy(this Application application)
+        public static string Hierarchy(this Xamarin.Forms.Application application)
         {
             var sb = new StringBuilder();
             sb.AppendLine("Application Root");
