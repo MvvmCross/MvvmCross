@@ -83,7 +83,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             var view = Control;
             if (view == null) return;
 
-            view.Enabled = _command?.CanExecute(null) ?? false; 
+            view.Enabled = _command?.CanExecute(null) ?? false;
         }
 
         private void OnCanExecuteChanged(object sender, EventArgs e)
