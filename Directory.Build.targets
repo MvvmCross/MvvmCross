@@ -22,6 +22,9 @@
   <PropertyGroup Condition="$(TargetFramework.StartsWith('net6.0-macos'))">
     <DefineConstants>$(DefineConstants);MONO;COCOA;APPLE;MAC</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net6.0-maccatalyst'))">
+    <DefineConstants>$(DefineConstants);MONO;COCOA;APPLE;IOS;MACCATALYST</DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition="$(TargetFramework.StartsWith('xamarin.tvos'))">
     <DefineConstants>$(DefineConstants);MONO;COCOA;APPLE;TVOS</DefineConstants>
   </PropertyGroup>

@@ -15,13 +15,6 @@ namespace MvvmCross.Platforms.Ios.Views
 	/// </summary>
 	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : IMvxViewModel
     {
-        private readonly MvxIosMajorVersionChecker _iosVersion11Checker = new MvxIosMajorVersionChecker(11);
-        private readonly WeakReference<UIView?> _lastActiveView = new WeakReference<UIView?>(null);
-
-        private NSObject _keyboardShowObserver;
-        private NSObject _keyboardHideObserver;
-        private CGRect _lastKeyboardFrame = CGRect.Empty;
-
         protected MvxBaseViewController()
         {
         }
@@ -53,6 +46,14 @@ namespace MvvmCross.Platforms.Ios.Views
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
+
+#if !MACCATALYST
+        private readonly MvxIosMajorVersionChecker _iosVersion11Checker = new MvxIosMajorVersionChecker(11);
+        private readonly WeakReference<UIView?> _lastActiveView = new WeakReference<UIView?>(null);
+
+        private NSObject _keyboardShowObserver;
+        private NSObject _keyboardHideObserver;
+        private CGRect _lastKeyboardFrame = CGRect.Empty;
 
         /// <summary>
         /// The view to center on keyboard shown
@@ -221,6 +222,7 @@ namespace MvvmCross.Platforms.Ios.Views
             tap.ShouldReceiveTouch = (recognizer, touch) => !(touch.View is UIControl || touch.View.FindSuperviewOfType(View, typeof(UITableViewCell)) != null);
             View.AddGestureRecognizer(tap);
         }
+#endif
 
         /// <summary>
         /// Selects next TextField to become FirstResponder.
