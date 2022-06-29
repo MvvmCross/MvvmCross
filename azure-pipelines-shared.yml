@@ -18,11 +18,8 @@ steps:
     version: 6.0.x
 
 - pwsh: |
-    dotnet workload install android
-    dotnet workload install ios
-    dotnet workload install tvos
-    dotnet workload install macos
-    dotnet workload install maccatalyst
+    dotnet workload install android ios tvos macos maccatalyst
+  displayName: Install dotnet workloads
 
 - task: Cache@2
   displayName: Cache NuGet packages
