@@ -19,7 +19,7 @@ namespace MvvmCross.Forms.Presenters
                 throw new ArgumentNullException(nameof(page));
             }
 
-            page.On<iOS>().SetModalPresentationStyle((UIModalPresentationStyle)presentationStyle);
+            page.On<iOS>().SetModalPresentationStyle((Xamarin.Forms.PlatformConfiguration.iOSSpecific.UIModalPresentationStyle)presentationStyle);
         }
     }
 }

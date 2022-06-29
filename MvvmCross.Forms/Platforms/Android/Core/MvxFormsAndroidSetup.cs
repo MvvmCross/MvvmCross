@@ -64,9 +64,9 @@ namespace MvvmCross.Forms.Platforms.Android.Core
                 {
                     _formsApplication = CreateFormsApplication();
                 }
-                if (Application.Current != _formsApplication)
+                if (Xamarin.Forms.Application.Current != _formsApplication)
                 {
-                    Application.Current = _formsApplication;
+                    Xamarin.Forms.Application.Current = _formsApplication;
                 }
                 return _formsApplication;
             }

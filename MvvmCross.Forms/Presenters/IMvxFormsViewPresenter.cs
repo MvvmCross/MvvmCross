@@ -11,7 +11,7 @@ namespace MvvmCross.Forms.Presenters
 {
     public interface IMvxFormsViewPresenter : IMvxAttributeViewPresenter
     {
-        Application FormsApplication { get; set; }
+        Xamarin.Forms.Application FormsApplication { get; set; }
         IMvxFormsPagePresenter FormsPagePresenter { get; set; }
 
         bool ClosePlatformViews();
