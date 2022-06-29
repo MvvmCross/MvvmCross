@@ -1,4 +1,5 @@
 #tool dotnet:n?package=GitVersion.Tool&version=5.10.3
+#tool nuget:?package=vswhere&version=3.0.3
 #tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.8.0
 #addin nuget:?package=Cake.Figlet&version=2.0.1
 #addin nuget:?package=Cake.Sonar&version=1.1.30
@@ -63,10 +64,33 @@ Task("Clean")
     CopyFile(gitVersionLog, outputDir + "/gitversion.log");
 });
 
-Task("Restore")
+FilePath msBuildPath;
+Task("ResolveBuildTools")
+    .WithCriteria(() => IsRunningOnWindows())
     .Does(() => 
 {
-    DotNetRestore(sln.ToString());
+    var vsWhereSettings = new VSWhereLatestSettings
+    {
+        IncludePrerelease = true,
+        Requires = "Component.Xamarin"
+    };
+    
+    var vsLatest = VSWhereLatest(vsWhereSettings);
+    msBuildPath = (vsLatest == null)
+        ? null
+        : vsLatest.CombineWithFilePath("./MSBuild/Current/Bin/MSBuild.exe");
+
+    if (msBuildPath != null)
+        Information("Found MSBuild at {0}", msBuildPath.ToString());
+});
+
+Task("Restore")
+    .IsDependentOn("ResolveBuildTools")
+    .Does(() => 
+{
+    var settings = GetDefaultBuildSettings()
+        .WithTarget("Restore");
+    MSBuild(sln, settings);
 });
 
 Task("PatchBuildProps")
@@ -114,25 +138,20 @@ Task("SonarEnd")
 });
 
 Task("Build")
+    .IsDependentOn("ResolveBuildTools")
     .IsDependentOn("Clean")
     .IsDependentOn("PatchBuildProps")
     .IsDependentOn("Restore")
-    .Does(() => 
-{
-    var msBuildSettings = new DotNetMSBuildSettings
-    {
-        Version = versionInfo.SemVer,
-        PackageVersion = versionInfo.SemVer,
-        InformationalVersion = versionInfo.InformationalVersion
-    };
+    .Does(() =>  {
 
-    var settings = new DotNetBuildSettings
-    {
-         Configuration = configuration,
-         MSBuildSettings = msBuildSettings
-    };
-
-    DotNetBuild(sln.ToString(), settings);
+    var settings = GetDefaultBuildSettings()
+        .WithProperty("Version", versionInfo.SemVer)
+        .WithProperty("PackageVersion", versionInfo.SemVer)
+        .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
+        .WithProperty("NoPackageAnalysis", "True")
+        .WithTarget("Build");
+	
+    MSBuild(sln, settings);
 });
 
 Task("UnitTest")
@@ -142,7 +161,7 @@ Task("UnitTest")
     EnsureDirectoryExists(outputDir + "/Tests/");
 
     var testPaths = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
-    var settings = new DotNetTestSettings
+    var settings = new DotNetCoreTestSettings
     {
         Configuration = configuration,
         NoBuild = true
@@ -155,7 +174,7 @@ Task("UnitTest")
         settings.Loggers = new string[] { $"xunit;LogFilePath={testXml.FullPath}" };
         try 
         {
-            DotNetTest(project.ToString(), settings);
+            DotNetCoreTest(project.ToString(), settings);
         }
         catch
         {
@@ -256,3 +275,15 @@ Task("Default")
 });
 
 RunTarget(target);
+
+MSBuildSettings GetDefaultBuildSettings()
+{
+    var settings = new MSBuildSettings 
+    {
+        Configuration = configuration,
+        ToolPath = msBuildPath,
+        Verbosity = verbosity
+    };
+
+    return settings;
+}
