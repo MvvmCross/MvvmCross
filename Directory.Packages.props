@@ -21,7 +21,7 @@
     <PackageVersion Include="Xamarin.Build.Download" Version="0.11.0" />
     <PackageVersion Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.2478" />
     <PackageVersion Include="Xamarin.Forms" Version="5.0.0.2478" />
-    <PackageVersion Include="Roslynator.Analyzers" Version="4.0.2" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="4.1.1" />
     <PackageVersion Include="AsyncFixer" Version="1.5.1" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.36.0.43782" />
