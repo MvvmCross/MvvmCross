@@ -2,11 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Java.Lang;
-
 namespace MvvmCross.Platforms.Android
 {
-    public class MvxJavaContainer : Object
+    public class MvxJavaContainer : Java.Lang.Object
     {
         protected MvxJavaContainer(object theObject)
         {
