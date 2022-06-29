@@ -1,13 +1,13 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
-    <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;xamarin.tvos10;xamarin.watchos10;monoandroid10.0;net6.0;net6.0-android;net6.0-ios;net6.0-tvos;net6.0-macos;tizen40;netcoreapp3.1;net5.0</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net48;uap10.0.19041;$(TargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;xamarin.tvos10;xamarin.watchos10;monoandroid12.0;net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst;net6.0-tvos;net6.0-macos;tizen40;netcoreapp3.1;net5.0</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.19041;$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetsToBuild)' != 'All' ">
-    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Android' ">net6.0;netstandard2.0;monoandroid10.0;net6.0-android;</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Android' ">net6.0;netstandard2.0;monoandroid12.0;net6.0-android;</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Uap' ">net6.0;netstandard2.0;uap10.0.19041</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">net6.0;netstandard2.0;xamarin.ios10;net6.0-ios</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">net6.0;netstandard2.0;xamarin.ios10;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Tizen' ">net6.0;netstandard2.0;tizen40</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Mac' ">net6.0;netstandard2.0;xamarin.mac20;net6.0-macos;</TargetFrameworks>
   </PropertyGroup>
@@ -66,6 +66,12 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>
 
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-maccatalyst')) ">
+    <Compile Include="Platforms\Apple\**\*.cs" />
+    <Compile Include="Platforms\Ios\**\*.cs" />
+    <Compile Include="Platforms\Xamarin\**\*.cs" />
+  </ItemGroup>
+
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) ">
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Mac\**\*.cs" />
@@ -73,7 +79,7 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <Reference Include="OpenTK" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-mac')) ">
+  <ItemGroup Condition=" $(TargetFramework.Equals('net6.0-mac')) ">
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Mac\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
