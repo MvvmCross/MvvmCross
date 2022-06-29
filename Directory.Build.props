@@ -50,11 +50,6 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-
   <ItemGroup Condition="'$(IsLibraryProject)' == 'true'">
     <None Include="$(MSBuildThisFileDirectory)\LICENSE" Pack="true" PackagePath="\" />
     <None Include="$(MSBuildThisFileDirectory)\icon.png" Pack="true" PackagePath="\" />
