@@ -1,4 +1,4 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras">
+﻿<Project Sdk="Xamarin.Legacy.Sdk">
   <PropertyGroup>
     <TargetFrameworks>monoandroid12.0;net6.0-android</TargetFrameworks>
     <AssemblyName>MvvmCross.DroidX.RecyclerView</AssemblyName>
