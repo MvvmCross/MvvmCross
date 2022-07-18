@@ -1925,7 +1925,6 @@ Global
 		{A9E90148-DC2F-450F-962B-F322B712E7F0}.Release|x64.ActiveCfg = Release|Any CPU
 		{A9E90148-DC2F-450F-962B-F322B712E7F0}.Release|x64.Build.0 = Release|Any CPU
 		{A9E90148-DC2F-450F-962B-F322B712E7F0}.Release|x86.ActiveCfg = Release|Any CPU
-<<<<<<< HEAD
 		{F31E7C02-8625-4634-8EA5-07B3B179A806}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
 		{F31E7C02-8625-4634-8EA5-07B3B179A806}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
 		{F31E7C02-8625-4634-8EA5-07B3B179A806}.Ad-Hoc|ARM.ActiveCfg = Debug|Any CPU
@@ -2043,7 +2042,6 @@ Global
 		{7EC523B3-3A6B-4182-98E9-AC232135E068}.Release|x64.Build.0 = Release|x64
 		{7EC523B3-3A6B-4182-98E9-AC232135E068}.Release|x86.ActiveCfg = Release|x86
 		{7EC523B3-3A6B-4182-98E9-AC232135E068}.Release|x86.Build.0 = Release|x86
-=======
 		{7C278531-0D53-422F-91C5-7A37A8276AC1}.Ad-Hoc|Any CPU.ActiveCfg = Debug|x64
 		{7C278531-0D53-422F-91C5-7A37A8276AC1}.Ad-Hoc|Any CPU.Build.0 = Debug|x64
 		{7C278531-0D53-422F-91C5-7A37A8276AC1}.Ad-Hoc|Any CPU.Deploy.0 = Debug|x64
@@ -2140,7 +2138,6 @@ Global
 		{7C278531-0D53-422F-91C5-7A37A8276AC1}.Release|x86.ActiveCfg = Release|x86
 		{7C278531-0D53-422F-91C5-7A37A8276AC1}.Release|x86.Build.0 = Release|x86
 		{7C278531-0D53-422F-91C5-7A37A8276AC1}.Release|x86.Deploy.0 = Release|x86
->>>>>>> dhovey/develop
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
