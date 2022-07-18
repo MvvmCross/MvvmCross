@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,10 +10,10 @@ using MvvmCross.Platforms.Android.Binding.Target;
 namespace MvvmCross.Plugin.Color.Platforms.Android.BindingTargets
 {
     [Preserve(AllMembers = true)]
-	public abstract class MvxViewColorBinding
+    public abstract class MvxViewColorBinding
         : MvxAndroidTargetBinding
     {
-        protected View TextView => (View) Target;
+        protected View TextView => (View)Target;
 
         protected MvxViewColorBinding(View view)
             : base(view)
@@ -22,6 +22,6 @@ namespace MvvmCross.Plugin.Color.Platforms.Android.BindingTargets
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof(global::Android.Graphics.Color);
+        public override Type TargetValueType => typeof(global::Android.Graphics.Color);
     }
 }

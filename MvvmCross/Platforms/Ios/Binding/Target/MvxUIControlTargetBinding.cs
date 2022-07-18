@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
 
         private readonly string _controlEvent;
         private readonly EventHandler<EventArgs> _canExecuteEventHandler;
-        
+
         protected UIControl Control => Target as UIControl;
 
         public MvxUIControlTargetBinding(UIControl control, string controlEvent)
@@ -29,11 +29,11 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
 
             if (control == null)
             {
-                MvxBindingLog.Error( "Error - UIControl is null in MvxUIControlTargetBinding");
+                MvxBindingLog.Error("Error - UIControl is null in MvxUIControlTargetBinding");
             }
             else
             {
-                AddHandler(control);    
+                AddHandler(control);
             }
 
             _canExecuteEventHandler = new EventHandler<EventArgs>(OnCanExecuteChanged);
@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof(ICommand);
+        public override Type TargetValueType => typeof(ICommand);
 
         protected override void SetValueImpl(object target, object value)
         {
@@ -83,7 +83,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             var view = Control;
             if (view == null) return;
 
-            view.Enabled = _command?.CanExecute(null) ?? false;;
+            view.Enabled = _command?.CanExecute(null) ?? false;
         }
 
         private void OnCanExecuteChanged(object sender, EventArgs e)
@@ -135,7 +135,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
                     _controlEventSubscription = control.WeakSubscribe(nameof(control.AllEvents), ControlEvent);
                     break;
                 default:
-                    MvxBindingLog.Error( "Error - Invalid controlEvent in MvxUIControlTargetBinding");
+                    MvxBindingLog.Error("Error - Invalid controlEvent in MvxUIControlTargetBinding");
                     break;
             }
         }
@@ -160,7 +160,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
                     _controlEventSubscription?.Dispose();
                     break;
                 default:
-                    MvxBindingLog.Error( "Error - Invalid controlEvent in MvxUIControlTargetBinding");
+                    MvxBindingLog.Error("Error - Invalid controlEvent in MvxUIControlTargetBinding");
                     break;
             }
         }

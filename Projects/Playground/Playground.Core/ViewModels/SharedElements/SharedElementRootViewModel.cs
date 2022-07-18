@@ -9,7 +9,7 @@ namespace Playground.Core.ViewModels
 {
     public class SharedElementRootViewModel : BaseViewModel
     {
-        public SharedElementRootViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService) 
+        public SharedElementRootViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
         }

@@ -24,7 +24,7 @@ namespace Playground.Core.ViewModels
             public Type ViewModelType { get; set; }
         }
 
-        public MixedNavMasterDetailViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService) 
+        public MixedNavMasterDetailViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
             Menu = new[] {
@@ -36,17 +36,21 @@ namespace Playground.Core.ViewModels
 
         public IEnumerable<MenuItem> Menu { get; set; }
 
-        public MenuItem SelectedMenu {
+        public MenuItem SelectedMenu
+        {
             get => _menuItem;
-            set {
+            set
+            {
                 if (SetProperty(ref _menuItem, value))
                     OnSelectedChangedCommand.Execute(value);
             }
         }
 
-        private IMvxAsyncCommand<MenuItem> OnSelectedChangedCommand {
-            get {
-                return _onSelectedChangedCommand ??= new MvxAsyncCommand<MenuItem>(async (item) => 
+        private IMvxAsyncCommand<MenuItem> OnSelectedChangedCommand
+        {
+            get
+            {
+                return _onSelectedChangedCommand ??= new MvxAsyncCommand<MenuItem>(async (item) =>
                 {
                     if (item == null)
                         return;

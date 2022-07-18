@@ -10,6 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
@@ -19,9 +20,8 @@ using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.WeakSubscription;
 using Object = Java.Lang.Object;
-using ViewHolder = AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder;
 using RecyclerViewAdapter = AndroidX.RecyclerView.Widget.RecyclerView.Adapter;
-using Microsoft.Extensions.Logging;
+using ViewHolder = AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder;
 
 namespace MvvmCross.DroidX.RecyclerView
 {

@@ -62,7 +62,7 @@ namespace MvvmCross.DroidX.Leanback.Fragments
         public virtual IMvxViewModel ViewModel
         {
             get
-            { 
+            {
                 return DataContext as IMvxViewModel;
             }
             set
@@ -79,7 +79,7 @@ namespace MvvmCross.DroidX.Leanback.Fragments
         public string UniqueImmutableCacheTag => Tag;
     }
 
-    public abstract class MvxGuidedStepSupportFragment<TViewModel> : MvxGuidedStepSupportFragment, IMvxFragmentView<TViewModel> 
+    public abstract class MvxGuidedStepSupportFragment<TViewModel> : MvxGuidedStepSupportFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxGuidedStepSupportFragment()

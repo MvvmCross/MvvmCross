@@ -11,7 +11,7 @@ namespace Playground.Core.ViewModels
 {
     public class SplitDetailNavViewModel : MvxNavigationViewModel
     {
-        public SplitDetailNavViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService) 
+        public SplitDetailNavViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
             MainMenuCommand = new MvxAsyncCommand(() => NavigationService.Navigate<MixedNavFirstViewModel>());

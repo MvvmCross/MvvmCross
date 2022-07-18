@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace MvvmCross.Plugin.Json
 {
     [Preserve(AllMembers = true)]
-	public class MvxDateTimeJsonConverter : JsonConverter
+    public class MvxDateTimeJsonConverter : JsonConverter
     {
         private const string DateTimeFormat = "yyyy-MM-ddTHH:mm:ssZ";
 

@@ -81,7 +81,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
             var templateSelector = Activator.CreateInstance(type) as IMvxTemplateSelector;
 
             if (itemTemplateId != 0 && templateSelector != null)
-                    templateSelector.ItemTemplateId = itemTemplateId;
+                templateSelector.ItemTemplateId = itemTemplateId;
 
             return templateSelector;
         }
@@ -96,7 +96,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
             var styleableType = resourceTypeFinder.GetNestedType("Styleable");
 
             _recyclerViewItemTemplateSelectorGroupId = (int[])styleableType.GetField("MvxRecyclerView").GetValue(null);
-            _recyclerViewItemTemplateSelector = (int) styleableType.GetField("MvxRecyclerView_MvxTemplateSelector").GetValue(null);
+            _recyclerViewItemTemplateSelector = (int)styleableType.GetField("MvxRecyclerView_MvxTemplateSelector").GetValue(null);
         }
     }
 }

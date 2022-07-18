@@ -5,18 +5,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AppKit;
 using CoreGraphics;
+using Foundation;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
-using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
-using System.Threading.Tasks;
-using Foundation;
-using Microsoft.Extensions.Logging;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Mac.Presenters
 {
@@ -290,7 +290,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             for (int i = Windows.Count - 1; i >= 0; i--)
             {
                 var window = Windows[i];
-                
+
                 // closing controller is a tab
                 var tabViewController = window.ContentViewController as IMvxTabViewController;
                 if (tabViewController != null && tabViewController.CloseTabView(viewModel))

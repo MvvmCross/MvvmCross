@@ -31,7 +31,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             cellIdentifier = cellIdentifier ?? nibName;
             _cellIdentifier = new NSString(cellIdentifier);
 
-            if (registerNibForCellReuse) {
+            if (registerNibForCellReuse)
+            {
                 tableView.RegisterNibForCellReuse(UINib.FromName(nibName, bundle ?? NSBundle.MainBundle), cellIdentifier);
             }
         }

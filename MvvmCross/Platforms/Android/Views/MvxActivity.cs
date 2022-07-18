@@ -9,11 +9,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platforms.Android.Views.Base;
+using MvvmCross.Core;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.ViewModels;
-using MvvmCross.Core;
 using Fragment = AndroidX.Fragment.App.Fragment;
 
 namespace MvvmCross.Platforms.Android.Views

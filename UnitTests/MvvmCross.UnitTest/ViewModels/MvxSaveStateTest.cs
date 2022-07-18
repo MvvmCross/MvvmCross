@@ -45,7 +45,7 @@ namespace MvvmCross.UnitTest.ViewModels
                     TheInt1 = 123,
                     TheInt2 = 456,
                     TheString1 = "Hello World",
-                    TheString2 = null
+                    TheString2 = string.Empty
                 }
             };
 

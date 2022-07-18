@@ -414,15 +414,15 @@ namespace MvvmCross.UnitTest.ViewModels
         }
 
         private void CheckCounts(
-            CommandTestClass testObject, 
-            int countMyCalled = 0, 
-            int countCanExecuteMyCalled = 0, 
-            int countMyExCalled = 0, 
-            int countCanExecuteMyExCalled = 0, 
-            int countNotACalled = 0, 
-            int countAttributedCalled = 0, 
-            int countAttributed2Called = 0, 
-            int countCanExecuteAttributed2Called = 0, 
+            CommandTestClass testObject,
+            int countMyCalled = 0,
+            int countCanExecuteMyCalled = 0,
+            int countMyExCalled = 0,
+            int countCanExecuteMyExCalled = 0,
+            int countNotACalled = 0,
+            int countAttributedCalled = 0,
+            int countAttributed2Called = 0,
+            int countCanExecuteAttributed2Called = 0,
             int countIntReturningCalled = 0)
         {
             Assert.Equal(countMyCalled, testObject.CountMyCommandCalled);

@@ -23,7 +23,7 @@ namespace MvvmCross.Binding.ExpressionParse
 
         public IMvxParsedExpression Parse<TObj, TRet>(Expression<Func<TObj, TRet>> propertyPath)
         {
-            if (propertyPath.Body is MethodCallExpression 
+            if (propertyPath.Body is MethodCallExpression
                 && (propertyPath.Body as MethodCallExpression).Method.Name.Contains("Bind"))
             {
                 return ParseBindExtensionMethod(propertyPath as LambdaExpression, default(TObj));

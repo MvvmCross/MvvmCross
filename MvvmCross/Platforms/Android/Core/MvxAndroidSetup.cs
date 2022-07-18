@@ -4,27 +4,27 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using Android.App;
 using Android.Content;
 using Android.Views;
-using MvvmCross.Converters;
-using MvvmCross.Exceptions;
-using MvvmCross.IoC;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Converters;
 using MvvmCross.Core;
+using MvvmCross.Exceptions;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Android.Binding;
 using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using MvvmCross.Presenters;
-using System.Linq;
-using Android.App;
 
 namespace MvvmCross.Platforms.Android.Core
 {

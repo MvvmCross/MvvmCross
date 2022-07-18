@@ -16,7 +16,7 @@ namespace Playground.Core.ViewModels
     {
         public MvxCommand<int> HeaderTappedCommand { get; }
 
-        public Page1ViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService) 
+        public Page1ViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
             HeaderTappedCommand = new MvxCommand<int>(DoHeaderTappedCommand);

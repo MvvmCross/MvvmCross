@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows10.0.19041.0</TargetFramework>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <RootNamespace>Playground.WinUi3</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -9,32 +9,12 @@
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
     <UseWinUI>true</UseWinUI>
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
-    <EnableDefaultPageItems>false</EnableDefaultPageItems>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Views\ChildView.xaml" />
-    <None Remove="Views\DialogView.xaml" />
-    <None Remove="Views\RootView.xaml" />
-    <None Remove="Views\SecondChildView.xaml" />
-    <None Remove="Views\SplitDetailView.xaml" />
-    <None Remove="Views\SplitMasterView.xaml" />
-    <None Remove="Views\SplitRootView.xaml" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
     <Manifest Include="$(ApplicationManifest)" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Include="Views\ChildView.xaml" />
-    <Page Include="Views\DialogView.xaml" />
-    <Page Include="Views\RootView.xaml" />
-    <Page Include="Views\SecondChildView.xaml" />
-    <Page Include="Views\SplitDetailView.xaml" />
-    <Page Include="Views\SplitMasterView.xaml" />
-    <Page Include="Views\SplitRootView.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +26,6 @@
        Tools extension to be activated for this project even if the Windows App SDK Nuget
        package has not yet been restored -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
-    <ProjectCapability Include="Msix"/>
+    <ProjectCapability Include="Msix" />
   </ItemGroup>
 </Project>

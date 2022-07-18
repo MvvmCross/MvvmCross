@@ -20,7 +20,7 @@ namespace MvvmCross.Platforms.Android.Views
         public virtual void OnCreate(Activity activity, Bundle eventArgs)
         {
             Interlocked.Increment(ref _createdActivityCount);
-            
+
             if (_createdActivityCount == 1)
             {
                 FireLifetimeChange(MvxLifetimeEvent.ActivatedFromDisk);

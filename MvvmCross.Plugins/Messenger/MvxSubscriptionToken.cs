@@ -8,7 +8,7 @@ namespace MvvmCross.Plugin.Messenger
 {
 #nullable enable
     [Preserve(AllMembers = true)]
-	public sealed class MvxSubscriptionToken
+    public sealed class MvxSubscriptionToken
         : IDisposable
     {
         public Guid Id { get; private set; }

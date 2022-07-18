@@ -1,9 +1,13 @@
 steps:
 - task: UseDotNet@2
-  displayName: 'Use .NET Core sdk'
+  displayName: 'Install .NET 6.0'
   inputs:
     packageType: sdk
-    version: 3.1.402
+    version: 6.0.x
+
+- pwsh: |
+    dotnet workload install android ios tvos macos maccatalyst
+  displayName: Install dotnet workloads
 
 - task: UseDotNet@2
   displayName: 'Install .NET 5.0'

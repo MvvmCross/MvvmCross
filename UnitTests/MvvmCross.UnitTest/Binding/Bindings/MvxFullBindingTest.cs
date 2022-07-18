@@ -30,7 +30,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         [Fact]
         public void TestTwoWayEventSubscription()
         {
-            var binding = TestSetupCommon(MvxBindingMode.TwoWay, 
+            var binding = TestSetupCommon(MvxBindingMode.TwoWay,
                 out MockSourceBinding mockSource, out MockTargetBinding mockTarget);
 
             TwoWayAssertions(binding, mockTarget, mockSource);
@@ -39,7 +39,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         [Fact]
         public void TestDefaultTwoWayEventSubscription()
         {
-            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.TwoWay, 
+            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.TwoWay,
                 out MockSourceBinding mockSource, out MockTargetBinding mockTarget);
 
             TwoWayAssertions(binding, mockTarget, mockSource);
@@ -117,7 +117,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         [Fact]
         public void TestDefaultOneWayEventSubscription()
         {
-            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWay, 
+            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWay,
                 out MockSourceBinding mockSource, out MockTargetBinding mockTarget);
 
             OneWayAssertions(binding, mockTarget, mockSource);
@@ -181,7 +181,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         [Fact]
         public void TestOneWayToSourceEventSubscription()
         {
-            var binding = TestSetupCommon(MvxBindingMode.OneWayToSource, 
+            var binding = TestSetupCommon(MvxBindingMode.OneWayToSource,
                 out MockSourceBinding mockSource, out MockTargetBinding mockTarget);
 
             OnWayToSourceAssertions(binding, mockTarget, mockSource);
@@ -190,7 +190,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         [Fact]
         public void TestDefaultOneWayToSourceEventSubscription()
         {
-            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWayToSource, 
+            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneWayToSource,
                 out MockSourceBinding mockSource, out MockTargetBinding mockTarget);
 
             OnWayToSourceAssertions(binding, mockTarget, mockSource);
@@ -261,7 +261,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         [Fact]
         public void TestDefaultOneTimeEventSubscription()
         {
-            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneTime, 
+            var binding = TestSetupCommon(MvxBindingMode.Default, MvxBindingMode.OneTime,
                 out MockSourceBinding mockSource, out MockTargetBinding mockTarget);
 
             OneTimeAssertions(binding, mockTarget, mockSource);
@@ -325,7 +325,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             return TestSetupCommon(mvxBindingMode, MvxBindingMode.Default, out mockSource, out mockTarget);
         }
 
-        private MvxFullBinding TestSetupCommon(MvxBindingMode mvxBindingMode, MvxBindingMode defaultMode, 
+        private MvxFullBinding TestSetupCommon(MvxBindingMode mvxBindingMode, MvxBindingMode defaultMode,
             out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
         {
             _fixture.ClearAll();

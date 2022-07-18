@@ -88,7 +88,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         public override void DidMoveToParentViewController(UIViewController parent)
         {
             base.DidMoveToParentViewController(parent);
-            if(parent == null)
+            if (parent == null)
             {
                 ViewModel?.ViewDestroy();
             }
@@ -101,7 +101,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         }
     }
 
-    public class MvxViewController<TViewModel> : MvxViewController, IMvxTvosView<TViewModel> 
+    public class MvxViewController<TViewModel> : MvxViewController, IMvxTvosView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public MvxViewController()

@@ -19,10 +19,10 @@ namespace MvvmCross.Binding.Combiners
             switch (list.Count)
             {
                 case 2:
-                    return TryEvaluateif (list[0], list[1], null, out value);
+                    return TryEvaluateif(list[0], list[1], null, out value);
 
                 case 3:
-                    return TryEvaluateif (list[0], list[1], list[2], out value);
+                    return TryEvaluateif(list[0], list[1], list[2], out value);
 
                 default:
                     MvxBindingLog.Warning("Unexpected substep count of {0} in 'If' ValueCombiner", list.Count);
@@ -30,7 +30,7 @@ namespace MvvmCross.Binding.Combiners
             }
         }
 
-        private bool TryEvaluateif (IMvxSourceStep testStep, IMvxSourceStep ifStep, IMvxSourceStep elseStep, out object value)
+        private bool TryEvaluateif(IMvxSourceStep testStep, IMvxSourceStep ifStep, IMvxSourceStep elseStep, out object value)
         {
             var result = testStep.GetValue();
             if (result == MvxBindingConstant.DoNothing)

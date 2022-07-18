@@ -45,7 +45,7 @@ namespace MvvmCross.ViewModels
         protected virtual Exception ReportBuildProblem(
             IEnumerable<KeyValuePair<Type, Type>> views, ArgumentException exception)
         {
-            var overSizedCounts = 
+            var overSizedCounts =
                 views.GroupBy(x => x.Key)
                 .Select(x => new { x.Key.Name, Count = x.Count(), ViewNames = x.Select(v => v.Value.Name).ToList() })
                 .Where(x => x.Count > 1)

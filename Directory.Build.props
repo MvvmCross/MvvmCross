@@ -1,4 +1,4 @@
-<Project>
+﻿<Project>
   <PropertyGroup>
     <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
     <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
@@ -16,10 +16,11 @@
     <RepositoryUrl>https://github.com/MvvmCross/MvvmCross</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <Version>7.0.0</Version>
+    <Version>8.1.0-net6.1</Version>
 
     <!--<Nullable>enable</Nullable>-->
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>true</ImplicitUsings>
     <NoWarn>$(NoWarn);1591;1701;1702;1705;VSX1000;CS0109;CS0108;CS0618;CS0114;NU1603</NoWarn>
     <Platform>AnyCPU</Platform>
 
@@ -49,11 +50,6 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-
   <ItemGroup Condition="'$(IsLibraryProject)' == 'true'">
     <None Include="$(MSBuildThisFileDirectory)\LICENSE" Pack="true" PackagePath="\" />
     <None Include="$(MSBuildThisFileDirectory)\icon.png" Pack="true" PackagePath="\" />
@@ -66,12 +62,11 @@
     <!-- <TargetsToBuild>iOS</TargetsToBuild> -->
     <!-- <TargetsToBuild>Tizen</TargetsToBuild> -->
     <!-- <TargetsToBuild>Mac</TargetsToBuild> -->
+    <!-- <TargetsToBuild>WinUi</TargetsToBuild> -->
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' != 'Debug' ">
     <TargetsToBuild>All</TargetsToBuild>
   </PropertyGroup>
-
-
 
 </Project>

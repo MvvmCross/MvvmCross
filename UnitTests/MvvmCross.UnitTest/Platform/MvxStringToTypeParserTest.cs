@@ -166,7 +166,7 @@ namespace MvvmCross.UnitTest.Platform
             yield return new object[] { "garbage", Guid.Empty };
             yield return new object[] { null, Guid.Empty };
         }
-        
+
 
         [Theory]
         [MemberData(nameof(GuidCases))]

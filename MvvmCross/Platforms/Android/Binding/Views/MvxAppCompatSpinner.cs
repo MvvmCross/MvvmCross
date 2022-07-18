@@ -7,8 +7,8 @@ using System.Collections;
 using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
-using AndroidX.AppCompat.Widget;
 using Android.Util;
+using AndroidX.AppCompat.Widget;
 using MvvmCross.Binding.Attributes;
 
 namespace MvvmCross.Platforms.Android.Binding.Views

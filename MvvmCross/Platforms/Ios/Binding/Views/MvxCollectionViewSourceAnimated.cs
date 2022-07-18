@@ -9,10 +9,10 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
-using MvvmCross.Logging;
-using MvvmCross.Binding.Extensions;
-using UIKit;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Binding.Extensions;
+using MvvmCross.Logging;
+using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
 {
@@ -56,7 +56,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
                 BeginInvokeOnMainThread(() => CollectionChangedOnCollectionChanged(sender, args));
                 return;
             }
-            
+
             var itemsSource = (ItemsSource as IEnumerable<object>)?.ToList();
             if (itemsSource == null)
                 throw new ArgumentException("ItemsSource must be convertible to IEnumerable<object>, as this code needs to take a snapshot of the list in order to be thread safe for the ios animations");

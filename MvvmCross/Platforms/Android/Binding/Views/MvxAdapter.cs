@@ -11,29 +11,29 @@ using Android.Content;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Exceptions;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.WeakSubscription;
-using Microsoft.Extensions.Logging;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platforms.Android.Binding.Views
 {
-	public class MvxAdapter
+    public class MvxAdapter
         : BaseAdapter
         , IMvxAdapter
-	{
-	    private static int[] SimpleItemTemplateIds { get; } =
-	    {
+    {
+        private static int[] SimpleItemTemplateIds { get; } =
+        {
             global::Android.Resource.Layout.SimpleListItem1,
-	        global::Android.Resource.Layout.SimpleSpinnerItem
-	    };
+            global::Android.Resource.Layout.SimpleSpinnerItem
+        };
 
-	    private int _itemTemplateId = global::Android.Resource.Layout.SimpleListItem1;
+        private int _itemTemplateId = global::Android.Resource.Layout.SimpleListItem1;
         private int _dropDownItemTemplateId = global::Android.Resource.Layout.SimpleSpinnerDropDownItem;
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
@@ -176,23 +176,23 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return position;
         }
 
-        public override View GetDropDownView(int position, View convertView, ViewGroup parent) 
+        public override View GetDropDownView(int position, View convertView, ViewGroup parent)
             => GetView(position, convertView, parent, DropDownItemTemplateId);
 
-        public override View GetView(int position, View convertView, ViewGroup parent) 
+        public override View GetView(int position, View convertView, ViewGroup parent)
             => GetView(position, convertView, parent, ItemTemplateId);
 
         protected virtual View GetView(int position, View convertView, ViewGroup parent, int templateId)
         {
             if (ItemsSource == null)
             {
-                MvxBindingLog.Error( "GetView called when ItemsSource is null");
+                MvxBindingLog.Error("GetView called when ItemsSource is null");
                 return null;
             }
 
             var source = GetRawItem(position);
 
-			return GetBindableView(convertView, source, parent, templateId);
+            return GetBindableView(convertView, source, parent, templateId);
         }
 
         protected virtual View GetBindableView(
@@ -211,7 +211,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 viewToUse = CreateBindableView(dataContext, parent, templateId);
                 viewToUse.Content.Tag = viewToUse as Object;
             }
-                
+
             BindBindableView(dataContext, viewToUse);
 
             return viewToUse.Content;// as View;
@@ -236,28 +236,28 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         }
     }
 
-	public class MvxAdapter<TItem> : MvxAdapter where TItem : class
-	{
-		public MvxAdapter(Context context) 
+    public class MvxAdapter<TItem> : MvxAdapter where TItem : class
+    {
+        public MvxAdapter(Context context)
             : base(context, MvxAndroidBindingContextHelpers.Current())
-		{
-		}
+        {
+        }
 
-		public MvxAdapter(Context context, IMvxAndroidBindingContext bindingContext) 
+        public MvxAdapter(Context context, IMvxAndroidBindingContext bindingContext)
             : base(context, bindingContext)
-		{
-		}
+        {
+        }
 
-		public MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer) 
+        public MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-		{
-		}
+        {
+        }
 
         [MvxSetToNullAfterBinding]
         public new IEnumerable<TItem> ItemsSource
-		{
-			get => base.ItemsSource as IEnumerable<TItem>;
-			set => base.ItemsSource = value;
-		}
-	}
+        {
+            get => base.ItemsSource as IEnumerable<TItem>;
+            set => base.ItemsSource = value;
+        }
+    }
 }

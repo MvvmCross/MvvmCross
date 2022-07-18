@@ -22,7 +22,7 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
         public override bool RequestMainThreadAction(Action action,
                                                     bool maskExceptions = true)
         {
-            return _callback(()=>ExceptionMaskedAction(action, maskExceptions));
+            return _callback(() => ExceptionMaskedAction(action, maskExceptions));
         }
     }
 }

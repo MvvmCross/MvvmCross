@@ -18,7 +18,7 @@ namespace MvvmCross.Tests
 
         public bool HasCalledRaisePropertyChangedFor(object item)
         {
-            if(item != null && items.Any() && items.ContainsKey(item))
+            if (item != null && items.Any() && items.ContainsKey(item))
             {
                 return items[item] > 0;
             }
