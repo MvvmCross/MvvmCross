@@ -20,7 +20,7 @@
 
 This package contains the 'Core' libraries for MvvmCross</Description>
     <PackageId>MvvmCross</PackageId>
-    <GenerateLibraryLayout Condition="$(TargetFramework.StartsWith('uap'))">true</GenerateLibraryLayout>
+    <GenerateLibraryLayout Condition=" $(TargetFramework.StartsWith('uap')) or $(TargetFramework.StartsWith('net6.0-windows')) ">true</GenerateLibraryLayout>
   </PropertyGroup>
 
   <ItemGroup>
