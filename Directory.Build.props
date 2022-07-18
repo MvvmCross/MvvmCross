@@ -62,6 +62,7 @@
     <!-- <TargetsToBuild>iOS</TargetsToBuild> -->
     <!-- <TargetsToBuild>Tizen</TargetsToBuild> -->
     <!-- <TargetsToBuild>Mac</TargetsToBuild> -->
+    <!-- <TargetsToBuild>WinUi</TargetsToBuild> -->
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' != 'Debug' ">
