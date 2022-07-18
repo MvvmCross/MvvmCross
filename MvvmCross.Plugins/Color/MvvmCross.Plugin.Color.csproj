@@ -52,11 +52,6 @@ This package contains the 'Color' plugin for MvvmCross</Description>
     <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-android')) ">
-    <Compile Include="Platforms\Android\**\*.cs" />
-    <Compile Include="Platforms\Xamarin\**\*.cs" />
-  </ItemGroup>
-
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-windows')) ">
     <Compile Include="Platforms\WinUi\**\*.cs" />
 
