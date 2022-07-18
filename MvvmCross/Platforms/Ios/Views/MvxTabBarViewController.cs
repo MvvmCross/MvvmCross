@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Foundation;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.ViewModels;
@@ -230,8 +231,8 @@ namespace MvvmCross.Platforms.Ios.Views
         }
     }
 
-    public class MvxTabBarViewController<TViewModel> : MvxTabBarViewController
-        where TViewModel : IMvxViewModel
+    public class MvxTabBarViewController<TViewModel> : MvxTabBarViewController, IMvxIosView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
         public MvxTabBarViewController()
         {
@@ -257,6 +258,11 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxIosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxIosView<TViewModel>, TViewModel>();
         }
     }
 }

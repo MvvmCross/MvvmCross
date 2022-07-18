@@ -13,7 +13,7 @@ using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 namespace MvvmCross.Plugin.FieldBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxFieldSourceBindingFactoryExtension
+    public class MvxFieldSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
         public bool TryCreateBinding(object source, MvxPropertyToken currentToken,

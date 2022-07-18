@@ -1,12 +1,12 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Reflection;
 using Android.Widget;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding;
+using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             var seekBar = View;
             if (seekBar == null)
             {
-                MvxBindingLog.Error( "Error - SeekBar is null in MvxSeekBarProgressTargetBinding");
+                MvxBindingLog.Error("Error - SeekBar is null in MvxSeekBarProgressTargetBinding");
                 return;
             }
 

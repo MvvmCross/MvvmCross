@@ -4,12 +4,12 @@
 
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Core;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Mac.Views
 {

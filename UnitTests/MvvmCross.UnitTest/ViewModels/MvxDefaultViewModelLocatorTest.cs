@@ -43,7 +43,7 @@ namespace MvvmCross.UnitTest.ViewModels
                 TheInt1 = 123,
                 TheInt2 = 456,
                 TheString1 = "Hello World",
-                TheString2 = null
+                TheString2 = string.Empty
             };
             var bundle = new MvxBundle();
             bundle.Write(testObject);
@@ -88,7 +88,7 @@ namespace MvvmCross.UnitTest.ViewModels
                 TheInt1 = 123,
                 TheInt2 = 456,
                 TheString1 = "Hello World",
-                TheString2 = null
+                TheString2 = string.Empty
             };
             var initBundle = new MvxBundle();
             initBundle.Write(initBundleObject);
@@ -102,7 +102,7 @@ namespace MvvmCross.UnitTest.ViewModels
                 TheInt1 = 1234,
                 TheInt2 = 4567,
                 TheString1 = "Foo Bar",
-                TheString2 = null
+                TheString2 = string.Empty
             };
             var reloadBundle = new MvxBundle();
             reloadBundle.Write(reloadBundleObject);

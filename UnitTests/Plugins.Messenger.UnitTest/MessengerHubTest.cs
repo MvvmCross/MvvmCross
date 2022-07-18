@@ -129,7 +129,8 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         [Fact]
         public void NullSenderCausesException()
         {
-            Assert.Throws<ArgumentNullException>(() => {
+            Assert.Throws<ArgumentNullException>(() =>
+            {
                 var message = new TestMessage(null);
             });
         }
@@ -138,7 +139,8 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         public void NullSubscribeCausesException()
         {
             var messenger = new MvxMessengerHub();
-            Assert.Throws<ArgumentNullException>(() => {
+            Assert.Throws<ArgumentNullException>(() =>
+            {
                 messenger.Subscribe<TestMessage>(null);
             });
         }
@@ -160,7 +162,8 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         public void NullPublishCausesException()
         {
             var messenger = new MvxMessengerHub();
-            Assert.Throws<ArgumentNullException>(() => {
+            Assert.Throws<ArgumentNullException>(() =>
+            {
                 messenger.Publish<TestMessage>(null);
             });
         }

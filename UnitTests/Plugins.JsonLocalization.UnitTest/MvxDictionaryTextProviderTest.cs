@@ -26,7 +26,7 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
 
             var actual = textProvider.GetText(
                 TestDictionaryTextProvider.LocalizationNamespace,
-                TestDictionaryTextProvider.TypeKey, 
+                TestDictionaryTextProvider.TypeKey,
                 "DummyKey");
 
             Assert.Equal(expected, actual);
@@ -64,7 +64,7 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
         public void GetTextWithNonExistingValueThrowsKeyNotFoundExceptionWhenNotMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
-            
+
             Assert.Throws<KeyNotFoundException>(() => textProvider.GetText(
                 TestDictionaryTextProvider.LocalizationNamespace,
                 TestDictionaryTextProvider.TypeKey,
@@ -114,7 +114,7 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
             var expected = $"{TestDictionaryTextProvider.LocalizationNamespace}|{TestDictionaryTextProvider.TypeKey}|NonExistingKey";
 
             string actual;
-            textProvider.TryGetText(out actual, 
+            textProvider.TryGetText(out actual,
                 TestDictionaryTextProvider.LocalizationNamespace,
                 TestDictionaryTextProvider.TypeKey, "NonExistingKey");
 

@@ -16,6 +16,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
     {
         public event EventHandler SelectedItemChanged;
 
+        private readonly WeakReference<UICollectionView> _collectionView;
         private object _selectedItem;
 
         public static readonly NSString UnknownCellIdentifier = NSString.Empty;
@@ -30,12 +31,23 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         protected MvxBaseCollectionViewSource(UICollectionView collectionView,
                                               NSString cellIdentifier)
         {
-            CollectionView = collectionView;
+            _collectionView = new WeakReference<UICollectionView>(collectionView);
             DefaultCellIdentifier = cellIdentifier;
         }
 
-        [field: Weak]
-        protected UICollectionView CollectionView { get; }
+        protected UICollectionView CollectionView
+        {
+            get
+            {
+                if (_collectionView.TryGetTarget(out var collectionView))
+                    return collectionView;
+
+                // This is not a array Sonar. You are drunk...
+#pragma warning disable S1168 // Empty arrays and collections should be returned instead of null
+                return null;
+#pragma warning restore S1168 // Empty arrays and collections should be returned instead of null
+            }
+        }
 
         public ICommand SelectionChangedCommand { get; set; }
 

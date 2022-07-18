@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,10 +9,10 @@ using Android.Content;
 using Android.Content.Res;
 using Android.Util;
 using Android.Views;
-using MvvmCross.Exceptions;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
+using MvvmCross.Exceptions;
 using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders
@@ -69,7 +69,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingLog.Error( "Exception thrown during the view binding {0}",
+                MvxBindingLog.Error("Exception thrown during the view binding {0}",
                                       exception.ToLongString());
             }
         }
@@ -92,7 +92,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingLog.Error( "Exception thrown during the view language binding {0}",
+                MvxBindingLog.Error("Exception thrown during the view language binding {0}",
                                       exception.ToLongString());
                 throw;
             }

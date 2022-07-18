@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <AssemblyName>MvvmCross.Plugins.JsonLocalization.UnitTest</AssemblyName>
     <RootNamespace>MvvmCross.Plugins.JsonLocalization.UnitTest</RootNamespace>

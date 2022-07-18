@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -25,7 +25,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
         {
             if (control == null)
             {
-                MvxBindingLog.Error( "Error - UIControl is null in MvxUIBarButtonItemTargetBinding");
+                MvxBindingLog.Error("Error - UIControl is null in MvxUIBarButtonItemTargetBinding");
             }
             else
             {
@@ -34,7 +34,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             _canExecuteEventHandler = OnCanExecuteChanged;
         }
 
-        public override Type TargetType => typeof(ICommand);
+        public override Type TargetValueType => typeof(ICommand);
 
         protected override void SetValueImpl(object target, object value)
         {

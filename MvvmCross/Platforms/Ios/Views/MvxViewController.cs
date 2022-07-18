@@ -62,28 +62,28 @@ namespace MvvmCross.Platforms.Ios.Views
         }
 
         public override void ViewWillAppear(bool animated)
-		{
-			base.ViewWillAppear(animated);
-			ViewModel?.ViewAppearing();
-		}
+        {
+            base.ViewWillAppear(animated);
+            ViewModel?.ViewAppearing();
+        }
 
-		public override void ViewDidAppear(bool animated)
-		{
-			base.ViewDidAppear(animated);
-			ViewModel?.ViewAppeared();
-		}
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+            ViewModel?.ViewAppeared();
+        }
 
-		public override void ViewWillDisappear(bool animated)
-		{
-			base.ViewWillDisappear(animated);
-			ViewModel?.ViewDisappearing();
-		}
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+            ViewModel?.ViewDisappearing();
+        }
 
-		public override void ViewDidDisappear(bool animated)
-		{
-			base.ViewDidDisappear(animated);
-			ViewModel?.ViewDisappeared();
-		}
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+            ViewModel?.ViewDisappeared();
+        }
 
         public override void DidMoveToParentViewController(UIViewController parent)
         {
@@ -92,13 +92,14 @@ namespace MvvmCross.Platforms.Ios.Views
                 ViewModel?.ViewDestroy();
         }
 
-        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender) {
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        {
             base.PrepareForSegue(segue, sender);
             this.ViewModelRequestForSegue(segue, sender);
         }
     }
 
-    public class MvxViewController<TViewModel> : MvxViewController, IMvxIosView<TViewModel> 
+    public class MvxViewController<TViewModel> : MvxViewController, IMvxIosView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public MvxViewController()

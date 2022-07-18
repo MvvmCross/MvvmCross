@@ -13,7 +13,7 @@ namespace MvvmCross.Core
 #nullable enable
     public static class MvxSetupExtensions
     {
-        public static void RegisterSetupType<TMvxSetup>(this object platformApplication,  params Assembly[] assemblies)
+        public static void RegisterSetupType<TMvxSetup>(this object platformApplication, params Assembly[] assemblies)
             where TMvxSetup : MvxSetup, new()
         {
             if (platformApplication == null)

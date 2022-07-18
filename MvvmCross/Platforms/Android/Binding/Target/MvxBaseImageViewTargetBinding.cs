@@ -5,9 +5,9 @@
 using System;
 using Android.Graphics;
 using Android.Widget;
-using MvvmCross.Logging;
-using MvvmCross.Binding;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Binding;
+using MvvmCross.Logging;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
 {

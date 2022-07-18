@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -37,7 +37,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             var segmentedControl = View;
             if (segmentedControl == null)
             {
-                MvxBindingLog.Error( "Error - NSSegmentedControl is null in MvxNSSegmentedControlSelectedSegmentTargetBinding");
+                MvxBindingLog.Error("Error - NSSegmentedControl is null in MvxNSSegmentedControlSelectedSegmentTargetBinding");
                 return;
             }
 
@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             var view = target as NSSegmentedControl;
             if (view == null)
                 return;
-            
+
             view.SelectSegment((int)value);
         }
 

@@ -5,9 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using MvvmCross.Logging;
-using MvvmCross.Binding.Bindings;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Logging;
 
 namespace MvvmCross.Platforms.Wpf.Binding
 {

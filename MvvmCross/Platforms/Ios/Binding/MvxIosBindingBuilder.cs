@@ -3,11 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Converters;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Converters;
 using MvvmCross.Platforms.Ios.Binding.Target;
 using MvvmCross.Platforms.Ios.Binding.ValueConverters;
 using MvvmCross.Platforms.Ios.Binding.Views;
@@ -48,7 +48,7 @@ namespace MvvmCross.Platforms.Ios.Binding
             registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_TouchDownRepeat,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDownRepeat));
-            
+
             registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_TouchDragInside,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDragInside));
@@ -88,7 +88,7 @@ namespace MvvmCross.Platforms.Ios.Binding
             registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_AllEditingEvents,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllEditingEvents));
-            
+
             registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_AllEvents,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllEvents));
@@ -99,7 +99,7 @@ namespace MvvmCross.Platforms.Ios.Binding
 
             registry.RegisterCustomBindingFactory<UIView>(
                 MvxIosPropertyBinding.UIView_Visible,
-                view =>   new MvxUIViewVisibleTargetBinding(view));
+                view => new MvxUIViewVisibleTargetBinding(view));
 
             registry.RegisterCustomBindingFactory<UIActivityIndicatorView>(
                 MvxIosPropertyBinding.UIActivityIndicatorView_Hidden,

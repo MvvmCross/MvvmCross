@@ -8,7 +8,7 @@ using MvvmCross.Binding.Extensions;
 namespace MvvmCross.Plugin.FieldBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxLeafNotifyChangeFieldSourceBinding
+    public class MvxLeafNotifyChangeFieldSourceBinding
         : MvxNotifyChangeFieldSourceBinding
     {
         public MvxLeafNotifyChangeFieldSourceBinding(object source, INotifyChange notifyChange)

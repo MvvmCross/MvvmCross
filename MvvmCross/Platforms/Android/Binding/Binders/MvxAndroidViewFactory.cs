@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,8 +7,8 @@ using System.Threading;
 using Android.Content;
 using Android.Util;
 using Android.Views;
-using MvvmCross.Exceptions;
 using MvvmCross.Binding;
+using MvvmCross.Exceptions;
 using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders
@@ -37,7 +37,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
                 var view = Activator.CreateInstance(viewType, context, attrs) as View;
                 if (view == null)
                 {
-                    MvxBindingLog.Error( "Unable to load view {0} from type {1}", name,
+                    MvxBindingLog.Error("Unable to load view {0} from type {1}", name,
                                           viewType.FullName ?? string.Empty);
                 }
                 return view;

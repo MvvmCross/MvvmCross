@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows.Input;
 using Android.Views;
 using MvvmCross.Binding;
@@ -30,7 +30,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             _command.Execute(e.HasFocus);
         }
 
-        public override Type TargetType => typeof(ICommand);
+        public override Type TargetValueType => typeof(ICommand);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
@@ -38,7 +38,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
         {
             _command = value as ICommand;
         }
-        
+
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)

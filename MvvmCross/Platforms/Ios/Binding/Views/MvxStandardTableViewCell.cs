@@ -41,7 +41,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
         }
-        
+
         public string TitleText
         {
             get { return TextLabel.Text; }
@@ -53,7 +53,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             get { return DetailTextLabel.Text; }
             set { DetailTextLabel.Text = value; }
         }
-       
+
         public ICommand SelectedCommand { get; set; }
 
         private bool _isSelected;

@@ -8,9 +8,9 @@ using System.Collections.Specialized;
 using System.Threading;
 using Android.Content;
 using Android.Runtime;
-using AndroidX.AppCompat.Widget;
 using Android.Util;
 using Android.Widget;
+using AndroidX.AppCompat.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
@@ -53,7 +53,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             //var li = (args.Child as MvxListItemView);
             var radioButton = args.Child as AppCompatRadioButton;
-            
+
             // radio buttons require an id so that they get un-checked correctly
             if (radioButton?.Id == NoId)
             {
@@ -127,7 +127,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private static new int GenerateViewId()
         {
-            for (;;)
+            for (; ; )
             {
                 int result = (int)Interlocked.Read(ref _nextGeneratedViewId);
 

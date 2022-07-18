@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace MvvmCross.Plugin.Json
 {
     [Preserve(AllMembers = true)]
-	public class MvxJsonConverter 
+    public class MvxJsonConverter
         : IMvxJsonConverter
     {
         private static readonly JsonSerializerSettings Settings;
@@ -46,7 +46,7 @@ namespace MvvmCross.Plugin.Json
 
         public T DeserializeObject<T>(Stream stream)
         {
-			var serializer = JsonSerializer.Create(Settings);
+            var serializer = JsonSerializer.Create(Settings);
 
             using (var sr = new StreamReader(stream))
             using (var jsonTextReader = new JsonTextReader(sr))

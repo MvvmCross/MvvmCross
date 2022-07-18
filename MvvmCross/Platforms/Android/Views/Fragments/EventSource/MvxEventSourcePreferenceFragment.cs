@@ -41,12 +41,12 @@ namespace MvvmCross.Platforms.Android.Views.Fragments.EventSource
         {
         }
 
-		public override void OnAttach(Context context)
-		{
-			AttachCalled.Raise(this, context);
+        public override void OnAttach(Context context)
+        {
+            AttachCalled.Raise(this, context);
 
-			base.OnAttach(context);
-		}
+            base.OnAttach(context);
+        }
 
         public override void OnCreate(Bundle savedInstanceState)
         {

@@ -14,7 +14,7 @@ using MvvmCross.Converters;
 namespace MvvmCross.Plugin.FieldBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxChainedFieldSourceBinding
+    public class MvxChainedFieldSourceBinding
         : MvxFieldSourceBinding
     {
         private readonly IList<MvxPropertyToken> _childTokens;

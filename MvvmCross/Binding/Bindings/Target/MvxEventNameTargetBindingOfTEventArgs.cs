@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Bindings.Target
             _eventSubscription = target.WeakSubscribe<TTarget, TEventArgs>(targetEventName, HandleEvent);
         }
 
-        public override Type TargetType { get; } = typeof(ICommand);
+        public override Type TargetValueType { get; } = typeof(ICommand);
 
         public override MvxBindingMode DefaultMode { get; } = MvxBindingMode.OneWay;
 

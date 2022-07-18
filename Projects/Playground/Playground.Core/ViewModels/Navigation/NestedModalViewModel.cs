@@ -11,7 +11,7 @@ namespace Playground.Core.ViewModels
 {
     public class NestedModalViewModel : MvxNavigationViewModel
     {
-        public NestedModalViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService) 
+        public NestedModalViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService)
             : base(logFactory, navigationService)
         {
             CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));

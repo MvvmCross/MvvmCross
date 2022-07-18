@@ -11,7 +11,7 @@ using MvvmCross.Binding.Bindings.Source;
 namespace MvvmCross.Plugin.MethodBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxMethodSourceBinding
+    public class MvxMethodSourceBinding
         : MvxSourceBinding, ICommand
     {
         private readonly MethodInfo _methodInfo;

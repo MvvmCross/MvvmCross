@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using AndroidX.Preference;
 using Android.Views;
 using Android.Webkit;
 using Android.Widget;
+using AndroidX.Preference;
 using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
@@ -16,8 +16,8 @@ using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 using MvvmCross.Platforms.Android.Binding.Target;
 using MvvmCross.Platforms.Android.Binding.Views;
-using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 using AppCompatSearchView = AndroidX.AppCompat.Widget.SearchView;
+using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace MvvmCross.Platforms.Android.Binding
 {
@@ -123,7 +123,7 @@ namespace MvvmCross.Platforms.Android.Binding
                 MvxAndroidPropertyBinding.NumberPicker_Value);
 
             registry.RegisterCustomBindingFactory<NumberPicker>(
-                MvxAndroidPropertyBinding.NumberPicker_DisplayedValues, 
+                MvxAndroidPropertyBinding.NumberPicker_DisplayedValues,
                 view => new MvxNumberPickerDisplayedValuesTargetBinding(view));
 
             registry.RegisterCustomBindingFactory<View>(
@@ -221,7 +221,7 @@ namespace MvvmCross.Platforms.Android.Binding
                 MvxAndroidPropertyBinding.View_MarginEnd
             };
 
-            foreach(var margin in allMargins)
+            foreach (var margin in allMargins)
             {
                 registry.RegisterCustomBindingFactory<View>(
                     margin, view => new MvxViewMarginTargetBinding(view, margin));

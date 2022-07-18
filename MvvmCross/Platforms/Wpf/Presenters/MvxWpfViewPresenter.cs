@@ -5,16 +5,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Wpf.Presenters.Attributes;
 using MvvmCross.Platforms.Wpf.Views;
-using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Wpf.Presenters
 {
@@ -202,7 +202,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
                 return Task.FromResult(true);
             }
 
-            return Task.FromResult(false); 
+            return Task.FromResult(false);
         }
 
         protected virtual Task<bool> CloseContentView(IMvxViewModel toClose)

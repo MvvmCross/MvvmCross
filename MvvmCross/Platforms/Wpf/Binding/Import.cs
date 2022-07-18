@@ -1,12 +1,12 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System.Reflection;
 using MvvmCross.Base;
+using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
 using MvvmCross.IoC;
-using MvvmCross.Binding.Combiners;
 
 namespace MvvmCross.Platforms.Wpf.Binding
 {

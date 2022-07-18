@@ -3,16 +3,16 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Windows.UI.Xaml;
 using MvvmCross.Base;
-using MvvmCross.Converters;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
+using MvvmCross.Converters;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Uap.Binding.MvxBinding;
 using MvvmCross.Platforms.Uap.Binding.MvxBinding.Target;
-using MvvmCross.IoC;
+using Windows.UI.Xaml;
 
 namespace MvvmCross.Platforms.Uap.Binding
 {

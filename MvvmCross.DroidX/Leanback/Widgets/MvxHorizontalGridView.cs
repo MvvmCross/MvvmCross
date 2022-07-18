@@ -7,14 +7,14 @@ using System.Collections;
 using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
-using AndroidX.Leanback.Widget;
 using Android.Util;
+using AndroidX.Leanback.Widget;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.DroidX.Leanback.Listeners;
 using MvvmCross.DroidX.RecyclerView;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.Views;
-using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.DroidX.Leanback.Widgets
 {

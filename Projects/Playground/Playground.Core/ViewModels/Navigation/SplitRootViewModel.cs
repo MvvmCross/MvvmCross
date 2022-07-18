@@ -25,7 +25,8 @@ namespace Playground.Core.ViewModels
 
         public override void ViewAppeared()
         {
-            MvxNotifyTask.Create(async () => {
+            MvxNotifyTask.Create(async () =>
+            {
                 await ShowInitialViewModel();
                 await ShowDetailViewModel();
             });

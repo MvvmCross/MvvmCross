@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Xunit;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using MvvmCross.Converters;
+using Xunit;
 
 namespace MvvmCross.UnitTest.Base.Converters
 {

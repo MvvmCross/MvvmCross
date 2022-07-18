@@ -17,7 +17,7 @@ namespace Playground.Core.ViewModels.Bindings
 
         private string _hello = "Hello MvvmCross";
 
-        public CustomBindingViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService) 
+        public CustomBindingViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService)
             : base(logFactory, navigationService)
         {
         }

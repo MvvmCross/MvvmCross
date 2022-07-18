@@ -17,7 +17,7 @@ namespace MvvmCross.Plugin.Messenger
     // - https://github.com/jonathanpeppers/XPlatUtils
     // - inspiration consumed, ripped apart and loved under Ms-PL
     [Preserve(AllMembers = true)]
-	public class MvxMessengerHub : IMvxMessenger
+    public class MvxMessengerHub : IMvxMessenger
     {
         private readonly Dictionary<Type, MvxMessage> _messageDictionary = new Dictionary<Type, MvxMessage>();
 

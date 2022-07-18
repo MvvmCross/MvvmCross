@@ -1,12 +1,12 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using Android.Widget;
 using MvvmCross.Binding;
-using MvvmCross.Platforms.Android.WeakSubscription;
 using MvvmCross.Platforms.Android.Binding.Views;
+using MvvmCross.Platforms.Android.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
 {
@@ -66,7 +66,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             _subscription = listView.WeakSubscribe<ListView, AdapterView.ItemClickEventArgs>(nameof(listView.ItemClick), OnItemClick);
         }
 
-        public override Type TargetType => typeof(object);
+        public override Type TargetValueType => typeof(object);
 
         protected override void Dispose(bool isDisposing)
         {

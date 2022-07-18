@@ -122,16 +122,16 @@ namespace MvvmCross.Platforms.Android.Binding
 
         public static string BindMarginEnd(this View view)
             => MvxAndroidPropertyBinding.View_MarginEnd;
-        
+
         public static string BindFocus(this View view)
             => MvxAndroidPropertyBinding.View_Focus;
-        
+
         public static string BindVideoUri(this VideoView view)
             => MvxAndroidPropertyBinding.VideoView_Uri;
-        
+
         public static string BindWebViewUri(this WebView view)
             => MvxAndroidPropertyBinding.WebView_Uri;
-        
+
         public static string BindWebViewHtml(this WebView view)
             => MvxAndroidPropertyBinding.WebView_Html;
     }

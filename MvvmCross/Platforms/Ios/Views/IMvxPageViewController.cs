@@ -12,6 +12,6 @@ namespace MvvmCross.Platforms.Ios.Views
     {
         void AddPage(UIViewController viewController, MvxPagePresentationAttribute attribute);
 
-        bool RemovePage (IMvxViewModel viewModel);
+        bool RemovePage(IMvxViewModel viewModel);
     }
 }

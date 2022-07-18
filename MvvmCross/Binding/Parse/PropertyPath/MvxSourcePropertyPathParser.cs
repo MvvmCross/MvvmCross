@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,21 +13,19 @@ namespace MvvmCross.Binding.Parse.PropertyPath
     /// </summary>
     public class MvxSourcePropertyPathParser : IMvxSourcePropertyPathParser
     {
-        private static readonly ConcurrentDictionary<int, IList<MvxPropertyToken>> ParseCache = 
-            new ConcurrentDictionary<int, IList<MvxPropertyToken>>();
+        private static readonly ConcurrentDictionary<string, IList<MvxPropertyToken>> ParseCache =
+            new ConcurrentDictionary<string, IList<MvxPropertyToken>>();
 
         public IList<MvxPropertyToken> Parse(string textToParse)
         {
             textToParse = MvxPropertyPathParser.MakeSafe(textToParse);
-            var hash = textToParse.GetHashCode();
-            IList<MvxPropertyToken> list;
-            if (ParseCache.TryGetValue(hash, out list))
-                return list;
+            if (ParseCache.TryGetValue(textToParse, out var cachedItem))
+                return cachedItem;
 
             var parser = new MvxPropertyPathParser();
             var currentTokens = parser.Parse(textToParse);
 
-            ParseCache.TryAdd(hash, currentTokens);
+            ParseCache.TryAdd(textToParse, currentTokens);
             return currentTokens;
         }
     }

@@ -187,7 +187,7 @@ namespace MvvmCross.Core
                 {
                     _setup.InitializeSecondary();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     setupException = ExceptionDispatchInfo.Capture(ex);
                 }

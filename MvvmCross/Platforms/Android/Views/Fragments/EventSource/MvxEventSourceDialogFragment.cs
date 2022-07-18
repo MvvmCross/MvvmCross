@@ -55,7 +55,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments.EventSource
 
         public override void OnAttach(Context context)
         {
-			AttachCalled.Raise(this, context);
+            AttachCalled.Raise(this, context);
 
             base.OnAttach(context);
         }

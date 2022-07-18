@@ -32,7 +32,7 @@ namespace MvvmCross.Base
                     if (!maskExceptions)
                         throw;
                 }
-                
+
                 return Task.CompletedTask;
             }
 

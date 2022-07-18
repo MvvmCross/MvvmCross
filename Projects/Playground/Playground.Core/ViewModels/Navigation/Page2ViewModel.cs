@@ -10,7 +10,7 @@ namespace Playground.Core.ViewModels
 {
     public class Page2ViewModel : MvxNavigationViewModel
     {
-        public Page2ViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService) 
+        public Page2ViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
         }
