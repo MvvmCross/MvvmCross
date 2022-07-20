@@ -50,6 +50,16 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
+  <!--
+    For Version 1.1 of Windows App SDK there is known issue with building
+      WinUI 3 library that results in error if the property EnableMsixTooling
+      is not set. This is set here since the base MvvmCross assembly and plugins
+      will need this property set.
+   -->
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('net6.0-windows')) ">
+    <EnableMsixTooling>true</EnableMsixTooling>
+  </PropertyGroup>
+
   <ItemGroup Condition="'$(IsLibraryProject)' == 'true'">
     <None Include="$(MSBuildThisFileDirectory)\LICENSE" Pack="true" PackagePath="\" />
     <None Include="$(MSBuildThisFileDirectory)\icon.png" Pack="true" PackagePath="\" />
