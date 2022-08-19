@@ -23,7 +23,7 @@
     <PackageVersion Include="Roslynator.Analyzers" Version="4.1.1" />
     <PackageVersion Include="AsyncFixer" Version="1.6.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.36.0.43782" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.44.0.52574" />
     <PackageVersion Include="SourceLink.Create.CommandLine" Version="2.8.3" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
