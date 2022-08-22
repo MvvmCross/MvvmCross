@@ -91,11 +91,14 @@ public IMvxInteraction<YesNoQuestion> Interaction
     get => _interaction;
     set
     {
-        if (_interaction != null)
-            _interaction.Requested -= OnInteractionRequested;
+        if (value != null)
+        {
+            if (_interaction != null)
+                _interaction.Requested -= OnInteractionRequested;
             
-        _interaction = value;
-        _interaction.Requested += OnInteractionRequested;
+            _interaction = value;
+            _interaction.Requested += OnInteractionRequested;
+        }
     }
 }
 ```
