@@ -17,7 +17,7 @@
     <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="117.6.0.2" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="119.0.1.1" />
     <PackageVersion Include="Microsoft.CodeAnalysis" Version="4.2.0" />
-    <PackageVersion Include="Xamarin.Build.Download" Version="0.11.2" />
+    <PackageVersion Include="Xamarin.Build.Download" Version="0.11.3" />
     <PackageVersion Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.2478" />
     <PackageVersion Include="Xamarin.Forms" Version="5.0.0.2478" />
     <PackageVersion Include="Roslynator.Analyzers" Version="4.1.1" />
