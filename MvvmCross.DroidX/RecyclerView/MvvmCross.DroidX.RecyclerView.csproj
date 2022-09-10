@@ -23,5 +23,4 @@ This package contains AndroidX RecyclerView support for MvvmCross.</Description>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\XamarinBuild.targets" />
 </Project>

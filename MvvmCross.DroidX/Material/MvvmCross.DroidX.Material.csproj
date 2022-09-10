@@ -23,6 +23,4 @@ This package contains Support v7 Design support for MvvmCross.</Description>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
-
-  <Import Project="..\..\XamarinBuild.targets" />
 </Project>

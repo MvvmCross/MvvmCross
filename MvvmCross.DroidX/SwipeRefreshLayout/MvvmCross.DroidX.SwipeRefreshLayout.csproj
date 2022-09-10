@@ -23,5 +23,4 @@ This package contains Support Core UI support for MvvmCross.</Description>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\XamarinBuild.targets" />
 </Project>

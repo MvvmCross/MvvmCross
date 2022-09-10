@@ -26,7 +26,6 @@
 
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('MvvmCross'))</IsLibraryProject>
-    <IsXamarinForms>$(MSBuildProjectName.Contains('.Forms'))</IsXamarinForms>
 
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
@@ -64,19 +63,5 @@
     <None Include="$(MSBuildThisFileDirectory)\LICENSE" Pack="true" PackagePath="\" />
     <None Include="$(MSBuildThisFileDirectory)\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <TargetsToBuild>All</TargetsToBuild>
-    <!--<TargetsToBuild>Android</TargetsToBuild>-->
-    <!-- <TargetsToBuild>Uap</TargetsToBuild> -->
-    <!-- <TargetsToBuild>iOS</TargetsToBuild> -->
-    <!-- <TargetsToBuild>Tizen</TargetsToBuild> -->
-    <!-- <TargetsToBuild>Mac</TargetsToBuild> -->
-    <!-- <TargetsToBuild>WinUi</TargetsToBuild> -->
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' != 'Debug' ">
-    <TargetsToBuild>All</TargetsToBuild>
-  </PropertyGroup>
 
 </Project>

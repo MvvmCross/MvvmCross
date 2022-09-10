@@ -22,6 +22,4 @@
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
   </ItemGroup>
-
-  <Import Project="..\..\..\XamarinBuild.targets" />
 </Project>
