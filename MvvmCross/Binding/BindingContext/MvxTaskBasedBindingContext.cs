@@ -2,10 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 
@@ -16,9 +12,9 @@ namespace MvvmCross.Binding.BindingContext
     /// </summary>
     public class MvxTaskBasedBindingContext : IMvxBindingContext, IDisposable
     {
-        private readonly List<Action> _delayedActions = new List<Action>();
-        private readonly List<MvxBindingContext.TargetAndBinding> _directBindings = new List<MvxBindingContext.TargetAndBinding>();
-        private readonly List<KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>> _viewBindings = new List<KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>>();
+        private readonly List<Action> _delayedActions = new();
+        private readonly List<MvxBindingContext.TargetAndBinding> _directBindings = new();
+        private readonly List<KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>> _viewBindings = new();
         private object _dataContext;
         private IMvxBinder _binder;
 
@@ -82,7 +78,7 @@ namespace MvvmCross.Binding.BindingContext
         {
             get
             {
-                _binder = _binder ?? Mvx.IoCProvider.Resolve<IMvxBinder>();
+                _binder ??= Mvx.IoCProvider.Resolve<IMvxBinder>();
                 return _binder;
             }
         }
@@ -106,7 +102,7 @@ namespace MvvmCross.Binding.BindingContext
 
         /// <summary>
         /// Must be called on main thread as it creates the target bindings, and creating target bindings might subscribe to events that
-        /// needs to be done on main thread (like touchupinside). 
+        /// needs to be done on main thread (like TouchUpInside).
         /// If the code is run in Synchronous mode there will be a performance hit, there are however some use-cases(iOS automatic resizing cells).
         /// </summary>
         protected virtual void OnDataContextChange()
