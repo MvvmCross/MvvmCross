@@ -4,7 +4,7 @@
     <PackageVersion Include="Xamarin.AndroidX.CardView" Version="1.0.0.16" />
     <PackageVersion Include="Xamarin.AndroidX.Leanback" Version="1.0.0.12" />
     <PackageVersion Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.7" />
-    <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.4.2.1" />
+    <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.5.0" />
     <PackageVersion Include="Xamarin.AndroidX.Fragment" Version="1.4.1.2" />
     <PackageVersion Include="Xamarin.AndroidX.ViewPager" Version="1.0.0.14" />
     <PackageVersion Include="Xamarin.AndroidX.Preference" Version="1.2.0.2" />
@@ -17,9 +17,7 @@
     <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="117.6.0.2" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="119.0.1.1" />
     <PackageVersion Include="Microsoft.CodeAnalysis" Version="4.2.0" />
-    <PackageVersion Include="Xamarin.Build.Download" Version="0.11.2" />
-    <PackageVersion Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.2478" />
-    <PackageVersion Include="Xamarin.Forms" Version="5.0.0.2478" />
+    <PackageVersion Include="Xamarin.Build.Download" Version="0.11.3" />
     <PackageVersion Include="Roslynator.Analyzers" Version="4.1.1" />
     <PackageVersion Include="AsyncFixer" Version="1.6.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0" />
