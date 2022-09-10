@@ -9,6 +9,12 @@ steps:
     dotnet workload install android ios tvos macos maccatalyst
   displayName: Install dotnet workloads
 
+- task: UseDotNet@2
+  displayName: 'Install .NET 5.0'
+  inputs:
+    packageType: sdk
+    version: 5.0.x
+    
 - task: Cache@2
   displayName: Cache NuGet packages
   inputs:

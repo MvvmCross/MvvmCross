@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Xamarin.Legacy.Sdk">
   <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
-    <TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst;net6.0-tvos;net6.0-macos</TargetFrameworks>
+    <TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst;net6.0-tvos;net6.0-macos;net6.0-windows10.0.19041.0</TargetFrameworks>
     <!--<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.19041;$(TargetFrameworks)</TargetFrameworks>-->
   </PropertyGroup>
 
@@ -10,6 +10,7 @@
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">net6.0;netstandard2.0;xamarin.ios10;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Tizen' ">net6.0;netstandard2.0;tizen40</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Mac' ">net6.0;netstandard2.0;xamarin.mac20;net6.0-macos;</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'WinUi' ">net6.0;netstandard2.0;net6.0-windows10.0.19041.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -19,7 +20,7 @@
 
 This package contains the 'Core' libraries for MvvmCross</Description>
     <PackageId>MvvmCross</PackageId>
-    <GenerateLibraryLayout Condition="$(TargetFramework.StartsWith('uap'))">true</GenerateLibraryLayout>
+    <GenerateLibraryLayout Condition=" $(TargetFramework.StartsWith('uap')) or $(TargetFramework.StartsWith('net6.0-windows')) ">true</GenerateLibraryLayout>
   </PropertyGroup>
 
   <ItemGroup>
@@ -68,6 +69,24 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <PackageReference Include="Xamarin.AndroidX.Preference" />
     <PackageReference Include="Xamarin.AndroidX.ViewPager" />
     <PackageReference Include="Xamarin.Google.Android.Material" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('net6.0-windows')) "> 
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>MvvmCross</RootNamespace>
+    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <UseWinUI>true</UseWinUI>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-windows')) ">
+    <Compile Include="Platforms\Windows\**\*.cs" />
+    <Compile Include="Platforms\WinUi\**\*.cs" />
+    <Page Include="Platforms\WinUi\**\*.xaml" SubType="Designer" Generator="MSBuild:Compile" />
+    <None Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
+    <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
+
+    <PackageReference Include="Microsoft.WindowsAppSDK"  />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
   </ItemGroup>
 
   <ItemGroup>

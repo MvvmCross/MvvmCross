@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Xamarin.Legacy.Sdk">
   <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
-    <TargetFrameworks>net6.0;net6.0-android;net6.0-ios</TargetFrameworks>
+    <TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-windows10.0.19041.0</TargetFrameworks>
     <!--<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.19041;$(TargetFrameworks)</TargetFrameworks>-->
   </PropertyGroup>
 
@@ -10,6 +10,7 @@
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">net6.0;netstandard2.0;xamarin.ios10;net6.0-ios</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Tizen' ">net6.0;netstandard2.0</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Mac' ">net6.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'WinUi' ">net6.0;netstandard2.0;net6.0-windows10.0.19041.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -26,6 +27,10 @@ This package contains the 'ResourceLoader' plugin for MvvmCross</Description>
     <None Include="Platforms\**\*.cs" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-windows')) ">
+    <Compile Include="Platforms\WinUI\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-ios')) ">
