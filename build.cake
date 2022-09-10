@@ -9,7 +9,6 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var verbosityArg = Argument("verbosity", "Minimal");
 var artifactsDir = Argument("artifactsDir", "./artifacts");
-var sln = new FilePath("./" + solutionName + ".sln");
 var outputDir = new DirectoryPath(artifactsDir);
 var gitVersionLog = new FilePath("./gitversion.log");
 var nuspecDir = new DirectoryPath("./nuspec");
@@ -23,8 +22,13 @@ var sinceTag = Argument("since_tag", "");
 var isRunningOnPipelines = AzurePipelines.IsRunningOnAzurePipelines;
 GitVersion versionInfo = null;
 
+FilePath solution;
+
 Setup(context => 
 {
+    var slnPath = IsRunningOnMacOs() ? "./MvvmCross-macos.slnf" : "./MvvmCross.sln";
+    solution = new FilePath(slnPath);
+
     versionInfo = context.GitVersion(new GitVersionSettings 
     {
         UpdateAssemblyInfo = true,
@@ -66,7 +70,7 @@ Task("Clean")
 Task("Restore")
     .Does(() =>
 {
-    DotNetRestore(sln.ToString());
+    DotNetRestore(solution.ToString());
 });
 
 Task("PatchBuildProps")
@@ -133,7 +137,7 @@ Task("Build")
          MSBuildSettings = msBuildSettings
     };
 
-    DotNetBuild(sln.ToString(), settings);
+    DotNetBuild(solution.ToString(), settings);
 });
 
 Task("UnitTest")
