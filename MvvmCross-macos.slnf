@@ -1,0 +1,33 @@
+{
+  "solution": {
+    "path": "MvvmCross.sln",
+    "projects": [
+      "MvvmCross.DroidX\\Leanback\\MvvmCross.DroidX.Leanback.csproj",
+      "MvvmCross.DroidX\\Material\\MvvmCross.DroidX.Material.csproj",
+      "MvvmCross.DroidX\\RecyclerView\\MvvmCross.DroidX.RecyclerView.csproj",
+      "MvvmCross.DroidX\\SwipeRefreshLayout\\MvvmCross.DroidX.SwipeRefreshLayout.csproj",
+      "MvvmCross.Plugins\\All\\MvvmCross.Plugin.All.csproj",
+      "MvvmCross.Plugins\\Color\\MvvmCross.Plugin.Color.csproj",
+      "MvvmCross.Plugins\\FieldBinding\\MvvmCross.Plugin.FieldBinding.csproj",
+      "MvvmCross.Plugins\\Json\\MvvmCross.Plugin.Json.csproj",
+      "MvvmCross.Plugins\\JsonLocalization\\MvvmCross.Plugin.JsonLocalization.csproj",
+      "MvvmCross.Plugins\\Messenger\\MvvmCross.Plugin.Messenger.csproj",
+      "MvvmCross.Plugins\\MethodBinding\\MvvmCross.Plugin.MethodBinding.csproj",
+      "MvvmCross.Plugins\\ResourceLoader\\MvvmCross.Plugin.ResourceLoader.csproj",
+      "MvvmCross.Plugins\\ResxLocalization\\MvvmCross.Plugin.ResxLocalization.csproj",
+      "MvvmCross.Plugins\\Visibility\\MvvmCross.Plugin.Visibility.csproj",
+      "MvvmCross.Tests\\MvvmCross.Tests.csproj",
+      "MvvmCross\\MvvmCross.csproj",
+      "Projects\\Playground\\Playground.Core\\Playground.Core.csproj",
+      "Projects\\Playground\\Playground.Droid\\Playground.Droid.csproj",
+      "Projects\\Playground\\Playground.iOS\\Playground.iOS.csproj",
+      "UnitTests\\MvvmCross.UnitTest\\MvvmCross.UnitTest.csproj",
+      "UnitTests\\Plugins.Color.UnitTest\\MvvmCross.Plugins.Color.UnitTest.csproj",
+      "UnitTests\\Plugins.JsonLocalization.UnitTest\\MvvmCross.Plugins.JsonLocalization.UnitTest.csproj",
+      "UnitTests\\Plugins.Messenger.UnitTest\\MvvmCross.Plugins.Messenger.UnitTest.csproj",
+      "UnitTests\\Plugins.ResourceLoader.UnitTest\\MvvmCross.Plugins.ResourceLoader.UnitTest.csproj",
+      "UnitTests\\Plugins.ResxLocalization.UnitTest\\MvvmCross.Plugins.ResxLocalization.UnitTest.csproj",
+      "UnitTests\\Plugins.Visibility.UnitTest\\MvvmCross.Plugins.Visibility.UnitTest.csproj"
+    ]
+  }
+}
