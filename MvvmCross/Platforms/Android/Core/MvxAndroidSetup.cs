@@ -4,26 +4,27 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using Android.App;
 using Android.Content;
 using Android.Views;
-using MvvmCross.Converters;
-using MvvmCross.Exceptions;
-using MvvmCross.IoC;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Converters;
 using MvvmCross.Core;
+using MvvmCross.Exceptions;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Android.Binding;
 using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using MvvmCross.Presenters;
-using System.Linq;
 
 namespace MvvmCross.Platforms.Android.Core
 {
@@ -31,20 +32,32 @@ namespace MvvmCross.Platforms.Android.Core
     public abstract class MvxAndroidSetup
         : MvxSetup, IMvxAndroidGlobals, IMvxAndroidSetup
     {
-        private Context? _applicationContext;
+        private MvxCurrentTopActivity? _currentTopActivity;
         private IMvxAndroidViewPresenter? _presenter;
 
-        public void PlatformInitialize(Context applicationContext)
+        public void PlatformInitialize(Activity activity)
         {
-            if (applicationContext == null)
-                throw new ArgumentNullException(nameof(applicationContext));
+            if (activity == null)
+                throw new ArgumentNullException(nameof(activity));
 
-            _applicationContext = applicationContext;
+            PlatformInitialize(activity.Application);
+        }
+
+        public void PlatformInitialize(Application application)
+        {
+            if (application == null)
+                throw new ArgumentNullException(nameof(application));
+
+            if (_currentTopActivity != null)
+                return;
+
+            _currentTopActivity = new MvxCurrentTopActivity();
+            application?.RegisterActivityLifecycleCallbacks(_currentTopActivity);
         }
 
         public virtual Assembly ExecutableAssembly => ViewAssemblies?.FirstOrDefault() ?? GetType().Assembly;
 
-        public Context? ApplicationContext => _applicationContext;
+        public Context? ApplicationContext => _currentTopActivity?.Activity?.ApplicationContext;
 
         protected override void InitializeFirstChance(IMvxIoCProvider iocProvider)
         {
@@ -78,17 +91,10 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected virtual IMvxAndroidCurrentTopActivity CreateAndroidCurrentTopActivity()
         {
-            var mvxApplication = MvxAndroidApplication.Instance;
-            if (mvxApplication != null)
-            {
-                var activityLifecycleCallbacksManager = new MvxApplicationCallbacksCurrentTopActivity();
-                mvxApplication.RegisterActivityLifecycleCallbacks(activityLifecycleCallbacksManager);
-                return activityLifecycleCallbacksManager;
-            }
-            else
-            {
-                return new MvxLifecycleMonitorCurrentTopActivity(Mvx.IoCProvider.GetSingleton<IMvxAndroidActivityLifetimeListener>());
-            }
+            if (_currentTopActivity == null)
+                throw new InvalidOperationException($"Please call {nameof(PlatformInitialize)} first");
+
+            return _currentTopActivity;
         }
 
         protected virtual void InitializeLifetimeMonitor(IMvxIoCProvider iocProvider)
@@ -123,10 +129,10 @@ namespace MvvmCross.Platforms.Android.Core
         {
             ValidateArguments(iocProvider);
 
-            if (_applicationContext == null)
+            if (ApplicationContext == null)
                 throw new InvalidOperationException("Cannot create Views Container without ApplicationContext");
 
-            var container = CreateViewsContainer(_applicationContext);
+            var container = CreateViewsContainer(ApplicationContext);
             iocProvider.RegisterSingleton<IMvxAndroidViewModelRequestTranslator>(container);
             iocProvider.RegisterSingleton<IMvxAndroidViewModelLoader>(container);
             var viewsContainer = container as MvxViewsContainer;

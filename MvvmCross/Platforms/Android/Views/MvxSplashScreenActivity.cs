@@ -51,7 +51,7 @@ namespace MvvmCross.Platforms.Android.Views
 
             _bundle = bundle;
 
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
             setup.InitializeAndMonitor(this);
 
             base.OnCreate(bundle);
@@ -71,14 +71,14 @@ namespace MvvmCross.Platforms.Android.Views
         {
             base.OnResume();
             _isResumed = true;
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
             setup.InitializeAndMonitor(this);
         }
 
         protected override void OnPause()
         {
             _isResumed = false;
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
             setup.CancelMonitor(this);
             base.OnPause();
         }
@@ -95,7 +95,7 @@ namespace MvvmCross.Platforms.Android.Views
         {
             if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup))
             {
-                if(!startup.IsStarted)
+                if (!startup.IsStarted)
                 {
                     await startup.StartAsync(GetAppStartHint(bundle));
                 }

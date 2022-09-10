@@ -1,0 +1,10 @@
+{
+    "profiles": {
+      "Playground.WinUI3 (Package)": {
+        "commandName": "MsixPackage"
+      },
+      "Playground.WinUI3 (Unpackaged)": {
+        "commandName": "Project"
+      }
+    }
+  }

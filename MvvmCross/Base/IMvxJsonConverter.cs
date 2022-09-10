@@ -9,7 +9,7 @@ namespace MvvmCross.Base
 #nullable enable
     public interface IMvxJsonConverter : IMvxTextSerializer
     {
-		T DeserializeObject<T>(Stream stream);
+        T DeserializeObject<T>(Stream stream);
     }
 #nullable restore
 }

@@ -46,7 +46,7 @@ namespace MvvmCross.Platforms.Wpf.Views
         public MvxWindow()
         {
             Closed += MvxWindow_Closed;
-            Unloaded += MvxWindow_Unloaded;            
+            Unloaded += MvxWindow_Unloaded;
             Loaded += MvxWindow_Loaded;
             Initialized += MvxWindow_Initialized;
         }

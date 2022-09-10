@@ -6,6 +6,6 @@ namespace MvvmCross.Platforms.Tizen.Binding
 {
     internal static class MvxTizenPropertyBinding
     {
-        
+
     }
 }

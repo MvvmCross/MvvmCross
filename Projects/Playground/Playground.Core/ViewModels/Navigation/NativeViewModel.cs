@@ -9,7 +9,7 @@ using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class NativeViewModel:MvxViewModel
+    public class NativeViewModel : MvxViewModel
     {
         private static int _counter = 0;
 

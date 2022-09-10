@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Binding.BindingContext;
 using Foundation;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Tvos.Views.Base;
 using MvvmCross.ViewModels;
 using UIKit;
@@ -12,7 +12,7 @@ using UIKit;
 namespace MvvmCross.Platforms.Tvos.Views
 {
     public class MvxBaseTabBarViewController
-        : MvxEventSourceTabBarController, IMvxTvosView 
+        : MvxEventSourceTabBarController, IMvxTvosView
     {
         public MvxBaseTabBarViewController()
         {

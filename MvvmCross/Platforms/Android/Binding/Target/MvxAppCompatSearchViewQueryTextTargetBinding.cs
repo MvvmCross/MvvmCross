@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using AndroidX.AppCompat.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.WeakSubscription;
+using SearchView = AndroidX.AppCompat.Widget.SearchView;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
 {
@@ -19,7 +18,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
         {
         }
 
-        public override Type TargetType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 

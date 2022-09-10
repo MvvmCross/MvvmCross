@@ -93,7 +93,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         public override void DidMoveToParentViewController(UIViewController parent)
         {
             base.DidMoveToParentViewController(parent);
-            if(parent == null)
+            if (parent == null)
                 ViewModel?.ViewDestroy();
         }
 

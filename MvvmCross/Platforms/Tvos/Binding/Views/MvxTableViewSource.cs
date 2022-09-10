@@ -5,14 +5,14 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Linq;
 using Foundation;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
+using MvvmCross.Logging;
 using MvvmCross.WeakSubscription;
 using UIKit;
-using System.Linq;
-using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Views
 {

@@ -5,15 +5,15 @@
 using System;
 using System.Windows;
 using MvvmCross.Base;
-using MvvmCross.Converters;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
+using MvvmCross.Converters;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Wpf.Binding.MvxBinding;
 using MvvmCross.Platforms.Wpf.Binding.MvxBinding.Target;
 using MvvmCross.Platforms.Wpf.Binding.WindowsBinding;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Wpf.Binding
 {

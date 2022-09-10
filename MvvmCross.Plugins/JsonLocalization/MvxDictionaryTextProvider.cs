@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace MvvmCross.Plugin.JsonLocalization
 {
     [Preserve(AllMembers = true)]
-	public class MvxDictionaryTextProvider : MvxTextProvider
+    public class MvxDictionaryTextProvider : MvxTextProvider
     {
         private readonly Dictionary<string, string> _entries = new Dictionary<string, string>();
         private readonly bool _maskErrors;
@@ -23,7 +23,7 @@ namespace MvvmCross.Plugin.JsonLocalization
             var key = MakeLookupKey(namespaceKey, typeKey, name);
             _entries[key] = value;
         }
-        
+
         public override string GetText(string namespaceKey, string typeKey, string name)
         {
             var key = MakeLookupKey(namespaceKey, typeKey, name);
@@ -41,7 +41,7 @@ namespace MvvmCross.Plugin.JsonLocalization
         public override bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name)
         {
             var key = MakeLookupKey(namespaceKey, typeKey, name);
-            
+
             if (_entries.TryGetValue(key, out textValue))
                 return true;
 

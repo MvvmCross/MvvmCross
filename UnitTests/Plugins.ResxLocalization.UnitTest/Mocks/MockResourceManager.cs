@@ -14,7 +14,7 @@ namespace MvvmCross.Plugin.ResxLocalization.UnitTest.Mocks
         public static readonly string TypeKey = "DummyTypeKey";
         public static readonly string DummyName = "DummyName";
 
-        private static readonly string[] ValidKeys = { $"{LocalizationNamespace}.{TypeKey}.{DummyName}", $"{LocalizationNamespace}.{DummyName}", $"{TypeKey}.{DummyName}", DummyName};
+        private static readonly string[] ValidKeys = { $"{LocalizationNamespace}.{TypeKey}.{DummyName}", $"{LocalizationNamespace}.{DummyName}", $"{TypeKey}.{DummyName}", DummyName };
 
         public override string GetString(string name) => ValidKeys.SingleOrDefault(key => key.Equals(name));
 

@@ -1,10 +1,10 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Windows.UI.Xaml;
 using MvvmCross.Binding;
+using Windows.UI.Xaml;
 
 namespace MvvmCross.Platforms.Uap.Binding.MvxBinding.Target
 {
@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Uap.Binding.MvxBinding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof(bool);
+        public override Type TargetValueType => typeof(bool);
 
         public override void SetValue(object value)
         {

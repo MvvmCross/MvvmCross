@@ -214,7 +214,8 @@ namespace MvvmCross.Platforms.Android.Presenters
                 _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {viewName}. Assuming DialogFragment presentation", viewType.Name);
                 return new MvxDialogFragmentPresentationAttribute(enterAnimation: int.MinValue)
                 {
-                    ViewType = viewType, ViewModelType = viewModelType
+                    ViewType = viewType,
+                    ViewModelType = viewModelType
                 };
             }
 
@@ -223,7 +224,8 @@ namespace MvvmCross.Platforms.Android.Presenters
                 _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {viewName}. Assuming Fragment presentation", viewType.Name);
                 return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), global::Android.Resource.Id.Content)
                 {
-                    ViewType = viewType, ViewModelType = viewModelType
+                    ViewType = viewType,
+                    ViewModelType = viewModelType
                 };
             }
 
@@ -232,7 +234,8 @@ namespace MvvmCross.Platforms.Android.Presenters
                 _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {viewName}. Assuming Activity presentation", viewType.Name);
                 return new MvxActivityPresentationAttribute
                 {
-                    ViewType = viewType, ViewModelType = viewModelType
+                    ViewType = viewType,
+                    ViewModelType = viewModelType
                 };
             }
 
@@ -341,8 +344,18 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             var bundle = Bundle.Empty!;
 
-            if (CurrentActivity.IsActivityAlive() &&
-                CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity)
+            if (!(CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity))
+            {
+                return bundle;
+            }
+
+            if (Build.VERSION.SdkInt < BuildVersionCodes.Lollipop)
+            {
+                _logger.Value?.Log(LogLevel.Warning, "Shared element transition requires Android v21+.");
+                return bundle;
+            }
+
+            if (CurrentActivity.IsActivityAlive())
             {
                 var (elements, transitionElementPairs) =
                     GetTransitionElements(attribute, request, sharedElementsActivity);
@@ -356,10 +369,6 @@ namespace MvvmCross.Platforms.Android.Presenters
                 var transitionElementsBundle = CreateTransitionElementsBundle(intent, transitionElementPairs, elements);
                 if (transitionElementsBundle != null)
                     return transitionElementsBundle;
-            }
-            else
-            {
-                _logger.Value?.Log(LogLevel.Warning, "Shared element transition requires Android v21+.");
             }
 
             return bundle;
@@ -985,7 +994,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             fragmentManager.PopBackStackImmediate(
                 popBackStackFragmentName,
-                (int) fragmentAttribute.PopBackStackImmediateFlag.ToNativePopBackStackFlags());
+                (int)fragmentAttribute.PopBackStackImmediateFlag.ToNativePopBackStackFlags());
 
             OnFragmentPopped(null, null, fragmentAttribute);
         }

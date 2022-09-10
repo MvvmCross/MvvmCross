@@ -5,15 +5,15 @@
 using System;
 using Android.App;
 using Android.OS;
+using Microsoft.Extensions.Logging;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using MvvmCross.Core;
-using Microsoft.Extensions.Logging;
-using MvvmCross.Platforms.Android.Views.Base;
-using MvvmCross.Binding.BindingContext;
 
 namespace MvvmCross.Platforms.Android.Views
 {
@@ -152,7 +152,7 @@ namespace MvvmCross.Platforms.Android.Views
             }
 
             var activity = androidView.ToActivity();
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity.ApplicationContext);
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity);
             setup.EnsureInitialized();
         }
     }

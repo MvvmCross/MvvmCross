@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Android.Widget;
 using MvvmCross.Platforms.Android.Binding.Target;
 using AndroidUri = Android.Net.Uri;
@@ -9,7 +9,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
     {
         public MvxVideoViewUriTargetBinding(object target) : base(target) { }
 
-        public override Type TargetType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
         protected override void SetValueImpl(object target, object value)
         {

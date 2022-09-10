@@ -84,7 +84,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
             UpdateBackButtonVisibility();
         }
-        
+
         protected virtual void UpdateBackButtonVisibility()
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
@@ -157,7 +157,7 @@ namespace MvvmCross.Platforms.Uap.Views
             // nothing loaded by default
             var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
             _pageKey = "Page-" + Frame.BackStackDepth;
-             IMvxBundle bundle = null;
+            IMvxBundle bundle = null;
 
             if (e.NavigationMode == NavigationMode.New)
             {

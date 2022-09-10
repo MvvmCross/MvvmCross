@@ -4,8 +4,8 @@
 
 namespace MvvmCross.DroidX.RecyclerView.ItemTemplates
 {
-	//MvxDefaultTemplateSelector
-	public class MvxDefaultTemplateSelector : IMvxTemplateSelector
+    //MvxDefaultTemplateSelector
+    public class MvxDefaultTemplateSelector : IMvxTemplateSelector
     {
         public int ItemTemplateId { get; set; }
 

@@ -4,7 +4,7 @@
 
 namespace MvvmCross.Binding.Combiners
 {
-    public class MvxEqualToValueCombiner 
+    public class MvxEqualToValueCombiner
         : MvxPairwiseValueCombiner
     {
         protected override bool CombineDecimalAndDecimal(decimal input1, decimal input2, out object value)

@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Logging;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platforms.Ios.Views.Base;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Logging;
+using MvvmCross.Platforms.Ios.Views.Base;
 
 namespace MvvmCross.Platforms.Ios.Views
 {

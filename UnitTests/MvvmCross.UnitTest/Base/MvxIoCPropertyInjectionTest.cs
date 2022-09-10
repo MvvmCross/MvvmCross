@@ -15,7 +15,7 @@ namespace MvvmCross.UnitTest.Base
         {
         }
 
-        public interface IB 
+        public interface IB
         {
         }
 
@@ -40,7 +40,7 @@ namespace MvvmCross.UnitTest.Base
             public C CNever { get; set; }
         }
 
-        public class B : IB 
+        public class B : IB
         {
         }
 

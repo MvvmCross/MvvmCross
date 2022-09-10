@@ -27,7 +27,7 @@ namespace MvvmCross.Binding.Bindings.Target
             ValueChanged?.Invoke(this, new MvxTargetChangedEventArgs(newValue));
         }
 
-        public abstract Type TargetType { get; }
+        public abstract Type TargetValueType { get; }
 
         public abstract void SetValue(object value);
 
@@ -46,13 +46,13 @@ namespace MvvmCross.Binding.Bindings.Target
             _target = new WeakReference<TTarget>(target);
         }
 
-        protected TTarget Target 
-        { 
-            get 
+        protected TTarget Target
+        {
+            get
             {
                 _target.TryGetTarget(out var target);
                 return target;
-            } 
+            }
         }
 
         public virtual void SubscribeToEvents()
@@ -67,7 +67,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
         public abstract MvxBindingMode DefaultMode { get; }
 
-        public Type TargetType => typeof(TTarget);
+        public Type TargetValueType => typeof(TValue);
 
         public event EventHandler<MvxTargetChangedEventArgs> ValueChanged;
 

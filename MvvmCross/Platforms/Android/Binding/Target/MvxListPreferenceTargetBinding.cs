@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
         {
             var pref = target as ListPreference;
             if (pref != null)
-                pref.Value = (string) value;
+                pref.Value = (string)value;
         }
     }
 }

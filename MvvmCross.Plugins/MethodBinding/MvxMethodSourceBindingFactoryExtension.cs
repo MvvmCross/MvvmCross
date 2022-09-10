@@ -13,7 +13,7 @@ using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 namespace MvvmCross.Plugin.MethodBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxMethodSourceBindingFactoryExtension
+    public class MvxMethodSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
         public bool TryCreateBinding(object source, MvxPropertyToken currentToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)

@@ -35,7 +35,7 @@ namespace MvvmCross.ViewModels
                 await Task.Yield();
                 await task;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _onException?.Invoke(e);
             }
@@ -220,7 +220,7 @@ namespace MvvmCross.ViewModels
                 await System.Threading.Tasks.Task.Yield();
                 await task;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _onException?.Invoke(e);
             }

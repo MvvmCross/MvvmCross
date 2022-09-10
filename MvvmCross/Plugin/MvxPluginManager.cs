@@ -68,7 +68,7 @@ namespace MvvmCross.Plugin
             }
         }
 
-        public bool TryEnsurePluginLoaded<TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin 
+        public bool TryEnsurePluginLoaded<TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin
             => TryEnsurePluginLoaded(typeof(TPlugin), forceLoad);
 
         public bool TryEnsurePluginLoaded(Type type, bool forceLoad = false)

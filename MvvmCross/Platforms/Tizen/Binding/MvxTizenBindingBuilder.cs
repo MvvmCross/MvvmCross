@@ -4,11 +4,11 @@
 
 using System;
 using MvvmCross.Base;
-using MvvmCross.Converters;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Converters;
 
 namespace MvvmCross.Platforms.Tizen.Binding
 {

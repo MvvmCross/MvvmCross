@@ -73,29 +73,29 @@ namespace MvvmCross.DroidX.Leanback.Adapters
             BindingContext = bindingContext;
         }
 
-        protected MvxBaseObjectAdapter(Presenter presenter) 
+        protected MvxBaseObjectAdapter(Presenter presenter)
             : this(presenter, MvxAndroidBindingContextHelpers.Current())
         {
         }
 
-        protected MvxBaseObjectAdapter(Presenter presenter, IMvxAndroidBindingContext bindingContext) 
+        protected MvxBaseObjectAdapter(Presenter presenter, IMvxAndroidBindingContext bindingContext)
             : base(presenter)
         {
             BindingContext = bindingContext;
         }
 
-        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector) 
+        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector)
             : this(presenterSelector, MvxAndroidBindingContextHelpers.Current())
         {
         }
 
-        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector, IMvxAndroidBindingContext bindingContext) 
+        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector, IMvxAndroidBindingContext bindingContext)
             : base(presenterSelector)
         {
             BindingContext = bindingContext;
         }
 
-        protected MvxBaseObjectAdapter(IntPtr javaReference, JniHandleOwnership transfer) 
+        protected MvxBaseObjectAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }

@@ -13,7 +13,7 @@ namespace MvvmCross.UnitTest.Binding.Mocks
     {
         public MockTargetBinding()
         {
-            TargetType = typeof(object);
+            TargetValueType = typeof(object);
         }
 
         public int DisposeCalled { get; set; }
@@ -30,7 +30,7 @@ namespace MvvmCross.UnitTest.Binding.Mocks
             SubscribeToEventsCalled++;
         }
 
-        public Type TargetType { get; set; }
+        public Type TargetValueType { get; set; }
         public MvxBindingMode DefaultMode { get; set; }
 
         public List<object> Values { get; } = new List<object>();

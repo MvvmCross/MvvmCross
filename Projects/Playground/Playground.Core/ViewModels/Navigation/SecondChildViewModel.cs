@@ -11,7 +11,7 @@ namespace Playground.Core.ViewModels
 {
     public class SecondChildViewModel : MvxNavigationViewModel
     {
-        public SecondChildViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService) 
+        public SecondChildViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService)
             : base(logFactory, navigationService)
         {
             ShowNestedChildCommand = new MvxAsyncCommand(() => NavigationService.Navigate<NestedChildViewModel>());

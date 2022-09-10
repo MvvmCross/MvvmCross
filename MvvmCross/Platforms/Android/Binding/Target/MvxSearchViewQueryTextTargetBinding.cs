@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 
         private IDisposable _subscription;
 
-        public override Type TargetType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
@@ -32,7 +32,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
                 HandleQueryTextChanged);
         }
 
-        protected override void SetValueImpl(object target, object value) => 
+        protected override void SetValueImpl(object target, object value) =>
             ((SearchView)target).SetQuery((string)value, true);
 
         protected override void Dispose(bool isDisposing)

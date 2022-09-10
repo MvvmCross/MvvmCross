@@ -12,7 +12,7 @@ using Xunit;
 
 namespace MvvmCross.UnitTest.Base
 {
-    
+
     public class MvxParserTest
     {
         public class BaseToken

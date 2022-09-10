@@ -1,8 +1,8 @@
-﻿using AndroidX.Preference;
+﻿using System;
+using System.Windows.Input;
+using AndroidX.Preference;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.WeakSubscription;
-using System;
-using System.Windows.Input;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
 {
@@ -65,7 +65,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof(ICommand);
+        public override Type TargetValueType => typeof(ICommand);
 
         protected override void Dispose(bool isDisposing)
         {

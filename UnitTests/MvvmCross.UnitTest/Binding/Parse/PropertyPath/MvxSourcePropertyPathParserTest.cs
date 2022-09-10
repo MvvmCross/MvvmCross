@@ -2,14 +2,15 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
 {
-    
     public class MvxSourcePropertyPathParserTest
     {
         [Fact]
@@ -190,6 +191,33 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
         {
             var tokeniser = new MvxSourcePropertyPathParser();
             return tokeniser.Parse(text);
+        }
+
+        [Fact]
+        public void TestTokeniser_ReturnsParsedValueSimilarToOriginalValueForSimpleExpressions()
+        {
+            var random = new Random(123);
+            for (int i = 0; i < 100_000; i++)
+            {
+                var originalExpression = CreateRandomExpression(random);
+                var mvxPropertyTokens = Tokenise(originalExpression);
+
+                var actual = string.Join<string>(".",
+                    mvxPropertyTokens.Cast<MvxPropertyNamePropertyToken>().Select(t => t.PropertyName));
+
+                Assert.Equal(originalExpression, actual);
+            }
+        }
+
+        private static string CreateRandomExpression(Random random)
+        {
+            return string.Join<string>(".",
+                Enumerable.Repeat(0, random.Next() % 6 + 3).Select(_ =>
+                {
+                    var length = random.Next() % 6 + 3;
+                    return new string(Enumerable.Repeat("qwertyuiopasdfghjklzxcvbnm", length)
+                        .Select(s => s[random.Next(s.Length)]).ToArray());
+                }));
         }
     }
 }

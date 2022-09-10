@@ -178,8 +178,8 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
 
         protected void ThrowExceptionIfPathAlreadyDefined(MvxSerializableBindingDescription description)
         {
-            if (description.Path != null && 
-                description.Literal != null && 
+            if (description.Path != null &&
+                description.Literal != null &&
                 description.Function != null)
             {
                 throw new MvxException(

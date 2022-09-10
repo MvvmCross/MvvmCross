@@ -24,7 +24,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
     public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresenter
     {
         private readonly MvxIosMajorVersionChecker _iosVersion13Checker = new MvxIosMajorVersionChecker(13);
-        
+
         protected IUIApplicationDelegate ApplicationDelegate { get; }
         protected UIWindow Window { get; }
 
@@ -57,7 +57,9 @@ namespace MvvmCross.Platforms.Ios.Presenters
                     $"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. Assuming Root presentation");
                 return new MvxRootPresentationAttribute
                 {
-                    WrapInNavigationController = true, ViewType = viewType, ViewModelType = viewModelType
+                    WrapInNavigationController = true,
+                    ViewType = viewType,
+                    ViewModelType = viewModelType
                 };
             }
 
@@ -422,7 +424,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
             viewController.ModalTransitionStyle = attribute.ModalTransitionStyle;
-            if (_iosVersion13Checker.IsVersionOrHigher)
+            if (_iosVersion13Checker.IsVersionOrHigher && viewController.PresentationController != null)
             {
                 viewController.PresentationController.Delegate =
                     new MvxModalPresentationControllerDelegate(this, viewController, attribute);

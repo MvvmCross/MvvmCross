@@ -59,7 +59,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
             SkipWhitespace();
 
             var value = ReadValue();
-            if(value == null)
+            if (value == null)
             {
                 CurrentEntries![(string)key] = null;
             }

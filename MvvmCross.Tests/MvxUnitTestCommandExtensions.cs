@@ -21,7 +21,7 @@ namespace MvvmCross.Tests
         {
             if (Mvx.IoCProvider.TryResolve<IMvxCommandHelper>(out IMvxCommandHelper helper))
             {
-                if (helper != null && helper is MvxUnitTestCommandHelper)
+                if (helper is MvxUnitTestCommandHelper)
                 {
                     return (MvxUnitTestCommandHelper)helper;
                 }
