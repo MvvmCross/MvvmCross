@@ -139,10 +139,7 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         public void NullSubscribeCausesException()
         {
             var messenger = new MvxMessengerHub();
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                messenger.Subscribe<TestMessage>(null);
-            });
+            Assert.Throws<ArgumentNullException>(() => messenger.Subscribe<TestMessage>(null));
         }
 
         [Fact]
