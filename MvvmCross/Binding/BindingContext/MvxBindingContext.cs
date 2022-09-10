@@ -2,9 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 
@@ -12,24 +9,13 @@ namespace MvvmCross.Binding.BindingContext
 {
     public class MvxBindingContext : IMvxBindingContext, IDisposable
     {
-        public class TargetAndBinding
-        {
-            public TargetAndBinding(object target, IMvxUpdateableBinding binding)
-            {
-                Target = target;
-                Binding = binding;
-            }
+        public record TargetAndBinding(object Target, IMvxUpdateableBinding Binding);
 
-            public object Target { get; private set; }
-            public IMvxUpdateableBinding Binding { get; }
-        }
+        private readonly List<Action> _delayedActions = new();
 
-        private readonly List<Action> _delayedActions = new List<Action>();
+        private readonly List<TargetAndBinding> _directBindings = new();
 
-        private readonly List<TargetAndBinding> _directBindings = new List<TargetAndBinding>();
-
-        private readonly List<KeyValuePair<object, IList<TargetAndBinding>>> _viewBindings =
-            new List<KeyValuePair<object, IList<TargetAndBinding>>>();
+        private readonly List<KeyValuePair<object, IList<TargetAndBinding>>> _viewBindings = new();
 
         private object _dataContext;
 
