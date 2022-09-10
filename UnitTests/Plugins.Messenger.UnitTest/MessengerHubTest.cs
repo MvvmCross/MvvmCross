@@ -150,12 +150,14 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         {
             var messenger = new MvxMessengerHub();
             messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.NewGuid(), () => { }, new object()));
-            messenger.Subscribe<TestMessage>(m =>
-                {
-                    // stuff
-                });
+            messenger.Subscribe<TestMessage>(_ =>
+            {
+                // stuff
+            });
             messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.NewGuid(), () => { }, new object()));
             messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.Empty, () => { }, new object()));
+
+            Assert.True(messenger.HasSubscriptionsFor<TestMessage>());
         }
 
         [Fact]
