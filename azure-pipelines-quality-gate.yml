@@ -35,6 +35,6 @@ steps:
 - script: dotnet tool restore
   displayName: Restore dotnet tools
 
-- pwsh: dotnet cake --verbosity=Normal --target=Sonar --sonarKey=$env:SONARY_KEY
+- pwsh: dotnet cake --verbosity=Minimal --target=Sonar --sonarKey=$env:SONARY_KEY
   env: 
     SONARY_KEY: $(sonarKey)
