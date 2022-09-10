@@ -4,9 +4,22 @@ title: iOS Sidebar
 category: Plugins
 ---
 
+## Setup
+
+You must override `CreateViewPresenter` in your `MvxIosSetup` class too tell MvvmCross to use the `MvxSidebarPresenter` instead of the default [iOS ViewPresenter](https://www.mvvmcross.com/documentation/platform/ios/ios-view-presenter).
+
+```c#
+protected override IMvxIosViewPresenter CreateViewPresenter()
+{
+    return new MvxSidebarPresenter((MvxApplicationDelegate) ApplicationDelegate, Window);
+}
+```
+
+> Note: `MvxSidebarPresenter` inherits all of the capabilities of the default view presenter
+
 ## MvxSidebarPresenter
 
-This presenter provides 3 panels as view "targets", a main central panel, a right side panel and a left side panel. Where views appear in the UI and how they are shown is controlled through the decoration of a view controller using  class level attribute.
+This presenter provides 3 panels as view "targets", a main central panel, a right side panel and a left side panel. Where views appear in the UI and how they are shown is controlled through the decoration of a view controller using a class level attribute.
 
 A view controller class can be decorated with the MvxSidebarPresentationAttribute. The constructor for this attribute is shown below:
 ```c#
@@ -27,11 +40,51 @@ public class CenterPanelView
 }
 ```
 
-So to explain this example it's telling the MvxSidebarPresenter that this view controller wants to be displayed in the center panel, set as the active panel and it also wants to be shown immediately.
+The above example is telling the MvxSidebarPresenter that this view controller wants to be displayed in the center panel, as the root view, with an animated transition.
 
 If this was using MvxPanelEnum.Left for instance this would be shown in the left hand panel and would also immediately slide the left panel into view.
 
 If the last value set in the attribute was set to false this would simply add the view to the left hand panel but leave the view hidden until the user performed some action in the UI that would result in that panel being shown.
+
+### Panel Locations
+
+* `MvxPanelEnum.None` - Same as `MvxPanelEnum.Center`
+* `MvxPanelEnum.Center` - A center panel. The traditional location of a ViewController.
+* `MvxPanelEnum.Left` - A Panel that can slide in from the left.
+* `MvxPanelEnum.Right` - A Panel that can slide in from the right.
+* `MvxPanelEnum.CenterWithLeft` - A center panel with the left panel open.
+* `MvxPanelEnum.CenterWithRight` - A center panel with the right panel open.
+
+###  Panel Hint Types
+
+* `MvxPanelHintType.PushPanel` - Pushes the view on the center's navigation stack. (New view will not have a menu button)
+* `MvxPanelHintType.ResetRoot` - Recreates the center's navigation stack with using the new view as the root view.
+* `MvxPanelHintType.PopToRoot` - Pops to the center's navigation stack to root and pushes the new view.
+
+## IMvxSidebarMenu
+
+An optional `IMvxSidebarMenu` interface is provided for ViewControllers that use the `MvxSidebarPresentation` attribute with their panel set to left or right.
+
+Implementing the interface provides the following lifecycle callbacks:
+
+* `MenuWillOpen()`
+* `MenuDidOpen()`
+* `MenuWillClose()`
+* `MenuDidClose()`
+
+And the following configuration options:
+
+* `bool AnimateMenu`
+* `bool DisablePanGesture`
+* `float DarkOverlayAlpha`
+* `bool HasDarkOverlay`
+* `bool HasShadowing`
+* `float ShadowOpacity`
+* `float ShadowRadius`
+* `UIColor ShadowColor`
+* `UIImage MenuButtonImage`
+* `int MenuWidth`
+* `bool ReopenOnRotate`
 
 ## MvxSplitViewBehaviour
 

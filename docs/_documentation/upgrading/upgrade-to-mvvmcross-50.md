@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Upgrade from 4 to MvvmCross 5
+title: Upgrade from 4 to 5
 category: Upgrading
 Order: 2
 ---
