@@ -146,7 +146,7 @@ Task("UnitTest")
     EnsureDirectoryExists(outputDir + "/Tests/");
 
     var testPaths = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
-    var settings = new DotNetCoreTestSettings
+    var settings = new DotNetTestSettings
     {
         Configuration = configuration,
         NoBuild = true
@@ -159,7 +159,7 @@ Task("UnitTest")
         settings.Loggers = new string[] { $"xunit;LogFilePath={testXml.FullPath}" };
         try 
         {
-            DotNetCoreTest(project.ToString(), settings);
+            DotNetTest(project.ToString(), settings);
         }
         catch
         {
