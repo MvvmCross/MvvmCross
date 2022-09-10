@@ -10,7 +10,7 @@ using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Binding.BindingContext
 {
-    public class MvxBindingContext : IMvxBindingContext
+    public class MvxBindingContext : IMvxBindingContext, IDisposable
     {
         public class TargetAndBinding
         {
