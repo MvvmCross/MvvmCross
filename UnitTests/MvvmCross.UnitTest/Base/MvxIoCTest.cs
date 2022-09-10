@@ -582,14 +582,18 @@ namespace MvvmCross.UnitTest.Base
         {
             var c = new C2();
             var arguments = new Dictionary<string, object> { ["c"] = c };
-            _iocProvider.IoCConstruct<B>(arguments);
+            var b = _iocProvider.IoCConstruct<B>(arguments);
+
+            Assert.Equal(c, b.C);
         }
 
         [Fact]
         public virtual void IocConstruct_WithAnonymousTypeArguments_CreatesObject()
         {
             var c = new C2();
-            _iocProvider.IoCConstruct<B>(new { c });
+            var b = _iocProvider.IoCConstruct<B>(new { c });
+
+            Assert.Equal(c, b.C);
         }
 
         [Fact]
