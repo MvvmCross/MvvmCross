@@ -124,31 +124,33 @@ namespace MvvmCross.Binding.BindingContext
             // once we are on the background thread we don't get an InvalidOperationException. 
             // Issue: #1398
             // View bindings need to be deep copied
-            var viewBindingsCopy = _viewBindings.Select(vb => new KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>(vb.Key, vb.Value.ToList()))
-                                                     .ToList();
+            var viewBindingsCopy = _viewBindings.ConvertAll(vb =>
+                new KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>(vb.Key, vb.Value.ToList()));
+;
 
             var directBindingsCopy = _directBindings.ToList();
 
-            Action setBindingsAction = () =>
-            {
-                foreach (var binding in viewBindingsCopy)
-                {
-                    foreach (var bind in binding.Value)
-                    {
-                        bind.Binding.DataContext = _dataContext;
-                    }
-                }
-
-                foreach (var binding in directBindingsCopy)
-                {
-                    binding.Binding.DataContext = _dataContext;
-                }
-            };
-
             if (RunSynchronously)
-                setBindingsAction();
+                SetBindings(viewBindingsCopy, directBindingsCopy);
             else
-                Task.Run(setBindingsAction);
+                Task.Run(() => SetBindings(viewBindingsCopy, directBindingsCopy));
+        }
+        
+        private void SetBindings(List<KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>> viewBindings,
+            List<MvxBindingContext.TargetAndBinding> bindings)
+        {
+            foreach (var binding in viewBindings)
+            {
+                foreach (var bind in binding.Value)
+                {
+                    bind.Binding.DataContext = _dataContext;
+                }
+            }
+
+            foreach (var binding in bindings)
+            {
+                binding.Binding.DataContext = _dataContext;
+            }
         }
 
         public virtual void DelayBind(Action action)
