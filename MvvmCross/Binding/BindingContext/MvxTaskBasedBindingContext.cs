@@ -14,7 +14,7 @@ namespace MvvmCross.Binding.BindingContext
     /// <summary>
     /// OnDataContextChange executes asynchronously on a worker thread
     /// </summary>
-    public class MvxTaskBasedBindingContext : IMvxBindingContext
+    public class MvxTaskBasedBindingContext : IMvxBindingContext, IDisposable
     {
         private readonly List<Action> _delayedActions = new List<Action>();
         private readonly List<MvxBindingContext.TargetAndBinding> _directBindings = new List<MvxBindingContext.TargetAndBinding>();
