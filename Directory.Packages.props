@@ -10,16 +10,14 @@
     <PackageVersion Include="Xamarin.AndroidX.Preference" Version="1.2.0.2" />
     <PackageVersion Include="Xamarin.AndroidX.ExifInterface" Version="1.3.3.2" />
     <PackageVersion Include="Xamarin.AndroidX.MediaRouter" Version="1.3.0.1" />
-    <PackageVersion Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.5.0" />
+    <PackageVersion Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.5.1" />
     <PackageVersion Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.10" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.4.2.1" />
     <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.6.1.1" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="117.6.0.2" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="119.0.1.1" />
     <PackageVersion Include="Microsoft.CodeAnalysis" Version="4.2.0" />
-    <PackageVersion Include="Xamarin.Build.Download" Version="0.11.2" />
-    <PackageVersion Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.2478" />
-    <PackageVersion Include="Xamarin.Forms" Version="5.0.0.2478" />
+    <PackageVersion Include="Xamarin.Build.Download" Version="0.11.3" />
     <PackageVersion Include="Roslynator.Analyzers" Version="4.1.1" />
     <PackageVersion Include="AsyncFixer" Version="1.6.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0" />
