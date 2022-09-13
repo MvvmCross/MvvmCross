@@ -1,5 +1,18 @@
 # Changelog
 
+## [9.0.1](https://github.com/MvvmCross/MvvmCross/tree/9.0.0) (2022-09-10)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.0...HEAD)
+
+**Fixed bugs:**
+
+- Fixed condition of including macos-related stuff into the build. Fixe… [\#4480](https://github.com/MvvmCross/MvvmCross/pull/4480) ([snechaev](https://github.com/snechaev))
+
+**Merged pull requests:**
+
+- Bump Xamarin.AndroidX.AppCompat.AppCompatResources from 1.4.2.1 to 1.5.0 [\#4479](https://github.com/MvvmCross/MvvmCross/pull/4479) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.GooglePlayServices.Location from 119.0.1.1 to 120.0.0 [\#4477](https://github.com/MvvmCross/MvvmCross/pull/4477) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [9.0.0](https://github.com/MvvmCross/MvvmCross/tree/9.0.0) (2022-09-10)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/8.0.2...9.0.0)
