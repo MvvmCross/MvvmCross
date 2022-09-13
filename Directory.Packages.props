@@ -29,7 +29,7 @@
     <PackageVersion Include="XunitXml.TestLogger" Version="3.0.70" />
     <PackageVersion Include="Plugin.Permissions" Version="6.0.1" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.1"/>
-    <PackageVersion Include="Serilog" Version="2.11.0"/>
+    <PackageVersion Include="Serilog" Version="2.12.0"/>
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0"/>
     <PackageVersion Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
