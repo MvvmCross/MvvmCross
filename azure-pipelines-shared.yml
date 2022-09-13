@@ -8,16 +8,6 @@ steps:
 - pwsh: |
     dotnet workload install android ios tvos macos maccatalyst
   displayName: Install dotnet workloads
-    
-- task: Cache@2
-  displayName: Cache NuGet packages
-  inputs:
-    key: 'nuget | "$(Agent.OS)" | Directory.Packages.props'
-    restoreKeys: |
-      nuget | "$(Agent.OS)"
-      nuget
-    path: '$(NUGET_PACKAGES)'
-  continueOnError: true
 
 - task: Cache@2
   displayName: Cache Cake tools
