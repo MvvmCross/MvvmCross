@@ -1,7 +1,6 @@
 #tool dotnet:n?package=GitVersion.Tool&version=5.10.3
-#tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.8.0
+#tool dotnet:n?package=dotnet-sonarscanner&version=5.8.0
 #addin nuget:?package=Cake.Figlet&version=2.0.1
-#addin nuget:?package=Cake.Sonar&version=1.1.30
 
 var solutionName = "MvvmCross";
 var repoName = "mvvmcross/mvvmcross";
@@ -84,37 +83,37 @@ Task("SonarStart")
     .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
     .Does(() => 
 {
-    var settings = new SonarBeginSettings
-    {
-        Key = "MvvmCross_MvvmCross",
-        Url = "https://sonarcloud.io",
-        Organization = "mvx",
-        Login = sonarKey,
-        XUnitReportsPath = new DirectoryPath(outputDir + "/Tests/").FullPath
-    };
+    StringBuilder args = new StringBuilder();
+    args.Append("begin ");
+    args.Append("/key:MvvmCross_MvvmCross ");
+    args.Append("/o:mvx ");
+    args.Append("/d:sonar.host.url=https://sonarcloud.io ");
+    args.AppendFormat("/d:sonar.cs.xunit.reportsPaths={0} ", new DirectoryPath(outputDir + "/Tests/").FullPath);
+    args.AppendFormat("/d:sonar.login={0} ", sonarKey);
 
     if (AzurePipelines.Environment.PullRequest.IsPullRequest)
     {
-        settings.PullRequestKey = AzurePipelines.Environment.PullRequest.Number;
-        settings.PullRequestBranch = AzurePipelines.Environment.PullRequest.SourceBranch;
-        settings.PullRequestBase = AzurePipelines.Environment.PullRequest.TargetBranch;
+        args.AppendFormat("/d:sonar.pullrequest.key={0} ", AzurePipelines.Environment.PullRequest.Number);
+        args.AppendFormat("/d:sonar.pullrequest.branch={0} ", AzurePipelines.Environment.PullRequest.SourceBranch);
+        args.AppendFormat("/d:sonar.pullrequest.base={0}", AzurePipelines.Environment.PullRequest.TargetBranch);
     }
     else
     {
-        settings.Branch = versionInfo.BranchName;
+        args.AppendFormat("/d:sonar.branch.name={0}", versionInfo.BranchName);
     }
 
-    SonarBegin(settings);
+    DotNetTool("./", "dotnet-sonarscanner", args.ToString());
 });
 
 Task("SonarEnd")
     .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
     .Does(() => 
 {   
-    SonarEnd(new SonarEndSettings
-    {
-        Login = sonarKey
-    });
+    StringBuilder args = new StringBuilder();
+    args.Append("end ");
+    args.AppendFormat("/d:sonar.login={0}", sonarKey);
+
+    DotNetTool("./", "dotnet-sonarscanner", args.ToString());
 });
 
 Task("Build")
@@ -147,7 +146,7 @@ Task("UnitTest")
     EnsureDirectoryExists(outputDir + "/Tests/");
 
     var testPaths = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
-    var settings = new DotNetCoreTestSettings
+    var settings = new DotNetTestSettings
     {
         Configuration = configuration,
         NoBuild = true
@@ -160,7 +159,7 @@ Task("UnitTest")
         settings.Loggers = new string[] { $"xunit;LogFilePath={testXml.FullPath}" };
         try 
         {
-            DotNetCoreTest(project.ToString(), settings);
+            DotNetTest(project.ToString(), settings);
         }
         catch
         {

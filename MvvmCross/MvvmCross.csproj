@@ -38,7 +38,7 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.Equals('net6.0-mac')) ">
+  <ItemGroup Condition=" $(TargetFramework.Equals('net6.0-macos')) ">
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Mac\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
