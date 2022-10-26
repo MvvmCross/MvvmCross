@@ -4,7 +4,7 @@
     <PackageVersion Include="Xamarin.AndroidX.CardView" Version="1.0.0.16" />
     <PackageVersion Include="Xamarin.AndroidX.Leanback" Version="1.0.0.16" />
     <PackageVersion Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.7" />
-    <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.5.0" />
+    <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.5.1.1" />
     <PackageVersion Include="Xamarin.AndroidX.Fragment" Version="1.5.2" />
     <PackageVersion Include="Xamarin.AndroidX.ViewPager" Version="1.0.0.14" />
     <PackageVersion Include="Xamarin.AndroidX.Preference" Version="1.2.0.2" />
