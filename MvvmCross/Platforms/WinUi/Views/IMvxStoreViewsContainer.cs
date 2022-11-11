@@ -10,6 +10,6 @@ namespace MvvmCross.Platforms.WinUi.Views
         : IMvxViewsContainer
             , IMvxWindowsViewModelLoader
             , IMvxWindowsViewModelRequestTranslator
-    {        
+    {
     }
 }

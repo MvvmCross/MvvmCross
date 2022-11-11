@@ -1,4 +1,4 @@
-﻿using AndroidX.Preference;
+using AndroidX.Preference;
 
 namespace MvvmCross.Platforms.Android.Binding
 {

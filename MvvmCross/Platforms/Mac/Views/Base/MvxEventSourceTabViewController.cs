@@ -38,6 +38,7 @@ namespace MvvmCross.Platforms.Mac.Views.Base
 
         private void Initialize()
         {
+            // Method intentionally left empty.
         }
 
         public override void LoadView()

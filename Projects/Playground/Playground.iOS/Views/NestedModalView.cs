@@ -1,8 +1,8 @@
-﻿using System;
-using MvvmCross.Platforms.Ios.Views;
-using UIKit;
-using Playground.Core.ViewModels;
+using System;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
+using MvvmCross.Platforms.Ios.Views;
+using Playground.Core.ViewModels;
+using UIKit;
 
 namespace Playground.iOS.Views
 {

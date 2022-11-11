@@ -28,10 +28,8 @@ namespace MvvmCross.Platforms.WinUi.Views
                 return true;
             }
 
-           var queued = _uiDispatcher.TryEnqueue(DispatcherQueuePriority.Normal, () =>
-            {
-                ExceptionMaskedAction(action, maskExceptions);
-            });
+            var queued = _uiDispatcher.TryEnqueue(DispatcherQueuePriority.Normal,
+                () => ExceptionMaskedAction(action, maskExceptions));
             return queued;
         }
     }

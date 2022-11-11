@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -18,6 +18,9 @@ using MvvmCross.Platforms.Android.Binding.Views;
 
 namespace MvvmCross.DroidX.Leanback.Widgets
 {
+    /// <summary>
+    /// 
+    /// </summary>
     /// <remarks>
     /// This class is actually (almost) the same as MvxRecylerView. Please keep this in mind if fixing bugs or implementing improvements!
     /// </remarks>

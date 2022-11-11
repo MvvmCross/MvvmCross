@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using Playground.iOS.Controls;

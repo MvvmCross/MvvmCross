@@ -1,16 +1,16 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using Android.Content.Res;
 using Android.OS;
-using AndroidX.AppCompat.Widget;
 using Android.Views;
+using AndroidX.AppCompat.Widget;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Views.AppCompat;
 using MvvmCross.Platforms.Android.Views.Fragments;
 using MvvmCross.ViewModels;
 using Playground.Droid.Activities;
-using MvvmCross.Platforms.Android.Views.AppCompat;
 
 namespace Playground.Droid.Fragments
 {

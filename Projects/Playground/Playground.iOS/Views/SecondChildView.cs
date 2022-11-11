@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MvvmCross;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Views;
