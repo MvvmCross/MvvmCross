@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.Plugin;
 using Serilog;

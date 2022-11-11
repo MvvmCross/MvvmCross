@@ -32,6 +32,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
         // Shared initialization code
         private void Initialize()
         {
+            // Method intentionally left empty.
         }
 
         public string BindingText

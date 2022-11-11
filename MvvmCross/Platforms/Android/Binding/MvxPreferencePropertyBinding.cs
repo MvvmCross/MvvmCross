@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.Platforms.Android.Binding
+namespace MvvmCross.Platforms.Android.Binding
 {
     internal static class MvxPreferencePropertyBinding
     {

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -32,14 +32,14 @@ namespace Playground.Core.ViewModels
             });
         }
 
-        private async Task ShowInitialViewModel()
+        private Task ShowInitialViewModel()
         {
-            await NavigationService.Navigate<SplitMasterViewModel>();
+            return NavigationService.Navigate<SplitMasterViewModel>();
         }
 
-        private async Task ShowDetailViewModel()
+        private Task ShowDetailViewModel()
         {
-            await NavigationService.Navigate<SplitDetailViewModel>();
+            return NavigationService.Navigate<SplitDetailViewModel>();
         }
     }
 }
