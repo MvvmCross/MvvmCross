@@ -1,4 +1,4 @@
-﻿using MvvmCross.Platforms.WinUi.Presenters.Attributes;
+using MvvmCross.Platforms.WinUi.Presenters.Attributes;
 
 namespace Playground.WinUi.Views
 {

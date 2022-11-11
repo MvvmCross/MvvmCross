@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MvvmCross.WeakSubscription;
 using Xunit;
 

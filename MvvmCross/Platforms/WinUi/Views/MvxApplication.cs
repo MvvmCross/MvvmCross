@@ -26,7 +26,7 @@ namespace MvvmCross.Platforms.WinUi.Views
         {
             RegisterSetup();
         }
-        
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.
         /// </summary>

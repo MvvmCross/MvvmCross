@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -24,7 +24,7 @@ namespace MvvmCross.Platforms.Ios.Presenters.Attributes
         public static bool DefaultWrapInNavigationController = true;
         public bool WrapInNavigationController { get; set; } = DefaultWrapInNavigationController;
 
-        public MasterDetailPosition Position { get; set; } = MasterDetailPosition.Detail;
+        public MasterDetailPosition Position { get; set; }
     }
 
     public enum MasterDetailPosition

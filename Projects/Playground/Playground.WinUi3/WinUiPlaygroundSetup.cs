@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Platforms.WinUi.Core;
 using Playground.Core;
 using Serilog;

@@ -1,4 +1,4 @@
-﻿using MvvmCross;
+using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.ViewModels;
 

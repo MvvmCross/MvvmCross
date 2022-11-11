@@ -43,18 +43,16 @@ namespace Playground.iOS.Views
         {
             var type = viewController.GetType();
 
-            return type == typeof(ChildView)
-                ? false
-                : base.ShowChildView(viewController);
+            return !(type == typeof(ChildView)
+) && base.ShowChildView(viewController);
         }
 
         public override bool CloseChildViewModel(IMvxViewModel viewModel)
         {
             var type = viewModel.GetType();
 
-            return type == typeof(ChildViewModel)
-                ? false
-                : base.CloseChildViewModel(viewModel);
+            return !(type == typeof(ChildViewModel)
+) && base.CloseChildViewModel(viewModel);
         }
     }
 }

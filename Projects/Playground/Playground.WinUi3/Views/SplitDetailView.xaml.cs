@@ -1,4 +1,4 @@
-﻿// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 using MvvmCross.Platforms.WinUi.Presenters.Attributes;
 using MvvmCross.Platforms.WinUi.Views;
