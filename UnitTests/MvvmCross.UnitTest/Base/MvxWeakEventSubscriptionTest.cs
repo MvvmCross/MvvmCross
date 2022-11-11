@@ -1,5 +1,4 @@
-using System;
-using MvvmCross.WeakSubscription;
+﻿using MvvmCross.WeakSubscription;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Base
@@ -40,12 +39,14 @@ namespace MvvmCross.UnitTest.Base
         {
             var disposableClass = new DisposableClass();
 
-            var subscription = new MvxWeakEventSubscription<DisposableClass>(disposableClass, "TestEvent", (s, e) =>
+            var subscription = new MvxWeakEventSubscription<DisposableClass>(disposableClass, "TestEvent", (_, _) =>
             {
             });
 
             disposableClass.Dispose();
             subscription.Dispose();
+
+            Assert.True(true);
         }
     }
 }
