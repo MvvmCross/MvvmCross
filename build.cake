@@ -6,12 +6,12 @@ var solutionName = "MvvmCross";
 var repoName = "mvvmcross/mvvmcross";
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var verbosityArg = Argument("verbosity", "Minimal");
 var artifactsDir = Argument("artifactsDir", "./artifacts");
 var outputDir = new DirectoryPath(artifactsDir);
 var gitVersionLog = new FilePath("./gitversion.log");
 var nuspecDir = new DirectoryPath("./nuspec");
 var verbosity = Verbosity.Minimal;
+var verbosityDotNet = DotNetVerbosity.Minimal;
 var sonarKey = Argument("sonarKey", "");
 
 var githubToken = Argument("github_token", "");
@@ -51,7 +51,14 @@ Setup(context =>
         target,
         cakeVersion);
 
-    verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
+    verbosity = context.Log.Verbosity;
+    verbosityDotNet = verbosity switch {
+        Verbosity.Quiet => DotNetVerbosity.Quiet,
+        Verbosity.Normal => DotNetVerbosity.Normal,
+        Verbosity.Verbose => DotNetVerbosity.Detailed,
+        Verbosity.Diagnostic => DotNetVerbosity.Diagnostic,
+        _ => DotNetVerbosity.Minimal
+    };
 });
 
 Task("Clean")
@@ -133,7 +140,8 @@ Task("Build")
     var settings = new DotNetBuildSettings
     {
          Configuration = configuration,
-         MSBuildSettings = msBuildSettings
+         MSBuildSettings = msBuildSettings,
+         Verbosity = verbosityDotNet
     };
 
     DotNetBuild(solution.ToString(), settings);
@@ -149,7 +157,8 @@ Task("UnitTest")
     var settings = new DotNetTestSettings
     {
         Configuration = configuration,
-        NoBuild = true
+        NoBuild = true,
+        Verbosity = verbosityDotNet
     };
 
     foreach(var project in testPaths)
