@@ -369,7 +369,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 view = CreateView(viewContext, name, null, attrs);
             else
 #endif
-            view = CreateView(name, null, attrs);
+                view = CreateView(name, null, attrs);
 
             return view;
         }
