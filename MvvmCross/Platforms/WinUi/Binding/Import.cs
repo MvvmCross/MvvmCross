@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.WinUi.Binding
         {
             get
             {
-                return _from 
+                return _from;
             }
             set
             {
