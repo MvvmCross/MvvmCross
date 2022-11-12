@@ -1,6 +1,20 @@
 # Changelog
 
-## [9.0.1](https://github.com/MvvmCross/MvvmCross/tree/9.0.0) (2022-09-10)
+## [9.0.2](https://github.com/MvvmCross/MvvmCross/tree/9.0.2) (2022-11-12)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.1...HEAD)
+
+* Bump Microsoft.Extensions.Logging.Abstractions from 6.0.1 to 6.0.2 by @dependabot in https://github.com/MvvmCross/MvvmCross/pull/4483
+* Fix MvxAppCompatAutoCompleteTextView ItemClick being subscribed to twice by @Digifais in https://github.com/MvvmCross/MvvmCross/pull/4508
+* Bump SonarAnalyzer.CSharp from 8.44.0.52574 to 8.48.0.56517 by @dependabot in https://github.com/MvvmCross/MvvmCross/pull/4512
+* Bump Microsoft.Extensions.Logging.Abstractions from 6.0.2 to 7.0.0 by @dependabot in https://github.com/MvvmCross/MvvmCross/pull/4513
+* Bump Microsoft.NET.Test.Sdk from 17.3.1 to 17.4.0 by @dependabot in https://github.com/MvvmCross/MvvmCross/pull/4511
+* Add supported os versions by @Cheesebaron in https://github.com/MvvmCross/MvvmCross/pull/4517
+* Fix "blocker" sonarcube warnings by @Cheesebaron in https://github.com/MvvmCross/MvvmCross/pull/4475
+
+**Full Changelog**: https://github.com/MvvmCross/MvvmCross/compare/9.0.1...9.0.2
+
+## [9.0.1](https://github.com/MvvmCross/MvvmCross/tree/9.0.1) (2022-09-10)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.0...HEAD)
 
