@@ -1,9 +1,7 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
@@ -18,7 +16,6 @@ using MvvmCross.Platforms.Ios.Views;
 using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Core
 {
@@ -123,7 +120,7 @@ namespace MvvmCross.Platforms.Ios.Core
         {
             ValidateArguments(iocProvider);
 
-            iocProvider.RegisterSingleton<IMvxPopoverPresentationSourceProvider>(CreatePopoverPresentationSourceProvider());
+            iocProvider.RegisterSingleton(CreatePopoverPresentationSourceProvider());
         }
 
         protected virtual IMvxPopoverPresentationSourceProvider CreatePopoverPresentationSourceProvider()

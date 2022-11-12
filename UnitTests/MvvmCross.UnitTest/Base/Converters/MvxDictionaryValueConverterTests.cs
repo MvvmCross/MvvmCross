@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -59,7 +59,7 @@ namespace MvvmCross.UnitTest.Base.Converters
 
             var result = Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, Fallback, true), CultureInfo.CurrentUICulture);
 
-            Assert.Equal(result, Fallback);
+            Assert.Equal(Fallback, result);
         }
 
         [Fact]

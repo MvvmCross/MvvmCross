@@ -1,19 +1,19 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Collections.Generic;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Playground.Core.ViewModels;
-using System.Collections.Generic;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views.Fragments;
+using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Fragments
 {

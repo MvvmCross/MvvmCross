@@ -21,9 +21,9 @@ namespace MvvmCross.Platforms.WinUi.Binding
 
         public object From
         {
-            get 
-            { 
-                return _from; 
+            get
+            {
+                return _from;
             }
             set
             {
@@ -31,6 +31,7 @@ namespace MvvmCross.Platforms.WinUi.Binding
                     return;
 
                 _from = value;
+
                 if (_from != null)
                 {
                     RegisterAssembly(_from.GetType().GetTypeInfo().Assembly);
@@ -48,15 +49,9 @@ namespace MvvmCross.Platforms.WinUi.Binding
             else
             {
                 Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(
-                    registry =>
-                        {
-                            registry.AddOrOverwriteFrom(assembly);
-                        });
+                    registry => registry.AddOrOverwriteFrom(assembly));
                 Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(
-                    registry =>
-                        {
-                            registry.AddOrOverwriteFrom(assembly);
-                        });
+                    registry => registry.AddOrOverwriteFrom(assembly));
             }
         }
     }

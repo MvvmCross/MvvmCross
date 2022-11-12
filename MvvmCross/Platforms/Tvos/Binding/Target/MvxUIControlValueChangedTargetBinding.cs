@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         : MvxConvertingTargetBinding
     {
         private ICommand _command;
-        private EventHandler<EventArgs> _canExecuteEventHandler;
+        private readonly EventHandler<EventArgs> _canExecuteEventHandler;
         private MvxCanExecuteChangedEventSubscription _canExecuteSubscription;
 
         protected UIControl Control => Target as UIControl;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.Binding.Target;
 using Playground.Droid.Controls;

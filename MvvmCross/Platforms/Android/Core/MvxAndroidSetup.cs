@@ -1,12 +1,8 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using Android.App;
 using Android.Content;
 using Android.Views;
 using MvvmCross.Binding;
@@ -37,25 +33,24 @@ namespace MvvmCross.Platforms.Android.Core
 
         public void PlatformInitialize(Activity activity)
         {
-            if (activity == null)
-                throw new ArgumentNullException(nameof(activity));
+            ArgumentNullException.ThrowIfNull(activity);
+            ArgumentNullException.ThrowIfNull(activity.Application);
 
             PlatformInitialize(activity.Application);
         }
 
         public void PlatformInitialize(Application application)
         {
-            if (application == null)
-                throw new ArgumentNullException(nameof(application));
+            ArgumentNullException.ThrowIfNull(application);
 
             if (_currentTopActivity != null)
                 return;
 
             _currentTopActivity = new MvxCurrentTopActivity();
-            application?.RegisterActivityLifecycleCallbacks(_currentTopActivity);
+            application.RegisterActivityLifecycleCallbacks(_currentTopActivity);
         }
 
-        public virtual Assembly ExecutableAssembly => ViewAssemblies?.FirstOrDefault() ?? GetType().Assembly;
+        public virtual Assembly ExecutableAssembly => ViewAssemblies.FirstOrDefault() ?? GetType().Assembly;
 
         public Context? ApplicationContext => _currentTopActivity?.Activity?.ApplicationContext;
 
@@ -86,7 +81,7 @@ namespace MvvmCross.Platforms.Android.Core
             ValidateArguments(iocProvider);
 
             var currentTopActivity = CreateAndroidCurrentTopActivity();
-            iocProvider.RegisterSingleton<IMvxAndroidCurrentTopActivity>(currentTopActivity);
+            iocProvider.RegisterSingleton(currentTopActivity);
         }
 
         protected virtual IMvxAndroidCurrentTopActivity CreateAndroidCurrentTopActivity()
@@ -135,8 +130,7 @@ namespace MvvmCross.Platforms.Android.Core
             var container = CreateViewsContainer(ApplicationContext);
             iocProvider.RegisterSingleton<IMvxAndroidViewModelRequestTranslator>(container);
             iocProvider.RegisterSingleton<IMvxAndroidViewModelLoader>(container);
-            var viewsContainer = container as MvxViewsContainer;
-            if (viewsContainer == null)
+            if (container is not MvxViewsContainer viewsContainer)
                 throw new MvxException("CreateViewsContainer must return an MvxViewsContainer");
             return viewsContainer;
         }
@@ -212,8 +206,7 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected virtual void FillViewTypes(IMvxTypeCache<View> cache)
         {
-            if (cache == null)
-                throw new ArgumentNullException(nameof(cache));
+            ArgumentNullException.ThrowIfNull(cache);
 
             foreach (var assembly in AndroidViewAssemblies)
             {
@@ -228,8 +221,7 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected virtual void FillAxmlViewTypeResolver(IMvxAxmlNameViewTypeResolver viewTypeResolver)
         {
-            if (viewTypeResolver == null)
-                throw new ArgumentNullException(nameof(viewTypeResolver));
+            ArgumentNullException.ThrowIfNull(viewTypeResolver);
 
             foreach (var kvp in ViewNamespaceAbbreviations)
             {
@@ -239,8 +231,7 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected virtual void FillNamespaceListViewTypeResolver(IMvxNamespaceListViewTypeResolver viewTypeResolver)
         {
-            if (viewTypeResolver == null)
-                throw new ArgumentNullException(nameof(viewTypeResolver));
+            ArgumentNullException.ThrowIfNull(viewTypeResolver);
 
             foreach (var viewNamespace in ViewNamespaces)
             {
@@ -250,8 +241,7 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
-            if (registry == null)
-                throw new ArgumentNullException(nameof(registry));
+            ArgumentNullException.ThrowIfNull(registry);
 
             registry.Fill(ValueConverterAssemblies);
             registry.Fill(ValueConverterHolders);

@@ -47,9 +47,9 @@ namespace MvvmCross.Platforms.WinUi.Binding.MvxBinding.Target
             };
 
             var attachedProperty = DependencyProperty.RegisterAttached(
-                "ListenAttached" + _targetName + Guid.NewGuid().ToString("N"), 
-                typeof(object), 
-                typeof(FrameworkElement), 
+                "ListenAttached" + _targetName + Guid.NewGuid().ToString("N"),
+                typeof(object),
+                typeof(FrameworkElement),
                 new PropertyMetadata(null, (s, e) => FireValueChanged(e.NewValue)));
 
             frameworkElement.SetBinding(attachedProperty, listenerBinding);
