@@ -73,7 +73,7 @@ namespace MvvmCross.Core
                 }
             }
 
-            MvxLogHost.Default.LogInformation("Setup: RegisterSetupType already called");
+            MvxLogHost.Default?.LogInformation("Setup: RegisterSetupType already called");
         }
 
         public static IMvxSetup Instance()
@@ -96,80 +96,101 @@ namespace MvvmCross.Core
         {
             if (State != MvxSetupState.Uninitialized)
             {
+                SetupLog?.Log(LogLevel.Trace,
+                    "InitializePrimary() called when State is not Uninitialized. State: {State}", State);
                 return;
             }
 
-            State = MvxSetupState.InitializingPrimary;
-            _iocProvider = InitializeIoC();
+            try
+            {
+                State = MvxSetupState.InitializingPrimary;
+                _iocProvider = InitializeIoC();
 
-            InitializeLoggingServices(_iocProvider);
+                InitializeLoggingServices(_iocProvider);
 
-            // Register the default setup dependencies before
-            // invoking the static call back.
-            // Developers can either extend the MvxSetup and override
-            // the RegisterDefaultSetupDependencies method, or can provide a
-            // callback method by setting the RegisterSetupDependencies method
-            RegisterDefaultSetupDependencies(_iocProvider);
-            RegisterSetupDependencies?.Invoke(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: Primary start");
-            SetupLog?.Log(LogLevel.Trace, "Setup: FirstChance start");
-            InitializeFirstChance(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: MvvmCross settings start");
-            InitializeSettings(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: Singleton Cache start");
-            InitializeSingletonCache();
-            SetupLog?.Log(LogLevel.Trace, "Setup: ViewDispatcher start");
-            InitializeViewDispatcher(_iocProvider);
-            State = MvxSetupState.InitializedPrimary;
+                // Register the default setup dependencies before
+                // invoking the static call back.
+                // Developers can either extend the MvxSetup and override
+                // the RegisterDefaultSetupDependencies method, or can provide a
+                // callback method by setting the RegisterSetupDependencies method
+                RegisterDefaultSetupDependencies(_iocProvider);
+                RegisterSetupDependencies?.Invoke(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: Primary start");
+                SetupLog?.Log(LogLevel.Trace, "Setup: FirstChance start");
+                InitializeFirstChance(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: MvvmCross settings start");
+                InitializeSettings(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: Singleton Cache start");
+                InitializeSingletonCache();
+                SetupLog?.Log(LogLevel.Trace, "Setup: ViewDispatcher start");
+                InitializeViewDispatcher(_iocProvider);
+                State = MvxSetupState.InitializedPrimary;
+            }
+            catch (Exception e)
+            {
+                SetupLog?.Log(LogLevel.Error, e, "InitializePrimary() Failed initializing primary dependencies");
+                throw;
+            }
         }
 
         public virtual void InitializeSecondary()
         {
             if (State != MvxSetupState.InitializedPrimary)
             {
+                SetupLog?.Log(LogLevel.Trace,
+                    "InitializeSecondary() called when State is not InitializedPrimary. State: {State}", State);
                 return;
             }
 
             if (_iocProvider == null)
             {
+                SetupLog?.Log(LogLevel.Error, "InitializeSecondary() IoC Provider is null");
                 throw new InvalidOperationException("Cannot continue setup with null IoCProvider");
             }
 
-            State = MvxSetupState.InitializingSecondary;
-            SetupLog?.Log(LogLevel.Trace, "Setup: Bootstrap actions");
-            PerformBootstrapActions();
-            SetupLog?.Log(LogLevel.Trace, "Setup: StringToTypeParser start");
-            InitializeStringToTypeParser(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: FillableStringToTypeParser start");
-            InitializeFillableStringToTypeParser(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: PluginManagerFramework start");
-            var pluginManager = InitializePluginFramework(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: Create App");
-            var app = InitializeMvxApplication(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: NavigationService");
-            InitializeNavigationService(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: App start");
-            InitializeApp(pluginManager, app);
-            SetupLog?.Log(LogLevel.Trace, "Setup: ViewModelTypeFinder start");
-            InitializeViewModelTypeFinder(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: ViewsContainer start");
-            InitializeViewsContainer(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: Lookup Dictionary start");
-            var lookup = InitializeLookupDictionary(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: Views start");
-            InitializeViewLookup(lookup, _iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: CommandCollectionBuilder start");
-            InitializeCommandCollectionBuilder(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: NavigationSerializer start");
-            InitializeNavigationSerializer(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: InpcInterception start");
-            InitializeInpcInterception(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: InpcInterception start");
-            InitializeViewModelCache(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: LastChance start");
-            InitializeLastChance(_iocProvider);
-            SetupLog?.Log(LogLevel.Trace, "Setup: Secondary end");
-            State = MvxSetupState.Initialized;
+            try
+            {
+                State = MvxSetupState.InitializingSecondary;
+                SetupLog?.Log(LogLevel.Trace, "Setup: Bootstrap actions");
+                PerformBootstrapActions();
+                SetupLog?.Log(LogLevel.Trace, "Setup: StringToTypeParser start");
+                InitializeStringToTypeParser(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: FillableStringToTypeParser start");
+                InitializeFillableStringToTypeParser(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: PluginManagerFramework start");
+                var pluginManager = InitializePluginFramework(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: Create App");
+                var app = InitializeMvxApplication(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: NavigationService");
+                InitializeNavigationService(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: App start");
+                InitializeApp(pluginManager, app);
+                SetupLog?.Log(LogLevel.Trace, "Setup: ViewModelTypeFinder start");
+                InitializeViewModelTypeFinder(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: ViewsContainer start");
+                InitializeViewsContainer(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: Lookup Dictionary start");
+                var lookup = InitializeLookupDictionary(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: Views start");
+                InitializeViewLookup(lookup, _iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: CommandCollectionBuilder start");
+                InitializeCommandCollectionBuilder(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: NavigationSerializer start");
+                InitializeNavigationSerializer(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: InpcInterception start");
+                InitializeInpcInterception(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: InpcInterception start");
+                InitializeViewModelCache(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: LastChance start");
+                InitializeLastChance(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: Secondary end");
+                State = MvxSetupState.Initialized;
+            }
+            catch (Exception e)
+            {
+                SetupLog?.Log(LogLevel.Error, e, "InitializeSecondary() failed initializing secondary dependencies");
+                throw;
+            }
         }
 
         protected virtual void InitializeSingletonCache()
