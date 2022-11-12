@@ -5,12 +5,11 @@
     <PackageProjectUrl>https://github.com/MvvmCross/MvvmCross</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
     <Authors>.NET Foundation and Contributors</Authors>
-    <Owners>MvvmCross;slodge;cheesebaron;martijn00</Owners>
-    <PackageTags>mvvm;mvvmcross;xamarin;android;ios;mac;forms;monodroid;monotouch;xamarin.android;xamarin.ios;xamarin.forms;xamarin.mac;wpf;net;net45;uwp;tizen</PackageTags>
+    <Owners>MvvmCross;slodge;cheesebaron</Owners>
+    <PackageTags>mvvm;mvvmcross;xamarin;android;ios;mac</PackageTags>
     <PackageReleaseNotes>https://github.com/MvvmCross/MvvmCross/blob/develop/CHANGELOG.md</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <MinClientVersion>2.12</MinClientVersion>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryUrl>https://github.com/MvvmCross/MvvmCross</RepositoryUrl>
@@ -22,12 +21,16 @@
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>true</ImplicitUsings>
     <NoWarn>$(NoWarn);1591;1701;1702;1705;VSX1000;CS0109;CS0108;CS0618;CS0114;NU1603</NoWarn>
-    <Platform>AnyCPU</Platform>
 
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('MvvmCross'))</IsLibraryProject>
 
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">10.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tvos'">10.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

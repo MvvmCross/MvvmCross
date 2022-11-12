@@ -1,4 +1,4 @@
-﻿using MvvmCross.IoC;
+using MvvmCross.IoC;
 
 namespace Playground.Core.Services
 {

@@ -248,7 +248,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters
                 {
                     contentDialog.XamlRoot = frame.XamlRoot;
                 }
-                
+
                 if (contentDialog != null)
                 {
                     await contentDialog.ShowAsync(attribute.Placement);

@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using MvvmCross.Core;
 using MvvmCross.Platforms.WinUi.Views;
 using Playground.WinUi3;

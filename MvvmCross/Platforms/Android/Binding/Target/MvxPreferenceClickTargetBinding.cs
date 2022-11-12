@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Input;
 using AndroidX.Preference;
 using MvvmCross.Binding;

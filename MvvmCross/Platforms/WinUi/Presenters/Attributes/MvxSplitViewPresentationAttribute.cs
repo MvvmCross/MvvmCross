@@ -8,10 +8,8 @@ namespace MvvmCross.Platforms.WinUi.Presenters.Attributes
 {
     public class MvxSplitViewPresentationAttribute : MvxBasePresentationAttribute
     {
-
         public MvxSplitViewPresentationAttribute() : this(SplitPanePosition.Content)
         {
-            
         }
 
         public MvxSplitViewPresentationAttribute(SplitPanePosition position)
