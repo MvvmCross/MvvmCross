@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
-using MvvmCross.Exceptions;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
 
@@ -26,16 +24,15 @@ namespace MvvmCross.Base
 
         protected virtual void Run(Type type)
         {
-            if (type == null)
-                throw new ArgumentNullException(nameof(type));
+            ArgumentNullException.ThrowIfNull(type);
 
             try
             {
                 var toRun = Activator.CreateInstance(type);
-                var bootstrapAction = toRun as IMvxBootstrapAction;
-                if (bootstrapAction == null)
+                if (toRun is not IMvxBootstrapAction bootstrapAction)
                 {
-                    MvxLogHost.Default?.Log(LogLevel.Trace, "Could not run startup task {0} - it's not a startup task", type.Name);
+                    MvxLogHost.Default?.Log(LogLevel.Trace,
+                        "Could not run startup task {TypeName} - it's not a startup task", type.Name);
                     return;
                 }
 
@@ -46,7 +43,7 @@ namespace MvvmCross.Base
 #pragma warning restore CA1031 // Do not catch general exception types
             {
                 // pokemon handling
-                MvxLogHost.Default?.Log(LogLevel.Trace, "Error running startup task {0} - error {1}", type.Name, exception.ToLongString());
+                MvxLogHost.Default?.Log(LogLevel.Trace, exception, "Error running startup task {TypeName}", type.Name);
             }
         }
     }
