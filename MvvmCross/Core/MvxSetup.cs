@@ -2,9 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
@@ -23,7 +20,7 @@ namespace MvvmCross.Core
     {
         public event EventHandler<MvxSetupStateEventArgs>? StateChanged;
 
-        private static readonly object _lock = new object();
+        private static readonly object _lock = new();
         private MvxSetupState _state;
         private IMvxIoCProvider? _iocProvider;
 
@@ -31,7 +28,7 @@ namespace MvvmCross.Core
 
         protected static Func<IMvxSetup>? SetupCreator { get; set; }
 
-        protected static List<Assembly> ViewAssemblies { get; } = new List<Assembly>();
+        protected static List<Assembly> ViewAssemblies { get; } = new();
 
         protected ILogger? SetupLog { get; private set; }
 
@@ -319,10 +316,12 @@ namespace MvvmCross.Core
             iocProvider.RegisterSingleton(CreateApp(iocProvider));
             iocProvider.LazyConstructAndRegisterSingleton<IMvxViewModelLoader, MvxViewModelLoader>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxNavigationService, IMvxViewModelLoader, IMvxViewDispatcher, IMvxIoCProvider>(
-                (loader, dispatcher, iocProvider) => new MvxNavigationService(loader, dispatcher, iocProvider));
+                (loader, dispatcher, p) => new MvxNavigationService(loader, dispatcher, p));
             iocProvider.RegisterSingleton(() => new MvxViewModelByNameLookup());
-            iocProvider.LazyConstructAndRegisterSingleton<IMvxViewModelByNameLookup, MvxViewModelByNameLookup>(nameLookup => nameLookup);
-            iocProvider.LazyConstructAndRegisterSingleton<IMvxViewModelByNameRegistry, MvxViewModelByNameLookup>(nameLookup => nameLookup);
+            iocProvider.LazyConstructAndRegisterSingleton<IMvxViewModelByNameLookup, MvxViewModelByNameLookup>(
+                nameLookup => nameLookup);
+            iocProvider.LazyConstructAndRegisterSingleton<IMvxViewModelByNameRegistry, MvxViewModelByNameLookup>(
+                nameLookup => nameLookup);
             iocProvider.LazyConstructAndRegisterSingleton<IMvxViewModelTypeFinder, MvxViewModelViewTypeFinder>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxTypeToTypeLookupBuilder, MvxViewModelViewLookupBuilder>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxCommandCollectionBuilder, MvxCommandCollectionBuilder>();
@@ -415,7 +414,7 @@ namespace MvvmCross.Core
 
             return assemblies
                 .AsParallel()
-                .Where(asmb => AssemblyReferencesMvvmCross(asmb, mvvmCrossAssemblyName));
+                .Where(assembly => AssemblyReferencesMvvmCross(assembly, mvvmCrossAssemblyName));
         }
 
         private static bool AssemblyReferencesMvvmCross(Assembly assembly, string mvvmCrossAssemblyName)
@@ -440,24 +439,21 @@ namespace MvvmCross.Core
             var pluginAttribute = typeof(MvxPluginAttribute);
             var pluginAssemblies = GetPluginAssemblies();
 
-            //Search Assemblies for Plugins
+            // Search Assemblies for Plugins
             foreach (var pluginAssembly in pluginAssemblies)
             {
                 var assemblyTypes = pluginAssembly.ExceptionSafeGetTypes();
 
-                //Search Types for Valid Plugin
-                foreach (var type in assemblyTypes)
+                // Search Types for Valid Plugin
+                foreach (var type in assemblyTypes.Where(TypeContainsPluginAttribute))
                 {
-                    if (TypeContainsPluginAttribute(type))
-                    {
-                        //Ensure Plugin has been loaded
-                        pluginManager.EnsurePluginLoaded(type);
-                    }
+                    // Ensure Plugin has been loaded
+                    pluginManager.EnsurePluginLoaded(type);
                 }
             }
 
             bool TypeContainsPluginAttribute(Type type) =>
-                (type.GetCustomAttributes(pluginAttribute, false)?.Length ?? 0) > 0;
+                type.GetCustomAttributes(pluginAttribute, false).Length > 0;
         }
 
         protected virtual IMvxApplication CreateMvxApplication(IMvxIoCProvider iocProvider)
@@ -597,9 +593,6 @@ namespace MvvmCross.Core
         protected virtual IMvxViewsContainer? InitializeViewLookup(IDictionary<Type, Type> viewModelViewLookup,
             IMvxIoCProvider iocProvider)
         {
-            if (viewModelViewLookup == null)
-                return null;
-
             ValidateArguments(iocProvider);
 
             var container = iocProvider.Resolve<IMvxViewsContainer>();
