@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -97,7 +97,7 @@ namespace MvvmCross.UnitTest.Navigation
         }
 
         [Fact]
-        public Task Test_NavigateWithBundle()
+        public async Task Test_NavigateWithBundle()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
 
@@ -106,7 +106,7 @@ namespace MvvmCross.UnitTest.Navigation
             var bundle = new MvxBundle();
             bundle.Write(new { hello = "world" });
 
-            return navigationService.Navigate(mockVm.Object, bundle);
+            await navigationService.Navigate(mockVm.Object, bundle);
 
             //TODO: fix NavigationService not allowing parameter values in request and only presentation values
             //mockVm.Verify(vm => vm.Init(It.Is<string>(s => s == "world")), Times.Once);
@@ -185,14 +185,14 @@ namespace MvvmCross.UnitTest.Navigation
         }
 
         [Fact]
-        public Task Test_NavigateTypeOfWithBundle()
+        public async Task Test_NavigateTypeOfWithBundle()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
 
             var bundle = new MvxBundle();
             bundle.Write(new { hello = "world" });
 
-            return navigationService.Navigate(typeof(SimpleTestViewModel), presentationBundle: bundle);
+            await navigationService.Navigate(typeof(SimpleTestViewModel), presentationBundle: bundle);
 
             //TODO: fix NavigationService not allowing parameter values in request and only presentation values
             //mockVm.Verify(vm => vm.Init(It.Is<string>(s => s == "world")), Times.Once);

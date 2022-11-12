@@ -1,8 +1,8 @@
-using UIKit;
+﻿using UIKit;
 
 namespace Playground.iOS
 {
-    public static class Application
+    public class Application
     {
         // This is the main entry point of the application.
         private static void Main(string[] args)

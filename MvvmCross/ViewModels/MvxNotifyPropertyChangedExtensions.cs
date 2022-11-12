@@ -1,13 +1,10 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace MvvmCross.ViewModels
 {
@@ -15,7 +12,7 @@ namespace MvvmCross.ViewModels
     public static class MvxNotifyPropertyChangedExtensions
     {
         private static bool RaiseIfChanging<TSource, TReturn>(
-            TReturn backingField, TReturn newValue,
+            TSource source, TReturn backingField, TReturn newValue,
             Func<bool> raiseAction)
             where TSource : IMvxNotifyPropertyChanged
         {
@@ -52,7 +49,7 @@ namespace MvvmCross.ViewModels
         }
 
         private static TReturn RaiseAndSetIfChanged<TSource, TReturn, TActionParameter>(
-            ref TReturn backingField, TReturn newValue,
+            TSource source, ref TReturn backingField, TReturn newValue,
             Func<TActionParameter, Task> raiseAction,
             TActionParameter raiseActionParameter)
             where TSource : IMvxNotifyPropertyChanged
