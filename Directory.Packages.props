@@ -6,7 +6,7 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.2.221109.1" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.2.221116.1" />
     <PackageVersion Include="Moq" Version="4.18.2" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageVersion Include="Plugin.Permissions" Version="6.0.1" />
