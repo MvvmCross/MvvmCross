@@ -15,7 +15,7 @@
     <PackageVersion Include="Serilog.Extensions.Logging" Version="3.1.0" />
     <PackageVersion Include="Serilog.Sinks.Debug" Version="2.0.0" />
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.48.0.56517" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.49.0.57237" />
     <PackageVersion Include="SourceLink.Create.CommandLine" Version="2.8.3" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.5.1.1" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.5.0" />
