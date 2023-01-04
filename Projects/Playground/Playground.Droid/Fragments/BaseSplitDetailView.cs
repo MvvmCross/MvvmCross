@@ -11,6 +11,7 @@ using MvvmCross.Platforms.Android.Views.AppCompat;
 using MvvmCross.Platforms.Android.Views.Fragments;
 using MvvmCross.ViewModels;
 using Playground.Droid.Activities;
+using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace Playground.Droid.Fragments
 {
