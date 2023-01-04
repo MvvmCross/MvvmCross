@@ -74,11 +74,26 @@ namespace MvvmCross.Platforms.Android.Views
             var view = androidView as IMvxView;
             view.OnViewDestroy();
 
-            var currentActivity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity;
-            if (currentActivity == null && view is Activity destroyedActivity && destroyedActivity.IsFinishing && Mvx.IoCProvider.TryResolve<IMvxAppStart>(out var appStart))
+            if (!Mvx.IoCProvider.TryResolve<IMvxAppStart>(out var appStart) || !Mvx.IoCProvider.TryResolve<IMvxAndroidCurrentTopActivity>(out var topActivity))
+                return;
+
+            var currentActivity = topActivity.Activity;
+            if (IsActivityTearingDown(currentActivity))
             {
                 appStart?.ResetStart();
             }
+            else if (currentActivity == null && IsActivityTearingDown(view as Activity))
+            {
+                appStart?.ResetStart();
+            }
+        }
+
+        private static bool IsActivityTearingDown(Activity? activity)
+        {
+            if (activity == null) return false;
+            if (activity.IsDestroyed) return true;
+            if (activity.IsFinishing) return true;
+            return false;
         }
 
         public static void OnViewStart(this IMvxAndroidView androidView)
