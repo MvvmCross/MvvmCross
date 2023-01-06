@@ -32,7 +32,7 @@
     <PackageVersion Include="Xamarin.AndroidX.ViewPager" Version="1.0.0.15" />
     <PackageVersion Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.7.0.1" />
-    <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="117.6.0.2" />
+    <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="118.1.0.1" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="120.0.0" />
     <PackageVersion Include="XunitXml.TestLogger" Version="3.0.70" />
     <PackageVersion Include="xunit" Version="2.4.2" />
