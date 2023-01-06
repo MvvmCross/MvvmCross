@@ -1,5 +1,20 @@
 # Changelog
 
+## [9.0.4](https://github.com/MvvmCross/MvvmCross/tree/9.0.4) (2023-01-06)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.3...9.0.4)
+
+**Fixed bugs:**
+
+- MvvmCross 9.0.2 throws InvalidOperationException when calling MvxSetupSingleton.EnsureInitialized() [\#4534](https://github.com/MvvmCross/MvvmCross/issues/4532) ([pwojtysiak](https://github.com/pwojtysiak))
+
+**Merged pull requests:**
+
+- gh-4532 fix invalidoperationexception in MvxIntentService and MvxFragment [\#4539](https://github.com/MvvmCross/MvvmCross/pull/4539) ([Cheesebaron](https://github.com/Cheesebaron))
+- Remove MSBuild.SDK.Extras [\#4538](https://github.com/MvvmCross/MvvmCross/pull/4538) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Microsoft.CodeAnalysis.NetAnalyzers from 6.0.0 to 7.0.0 [\#4537](https://github.com/MvvmCross/MvvmCross/pull/4537) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.GooglePlayServices.Basement from 117.6.0.2 to 118.1.0.1 [\#4536](https://github.com/MvvmCross/MvvmCross/pull/4536) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [9.0.3](https://github.com/MvvmCross/MvvmCross/tree/9.0.3) (2023-01-04)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.2...9.0.3)
@@ -12,14 +27,8 @@
 **Merged pull requests:**
 
 - Bump Microsoft.WindowsAppSDK from 1.2.221109.1 to 1.2.221116.1 [\#4521](https://github.com/MvvmCross/MvvmCross/pull/4521) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Add supported os versions [\#4517](https://github.com/MvvmCross/MvvmCross/pull/4517) ([Cheesebaron](https://github.com/Cheesebaron))
-- Bump Microsoft.Extensions.Logging.Abstractions from 6.0.2 to 7.0.0 [\#4513](https://github.com/MvvmCross/MvvmCross/pull/4513) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump SonarAnalyzer.CSharp from 8.44.0.52574 to 8.48.0.56517 [\#4512](https://github.com/MvvmCross/MvvmCross/pull/4512) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump Microsoft.NET.Test.Sdk from 17.3.1 to 17.4.0 [\#4511](https://github.com/MvvmCross/MvvmCross/pull/4511) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Fix MvxAppCompatAutoCompleteTextView ItemClick being subscribed to twice [\#4508](https://github.com/MvvmCross/MvvmCross/pull/4508) ([Digifais](https://github.com/Digifais))
 - Fix: MvxCurrentTopActivity.Activity returns last seen activity if no activity exists [\#4506](https://github.com/MvvmCross/MvvmCross/pull/4506) ([evgenyvalavin](https://github.com/evgenyvalavin))
-- Bump Microsoft.Extensions.Logging.Abstractions from 6.0.1 to 6.0.2 [\#4483](https://github.com/MvvmCross/MvvmCross/pull/4483) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Fix "blocker" sonarcube warnings [\#4475](https://github.com/MvvmCross/MvvmCross/pull/4475) ([Cheesebaron](https://github.com/Cheesebaron))
 
 ## [9.0.2](https://github.com/MvvmCross/MvvmCross/tree/9.0.2) (2022-11-12)
 
