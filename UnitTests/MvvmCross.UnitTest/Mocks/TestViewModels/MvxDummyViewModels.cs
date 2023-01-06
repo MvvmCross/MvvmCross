@@ -21,6 +21,7 @@ namespace MvvmCross.UnitTest.Mocks.TestViewModels
     {
         public void Init(string id)
         {
+            // Method intentionally left empty.
         }
     }
 

@@ -122,7 +122,7 @@ namespace MvvmCross.Binding.BindingContext
             // View bindings need to be deep copied
             var viewBindingsCopy = _viewBindings.ConvertAll(vb =>
                 new KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>(vb.Key, vb.Value.ToList()));
-;
+
 
             var directBindingsCopy = _directBindings.ToList();
 
@@ -131,7 +131,7 @@ namespace MvvmCross.Binding.BindingContext
             else
                 Task.Run(() => SetBindings(viewBindingsCopy, directBindingsCopy));
         }
-        
+
         private void SetBindings(List<KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>> viewBindings,
             List<MvxBindingContext.TargetAndBinding> bindings)
         {
