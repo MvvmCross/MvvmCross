@@ -2,11 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Android.App;
-using Android.Content;
 using Android.Runtime;
-using MvvmCross.Core;
 using MvvmCross.Platforms.Android.Core;
 
 namespace MvvmCross.Platforms.Android.Services
@@ -22,8 +18,13 @@ namespace MvvmCross.Platforms.Android.Services
         {
         }
 
-        protected override void OnHandleIntent(Intent intent)
+        public override void OnCreate()
         {
+            base.OnCreate();
+
+            if (ApplicationContext == null)
+                return;
+
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.EnsureInitialized();
         }
