@@ -1,4 +1,4 @@
-﻿using MvvmCross.WeakSubscription;
+using MvvmCross.WeakSubscription;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Base

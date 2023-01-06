@@ -21,7 +21,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
     {
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
-        private NSTableView _tableView;
+        private readonly NSTableView _tableView;
 
         public MvxTableViewSource(NSTableView tableView) : base()
         {
