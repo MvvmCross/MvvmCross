@@ -94,15 +94,6 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             }
         }
 
-        public static void EnsureSetupInitialized(this IMvxFragmentView fragmentView)
-        {
-            var fragment = fragmentView.ToFragment();
-            if (fragment == null)
-                throw new MvxException($"{nameof(EnsureSetupInitialized)} called on an {nameof(IMvxFragmentView)} which is not an Android Fragment: {fragmentView}");
-
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(fragment.Activity.ApplicationContext);
-            setup.EnsureInitialized();
-        }
 
         public static TFragment FindFragmentById<TFragment>(this MvxActivity activity, int resourceId)
             where TFragment : Fragment
