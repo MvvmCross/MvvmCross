@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
-using MvvmCross.Platforms.Android.Core;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using Fragment = AndroidX.Fragment.App.Fragment;
@@ -65,11 +64,9 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
                     new MvxSimpleLayoutInflaterHolder(inflater),
                     fragment.DataContext);
             }
-            else
+            else if (fragment.BindingContext is IMvxAndroidBindingContext androidContext)
             {
-                var androidContext = fragment.BindingContext as IMvxAndroidBindingContext;
-                if (androidContext != null)
-                    androidContext.LayoutInflaterHolder = new MvxSimpleLayoutInflaterHolder(inflater);
+                androidContext.LayoutInflaterHolder = new MvxSimpleLayoutInflaterHolder(inflater);
             }
         }
 
@@ -86,14 +83,11 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
                         actualFragment.Activity.LayoutInflater),
                     fragment.DataContext);
             }
-            else
+            else if (fragment.BindingContext is IMvxAndroidBindingContext androidContext)
             {
-                var androidContext = fragment.BindingContext as IMvxAndroidBindingContext;
-                if (androidContext != null)
-                    androidContext.LayoutInflaterHolder = new MvxSimpleLayoutInflaterHolder(actualFragment.Activity.LayoutInflater);
+                androidContext.LayoutInflaterHolder = new MvxSimpleLayoutInflaterHolder(actualFragment.Activity.LayoutInflater);
             }
         }
-
 
         public static TFragment FindFragmentById<TFragment>(this MvxActivity activity, int resourceId)
             where TFragment : Fragment
@@ -102,7 +96,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             if (fragment == null)
             {
                 MvxLogHost.Default?.Log(LogLevel.Warning,
-                    "Failed to find fragment id {resourceId} in {activityTypeName}", resourceId, activity.GetType().Name);
+                    "Failed to find fragment id {ResourceId} in {ActivityTypeName}", resourceId, activity.GetType().Name);
                 return default(TFragment);
             }
 
@@ -116,7 +110,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             if (fragment == null)
             {
                 MvxLogHost.Default?.Log(LogLevel.Warning,
-                    "Failed to find fragment tag {tag} in {activityTypeName}", tag, activity.GetType().Name);
+                    "Failed to find fragment tag {Tag} in {ActivityTypeName}", tag, activity.GetType().Name);
                 return default(TFragment);
             }
 
@@ -128,7 +122,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             if (!(fragment is TFragment))
             {
                 MvxLogHost.Default?.Log(LogLevel.Warning,
-                    "Fragment type mismatch got {fragmentType} but expected {expectedType}",
+                    "Fragment type mismatch got {FragmentType} but expected {ExpectedType}",
                     fragment.GetType().FullName, typeof(TFragment).FullName);
                 return default(TFragment);
             }
@@ -142,7 +136,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             var viewModel = loader.LoadViewModel(request, savedState);
             if (viewModel == null)
             {
-                MvxLogHost.Default?.Log(LogLevel.Warning, "ViewModel not loaded for {viewModelType}", request.ViewModelType.FullName);
+                MvxLogHost.Default?.Log(LogLevel.Warning, "ViewModel not loaded for {ViewModelType}", request.ViewModelType.FullName);
                 return;
             }
 
