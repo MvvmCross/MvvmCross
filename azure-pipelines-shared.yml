@@ -6,7 +6,7 @@ steps:
     version: 6.0.x
 
 - pwsh: |
-    dotnet workload install android ios tvos macos maccatalyst
+    dotnet workload install android ios tvos macos maccatalyst maui-ios maui-android
   displayName: Install dotnet workloads
 
 - task: Cache@2

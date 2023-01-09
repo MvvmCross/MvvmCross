@@ -1,5 +1,23 @@
 # Changelog
 
+## [9.0.5](https://github.com/MvvmCross/MvvmCross/tree/9.0.5) (2023-01-09)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.4...9.0.5)
+
+**Fixed bugs:**
+
+- Embedded fragment is not displaying on Android [\#4353](https://github.com/MvvmCross/MvvmCross/issues/4353)
+- Enable nullable attributes on MvxFragmentAdapter and MvxFragmentExtensions [\#4542](https://github.com/MvvmCross/MvvmCross/pull/4542) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Merged pull requests:**
+
+- Bump Microsoft.WindowsAppSDK from 1.2.221116.1 to 1.2.221209.1 [\#4540](https://github.com/MvvmCross/MvvmCross/pull/4540) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Moq from 4.18.2 to 4.18.4 [\#4533](https://github.com/MvvmCross/MvvmCross/pull/4533) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump SonarAnalyzer.CSharp from 8.48.0.56517 to 8.51.0.59060 [\#4530](https://github.com/MvvmCross/MvvmCross/pull/4530) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Newtonsoft.Json from 13.0.1 to 13.0.2 [\#4523](https://github.com/MvvmCross/MvvmCross/pull/4523) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Added an MvxSplitViewController constructor with UISplitViewControllerStyle argument [\#4400](https://github.com/MvvmCross/MvvmCross/pull/4400) ([entdark](https://github.com/entdark))
+- Embedded fragment is not displaying on Android [\#4354](https://github.com/MvvmCross/MvvmCross/pull/4354) ([prin53](https://github.com/prin53))
+
 ## [9.0.4](https://github.com/MvvmCross/MvvmCross/tree/9.0.4) (2023-01-06)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.3...9.0.4)
