@@ -15,7 +15,7 @@ namespace MvvmCross.Plugin.FieldBinding
         private static readonly EventInfo NotifyChangeEventInfo = typeof(INotifyChange).GetEvent("Changed");
 
         private readonly INotifyChange _notifyChange;
-        private IDisposable _subscription;
+        private readonly IDisposable _subscription;
 
         protected INotifyChange NotifyChange => _notifyChange;
 
