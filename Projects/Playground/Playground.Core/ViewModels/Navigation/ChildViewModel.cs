@@ -55,6 +55,7 @@ namespace Playground.Core.ViewModels
 
         public void Init()
         {
+            // Method intentionally left empty.
         }
 
         public IMvxAsyncCommand CloseCommand { get; private set; }

@@ -1125,34 +1125,33 @@ namespace MvvmCross.Platforms.Android.Presenters
             return FindFragmentInChildren(fragmentName, CurrentFragmentManager);
         }
 
-        protected virtual Fragment? FindFragmentInChildren(string? fragmentName, FragmentManager? fragManager)
+        protected virtual Fragment? FindFragmentInChildren(string? fragmentName, FragmentManager? fragmentManager)
         {
             if (string.IsNullOrWhiteSpace(fragmentName))
-                return null;
-
-            if (fragManager == null)
-                return null;
-
-            if (fragManager.BackStackEntryCount == 0)
-                return null;
-
-            for (int i = 0; i < fragManager.BackStackEntryCount; i++)
             {
-                var parentFrag = fragManager.FindFragmentById(fragManager.GetBackStackEntryAt(i).Id);
+                return null;
+            }
 
-                //let's try again finding it
-                var frag = parentFrag?.ChildFragmentManager?.FindFragmentByTag(fragmentName);
+            if (fragmentManager == null)
+            {
+                return null;
+            }
 
-                if (frag == null)
+            foreach (var parentFragment in fragmentManager.Fragments)
+            {
+                // Let's try again finding it
+                var fragment = parentFragment?.ChildFragmentManager?.FindFragmentByTag(fragmentName);
+
+                if (fragment == null)
                 {
-                    //reloop for other fragments
-                    frag = FindFragmentInChildren(fragmentName, parentFrag?.ChildFragmentManager);
+                    // Re-loop for other fragments
+                    fragment = FindFragmentInChildren(fragmentName, parentFragment!.ChildFragmentManager);
                 }
 
-                //if we found the frag lets return it!
-                if (frag != null)
+                // If we found the fragment let's return it!
+                if (fragment != null)
                 {
-                    return frag;
+                    return fragment;
                 }
             }
 
