@@ -46,7 +46,7 @@ This package contains the 'Visibility' plugin for MvvmCross</Description>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-windows')) ">
     <Compile Include="Platforms\WinUi\**\*.cs" />
 
-    <PackageReference Include="Microsoft.WindowsAppSDK"  />
+    <PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
   </ItemGroup>
 

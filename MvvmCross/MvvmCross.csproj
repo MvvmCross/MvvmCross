@@ -76,7 +76,7 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <None Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
     <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
 
-    <PackageReference Include="Microsoft.WindowsAppSDK"  />
+    <PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
   </ItemGroup>
 
