@@ -32,6 +32,10 @@ namespace MvvmCross.Platforms.Ios.Views.Base
         {
         }
 
+        public MvxEventSourceSplitViewController(UISplitViewControllerStyle style) : base(style)
+        {
+        }
+
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);

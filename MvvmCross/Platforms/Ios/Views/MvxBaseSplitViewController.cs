@@ -38,6 +38,11 @@ namespace MvvmCross.Platforms.Ios.Views
             this.AdaptForBinding();
         }
 
+        public MvxBaseSplitViewController(UISplitViewControllerStyle style) : base(style)
+        {
+            this.AdaptForBinding();
+        }
+
         public object DataContext
         {
             get { return BindingContext.DataContext; }
