@@ -7,10 +7,10 @@
     <RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
     <OutputType>Exe</OutputType>
     <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <UseMauiEssentials>true</UseMauiEssentials>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Plugin.Permissions" />
     <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Serilog" />
   </ItemGroup>

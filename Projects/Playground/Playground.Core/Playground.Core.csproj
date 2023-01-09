@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <UseMauiEssentials>true</UseMauiEssentials>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +24,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Plugin.Permissions" />
     <PackageReference Include="Serilog.Extensions.Logging" />
   </ItemGroup>
 

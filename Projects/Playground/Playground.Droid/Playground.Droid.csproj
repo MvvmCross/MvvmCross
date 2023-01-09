@@ -5,6 +5,7 @@
     <AssemblyName>Playground.Droid</AssemblyName>
     <RootNamespace>Playground.Droid</RootNamespace>
     <OutputType>Exe</OutputType>
+    <UseMauiEssentials>true</UseMauiEssentials>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +13,6 @@
     <PackageReference Include="Serilog.Sinks.Xamarin" />
     <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Xamarin.FFImageLoading" />
-    <PackageReference Include="Plugin.Permissions" />
     <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" />
   </ItemGroup>
 
