@@ -84,7 +84,7 @@ namespace MvvmCross.UnitTest.Base
                 }
             };
             var instance = MvxIoCProvider.Initialize(options);
-            
+
             Assert.NotNull(Mvx.IoCProvider);
 
             Mvx.IoCProvider.RegisterType<IA, A>();

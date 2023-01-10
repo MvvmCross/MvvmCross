@@ -4,9 +4,9 @@
 
 using System.Reflection;
 using MvvmCross.Base;
+using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
 using MvvmCross.IoC;
-using MvvmCross.Binding.Combiners;
 
 namespace MvvmCross.Platforms.WinUi.Binding
 {
