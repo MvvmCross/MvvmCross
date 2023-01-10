@@ -3,11 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.WinUi.Views
 {
+    [RequiresUnreferencedCode("MvxWindowsViewContainer is not trimming compatible")]
     public class MvxWindowsViewsContainer
         : MvxViewsContainer
         , IMvxStoreViewsContainer
