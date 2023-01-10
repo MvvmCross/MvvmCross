@@ -29,7 +29,6 @@ namespace MvvmCross.IoC
 
         protected IMvxIocOptions Options => _options;
 
-        [RequiresUnreferencedCode("In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed")]
         public MvxIoCContainer(IMvxIocOptions options, IMvxIoCProvider parentProvider = null)
         {
             _options = options ?? new MvxIocOptions();
@@ -58,6 +57,7 @@ namespace MvvmCross.IoC
 
         public interface IResolver
         {
+            [RequiresUnreferencedCode("Resolve is incompatible with trimming")]
             object Resolve();
 
             ResolverType ResolveType { get; }
@@ -67,15 +67,17 @@ namespace MvvmCross.IoC
 
         public class ConstructingResolver : IResolver
         {
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             private readonly Type _type;
             private readonly IMvxIoCProvider _parent;
 
-            public ConstructingResolver(Type type, IMvxIoCProvider parent)
+            public ConstructingResolver([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, IMvxIoCProvider parent)
             {
                 _type = type;
                 _parent = parent;
             }
 
+            [RequiresUnreferencedCode("Resolve is incompatible with trimming")]
             public object Resolve()
             {
                 return _parent.IoCConstruct(_type);
@@ -98,6 +100,7 @@ namespace MvvmCross.IoC
                 _constructor = constructor;
             }
 
+            [RequiresUnreferencedCode("Resolve is incompatible with trimming")]
             public object Resolve()
             {
                 return _constructor();
@@ -120,6 +123,7 @@ namespace MvvmCross.IoC
                 _theObject = theObject;
             }
 
+            [RequiresUnreferencedCode("Resolve is incompatible with trimming")]
             public object Resolve()
             {
                 return _theObject;
@@ -144,6 +148,7 @@ namespace MvvmCross.IoC
                 _constructor = theConstructor;
             }
 
+            [RequiresUnreferencedCode("Resolve is incompatible with trimming")]
             public object Resolve()
             {
                 if (_theObject != null)
@@ -184,6 +189,7 @@ namespace MvvmCross.IoC
                 _genericTypeParameters = genericTypeParameters;
             }
 
+            [RequiresUnreferencedCode("Resolve is incompatible with trimming")]
             public object Resolve()
             {
                 return _parent.IoCConstruct(_genericTypeDefinition.MakeGenericType(_genericTypeParameters));
@@ -214,7 +220,8 @@ namespace MvvmCross.IoC
             }
         }
 
-        public bool TryResolve<T>(out T resolved)
+        [RequiresUnreferencedCode("TryResolve is not compatible with trimming")]
+        public bool TryResolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(out T resolved)
             where T : class
         {
             try
@@ -231,7 +238,8 @@ namespace MvvmCross.IoC
             }
         }
 
-        public bool TryResolve(Type type, out object resolved)
+        [RequiresUnreferencedCode("TryResolve is not compatible with trimming")]
+        public bool TryResolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, out object resolved)
         {
             lock (_lockObject)
             {
@@ -239,13 +247,15 @@ namespace MvvmCross.IoC
             }
         }
 
-        public T Resolve<T>()
+        [RequiresUnreferencedCode("Resolve is not compatible with trimming")]
+        public T Resolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
             where T : class
         {
             return (T)Resolve(typeof(T));
         }
 
-        public object Resolve(Type type)
+        [RequiresUnreferencedCode("Resolve is not compatible with trimming")]
+        public object Resolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
         {
             lock (_lockObject)
             {
@@ -258,13 +268,15 @@ namespace MvvmCross.IoC
             }
         }
 
-        public T GetSingleton<T>()
+        [RequiresUnreferencedCode("GetSingleton is not compatible with trimming")]
+        public T GetSingleton<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
             where T : class
         {
             return (T)GetSingleton(typeof(T));
         }
 
-        public object GetSingleton(Type type)
+        [RequiresUnreferencedCode("GetSingleton is not compatible with trimming")]
+        public object GetSingleton([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
         {
             lock (_lockObject)
             {
@@ -277,13 +289,15 @@ namespace MvvmCross.IoC
             }
         }
 
-        public T Create<T>()
+        [RequiresUnreferencedCode("Create is not compatible with trimming")]
+        public T Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
             where T : class
         {
             return (T)Create(typeof(T));
         }
 
-        public object Create(Type type)
+        [RequiresUnreferencedCode("Create is not compatible with trimming")]
+        public object Create([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
         {
             lock (_lockObject)
             {
@@ -296,7 +310,7 @@ namespace MvvmCross.IoC
             }
         }
 
-        public void RegisterType<TInterface, TToConstruct>()
+        public void RegisterType<TInterface, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TToConstruct>()
             where TInterface : class
             where TToConstruct : class, TInterface
         {
@@ -324,7 +338,7 @@ namespace MvvmCross.IoC
             InternalSetResolver(t, resolver);
         }
 
-        public void RegisterType(Type tFrom, Type tTo)
+        public void RegisterType(Type tFrom, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type tTo)
         {
             IResolver resolver = null;
             if (tFrom.GetTypeInfo().IsGenericTypeDefinition)
@@ -361,40 +375,47 @@ namespace MvvmCross.IoC
             InternalSetResolver(tInterface, new ConstructingSingletonResolver(theConstructor));
         }
 
-        public object IoCConstruct(Type type)
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        public object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
         {
             return IoCConstruct(type, default(IDictionary<string, object>));
         }
 
-        public T IoCConstruct<T>()
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        public T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
             where T : class
         {
             return (T)IoCConstruct(typeof(T));
         }
 
-        public virtual object IoCConstruct(Type type, object arguments)
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        public virtual object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, object arguments)
         {
             return IoCConstruct(type, arguments.ToPropertyDictionary());
         }
 
-        public virtual T IoCConstruct<T>(IDictionary<string, object> arguments)
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        public virtual T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(IDictionary<string, object> arguments)
             where T : class
         {
             return (T)IoCConstruct(typeof(T), arguments);
         }
 
-        public virtual T IoCConstruct<T>(object arguments)
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        public virtual T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(object arguments)
             where T : class
         {
             return (T)IoCConstruct(typeof(T), arguments.ToPropertyDictionary());
         }
 
-        public virtual T IoCConstruct<T>(params object[] arguments) where T : class
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        public virtual T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(params object[] arguments) where T : class
         {
             return (T)IoCConstruct(typeof(T), arguments);
         }
 
-        public virtual object IoCConstruct(Type type, params object[] arguments)
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        public virtual object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, params object[] arguments)
         {
             var selectedConstructor = type.FindApplicableConstructor(arguments);
 
@@ -407,7 +428,9 @@ namespace MvvmCross.IoC
             return IoCConstruct(type, selectedConstructor, parameters.ToArray());
         }
 
-        public virtual object IoCConstruct(Type type, IDictionary<string, object> arguments)
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        public virtual object IoCConstruct(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, IDictionary<string, object> arguments)
         {
             var selectedConstructor = type.FindApplicableConstructor(arguments);
 
@@ -420,7 +443,7 @@ namespace MvvmCross.IoC
             return IoCConstruct(type, selectedConstructor, parameters.ToArray());
         }
 
-        protected virtual object IoCConstruct(Type type, ConstructorInfo constructor, object[] arguments)
+        protected virtual object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, ConstructorInfo constructor, object[] arguments)
         {
             object toReturn;
             try
@@ -501,12 +524,16 @@ namespace MvvmCross.IoC
             return resolver.ResolveType == requiredResolverType.Value;
         }
 
-        private bool InternalTryResolve(Type type, out object resolved)
+        [RequiresUnreferencedCode("InternalTryResolve is not compatible with trimming")]
+        private bool InternalTryResolve(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, out object resolved)
         {
             return InternalTryResolve(type, ResolverTypeNoneSpecified, out resolved);
         }
 
-        private bool InternalTryResolve(Type type, ResolverType? requiredResolverType, out object resolved)
+        [RequiresUnreferencedCode("InternalTryResolve is not compatible with trimming")]
+        private bool InternalTryResolve(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, ResolverType? requiredResolverType, out object resolved)
         {
             IResolver resolver;
             if (!TryGetResolver(type, out resolver))
@@ -529,7 +556,9 @@ namespace MvvmCross.IoC
             return InternalTryResolve(type, resolver, out resolved);
         }
 
-        private bool InternalTryResolve(Type type, IResolver resolver, out object resolved)
+        [RequiresUnreferencedCode("InternalTryResolve is not compatible with trimming")]
+        private bool InternalTryResolve(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type, IResolver resolver, out object resolved)
         {
             var detectingCircular = ShouldDetectCircularReferencesFor(resolver);
             if (detectingCircular)
@@ -637,6 +666,7 @@ namespace MvvmCross.IoC
             _propertyInjector?.Inject(toReturn, _options.PropertyInjectorOptions);
         }
 
+        [RequiresUnreferencedCode("TryResolveParameter is incompatible with trimming")]
         protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo selectedConstructor, IDictionary<string, object> arguments)
         {
             var parameters = new List<object>();
@@ -654,6 +684,7 @@ namespace MvvmCross.IoC
             return parameters;
         }
 
+        [RequiresUnreferencedCode("TryResolveParameter is incompatible with trimming")]
         protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo selectedConstructor, object[] arguments)
         {
             var parameters = new List<object>();
@@ -676,6 +707,7 @@ namespace MvvmCross.IoC
             return parameters;
         }
 
+        [RequiresUnreferencedCode("TryResolveParameter is incompatible with trimming")]
         private bool TryResolveParameter(Type type, ParameterInfo parameterInfo, out object parameterValue)
         {
             if (!TryResolve(parameterInfo.ParameterType, out parameterValue))

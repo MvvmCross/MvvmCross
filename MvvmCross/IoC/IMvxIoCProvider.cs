@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.IoC
 {
@@ -14,27 +15,35 @@ namespace MvvmCross.IoC
 
         bool CanResolve(Type type);
 
-        T Resolve<T>()
+        [RequiresUnreferencedCode("Resolve is not compatible with trimming")]
+        T Resolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
             where T : class;
 
-        object Resolve(Type type);
+        [RequiresUnreferencedCode("Resolve is not compatible with trimming")]
+        object Resolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type);
 
-        bool TryResolve<T>(out T resolved)
+        [RequiresUnreferencedCode("TryResolve is not compatible with trimming")]
+        bool TryResolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(out T resolved)
             where T : class;
 
-        bool TryResolve(Type type, out object resolved);
+        [RequiresUnreferencedCode("TryResolve is not compatible with trimming")]
+        bool TryResolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, out object resolved);
 
-        T Create<T>()
+        [RequiresUnreferencedCode("Create is not compatible with trimming")]
+        T Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
             where T : class;
 
-        object Create(Type type);
+        [RequiresUnreferencedCode("Create is not compatible with trimming")]
+        object Create([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type);
 
-        T GetSingleton<T>()
+        [RequiresUnreferencedCode("GetSingleton is not compatible with trimming")]
+        T GetSingleton<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
             where T : class;
 
-        object GetSingleton(Type type);
+        [RequiresUnreferencedCode("GetSingleton is not compatible with trimming")]
+        object GetSingleton([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type);
 
-        void RegisterType<TFrom, TTo>()
+        void RegisterType<TFrom, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTo>()
             where TFrom : class
             where TTo : class, TFrom;
 
@@ -43,7 +52,7 @@ namespace MvvmCross.IoC
 
         void RegisterType(Type t, Func<object> constructor);
 
-        void RegisterType(Type tFrom, Type tTo);
+        void RegisterType(Type tFrom, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type tTo);
 
         void RegisterSingleton<TInterface>(TInterface theObject)
             where TInterface : class;
@@ -55,25 +64,33 @@ namespace MvvmCross.IoC
 
         void RegisterSingleton(Type tInterface, Func<object> theConstructor);
 
-        T IoCConstruct<T>()
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
             where T : class;
 
-        T IoCConstruct<T>(IDictionary<string, object> arguments)
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(IDictionary<string, object> arguments)
             where T : class;
 
-        T IoCConstruct<T>(object arguments)
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(object arguments)
             where T : class;
 
-        T IoCConstruct<T>(params object[] arguments)
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(params object[] arguments)
             where T : class;
 
-        object IoCConstruct(Type type);
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type);
 
-        object IoCConstruct(Type type, IDictionary<string, object> arguments);
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, IDictionary<string, object> arguments);
 
-        object IoCConstruct(Type type, object arguments);
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, object arguments);
 
-        object IoCConstruct(Type type, params object[] arguments);
+        [RequiresUnreferencedCode("IoCConstruct is incompatible with trimming")]
+        object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, params object[] arguments);
 
         void CallbackWhenRegistered<T>(Action action);
 

@@ -2,11 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
@@ -17,6 +14,7 @@ namespace MvvmCross.IoC
 #nullable enable
     public static class MvxTypeExtensions
     {
+        [RequiresUnreferencedCode("ExceptionSafeGetTypes calls GetTypes on Assembly")]
         public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
         {
             try
@@ -46,6 +44,7 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("CreatableTypes calls ExceptionSafeGetTypes")]
         public static IEnumerable<Type> CreatableTypes(this Assembly assembly)
         {
             return assembly
@@ -130,9 +129,11 @@ namespace MvvmCross.IoC
         public class ServiceTypeAndImplementationTypePair
         {
             public List<Type> ServiceTypes { get; }
+
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             public Type ImplementationType { get; }
 
-            public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes, Type implementationType)
+            public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type implementationType)
             {
                 ImplementationType = implementationType;
                 ServiceTypes = serviceTypes;
@@ -141,10 +142,12 @@ namespace MvvmCross.IoC
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsTypes(this IEnumerable<Type> types)
         {
-            return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type>() { t }, t));
+            return types.Select(([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type t) => new ServiceTypeAndImplementationTypePair(new List<Type>() { t }, t));
         }
 
-        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types) => types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
+        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types) =>
+            types.Select(([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type t) =>
+                new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types, params Type[] interfaces)
         {
@@ -154,7 +157,7 @@ namespace MvvmCross.IoC
                 var lookup = interfaces.ToDictionary(x => x, _ => true);
                 return
                     types.Select(
-                        t =>
+                        ([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type t) =>
                         new ServiceTypeAndImplementationTypePair(
                             t.GetInterfaces().Where(iface => lookup.ContainsKey(iface)).ToList(), t));
             }
@@ -162,7 +165,7 @@ namespace MvvmCross.IoC
             {
                 return
                     types.Select(
-                        t =>
+                        ([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type t) =>
                         new ServiceTypeAndImplementationTypePair(
                             t.GetInterfaces().Where(iface => interfaces.Contains(iface)).ToList(), t));
             }
@@ -224,8 +227,8 @@ namespace MvvmCross.IoC
             }
         }
 
-        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
-        public static object? CreateDefault(this Type type)
+        public static object? CreateDefault(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] this Type type)
         {
             if (type == null)
             {
@@ -244,7 +247,7 @@ namespace MvvmCross.IoC
         }
 
         public static ConstructorInfo? FindApplicableConstructor(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]this Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] this Type type,
             IDictionary<string, object> arguments)
         {
             var constructors = type.GetConstructors();
@@ -277,7 +280,7 @@ namespace MvvmCross.IoC
         }
 
         public static ConstructorInfo? FindApplicableConstructor(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]this Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] this Type type,
             object[] arguments)
         {
             var constructors = type.GetConstructors();
