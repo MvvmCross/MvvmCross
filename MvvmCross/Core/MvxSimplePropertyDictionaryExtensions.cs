@@ -44,7 +44,7 @@ namespace MvvmCross.Core
         public static T Read<
             [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicConstructors |
-            DynamicallyAccessedMemberTypes.PublicProperties)] T> (this IDictionary<string, string> data)
+            DynamicallyAccessedMemberTypes.PublicProperties)] T>(this IDictionary<string, string> data)
             where T : new()
         {
             return (T)data.Read(typeof(T));
