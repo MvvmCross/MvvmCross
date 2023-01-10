@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -40,6 +40,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
     /// Heavily based on Calligraphy's CalligraphyLayoutInflater
     /// See: https://github.com/chrisjenx/Calligraphy/blob/master/calligraphy/src/main/java/uk/co/chrisjenx/calligraphy/CalligraphyLayoutInflater.java" />
     /// </summary>
+    [RequiresUnreferencedCode("MvxLayoutInflater is not trimming compatible")]
     [Register("mvvmcross.platforms.android.binding.views.MvxLayoutInflater")]
     public class MvxLayoutInflater : LayoutInflater
     {
@@ -183,7 +184,6 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return _bindingVisitor.OnViewCreated(view, Context, attrs);
         }
 
-#if __ANDROID_29__
         public override View? OnCreateView(Context viewContext, View? parent, string name, IAttributeSet? attrs)
         {
             if (Debug)
@@ -194,7 +194,6 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 viewContext,
                 attrs);
         }
-#endif
 
         // Mimic PhoneLayoutInflater's OnCreateView.
         private View? PhoneLayoutInflaterOnCreateView(string? name, IAttributeSet? attrs)
@@ -263,7 +262,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             if (_setPrivateFactory)
                 return;
 
-            if (!(Context is IFactory2))
+            if (Context is not IFactory2)
             {
                 _setPrivateFactory = true;
                 return;
@@ -364,11 +363,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         private View? CreateViewCompat(Context viewContext, string name, IAttributeSet attrs)
         {
             View? view;
-#if __ANDROID_29__
+
             if (Build.VERSION.SdkInt > BuildVersionCodes.P)
                 view = CreateView(viewContext, name, null, attrs);
             else
-#endif
                 view = CreateView(name, null, attrs);
 
             return view;
@@ -420,7 +418,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        private class DelegateFactory2 : IMvxLayoutInflaterFactory
+        private sealed class DelegateFactory2 : IMvxLayoutInflaterFactory
         {
             private const string DelegateFactory2Tag = "DelegateFactory2";
 
@@ -444,7 +442,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        private class DelegateFactory1 : IMvxLayoutInflaterFactory
+        private sealed class DelegateFactory1 : IMvxLayoutInflaterFactory
         {
             private const string DelegateFactory1Tag = "DelegateFactory1";
 
@@ -468,7 +466,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        private class PrivateFactoryWrapper2 : Object, IFactory2
+        private sealed class PrivateFactoryWrapper2 : Object, IFactory2
         {
             private const string PrivateFactoryWrapper2Tag = "PrivateFactoryWrapper2";
 
