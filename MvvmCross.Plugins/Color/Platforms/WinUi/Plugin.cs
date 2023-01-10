@@ -12,7 +12,7 @@ namespace MvvmCross.Plugin.Color.Platforms.WinUi
         public override void Load()
         {
             base.Load();
-            Mvx.IoCProvider.RegisterSingleton<IMvxNativeColor>(new MvxWindowsColor());
+            Mvx.IoCProvider?.RegisterSingleton<IMvxNativeColor>(new MvxWindowsColor());
         }
     }
 }

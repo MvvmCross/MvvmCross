@@ -63,7 +63,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             Title = title;
 
             if (!string.IsNullOrEmpty(viewPagerResourceName) &&
-                Mvx.IoCProvider.TryResolve(out IMvxAndroidGlobals globals) &&
+                Mvx.IoCProvider?.TryResolve(out IMvxAndroidGlobals globals) == true &&
                 globals.ApplicationContext.Resources != null)
             {
                 ViewPagerResourceId = globals.ApplicationContext.Resources.GetIdentifier(

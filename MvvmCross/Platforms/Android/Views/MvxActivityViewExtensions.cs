@@ -41,7 +41,7 @@ namespace MvvmCross.Platforms.Android.Views
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity, bundle));
 
             IMvxViewModel cached = null;
-            if (Mvx.IoCProvider.TryResolve<IMvxSingleViewModelCache>(out var cache))
+            if (Mvx.IoCProvider?.TryResolve<IMvxSingleViewModelCache>(out var cache) == true)
                 cached = cache.GetAndClear(bundle);
 
             var view = (IMvxView)androidView;
@@ -54,7 +54,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (bundle == null)
                 return null;
 
-            if (!Mvx.IoCProvider.TryResolve<IMvxSavedStateConverter>(out var converter))
+            if (Mvx.IoCProvider?.TryResolve<IMvxSavedStateConverter>(out var converter) != true)
             {
                 MvxLogHost.Default?.Log(LogLevel.Trace, "No saved state converter available - this is OK if seen during start");
                 return null;
@@ -65,7 +65,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public static void OnViewNewIntent(this IMvxAndroidView androidView)
         {
-            MvxLogHost.Default?.Log(LogLevel.Trace, "OnViewNewIntent called - MvvmCross lifecycle won't run automatically in this case.");
+            MvxLogHost.Default?.Log(LogLevel.Trace, "OnViewNewIntent called - MvvmCross lifecycle won't run automatically in this case");
         }
 
         public static void OnViewDestroy(this IMvxAndroidView androidView)
@@ -74,8 +74,11 @@ namespace MvvmCross.Platforms.Android.Views
             var view = androidView as IMvxView;
             view.OnViewDestroy();
 
-            if (!Mvx.IoCProvider.TryResolve<IMvxAppStart>(out var appStart) || !Mvx.IoCProvider.TryResolve<IMvxAndroidCurrentTopActivity>(out var topActivity))
+            if (Mvx.IoCProvider?.TryResolve<IMvxAppStart>(out var appStart) != true ||
+                Mvx.IoCProvider?.TryResolve<IMvxAndroidCurrentTopActivity>(out var topActivity) != true)
+            {
                 return;
+            }
 
             var currentActivity = topActivity.Activity;
             if (IsActivityTearingDown(currentActivity))
@@ -148,7 +151,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxLogHost.Default?.Log(LogLevel.Trace, "No ViewModel class specified for {0} in LoadViewModel",
+                MvxLogHost.Default?.Log(LogLevel.Trace, "No ViewModel class specified for {ViewType} in LoadViewModel",
                     androidView.GetType().Name);
             }
 

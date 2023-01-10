@@ -119,7 +119,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             var mvxBundle = FragmentView?.CreateSaveStateBundle();
             if (mvxBundle != null)
             {
-                if (!Mvx.IoCProvider.TryResolve(out IMvxSavedStateConverter converter))
+                if (Mvx.IoCProvider?.TryResolve(out IMvxSavedStateConverter converter) != true)
                 {
                     MvxLogHost.GetLog<MvxBindingFragmentAdapter>()?.Log(LogLevel.Warning,
                         "Saved state converter not available - saving state will be hard");
@@ -133,8 +133,8 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             if (FragmentView == null)
                 return;
 
-            var cache = Mvx.IoCProvider.Resolve<IMvxMultipleViewModelCache>();
-            cache.Cache(FragmentView.ViewModel, FragmentView.UniqueImmutableCacheTag);
+            if (Mvx.IoCProvider?.TryResolve(out IMvxMultipleViewModelCache cache) == true)
+                cache.Cache(FragmentView.ViewModel, FragmentView.UniqueImmutableCacheTag);
         }
 
         protected override void HandleDestroyViewCalled(object? sender, EventArgs e)

@@ -10,12 +10,12 @@ namespace MvvmCross.Plugin.Color
     {
         public virtual void Load()
         {
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
+            Mvx.IoCProvider?.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
         }
 
         private void RegisterValueConverters()
         {
-            if (Mvx.IoCProvider.TryResolve<IMvxValueConverterRegistry>(out var registry))
+            if (Mvx.IoCProvider?.TryResolve<IMvxValueConverterRegistry>(out var registry) == true)
             {
                 registry.AddOrOverwrite("ARGB", new MvxARGBValueConverter());
                 registry.AddOrOverwrite("NativeColor", new MvxNativeColorValueConverter());

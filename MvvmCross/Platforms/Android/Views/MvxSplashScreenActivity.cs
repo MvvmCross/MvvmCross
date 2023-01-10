@@ -93,7 +93,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected virtual async Task RunAppStartAsync(Bundle bundle)
         {
-            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup))
+            if (Mvx.IoCProvider?.TryResolve(out IMvxAppStart startup) == true)
             {
                 if (!startup.IsStarted)
                 {

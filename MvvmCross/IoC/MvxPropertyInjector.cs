@@ -35,7 +35,7 @@ namespace MvvmCross.IoC
         protected virtual void InjectProperty(object toReturn, PropertyInfo injectableProperty, IMvxPropertyInjectorOptions options)
         {
             object propertyValue;
-            if (Mvx.IoCProvider.TryResolve(injectableProperty.PropertyType, out propertyValue))
+            if (Mvx.IoCProvider?.TryResolve(injectableProperty.PropertyType, out propertyValue) == true)
             {
                 try
                 {

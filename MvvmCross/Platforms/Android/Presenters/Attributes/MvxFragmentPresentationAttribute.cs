@@ -65,7 +65,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             bool addFragment = false
         )
         {
-            if (Mvx.IoCProvider.TryResolve(out IMvxAndroidGlobals globals) &&
+            if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidGlobals globals) == true &&
                 globals.ApplicationContext.Resources != null)
             {
                 var context = globals.ApplicationContext;

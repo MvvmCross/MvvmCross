@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
                   isCacheableFragment)
         {
             if (!string.IsNullOrEmpty(tabLayoutResourceName) &&
-                Mvx.IoCProvider.TryResolve(out IMvxAndroidGlobals globals) &&
+                Mvx.IoCProvider?.TryResolve(out IMvxAndroidGlobals globals) == true &&
                 globals.ApplicationContext.Resources != null)
             {
                 TabLayoutResourceId = globals.ApplicationContext.Resources.GetIdentifier(

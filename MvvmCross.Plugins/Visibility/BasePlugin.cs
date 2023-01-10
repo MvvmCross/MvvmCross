@@ -11,7 +11,7 @@ namespace MvvmCross.Plugin.Visibility
     {
         public virtual void Load()
         {
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
+            Mvx.IoCProvider?.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
         }
 
         private void RegisterValueConverters()

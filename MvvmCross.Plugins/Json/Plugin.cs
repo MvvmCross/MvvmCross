@@ -15,12 +15,12 @@ namespace MvvmCross.Plugin.Json
 
         public void Load()
         {
-            Mvx.IoCProvider.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
+            Mvx.IoCProvider?.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
             var configuration = _configuration ?? MvxJsonConfiguration.Default;
 
             if (configuration.RegisterAsTextSerializer)
             {
-                Mvx.IoCProvider.RegisterType<IMvxTextSerializer, MvxJsonConverter>();
+                Mvx.IoCProvider?.RegisterType<IMvxTextSerializer, MvxJsonConverter>();
             }
         }
 
