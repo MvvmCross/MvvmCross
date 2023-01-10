@@ -13,7 +13,7 @@ namespace MvvmCross.Plugin.FieldBinding
     {
         public void Load()
         {
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxSourceBindingFactoryExtensionHost>(OnHostRegistered);
+            Mvx.IoCProvider?.CallbackWhenRegistered<IMvxSourceBindingFactoryExtensionHost>(OnHostRegistered);
         }
 
         private void OnHostRegistered(IMvxSourceBindingFactoryExtensionHost host)

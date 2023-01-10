@@ -15,7 +15,7 @@ namespace MvvmCross.Plugin.Color.Platforms.WinUi
             if (!IsInDesignTool)
                 return;
 
-            if (Mvx.IoCProvider.CanResolve<IMvxNativeColor>())
+            if (Mvx.IoCProvider?.CanResolve<IMvxNativeColor>() == true)
                 return;
 
             var forceLoaded = new Plugin();

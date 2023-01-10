@@ -52,7 +52,7 @@ namespace MvvmCross.Platforms.Ios.Core
 
         protected virtual void RunAppStart(object hint = null)
         {
-            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+            if (Mvx.IoCProvider?.TryResolve(out IMvxAppStart startup) == true && !startup.IsStarted)
             {
                 startup.Start(GetAppStartHint(hint));
             }

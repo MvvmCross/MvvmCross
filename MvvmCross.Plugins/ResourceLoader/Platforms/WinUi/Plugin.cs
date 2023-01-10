@@ -11,7 +11,7 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.WinUi
     {
         public void Load()
         {
-            Mvx.IoCProvider.RegisterType<IMvxResourceLoader, MvxStoreResourceLoader>();
+            Mvx.IoCProvider?.RegisterType<IMvxResourceLoader, MvxStoreResourceLoader>();
         }
     }
 }

@@ -82,7 +82,7 @@ namespace MvvmCross.Platforms.Android.Views
             var mvxBundle = AndroidView.CreateSaveStateBundle();
             if (mvxBundle != null)
             {
-                if (!Mvx.IoCProvider.TryResolve<IMvxSavedStateConverter>(out var converter))
+                if (Mvx.IoCProvider?.TryResolve<IMvxSavedStateConverter>(out var converter) != true)
                 {
                     MvxLogHost.GetLog<MvxActivityAdapter>()?.Log(LogLevel.Warning,
                         "Saved state converter not available - saving state will be hard");
@@ -93,7 +93,7 @@ namespace MvvmCross.Platforms.Android.Views
                 }
             }
 
-            if (Mvx.IoCProvider.TryResolve<IMvxSingleViewModelCache>(out var cache))
+            if (Mvx.IoCProvider?.TryResolve<IMvxSingleViewModelCache>(out var cache) == true)
             {
                 cache.Cache(AndroidView.ViewModel, eventArgs.Value);
             }
@@ -102,7 +102,7 @@ namespace MvvmCross.Platforms.Android.Views
         protected override void EventSourceOnActivityResultCalled(
             object sender, MvxValueEventArgs<MvxActivityResultParameters> eventArgs)
         {
-            if (Mvx.IoCProvider.TryResolve<IMvxIntentResultSink>(out var sink))
+            if (Mvx.IoCProvider?.TryResolve<IMvxIntentResultSink>(out var sink) == true)
             {
                 var resultParameters = eventArgs.Value;
                 var intentResult = new MvxIntentResultEventArgs(

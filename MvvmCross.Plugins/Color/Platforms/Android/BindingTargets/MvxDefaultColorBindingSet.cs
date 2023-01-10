@@ -16,8 +16,7 @@ namespace MvvmCross.Plugin.Color.Platforms.Android.BindingTargets
     {
         public void RegisterBindings()
         {
-            IMvxTargetBindingFactoryRegistry registry;
-            if (!Mvx.IoCProvider.TryResolve(out registry))
+            if (Mvx.IoCProvider?.TryResolve(out IMvxTargetBindingFactoryRegistry registry) != true)
             {
                 MvxPluginLog.Instance.Log(LogLevel.Warning,
                     "No binding registry available - so color bindings will not be used");
