@@ -38,7 +38,7 @@ namespace MvvmCross.Base
 
         // core implementation of MakeSafeValue
         public static object? MakeSafeValueCore(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type propertyType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] this Type propertyType,
             object? value)
         {
             if (value == null)
