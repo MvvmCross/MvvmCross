@@ -19,6 +19,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
         private static int[] _recyclerViewItemTemplateSelectorGroupId;
         private static int _recyclerViewItemTemplateSelector;
 
+        [RequiresUnreferencedCode("TryInitializeBindingResourcePaths is not trimming compatible")]
         private static string ReadRecyclerViewItemTemplateSelectorClassName(Context context, IAttributeSet attrs)
         {
             TryInitializeBindingResourcePaths();
@@ -50,7 +51,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
             return className;
         }
 
-        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
+        [RequiresUnreferencedCode("BuildItemTemplateSelector is not trimming compatible")]
         public static IMvxTemplateSelector BuildItemTemplateSelector(Context context, IAttributeSet attrs, int itemTemplateId)
         {
             var templateSelectorClassName = ReadRecyclerViewItemTemplateSelectorClassName(context, attrs);
@@ -88,7 +89,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
             return templateSelector;
         }
 
-        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
+        [RequiresUnreferencedCode("TryInitializeBindingResourcePaths is not trimming compatible")]
         private static void TryInitializeBindingResourcePaths()
         {
             if (areBindingResourcesInitialized)

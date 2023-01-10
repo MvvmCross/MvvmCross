@@ -1,15 +1,12 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.UnitTest.Mocks.ViewModels
 {
-    public class ViewModelMock<T> where T : MvxViewModel
+    public class ViewModelMock<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T> where T : MvxViewModel
     {
         private readonly T _object;
 
-        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         public ViewModelMock()
         {
             _object = (T)Activator.CreateInstance(typeof(T));
