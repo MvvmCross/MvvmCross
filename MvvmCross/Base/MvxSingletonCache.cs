@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.ViewModels;
@@ -9,6 +10,7 @@ using MvvmCross.ViewModels;
 namespace MvvmCross.Base
 {
 #nullable enable
+    [RequiresUnreferencedCode("MvxSingletonCache is not trimming compatible")]
     public sealed class MvxSingletonCache
         : MvxSingleton<IMvxSingletonCache>, IMvxSingletonCache
     {

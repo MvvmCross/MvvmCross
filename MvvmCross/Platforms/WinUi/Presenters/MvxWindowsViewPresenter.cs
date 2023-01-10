@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -22,6 +23,7 @@ using Windows.UI.Core;
 
 namespace MvvmCross.Platforms.WinUi.Presenters
 {
+    [RequiresUnreferencedCode("MvxWindowsViewPresenter is not trimming compatible")]
     public class MvxWindowsViewPresenter
         : MvxAttributeViewPresenter, IMvxWindowsViewPresenter
     {

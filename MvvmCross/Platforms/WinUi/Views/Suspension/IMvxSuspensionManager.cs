@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml.Controls;
 
@@ -15,8 +16,10 @@ namespace MvvmCross.Platforms.WinUi.Views.Suspension
 
         List<Type> KnownTypes { get; }
 
+        [RequiresUnreferencedCode("SaveAsync is not trimming compatible")]
         Task SaveAsync();
 
+        [RequiresUnreferencedCode("RestoreAsync is not trimming compatible")]
         Task RestoreAsync();
 
         /// <summary>

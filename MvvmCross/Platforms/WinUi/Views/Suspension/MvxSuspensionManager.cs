@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
@@ -47,6 +48,7 @@ namespace MvvmCross.Platforms.WinUi.Views.Suspension
         /// to save its state.
         /// </summary>
         /// <returns>An asynchronous task that reflects when session state has been saved.</returns>
+        [RequiresUnreferencedCode("SaveAsync is not trimming compatible")]
         public virtual async Task SaveAsync()
         {
             try
@@ -93,6 +95,7 @@ namespace MvvmCross.Platforms.WinUi.Views.Suspension
         /// <returns>An asynchronous task that reflects when session state has been read.  The
         /// content of <see cref="SessionState"/> should not be relied upon until this task
         /// completes.</returns>
+        [RequiresUnreferencedCode("RestoreAsync is not trimming compatible")]
         public virtual async Task RestoreAsync()
         {
             SessionState = new Dictionary<string, object>();
