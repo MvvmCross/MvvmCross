@@ -3,13 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Views
 {
 #nullable enable
     public interface IMvxViewFinder
     {
-        Type? GetViewType(Type? viewModelType);
+        Type? GetViewType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType);
     }
 #nullable restore
 }

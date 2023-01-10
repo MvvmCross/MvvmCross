@@ -12,10 +12,12 @@ namespace MvvmCross.Base
 {
     public class MvxBootstrapRunner
     {
+        [RequiresUnreferencedCode("Run calls CreatableTypes on Assembly")]
         public virtual void Run(Assembly assembly)
         {
-            var types = assembly.CreatableTypes()
-                                .Inherits<IMvxBootstrapAction>();
+            var types = assembly
+                .CreatableTypes()
+                .Inherits<IMvxBootstrapAction>();
 
             foreach (var type in types)
             {
@@ -23,8 +25,8 @@ namespace MvvmCross.Base
             }
         }
 
-        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
-        protected virtual void Run(Type type)
+        protected virtual void Run(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
         {
             ArgumentNullException.ThrowIfNull(type);
 

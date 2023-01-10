@@ -13,6 +13,7 @@ using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
 namespace MvvmCross.Platforms.Android.Binding.Binders
 {
 #nullable enable
+    [RequiresUnreferencedCode("MvxAndroidViewFactory is not compatible with trimming")]
     public class MvxAndroidViewFactory
         : IMvxAndroidViewFactory
     {
@@ -34,9 +35,8 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             return CreateView(viewType, context, attrs, name);
         }
 
-        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         private static View? CreateView(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type viewType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewType,
             Context context, IAttributeSet attributes, string name)
         {
             try

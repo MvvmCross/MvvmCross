@@ -2,14 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using MvvmCross.Converters;
 using MvvmCross.IoC;
-using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Ios.Binding.ValueConverters
 {
@@ -17,21 +13,14 @@ namespace MvvmCross.Platforms.Ios.Binding.ValueConverters
         : MvxValueConverter
     {
         //dictionary of supported unified type conversions
-        internal static readonly IReadOnlyDictionary<Type, Type> UnifiedTypeConversions;
+        internal static readonly IReadOnlyDictionary<Type, Type> UnifiedTypeConversions =
+            new ReadOnlyDictionary<Type, Type>(new Dictionary<Type, Type>
+            {
+                { typeof(float), typeof(nfloat) },
+                { typeof(int), typeof(nint) },
+                { typeof(uint), typeof(nuint) }
+            });
 
-        static MvxUnifiedTypesValueConverter()
-        {
-            var initDictionary = new Dictionary<Type, Type>
-                {
-                    { typeof(float), typeof(nfloat) },
-                    { typeof(int), typeof(nint) },
-                    { typeof(uint), typeof(nuint) }
-                };
-
-            UnifiedTypeConversions = new ReadOnlyDictionary<Type, Type>(initDictionary);
-        }
-
-        [RequiresUnreferencedCode("In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed")]
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             //actually value cannot be null if converter is being used by auto converter registry and was

@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Views
@@ -41,7 +40,7 @@ namespace MvvmCross.Views
             Add(typeof(TViewModel), typeof(TView));
         }
 
-        public Type GetViewType(Type? viewModelType)
+        public Type? GetViewType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType)
         {
             Type? binding;
             if (viewModelType != null && _bindingMap.TryGetValue(viewModelType, out binding))

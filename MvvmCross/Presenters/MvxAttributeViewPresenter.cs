@@ -2,11 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Presenters.Attributes;
@@ -17,6 +13,7 @@ using MvvmCross.Views;
 namespace MvvmCross.Presenters
 {
 #nullable enable
+    [RequiresUnreferencedCode("MvxAttributeViewPresenter is not trimming compatible")]
     public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttributeViewPresenter
     {
         private readonly Lazy<IMvxViewModelTypeFinder> _viewModelTypeFinder =
@@ -48,9 +45,8 @@ namespace MvvmCross.Presenters
 
         public abstract MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType);
 
-        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         public virtual object? CreateOverridePresentationAttributeViewInstance(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type viewType)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewType)
         {
             if (viewType == null)
                 throw new ArgumentNullException(nameof(viewType));
@@ -59,7 +55,7 @@ namespace MvvmCross.Presenters
         }
 
         public virtual MvxBasePresentationAttribute? GetOverridePresentationAttribute(
-            MvxViewModelRequest request, Type viewType)
+            MvxViewModelRequest request, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
@@ -97,6 +93,7 @@ namespace MvvmCross.Presenters
             }
         }
 
+        [RequiresUnreferencedCode("GetPresentationAttribute is not trimming compatible")]
         public virtual MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
         {
             if (request == null)

@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
@@ -18,10 +17,10 @@ namespace MvvmCross.Presenters
         IDictionary<Type, MvxPresentationAttributeAction>? AttributeTypesToActionsDictionary { get; }
         void RegisterAttributeTypes();
 
-        //TODO: Maybe move those to helper class
+        [RequiresUnreferencedCode("GetPresentationAttribute is not trimming compatible")]
         MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request);
         MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType);
-        MvxBasePresentationAttribute? GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType);
+        MvxBasePresentationAttribute? GetOverridePresentationAttribute(MvxViewModelRequest request, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType);
     }
 #nullable restore
 }

@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
@@ -26,13 +24,12 @@ namespace MvvmCross.Plugin
             ConfigurationSource = configurationSource;
         }
 
-        public void EnsurePluginLoaded<TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin
+        public void EnsurePluginLoaded<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin
         {
             EnsurePluginLoaded(typeof(TPlugin), forceLoad);
         }
 
-        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
-        public virtual void EnsurePluginLoaded(Type type, bool forceLoad = false)
+        public virtual void EnsurePluginLoaded([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type, bool forceLoad = false)
         {
             if (!forceLoad && IsPluginLoaded(type))
                 return;
@@ -70,10 +67,10 @@ namespace MvvmCross.Plugin
             }
         }
 
-        public bool TryEnsurePluginLoaded<TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin
+        public bool TryEnsurePluginLoaded<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin
             => TryEnsurePluginLoaded(typeof(TPlugin), forceLoad);
 
-        public bool TryEnsurePluginLoaded(Type type, bool forceLoad = false)
+        public bool TryEnsurePluginLoaded([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type, bool forceLoad = false)
         {
             try
             {

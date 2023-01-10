@@ -12,7 +12,6 @@ namespace MvvmCross.Binding.Binders
     public class MvxNamedInstanceRegistryFiller<T> : IMvxNamedInstanceRegistryFiller<T>
         where T : class
     {
-        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         protected virtual void FillFromInstance(IMvxNamedInstanceRegistry<T> registry,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type)
         {
@@ -70,17 +69,18 @@ namespace MvvmCross.Binding.Binders
             }
         }
 
-        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
+        [RequiresUnreferencedCode("FillFrom calls ExceptionSafeGetTypes on Assembly")]
         public virtual void FillFrom(IMvxNamedInstanceRegistry<T> registry, Assembly assembly)
         {
-            var pairs = from type in assembly.ExceptionSafeGetTypes()
-                        where type.GetTypeInfo().IsPublic
-                        where !type.GetTypeInfo().IsAbstract
-                        where typeof(T).IsAssignableFrom(type)
-                        let name = FindName(type)
-                        where !string.IsNullOrEmpty(name)
-                        where type.IsConventional()
-                        select new { Name = name, Type = type };
+            var pairs =
+                from type in assembly.ExceptionSafeGetTypes()
+                where type.GetTypeInfo().IsPublic
+                where !type.GetTypeInfo().IsAbstract
+                where typeof(T).IsAssignableFrom(type)
+                let name = FindName(type)
+                where !string.IsNullOrEmpty(name)
+                where type.IsConventional()
+                select new { Name = name, Type = type };
 
             foreach (var pair in pairs)
             {
@@ -102,21 +102,20 @@ namespace MvvmCross.Binding.Binders
         public virtual string FindName(Type type)
         {
             var name = type.Name;
-            name = RemoveHead(name, "Mvx");
-            return name;
+            return RemoveHead(name, "Mvx");
         }
 
         protected static string RemoveHead(string name, string word)
         {
             if (name.StartsWith(word))
-                name = name.Substring(word.Length);
+                name = name[word.Length..];
             return name;
         }
 
         protected static string RemoveTail(string name, string word)
         {
             if (name.EndsWith(word))
-                name = name.Substring(0, name.Length - word.Length);
+                name = name[..^word.Length];
             return name;
         }
     }

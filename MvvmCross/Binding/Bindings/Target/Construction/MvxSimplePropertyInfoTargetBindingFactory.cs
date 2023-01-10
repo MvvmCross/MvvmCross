@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
@@ -12,10 +10,13 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
     public class MvxSimplePropertyInfoTargetBindingFactory
         : IMvxPluginTargetBindingFactory
     {
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private readonly Type _bindingType;
         private readonly MvxPropertyInfoTargetBindingFactory _innerFactory;
 
-        public MvxSimplePropertyInfoTargetBindingFactory(Type bindingType, Type targetType, string targetName)
+        public MvxSimplePropertyInfoTargetBindingFactory(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type bindingType,
+            Type targetType, string targetName)
         {
             _bindingType = bindingType;
             _innerFactory = new MvxPropertyInfoTargetBindingFactory(targetType, targetName, CreateTargetBinding);
@@ -32,7 +33,6 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         #endregion IMvxPluginTargetBindingFactory Members
 
-        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         private IMvxTargetBinding CreateTargetBinding(object target, PropertyInfo targetPropertyInfo)
         {
             var targetBindingCandidate = Activator.CreateInstance(_bindingType, target, targetPropertyInfo);

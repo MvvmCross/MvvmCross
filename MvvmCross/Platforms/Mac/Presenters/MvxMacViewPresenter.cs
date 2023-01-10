@@ -195,7 +195,6 @@ namespace MvvmCross.Platforms.Mac.Presenters
             return window;
         }
 
-        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         protected virtual MvxWindowController CreateWindowController(MvxWindowPresentationAttribute attribute)
         {
             MvxWindowController windowController;

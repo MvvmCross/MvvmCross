@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using MvvmCross.Base;
 using MvvmCross.IoC;
@@ -49,15 +50,18 @@ namespace MvvmCross.Binding.Extensions
             return result.ConvertToBooleanCore();
         }
 
-        public static object MakeSafeValue(this Type propertyType, object value)
+        public static object MakeSafeValue(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] this Type propertyType,
+            object value)
         {
             if (value == null)
             {
                 return propertyType.CreateDefault();
             }
 
-            var autoConverter = MvxBindingSingletonCache.Instance.AutoValueConverters.Find(value.GetType(),
-                                                                                            propertyType);
+            var autoConverter = MvxBindingSingletonCache.Instance.AutoValueConverters.Find(
+                value.GetType(), propertyType);
+
             if (autoConverter != null)
             {
                 return autoConverter.Convert(value, propertyType, null, CultureInfo.CurrentUICulture);

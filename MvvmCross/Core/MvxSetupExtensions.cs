@@ -21,7 +21,7 @@ public static class MvxSetupExtensions
             new[] { platformApplication.GetType().Assembly }.Union(assemblies ?? Array.Empty<Assembly>()).ToArray());
     }
 
-    [RequiresUnreferencedCode("In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed")]
+    [RequiresUnreferencedCode("CreateSetup calls FindSetupType")]
     public static TSetup CreateSetup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TSetup>(
         Assembly assembly, params object[] parameters) where TSetup : MvxSetup
     {
@@ -41,7 +41,7 @@ public static class MvxSetupExtensions
         }
     }
 
-    [RequiresUnreferencedCode("In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed")]
+    [RequiresUnreferencedCode("CreateSetup calls FindSetupType")]
     public static TSetup CreateSetup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TSetup>()
         where TSetup : MvxSetup
     {
@@ -61,23 +61,25 @@ public static class MvxSetupExtensions
         }
     }
 
-    public static Type? FindSetupType<TSetup>(Assembly assembly)
+    [RequiresUnreferencedCode("FindSetupType calls ExceptionSafeGetTypes on Assembly")]
+    public static Type? FindSetupType<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TSetup>(Assembly assembly)
     {
         var query = from type in assembly.ExceptionSafeGetTypes()
-            where type.Name == "Setup"
-            where typeof(TSetup).IsAssignableFrom(type)
-            select type;
+                    where type.Name == "Setup"
+                    where typeof(TSetup).IsAssignableFrom(type)
+                    select type;
 
         return query.FirstOrDefault();
     }
 
-    public static Type? FindSetupType<TSetup>()
+    [RequiresUnreferencedCode("FindSetupType calls ExceptionSafeGetTypes on Assembly")]
+    public static Type? FindSetupType<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TSetup>()
     {
         var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-            from type in assembly.ExceptionSafeGetTypes()
-            where type.Name == "Setup"
-            where typeof(TSetup).IsAssignableFrom(type)
-            select type;
+                    from type in assembly.ExceptionSafeGetTypes()
+                    where type.Name == "Setup"
+                    where typeof(TSetup).IsAssignableFrom(type)
+                    select type;
 
         return query.FirstOrDefault();
     }

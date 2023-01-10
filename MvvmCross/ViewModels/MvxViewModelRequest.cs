@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Core;
 
 namespace MvvmCross.ViewModels
@@ -15,12 +14,12 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        public MvxViewModelRequest(Type viewModelType)
+        public MvxViewModelRequest([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType)
         {
             ViewModelType = viewModelType;
         }
 
-        public MvxViewModelRequest(Type viewModelType,
+        public MvxViewModelRequest([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
                                    IMvxBundle? parameterBundle,
                                    IMvxBundle? presentationBundle)
         {
@@ -29,17 +28,18 @@ namespace MvvmCross.ViewModels
             PresentationValues = presentationBundle.SafeGetData();
         }
 
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)]
         public Type? ViewModelType { get; set; }
         public IDictionary<string, string>? ParameterValues { get; set; }
         public IDictionary<string, string>? PresentationValues { get; set; }
 
-        public static MvxViewModelRequest GetDefaultRequest(Type viewModelType)
+        public static MvxViewModelRequest GetDefaultRequest([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType)
         {
             return new MvxViewModelRequest(viewModelType, null, null);
         }
     }
 
-    public class MvxViewModelRequest<TViewModel> : MvxViewModelRequest where TViewModel : IMvxViewModel
+    public class MvxViewModelRequest<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel> : MvxViewModelRequest where TViewModel : IMvxViewModel
     {
         public MvxViewModelRequest() : base(typeof(TViewModel))
         {
