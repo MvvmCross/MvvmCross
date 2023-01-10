@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -47,7 +48,9 @@ namespace MvvmCross.Presenters
 
         public abstract MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType);
 
-        public virtual object? CreateOverridePresentationAttributeViewInstance(Type viewType)
+        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
+        public virtual object? CreateOverridePresentationAttributeViewInstance(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type viewType)
         {
             if (viewType == null)
                 throw new ArgumentNullException(nameof(viewType));

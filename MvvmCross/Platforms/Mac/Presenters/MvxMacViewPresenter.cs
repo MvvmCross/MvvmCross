@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using AppKit;
@@ -194,6 +195,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             return window;
         }
 
+        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         protected virtual MvxWindowController CreateWindowController(MvxWindowPresentationAttribute attribute)
         {
             MvxWindowController windowController;

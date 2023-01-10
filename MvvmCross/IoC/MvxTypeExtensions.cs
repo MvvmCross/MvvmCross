@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
@@ -223,6 +224,7 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         public static object? CreateDefault(this Type type)
         {
             if (type == null)
@@ -241,7 +243,9 @@ namespace MvvmCross.IoC
             return Activator.CreateInstance(type);
         }
 
-        public static ConstructorInfo? FindApplicableConstructor(this Type type, IDictionary<string, object> arguments)
+        public static ConstructorInfo? FindApplicableConstructor(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]this Type type,
+            IDictionary<string, object> arguments)
         {
             var constructors = type.GetConstructors();
             if (arguments == null || arguments.Count == 0)
@@ -272,7 +276,9 @@ namespace MvvmCross.IoC
             return null;
         }
 
-        public static ConstructorInfo? FindApplicableConstructor(this Type type, object[] arguments)
+        public static ConstructorInfo? FindApplicableConstructor(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]this Type type,
+            object[] arguments)
         {
             var constructors = type.GetConstructors();
             if (arguments == null || arguments.Length == 0)

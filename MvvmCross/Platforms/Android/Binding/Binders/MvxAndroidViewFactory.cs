@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Threading;
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.Util;
 using Android.Views;
@@ -19,7 +18,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
     {
         private IMvxViewTypeResolver? _viewTypeResolver;
 
-        protected IMvxViewTypeResolver? ViewTypeResolver => _viewTypeResolver ??= Mvx.IoCProvider?.Resolve<IMvxViewTypeResolver>();
+        protected IMvxViewTypeResolver? ViewTypeResolver => _viewTypeResolver ??= Mvx.IoCProvider.Resolve<IMvxViewTypeResolver>();
 
         public virtual View? CreateView(View? parent, string name, Context context, IAttributeSet attrs)
         {
@@ -32,13 +31,21 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
                 return null;
             }
 
+            return CreateView(viewType, context, attrs, name);
+        }
+
+        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
+        private static View? CreateView(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type viewType,
+            Context context, IAttributeSet attributes, string name)
+        {
             try
             {
-                var view = Activator.CreateInstance(viewType, context, attrs) as View;
+                var view = Activator.CreateInstance(viewType, context, attributes) as View;
                 if (view == null)
                 {
                     MvxBindingLog.Error("Unable to load view {0} from type {1}", name,
-                                          viewType.FullName ?? string.Empty);
+                        viewType.FullName ?? string.Empty);
                 }
                 return view;
             }
@@ -48,9 +55,8 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingLog.Error(
-                                      "Exception during creation of {0} from type {1} - exception {2}", name,
-                                      viewType.FullName ?? string.Empty, exception.ToLongString());
+                MvxBindingLog.Error("Exception during creation of {ViewName} from type {ViewType} - exception {Exception}",
+                    name, viewType.FullName ?? string.Empty, exception.ToLongString());
                 return null;
             }
         }

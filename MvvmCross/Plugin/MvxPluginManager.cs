@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -30,6 +31,7 @@ namespace MvvmCross.Plugin
             EnsurePluginLoaded(typeof(TPlugin), forceLoad);
         }
 
+        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         public virtual void EnsurePluginLoaded(Type type, bool forceLoad = false)
         {
             if (!forceLoad && IsPluginLoaded(type))

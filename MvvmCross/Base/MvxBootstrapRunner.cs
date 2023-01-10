@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.IoC;
@@ -22,6 +23,7 @@ namespace MvvmCross.Base
             }
         }
 
+        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         protected virtual void Run(Type type)
         {
             ArgumentNullException.ThrowIfNull(type);

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
@@ -28,6 +29,7 @@ namespace MvvmCross.IoC
 
         protected IMvxIocOptions Options => _options;
 
+        [RequiresUnreferencedCode("In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed")]
         public MvxIoCContainer(IMvxIocOptions options, IMvxIoCProvider parentProvider = null)
         {
             _options = options ?? new MvxIocOptions();

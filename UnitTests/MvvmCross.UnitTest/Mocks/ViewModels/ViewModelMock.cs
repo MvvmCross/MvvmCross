@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using MvvmCross.ViewModels;
 
@@ -8,6 +9,7 @@ namespace MvvmCross.UnitTest.Mocks.ViewModels
     {
         private readonly T _object;
 
+        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         public ViewModelMock()
         {
             _object = (T)Activator.CreateInstance(typeof(T));

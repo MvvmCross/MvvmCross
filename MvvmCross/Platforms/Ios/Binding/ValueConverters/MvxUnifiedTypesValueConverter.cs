@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using MvvmCross.Converters;
 using MvvmCross.IoC;
@@ -30,6 +31,7 @@ namespace MvvmCross.Platforms.Ios.Binding.ValueConverters
             UnifiedTypeConversions = new ReadOnlyDictionary<Type, Type>(initDictionary);
         }
 
+        [RequiresUnreferencedCode("In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed")]
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             //actually value cannot be null if converter is being used by auto converter registry and was

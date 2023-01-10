@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Exceptions;
 using MvvmCross.ViewModels;
@@ -36,7 +38,10 @@ namespace MvvmCross.Platforms.Ios.Views
             }
         }
 
-        public virtual IMvxIosView CreateViewOfType(Type viewType, MvxViewModelRequest request)
+        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
+        public virtual IMvxIosView CreateViewOfType(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type viewType,
+            MvxViewModelRequest request)
         {
             var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
             if (storyboardAttribute != null)

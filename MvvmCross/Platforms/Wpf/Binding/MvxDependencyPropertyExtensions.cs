@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -12,7 +13,9 @@ namespace MvvmCross.Platforms.Wpf.Binding
 {
     public static class MvxDependencyPropertyExtensions
     {
-        public static TypeConverter TypeConverter(this Type type)
+        [RequiresUnreferencedCode("In case the type is non-primitive, the trimmer cannot statically analyze the object's type so its members may be trimmed")]
+        public static TypeConverter TypeConverter(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]this Type type)
         {
             var typeConverter =
                 type.GetCustomAttributes(typeof(TypeConverterAttribute), true).FirstOrDefault() as
@@ -28,7 +31,8 @@ namespace MvvmCross.Platforms.Wpf.Binding
             return converter;
         }
 
-        public static PropertyInfo FindActualProperty(this Type type, string name)
+        public static PropertyInfo FindActualProperty(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]this Type type, string name)
         {
             if (string.IsNullOrEmpty(name))
                 return null;
@@ -37,7 +41,8 @@ namespace MvvmCross.Platforms.Wpf.Binding
             return property;
         }
 
-        public static FieldInfo FindDependencyPropertyInfo(this Type type, string dependencyPropertyName)
+        public static FieldInfo FindDependencyPropertyInfo(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]this Type type, string dependencyPropertyName)
         {
             if (string.IsNullOrEmpty(dependencyPropertyName))
                 return null;
@@ -58,7 +63,8 @@ namespace MvvmCross.Platforms.Wpf.Binding
             return null;
         }
 
-        public static DependencyProperty FindDependencyProperty(this Type type, string name)
+        public static DependencyProperty FindDependencyProperty(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]this Type type, string name)
         {
             if (string.IsNullOrEmpty(name))
                 return null;

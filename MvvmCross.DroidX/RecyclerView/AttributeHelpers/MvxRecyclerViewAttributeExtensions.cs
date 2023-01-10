@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.Content.Res;
 using Android.Util;
@@ -49,6 +50,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
             return className;
         }
 
+        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         public static IMvxTemplateSelector BuildItemTemplateSelector(Context context, IAttributeSet attrs, int itemTemplateId)
         {
             var templateSelectorClassName = ReadRecyclerViewItemTemplateSelectorClassName(context, attrs);
@@ -86,6 +88,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
             return templateSelector;
         }
 
+        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         private static void TryInitializeBindingResourcePaths()
         {
             if (areBindingResourcesInitialized)

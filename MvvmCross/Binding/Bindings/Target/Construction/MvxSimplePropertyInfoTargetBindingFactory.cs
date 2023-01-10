@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.Binding.Bindings.Target.Construction
@@ -31,6 +32,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         #endregion IMvxPluginTargetBindingFactory Members
 
+        [RequiresUnreferencedCode("Cannot statically analyze the type of instance so its members may be trimmed")]
         private IMvxTargetBinding CreateTargetBinding(object target, PropertyInfo targetPropertyInfo)
         {
             var targetBindingCandidate = Activator.CreateInstance(_bindingType, target, targetPropertyInfo);
