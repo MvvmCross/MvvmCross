@@ -6,6 +6,7 @@ using System;
 using CoreGraphics;
 using Foundation;
 using MvvmCross.ViewModels;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
@@ -27,7 +28,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected MvxBaseViewController(IntPtr handle) : base(handle)
+        protected MvxBaseViewController(NativeHandle handle) : base(handle)
         {
         }
 

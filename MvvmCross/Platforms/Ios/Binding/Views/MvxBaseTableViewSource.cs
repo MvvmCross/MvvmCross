@@ -8,6 +8,7 @@ using Foundation;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Logging;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
@@ -23,11 +24,11 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             _tableView = new WeakReference<UITableView>(tableView);
         }
 
-        protected MvxBaseTableViewSource(IntPtr handle)
+        protected MvxBaseTableViewSource(NativeHandle handle)
             : base(handle)
         {
             MvxLogHost.GetLog<MvxBaseTableViewSource>()?.Log(LogLevel.Warning,
-                "MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+                "MvxBaseTableViewSource NativeHandle constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         protected UITableView TableView

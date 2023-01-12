@@ -1,6 +1,7 @@
 using System;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 using UIKit;
 
@@ -10,7 +11,7 @@ namespace Playground.iOS.Views
     [MvxRootPresentation(WrapInNavigationController = true)]
     public partial class RootView : MvxViewController<RootViewModel>
     {
-        public RootView(IntPtr handle) : base(handle)
+        public RootView(NativeHandle handle) : base(handle)
         {
         }
 

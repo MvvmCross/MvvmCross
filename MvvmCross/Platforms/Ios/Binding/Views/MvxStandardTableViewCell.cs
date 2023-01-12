@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Foundation;
 using MvvmCross.Binding.Bindings;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
@@ -14,17 +15,17 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
     public class MvxStandardTableViewCell
         : MvxTableViewCell
     {
-        public MvxStandardTableViewCell(IntPtr handle)
+        public MvxStandardTableViewCell(NativeHandle handle)
             : this("TitleText" /* default binding is ToString() on the passed in item */, handle)
         {
         }
 
-        public MvxStandardTableViewCell(string bindingText, IntPtr handle)
+        public MvxStandardTableViewCell(string bindingText, NativeHandle handle)
             : base(bindingText, handle)
         {
         }
 
-        public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+        public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, NativeHandle handle)
             : base(bindingDescriptions, handle)
         {
         }
