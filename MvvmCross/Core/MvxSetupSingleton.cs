@@ -22,27 +22,17 @@ namespace MvvmCross.Core
     /// as it's assumed that each platform will provide a platform specific
     /// public overload for this method which will include any platform parameters
     /// required
-    /// EnsureInitialized - this is an instance method that should be called 
-    /// to guarrantee that setup has been created and initialized. This method 
+    /// EnsureInitialized - this is an instance method that should be called
+    /// to guarantee that setup has been created and initialized. This method
     /// is blocking so make sure it's only called at a point where there
     /// are no other UI methods are being invoked. This method is typically called
     /// in applications where there is no splash screen.
-    /// InitializeAndMonitor - this is an instance method that can be called 
-    /// to make sure that the initialization of setup has begun. It registers
-    /// an object to be notified when setup initialization has completed. The callback
-    /// will be raised on the UI thread. This method is not blocking, and doesn't
-    /// guarrantee setup initialize has finished when it returns. This method is 
-    /// typically called by the splash screen view of an application, passing
-    /// itself in as the object to be notified. On notification the splash screen 
-    /// view will trigger navigation to the first view
     /// </summary>
     public abstract class MvxSetupSingleton
        : MvxSingleton<MvxSetupSingleton>
     {
-        private static readonly object LockObject = new object();
-        private static TaskCompletionSource<bool> IsInitialisedTaskCompletionSource;
+        private static readonly object LockObject = new();
         private IMvxSetup _setup;
-        private IMvxSetupMonitor _currentMonitor;
 
         protected virtual IMvxSetup Setup => _setup;
 
@@ -62,7 +52,7 @@ namespace MvvmCross.Core
             }
             catch (Exception ex)
             {
-                MvxLogHost.Default?.Log(LogLevel.Error, ex, "Unable to cast setup to {0}", typeof(TMvxSetup));
+                MvxLogHost.Default?.Log(LogLevel.Error, ex, "Unable to cast setup to {SetupType}", typeof(TMvxSetup));
                 throw;
             }
         }
@@ -98,57 +88,8 @@ namespace MvvmCross.Core
         {
             lock (LockObject)
             {
-                if (IsInitialisedTaskCompletionSource == null)
-                {
-                    StartSetupInitialization();
-                }
-                else
-                {
-                    if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
-                    {
-                        if (IsInitialisedTaskCompletionSource.Task.IsFaulted)
-                            throw IsInitialisedTaskCompletionSource.Task.Exception;
-                        return;
-                    }
-
-                    MvxLogHost.Default?.Log(LogLevel.Trace, "EnsureInitialized has already been called so now waiting for completion");
-                }
-            }
-            IsInitialisedTaskCompletionSource.Task.GetAwaiter().GetResult();
-        }
-
-        public virtual void InitializeAndMonitor(IMvxSetupMonitor setupMonitor)
-        {
-            lock (LockObject)
-            {
-                _currentMonitor = setupMonitor;
-
-                // if the tcs is not null, it means the initialization is running
-                if (IsInitialisedTaskCompletionSource != null)
-                {
-                    // If the task is already completed at this point, let the monitor know it has finished. 
-                    // but don't do it otherwise because it's done elsewhere
-                    if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
-                    {
-                        _currentMonitor?.InitializationComplete();
-                    }
-
-                    return;
-                }
-
-                StartSetupInitialization();
-            }
-        }
-
-        public virtual void CancelMonitor(IMvxSetupMonitor setupMonitor)
-        {
-            lock (LockObject)
-            {
-                if (setupMonitor != _currentMonitor)
-                {
-                    throw new MvxException("The specified IMvxSetupMonitor is not the one registered in MvxSetupSingleton");
-                }
-                _currentMonitor = null;
+                _setup.InitializePrimary();
+                _setup.InitializeSecondary();
             }
         }
 
@@ -162,61 +103,6 @@ namespace MvvmCross.Core
             {
                 throw exception.MvxWrap("Failed to create setup instance");
             }
-        }
-
-        protected override void Dispose(bool isDisposing)
-        {
-            if (isDisposing)
-            {
-                lock (LockObject)
-                {
-                    _currentMonitor = null;
-                }
-            }
-            base.Dispose(isDisposing);
-        }
-
-        private void StartSetupInitialization()
-        {
-            IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
-            _setup.InitializePrimary();
-            Task.Run(async () =>
-            {
-                ExceptionDispatchInfo setupException = null;
-                try
-                {
-                    _setup.InitializeSecondary();
-                }
-                catch (Exception ex)
-                {
-                    setupException = ExceptionDispatchInfo.Capture(ex);
-                }
-                IMvxSetupMonitor monitor;
-                lock (LockObject)
-                {
-                    if (setupException == null)
-                    {
-                        IsInitialisedTaskCompletionSource.SetResult(true);
-                    }
-                    else
-                    {
-                        IsInitialisedTaskCompletionSource.SetException(setupException.SourceException);
-                    }
-                    monitor = _currentMonitor;
-                }
-
-                if (monitor != null)
-                {
-                    var dispatcher = Mvx.IoCProvider.GetSingleton<IMvxMainThreadAsyncDispatcher>();
-                    await dispatcher.ExecuteOnMainThreadAsync(async () =>
-                    {
-                        if (monitor != null)
-                        {
-                            await monitor.InitializationComplete();
-                        }
-                    });
-                }
-            });
         }
     }
 }

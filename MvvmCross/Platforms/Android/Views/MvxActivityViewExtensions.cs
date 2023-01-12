@@ -2,12 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Android.App;
-using Android.OS;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
@@ -37,7 +33,6 @@ namespace MvvmCross.Platforms.Android.Views
 
         public static void OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
         {
-            androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity, bundle));
 
             IMvxViewModel cached = null;
@@ -159,19 +154,6 @@ namespace MvvmCross.Platforms.Android.Views
             var viewModel = translatorService.Load(activity.Intent, savedState, viewModelType);
 
             return viewModel;
-        }
-
-        private static void EnsureSetupInitialized(this IMvxAndroidView androidView)
-        {
-            if (androidView is IMvxSetupMonitor)
-            {
-                // setup monitor views manage their own setup initialization
-                return;
-            }
-
-            var activity = androidView.ToActivity();
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity);
-            setup.EnsureInitialized();
         }
     }
 }

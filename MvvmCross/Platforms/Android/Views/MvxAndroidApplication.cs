@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Android.App;
 using Android.Runtime;
 using MvvmCross.Core;
 using MvvmCross.Platforms.Android.Core;
@@ -29,6 +27,21 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected virtual void RegisterSetup()
         {
+        }
+
+        public override void OnCreate()
+        {
+            base.OnCreate();
+
+            MvxAndroidSetupSingleton.EnsureSingletonAvailable(this).EnsureInitialized();
+        }
+
+        protected virtual void RunAppStart()
+        {
+            if (Mvx.IoCProvider?.TryResolve(out IMvxAppStart startup) == true && !startup.IsStarted)
+            {
+                startup.Start();
+            }
         }
     }
 

@@ -2,20 +2,15 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Threading.Tasks;
-using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Core;
-using MvvmCross.Platforms.Android.Core;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views
 {
     [Register("mvvmcross.platforms.android.views.MvxSplashScreenActivity")]
     public abstract class MvxSplashScreenActivity
-        : MvxActivity, IMvxSetupMonitor
+        : MvxActivity
     {
         protected const int NoContent = 0;
 
@@ -51,9 +46,6 @@ namespace MvvmCross.Platforms.Android.Views
 
             _bundle = bundle;
 
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
-            setup.InitializeAndMonitor(this);
-
             base.OnCreate(bundle);
 
             if (_resourceId != NoContent)
@@ -65,31 +57,15 @@ namespace MvvmCross.Platforms.Android.Views
             }
         }
 
-        private bool _isResumed;
-
-        protected override void OnResume()
+#pragma warning disable AsyncFixer01
+#pragma warning disable AsyncFixer03
+        protected override async void OnResume()
         {
             base.OnResume();
-            _isResumed = true;
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
-            setup.InitializeAndMonitor(this);
-        }
-
-        protected override void OnPause()
-        {
-            _isResumed = false;
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
-            setup.CancelMonitor(this);
-            base.OnPause();
-        }
-
-        public virtual async Task InitializationComplete()
-        {
-            if (!_isResumed)
-                return;
-
             await RunAppStartAsync(_bundle);
         }
+#pragma warning restore AsyncFixer03
+#pragma warning restore AsyncFixer01
 
         protected virtual async Task RunAppStartAsync(Bundle bundle)
         {
@@ -113,20 +89,6 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected virtual void RegisterSetup()
         {
-        }
-    }
-
-    public abstract class MvxSplashScreenActivity<TMvxAndroidSetup, TApplication> : MvxSplashScreenActivity
-            where TMvxAndroidSetup : MvxAndroidSetup<TApplication>, new()
-            where TApplication : class, IMvxApplication, new()
-    {
-        protected MvxSplashScreenActivity(int resourceId = NoContent) : base(resourceId)
-        {
-        }
-
-        protected override void RegisterSetup()
-        {
-            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 }

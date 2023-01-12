@@ -22,28 +22,22 @@ using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platforms.Android.Core;
-
-public abstract class MvxAndroidSetup
-    : MvxSetup, IMvxAndroidGlobals, IMvxAndroidSetup
+namespace MvvmCross.Platforms.Android.Core
 {
-    private MvxCurrentTopActivity? _currentTopActivity;
-    private IMvxAndroidViewPresenter? _presenter;
-
-    public void PlatformInitialize(Activity activity)
+#nullable enable
+    public abstract class MvxAndroidSetup
+        : MvxSetup, IMvxAndroidGlobals, IMvxAndroidSetup
     {
-        ArgumentNullException.ThrowIfNull(activity);
-        ArgumentNullException.ThrowIfNull(activity.Application);
+        private MvxCurrentTopActivity? _currentTopActivity;
+        private IMvxAndroidViewPresenter? _presenter;
 
-        PlatformInitialize(activity.Application);
+        public void PlatformInitialize(Application application)
+        {
+            ArgumentNullException.ThrowIfNull(application);
 
-        // this is needed for when App is rehydrated from being killed by Android in the background
-        _currentTopActivity?.OnActivityCreated(activity, null);
-    }
+            ApplicationContext = application;
 
-    public void PlatformInitialize(Application application)
-    {
-        ArgumentNullException.ThrowIfNull(application);
+            ApplicationContext = application;
 
         if (_currentTopActivity != null)
             return;
@@ -54,7 +48,7 @@ public abstract class MvxAndroidSetup
 
     public virtual Assembly ExecutableAssembly => ViewAssemblies.FirstOrDefault() ?? GetType().Assembly;
 
-    public virtual Context? ApplicationContext => Application.Context;
+        public Context? ApplicationContext { get; private set; }
 
     protected override void InitializeFirstChance(IMvxIoCProvider iocProvider)
     {
