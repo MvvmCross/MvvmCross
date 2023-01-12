@@ -388,7 +388,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     return null;
                 }
 
-                if (Mvx.IoCProvider.TryResolve(out IMvxAndroidViewFactory viewFactory))
+                if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidViewFactory viewFactory) == true)
                 {
                     _androidViewFactory = viewFactory;
                 }
@@ -411,7 +411,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     return null;
                 }
 
-                if (Mvx.IoCProvider.TryResolve(out IMvxLayoutInflaterHolderFactoryFactory factoryFactory))
+                if (Mvx.IoCProvider?.TryResolve(out IMvxLayoutInflaterHolderFactoryFactory factoryFactory) == true)
                 {
                     _layoutInflaterHolderFactoryFactory = factoryFactory;
                 }

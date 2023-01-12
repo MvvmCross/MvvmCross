@@ -3,22 +3,22 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Windows.UI.Core;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Platforms.WinUi.Presenters.Attributes;
 using MvvmCross.Platforms.WinUi.Views;
-using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
-using MvvmCross.Views;
 using MvvmCross.Presenters.Attributes;
-using System.Threading.Tasks;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml;
-using System.Linq;
-using Microsoft.Extensions.Logging;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
+using Windows.UI.Core;
 
 namespace MvvmCross.Platforms.WinUi.Presenters
 {

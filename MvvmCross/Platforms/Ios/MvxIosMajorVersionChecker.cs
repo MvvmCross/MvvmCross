@@ -18,12 +18,10 @@ namespace MvvmCross.Platforms.Ios
 
         private static bool ReadIsIosVersionOrHigher(int target, bool defaultValue)
         {
-            IMvxIosSystem iosSystem;
-            Mvx.IoCProvider.TryResolve<IMvxIosSystem>(out iosSystem);
-            if (iosSystem == null)
+            if (Mvx.IoCProvider?.TryResolve(out IMvxIosSystem iosSystem) != true)
             {
                 MvxLogHost.Default?.LogWarning(
-                    "IMvxIosSystem not found - so assuming we {target} on iOS {default} or later", target, defaultValue ? "are" : "are not");
+                    "IMvxIosSystem not found - so assuming we {Target} on iOS {Default} or later", target, defaultValue ? "are" : "are not");
                 return defaultValue;
             }
 

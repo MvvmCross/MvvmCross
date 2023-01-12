@@ -54,6 +54,8 @@ namespace MvvmCross.UnitTest.Base
             MvxSingleton.ClearAllSingletons();
             var instance = MvxIoCProvider.Initialize();
 
+            Assert.NotNull(Mvx.IoCProvider);
+
             Mvx.IoCProvider.RegisterType<IA, A>();
             Mvx.IoCProvider.RegisterType<IB, B>();
             Mvx.IoCProvider.RegisterType<IC, C>();
@@ -82,6 +84,8 @@ namespace MvvmCross.UnitTest.Base
                 }
             };
             var instance = MvxIoCProvider.Initialize(options);
+
+            Assert.NotNull(Mvx.IoCProvider);
 
             Mvx.IoCProvider.RegisterType<IA, A>();
             Mvx.IoCProvider.RegisterType<IB, B>();
@@ -112,6 +116,7 @@ namespace MvvmCross.UnitTest.Base
                 }
             };
             var instance = MvxIoCProvider.Initialize(options);
+            Assert.NotNull(Mvx.IoCProvider);
 
             Mvx.IoCProvider.RegisterType<IA, A>();
             Mvx.IoCProvider.RegisterType<IB, B>();

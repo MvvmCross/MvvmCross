@@ -1,5 +1,17 @@
 # Changelog
 
+## [9.0.6](https://github.com/MvvmCross/MvvmCross/tree/9.0.6) (2023-01-12)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.5...9.0.6)
+
+**Fixed bugs:**
+
+- Fix nullable warnings with a lot of Mvx.IoCProvider usages [\#4543](https://github.com/MvvmCross/MvvmCross/pull/4543) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Merged pull requests:**
+
+- Bump Microsoft.NET.Test.Sdk from 17.4.0 to 17.4.1 [\#4535](https://github.com/MvvmCross/MvvmCross/pull/4535) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [9.0.5](https://github.com/MvvmCross/MvvmCross/tree/9.0.5) (2023-01-09)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.4...9.0.5)

@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Tvos
 
         private static bool ReadIsTvosVersionOrHigher(int target, bool defaultValue)
         {
-            if (!Mvx.IoCProvider.TryResolve<IMvxTvosSystem>(out var tvosSystem) || tvosSystem == null)
+            if (Mvx.IoCProvider?.TryResolve<IMvxTvosSystem>(out var tvosSystem) != true || tvosSystem == null)
             {
                 return defaultValue;
             }

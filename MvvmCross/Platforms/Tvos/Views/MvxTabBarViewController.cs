@@ -44,7 +44,7 @@ namespace MvvmCross.Platforms.Tvos.Views
 
             if (IsMovingFromParentViewController)
             {
-                if (Mvx.IoCProvider.TryResolve(out IMvxTvosViewPresenter iPresenter)
+                if (Mvx.IoCProvider?.TryResolve(out IMvxTvosViewPresenter iPresenter) == true
                     && iPresenter is MvxTvosViewPresenter mvxTvosViewPresenter)
                 {
                     mvxTvosViewPresenter.CloseTabBarViewController();

@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using Microsoft.UI.Xaml;
 using MvvmCross.Base;
-using MvvmCross.Exceptions;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Platforms.WinUi.Binding
 {

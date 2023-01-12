@@ -11,7 +11,7 @@ namespace MvvmCross.Plugin.Messenger
     {
         public void Load()
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxMessenger>(new MvxMessengerHub());
+            Mvx.IoCProvider?.RegisterSingleton<IMvxMessenger>(new MvxMessengerHub());
         }
     }
 #nullable restore

@@ -12,7 +12,7 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Android
     {
         public void Load()
         {
-            Mvx.IoCProvider.RegisterType<IMvxResourceLoader, MvxAndroidResourceLoader>();
+            Mvx.IoCProvider?.RegisterType<IMvxResourceLoader, MvxAndroidResourceLoader>();
         }
     }
 }
