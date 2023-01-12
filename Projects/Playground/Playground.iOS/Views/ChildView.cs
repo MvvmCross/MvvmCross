@@ -1,6 +1,7 @@
 using System;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 using UIKit;
 
@@ -10,7 +11,7 @@ namespace Playground.iOS.Views
     [MvxChildPresentation]
     public partial class ChildView : MvxViewController<ChildViewModel>
     {
-        public ChildView(IntPtr handle) : base(handle)
+        public ChildView(NativeHandle handle) : base(handle)
         {
         }
 
