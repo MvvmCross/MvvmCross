@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,12 +10,12 @@ namespace MvvmCross.Plugin.Color
     {
         public virtual void Load()
         {
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
+            Mvx.IoCProvider?.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
         }
 
         private void RegisterValueConverters()
         {
-            if (Mvx.IoCProvider.TryResolve<IMvxValueConverterRegistry>(out var registry))
+            if (Mvx.IoCProvider?.TryResolve<IMvxValueConverterRegistry>(out var registry) == true)
             {
                 registry.AddOrOverwrite("ARGB", new MvxARGBValueConverter());
                 registry.AddOrOverwrite("NativeColor", new MvxNativeColorValueConverter());

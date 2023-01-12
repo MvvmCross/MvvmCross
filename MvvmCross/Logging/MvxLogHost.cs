@@ -1,39 +1,21 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace MvvmCross.Logging
-{
 #nullable enable
-    public static class MvxLogHost
-    {
-        private static ILogger? _defaultLogger;
+using Microsoft.Extensions.Logging;
 
-        public static ILogger? Default
-        {
-            get
-            {
-                return _defaultLogger ??= GetLog("Default");
-            }
-        }
+namespace MvvmCross.Logging;
 
-        public static ILogger<T>? GetLog<T>()
-        {
-            if (Mvx.IoCProvider.TryResolve<ILoggerFactory>(out var loggerFactory))
-            {
-                return loggerFactory.CreateLogger<T>();
-            }
+public static class MvxLogHost
+{
+    private static ILogger? _defaultLogger;
 
-            return null;
-        }
+    public static ILogger? Default => _defaultLogger ??= GetLog("Default");
 
-        public static ILogger? GetLog(string categoryName)
-        {
-            if (Mvx.IoCProvider.TryResolve<ILoggerFactory>(out var loggerFactory))
-            {
-                return loggerFactory.CreateLogger(categoryName);
-            }
+    public static ILogger<T>? GetLog<T>() =>
+        Mvx.IoCProvider?.TryResolve<ILoggerFactory>(out var loggerFactory) == true
+            ? loggerFactory.CreateLogger<T>()
+            : null;
 
-            return null;
-        }
-    }
-#nullable restore
+    public static ILogger? GetLog(string categoryName) =>
+        Mvx.IoCProvider?.TryResolve<ILoggerFactory>(out var loggerFactory) == true
+            ? loggerFactory.CreateLogger(categoryName)
+            : null;
 }

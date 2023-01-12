@@ -1,5 +1,0 @@
-<Project>
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Build.Download" />
-  </ItemGroup>
-</Project>

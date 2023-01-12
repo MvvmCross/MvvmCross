@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,6 +7,7 @@ using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Views.Base;
 using MvvmCross.ViewModels;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
@@ -29,7 +30,7 @@ namespace MvvmCross.Platforms.Ios.Views
             this.AdaptForBinding();
         }
 
-        protected internal MvxViewController(IntPtr handle) : base(handle)
+        protected internal MvxViewController(NativeHandle handle) : base(handle)
         {
             this.AdaptForBinding();
         }
@@ -118,7 +119,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxViewController(IntPtr handle) : base(handle)
+        protected internal MvxViewController(NativeHandle handle) : base(handle)
         {
         }
 

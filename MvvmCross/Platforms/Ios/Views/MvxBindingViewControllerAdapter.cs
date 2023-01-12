@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -20,7 +20,7 @@ namespace MvvmCross.Platforms.Ios.Views
             if (!(eventSource is IMvxIosView))
                 throw new ArgumentException($"{nameof(eventSource)} should be a {nameof(IMvxIosView)}", nameof(eventSource));
 
-            if (Mvx.IoCProvider.TryResolve<IMvxBindingContext>(out var bindingContext))
+            if (Mvx.IoCProvider?.TryResolve<IMvxBindingContext>(out var bindingContext) == true)
                 IosView.BindingContext = bindingContext;
         }
 
@@ -29,7 +29,7 @@ namespace MvvmCross.Platforms.Ios.Views
             if (IosView == null)
             {
                 MvxLogHost.GetLog<MvxBindingViewControllerAdapter>()?.LogWarning(
-                    "{iosView} is null for clearup of bindings", nameof(IosView));
+                    "{IosView} is null for clear-up of bindings", nameof(IosView));
                 return;
             }
             IosView.ClearAllBindings();

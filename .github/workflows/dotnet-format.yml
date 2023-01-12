@@ -31,4 +31,4 @@ jobs:
 
     - name: Run dotnet format
       run: |
-        dotnet format --verify-no-changes MvvmCross.sln
+        dotnet format whitespace --no-restore --verify-no-changes MvvmCross.sln

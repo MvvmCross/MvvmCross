@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MvvmCross.Commands;
 
 namespace MvvmCross.Tests
@@ -19,16 +19,16 @@ namespace MvvmCross.Tests
 
         private static MvxUnitTestCommandHelper GetCommandHelper()
         {
-            if (Mvx.IoCProvider.TryResolve<IMvxCommandHelper>(out IMvxCommandHelper helper))
+            if (Mvx.IoCProvider?.TryResolve<IMvxCommandHelper>(out IMvxCommandHelper helper) == true)
             {
-                if (helper != null && helper is MvxUnitTestCommandHelper)
+                if (helper is MvxUnitTestCommandHelper unitTestHelper)
                 {
-                    return (MvxUnitTestCommandHelper)helper;
+                    return unitTestHelper;
                 }
             }
 
             helper = new MvxUnitTestCommandHelper();
-            Mvx.IoCProvider.RegisterSingleton<IMvxCommandHelper>(helper);
+            Mvx.IoCProvider?.RegisterSingleton<IMvxCommandHelper>(helper);
             return (MvxUnitTestCommandHelper)helper;
         }
     }

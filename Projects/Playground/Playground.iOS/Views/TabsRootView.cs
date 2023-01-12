@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using MvvmCross.ViewModels;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 using UIKit;
 
@@ -13,7 +14,7 @@ namespace Playground.iOS.Views
     {
         private bool _isPresentedFirstTime = true;
 
-        public TabsRootView(IntPtr handle) : base(handle)
+        public TabsRootView(NativeHandle handle) : base(handle)
         {
         }
 
@@ -43,18 +44,16 @@ namespace Playground.iOS.Views
         {
             var type = viewController.GetType();
 
-            return type == typeof(ChildView)
-                ? false
-                : base.ShowChildView(viewController);
+            return (type != typeof(ChildView)
+) && base.ShowChildView(viewController);
         }
 
         public override bool CloseChildViewModel(IMvxViewModel viewModel)
         {
             var type = viewModel.GetType();
 
-            return type == typeof(ChildViewModel)
-                ? false
-                : base.CloseChildViewModel(viewModel);
+            return (type != typeof(ChildViewModel)
+) && base.CloseChildViewModel(viewModel);
         }
     }
 }

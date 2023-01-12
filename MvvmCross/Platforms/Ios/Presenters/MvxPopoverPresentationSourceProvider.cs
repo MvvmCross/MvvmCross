@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,26 +10,40 @@ namespace MvvmCross.Platforms.Ios.Presenters
 #nullable enable
     public class MvxPopoverPresentationSourceProvider : IMvxPopoverPresentationSourceProvider
     {
-        [Weak] private UIView? _sourceView;
-        [Weak] private UIBarButtonItem? _sourceBarButtonItem;
+        private readonly WeakReference<UIView?> _sourceViewWeakReference = new WeakReference<UIView?>(null);
+        private readonly WeakReference<UIBarButtonItem?> _sourceBarButtonItemWeakReference = new WeakReference<UIBarButtonItem?>(null);
 
         public UIView? SourceView
         {
-            get => _sourceView;
+            get
+            {
+                if (_sourceViewWeakReference.TryGetTarget(out var view))
+                    return view;
+
+                // This is not a array Sonar. You are drunk...
+#pragma warning disable S1168 // Empty arrays and collections should be returned instead of null
+                return null;
+#pragma warning restore S1168 // Empty arrays and collections should be returned instead of null
+            }
             set
             {
-                _sourceBarButtonItem = null;
-                _sourceView = value;
+                _sourceBarButtonItemWeakReference.SetTarget(null);
+                _sourceViewWeakReference.SetTarget(value);
             }
         }
 
         public UIBarButtonItem? SourceBarButtonItem
         {
-            get => _sourceBarButtonItem;
+            get
+            {
+                if (_sourceBarButtonItemWeakReference.TryGetTarget(out var view))
+                    return view;
+                return null;
+            }
             set
             {
-                _sourceView = null;
-                _sourceBarButtonItem = value;
+                _sourceViewWeakReference.SetTarget(null);
+                _sourceBarButtonItemWeakReference.SetTarget(value);
             }
         }
 

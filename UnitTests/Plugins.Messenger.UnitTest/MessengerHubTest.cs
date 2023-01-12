@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -139,10 +139,7 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         public void NullSubscribeCausesException()
         {
             var messenger = new MvxMessengerHub();
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                messenger.Subscribe<TestMessage>(null);
-            });
+            Assert.Throws<ArgumentNullException>(() => messenger.Subscribe<TestMessage>(null));
         }
 
         [Fact]
@@ -150,12 +147,14 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         {
             var messenger = new MvxMessengerHub();
             messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.NewGuid(), () => { }, new object()));
-            messenger.Subscribe<TestMessage>(m =>
-                {
-                    // stuff
-                });
+            messenger.Subscribe<TestMessage>(_ =>
+            {
+                // stuff
+            });
             messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.NewGuid(), () => { }, new object()));
             messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.Empty, () => { }, new object()));
+
+            Assert.True(messenger.HasSubscriptionsFor<TestMessage>());
         }
 
         [Fact]

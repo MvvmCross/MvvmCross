@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -35,7 +35,7 @@ namespace MvvmCross.Localization
                 if (_cachedTextProvider != null)
                     return _cachedTextProvider;
 
-                if (!Mvx.IoCProvider.TryResolve(out IMvxTextProvider cachedTextProvider))
+                if (Mvx.IoCProvider?.TryResolve(out IMvxTextProvider cachedTextProvider) != true)
                 {
                     throw new MvxException(
                         "Missing text provider - please initialize IoC with a suitable IMvxTextProvider");

@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using MvvmCross.Core;
 using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.ViewModels;

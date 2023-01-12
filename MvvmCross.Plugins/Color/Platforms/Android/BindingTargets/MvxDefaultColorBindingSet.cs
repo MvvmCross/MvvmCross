@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -16,8 +16,7 @@ namespace MvvmCross.Plugin.Color.Platforms.Android.BindingTargets
     {
         public void RegisterBindings()
         {
-            IMvxTargetBindingFactoryRegistry registry;
-            if (!Mvx.IoCProvider.TryResolve(out registry))
+            if (Mvx.IoCProvider?.TryResolve(out IMvxTargetBindingFactoryRegistry registry) != true)
             {
                 MvxPluginLog.Instance.Log(LogLevel.Warning,
                     "No binding registry available - so color bindings will not be used");

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -41,24 +41,9 @@ namespace Playground.Core.ViewModels
                 throw new System.NotImplementedException();
         }
 
-        public override void Prepare()
-        {
-            base.Prepare();
-        }
-
         public override void Prepare(SampleModel parameter)
         {
             _parameter = parameter;
-        }
-
-        protected override void SaveStateToBundle(IMvxBundle bundle)
-        {
-            base.SaveStateToBundle(bundle);
-        }
-
-        protected override void ReloadFromBundle(IMvxBundle state)
-        {
-            base.ReloadFromBundle(state);
         }
 
         public override async System.Threading.Tasks.Task Initialize()
@@ -70,11 +55,7 @@ namespace Playground.Core.ViewModels
 
         public void Init()
         {
-        }
-
-        public override void Start()
-        {
-            base.Start();
+            // Method intentionally left empty.
         }
 
         public IMvxAsyncCommand CloseCommand { get; private set; }

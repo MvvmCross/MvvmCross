@@ -1,6 +1,6 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>monoandroid10.0;</TargetFrameworks>
+    <TargetFramework>net6.0-android</TargetFramework>
     <AssemblyName>MvvmCross.DroidX.SwipeRefreshLayout</AssemblyName>
     <RootNamespace>MvvmCross.DroidX.SwipeRefreshLayout</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
@@ -23,5 +23,4 @@ This package contains Support Core UI support for MvvmCross.</Description>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\XamarinBuild.targets" />
 </Project>

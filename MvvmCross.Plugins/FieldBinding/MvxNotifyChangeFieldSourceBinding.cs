@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -15,7 +15,7 @@ namespace MvvmCross.Plugin.FieldBinding
         private static readonly EventInfo NotifyChangeEventInfo = typeof(INotifyChange).GetEvent("Changed");
 
         private readonly INotifyChange _notifyChange;
-        private IDisposable _subscription;
+        private readonly IDisposable _subscription;
 
         protected INotifyChange NotifyChange => _notifyChange;
 

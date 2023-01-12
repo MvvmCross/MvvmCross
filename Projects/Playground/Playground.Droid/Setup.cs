@@ -1,19 +1,17 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Plugin;
+using MvvmCross.DroidX.RecyclerView;
+using MvvmCross.Platforms.Android.Core;
 using Playground.Core;
 using Playground.Droid.Bindings;
 using Playground.Droid.Controls;
 using Serilog;
 using Serilog.Extensions.Logging;
-using MvvmCross.Platforms.Android.Core;
-using MvvmCross.DroidX.RecyclerView;
-using Microsoft.Extensions.Logging;
 
 namespace Playground.Droid
 {
@@ -32,13 +30,6 @@ namespace Playground.Droid
                 (arg) => new BinaryEditTargetBinding(arg));
 
             base.FillTargetFactories(registry);
-        }
-
-        public override void LoadPlugins(IMvxPluginManager pluginManager)
-        {
-            base.LoadPlugins(pluginManager);
-
-            pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.Location.Fused.Plugin>();
         }
 
         protected override ILoggerProvider CreateLogProvider()

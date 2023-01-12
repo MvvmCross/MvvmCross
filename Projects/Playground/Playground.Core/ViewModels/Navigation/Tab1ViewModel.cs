@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -27,20 +27,15 @@ namespace Playground.Core.ViewModels
             OpenTab2Command = new MvxAsyncCommand(() => NavigationService.ChangePresentation(new MvxPagePresentationHint(typeof(Tab2ViewModel))));
         }
 
-        public override async Task Initialize()
+        public override Task Initialize()
         {
-            await Task.Delay(3000);
+            return Task.Delay(3000);
         }
 
         string para;
         public override void Prepare(string parameter)
         {
             para = parameter;
-        }
-
-        public override void ViewAppeared()
-        {
-            base.ViewAppeared();
         }
 
         public IMvxAsyncCommand OpenChildCommand { get; }

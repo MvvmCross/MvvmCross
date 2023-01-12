@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         : MvxConvertingTargetBinding
     {
         private ICommand _command;
-        private EventHandler<EventArgs> _canExecuteEventHandler;
+        private readonly EventHandler<EventArgs> _canExecuteEventHandler;
         private MvxCanExecuteChangedEventSubscription _canExecuteSubscription;
 
         protected UIControl Control => Target as UIControl;

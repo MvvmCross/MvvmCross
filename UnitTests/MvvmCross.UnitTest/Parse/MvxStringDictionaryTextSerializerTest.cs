@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -28,7 +28,7 @@ namespace MvvmCross.UnitTest.Parse
 
             var viewModelNameLookup = new MvxViewModelByNameLookup();
             viewModelNameLookup.AddAll(GetType().Assembly);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelNameLookup);
+            Mvx.IoCProvider?.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelNameLookup);
 
             var parameterBundle = new MvxBundle(new Dictionary<string, string> { { "On'e", "1'\\" }, { "Two", "2" } });
             var presentationBundle =

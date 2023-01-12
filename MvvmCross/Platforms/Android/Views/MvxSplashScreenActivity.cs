@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -93,7 +93,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected virtual async Task RunAppStartAsync(Bundle bundle)
         {
-            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup))
+            if (Mvx.IoCProvider?.TryResolve(out IMvxAppStart startup) == true)
             {
                 if (!startup.IsStarted)
                 {

@@ -1,4 +1,4 @@
-﻿using AndroidX.Preference;
+using AndroidX.Preference;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platforms.Android.Binding.Target;
 

@@ -1,5 +1,0 @@
-<Project>
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Forms.Platform.WPF" />
-  </ItemGroup>
-</Project>

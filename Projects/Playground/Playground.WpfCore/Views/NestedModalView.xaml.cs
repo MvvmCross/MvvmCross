@@ -1,4 +1,4 @@
-﻿using MvvmCross.Platforms.Wpf.Presenters.Attributes;
+using MvvmCross.Platforms.Wpf.Presenters.Attributes;
 
 namespace Playground.WpfCore.Views
 {

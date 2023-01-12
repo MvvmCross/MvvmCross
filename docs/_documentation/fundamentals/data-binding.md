@@ -646,7 +646,7 @@ Or a binding:
 Value Format('Hello {1} - today is {0:ddd MMM yyyy}', TheDate, Name)
 ```
 
-uses a literal string to assist formating `TheDate` and `Name`
+uses a literal string to assist formatting `TheDate` and `Name`
 
 **Binding macros**
 

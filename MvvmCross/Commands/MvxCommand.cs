@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -107,9 +107,7 @@ namespace MvvmCross.Commands
         protected MvxCommandBase()
         {
             // fallback on MvxWeakCommandHelper if no IoC has been set up
-            if (Mvx.IoCProvider == null)
-                _commandHelper = new MvxWeakCommandHelper();
-            else if (!Mvx.IoCProvider.TryResolve(out _commandHelper))
+            if (Mvx.IoCProvider?.TryResolve(out _commandHelper) != true)
                 _commandHelper = new MvxWeakCommandHelper();
 
             // default to true if no Singleton Cache has been set up

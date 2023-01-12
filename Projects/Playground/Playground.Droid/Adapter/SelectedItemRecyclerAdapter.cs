@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -36,7 +36,7 @@ namespace Playground.Droid.Adapter
 
         protected override void OnItemViewClick(object sender, EventArgs e)
         {
-            base.OnItemViewClick(sender,e);
+            base.OnItemViewClick(sender, e);
 
             var holder = (MvxRecyclerViewHolder)sender;
             OnItemClick?.Invoke(this, new SelectedItemEventArgs(holder.AdapterPosition, holder.ItemView, holder.DataContext));

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -83,7 +83,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             var view = Control;
             if (view == null) return;
 
-            view.Enabled = _command?.CanExecute(null) ?? false; ;
+            view.Enabled = _command?.CanExecute(null) ?? false;
         }
 
         private void OnCanExecuteChanged(object sender, EventArgs e)

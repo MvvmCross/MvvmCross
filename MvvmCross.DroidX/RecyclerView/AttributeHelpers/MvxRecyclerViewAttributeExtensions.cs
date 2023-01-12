@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -60,21 +60,21 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
                     "Sorry but type with class name: {TemplateSelectorClassName} does not exist." +
                     "Make sure you have provided full Type name: namespace + class name, AssemblyName." +
                     "Example (check Example.Droid sample!): Example.Droid.Common.TemplateSelectors.MultiItemTemplateModelTemplateSelector, Example.Droid";
-                MvxAndroidLog.Instance.Log(LogLevel.Error, message, templateSelectorClassName);
+                MvxAndroidLog.Instance?.Log(LogLevel.Error, message, templateSelectorClassName);
                 throw new InvalidOperationException(message);
             }
 
             if (!typeof(IMvxTemplateSelector).IsAssignableFrom(type))
             {
                 const string message = "Sorry but type: {Type} does not implement {TemplateSelectorType} interface.";
-                MvxAndroidLog.Instance.Log(LogLevel.Error, message, type, nameof(IMvxTemplateSelector));
+                MvxAndroidLog.Instance?.Log(LogLevel.Error, message, type, nameof(IMvxTemplateSelector));
                 throw new InvalidOperationException(message);
             }
 
             if (type.IsAbstract)
             {
                 const string message = "Sorry can not instatiate {TemplateSelectorType} as provided type: {Type} is abstract/interface.";
-                MvxAndroidLog.Instance.Log(LogLevel.Error, message, nameof(IMvxTemplateSelector), type);
+                MvxAndroidLog.Instance?.Log(LogLevel.Error, message, nameof(IMvxTemplateSelector), type);
                 throw new InvalidOperationException(message);
             }
 

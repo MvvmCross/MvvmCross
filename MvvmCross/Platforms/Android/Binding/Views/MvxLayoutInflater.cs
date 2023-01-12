@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -388,7 +388,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     return null;
                 }
 
-                if (Mvx.IoCProvider.TryResolve(out IMvxAndroidViewFactory viewFactory))
+                if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidViewFactory viewFactory) == true)
                 {
                     _androidViewFactory = viewFactory;
                 }
@@ -411,7 +411,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     return null;
                 }
 
-                if (Mvx.IoCProvider.TryResolve(out IMvxLayoutInflaterHolderFactoryFactory factoryFactory))
+                if (Mvx.IoCProvider?.TryResolve(out IMvxLayoutInflaterHolderFactoryFactory factoryFactory) == true)
                 {
                     _layoutInflaterHolderFactoryFactory = factoryFactory;
                 }

@@ -1,11 +1,10 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Linq;
 using MvvmCross.Core;
-using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.ViewModels;
 using Xunit;
@@ -37,7 +36,7 @@ namespace MvvmCross.UnitTest.ViewModels
                 TheInt1 = 123,
                 TheInt2 = 456,
                 TheString1 = "Hello World",
-                TheString2 = null
+                TheString2 = string.Empty
             };
             var bundle = new MvxBundle();
             bundle.Write(testObject);
@@ -92,7 +91,7 @@ namespace MvvmCross.UnitTest.ViewModels
                 TheInt1 = 0,
                 TheInt2 = 456,
                 TheString1 = "Hello World",
-                TheString2 = null
+                TheString2 = string.Empty
             };
             Assert.Equal(expected, output);
         }

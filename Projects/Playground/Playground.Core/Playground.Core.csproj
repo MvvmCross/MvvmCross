@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <UseMauiEssentials>true</UseMauiEssentials>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,11 +21,9 @@
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Messenger\MvvmCross.Plugin.Messenger.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
-    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Location\MvvmCross.Plugin.Location.csproj" />
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Plugin.Permissions" />
     <PackageReference Include="Serilog.Extensions.Logging" />
   </ItemGroup>
 
