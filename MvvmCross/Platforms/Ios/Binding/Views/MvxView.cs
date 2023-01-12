@@ -2,12 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using CoreGraphics;
-using Foundation;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
-using UIKit;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
 {
@@ -22,7 +19,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         // interface builder (or Xamarin iOS designer). More documentation can be found:
         // - here: https://developer.xamarin.com/guides/ios/user_interface/designer/ios_designable_controls_overview/
         // - and here: https://developer.xamarin.com/guides/ios/under_the_hood/api_design/#Types_and_Interface_Builder
-        public MvxView(IntPtr handle) : base(handle) { }
+        public MvxView(NativeHandle handle) : base(handle) { }
 
         public MvxView()
         {

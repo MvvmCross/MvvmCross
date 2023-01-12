@@ -9,6 +9,7 @@ using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.ViewModels;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
@@ -35,7 +36,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxPageViewController(IntPtr handle) : base(handle)
+        protected internal MvxPageViewController(NativeHandle handle) : base(handle)
         {
         }
 
@@ -131,7 +132,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxPageViewController(IntPtr handle) : base(handle)
+        protected internal MvxPageViewController(NativeHandle handle) : base(handle)
         {
         }
 
