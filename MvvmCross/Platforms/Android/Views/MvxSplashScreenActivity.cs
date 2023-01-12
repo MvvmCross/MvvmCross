@@ -57,15 +57,13 @@ namespace MvvmCross.Platforms.Android.Views
             }
         }
 
-#pragma warning disable AsyncFixer01
-#pragma warning disable AsyncFixer03
+#pragma warning disable AsyncFixer01, AsyncFixer03
         protected override async void OnResume()
         {
             base.OnResume();
             await RunAppStartAsync(_bundle);
         }
-#pragma warning restore AsyncFixer03
-#pragma warning restore AsyncFixer01
+#pragma warning restore AsyncFixer01, AsyncFixer03
 
         protected virtual async Task RunAppStartAsync(Bundle bundle)
         {
