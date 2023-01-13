@@ -37,6 +37,9 @@ namespace MvvmCross.Platforms.Android.Core
             ArgumentNullException.ThrowIfNull(activity.Application);
 
             PlatformInitialize(activity.Application);
+
+            // this is needed for when App is rehydrated from being killed by Android in the background
+            _currentTopActivity?.OnActivityCreated(activity, null);
         }
 
         public void PlatformInitialize(Application application)
