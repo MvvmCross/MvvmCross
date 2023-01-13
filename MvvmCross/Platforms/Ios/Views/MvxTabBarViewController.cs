@@ -10,6 +10,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.ViewModels;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
@@ -34,7 +35,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxTabBarViewController(IntPtr handle) : base(handle)
+        protected internal MvxTabBarViewController(NativeHandle handle) : base(handle)
         {
         }
 
@@ -250,7 +251,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxTabBarViewController(IntPtr handle) : base(handle)
+        protected internal MvxTabBarViewController(NativeHandle handle) : base(handle)
         {
         }
 

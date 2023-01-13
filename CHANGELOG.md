@@ -1,5 +1,17 @@
 # Changelog
 
+## [9.0.7](https://github.com/MvvmCross/MvvmCross/tree/9.0.7) (2023-01-13)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.6...9.0.7)
+
+**Breaking changes:**
+
+- Switch from IntPtr to NativeHandle [\#4545](https://github.com/MvvmCross/MvvmCross/pull/4545) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Fixed bugs:**
+
+- Fix crash when App gets rehydrated [\#4547](https://github.com/MvvmCross/MvvmCross/pull/4547) ([Cheesebaron](https://github.com/Cheesebaron))
+
 ## [9.0.6](https://github.com/MvvmCross/MvvmCross/tree/9.0.6) (2023-01-12)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.5...9.0.6)

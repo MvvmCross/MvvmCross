@@ -1,6 +1,7 @@
 using System;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 
 namespace Playground.iOS.Views
@@ -9,7 +10,7 @@ namespace Playground.iOS.Views
     [MvxTabPresentation(WrapInNavigationController = false)]
     public partial class Tab3View : MvxViewController<Tab3ViewModel>, IMvxTabBarItemViewController
     {
-        public Tab3View(IntPtr handle) : base(handle)
+        public Tab3View(NativeHandle handle) : base(handle)
         {
         }
 

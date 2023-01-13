@@ -4,6 +4,7 @@
 
 using System;
 using Foundation;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
@@ -34,7 +35,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxNavigationController(IntPtr handle) : base(handle)
+        protected internal MvxNavigationController(NativeHandle handle) : base(handle)
         {
         }
 

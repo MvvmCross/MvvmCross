@@ -2,6 +2,7 @@ using System;
 using CoreGraphics;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 using UIKit;
 
@@ -11,7 +12,7 @@ namespace Playground.iOS.Views
     [MvxModalPresentation(ModalPresentationStyle = UIModalPresentationStyle.OverFullScreen, ModalTransitionStyle = UIModalTransitionStyle.CrossDissolve)]
     public partial class ModalView : MvxViewController<ModalViewModel>
     {
-        public ModalView(IntPtr handle) : base(handle)
+        public ModalView(NativeHandle handle) : base(handle)
         {
         }
 

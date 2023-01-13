@@ -5,6 +5,7 @@
 using System;
 using Foundation;
 using MvvmCross.Base;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views.Base
@@ -35,7 +36,7 @@ namespace MvvmCross.Platforms.Ios.Views.Base
         {
         }
 
-        protected internal MvxEventSourcePageViewController(IntPtr handle) : base(handle)
+        protected internal MvxEventSourcePageViewController(NativeHandle handle) : base(handle)
         {
         }
 

@@ -6,6 +6,7 @@ using System;
 using Foundation;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
@@ -17,10 +18,10 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
         protected virtual NSString CellIdentifier => _cellIdentifier;
 
-        public MvxSimpleTableViewSource(IntPtr handle)
+        public MvxSimpleTableViewSource(NativeHandle handle)
             : base(handle)
         {
-            MvxLogHost.Default?.LogWarning("MvxSimpleTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+            MvxLogHost.Default?.LogWarning("MvxSimpleTableViewSource NativeHandle constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         public MvxSimpleTableViewSource(UITableView tableView, string nibName, string cellIdentifier = null,
