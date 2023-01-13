@@ -97,7 +97,7 @@ namespace MvvmCross.Binding.BindingContext
             var filler = Mvx.IoCProvider.Resolve<IMvxValueCombinerRegistryFiller>();
             var combinerName = filler.FindName(typeof(TValueConverter));
 
-            return ByCombining(combinerName, combinerParameter);
+            return ByCombining(combinerName, properties);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> ByCombining<TValueCombiner>(params string[] properties)
@@ -106,7 +106,7 @@ namespace MvvmCross.Binding.BindingContext
             var filler = Mvx.IoCProvider.Resolve<IMvxValueCombinerRegistryFiller>();
             var combinerName = filler.FindName(typeof(TValueConverter));
 
-            return ByCombining(combinerName, combinerParameter);
+            return ByCombining(combinerName, properties);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> CommandParameter(object parameter)
