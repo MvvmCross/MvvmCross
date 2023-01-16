@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/MvvmCross/MvvmCross</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <Version>8.1.0-net6.1</Version>
+    <Version>9.0.8</Version>
 
     <!--<Nullable>enable</Nullable>-->
     <LangVersion>latest</LangVersion>
