@@ -53,7 +53,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             (Bundle? bundle, MvxViewModelRequest? request) = GetAndroidBundleAndRequest(e);
 
             var mvxBundle = ReadAndroidBundle(bundle);
-            if (mvxBundle != null)
+            if (FragmentView?.ViewModel == null)
                 FragmentView?.OnCreate(mvxBundle, request);
         }
 
@@ -94,17 +94,17 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             return request;
         }
 
-        private static IMvxBundle? ReadAndroidBundle(Bundle? bundle)
+        private static IMvxBundle ReadAndroidBundle(Bundle? bundle)
         {
             if (Mvx.IoCProvider?.TryResolve(out IMvxSavedStateConverter converter) == true && bundle != null)
             {
-                return converter.Read(bundle);
+                return converter.Read(bundle) ?? new MvxBundle();
             }
 
             MvxLogHost.GetLog<MvxBindingFragmentAdapter>()?.Log(LogLevel.Warning,
             "Saved state converter not available - saving state will be hard");
 
-            return null;
+            return new MvxBundle();
         }
 
         protected override void HandleCreateViewCalled(
