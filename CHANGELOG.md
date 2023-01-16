@@ -1,5 +1,17 @@
 # Changelog
 
+## [9.0.8](https://github.com/MvvmCross/MvvmCross/tree/9.0.8) (2023-01-16)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.7...9.0.8)
+
+**Fixed bugs:**
+
+- Fix Fragments not loading ViewModel after App killed in background [\#4550](https://github.com/MvvmCross/MvvmCross/pull/4550) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Merged pull requests:**
+
+- Add missing generic ByCombining methods [\#4391](https://github.com/MvvmCross/MvvmCross/pull/4391) ([MattFaris](https://github.com/MattFaris))
+
 ## [9.0.7](https://github.com/MvvmCross/MvvmCross/tree/9.0.7) (2023-01-13)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.6...9.0.7)
