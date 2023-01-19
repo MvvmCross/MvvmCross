@@ -20,9 +20,9 @@ namespace MvvmCross.Platforms.Ios.Presenters
             _attribute = attribute;
         }
 
-        public override void DidDismiss(UIPresentationController presentationController)
+        public override void WillDismiss(UIPresentationController presentationController)
         {
-            _presenter.ClosedModalViewController(_viewController, _attribute);
+            _presenter.CloseModalViewController(_viewController, _attribute);
         }
     }
 }
