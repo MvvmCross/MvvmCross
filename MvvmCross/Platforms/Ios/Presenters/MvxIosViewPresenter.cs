@@ -442,7 +442,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (attribute.PreferredContentSize != default(CGSize))
                 viewController.PreferredContentSize = attribute.PreferredContentSize;
 
-            if (viewController.PresentationController != null)
+            if (_iosVersion13Checker.IsVersionOrHigher && viewController.PresentationController != null)
             {
                 viewController.PresentationController.Delegate =
                     new MvxModalPresentationControllerDelegate(this, viewController, attribute);
