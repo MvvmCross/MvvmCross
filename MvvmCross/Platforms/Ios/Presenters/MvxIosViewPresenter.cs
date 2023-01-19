@@ -445,7 +445,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (viewController.PresentationController != null)
             {
                 viewController.PresentationController.Delegate =
-                    new CustomModalPresentationControllerDelegate(this, viewController, attribute);
+                    new MvxModalPresentationControllerDelegate(this, viewController, attribute);
             }
 
             // Check if there is a modal already presented first. Otherwise use the window root
