@@ -410,10 +410,25 @@ namespace MvvmCross.Platforms.Ios.Presenters
         {
             ValidateArguments(viewController, attribute);
 
-            // Content size should be set to a target view controller, not the navigation one
-            if (attribute.PreferredContentSize != default)
+            // Check if the requested viewmodel is already presented AND ignore this request
+            var lastModal = ModalViewControllers.LastOrDefault();
+            if (lastModal != null)
             {
-                viewController.PreferredContentSize = attribute.PreferredContentSize;
+                var lastViewController = lastModal;
+                if (lastViewController is UINavigationController navCtrl && navCtrl.TopViewController != null)
+                {
+                    lastViewController = navCtrl.TopViewController;
+                }
+
+                if (lastViewController.GetType() == viewController.GetType())
+                {
+                    if (viewController is IDisposable disposable)
+                    {
+                        disposable.Dispose();
+                    }
+
+                    return Task.FromResult(false);
+                }
             }
 
             // setup modal based on attribute
@@ -424,27 +439,23 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
             viewController.ModalTransitionStyle = attribute.ModalTransitionStyle;
-            if (_iosVersion13Checker.IsVersionOrHigher && viewController.PresentationController != null)
+            if (attribute.PreferredContentSize != default(CGSize))
+                viewController.PreferredContentSize = attribute.PreferredContentSize;
+
+            if (viewController.PresentationController != null)
             {
                 viewController.PresentationController.Delegate =
-                    new MvxModalPresentationControllerDelegate(this, viewController, attribute);
+                    new CustomModalPresentationControllerDelegate(this, viewController, attribute);
             }
 
             // Check if there is a modal already presented first. Otherwise use the window root
             var modalHost = ModalViewControllers.LastOrDefault() ?? Window.RootViewController;
-            if (modalHost != null)
-            {
-                modalHost.PresentViewController(
-                    viewController,
-                    attribute.Animated,
-                    null);
 
-                ModalViewControllers.Add(viewController);
+            modalHost.PresentViewController(viewController, attribute.Animated, null);
 
-                return Task.FromResult(true);
-            }
+            ModalViewControllers.Add(viewController);
 
-            return Task.FromResult(false);
+            return Task.FromResult(true);
         }
 
         protected virtual async Task<bool> ShowPopoverViewController(
@@ -843,13 +854,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
         public virtual void ClosedPopoverViewController()
         {
             PopoverViewController = null;
-        }
-
-        // Called if the modal was dismissed by user (perhaps tapped background or form sheet swiped down)
-        public virtual ConfiguredTaskAwaitable<bool> ClosedModalViewController(UIViewController viewController,
-            MvxModalPresentationAttribute attribute)
-        {
-            return CloseModalViewController(viewController, attribute).ConfigureAwait(false);
         }
 
         private static void ValidateArguments(Type viewModelType, Type viewType)
