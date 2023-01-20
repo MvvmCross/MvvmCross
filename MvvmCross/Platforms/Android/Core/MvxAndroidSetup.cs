@@ -123,7 +123,7 @@ namespace MvvmCross.Platforms.Android.Core
             return new MvxSavedStateConverter();
         }
 
-        protected sealed override IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider)
+        protected override IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider)
         {
             ValidateArguments(iocProvider);
 
