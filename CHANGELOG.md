@@ -1,5 +1,22 @@
 # Changelog
 
+## [9.0.9](https://github.com/MvvmCross/MvvmCross/tree/9.0.9) (2023-01-20)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.8...9.0.9)
+
+**Fixed bugs:**
+
+- Android ListenableWorker MvxSetupSingleton.EnsureInitialized\(\) crashes with InvalidOperationException [\#4555](https://github.com/MvvmCross/MvvmCross/issues/4555)
+- Fix CreateViewsContainer getting Application Context from Top Activity [\#4556](https://github.com/MvvmCross/MvvmCross/pull/4556) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Closed issues:**
+
+- Upgrade to 8.0.2 causes "You cannot create more than one instance of MvxSingleton" exception on startup of iOS instance [\#4327](https://github.com/MvvmCross/MvvmCross/issues/4327)
+
+**Merged pull requests:**
+
+- Fix for closing and re-opening non-fullscreen modals on iOS fast not working correctly [\#4554](https://github.com/MvvmCross/MvvmCross/pull/4554) ([Digifais](https://github.com/Digifais))
+
 ## [9.0.8](https://github.com/MvvmCross/MvvmCross/tree/9.0.8) (2023-01-16)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.7...9.0.8)
