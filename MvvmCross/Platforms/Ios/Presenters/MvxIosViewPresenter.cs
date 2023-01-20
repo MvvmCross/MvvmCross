@@ -410,27 +410,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
         {
             ValidateArguments(viewController, attribute);
 
-            // Check if the requested viewmodel is already presented AND ignore this request
-            var lastModal = ModalViewControllers.LastOrDefault();
-            if (lastModal != null)
-            {
-                var lastViewController = lastModal;
-                if (lastViewController is UINavigationController navCtrl && navCtrl.TopViewController != null)
-                {
-                    lastViewController = navCtrl.TopViewController;
-                }
-
-                if (lastViewController.GetType() == viewController.GetType())
-                {
-                    if (viewController is IDisposable disposable)
-                    {
-                        disposable.Dispose();
-                    }
-
-                    return Task.FromResult(false);
-                }
-            }
-
             // setup modal based on attribute
             if (attribute.WrapInNavigationController)
             {
