@@ -55,7 +55,7 @@ namespace MvvmCross.Platforms.Android.Core
 
         public virtual Assembly ExecutableAssembly => ViewAssemblies.FirstOrDefault() ?? GetType().Assembly;
 
-        public Context? ApplicationContext => _currentTopActivity?.Activity?.ApplicationContext;
+        public Context? ApplicationContext => Application.Context;
 
         protected override void InitializeFirstChance(IMvxIoCProvider iocProvider)
         {
