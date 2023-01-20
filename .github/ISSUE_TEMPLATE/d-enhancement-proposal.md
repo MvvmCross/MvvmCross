@@ -1,7 +1,10 @@
 ---
-
-name: 🏗 Enhancement Proposal
+name: "\U0001F3D7 Enhancement Proposal"
 about: Proposals for code cleanup, refactor and improvements in general
+title: ''
+labels: t/enhancement
+assignees: ''
+
 ---
 
 ## 🏗 Enhancement Proposal

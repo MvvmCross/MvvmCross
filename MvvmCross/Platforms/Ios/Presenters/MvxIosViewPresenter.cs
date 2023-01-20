@@ -410,12 +410,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
         {
             ValidateArguments(viewController, attribute);
 
-            // Content size should be set to a target view controller, not the navigation one
-            if (attribute.PreferredContentSize != default)
-            {
-                viewController.PreferredContentSize = attribute.PreferredContentSize;
-            }
-
             // setup modal based on attribute
             if (attribute.WrapInNavigationController)
             {
@@ -424,6 +418,9 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
             viewController.ModalTransitionStyle = attribute.ModalTransitionStyle;
+            if (attribute.PreferredContentSize != default(CGSize))
+                viewController.PreferredContentSize = attribute.PreferredContentSize;
+
             if (_iosVersion13Checker.IsVersionOrHigher && viewController.PresentationController != null)
             {
                 viewController.PresentationController.Delegate =
@@ -432,19 +429,12 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             // Check if there is a modal already presented first. Otherwise use the window root
             var modalHost = ModalViewControllers.LastOrDefault() ?? Window.RootViewController;
-            if (modalHost != null)
-            {
-                modalHost.PresentViewController(
-                    viewController,
-                    attribute.Animated,
-                    null);
 
-                ModalViewControllers.Add(viewController);
+            modalHost.PresentViewController(viewController, attribute.Animated, null);
 
-                return Task.FromResult(true);
-            }
+            ModalViewControllers.Add(viewController);
 
-            return Task.FromResult(false);
+            return Task.FromResult(true);
         }
 
         protected virtual async Task<bool> ShowPopoverViewController(
@@ -843,13 +833,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
         public virtual void ClosedPopoverViewController()
         {
             PopoverViewController = null;
-        }
-
-        // Called if the modal was dismissed by user (perhaps tapped background or form sheet swiped down)
-        public virtual ConfiguredTaskAwaitable<bool> ClosedModalViewController(UIViewController viewController,
-            MvxModalPresentationAttribute attribute)
-        {
-            return CloseModalViewController(viewController, attribute).ConfigureAwait(false);
         }
 
         private static void ValidateArguments(Type viewModelType, Type viewType)
