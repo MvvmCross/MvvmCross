@@ -9,20 +9,20 @@ namespace MvvmCross.Platforms.Ios.Presenters
 {
     public class MvxModalPresentationControllerDelegate : UIAdaptivePresentationControllerDelegate
     {
-        private readonly IMvxIosViewPresenter _presenter;
+        private readonly MvxIosViewPresenter _presenter;
         private readonly UIViewController _viewController;
         private readonly MvxModalPresentationAttribute _attribute;
 
-        public MvxModalPresentationControllerDelegate(IMvxIosViewPresenter presenter, UIViewController viewController, MvxModalPresentationAttribute attribute)
+        public MvxModalPresentationControllerDelegate(MvxIosViewPresenter presenter, UIViewController viewController, MvxModalPresentationAttribute attribute)
         {
             _presenter = presenter;
             _viewController = viewController;
             _attribute = attribute;
         }
 
-        public override void DidDismiss(UIPresentationController presentationController)
+        public override void WillDismiss(UIPresentationController presentationController)
         {
-            _presenter.ClosedModalViewController(_viewController, _attribute);
+            _presenter.CloseModalViewController(_viewController, _attribute);
         }
     }
 }

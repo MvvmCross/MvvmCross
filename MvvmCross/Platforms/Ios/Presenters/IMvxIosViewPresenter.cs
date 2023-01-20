@@ -14,9 +14,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
     public interface IMvxIosViewPresenter : IMvxViewPresenter, IMvxCanCreateIosView
     {
         public void ClosedPopoverViewController();
-
-        public ConfiguredTaskAwaitable<bool> ClosedModalViewController(UIViewController viewController,
-            MvxModalPresentationAttribute attribute);
     }
 #nullable restore
 }
