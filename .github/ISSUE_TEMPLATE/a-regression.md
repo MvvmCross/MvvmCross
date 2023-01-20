@@ -1,7 +1,10 @@
 ---
-
-name: 🔙 Regression
+name: "\U0001F519 Regression"
 about: Report unexpected behavior that worked previously
+title: ''
+labels: t/bug
+assignees: ''
+
 ---
 
 ## 🔙 Regression

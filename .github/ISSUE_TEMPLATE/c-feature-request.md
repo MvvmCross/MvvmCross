@@ -1,7 +1,10 @@
 ---
-
-name: 🚀 Feature Request
+name: "\U0001F680 Feature Request"
 about: Want to see something new included in the Framework? Submit it!
+title: ''
+labels: t/feature
+assignees: ''
+
 ---
 
 ## 🚀 Feature Requests
