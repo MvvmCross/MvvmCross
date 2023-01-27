@@ -15,7 +15,7 @@ namespace Playground.Droid
         , Theme = "@style/AppTheme.Splash"
         , NoHistory = true
         , ScreenOrientation = ScreenOrientation.Portrait)]
-    public class SplashScreen : MvxSplashScreenActivity
+    public class SplashScreen : MvxStartActivity
     {
         public SplashScreen()
             : base(Resource.Layout.SplashScreen)
