@@ -22,22 +22,19 @@ using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platforms.Android.Core
+namespace MvvmCross.Platforms.Android.Core;
+
+public abstract class MvxAndroidSetup
+    : MvxSetup, IMvxAndroidGlobals, IMvxAndroidSetup
 {
-#nullable enable
-    public abstract class MvxAndroidSetup
-        : MvxSetup, IMvxAndroidGlobals, IMvxAndroidSetup
+    private MvxCurrentTopActivity? _currentTopActivity;
+    private IMvxAndroidViewPresenter? _presenter;
+
+    public void PlatformInitialize(Application application)
     {
-        private MvxCurrentTopActivity? _currentTopActivity;
-        private IMvxAndroidViewPresenter? _presenter;
+        ArgumentNullException.ThrowIfNull(application);
 
-        public void PlatformInitialize(Application application)
-        {
-            ArgumentNullException.ThrowIfNull(application);
-
-            ApplicationContext = application;
-
-            ApplicationContext = application;
+        ApplicationContext = application;
 
         if (_currentTopActivity != null)
             return;
@@ -48,7 +45,7 @@ namespace MvvmCross.Platforms.Android.Core
 
     public virtual Assembly ExecutableAssembly => ViewAssemblies.FirstOrDefault() ?? GetType().Assembly;
 
-        public Context? ApplicationContext { get; private set; }
+    public Context? ApplicationContext { get; private set; }
 
     protected override void InitializeFirstChance(IMvxIoCProvider iocProvider)
     {
