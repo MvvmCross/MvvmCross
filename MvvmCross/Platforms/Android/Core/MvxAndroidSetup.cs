@@ -30,20 +30,11 @@ public abstract class MvxAndroidSetup
     private MvxCurrentTopActivity? _currentTopActivity;
     private IMvxAndroidViewPresenter? _presenter;
 
-    public void PlatformInitialize(Activity activity)
-    {
-        ArgumentNullException.ThrowIfNull(activity);
-        ArgumentNullException.ThrowIfNull(activity.Application);
-
-        PlatformInitialize(activity.Application);
-
-        // this is needed for when App is rehydrated from being killed by Android in the background
-        _currentTopActivity?.OnActivityCreated(activity, null);
-    }
-
     public void PlatformInitialize(Application application)
     {
         ArgumentNullException.ThrowIfNull(application);
+
+        ApplicationContext = application;
 
         if (_currentTopActivity != null)
             return;
@@ -54,7 +45,7 @@ public abstract class MvxAndroidSetup
 
     public virtual Assembly ExecutableAssembly => ViewAssemblies.FirstOrDefault() ?? GetType().Assembly;
 
-    public virtual Context? ApplicationContext => Application.Context;
+    public Context? ApplicationContext { get; private set; }
 
     protected override void InitializeFirstChance(IMvxIoCProvider iocProvider)
     {

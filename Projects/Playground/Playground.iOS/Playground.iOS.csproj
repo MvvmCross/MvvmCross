@@ -4,10 +4,25 @@
     <TargetFramework>net6.0-ios</TargetFramework>
     <AssemblyName>Playground.iOS</AssemblyName>
     <RootNamespace>Playground.iOS</RootNamespace>
-    <RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
     <OutputType>Exe</OutputType>
-    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
     <UseMauiEssentials>true</UseMauiEssentials>
+    <Platforms>AnyCPU;iPhone;iPhoneSimulator</Platforms>
+    <EnableAssemblyILStripping>false</EnableAssemblyILStripping>
+    <MtouchLink>None</MtouchLink>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Any CPU' ">
+    <RuntimeIdentifier>iossimulator-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
