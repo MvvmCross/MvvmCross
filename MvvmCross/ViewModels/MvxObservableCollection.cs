@@ -113,7 +113,7 @@ namespace MvvmCross.ViewModels
             
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(start));
+                throw new ArgumentOutOfRangeException(nameof(index));
             }
 
             int currentIndex = index;
