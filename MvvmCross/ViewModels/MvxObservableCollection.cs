@@ -122,7 +122,7 @@ namespace MvvmCross.ViewModels
             {
                 foreach (var item in itemsList)
                 {
-                    InsertItem(currentIndex, i);
+                    InsertItem(currentIndex, item);
                     currentIndex++;
                 }
             }
