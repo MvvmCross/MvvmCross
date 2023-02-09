@@ -120,7 +120,7 @@ namespace MvvmCross.ViewModels
             var itemsList = items.ToList();
             using (SuppressEvents())
             {
-                foreach (var i in itemsList)
+                foreach (var item in itemsList)
                 {
                     InsertItem(currentIndex, i);
                     currentIndex++;
