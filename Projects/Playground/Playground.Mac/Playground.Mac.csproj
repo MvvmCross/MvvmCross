@@ -14,6 +14,16 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+    <UseSGen>false</UseSGen>
+    <LinkMode>None</LinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+    <UseSGen>false</UseSGen>
+    <LinkMode>None</LinkMode>
+  </PropertyGroup>
   <ItemGroup>
     <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition="$(CommitHash) != ''">
       <_Parameter1>RepositoryUrl</_Parameter1>
@@ -36,5 +46,22 @@
 
   <ItemGroup>
     <Folder Include="Properties" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Update="Assets.xcassets\AppIcon.appiconset\AppIcon-512%402x.png">
+      <Link>Assets.xcassets\AppIcon.appiconset\AppIcon-512%402x.png</Link>
+    </ImageAsset>
+    <ImageAsset Update="Assets.xcassets\AppIcon.appiconset\AppIcon-32%402x.png">
+      <Link>Assets.xcassets\AppIcon.appiconset\AppIcon-32%402x.png</Link>
+    </ImageAsset>
+    <ImageAsset Update="Assets.xcassets\AppIcon.appiconset\AppIcon-16%402x.png">
+      <Link>Assets.xcassets\AppIcon.appiconset\AppIcon-16%402x.png</Link>
+    </ImageAsset>
+    <ImageAsset Update="Assets.xcassets\AppIcon.appiconset\AppIcon-256%402x.png">
+      <Link>Assets.xcassets\AppIcon.appiconset\AppIcon-256%402x.png</Link>
+    </ImageAsset>
+    <ImageAsset Update="Assets.xcassets\AppIcon.appiconset\AppIcon-128%402x.png">
+      <Link>Assets.xcassets\AppIcon.appiconset\AppIcon-128%402x.png</Link>
+    </ImageAsset>
   </ItemGroup>
 </Project>
