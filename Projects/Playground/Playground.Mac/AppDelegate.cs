@@ -1,4 +1,4 @@
-﻿using Foundation;
+using Foundation;
 using MvvmCross;
 using MvvmCross.Platforms.Mac.Core;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;

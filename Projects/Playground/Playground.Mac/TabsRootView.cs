@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
 using Playground.Core.ViewModels;

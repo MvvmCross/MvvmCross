@@ -1,4 +1,4 @@
-﻿using AppKit;
+using AppKit;
 using CoreGraphics;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
