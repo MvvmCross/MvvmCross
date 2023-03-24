@@ -105,7 +105,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
         protected virtual string RowTitle(nint row, object item)
         {
-            return item.ToString();
+            return item?.ToString();
         }
 
         public override void Selected(UIPickerView picker, nint row, nint component)
