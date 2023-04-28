@@ -4,12 +4,10 @@
 
 using MvvmCross.Presenters;
 
-namespace MvvmCross.Platforms.Android.Presenters
-{
 #nullable enable
-    public interface IMvxAndroidViewPresenter
-        : IMvxViewPresenter
-    {
-    }
-#nullable restore
+namespace MvvmCross.Platforms.Android.Presenters;
+
+public interface IMvxAndroidViewPresenter
+    : IMvxViewPresenter
+{
 }
