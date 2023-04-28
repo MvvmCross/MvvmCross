@@ -12,6 +12,7 @@
 This package contains the 'Core' libraries for MvvmCross</Description>
     <PackageId>MvvmCross</PackageId>
     <GenerateLibraryLayout Condition=" $(TargetFramework.StartsWith('net6.0-windows')) ">true</GenerateLibraryLayout>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
