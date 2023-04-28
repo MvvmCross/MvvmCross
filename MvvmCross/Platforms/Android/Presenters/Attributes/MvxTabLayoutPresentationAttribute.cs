@@ -4,6 +4,7 @@
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes;
 
+#nullable enable
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class MvxTabLayoutPresentationAttribute : MvxViewPagerFragmentPresentationAttribute
 {

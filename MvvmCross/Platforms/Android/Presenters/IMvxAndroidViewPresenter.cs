@@ -4,6 +4,7 @@
 
 using MvvmCross.Presenters;
 
+#nullable enable
 namespace MvvmCross.Platforms.Android.Presenters;
 
 public interface IMvxAndroidViewPresenter

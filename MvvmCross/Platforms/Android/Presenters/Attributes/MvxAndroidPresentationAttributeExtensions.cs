@@ -6,6 +6,7 @@ using MvvmCross.Presenters;
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes;
 
+#nullable enable
 public static class MvxAndroidPresentationAttributeExtensions
 {
     public static bool IsFragmentCacheable(this Type fragmentType, Type fragmentActivityParentType)
