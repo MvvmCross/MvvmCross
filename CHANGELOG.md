@@ -1,5 +1,22 @@
 # Changelog
 
+## [9.0.10](https://github.com/MvvmCross/MvvmCross/tree/9.0.10) (2023-05-10)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.9...9.0.10)
+
+**Fixed bugs:**
+
+- "FrameLayout to show Fragment not found" because MvxFragmentPresentationAttribute.FragmentContentId misses Android.Resource.Id.Content [\#4586](https://github.com/MvvmCross/MvvmCross/issues/4586)
+- Mac view is not created until one of presentation attributes set explicitly [\#4572](https://github.com/MvvmCross/MvvmCross/issues/4572)
+- Android Mvx.IoCProvider.Resolve hitting MvvmCross.Exceptions.MvxIoCResolveException within ListenableWorkers when App is closed [\#4558](https://github.com/MvvmCross/MvvmCross/issues/4558)
+- \[Mac\] Correctly set view type when applying default presenter attribu… [\#4573](https://github.com/MvvmCross/MvvmCross/pull/4573) ([snechaev](https://github.com/snechaev))
+
+**Merged pull requests:**
+
+- Bugfix: MvxFragmentPresentationAttribute.FragmentContentId misses "Android.Resource.Id.Content" [\#4587](https://github.com/MvvmCross/MvvmCross/pull/4587) ([evgenyvalavin](https://github.com/evgenyvalavin))
+- Fix MvxCollectionViewCell when working with Auto Layout [\#4576](https://github.com/MvvmCross/MvvmCross/pull/4576) ([Digifais](https://github.com/Digifais))
+- Add an InsertRange method to MvxObservableCollection [\#4571](https://github.com/MvvmCross/MvvmCross/pull/4571) ([Digifais](https://github.com/Digifais))
+
 ## [9.0.9](https://github.com/MvvmCross/MvvmCross/tree/9.0.9) (2023-01-20)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.8...9.0.9)
