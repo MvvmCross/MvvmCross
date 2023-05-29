@@ -95,6 +95,7 @@ namespace MvvmCross.Platforms.Tizen.Core
             ValidateArguments(iocProvider);
 
             iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            iocProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(FillValueCombiners);
             iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
             iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
@@ -123,6 +124,11 @@ namespace MvvmCross.Platforms.Tizen.Core
         {
             registry.Fill(ValueConverterAssemblies);
             registry.Fill(ValueConverterHolders);
+        }
+        
+        protected virtual void FillValueCombiners(IMvxValueCombinerRegistry registry)
+        {
+            // this base class does nothing
         }
 
         protected virtual List<Type> ValueConverterHolders => new List<Type>();
