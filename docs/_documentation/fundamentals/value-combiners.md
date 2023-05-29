@@ -71,6 +71,18 @@ Note that it's unusual for a ValueCombiner to meaningfully implement `SetValue` 
 
 Developers are very welcome to write their own ValueCombiners if they wish to - please do - but please also be aware that it's likely that this internal `IMvxValueCombiner` API will change in future MvvmCross revisions - we are looking at ways to either simplify this Tibet binding interface and/or ways to make the binding structure more Type-aware so that conversions can be performed at more places within the binding engine. (Developers are also very welcome to suggest improvements for this API!)
 
+To manually register additional value combiners, you can do this in your `Setup` class using an override of the `FillValueCombiners` method - e.g.
+
+```c#
+protected override void FillValueCombiners(IMvxValueCombinerRegistry registry)
+{
+    base.FillValueCombiners(registry);
+    registry.AddOrOverwrite("CustomCombiner", new MyCustomValueCombiner(42));
+    registry.AddOrOverwrite("CustomCombiner2", new MvxCustomCombiner2ValueCombiner("Summer"));
+}
+```
+
+
 ### Available ValueCombiners
 
 The 'standard' ValueCombiners available in MvvmCross are:
