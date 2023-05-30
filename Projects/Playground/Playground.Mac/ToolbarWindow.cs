@@ -17,11 +17,6 @@ namespace Playground.Mac
             _count++;
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
-
         public NSTextField TextTitle => textTitle;
 
         public NSMenuItem MenuItem1 => menuItem1;
