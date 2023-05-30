@@ -10,6 +10,5 @@
     <Version>7.0.0</Version>
 
     <IsLibraryProject>$(MSBuildProjectName.Contains('MvvmCross'))</IsLibraryProject>
-    <IsXamarinForms>$(MSBuildProjectName.Contains('.Forms'))</IsXamarinForms>
   </PropertyGroup>
 </Project>
