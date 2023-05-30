@@ -3,6 +3,7 @@
 using System;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 
 namespace Playground.Mac
@@ -11,7 +12,7 @@ namespace Playground.Mac
     [MvxModalPresentation]
     public partial class ModalView : MvxViewController<ModalViewModel>
     {
-        public ModalView(IntPtr handle) : base(handle)
+        public ModalView(NativeHandle handle) : base(handle)
         {
             Title = "Modal view";
         }

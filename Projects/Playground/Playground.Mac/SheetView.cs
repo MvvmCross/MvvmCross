@@ -3,6 +3,7 @@
 using System;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 
 namespace Playground.Mac
@@ -11,7 +12,7 @@ namespace Playground.Mac
     [MvxSheetPresentation]
     public partial class SheetView : MvxViewController<SheetViewModel>
     {
-        public SheetView(IntPtr handle) : base(handle)
+        public SheetView(NativeHandle handle) : base(handle)
         {
             Title = "Sheet view";
         }

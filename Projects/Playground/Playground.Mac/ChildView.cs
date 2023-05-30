@@ -3,6 +3,7 @@
 using System;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 
 namespace Playground.Mac
@@ -11,7 +12,7 @@ namespace Playground.Mac
     [MvxContentPresentation]
     public partial class ChildView : MvxViewController<ChildViewModel>
     {
-        public ChildView(IntPtr handle) : base(handle)
+        public ChildView(NativeHandle handle) : base(handle)
         {
             Title = "Child view";
         }

@@ -1,6 +1,7 @@
 using System;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 
 namespace Playground.Mac
@@ -10,7 +11,7 @@ namespace Playground.Mac
     {
         private bool _firstTime = true;
 
-        public TabsRootView(IntPtr handle) : base(handle)
+        public TabsRootView(NativeHandle handle) : base(handle)
         {
         }
 

@@ -3,6 +3,7 @@
 using System;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 
 namespace Playground.Mac
@@ -11,7 +12,7 @@ namespace Playground.Mac
     [MvxTabPresentation(TabTitle = "Tab1")]
     public partial class Tab1View : MvxViewController<Tab1ViewModel>
     {
-        public Tab1View(IntPtr handle) : base(handle)
+        public Tab1View(NativeHandle handle) : base(handle)
         {
         }
 

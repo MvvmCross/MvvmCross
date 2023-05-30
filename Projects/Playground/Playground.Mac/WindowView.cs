@@ -3,6 +3,7 @@
 using System;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 
 namespace Playground.Mac
@@ -11,7 +12,7 @@ namespace Playground.Mac
     [MvxWindowPresentation("ToolbarWindow", "Main", Width = 500)]
     public partial class WindowView : MvxViewController<WindowViewModel>
     {
-        public WindowView(IntPtr handle) : base(handle)
+        public WindowView(NativeHandle handle) : base(handle)
         {
             Title = "Window view";
         }

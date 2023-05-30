@@ -9,6 +9,7 @@ using MvvmCross.Platforms.Mac.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
+using ObjCRuntime;
 
 namespace Playground.Mac
 {
@@ -21,7 +22,7 @@ namespace Playground.Mac
 
         public bool MyValue { get; set; } = true;
 
-        public RootView(IntPtr handle) : base(handle)
+        public RootView(NativeHandle handle) : base(handle)
         {
             Title = "Root view";
         }
