@@ -12,6 +12,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
 using MvvmCross.Core;
 using MvvmCross.IoC;
@@ -120,6 +121,7 @@ namespace MvvmCross.Platforms.Wpf.Core
             ValidateArguments(iocProvider);
 
             iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            iocProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(FillValueCombiners);
             iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
             iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
@@ -133,6 +135,11 @@ namespace MvvmCross.Platforms.Wpf.Core
         {
             registry.Fill(ValueConverterAssemblies);
             registry.Fill(ValueConverterHolders);
+        }
+
+        protected virtual void FillValueCombiners(IMvxValueCombinerRegistry registry)
+        {
+            // this base class does nothing
         }
 
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
