@@ -21,6 +21,7 @@
       "Projects\\Playground\\Playground.Core\\Playground.Core.csproj",
       "Projects\\Playground\\Playground.Droid\\Playground.Droid.csproj",
       "Projects\\Playground\\Playground.iOS\\Playground.iOS.csproj",
+      "Projects\\Playground\\Playground.Mac\\Playground.Mac.csproj",
       "UnitTests\\MvvmCross.UnitTest\\MvvmCross.UnitTest.csproj",
       "UnitTests\\Plugins.Color.UnitTest\\MvvmCross.Plugins.Color.UnitTest.csproj",
       "UnitTests\\Plugins.JsonLocalization.UnitTest\\MvvmCross.Plugins.JsonLocalization.UnitTest.csproj",
