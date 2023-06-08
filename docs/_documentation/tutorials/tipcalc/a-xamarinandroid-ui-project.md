@@ -113,7 +113,7 @@ This tutorial doesn't attempt to give an introduction to Android XML layout, but
 
 To achieve the basic layout that we need:
 
-- We will add a new .xml file - called `TipView.axml` into the `/Resources/Layout` folder.
+- We will add a new .xml file - called `TipView.xml` into the `/Resources/Layout` folder.
 
 - We will edit this file using the XML editor - the designer gives us a visual display, while the VS editor **sometimes** gives us XML Intellisense. Open the file, go to the "Source" tab and replace the file content with the following code:
 
