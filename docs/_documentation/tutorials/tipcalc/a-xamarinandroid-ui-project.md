@@ -25,7 +25,7 @@ Same as we did with the _Core_ project, we will use a standard template to creat
 
 ## Create a new Android project
 
-Add a new project to your solution - a 'Blank App (Android)' application with name `TipCalc.Droid`
+Add a new project to your solution - a '.Net Android Application' application with name `TipCalc.Droid`
 
 Within this, you'll find the normal Android application constructs:
 
@@ -37,7 +37,7 @@ Within this, you'll find the normal Android application constructs:
 
 No-one really needs that `MainActivity` :)
 
-Also, make sure you delete `Main.axml` in the /resources/Layout folder.
+Also, make sure you delete `activity_main.xml` in the /resources/Layout folder.
 
 ## Install MvvmCross
 
@@ -51,42 +51,9 @@ If you don't really enjoy the NuGet UI experience, then you can alternatively op
 
 Add a reference to your `TipCalc.Core` project - the project we created in the first step.
 
-## Add an Android Application class
+## Creating Setup class
 
-The Android Application class will allow us to specify the MvvmCross framework some key classes to be used for initialization:
-
-```c#
-using System;
-using Android.App;
-using Android.Runtime;
-using MvvmCross.Platforms.Android.Core;
-using MvvmCross.Platforms.Android.Views;
-using TipCalc.Core;
-
-namespace TipCalc.Droid
-{
-    [Application]
-    public class MainApplication : MvxAndroidApplication<MvxAndroidSetup<App>, App>
-    {
-        public MainApplication(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer)
-        {
-        }
-    }
-}
-```
-
-We won't go deeper into what role does MainApplication have on the Android platform, but let's talk a bit about the MvvmCross bits:
-
-- `MvxAndroidApplication` provides some behavior for initializing the framework in runtime - although it isn't really the only way to configure the Android project.
-- `MvxAndroidSetup` is the default setup MvvmCross contains. But you can use your own customized setup - sometimes it's necessary and it's a good place to initialize some 3rd party libraries on it.
-- `App` here is a reference to our `TipCalc.Core.App` class.
-
-### Some more details about the Setup class
-
-Every MvvmCross UI project requires a `Setup` class, but if your app is fairly simple, like the TipCalc is, then you can safely use the default one, provided by the framework.
-
-The `Setup` class is responsible for performing the initialization of the MvvmCross framework, including:
+Every MvvmCross UI project requires a `Setup` class. The `Setup` class is responsible for performing the initialization of the MvvmCross framework, including:
 
 - The IoC Container and DI engine
 - The Data-Binding engine
@@ -94,9 +61,49 @@ The `Setup` class is responsible for performing the initialization of the MvvmCr
 - The whole navigation system
 - Plugins
 
-Finally, the `Setup` class is also responsible for initializing your `App` class.
+The `Setup` class is also responsible for initializing your `App` class.
 
-Luckily for us, all this functionality is provided for you automatically, unless you want / need to use a custom `Setup` class (since it is an excellent place to register your own services / plugins, it is often the case).
+Finally, let's add `Setup` class:
+```c#
+using Microsoft.Extensions.Logging;
+using MvvmCross.Platforms.Android.Core;
+using TipCalc.Core;
+
+namespace TipCalc.Droid;
+
+public class Setup : MvxAndroidSetup<App>
+{
+    protected override ILoggerFactory? CreateLogFactory() => default!;
+
+    protected override ILoggerProvider? CreateLogProvider() => default!;
+}
+```
+
+## Add an Android Application class
+
+The Android Application class will allow us to specify the MvvmCross framework some key classes to be used for initialization:
+
+```c#
+using Android.Runtime;
+using MvvmCross.Platforms.Android.Views;
+using TipCalc.Core;
+
+namespace TipCalc.Droid;
+
+[Application]
+public class MainApplication : MvxAndroidApplication<Setup, App>
+{
+    public MainApplication(IntPtr javaReference, JniHandleOwnership transfer)
+        : base(javaReference, transfer)
+    {
+    }
+}
+```
+
+We won't go deeper into what role does MainApplication have on the Android platform, but let's talk a bit about the MvvmCross bits:
+
+- `MvxAndroidApplication` provides some behavior for initializing the framework in runtime - although it isn't really the only way to configure the Android project.
+- `App` here is a reference to our `TipCalc.Core.App` class.
 
 ## Add your View
 
@@ -106,7 +113,7 @@ This tutorial doesn't attempt to give an introduction to Android XML layout, but
 
 To achieve the basic layout that we need:
 
-- We will add a new .axml file - called `TipView.axml` into the `/Resources/Layout` folder.
+- We will add a new .xml file - called `TipView.xml` into the `/Resources/Layout` folder.
 
 - We will edit this file using the XML editor - the designer gives us a visual display, while the VS editor **sometimes** gives us XML Intellisense. Open the file, go to the "Source" tab and replace the file content with the following code:
 
@@ -267,7 +274,7 @@ public class TipView : MvxActivity<TipViewModel>
 - Add an `Activity` attribute over the class and set the `MainLauncher` property to `true`. This attribute lets Xamarin.Android add it automatically to your AndroidManifest file:
 
 ```c#
-[Activity(Label = "Tip Calculator", MainLauncher = true)]
+[Activity(Label = "Tip Calculator", MainLauncher = true, Theme = "@style/Theme.AppCompat")]
 ```
 
 - Override the method `OnCreate` and call `SetContentView()` right after the call to base:
@@ -283,21 +290,18 @@ protected override void OnCreate(Bundle bundle)
 As a result this completed class is very simple:
 
 ```c#
-using Android.App;
-using Android.OS;
 using MvvmCross.Platforms.Android.Views;
 using TipCalc.Core.ViewModels;
 
-namespace TipCalc.Droid.Views
+namespace TipCalc.Droid;
+
+[Activity(Label = "Tip Calculator", MainLauncher = true, Theme = "@style/Theme.AppCompat")]
+public class TipView : MvxActivity<TipViewModel>
 {
-    [Activity(Label = "Tip Calculator", MainLauncher = true)]
-    public class TipView : MvxActivity<TipViewModel>
+    protected override void OnCreate(Bundle bundle)
     {
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-            SetContentView(Resource.Layout.TipView);
-        }
+        base.OnCreate(bundle);
+        SetContentView(Resource.Layout.TipView);
     }
 }
 ```
@@ -310,7 +314,7 @@ When it starts... you should see something like this:
 
 ![Android TipCalc]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Android.png)
 
-If you then want to make it 'more beautiful', then try adding a few attributes to some of your .axml - things like:
+If you then want to make it 'more beautiful', then try adding a few attributes to some of your .xml - things like:
 
 ```xml
 android:background="#00007f"
