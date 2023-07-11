@@ -1,5 +1,5 @@
-#tool dotnet:n?package=GitVersion.Tool&version=5.10.3
-#tool dotnet:n?package=dotnet-sonarscanner&version=5.8.0
+#tool dotnet:n?package=GitVersion.Tool&version=5.12.0
+#tool dotnet:n?package=dotnet-sonarscanner&version=5.13.0
 #addin nuget:?package=Cake.Figlet&version=2.0.1
 
 var solutionName = "MvvmCross";
