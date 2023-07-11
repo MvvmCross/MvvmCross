@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net6.0-android;net6.0-ios</TargetFrameworks>
+    <TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net6.0-windows10.0.19041.0;$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
@@ -20,29 +20,29 @@ This package contains the 'ResourceLoader' plugin for MvvmCross</Description>
     <Compile Remove="Resources\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-windows')) ">
+  <ItemGroup Condition=" $(TargetFramework.Contains('-windows')) ">
     <Compile Include="Platforms\WinUI\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-ios')) ">
+  <ItemGroup Condition=" '$(_MvxTargetPlatformIsiOS)' == 'True' Or '$(_MvxTargetPlatformIsMacCatalyst)' == 'True' ">
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Ios\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-mac')) ">
+  <ItemGroup Condition=" '$(_MvxTargetPlatformIsmacOS)' == 'True'  ">
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Mac\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-tvos')) ">
+  <ItemGroup Condition=" '$(_MvxTargetPlatformIstvOS)' == 'True' ">
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Tvos\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('net6.0-android')) ">
+  <ItemGroup Condition=" '$(_MvxTargetPlatformIsAndroid)' == 'True' ">
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>

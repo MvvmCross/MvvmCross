@@ -29,17 +29,17 @@
 
     <_MvxTargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</_MvxTargetPlatformIdentifier>
     <_MvxTargetPlatformIsAndroid>false</_MvxTargetPlatformIsAndroid>
-    <_MvxTargetPlatformIsAndroid Condition="'$(_MauiTargetPlatformIdentifier)' == 'android'">True</_MvxTargetPlatformIsAndroid>
+    <_MvxTargetPlatformIsAndroid Condition="'$(_MvxTargetPlatformIdentifier)' == 'android'">True</_MvxTargetPlatformIsAndroid>
     <_MvxTargetPlatformIsiOS>false</_MvxTargetPlatformIsiOS>
-    <_MvxTargetPlatformIsiOS Condition="'$(_MauiTargetPlatformIdentifier)' == 'ios'">True</_MvxTargetPlatformIsiOS>
+    <_MvxTargetPlatformIsiOS Condition="'$(_MvxTargetPlatformIdentifier)' == 'ios'">True</_MvxTargetPlatformIsiOS>
     <_MvxTargetPlatformIsMacCatalyst>false</_MvxTargetPlatformIsMacCatalyst>
-    <_MvxTargetPlatformIsMacCatalyst Condition="'$(_MauiTargetPlatformIdentifier)' == 'maccatalyst'">True</_MvxTargetPlatformIsMacCatalyst>
+    <_MvxTargetPlatformIsMacCatalyst Condition="'$(_MvxTargetPlatformIdentifier)' == 'maccatalyst'">True</_MvxTargetPlatformIsMacCatalyst>
     <_MvxTargetPlatformIsmacOS>false</_MvxTargetPlatformIsmacOS>
-    <_MvxTargetPlatformIsmacOS Condition="'$(_MauiTargetPlatformIdentifier)' == 'macos'">True</_MvxTargetPlatformIsmacOS>
+    <_MvxTargetPlatformIsmacOS Condition="'$(_MvxTargetPlatformIdentifier)' == 'macos'">True</_MvxTargetPlatformIsmacOS>
     <_MvxTargetPlatformIstvOS>false</_MvxTargetPlatformIstvOS>
-    <_MvxTargetPlatformIstvOS Condition="'$(_MauiTargetPlatformIdentifier)' == 'tvos'">True</_MvxTargetPlatformIstvOS>
+    <_MvxTargetPlatformIstvOS Condition="'$(_MvxTargetPlatformIdentifier)' == 'tvos'">True</_MvxTargetPlatformIstvOS>
     <_MvxTargetPlatformIsWindows>false</_MvxTargetPlatformIsWindows>
-    <_MvxTargetPlatformIsWindows Condition="$(_MauiTargetPlatformIdentifier.Contains('windows')) == 'True'">True</_MvxTargetPlatformIsWindows>
+    <_MvxTargetPlatformIsWindows Condition="$(_MvxTargetPlatformIdentifier.Contains('windows')) == 'True'">True</_MvxTargetPlatformIsWindows>
 
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsiOS)' == 'True' ">10.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIstvOS)' == 'True' ">10.0</SupportedOSPlatformVersion>
