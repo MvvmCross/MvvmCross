@@ -27,10 +27,24 @@
 
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">10.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tvos'">10.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.2</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23</SupportedOSPlatformVersion>
+    <_MvxTargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</_MvxTargetPlatformIdentifier>
+    <_MvxTargetPlatformIsAndroid>false</_MvxTargetPlatformIsAndroid>
+    <_MvxTargetPlatformIsAndroid Condition="'$(_MauiTargetPlatformIdentifier)' == 'android'">True</_MvxTargetPlatformIsAndroid>
+    <_MvxTargetPlatformIsiOS>false</_MvxTargetPlatformIsiOS>
+    <_MvxTargetPlatformIsiOS Condition="'$(_MauiTargetPlatformIdentifier)' == 'ios'">True</_MvxTargetPlatformIsiOS>
+    <_MvxTargetPlatformIsMacCatalyst>false</_MvxTargetPlatformIsMacCatalyst>
+    <_MvxTargetPlatformIsMacCatalyst Condition="'$(_MauiTargetPlatformIdentifier)' == 'maccatalyst'">True</_MvxTargetPlatformIsMacCatalyst>
+    <_MvxTargetPlatformIsmacOS>false</_MvxTargetPlatformIsmacOS>
+    <_MvxTargetPlatformIsmacOS Condition="'$(_MauiTargetPlatformIdentifier)' == 'macos'">True</_MvxTargetPlatformIsmacOS>
+    <_MvxTargetPlatformIstvOS>false</_MvxTargetPlatformIstvOS>
+    <_MvxTargetPlatformIstvOS Condition="'$(_MauiTargetPlatformIdentifier)' == 'tvos'">True</_MvxTargetPlatformIstvOS>
+    <_MvxTargetPlatformIsWindows>false</_MvxTargetPlatformIsWindows>
+    <_MvxTargetPlatformIsWindows Condition="$(_MauiTargetPlatformIdentifier.Contains('windows')) == 'True'">True</_MvxTargetPlatformIsWindows>
+
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsiOS)' == 'True' ">10.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIstvOS)' == 'True' ">10.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsMacCatalyst)' == 'True' ">13.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsAndroid)' == 'True' ">23</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -58,7 +72,7 @@
       is not set. This is set here since the base MvvmCross assembly and plugins
       will need this property set.
    -->
-  <PropertyGroup Condition=" $(TargetFramework.StartsWith('net6.0-windows')) ">
+  <PropertyGroup Condition=" '$(_MvxTargetPlatformIsWindows)' == 'True' ">
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
 
