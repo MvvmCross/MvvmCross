@@ -26,7 +26,7 @@ namespace MvvmCross.Plugin.Json
 
         public void Configure(IMvxPluginConfiguration configuration)
         {
-            if (configuration != null && !(configuration is MvxJsonConfiguration))
+            if (configuration != null && configuration is not MvxJsonConfiguration)
             {
                 throw new MvxException("You must configure the Json plugin with MvxJsonConfiguration - but supplied {0}", configuration.GetType().Name);
             }
