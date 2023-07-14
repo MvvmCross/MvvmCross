@@ -4,6 +4,7 @@ using MvvmCross.Platforms.Ios.Views;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 using UIKit;
 
@@ -12,7 +13,7 @@ namespace Playground.iOS.Views
     [MvxFromStoryboard("Main")]
     public partial class OverrideAttributeView : MvxViewController<OverrideAttributeViewModel>, IMvxOverridePresentationAttribute
     {
-        public OverrideAttributeView(IntPtr handle) : base(handle)
+        public OverrideAttributeView(NativeHandle handle) : base(handle)
         {
         }
 

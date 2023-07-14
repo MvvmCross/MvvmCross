@@ -1,6 +1,7 @@
 using System;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 using UIKit;
 
@@ -10,7 +11,7 @@ namespace Playground.iOS.Views
     [MvxModalPresentation(WrapInNavigationController = true)]
     public partial class ModalNavView : MvxViewController<ModalNavViewModel>
     {
-        public ModalNavView(IntPtr handle) : base(handle)
+        public ModalNavView(NativeHandle handle) : base(handle)
         {
         }
 

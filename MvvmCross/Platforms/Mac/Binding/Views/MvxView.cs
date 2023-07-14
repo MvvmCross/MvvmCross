@@ -2,11 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Drawing;
-using AppKit;
-using Foundation;
 using MvvmCross.Binding.BindingContext;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Mac.Binding.Views
 {
@@ -21,7 +19,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
             this.CreateBindingContext();
         }
 
-        public MvxView(IntPtr handle)
+        public MvxView(NativeHandle handle)
             : base(handle)
         {
             this.CreateBindingContext();

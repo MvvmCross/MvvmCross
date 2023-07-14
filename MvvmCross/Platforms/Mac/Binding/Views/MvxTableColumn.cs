@@ -1,10 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using AppKit;
-using Foundation;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Mac.Binding.Views
 {
@@ -12,7 +9,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
     public class MvxTableColumn : NSTableColumn
     {
         // Called when created from unmanaged code
-        public MvxTableColumn(IntPtr handle) : base(handle)
+        public MvxTableColumn(NativeHandle handle) : base(handle)
         {
             this.Initialize();
         }
