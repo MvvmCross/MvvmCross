@@ -8,4 +8,4 @@ updates:
   groups:
     dev-dependencies:
       patterns:
-        - "Xamarin.AndroidX.*"
+        - "Xamarin.*"
