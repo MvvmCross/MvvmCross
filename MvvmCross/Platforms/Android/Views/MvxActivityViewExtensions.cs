@@ -25,10 +25,6 @@ namespace MvvmCross.Platforms.Android.Views
             {
                 var bindingAdapter = new MvxBindingActivityAdapter(activity);
             }
-            if (activity is IMvxChildViewModelOwner)
-            {
-                var childOwnerAdapter = new MvxChildViewModelOwnerAdapter(activity);
-            }
         }
 
         public static void OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)

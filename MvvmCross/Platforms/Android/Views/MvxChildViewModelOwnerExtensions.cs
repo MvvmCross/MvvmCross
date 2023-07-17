@@ -28,27 +28,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public static Intent CreateIntentFor(this IMvxAndroidView view, MvxViewModelRequest request)
         {
-            return Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>().GetIntentFor(request);
-        }
-
-        public static Intent CreateIntentFor(this IMvxChildViewModelOwner view, IMvxViewModel subViewModel)
-        {
-            var requestTranslator = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>();
-            var (intent, key) = requestTranslator.GetIntentWithKeyFor(subViewModel, null);
-
-            view.OwnedSubViewModelIndicies.Add(key);
-
-            return intent;
-        }
-
-        public static void ClearOwnedSubIndicies(this IMvxChildViewModelOwner view)
-        {
-            var translator = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>();
-            foreach (var ownedSubViewModelIndex in view.OwnedSubViewModelIndicies)
-            {
-                translator.RemoveSubViewModelWithKey(ownedSubViewModelIndex);
-            }
-            view.OwnedSubViewModelIndicies.Clear();
+            return Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>()?.GetIntentFor(request);
         }
     }
 }
