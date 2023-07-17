@@ -363,7 +363,7 @@ namespace MvvmCross.IoC
         {
             InternalSetResolver(tInterface, new ConstructingSingletonResolver(theConstructor));
         }
-        
+
         public object? IoCConstruct(Type type)
         {
             return IoCConstruct(type, (IDictionary<string, object>?)null);

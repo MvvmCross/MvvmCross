@@ -8,7 +8,7 @@ namespace MvvmCross.Platforms.Android
 {
     public static class MvxDateTimeExtensions
     {
-        private static readonly DateTime UnixZeroUtc = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime UnixZeroUtc = DateTime.UnixEpoch;
 
         public static DateTime FromMillisecondsUnixTimeToUtc(this long milliseconds)
         {

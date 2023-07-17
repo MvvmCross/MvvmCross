@@ -52,7 +52,7 @@ namespace MvvmCross.Binding.Combiners
     {
         protected override bool TryCombine(List<bool> stepValues, out object value)
         {
-            value = stepValues.Exists(x => !x) && 
+            value = stepValues.Exists(x => !x) &&
                     stepValues.Exists(x => x);
             return true;
         }
