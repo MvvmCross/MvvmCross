@@ -1,9 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System.Collections.Generic;
-using System.Linq;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Extensions;
 using MvvmCross.Converters;
@@ -15,7 +12,7 @@ namespace MvvmCross.Binding.Combiners
     {
         protected override bool TryCombine(List<bool> stepValues, out object value)
         {
-            value = stepValues.Any(x => !x);
+            value = stepValues.Exists(x => !x);
             return true;
         }
     }
@@ -25,7 +22,7 @@ namespace MvvmCross.Binding.Combiners
     {
         protected override bool TryCombine(List<bool> stepValues, out object value)
         {
-            value = stepValues.All(x => x);
+            value = stepValues.TrueForAll(x => x);
             return true;
         }
     }
@@ -35,7 +32,7 @@ namespace MvvmCross.Binding.Combiners
     {
         protected override bool TryCombine(List<bool> stepValues, out object value)
         {
-            value = stepValues.Any(x => x);
+            value = stepValues.Exists(x => x);
             return true;
         }
     }
@@ -45,7 +42,7 @@ namespace MvvmCross.Binding.Combiners
     {
         protected override bool TryCombine(List<bool> stepValues, out object value)
         {
-            value = stepValues.All(x => !x);
+            value = stepValues.TrueForAll(x => !x);
             return true;
         }
     }
@@ -55,8 +52,8 @@ namespace MvvmCross.Binding.Combiners
     {
         protected override bool TryCombine(List<bool> stepValues, out object value)
         {
-            value = stepValues.Any(x => !x)
-                && stepValues.Any(x => x);
+            value = stepValues.Exists(x => !x) && 
+                    stepValues.Exists(x => x);
             return true;
         }
     }
@@ -82,8 +79,7 @@ namespace MvvmCross.Binding.Combiners
                     value = MvxBindingConstant.UnsetValue;
                     return true;
                 }
-                bool booleanValue;
-                if (!TryConvertToBool(objectValue, out booleanValue))
+                if (!TryConvertToBool(objectValue, out var booleanValue))
                 {
                     value = MvxBindingConstant.UnsetValue;
                     return true;
