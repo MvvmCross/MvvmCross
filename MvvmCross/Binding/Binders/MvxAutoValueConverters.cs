@@ -34,7 +34,7 @@ namespace MvvmCross.Binding.Binders
                     && ViewType == other.ViewType;
             }
 
-            public override bool Equals(object obj)
+            public override bool Equals(object? obj)
             {
                 return obj is Key key && Equals(key);
             }

@@ -1,10 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using System.Collections.Generic;
-
+#nullable enable
 namespace MvvmCross.IoC
 {
     public interface IMvxIoCProvider
@@ -14,25 +11,25 @@ namespace MvvmCross.IoC
 
         bool CanResolve(Type type);
 
-        T Resolve<T>()
+        T? Resolve<T>()
             where T : class;
 
-        object Resolve(Type type);
+        object? Resolve(Type type);
 
-        bool TryResolve<T>(out T resolved)
+        bool TryResolve<T>(out T? resolved)
             where T : class;
 
-        bool TryResolve(Type type, out object resolved);
+        bool TryResolve(Type type, out object? resolved);
 
-        T Create<T>()
+        T? Create<T>()
             where T : class;
 
-        object Create(Type type);
+        object? Create(Type type);
 
-        T GetSingleton<T>()
+        T? GetSingleton<T>()
             where T : class;
 
-        object GetSingleton(Type type);
+        object? GetSingleton(Type type);
 
         void RegisterType<TFrom, TTo>()
             where TFrom : class
@@ -55,25 +52,25 @@ namespace MvvmCross.IoC
 
         void RegisterSingleton(Type tInterface, Func<object> theConstructor);
 
-        T IoCConstruct<T>()
+        T? IoCConstruct<T>()
             where T : class;
 
-        T IoCConstruct<T>(IDictionary<string, object> arguments)
+        T? IoCConstruct<T>(IDictionary<string, object>? arguments)
             where T : class;
 
-        T IoCConstruct<T>(object arguments)
+        T? IoCConstruct<T>(object? arguments)
             where T : class;
 
-        T IoCConstruct<T>(params object[] arguments)
+        T? IoCConstruct<T>(params object?[] arguments)
             where T : class;
 
-        object IoCConstruct(Type type);
+        object? IoCConstruct(Type type);
 
-        object IoCConstruct(Type type, IDictionary<string, object> arguments);
+        object? IoCConstruct(Type type, IDictionary<string, object>? arguments);
 
-        object IoCConstruct(Type type, object arguments);
+        object? IoCConstruct(Type type, object? arguments);
 
-        object IoCConstruct(Type type, params object[] arguments);
+        object? IoCConstruct(Type type, params object?[] arguments);
 
         void CallbackWhenRegistered<T>(Action action);
 

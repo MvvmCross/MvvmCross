@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
-using MvvmCross.Base;
 using System.Text.Json;
+using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.Json
 {
