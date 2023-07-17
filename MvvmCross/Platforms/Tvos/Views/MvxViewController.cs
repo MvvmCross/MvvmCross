@@ -2,12 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Tvos.Views.Base;
 using MvvmCross.ViewModels;
-using UIKit;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Views
 {
@@ -29,7 +27,7 @@ namespace MvvmCross.Platforms.Tvos.Views
             this.AdaptForBinding();
         }
 
-        protected internal MvxViewController(IntPtr handle) : base(handle)
+        protected internal MvxViewController(NativeHandle handle) : base(handle)
         {
             this.AdaptForBinding();
         }
@@ -120,7 +118,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
         }
 
-        protected internal MvxViewController(IntPtr handle) : base(handle)
+        protected internal MvxViewController(NativeHandle handle) : base(handle)
         {
         }
 

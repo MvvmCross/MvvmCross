@@ -1,6 +1,7 @@
 using System;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 
 namespace Playground.iOS.Views
@@ -9,7 +10,7 @@ namespace Playground.iOS.Views
     [MvxSplitViewPresentation]
     public partial class SplitDetailView : MvxViewController<SplitDetailViewModel>
     {
-        public SplitDetailView(IntPtr handle) : base(handle)
+        public SplitDetailView(NativeHandle handle) : base(handle)
         {
         }
 
