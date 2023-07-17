@@ -18,7 +18,6 @@ namespace MvvmCross.Platforms.Android.Views
          , IMvxAndroidViewsContainer
     {
         private const string ExtrasKey = "MvxLaunchData";
-        private const string SubViewModelKey = "MvxSubViewModelKey";
 
         private readonly Context _applicationContext;
         private readonly ILogger<MvxAndroidViewsContainer>? _logger;
@@ -28,8 +27,6 @@ namespace MvvmCross.Platforms.Android.Views
             _applicationContext = applicationContext;
             _logger = MvxLogHost.GetLog<MvxAndroidViewsContainer>();
         }
-
-        #region Implementation of IMvxAndroidViewModelRequestTranslator
 
         public virtual IMvxViewModel? Load(Intent intent, IMvxBundle? savedState)
         {
@@ -54,13 +51,6 @@ namespace MvvmCross.Platforms.Android.Views
             {
                 _logger?.Log(LogLevel.Trace, "Null Extras seen on Intent when creating ViewModel - have you tried to navigate to an MvvmCross View directly? Will try direct load");
                 return DirectLoad(savedState, viewModelTypeHint);
-            }
-
-            IMvxViewModel? mvxViewModel;
-            if (TryGetEmbeddedViewModel(intent, out mvxViewModel))
-            {
-                _logger?.Log(LogLevel.Trace, "Embedded ViewModel used");
-                return mvxViewModel;
             }
 
             _logger?.Log(LogLevel.Trace, "Attempting to load new ViewModel from Intent with Extras");
@@ -104,23 +94,6 @@ namespace MvvmCross.Platforms.Android.Views
             return loaderService.LoadViewModel(viewModelRequest, savedState);
         }
 
-        protected virtual bool TryGetEmbeddedViewModel(Intent intent, out IMvxViewModel? mvxViewModel)
-        {
-            var embeddedViewModelKey = intent.Extras?.GetInt(SubViewModelKey);
-            if (embeddedViewModelKey != null && embeddedViewModelKey.Value != 0)
-            {
-                mvxViewModel = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Get(embeddedViewModelKey.Value);
-                if (mvxViewModel != null)
-                {
-                    RemoveSubViewModelWithKey(embeddedViewModelKey.Value);
-                    return true;
-                }
-            }
-
-            mvxViewModel = null;
-            return false;
-        }
-
         public virtual Intent GetIntentFor(MvxViewModelRequest request)
         {
             var viewType = GetViewType(request.ViewModelType);
@@ -148,24 +121,13 @@ namespace MvvmCross.Platforms.Android.Views
             //                intent.AddFlags(ActivityFlags.ClearTop);
         }
 
-        public virtual (Intent intent, int key) GetIntentWithKeyFor(IMvxViewModel existingViewModelToUse, MvxViewModelRequest? request)
+        public virtual Intent GetIntentFor(IMvxViewModel existingViewModelToUse, MvxViewModelRequest? request)
         {
             request ??= MvxViewModelRequest.GetDefaultRequest(existingViewModelToUse.GetType());
             var intent = GetIntentFor(request);
 
-            var childViewModelCache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
-            var key = childViewModelCache.Cache(existingViewModelToUse);
-            intent.PutExtra(SubViewModelKey, key);
-
-            return (intent, key);
+            return intent;
         }
-
-        public void RemoveSubViewModelWithKey(int key)
-        {
-            Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Remove(key);
-        }
-
-        #endregion Implementation of IMvxAndroidViewModelRequestTranslator
     }
 #nullable restore
 }
