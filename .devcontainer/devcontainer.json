@@ -9,11 +9,10 @@
     },
     "ghcr.io/akhildevelops/devcontainer-features/android-cli:0": {}
   },
- "postCreateCommand": "dotnet workload install maui ios tvos macos maccatalyst android",
   "customizations": {
 		"vscode": {
 			"extensions": [
-        "ms-dotnettools.csdevkit",
+				"ms-dotnettools.csdevkit",
 				"editorconfig.editorconfig"
 			]
 		}
