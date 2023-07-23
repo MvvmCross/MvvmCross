@@ -1,0 +1,13 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:1": {
+      "version": "latest"
+    },
+    "ghcr.io/jarrodcolburn/features/android-sdk:0": {},
+    "ghcr.io/akhildevelops/devcontainer-features/android-cli:0": {},
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "11"
+    }
+  }
+}
