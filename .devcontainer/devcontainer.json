@@ -4,10 +4,18 @@
     "ghcr.io/devcontainers/features/dotnet:1": {
       "version": "latest"
     },
-    "ghcr.io/jarrodcolburn/features/android-sdk:0": {},
-    "ghcr.io/akhildevelops/devcontainer-features/android-cli:0": {},
     "ghcr.io/devcontainers/features/java:1": {
       "version": "11"
-    }
-  }
+    },
+    "ghcr.io/akhildevelops/devcontainer-features/android-cli:0": {}
+  },
+ "postCreateCommand": "dotnet workload install maui ios tvos macos maccatalyst android",
+  "customizations": {
+		"vscode": {
+			"extensions": [
+        "ms-dotnettools.csdevkit",
+				"editorconfig.editorconfig"
+			]
+		}
+	}
 }
