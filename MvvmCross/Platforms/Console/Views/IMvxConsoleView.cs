@@ -1,24 +1,21 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
+#nullable enable
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platforms.Console.Views
+namespace MvvmCross.Platforms.Console.Views;
+
+public interface IMvxConsoleView : IMvxView
 {
-#nullable enable
-    public interface IMvxConsoleView : IMvxView
-    {
-        void HackSetViewModel(object viewModel);
+    void HackSetViewModel(object? viewModel);
 
-        bool HandleInput(string input);
-    }
+    bool HandleInput(string input);
+}
 
-    public interface IMvxConsoleView<TViewModel>
-        : IMvxConsoleView
-        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
-    {
-    }
-#nullable restore
+public interface IMvxConsoleView<TViewModel>
+    : IMvxConsoleView, IMvxView<TViewModel>
+    where TViewModel : class, IMvxViewModel
+{
 }
