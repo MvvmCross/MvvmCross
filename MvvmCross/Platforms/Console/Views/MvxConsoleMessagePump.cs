@@ -43,6 +43,6 @@ public class MvxConsoleMessagePump : IMvxConsoleCurrentView, IMvxMessagePump
     private static IMvxViewModel? ReflectionGetViewModel(IMvxView? view)
     {
         var propertyInfo = view?.GetType().GetProperty("ViewModel");
-        return (IMvxViewModel?)propertyInfo?.GetGetMethod()?.Invoke(view, new object[] { });
+        return (IMvxViewModel?)propertyInfo?.GetGetMethod()?.Invoke(view, Array.Empty<object>());
     }
 }

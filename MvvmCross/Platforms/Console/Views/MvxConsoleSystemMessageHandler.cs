@@ -10,7 +10,7 @@ public class MvxConsoleSystemMessageHandler
 {
     public bool ExitFlag { get; set; }
 
-    private IMvxConsoleNavigation? ConsoleNavigation => Mvx.IoCProvider?.Resolve<IMvxConsoleNavigation>();
+    private static IMvxConsoleNavigation? ConsoleNavigation => Mvx.IoCProvider?.Resolve<IMvxConsoleNavigation>();
 
     public virtual bool HandleInput(IMvxViewModel? viewModel, string input)
     {

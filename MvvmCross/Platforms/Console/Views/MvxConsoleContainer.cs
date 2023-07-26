@@ -50,7 +50,7 @@ public class MvxConsoleContainer
             return await Close(closeHint.ViewModelToClose).ConfigureAwait(true);
         }
 
-        MvxLogHost.GetLog<MvxConsoleContainer>()?.Log(LogLevel.Trace, "Hint ignored {0}", hint.GetType().Name);
+        MvxLogHost.GetLog<MvxConsoleContainer>()?.Log(LogLevel.Trace, "Hint ignored {HintName}", hint.GetType().Name);
         return false;
     }
 
