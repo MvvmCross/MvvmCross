@@ -23,6 +23,7 @@ This package contains the 'Core' libraries for MvvmCross</Description>
   
   <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
     <Compile Include="Platforms\Netstandard\**\*.cs" />
+    <Compile Include="Platforms\Console\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(_MvxTargetPlatformIsiOS)' == 'True' Or '$(_MvxTargetPlatformIsMacCatalyst)' == 'True' ">
