@@ -14,7 +14,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
     {
         protected Dictionary<string, string?>? CurrentEntries { get; private set; }
 
-        public IDictionary<string, string?> Parse(string textToParse)
+        public IDictionary<string, string> Parse(string textToParse)
         {
             Reset(textToParse);
 
@@ -27,7 +27,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
             return CurrentEntries!;
         }
 
-        protected override void Reset(string textToParse)
+        protected override void Reset(string? textToParse)
         {
             CurrentEntries = new Dictionary<string, string?>();
             base.Reset(textToParse);

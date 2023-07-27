@@ -1,14 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
+#nullable enable
 using System.Reflection;
 using MvvmCross.Exceptions;
 
 namespace MvvmCross.WeakSubscription
 {
-#nullable enable
     public class MvxWeakEventSubscription<TSource, TEventArgs> : IDisposable
         where TSource : class
     {
@@ -35,7 +33,7 @@ namespace MvvmCross.WeakSubscription
 
         protected MvxWeakEventSubscription(
             TSource source,
-            EventInfo sourceEventInfo,
+            EventInfo? sourceEventInfo,
             EventHandler<TEventArgs> targetEventHandler)
         {
             if (source == null)
@@ -65,13 +63,13 @@ namespace MvvmCross.WeakSubscription
             return new EventHandler<TEventArgs>(OnSourceEvent);
         }
 
-        protected virtual object GetTargetObject()
+        protected virtual object? GetTargetObject()
         {
             return _targetReference.Target;
         }
 
         //This is the method that will handle the event of source.
-        protected void OnSourceEvent(object sender, TEventArgs e)
+        protected void OnSourceEvent(object? sender, TEventArgs e)
         {
             var target = GetTargetObject();
             if (target != null)
@@ -105,10 +103,9 @@ namespace MvvmCross.WeakSubscription
 
             try
             {
-                TSource source;
-                if (_sourceReference.TryGetTarget(out source))
+                if (_sourceReference.TryGetTarget(out var source))
                 {
-                    _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { _ourEventHandler });
+                    _sourceEventInfo.GetRemoveMethod()?.Invoke(source, new object[] { _ourEventHandler });
                     _subscribed = false;
                 }
             }
@@ -124,10 +121,9 @@ namespace MvvmCross.WeakSubscription
             if (_subscribed)
                 throw new MvxException("Should not call AddEventHandler twice");
 
-            TSource source;
-            if (_sourceReference.TryGetTarget(out source))
+            if (_sourceReference.TryGetTarget(out var source))
             {
-                _sourceEventInfo.GetAddMethod().Invoke(source, new object[] { _ourEventHandler });
+                _sourceEventInfo.GetAddMethod()?.Invoke(source, new object[] { _ourEventHandler });
                 _subscribed = true;
             }
         }
@@ -159,7 +155,7 @@ namespace MvvmCross.WeakSubscription
 
         protected MvxWeakEventSubscription(
             TSource source,
-            EventInfo sourceEventInfo,
+            EventInfo? sourceEventInfo,
             EventHandler targetEventHandler)
         {
             if (source == null)
@@ -180,7 +176,7 @@ namespace MvvmCross.WeakSubscription
             AddEventHandler();
         }
 
-        protected virtual object GetTargetObject()
+        protected virtual object? GetTargetObject()
         {
             return _targetReference.Target;
         }
@@ -191,7 +187,7 @@ namespace MvvmCross.WeakSubscription
         }
 
         //This is the method that will handle the event of source.
-        protected void OnSourceEvent(object sender, EventArgs e)
+        protected void OnSourceEvent(object? sender, EventArgs e)
         {
             var target = GetTargetObject();
             if (target != null)
@@ -225,10 +221,9 @@ namespace MvvmCross.WeakSubscription
 
             try
             {
-                TSource source;
-                if (_sourceReference.TryGetTarget(out source))
+                if (_sourceReference.TryGetTarget(out var source))
                 {
-                    _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { _ourEventHandler });
+                    _sourceEventInfo.GetRemoveMethod()?.Invoke(source, new object[] { _ourEventHandler });
                     _subscribed = false;
                 }
             }
@@ -244,13 +239,11 @@ namespace MvvmCross.WeakSubscription
             if (_subscribed)
                 throw new MvxException("Should not call AddEventHandler() twice");
 
-            TSource source;
-            if (_sourceReference.TryGetTarget(out source))
+            if (_sourceReference.TryGetTarget(out var source))
             {
-                _sourceEventInfo.GetAddMethod().Invoke(source, new object[] { _ourEventHandler });
+                _sourceEventInfo.GetAddMethod()?.Invoke(source, new object[] { _ourEventHandler });
                 _subscribed = true;
             }
         }
     }
-#nullable restore
 }

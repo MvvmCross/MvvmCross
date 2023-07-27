@@ -69,12 +69,11 @@ namespace MvvmCross.ViewModels
 
         protected virtual Type? LookupAssociatedConcreteViewModelType(Type candidateType)
         {
-            var viewModelPropertyInfo = candidateType
-                .GetProperties()
-                .FirstOrDefault(
+            var viewModelPropertyInfo =
+                Array.Find(candidateType.GetProperties(),
                     x => x.Name == "ViewModel" &&
-                    !x.PropertyType.GetTypeInfo().IsInterface &&
-                    !x.PropertyType.GetTypeInfo().IsAbstract);
+                         !x.PropertyType.GetTypeInfo().IsInterface &&
+                         !x.PropertyType.GetTypeInfo().IsAbstract);
 
             return viewModelPropertyInfo?.PropertyType;
         }

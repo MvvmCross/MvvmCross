@@ -2,16 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+#nullable enable
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters
 {
-#nullable enable
     public static class MvxPresentationAttributeExtensions
     {
         public static bool HasBasePresentationAttribute(this Type candidateType)
@@ -30,7 +26,7 @@ namespace MvvmCross.Presenters
             return attributes.Cast<MvxBasePresentationAttribute>();
         }
 
-        public static MvxBasePresentationAttribute GetBasePresentationAttribute(this Type fromViewType)
+        public static MvxBasePresentationAttribute? GetBasePresentationAttribute(this Type fromViewType)
         {
             return fromViewType.GetBasePresentationAttributes().FirstOrDefault();
         }
@@ -60,5 +56,4 @@ namespace MvvmCross.Presenters
                 });
         }
     }
-#nullable restore
 }

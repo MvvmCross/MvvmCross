@@ -150,7 +150,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             if (SelectedIndex > 5 && (MoreNavigationController?.ViewControllers?.Any() ?? false))
             {
-                var lastViewController = (MoreNavigationController.ViewControllers.Last()).GetIMvxIosView();
+                var lastViewController = MoreNavigationController.ViewControllers[0].GetIMvxIosView();
 
                 if (lastViewController != null && lastViewController.ViewModel == viewModel)
                 {
@@ -159,19 +159,18 @@ namespace MvvmCross.Platforms.Ios.Views
                 }
             }
 
-            if (SelectedViewController is UINavigationController navController
-                && navController.ViewControllers != null
-                && navController.ViewControllers.Any())
+            if (SelectedViewController is UINavigationController { ViewControllers: not null } navController &&
+                navController.ViewControllers.Any())
             {
                 // if the ViewModel to close if the last in the stack, close it animated
-                if (navController.TopViewController.GetIMvxIosView().ViewModel == viewModel)
+                if (navController.TopViewController.GetIMvxIosView()?.ViewModel == viewModel)
                 {
                     navController.PopViewController(true);
                     return true;
                 }
 
                 var controllers = navController.ViewControllers.ToList();
-                var controllerToClose = controllers.FirstOrDefault(vc => vc.GetIMvxIosView().ViewModel == viewModel);
+                var controllerToClose = controllers.Find(vc => vc.GetIMvxIosView()?.ViewModel == viewModel);
 
                 if (controllerToClose != null)
                 {
