@@ -1,6 +1,6 @@
 # Changelog
 
-## [9.1.0](https://github.com/MvvmCross/MvvmCross/tree/10.0.0) (2023-07-27)
+## [9.1.0](https://github.com/MvvmCross/MvvmCross/tree/9.1.0) (2023-07-27)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.10...9.1.0)
 
