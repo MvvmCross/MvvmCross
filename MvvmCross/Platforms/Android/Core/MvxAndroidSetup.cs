@@ -9,6 +9,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
@@ -185,6 +186,7 @@ public abstract class MvxAndroidSetup
         ValidateArguments(iocProvider);
 
         iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+        iocProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(FillValueCombiners);
         iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
         iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         iocProvider.CallbackWhenRegistered<IMvxTypeCache<View>>(FillViewTypes);
@@ -238,6 +240,11 @@ public abstract class MvxAndroidSetup
 
         registry.Fill(ValueConverterAssemblies);
         registry.Fill(ValueConverterHolders);
+    }
+
+    protected virtual void FillValueCombiners(IMvxValueCombinerRegistry registry)
+    {
+        // this base class does nothing
     }
 
     protected virtual IEnumerable<Type> ValueConverterHolders => new List<Type>();

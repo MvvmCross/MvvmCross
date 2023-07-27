@@ -96,7 +96,7 @@ namespace MvvmCross.ViewModels
 
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, itemsList, startingIndex));
         }
-        
+
         /// <summary>
         /// Inserts the specified items collection in the current <see cref="MvxObservableCollection{T}"/> instance at the specified index.
         /// </summary>
@@ -110,7 +110,7 @@ namespace MvvmCross.ViewModels
             {
                 throw new ArgumentNullException(nameof(items));
             }
-            
+
             if (index < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(index));

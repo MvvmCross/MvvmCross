@@ -6,16 +6,16 @@ order: 2
 ---
 MvvmCross applications normally consist on:
 
-- A 'Core' project in the form of a .NET Standard library, which will contain all the shared code (so you want to maximize the amount of code placed in this project). The _Core_ will contain Models, ViewModels, Services, Converters, ...
+- A 'Core' project in the form of a .NET Core library, which will contain all the shared code (so you want to maximize the amount of code placed in this project). The _Core_ will contain Models, ViewModels, Services, Converters, ...
 - One 'Platform' project per targeted platform. These projects will contain some framework initialization code, Views and SDK dependant code.
 
 Normally, you start development from the _Core_ project - and that's exactly what we'll do here.
 
 Although it is recommended that you install any of the community made solution templates, we'll use a blank solution on this tutorial.
 
-## Create the new .NET Standard library
+## Create the new .NET Core library
 
-Using Visual Studio, create your new `.NET Standard 2 Library` project using the File|New Project wizard.
+Using Visual Studio, create your new `.NET Class Library` project using the File|New Project wizard. Choose `.Net 7` as project framework.
 
 Call it something like `TipCalc.Core` and name the solution `TipCalc`.
 
@@ -38,26 +38,22 @@ Create a folder called `Services`.
 Within this folder create a new interface, which will be used for calculating tips:
 
 ```c#
-namespace TipCalc.Core.Services
+namespace TipCalc.Core.Services;
+public interface ICalculationService
 {
-    public interface ICalculationService
-    {
-        double TipAmount(double subTotal, int generosity);
-    }
+    double TipAmount(double subTotal, int generosity);
 }
 ```
 
 Within the `Services` folder now create an implementation for the interface:
 
 ```c#
-namespace TipCalc.Core.Services
+namespace TipCalc.Core.Services;
+public class CalculationService : ICalculationService
 {
-    public class CalculationService : ICalculationService
+    public double TipAmount(double subTotal, int generosity)
     {
-        public double TipAmount(double subTotal, int generosity)
-        {
-            return subTotal * ((double)generosity)/100.0;
-        }
+        return subTotal * ((double)generosity)/100.0;
     }
 }
 ```
@@ -83,70 +79,68 @@ So now let's create a folder called `ViewModels`, and inside of it a new class n
 ```c#
 using MvvmCross.ViewModels;
 using TipCalc.Core.Services;
-using System.Threading.Tasks;
 
-namespace TipCalc.Core.ViewModels
+namespace TipCalc.Core.ViewModels;
+
+public class TipViewModel : MvxViewModel
 {
-    public class TipViewModel : MvxViewModel
+    readonly ICalculationService _calculationService;
+
+    public TipViewModel(ICalculationService calculationService)
     {
-        readonly ICalculationService _calculationService;
+        _calculationService = calculationService;
+    }
 
-        public TipViewModel(ICalculationService calculationService)
+    public override async Task Initialize()
+    {
+        await base.Initialize();
+
+        _subTotal = 100;
+        _generosity = 10;
+
+        Recalculate();
+    }
+
+    private double _subTotal;
+    public double SubTotal
+    {
+        get => _subTotal;
+        set
         {
-            _calculationService = calculationService;
-        }
-
-        public override async Task Initialize()
-        {
-            await base.Initialize();
-
-            _subTotal = 100;
-            _generosity = 10;
+            _subTotal = value;
+            RaisePropertyChanged(() => SubTotal);
 
             Recalculate();
         }
+    }
 
-        private double _subTotal;
-        public double SubTotal
+    private int _generosity;
+    public int Generosity
+    {
+        get => _generosity;
+        set
         {
-            get => _subTotal;
-            set
-            {
-                _subTotal = value;
-                RaisePropertyChanged(() => SubTotal);
+            _generosity = value;
+            RaisePropertyChanged(() => Generosity);
 
-                Recalculate();
-            }
+            Recalculate();
         }
+    }
 
-        private int _generosity;
-        public int Generosity
+    private double _tip;
+    public double Tip
+    {
+        get => _tip;
+        set
         {
-            get => _generosity;
-            set
-            {
-                _generosity = value;
-                RaisePropertyChanged(() => Generosity);
-
-                Recalculate();
-            }
+            _tip = value;
+            RaisePropertyChanged(() => Tip);
         }
+    }
 
-        private double _tip;
-        public double Tip
-        {
-            get => _tip;
-            set
-            {
-                _tip = value;
-                RaisePropertyChanged(() => Tip);
-            }
-        }
-
-        private void Recalculate()
-        {
-            Tip = _calculationService.TipAmount(SubTotal, Generosity);
-        }
+    private void Recalculate()
+    {
+        Tip = _calculationService.TipAmount(SubTotal, Generosity);
     }
 }
 ```
@@ -266,21 +260,20 @@ The previous line tells the MvvmCross framework that `TipViewModel` should be th
 In summary, this is what App.cs should look like:
 
 ```c#
-using MvvmCross;
 using MvvmCross.ViewModels;
+using MvvmCross;
 using TipCalc.Core.Services;
 using TipCalc.Core.ViewModels;
 
-namespace TipCalc.Core
-{
-    public class App : MvxApplication
-    {
-        public override void Initialize()
-        {
-            Mvx.IoCProvider.RegisterType<ICalculationService, CalculationService>();
+namespace TipCalc.Core;
 
-            RegisterAppStart<TipViewModel>();
-        }
+public class App : MvxApplication
+{
+    public override void Initialize()
+    {
+        Mvx.IoCProvider.RegisterType<ICalculationService, CalculationService>();
+
+        RegisterAppStart<TipViewModel>();
     }
 }
 ```

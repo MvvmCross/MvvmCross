@@ -227,7 +227,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 return Task.FromResult(false);
 
             var modal = ModalViewControllers
-                .FirstOrDefault(v => v is IMvxTvosView && v.GetIMvxTvosView().ViewModel == viewModel);
+                .Find(v => v is IMvxTvosView && v.GetIMvxTvosView().ViewModel == viewModel);
             if (modal != null)
             {
                 return CloseModalViewController(modal);
@@ -309,9 +309,9 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             if (!SplitViewController.ViewControllers.Any())
                 return Task.FromResult(false);
 
-            var toClose = SplitViewController.ViewControllers.ToList()
-                                         .Select(v => v.GetIMvxTvosView())
-                                         .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+            var toClose = SplitViewController.ViewControllers
+                .Select(v => v.GetIMvxTvosView())
+                .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
             if (toClose != null)
             {
                 var newStack = SplitViewController.ViewControllers.Where(v => v.GetIMvxTvosView() != toClose);
@@ -342,24 +342,24 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                                            MvxRootPresentationAttribute attribute,
                                            MvxViewModelRequest request)
         {
-            if (viewController is IMvxTabBarViewController)
+            if (viewController is IMvxTabBarViewController controller)
             {
                 //NOTE clean up must be done first incase we are enbedding into a navigation controller
                 //before setting the tab view controller, otherwise this will reset the view stack and your tab
                 //controller will be null. 
                 await SetupWindowRootNavigation(viewController, attribute);
-                this.TabBarViewController = (IMvxTabBarViewController)viewController;
+                this.TabBarViewController = controller;
 
                 return await CloseModalViewControllers();
             }
 
-            if (viewController is IMvxPageViewController)
+            if (viewController is IMvxPageViewController pageViewController)
             {
                 //NOTE clean up must be done first incase we are enbedding into a navigation controller
                 //before setting the page view controller, otherwise this will reset the view stack and your page
                 //controller will be null. 
                 await SetupWindowRootNavigation(viewController, attribute);
-                this.PageViewController = (IMvxPageViewController)viewController;
+                this.PageViewController = pageViewController;
 
                 return await CloseModalViewControllers();
             }
@@ -541,7 +541,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
         public virtual Task<bool> CloseTopModalViewController()
         {
-            return CloseModalViewController(ModalViewControllers?.Last());
+            return CloseModalViewController(ModalViewControllers?[^1]);
         }
 
         protected virtual void PushViewControllerIntoStack(UINavigationController navigationController, UIViewController viewController, bool animated)
@@ -604,7 +604,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             }
 
             var viewControllers = navigationController.ViewControllers.ToList();
-            var viewController = viewControllers.FirstOrDefault(vc => vc.GetIMvxTvosView().ViewModel == viewModel);
+            var viewController = viewControllers.Find(vc => vc.GetIMvxTvosView().ViewModel == viewModel);
             if (viewController != null)
             {
                 viewControllers.Remove(viewController);

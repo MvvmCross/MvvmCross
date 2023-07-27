@@ -5,6 +5,7 @@
     <IsPackable>false</IsPackable>
     <AssemblyName>MvvmCross.Plugins.Visibility.UnitTest</AssemblyName>
     <RootNamespace>MvvmCross.Plugins.Visibility.UnitTest</RootNamespace>
+    <RollForward>Major</RollForward>
   </PropertyGroup>
 
   <ItemGroup>

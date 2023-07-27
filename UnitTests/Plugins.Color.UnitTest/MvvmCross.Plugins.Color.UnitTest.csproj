@@ -4,6 +4,7 @@
     <IsPackable>false</IsPackable>
     <AssemblyName>MvvmCross.Plugins.Color.UnitTest</AssemblyName>
     <RootNamespace>MvvmCross.Plugins.Color.UnitTest</RootNamespace>
+    <RollForward>Major</RollForward>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />

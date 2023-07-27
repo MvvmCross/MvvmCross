@@ -24,11 +24,11 @@ namespace MvvmCross.Platforms.Android.Views
             if (viewModelType == null)
             {
                 if (!type.HasBasePresentationAttribute())
-                    throw new InvalidOperationException($"Your fragment is not generic and it does not have {nameof(MvxFragmentPresentationAttribute)} attribute set!");
+                    throw new InvalidOperationException($"Your fragment of type {type.FullName} is not generic and it does not have {nameof(MvxFragmentPresentationAttribute)} attribute set!");
 
                 var cacheableFragmentAttribute = type.GetBasePresentationAttribute();
                 if (cacheableFragmentAttribute.ViewModelType == null)
-                    throw new InvalidOperationException($"Your fragment is not generic and it does not use {nameof(MvxFragmentPresentationAttribute)} with ViewModel Type constructor.");
+                    throw new InvalidOperationException($"Your fragment of type {type.FullName} is not generic and it does not use {nameof(MvxFragmentPresentationAttribute)} with ViewModel Type constructor.");
 
                 viewModelType = cacheableFragmentAttribute.ViewModelType;
             }
@@ -46,23 +46,15 @@ namespace MvvmCross.Platforms.Android.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxLogHost.Default?.Log(LogLevel.Trace, "No ViewModel class specified for {fragmentViewType} in LoadViewModel",
+                MvxLogHost.Default?.Log(LogLevel.Trace, "No ViewModel class specified for {FragmentViewType} in LoadViewModel",
                     fragmentView.GetType().Name);
             }
 
             if (request == null)
                 request = MvxViewModelRequest.GetDefaultRequest(viewModelType);
 
-            var viewModelCache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
-            if (viewModelCache.Exists(viewModelType))
-            {
-                var viewModelCached = viewModelCache.Get(viewModelType);
-                viewModelCache.Remove(viewModelType);
-                return viewModelCached;
-            }
-
             var loaderService = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadViewModel(request, savedState);
+            var viewModel = loaderService?.LoadViewModel(request, savedState);
 
             return viewModel;
         }

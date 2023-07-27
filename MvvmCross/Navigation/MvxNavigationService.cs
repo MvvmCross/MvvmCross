@@ -417,35 +417,6 @@ namespace MvvmCross.Navigation
             return close;
         }
 
-        public virtual async Task<bool> Close<TResult>(
-            IMvxViewModelResult<TResult> viewModel, TResult result, CancellationToken cancellationToken = default)
-        {
-            ValidateArguments(viewModel);
-
-            TaskCompletionResults.TryGetValue(viewModel, out var tcs);
-
-            //Disable cancelation of the Task when closing ViewModel through the service
-            viewModel.CloseCompletionSource = null;
-
-            try
-            {
-                var closeResult = await Close(viewModel, cancellationToken).ConfigureAwait(false);
-                if (closeResult)
-                {
-                    tcs?.TrySetResult(result);
-                    TaskCompletionResults.Remove(viewModel);
-                }
-                else
-                    viewModel.CloseCompletionSource = tcs;
-                return closeResult;
-            }
-            catch (Exception ex)
-            {
-                tcs?.TrySetException(ex);
-                return false;
-            }
-        }
-
         protected virtual void OnWillNavigate(object sender, IMvxNavigateEventArgs e)
         {
             WillNavigate?.Invoke(sender, e);
@@ -506,12 +477,6 @@ namespace MvvmCross.Navigation
         }
 
         private static void ValidateArguments(IMvxViewModel viewModel)
-        {
-            if (viewModel == null)
-                throw new ArgumentNullException(nameof(viewModel));
-        }
-
-        private static void ValidateArguments<TResult>(IMvxViewModelResult<TResult> viewModel)
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));

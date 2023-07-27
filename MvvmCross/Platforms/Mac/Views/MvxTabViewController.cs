@@ -2,13 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Linq;
-using AppKit;
-using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Mac.Views.Base;
 using MvvmCross.ViewModels;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Mac.Views
 {
@@ -26,7 +23,7 @@ namespace MvvmCross.Platforms.Mac.Views
             this.Initialize();
         }
 
-        protected MvxTabViewController(IntPtr handle)
+        protected MvxTabViewController(NativeHandle handle)
             : base(handle)
         {
             this.Initialize();
@@ -131,7 +128,7 @@ namespace MvvmCross.Platforms.Mac.Views
         {
         }
 
-        public MvxTabViewController(IntPtr handle)
+        public MvxTabViewController(NativeHandle handle)
             : base(handle)
         {
         }

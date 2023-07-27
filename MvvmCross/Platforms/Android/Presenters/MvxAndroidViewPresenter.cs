@@ -1,17 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
+#nullable enable
 using System.Reflection;
-using System.Threading.Tasks;
-using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Util;
-using Android.Views;
 using AndroidX.ViewPager.Widget;
 using Google.Android.Material.Tabs;
 using Java.Lang;
@@ -36,7 +30,6 @@ using FragmentTransaction = AndroidX.Fragment.App.FragmentTransaction;
 
 namespace MvvmCross.Platforms.Android.Presenters
 {
-#nullable enable
     public class MvxAndroidViewPresenter : MvxAttributeViewPresenter, IMvxAndroidViewPresenter
     {
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
@@ -70,7 +63,7 @@ namespace MvvmCross.Platforms.Android.Presenters
         }
 
         protected virtual Activity? CurrentActivity =>
-            _androidCurrentTopActivity.Value?.Activity as Activity;
+            _androidCurrentTopActivity.Value.Activity as Activity;
 
         protected IMvxAndroidActivityLifetimeListener ActivityLifetimeListener =>
             _activityLifetimeListener.Value;
@@ -84,7 +77,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             ActivityLifetimeListener.ActivityChanged += ActivityLifetimeListenerOnActivityChanged;
         }
 
-        protected virtual void ActivityLifetimeListenerOnActivityChanged(object sender, MvxActivityEventArgs e)
+        protected virtual void ActivityLifetimeListenerOnActivityChanged(object? sender, MvxActivityEventArgs e)
         {
             if (e.ActivityState == MvxActivityState.OnResume && PendingRequest != null)
             {
@@ -194,7 +187,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 var fragment = GetFragmentByViewType(item.FragmentHostViewType);
 
                 // if the fragment exists, and is on top, then use the current attribute 
-                if (fragment?.IsVisible != true || fragment.View.FindViewById(item.FragmentContentId) == null)
+                if (fragment?.IsVisible != true || fragment.View?.FindViewById(item.FragmentContentId) == null)
                     continue;
 
                 attribute = item;
@@ -211,7 +204,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             if (viewType.IsSubclassOf(typeof(DialogFragment)))
             {
-                _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {viewName}. Assuming DialogFragment presentation", viewType.Name);
+                _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewName}. Assuming DialogFragment presentation", viewType.Name);
                 return new MvxDialogFragmentPresentationAttribute(enterAnimation: int.MinValue)
                 {
                     ViewType = viewType,
@@ -221,7 +214,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             if (viewType.IsSubclassOf(typeof(Fragment)))
             {
-                _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {viewName}. Assuming Fragment presentation", viewType.Name);
+                _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewName}. Assuming Fragment presentation", viewType.Name);
                 return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), global::Android.Resource.Id.Content)
                 {
                     ViewType = viewType,
@@ -231,7 +224,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             if (viewType.IsSubclassOf(typeof(Activity)))
             {
-                _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {viewName}. Assuming Activity presentation", viewType.Name);
+                _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewName}. Assuming Activity presentation", viewType.Name);
                 return new MvxActivityPresentationAttribute
                 {
                     ViewType = viewType,
@@ -270,7 +263,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                     var index = adapter.FragmentsInfo.IndexOf(fragmentInfo);
                     if (index < 0)
                     {
-                        _logger.Value?.Log(LogLevel.Trace, "Did not find ViewPager index for {fragment}, skipping presentation change...", pagerFragmentAttribute.Tag);
+                        _logger.Value?.Log(LogLevel.Trace, "Did not find ViewPager index for {Fragment}, skipping presentation change...", pagerFragmentAttribute.Tag);
                         return true;
                     }
 
@@ -293,7 +286,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (pagerFragmentAttribute.FragmentHostViewType != null)
             {
                 var fragment = GetFragmentByViewType(pagerFragmentAttribute.FragmentHostViewType);
-                viewPager = fragment?.View.FindViewById<ViewPager>(pagerFragmentAttribute.ViewPagerResourceId);
+                viewPager = fragment?.View?.FindViewById<ViewPager>(pagerFragmentAttribute.ViewPagerResourceId);
             }
 
             // check for a ViewPager inside an Activity
@@ -351,7 +344,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             if (Build.VERSION.SdkInt < BuildVersionCodes.Lollipop)
             {
-                _logger.Value?.Log(LogLevel.Warning, "Shared element transition requires Android v21+.");
+                _logger.Value?.Log(LogLevel.Warning, "Shared element transition requires Android v21+");
                 return bundle;
             }
 
@@ -408,25 +401,26 @@ namespace MvvmCross.Platforms.Android.Presenters
                 }
                 else
                 {
-                    _logger.Value?.Log(LogLevel.Warning, "A XML transitionName is required in order to transition a control when navigating.");
+                    _logger.Value?.Log(LogLevel.Warning, "A XML transitionName is required in order to transition a control when navigating");
                 }
             }
 
             return (elements, transitionElementPairs);
         }
 
-        protected virtual Intent CreateIntentForRequest(MvxViewModelRequest? request)
+        protected virtual Intent? CreateIntentForRequest(MvxViewModelRequest? request)
         {
-            var requestTranslator = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>();
+            if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidViewModelRequestTranslator? requestTranslator) != true || requestTranslator == null)
+                return null;
 
             if (request is MvxViewModelInstanceRequest viewModelInstanceRequest)
             {
-                var intentWithKey = requestTranslator.GetIntentWithKeyFor(
+                var intent = requestTranslator.GetIntentFor(
                     viewModelInstanceRequest.ViewModelInstance,
                     viewModelInstanceRequest
                 );
 
-                return intentWithKey.intent;
+                return intent;
             }
 
             return requestTranslator.GetIntentFor(request);
@@ -501,7 +495,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             var currentHostViewModelType = GetCurrentActivityViewModelType();
             if (attribute.ActivityHostViewModelType != currentHostViewModelType)
             {
-                _logger.Value?.Log(LogLevel.Warning, "Activity host with ViewModelType {activityHostViewModelType} is not CurrentTopActivity. Showing Activity before showing Fragment for {viewModelType}",
+                _logger.Value?.Log(LogLevel.Warning, "Activity host with ViewModelType {ActivityHostViewModelType} is not CurrentTopActivity. Showing Activity before showing Fragment for {ViewModelType}",
                     attribute.ActivityHostViewModelType, attribute.ViewModelType);
                 PendingRequest = request;
                 ShowHostActivity(attribute);
@@ -525,12 +519,12 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             // current implementation only supports one level of nesting 
 
-            var fragmentHost = GetFragmentByViewType(attribute!.FragmentHostViewType);
+            var fragmentHost = GetFragmentByViewType(attribute.FragmentHostViewType);
             if (fragmentHost == null)
                 throw new InvalidOperationException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
 
             if (!fragmentHost.IsVisible)
-                _logger.Value?.Log(LogLevel.Warning, "Fragment host is not visible when trying to show View {viewName} as Nested Fragment", view!.Name);
+                _logger.Value?.Log(LogLevel.Warning, "Fragment host is not visible when trying to show View {ViewName} as Nested Fragment", view.Name);
 
             PerformShowFragmentTransaction(fragmentHost.ChildFragmentManager, attribute, request);
         }
@@ -550,13 +544,13 @@ namespace MvvmCross.Platforms.Android.Presenters
             IMvxFragmentView? fragmentView = null;
             if (attribute.IsCacheableFragment)
             {
-                fragmentView = (IMvxFragmentView)fragmentManager.FindFragmentByTag(fragmentName);
+                fragmentView = (IMvxFragmentView?)fragmentManager.FindFragmentByTag(fragmentName);
             }
 
             if (fragmentView == null && attribute.ViewType != null)
                 fragmentView = CreateFragment(fragmentManager, attribute, attribute.ViewType);
 
-            var fragment = fragmentView.ToFragment();
+            var fragment = fragmentView?.ToFragment();
             if (fragment == null)
                 throw new MvxException($"Fragment {fragmentName} is null. Cannot perform Fragment Transaction.");
 
@@ -638,12 +632,12 @@ namespace MvvmCross.Platforms.Android.Presenters
                     }
                     else
                     {
-                        _logger.Value?.Log(LogLevel.Warning, "A XML transitionName is required in order to transition a control when navigating.");
+                        _logger.Value?.Log(LogLevel.Warning, "A XML transitionName is required in order to transition a control when navigating");
                     }
                 }
 
                 if (elements.Count > 0)
-                    fragment.Arguments.PutString(SharedElementsBundleKey, string.Join("|", elements));
+                    fragment.Arguments?.PutString(SharedElementsBundleKey, string.Join("|", elements));
             }
 
             if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
@@ -811,8 +805,8 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 var fragment = GetFragmentByViewType(attribute.FragmentHostViewType);
 
-                viewPager = fragment?.View.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
-                tabLayout = fragment?.View.FindViewById<TabLayout>(attribute.TabLayoutResourceId);
+                viewPager = fragment?.View?.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
+                tabLayout = fragment?.View?.FindViewById<TabLayout>(attribute.TabLayoutResourceId);
             }
 
             // check for a ViewPager inside an Activity
@@ -932,7 +926,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                     return true;
                 }
 
-                Fragment fragmentToPop = fragmentManager.FindFragmentByTag(fragmentName);
+                Fragment? fragmentToPop = fragmentManager.FindFragmentByTag(fragmentName);
                 if (fragmentToPop != null)
                 {
                     PopFragment(fragmentManager, fragmentAttribute, fragmentToPop);
@@ -1014,7 +1008,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 if (fragment == null)
                     throw new MvxException("Fragment not found", attribute.FragmentHostViewType.Name);
 
-                viewPager = fragment.View.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
+                viewPager = fragment.View?.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
                 fragmentManager = fragment.ChildFragmentManager;
             }
             else
@@ -1056,7 +1050,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             MvxViewPagerFragmentInfo? fragmentInfo = null;
             if (attribute.Tag != null)
             {
-                fragmentInfo = adapter.FragmentsInfo?.FirstOrDefault(f => f.Tag == attribute.Tag);
+                fragmentInfo = adapter.FragmentsInfo?.Find(f => f.Tag == attribute.Tag);
             }
 
             if (fragmentInfo != null)
@@ -1074,7 +1068,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 return viewTypeMatches;
             }
 
-            fragmentInfo = adapter.FragmentsInfo?.FirstOrDefault(IsMatch);
+            fragmentInfo = adapter.FragmentsInfo?.Find(IsMatch);
             return fragmentInfo;
         }
         #endregion
@@ -1096,12 +1090,12 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 var fragmentClass = Class.FromType(fragmentType);
                 var fragment = (IMvxFragmentView)fragmentManager.FragmentFactory.Instantiate(
-                    fragmentClass.ClassLoader, fragmentClass.Name);
+                    fragmentClass.ClassLoader!, fragmentClass.Name);
                 return fragment;
             }
             catch (System.Exception ex)
             {
-                _logger.Value?.Log(LogLevel.Error, ex, "Cannot create Fragment {fragmentName}", fragmentType.Name);
+                _logger.Value?.Log(LogLevel.Error, ex, "Cannot create Fragment {FragmentName}", fragmentType.Name);
                 throw new MvxException(ex, $"Cannot create Fragment '{fragmentType.Name}'");
             }
         }
@@ -1137,15 +1131,15 @@ namespace MvvmCross.Platforms.Android.Presenters
                 return null;
             }
 
-            foreach (var parentFragment in fragmentManager.Fragments)
+            foreach (var parentFragmentManager in fragmentManager.Fragments.Select(f => f.ChildFragmentManager))
             {
                 // Let's try again finding it
-                var fragment = parentFragment?.ChildFragmentManager?.FindFragmentByTag(fragmentName);
+                var fragment = parentFragmentManager.FindFragmentByTag(fragmentName);
 
                 if (fragment == null)
                 {
                     // Re-loop for other fragments
-                    fragment = FindFragmentInChildren(fragmentName, parentFragment!.ChildFragmentManager);
+                    fragment = FindFragmentInChildren(fragmentName, parentFragmentManager);
                 }
 
                 // If we found the fragment let's return it!
@@ -1185,5 +1179,4 @@ namespace MvvmCross.Platforms.Android.Presenters
                 throw new ArgumentNullException(nameof(request));
         }
     }
-#nullable restore
 }

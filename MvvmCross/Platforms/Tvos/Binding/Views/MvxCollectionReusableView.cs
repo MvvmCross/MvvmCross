@@ -2,11 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using CoreGraphics;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
-using UIKit;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
@@ -21,7 +19,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             this.CreateBindingContext();
         }
 
-        public MvxCollectionReusableView(IntPtr handle)
+        public MvxCollectionReusableView(NativeHandle handle)
             : base(handle)
         {
             this.CreateBindingContext();

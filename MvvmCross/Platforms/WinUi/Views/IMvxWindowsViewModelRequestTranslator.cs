@@ -11,10 +11,6 @@ namespace MvvmCross.Platforms.WinUi.Views
         string GetRequestTextFor(MvxViewModelRequest request);
 
         // Important: if calling GetRequestTextWithKeyFor then you must later call RemoveSubViewModelWithKey on the returned key
-        string GetRequestTextWithKeyFor(IMvxViewModel existingViewModelToUse);
-
-        void RemoveSubViewModelWithKey(int key);
-
-        int RequestTextGetKey(string requestText);
+        string GetRequestTextFor(IMvxViewModel existingViewModelToUse);
     }
 }

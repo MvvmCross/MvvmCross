@@ -261,8 +261,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
         {
             var window = FindPresentingWindow(attribute.WindowIdentifier, viewController);
 
-            var tabViewController = window.ContentViewController as IMvxTabViewController;
-            if (tabViewController == null)
+            if (window.ContentViewController is not IMvxTabViewController tabViewController)
                 throw new MvxException($"Trying to display a tab but there is no TabViewController to host it! View type: {viewController.GetType()}");
 
             tabViewController.ShowTabView(viewController, attribute.TabTitle);
@@ -274,7 +273,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             NSWindow window = null;
 
             if (!string.IsNullOrEmpty(identifier))
-                window = Windows.FirstOrDefault(w => w.Identifier == identifier);
+                window = Windows.Find(w => w.Identifier == identifier);
 
             if (window == null)
                 window = MainWindow ?? Windows.LastOrDefault();

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-macos</TargetFramework>
+    <AssemblyName>Playground.Mac</AssemblyName>
+    <RootNamespace>Playground.Mac</RootNamespace>
+    <SupportedOSPlatfromVersion>13.0</SupportedOSPlatfromVersion>
+    <Company>.NET Foundation and Contributors</Company>
+    <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
+    <FileVersion>7.0.0.0</FileVersion>
+    <InformationalVersion>7.0.0</InformationalVersion>
+    <AssemblyTitle>Playground.Mac</AssemblyTitle>
+    <AssemblyVersion>7.0.0.0</AssemblyVersion>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+    <UseSGen>false</UseSGen>
+    <LinkMode>None</LinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <CreatePackage>false</CreatePackage>
+    <UseSGen>false</UseSGen>
+    <LinkMode>None</LinkMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition="$(CommitHash) != ''">
+      <_Parameter1>RepositoryUrl</_Parameter1>
+      <_Parameter2>https://github.com/MvvmCross/MvvmCross</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Serilog.Extensions.Logging" />
+    <PackageReference Include="Serilog" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Update="Assets.xcassets\AppIcon.appiconset\AppIcon-512%402x.png">
+      <Link>Assets.xcassets\AppIcon.appiconset\AppIcon-512%402x.png</Link>
+    </ImageAsset>
+    <ImageAsset Update="Assets.xcassets\AppIcon.appiconset\AppIcon-32%402x.png">
+      <Link>Assets.xcassets\AppIcon.appiconset\AppIcon-32%402x.png</Link>
+    </ImageAsset>
+    <ImageAsset Update="Assets.xcassets\AppIcon.appiconset\AppIcon-16%402x.png">
+      <Link>Assets.xcassets\AppIcon.appiconset\AppIcon-16%402x.png</Link>
+    </ImageAsset>
+    <ImageAsset Update="Assets.xcassets\AppIcon.appiconset\AppIcon-256%402x.png">
+      <Link>Assets.xcassets\AppIcon.appiconset\AppIcon-256%402x.png</Link>
+    </ImageAsset>
+    <ImageAsset Update="Assets.xcassets\AppIcon.appiconset\AppIcon-128%402x.png">
+      <Link>Assets.xcassets\AppIcon.appiconset\AppIcon-128%402x.png</Link>
+    </ImageAsset>
+  </ItemGroup>
+</Project>

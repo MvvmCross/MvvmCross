@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Windows.Input;
-using Foundation;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using UIKit;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
@@ -22,11 +19,11 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             _tableView = tableView;
         }
 
-        protected MvxBaseTableViewSource(IntPtr handle)
+        protected MvxBaseTableViewSource(NativeHandle handle)
             : base(handle)
         {
             MvxLogHost.GetLog<MvxBaseTableViewSource>()?.Log(LogLevel.Warning,
-                "MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+                "MvxBaseTableViewSource NativeHandle constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         protected UITableView TableView => _tableView;
