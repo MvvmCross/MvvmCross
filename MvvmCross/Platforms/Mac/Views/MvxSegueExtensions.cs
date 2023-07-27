@@ -21,7 +21,7 @@ namespace MvvmCross.Platforms.Mac.Views
         {
             var viewType = view.GetType();
             var props = viewType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var prop = props.Where(p => p.Name == "ViewModel").FirstOrDefault();
+            var prop = Array.Find(props, p => p.Name == "ViewModel");
             return prop?.PropertyType;
         }
 

@@ -150,7 +150,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             if (SelectedIndex > 5 && (MoreNavigationController?.ViewControllers?.Any() ?? false))
             {
-                var lastViewController = (MoreNavigationController.ViewControllers.Last()).GetIMvxIosView();
+                var lastViewController = MoreNavigationController.ViewControllers[0].GetIMvxIosView();
 
                 if (lastViewController != null && lastViewController.ViewModel == viewModel)
                 {
@@ -171,7 +171,7 @@ namespace MvvmCross.Platforms.Ios.Views
                 }
 
                 var controllers = navController.ViewControllers.ToList();
-                var controllerToClose = controllers.FirstOrDefault(vc => vc.GetIMvxIosView().ViewModel == viewModel);
+                var controllerToClose = controllers.Find(vc => vc.GetIMvxIosView()?.ViewModel == viewModel);
 
                 if (controllerToClose != null)
                 {

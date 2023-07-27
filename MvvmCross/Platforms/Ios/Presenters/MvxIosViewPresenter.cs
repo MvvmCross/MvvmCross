@@ -748,7 +748,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             while (ModalViewControllers.Count > 0)
             {
                 var didClose =
-                    await CloseModalViewController(ModalViewControllers.Last(),
+                    await CloseModalViewController(ModalViewControllers[^1],
                         new MvxModalPresentationAttribute()).ConfigureAwait(true);
 
                 if (!didClose)

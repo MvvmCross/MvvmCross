@@ -274,7 +274,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             NSWindow window = null;
 
             if (!string.IsNullOrEmpty(identifier))
-                window = Windows.FirstOrDefault(w => w.Identifier == identifier);
+                window = Windows.Find(w => w.Identifier == identifier);
 
             if (window == null)
                 window = MainWindow ?? Windows.LastOrDefault();

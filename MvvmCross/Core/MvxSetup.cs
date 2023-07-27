@@ -405,7 +405,7 @@ namespace MvvmCross.Core
         {
             try
             {
-                return assembly.GetReferencedAssemblies().Any(a => a.Name == mvvmCrossAssemblyName);
+                return Array.Exists(assembly.GetReferencedAssemblies(), a => a.Name == mvvmCrossAssemblyName);
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception)
