@@ -1,5 +1,54 @@
 # Changelog
 
+## [9.1.0](https://github.com/MvvmCross/MvvmCross/tree/10.0.0) (2023-07-27)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.10...9.1.0)
+
+**Breaking changes:**
+
+- Remove IMvxViewModel\<TResult\> and IMvxViewModel\<in TParameter, TResult\> [\#4651](https://github.com/MvvmCross/MvvmCross/issues/4651)
+- Remove IMvxViewModelResult [\#4652](https://github.com/MvvmCross/MvvmCross/pull/4652) ([Cheesebaron](https://github.com/Cheesebaron))
+- Remove ViewModel cache. It can lead to leaks and doesn't provide value [\#4650](https://github.com/MvvmCross/MvvmCross/pull/4650) ([Cheesebaron](https://github.com/Cheesebaron))
+- Move Setup to MvxAndroidApplication +semver:breaking [\#4546](https://github.com/MvvmCross/MvvmCross/pull/4546) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Implemented enhancements:**
+
+- Improve MvxFragmentExtensions.FindAssociatedViewModelType exception messages. [\#4601](https://github.com/MvvmCross/MvvmCross/issues/4601)
+- Add Mac Catalyst TFM to all iOS plugins [\#4585](https://github.com/MvvmCross/MvvmCross/issues/4585)
+- Add MacCatalyst TFM to plugins [\#4627](https://github.com/MvvmCross/MvvmCross/pull/4627) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Fixed bugs:**
+
+- net6.0 or .net7.0 - The type or namespace name Platforms does not exist in the namespace MvvmCross [\#4656](https://github.com/MvvmCross/MvvmCross/issues/4656)
+- Updating from 9.0.9 to 9.0.10, MvxSplashScreenActivity is missing [\#4621](https://github.com/MvvmCross/MvvmCross/issues/4621)
+- MvxBaseFluentBindingDescription\<TTarget\>.EnsureTargetNameSet does not ensures that target name was set [\#4603](https://github.com/MvvmCross/MvvmCross/issues/4603)
+- "System.InvalidCastException: Specified cast is not valid." during Android RestoreInstanceState [\#4600](https://github.com/MvvmCross/MvvmCross/issues/4600)
+- MvxDialogFragmentPresentationAttribute.Cancelable is not initialized with 'true' when using empty ctor [\#4588](https://github.com/MvvmCross/MvvmCross/issues/4588)
+- System.InvalidCastException getting MvxFragment\<TViewModel\>.ViewModel after Tombstoning [\#4584](https://github.com/MvvmCross/MvvmCross/issues/4584)
+- Java.Lang.ClassNotFoundException after upgrading to version 9.0.8 and only in release [\#4557](https://github.com/MvvmCross/MvvmCross/issues/4557)
+- Fix console platform missing [\#4657](https://github.com/MvvmCross/MvvmCross/pull/4657) ([Cheesebaron](https://github.com/Cheesebaron))
+- EnsureTargetNameSet should ensure a target name or throw [\#4649](https://github.com/MvvmCross/MvvmCross/pull/4649) ([Cheesebaron](https://github.com/Cheesebaron))
+- IntPtr -\> NativeHandle on Apple platforms [\#4635](https://github.com/MvvmCross/MvvmCross/pull/4635) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Merged pull requests:**
+
+- Fix multiple warnings [\#4658](https://github.com/MvvmCross/MvvmCross/pull/4658) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Microsoft.WindowsAppSDK from 1.3.230602002 to 1.3.230724000 [\#4655](https://github.com/MvvmCross/MvvmCross/pull/4655) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump SonarAnalyzer.CSharp from 9.5.0.73987 to 9.6.0.74858 [\#4654](https://github.com/MvvmCross/MvvmCross/pull/4654) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Enable Nullable attributes in IMvxIoCProvider, MvxCommand [\#4648](https://github.com/MvvmCross/MvvmCross/pull/4648) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump the dev-dependencies group with 16 updates [\#4647](https://github.com/MvvmCross/MvvmCross/pull/4647) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump dotnet-reportgenerator-globaltool from 5.0.4 to 5.1.23 [\#4633](https://github.com/MvvmCross/MvvmCross/pull/4633) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump dotnet-sonarscanner from 5.8.0 to 5.13.0 [\#4632](https://github.com/MvvmCross/MvvmCross/pull/4632) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.GooglePlayServices.Location from 120.0.0 to 121.0.1 [\#4631](https://github.com/MvvmCross/MvvmCross/pull/4631) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump Xamarin.GooglePlayServices.Basement from 118.1.0.1 to 118.2.0.1 [\#4630](https://github.com/MvvmCross/MvvmCross/pull/4630) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Make unit tests run on net7 [\#4629](https://github.com/MvvmCross/MvvmCross/pull/4629) ([Cheesebaron](https://github.com/Cheesebaron))
+- Drop dependency on Newtonsoft.Json [\#4628](https://github.com/MvvmCross/MvvmCross/pull/4628) ([Cheesebaron](https://github.com/Cheesebaron))
+- Update all dependencies [\#4626](https://github.com/MvvmCross/MvvmCross/pull/4626) ([Cheesebaron](https://github.com/Cheesebaron))
+- Update TipCalc Android and Core tutorial [\#4616](https://github.com/MvvmCross/MvvmCross/pull/4616) ([Leo506](https://github.com/Leo506))
+- Combiners registration via Setup.FillValueCombiners\(\) override [\#4615](https://github.com/MvvmCross/MvvmCross/pull/4615) ([snechaev](https://github.com/snechaev))
+- Improved MvxFragmentExtensions.FindAssociatedViewModelType exception messages [\#4602](https://github.com/MvvmCross/MvvmCross/pull/4602) ([ErisApps](https://github.com/ErisApps))
+- Bugfix: MvxDialogFragmentPresentationAttribute.Cancelable is 'false' when using empty ctor. [\#4589](https://github.com/MvvmCross/MvvmCross/pull/4589) ([evgenyvalavin](https://github.com/evgenyvalavin))
+
 ## [9.0.10](https://github.com/MvvmCross/MvvmCross/tree/9.0.10) (2023-05-10)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.9...9.0.10)
