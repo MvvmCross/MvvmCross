@@ -78,8 +78,6 @@ namespace MvvmCross.Platforms.Android.Views
 
             SetContentView(_layoutId);
 
-            _view = Window.DecorView.RootView;
-
             InitializeTabHost(savedInstanceState);
 
             if (savedInstanceState != null)

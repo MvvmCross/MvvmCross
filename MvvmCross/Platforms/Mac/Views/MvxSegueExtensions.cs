@@ -27,13 +27,14 @@ namespace MvvmCross.Platforms.Mac.Views
 
         internal static void ViewModelRequestForSegue(this IMvxEventSourceViewController self, NSStoryboardSegue segue, NSObject sender)
         {
-            var view = self as IMvxMacViewSegue;
-            var parameterValues = view == null ? null : view.PrepareViewModelParametersForSegue(segue, sender);
+            var parameterValues = self is not IMvxMacViewSegue view
+                ? null
+                : view.PrepareViewModelParametersForSegue(segue, sender);
 
-            if (parameterValues is IMvxBundle)
-                self.ViewModelRequestForSegueImpl(segue, (IMvxBundle)parameterValues);
-            else if (parameterValues is IDictionary<string, string>)
-                self.ViewModelRequestForSegueImpl(segue, (IDictionary<string, string>)parameterValues);
+            if (parameterValues is IMvxBundle bundle)
+                self.ViewModelRequestForSegueImpl(segue, bundle);
+            else if (parameterValues is IDictionary<string, string> values)
+                self.ViewModelRequestForSegueImpl(segue, values);
             else
                 self.ViewModelRequestForSegueImpl(segue, parameterValues);
         }
@@ -50,8 +51,7 @@ namespace MvvmCross.Platforms.Mac.Views
 
         private static void ViewModelRequestForSegueImpl(this IMvxEventSourceViewController _, NSStoryboardSegue segue, IMvxBundle parameterBundle = null)
         {
-            var view = segue.DestinationController as IMvxMacView;
-            if (view != null && view.Request == null)
+            if (segue.DestinationController is IMvxMacView { Request: null } view)
             {
                 var type = view.GetViewModelType();
                 if (type != null)

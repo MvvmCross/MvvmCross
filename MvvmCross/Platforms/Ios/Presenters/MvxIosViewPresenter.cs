@@ -762,7 +762,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
         {
             ValidateArguments(viewController, attribute);
 
-            if (viewController is UINavigationController popoverNavController && popoverNavController.ViewControllers != null)
+            if (viewController is UINavigationController { ViewControllers: not null } popoverNavController)
             {
                 foreach (var item in popoverNavController.ViewControllers)
                     item.DidMoveToParentViewController(null);

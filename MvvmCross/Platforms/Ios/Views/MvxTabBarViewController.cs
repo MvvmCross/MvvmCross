@@ -159,12 +159,11 @@ namespace MvvmCross.Platforms.Ios.Views
                 }
             }
 
-            if (SelectedViewController is UINavigationController navController
-                && navController.ViewControllers != null
-                && navController.ViewControllers.Any())
+            if (SelectedViewController is UINavigationController { ViewControllers: not null } navController &&
+                navController.ViewControllers.Any())
             {
                 // if the ViewModel to close if the last in the stack, close it animated
-                if (navController.TopViewController.GetIMvxIosView().ViewModel == viewModel)
+                if (navController.TopViewController.GetIMvxIosView()?.ViewModel == viewModel)
                 {
                     navController.PopViewController(true);
                     return true;

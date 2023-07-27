@@ -342,24 +342,24 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                                            MvxRootPresentationAttribute attribute,
                                            MvxViewModelRequest request)
         {
-            if (viewController is IMvxTabBarViewController)
+            if (viewController is IMvxTabBarViewController controller)
             {
                 //NOTE clean up must be done first incase we are enbedding into a navigation controller
                 //before setting the tab view controller, otherwise this will reset the view stack and your tab
                 //controller will be null. 
                 await SetupWindowRootNavigation(viewController, attribute);
-                this.TabBarViewController = (IMvxTabBarViewController)viewController;
+                this.TabBarViewController = controller;
 
                 return await CloseModalViewControllers();
             }
 
-            if (viewController is IMvxPageViewController)
+            if (viewController is IMvxPageViewController pageViewController)
             {
                 //NOTE clean up must be done first incase we are enbedding into a navigation controller
                 //before setting the page view controller, otherwise this will reset the view stack and your page
                 //controller will be null. 
                 await SetupWindowRootNavigation(viewController, attribute);
-                this.PageViewController = (IMvxPageViewController)viewController;
+                this.PageViewController = pageViewController;
 
                 return await CloseModalViewControllers();
             }
