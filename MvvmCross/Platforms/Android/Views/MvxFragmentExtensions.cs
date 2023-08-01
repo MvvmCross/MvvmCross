@@ -46,15 +46,23 @@ namespace MvvmCross.Platforms.Android.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxLogHost.Default?.Log(LogLevel.Trace, "No ViewModel class specified for {FragmentViewType} in LoadViewModel",
+                MvxLogHost.Default?.Log(LogLevel.Trace, "No ViewModel class specified for {fragmentViewType} in LoadViewModel",
                     fragmentView.GetType().Name);
             }
 
             if (request == null)
                 request = MvxViewModelRequest.GetDefaultRequest(viewModelType);
 
+            var viewModelCache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
+            if (viewModelCache.Exists(viewModelType))
+            {
+                var viewModelCached = viewModelCache.Get(viewModelType);
+                viewModelCache.Remove(viewModelType);
+                return viewModelCached;
+            }
+
             var loaderService = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
-            var viewModel = loaderService?.LoadViewModel(request, savedState);
+            var viewModel = loaderService.LoadViewModel(request, savedState);
 
             return viewModel;
         }

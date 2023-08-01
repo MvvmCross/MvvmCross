@@ -415,12 +415,12 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             if (request is MvxViewModelInstanceRequest viewModelInstanceRequest)
             {
-                var intent = requestTranslator.GetIntentFor(
+                var intentWithKey = requestTranslator.GetIntentWithKeyFor(
                     viewModelInstanceRequest.ViewModelInstance,
                     viewModelInstanceRequest
                 );
 
-                return intent;
+                return intentWithKey.intent;
             }
 
             return requestTranslator.GetIntentFor(request);

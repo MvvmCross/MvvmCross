@@ -91,7 +91,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters
             string requestText = string.Empty;
             if (request is MvxViewModelInstanceRequest)
             {
-                requestText = requestTranslator.GetRequestTextFor(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+                requestText = requestTranslator.GetRequestTextWithKeyFor(((MvxViewModelInstanceRequest)request).ViewModelInstance);
             }
             else
             {
