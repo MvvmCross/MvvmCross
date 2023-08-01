@@ -14,6 +14,8 @@
     </PackageVersion>
     <PackageVersion Include="Serilog" Version="3.0.1" />
     <PackageVersion Include="Serilog.Extensions.Logging" Version="7.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageVersion Include="Serilog.Sinks.Trace" Version="3.0.0" />
     <PackageVersion Include="Serilog.Sinks.Debug" Version="2.0.0" />
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.6.0.74858" />

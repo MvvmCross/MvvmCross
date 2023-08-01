@@ -81,7 +81,7 @@ namespace Playground.Core.ViewModels
                 await NavigationService.Navigate<DictionaryBindingViewModel>());
 
             ShowCollectionViewCommand =
-                new MvxAsyncCommand(() => NavigationService.Navigate<CollectionViewModel>());
+                new MvxAsyncCommand(() => NavigationService.Navigate<CollectionViewModel, CollectionViewParameter>(new CollectionViewParameter(50)));
 
             ShowSharedElementsCommand = new MvxAsyncCommand(async () =>
                 await NavigationService.Navigate<SharedElementRootChildViewModel>());
