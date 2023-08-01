@@ -20,11 +20,6 @@ namespace MvvmCross.Platforms.Android.Views
             _currentViewModel = new WeakReference<IMvxViewModel>(toCache);
             _counter++;
 
-            if (_currentViewModel == null)
-            {
-                return;
-            }
-
             bundle.PutInt(BundleCacheKey, _counter);
         }
 
