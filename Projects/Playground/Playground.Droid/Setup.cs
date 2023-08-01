@@ -6,9 +6,9 @@ using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.DroidX.RecyclerView;
-using MvvmCross.IoC;
 using MvvmCross.Platforms.Android.Core;
-using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Plugin;
+using MvvmCross.Plugin.Color.Platforms.Android;
 using Playground.Core;
 using Playground.Droid.Bindings;
 using Playground.Droid.Controls;
@@ -32,6 +32,13 @@ namespace Playground.Droid
                 (arg) => new BinaryEditTargetBinding(arg));
 
             base.FillTargetFactories(registry);
+        }
+
+        public override void LoadPlugins(IMvxPluginManager pluginManager)
+        {
+            base.LoadPlugins(pluginManager);
+
+            pluginManager.EnsurePluginLoaded<Plugin>();
         }
 
         protected override ILoggerProvider CreateLogProvider()
