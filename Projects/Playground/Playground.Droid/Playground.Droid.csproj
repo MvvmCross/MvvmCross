@@ -14,8 +14,7 @@
     <PackageReference Include="Serilog.Sinks.Trace" />
     <PackageReference Include="Serilog.Sinks.Xamarin" />
     <PackageReference Include="Serilog.Extensions.Logging" />
-    <PackageReference Include="Xamarin.FFImageLoading" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" />
+    <PackageReference Include="Xamarin.Android.Glide" />
   </ItemGroup>
 
   <ItemGroup>
