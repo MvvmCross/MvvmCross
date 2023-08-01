@@ -2,6 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
@@ -111,6 +114,30 @@ namespace MvvmCross.Platforms.WinUi.Views
             base.OnNavigatedFrom(e);
             var bundle = this.CreateSaveStateBundle();
             SaveStateBundle(e, bundle);
+
+            var translator = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelRequestTranslator>();
+
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                var key = translator.RequestTextGetKey(_reqData);
+                this.OnViewDestroy(key);
+            }
+            else
+            {
+                var backstack = Frame.BackStack;
+                if (backstack.Count > 0)
+                {
+                    var currentEntry = backstack[backstack.Count - 1];
+                    var key = translator.RequestTextGetKey(currentEntry.Parameter.ToString());
+                    if (key == 0)
+                    {
+                        var newParamter = translator.GetRequestTextWithKeyFor(ViewModel);
+                        var entry = new PageStackEntry(currentEntry.SourcePageType, newParamter, currentEntry.NavigationTransitionInfo);
+                        backstack.Remove(currentEntry);
+                        backstack.Add(entry);
+                    }
+                }
+            }
         }
 
         private string _pageKey;

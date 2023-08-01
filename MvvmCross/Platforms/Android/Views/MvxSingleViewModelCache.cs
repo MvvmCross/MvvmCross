@@ -1,8 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using Android.OS;
+#nullable enable
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views
@@ -14,32 +13,36 @@ namespace MvvmCross.Platforms.Android.Views
 
         private int _counter;
 
-        private IMvxViewModel _currentViewModel;
+        private WeakReference<IMvxViewModel>? _currentViewModel;
 
         public void Cache(IMvxViewModel toCache, Bundle bundle)
         {
-            _currentViewModel = toCache;
+            _currentViewModel = new WeakReference<IMvxViewModel>(toCache);
             _counter++;
-
-            if (_currentViewModel == null)
-            {
-                return;
-            }
 
             bundle.PutInt(BundleCacheKey, _counter);
         }
 
-        public IMvxViewModel GetAndClear(Bundle bundle)
+        public IMvxViewModel? GetAndClear(Bundle? bundle)
         {
-            var storedViewModel = _currentViewModel;
-            _currentViewModel = null;
+            try
+            {
+                if (bundle == null)
+                    return null;
 
-            if (bundle == null)
-                return null;
+                if (_currentViewModel?.TryGetTarget(out var storedViewModel) == true)
+                {
+                    var key = bundle.GetInt(BundleCacheKey);
+                    var toReturn = key == _counter ? storedViewModel : null;
+                    return toReturn;
+                }
+            }
+            finally
+            {
+                _currentViewModel = null;
+            }
 
-            var key = bundle.GetInt(BundleCacheKey);
-            var toReturn = key == _counter ? storedViewModel : null;
-            return toReturn;
+            return null;
         }
     }
 }

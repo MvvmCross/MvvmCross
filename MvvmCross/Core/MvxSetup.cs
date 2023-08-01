@@ -176,6 +176,8 @@ namespace MvvmCross.Core
                 InitializeNavigationSerializer(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: InpcInterception start");
                 InitializeInpcInterception(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: InpcInterception start");
+                InitializeViewModelCache(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: LastChance start");
                 InitializeLastChance(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: Secondary end");
@@ -198,6 +200,19 @@ namespace MvvmCross.Core
         protected virtual void InitializeInpcInterception(IMvxIoCProvider iocProvider)
         {
             // by default no Inpc calls are intercepted
+        }
+
+        protected virtual IMvxChildViewModelCache InitializeViewModelCache(IMvxIoCProvider iocProvider)
+        {
+            ValidateArguments(iocProvider);
+
+            var cache = CreateViewModelCache(iocProvider);
+            return cache;
+        }
+
+        protected virtual IMvxChildViewModelCache CreateViewModelCache(IMvxIoCProvider iocProvider)
+        {
+            return iocProvider.Resolve<IMvxChildViewModelCache>();
         }
 
         protected virtual IMvxSettings InitializeSettings(IMvxIoCProvider iocProvider)
@@ -311,6 +326,7 @@ namespace MvvmCross.Core
             iocProvider.LazyConstructAndRegisterSingleton<IMvxTypeToTypeLookupBuilder, MvxViewModelViewLookupBuilder>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxCommandCollectionBuilder, MvxCommandCollectionBuilder>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxNavigationSerializer, MvxStringDictionaryNavigationSerializer>();
+            iocProvider.LazyConstructAndRegisterSingleton<IMvxChildViewModelCache, MvxChildViewModelCache>();
 
             iocProvider.RegisterType<IMvxCommandHelper, MvxWeakCommandHelper>();
         }

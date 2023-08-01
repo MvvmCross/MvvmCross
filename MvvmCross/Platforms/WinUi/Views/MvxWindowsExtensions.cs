@@ -27,6 +27,15 @@ namespace MvvmCross.Platforms.WinUi.Views
             storeView.ViewModel = viewModel;
         }
 
+        public static void OnViewDestroy(this IMvxWindowsView storeView, int key)
+        {
+            if (key > 0)
+            {
+                var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelRequestTranslator>();
+                viewModelLoader.RemoveSubViewModelWithKey(key);
+            }
+        }
+
         public static bool HasRegionAttribute(this Type view)
         {
             var attributes = view

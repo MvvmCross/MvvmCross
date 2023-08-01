@@ -1,6 +1,6 @@
 # Changelog
 
-## [9.1.0](https://github.com/MvvmCross/MvvmCross/tree/10.0.0) (2023-07-27)
+## [9.1.0](https://github.com/MvvmCross/MvvmCross/tree/9.1.0) (2023-07-27)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.10...9.1.0)
 
@@ -9,7 +9,6 @@
 - Remove IMvxViewModel\<TResult\> and IMvxViewModel\<in TParameter, TResult\> [\#4651](https://github.com/MvvmCross/MvvmCross/issues/4651)
 - Remove IMvxViewModelResult [\#4652](https://github.com/MvvmCross/MvvmCross/pull/4652) ([Cheesebaron](https://github.com/Cheesebaron))
 - Remove ViewModel cache. It can lead to leaks and doesn't provide value [\#4650](https://github.com/MvvmCross/MvvmCross/pull/4650) ([Cheesebaron](https://github.com/Cheesebaron))
-- Move Setup to MvxAndroidApplication +semver:breaking [\#4546](https://github.com/MvvmCross/MvvmCross/pull/4546) ([Cheesebaron](https://github.com/Cheesebaron))
 
 **Implemented enhancements:**
 
@@ -59,6 +58,7 @@
 - Mac view is not created until one of presentation attributes set explicitly [\#4572](https://github.com/MvvmCross/MvvmCross/issues/4572)
 - Android Mvx.IoCProvider.Resolve hitting MvvmCross.Exceptions.MvxIoCResolveException within ListenableWorkers when App is closed [\#4558](https://github.com/MvvmCross/MvvmCross/issues/4558)
 - \[Mac\] Correctly set view type when applying default presenter attribu… [\#4573](https://github.com/MvvmCross/MvvmCross/pull/4573) ([snechaev](https://github.com/snechaev))
+- Move Setup to MvxAndroidApplication +semver:breaking [\#4546](https://github.com/MvvmCross/MvvmCross/pull/4546) ([Cheesebaron](https://github.com/Cheesebaron))
 
 **Merged pull requests:**
 
