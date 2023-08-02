@@ -171,7 +171,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             var keys = bundle.KeySet();
             foreach (var key in keys)
             {
-                if (!key.StartsWith("f"))
+                if (!key.StartsWith('f'))
                     continue;
 
                 var index = Integer.ParseInt(key.Substring(1));

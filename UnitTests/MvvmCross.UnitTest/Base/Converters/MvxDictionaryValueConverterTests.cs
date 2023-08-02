@@ -12,7 +12,7 @@ namespace MvvmCross.UnitTest.Base.Converters
 {
     public class MvxDictionaryValueConverterTests : MvxDictionaryValueConverter<MvxDictionaryValueConverterTests.TestStates, string>
     {
-        private Dictionary<TestStates, string> _testStatedictionary;
+        private readonly Dictionary<TestStates, string> _testStatedictionary;
 
         private const string StateRunning = "State Running";
         private const string StateCompleted = "State Completed";

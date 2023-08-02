@@ -65,7 +65,7 @@ namespace MvvmCross.UnitTest.ViewModels
             var viewModel = new Test3ViewModel();
 
             var bundle = viewModel.SaveStateBundle();
-            Assert.Equal(0, bundle.Data.Count);
+            Assert.Empty(bundle.Data);
         }
     }
 }

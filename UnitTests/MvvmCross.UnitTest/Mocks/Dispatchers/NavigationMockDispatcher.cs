@@ -15,7 +15,7 @@ using MvvmCross.Views;
 namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {
     public class NavigationMockDispatcher
-        : IMvxMainThreadDispatcher, IMvxViewDispatcher
+        : IMvxViewDispatcher
     {
         public readonly List<MvxViewModelRequest> Requests = new List<MvxViewModelRequest>();
         public readonly List<MvxPresentationHint> Hints = new List<MvxPresentationHint>();
