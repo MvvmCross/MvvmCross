@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
+
 namespace MvvmCross.IoC
 {
     public interface IMvxIoCProvider
@@ -11,25 +13,25 @@ namespace MvvmCross.IoC
 
         bool CanResolve(Type type);
 
-        T? Resolve<T>()
+        T? Resolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>()
             where T : class;
 
-        object? Resolve(Type type);
+        object? Resolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type type);
 
-        bool TryResolve<T>(out T? resolved)
+        bool TryResolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>(out T? resolved)
             where T : class;
 
-        bool TryResolve(Type type, out object? resolved);
+        bool TryResolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type type, out object? resolved);
 
-        T? Create<T>()
+        T? Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>()
             where T : class;
 
-        object? Create(Type type);
+        object? Create([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type type);
 
-        T? GetSingleton<T>()
+        T? GetSingleton<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>()
             where T : class;
 
-        object? GetSingleton(Type type);
+        object? GetSingleton([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type type);
 
         void RegisterType<TFrom, TTo>()
             where TFrom : class
@@ -40,7 +42,7 @@ namespace MvvmCross.IoC
 
         void RegisterType(Type t, Func<object> constructor);
 
-        void RegisterType(Type tFrom, Type tTo);
+        void RegisterType(Type tFrom, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type tTo);
 
         void RegisterSingleton<TInterface>(TInterface theObject)
             where TInterface : class;
@@ -52,25 +54,25 @@ namespace MvvmCross.IoC
 
         void RegisterSingleton(Type tInterface, Func<object> theConstructor);
 
-        T? IoCConstruct<T>()
+        T? IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]T>()
             where T : class;
 
-        T? IoCConstruct<T>(IDictionary<string, object>? arguments)
+        T? IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]T>(IDictionary<string, object>? arguments)
             where T : class;
 
-        T? IoCConstruct<T>(object? arguments)
+        T? IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]T>(object? arguments)
             where T : class;
 
-        T? IoCConstruct<T>(params object?[] arguments)
+        T? IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]T>(params object?[] arguments)
             where T : class;
 
-        object? IoCConstruct(Type type);
+        object? IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type type);
 
-        object? IoCConstruct(Type type, IDictionary<string, object>? arguments);
+        object? IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type type, IDictionary<string, object>? arguments);
 
-        object? IoCConstruct(Type type, object? arguments);
+        object? IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type type, object? arguments);
 
-        object? IoCConstruct(Type type, params object?[] arguments);
+        object? IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type type, params object?[] arguments);
 
         void CallbackWhenRegistered<T>(Action action);
 

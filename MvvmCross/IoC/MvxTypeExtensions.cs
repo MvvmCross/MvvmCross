@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
@@ -12,7 +13,12 @@ namespace MvvmCross.IoC
 {
     public static class MvxTypeExtensions
     {
-        public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
+        [RequiresUnreferencedCode("Method accesses assembly types")]
+        public static IEnumerable<Type> ExceptionSafeGetTypes(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicNestedTypes |
+                DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+            this Assembly assembly)
         {
             try
             {
@@ -43,6 +49,7 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("Method accesses assembly types")]
         public static IEnumerable<Type> CreatableTypes(this Assembly assembly)
         {
             return assembly
@@ -140,8 +147,10 @@ namespace MvvmCross.IoC
             return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type> { t }, t));
         }
 
-        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types) =>
-            types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
+        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(
+            this IEnumerable<Type> types) =>
+            types.Select(([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] t) =>
+                new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types, params Type[] interfaces)
         {
@@ -151,7 +160,7 @@ namespace MvvmCross.IoC
                 var lookup = interfaces.ToDictionary(x => x, _ => true);
                 return
                     types.Select(
-                        t =>
+                        ([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]t) =>
                         new ServiceTypeAndImplementationTypePair(
                             t.GetInterfaces().Where(iface => lookup.ContainsKey(iface)).ToList(), t));
             }
@@ -159,7 +168,7 @@ namespace MvvmCross.IoC
             {
                 return
                     types.Select(
-                        t =>
+                        ([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]t) =>
                         new ServiceTypeAndImplementationTypePair(
                             t.GetInterfaces().Where(interfaces.Contains).ToList(), t));
             }
@@ -182,13 +191,13 @@ namespace MvvmCross.IoC
                 if (pair.ServiceTypes.Count == 0)
                     continue;
 
-                var instance = Mvx.IoCProvider.IoCConstruct(pair.ImplementationType, (object?)null);
+                var instance = Mvx.IoCProvider?.IoCConstruct(pair.ImplementationType, (object?)null);
                 if (instance == null)
                     continue;
 
                 foreach (var serviceType in pair.ServiceTypes)
                 {
-                    Mvx.IoCProvider.RegisterSingleton(serviceType, instance);
+                    Mvx.IoCProvider?.RegisterSingleton(serviceType, instance);
                 }
             }
         }
@@ -205,7 +214,7 @@ namespace MvvmCross.IoC
                 var creationFunc = new Func<object>(() => creator.Instance);
                 foreach (var serviceType in pair.ServiceTypes)
                 {
-                    Mvx.IoCProvider.RegisterSingleton(serviceType, creationFunc);
+                    Mvx.IoCProvider?.RegisterSingleton(serviceType, creationFunc);
                 }
             }
         }
@@ -216,12 +225,14 @@ namespace MvvmCross.IoC
             {
                 foreach (var serviceType in pair.ServiceTypes)
                 {
-                    Mvx.IoCProvider.RegisterType(serviceType, pair.ImplementationType);
+                    Mvx.IoCProvider?.RegisterType(serviceType, pair.ImplementationType);
                 }
             }
         }
 
-        public static object? CreateDefault(this Type? type)
+        public static object? CreateDefault(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            this Type? type)
         {
             if (type == null)
                 return null;
@@ -237,7 +248,11 @@ namespace MvvmCross.IoC
             return Activator.CreateInstance(type);
         }
 
-        public static ConstructorInfo? FindApplicableConstructor(this Type type, IDictionary<string, object>? arguments)
+        public static ConstructorInfo? FindApplicableConstructor(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors |
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            this Type type, IDictionary<string, object>? arguments)
         {
             var constructors = type.GetConstructors();
             if (arguments == null || arguments.Count == 0)
@@ -268,7 +283,9 @@ namespace MvvmCross.IoC
             return null;
         }
 
-        public static ConstructorInfo? FindApplicableConstructor(this Type type, object?[] arguments)
+        public static ConstructorInfo? FindApplicableConstructor(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            this Type type, object?[] arguments)
         {
             var constructors = type.GetConstructors();
             if (arguments.Length == 0)

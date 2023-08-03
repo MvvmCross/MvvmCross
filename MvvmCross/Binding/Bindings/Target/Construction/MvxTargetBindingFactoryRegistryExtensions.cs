@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Binding.Bindings.Target.Construction
 {
@@ -17,8 +18,11 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             registry.RegisterFactory(new MvxCustomBindingFactory<TView>(customName, creator));
         }
 
-        public static void RegisterPropertyInfoBindingFactory(this IMvxTargetBindingFactoryRegistry registry,
-                                                              Type bindingType, Type targetType, string targetName)
+        public static void RegisterPropertyInfoBindingFactory(
+            this IMvxTargetBindingFactoryRegistry registry,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type bindingType,
+            Type targetType,
+            string targetName)
         {
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(bindingType, targetType, targetName));
         }

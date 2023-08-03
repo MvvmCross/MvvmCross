@@ -2,16 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.IoC
 {
     public class MvxLazySingletonCreator
     {
-        private readonly object _lockObject = new object();
-        private readonly Type _type;
-
         private object _instance;
+        private readonly Lazy<object> _lazyType;
 
         public object Instance
         {
@@ -20,17 +18,16 @@ namespace MvvmCross.IoC
                 if (_instance != null)
                     return _instance;
 
-                lock (_lockObject)
-                {
-                    _instance = _instance ?? Mvx.IoCProvider.IoCConstruct(_type);
-                    return _instance;
-                }
+                _instance = _lazyType.Value;
+
+                return _instance;
             }
         }
 
-        public MvxLazySingletonCreator(Type type)
+        public MvxLazySingletonCreator(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type type)
         {
-            _type = type;
+            _lazyType = new Lazy<object>(() => Mvx.IoCProvider?.IoCConstruct(type));
         }
     }
 }

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 
@@ -66,7 +67,9 @@ namespace MvvmCross.Commands
             collection.Add(command, commandName, helper.CanExecutePropertyName);
         }
 
-        protected virtual PropertyInfo? CanExecutePropertyInfo(Type type, MethodInfo commandMethod)
+        protected virtual PropertyInfo? CanExecutePropertyInfo(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]Type type,
+            MethodInfo commandMethod)
         {
             var canExecuteName = CanExecuteProperyName(commandMethod);
             if (string.IsNullOrEmpty(canExecuteName))

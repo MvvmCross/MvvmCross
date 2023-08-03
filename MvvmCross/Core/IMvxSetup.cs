@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Plugin;
 
@@ -13,15 +14,20 @@ namespace MvvmCross.Core
     public interface IMvxSetup
     {
         void InitializePrimary();
+        
+        [RequiresUnreferencedCode("Gets types from assemblies")]
         void InitializeSecondary();
 
         IEnumerable<Assembly> GetViewAssemblies();
         IEnumerable<Assembly> GetViewModelAssemblies();
+
+        [RequiresUnreferencedCode("Gets types from assemblies")]
         IEnumerable<Assembly> GetPluginAssemblies();
 
         IEnumerable<Type> CreatableTypes();
         IEnumerable<Type> CreatableTypes(Assembly assembly);
 
+        [RequiresUnreferencedCode("Gets types from assemblies")]
         void LoadPlugins(IMvxPluginManager pluginManager);
 
         event EventHandler<MvxSetupStateEventArgs>? StateChanged;

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using MvvmCross.Base;
@@ -16,7 +17,7 @@ using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.BindingContext
 {
-    public class MvxBaseFluentBindingDescription<TTarget>
+    public class MvxBaseFluentBindingDescription<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]TTarget>
         : MvxApplicableTo<TTarget>, IMvxBaseFluentBindingDescription
         where TTarget : class
     {

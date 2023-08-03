@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Exceptions;
@@ -23,6 +24,7 @@ namespace MvvmCross.Core
                 new[] { platformApplication.GetType().Assembly }.Union(assemblies ?? Array.Empty<Assembly>()).ToArray());
         }
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         public static TSetup? CreateSetup<TSetup>(Assembly assembly, params object[] parameters) where TSetup : MvxSetup
         {
             var setupType = FindSetupType<TSetup>(assembly);
@@ -41,6 +43,7 @@ namespace MvvmCross.Core
             }
         }
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         public static TSetup? CreateSetup<TSetup>() where TSetup : MvxSetup
         {
             var setupType = FindSetupType<TSetup>();
@@ -59,6 +62,7 @@ namespace MvvmCross.Core
             }
         }
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         public static Type? FindSetupType<TSetup>(Assembly assembly)
         {
             var query = from type in assembly.ExceptionSafeGetTypes()
@@ -69,6 +73,7 @@ namespace MvvmCross.Core
             return query.FirstOrDefault();
         }
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         public static Type? FindSetupType<TSetup>()
         {
             var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()

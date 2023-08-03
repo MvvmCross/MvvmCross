@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Base;
 
@@ -11,25 +10,28 @@ namespace MvvmCross.Binding.Binders
 {
     public static class MvxRegistryFillerExtensions
     {
+        [RequiresUnreferencedCode("Gets types from assemblies")]
         public static void Fill<T>(
             this IMvxNamedInstanceRegistry<T> registry, IEnumerable<Assembly> assemblies, IEnumerable<Type> types)
             where T : notnull
         {
-            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = Mvx.IoCProvider?.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, assemblies);
             registry.Fill(filler, types);
         }
 
+        [RequiresUnreferencedCode("Gets types from assemblies")]
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IEnumerable<Assembly> assemblies)
             where T : notnull
         {
             if (assemblies == null)
                 return;
 
-            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = Mvx.IoCProvider?.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, assemblies);
         }
 
+        [RequiresUnreferencedCode("Gets types from assemblies")]
         public static void Fill<T>(
             this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
             IEnumerable<Assembly> assemblies)
@@ -44,13 +46,15 @@ namespace MvvmCross.Binding.Binders
             }
         }
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, Assembly assembly)
             where T : notnull
         {
-            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = Mvx.IoCProvider?.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, assembly);
         }
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
                                 Assembly assembly)
             where T : notnull
@@ -58,18 +62,21 @@ namespace MvvmCross.Binding.Binders
             filler.FillFrom(registry, assembly);
         }
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IEnumerable<Type> types)
             where T : notnull
         {
             if (types == null)
                 return;
 
-            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = Mvx.IoCProvider?.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, types);
         }
 
-        public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
-                                IEnumerable<Type> types)
+        [RequiresUnreferencedCode("Gets types from assembly")]
+        public static void Fill<T>(
+            this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
+            IEnumerable<Type> types)
         {
             if (types == null)
                 return;
@@ -81,16 +88,22 @@ namespace MvvmCross.Binding.Binders
         }
 
         public static void Fill<T>(
-            this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler, Type type)
+            this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor |
+                DynamicallyAccessedMemberTypes.PublicFields)]Type type)
             where T : notnull
         {
             filler.FillFrom(registry, type);
         }
 
-        public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, Type type)
+        public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor |
+                DynamicallyAccessedMemberTypes.PublicFields)]Type type)
             where T : notnull
         {
-            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = Mvx.IoCProvider?.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, type);
         }
     }

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Converters;
@@ -76,7 +77,7 @@ namespace MvvmCross.Binding.BindingContext
             return element.Bind(target, targetPath, sourcePath, converter, converterParameter, fallbackValue, mode);
         }
 
-        public static T Bind<T, TViewModel>(this T element,
+        public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
                                             string targetPath,
                                             string sourcePath,
@@ -86,7 +87,7 @@ namespace MvvmCross.Binding.BindingContext
                                             MvxBindingMode mode = MvxBindingMode.Default)
         {
             if (string.IsNullOrEmpty(targetPath))
-                targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(T));
+                targetPath = MvxBindingSingletonCache.Instance?.DefaultBindingNameLookup.DefaultFor(typeof(T));
 
             var bindingDescription = new MvxBindingDescription(
                 targetPath,

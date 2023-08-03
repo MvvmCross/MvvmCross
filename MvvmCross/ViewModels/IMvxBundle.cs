@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.ViewModels
@@ -17,7 +18,9 @@ namespace MvvmCross.ViewModels
 
         T Read<T>() where T : new();
 
-        object Read(Type type);
+        object Read([DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors |
+            DynamicallyAccessedMemberTypes.PublicProperties)]Type type);
 
         IEnumerable<object> CreateArgumentList(IEnumerable<ParameterInfo> requiredParameters, string? debugText);
     }

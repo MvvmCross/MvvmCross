@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -43,13 +44,19 @@ namespace MvvmCross.Core
             }
         }
 
-        public static T Read<T>(this IDictionary<string, string> data)
+        public static T Read<[DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors |
+            DynamicallyAccessedMemberTypes.PublicProperties)]T>(this IDictionary<string, string> data)
             where T : new()
         {
             return (T)data.Read(typeof(T));
         }
 
-        public static object Read(this IDictionary<string, string> data, Type type)
+        public static object Read(this IDictionary<string, string> data,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors |
+                DynamicallyAccessedMemberTypes.PublicProperties)]
+            Type type)
         {
             var t = Activator.CreateInstance(type);
 

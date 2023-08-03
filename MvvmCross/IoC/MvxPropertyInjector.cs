@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
@@ -55,13 +53,15 @@ namespace MvvmCross.IoC
                 else
                 {
                     MvxLogHost.Default?.Log(LogLevel.Warning,
-                        "IoC property injection skipped for {propertyName} on {typeName}",
+                        "IoC property injection skipped for {PropertyName} on {TypeName}",
                         injectableProperty.Name, toReturn.GetType().Name);
                 }
             }
         }
 
-        protected virtual IEnumerable<PropertyInfo> FindInjectableProperties(Type type, IMvxPropertyInjectorOptions options)
+        protected virtual IEnumerable<PropertyInfo> FindInjectableProperties(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+            Type type, IMvxPropertyInjectorOptions options)
         {
             var injectableProperties = type
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
@@ -81,7 +81,7 @@ namespace MvvmCross.IoC
 
                 case MvxPropertyInjection.None:
                     MvxLogHost.Default?.Log(LogLevel.Error, "Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
-                    injectableProperties = new PropertyInfo[0];
+                    injectableProperties = Array.Empty<PropertyInfo>();
                     break;
 
                 default:

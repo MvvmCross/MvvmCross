@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.Binding.Bindings.Target.Construction
@@ -98,11 +99,11 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             return (type.GetHashCode() * 9) ^ name.GetHashCode();
         }
 
-        private IMvxPluginTargetBindingFactory FindSpecificFactory(Type type, string name)
+        private IMvxPluginTargetBindingFactory FindSpecificFactory(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]Type type, string name)
         {
-            IMvxPluginTargetBindingFactory factory;
             var key = GenerateKey(type, name);
-            if (_lookups.TryGetValue(key, out factory))
+            if (_lookups.TryGetValue(key, out var factory))
             {
                 return factory;
             }

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.IoC
@@ -14,6 +15,7 @@ namespace MvvmCross.IoC
         Dictionary<string, Type> FullNameCache { get; }
         Dictionary<string, Type> NameCache { get; }
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         void AddAssembly(Assembly assembly);
     }
 }

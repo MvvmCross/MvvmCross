@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
@@ -25,7 +26,8 @@ namespace MvvmCross.ViewModels
             _viewToViewModelNameMapping = viewToViewModelNameMapping;
         }
 
-        public virtual Type? FindTypeOrNull(Type candidateType)
+        public virtual Type? FindTypeOrNull(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]Type candidateType)
         {
             if (!CheckCandidateTypeIsAView(candidateType))
                 return null;
@@ -45,7 +47,7 @@ namespace MvvmCross.ViewModels
             if (typeByName != null)
                 return typeByName;
 
-            MvxLogHost.Default?.Log(LogLevel.Warning, "No view model association found for candidate view {name}", candidateType.Name);
+            MvxLogHost.Default?.Log(LogLevel.Warning, "No view model association found for candidate view {Name}", candidateType.Name);
             return null;
         }
 
@@ -58,16 +60,17 @@ namespace MvvmCross.ViewModels
             return attribute?.ViewModel;
         }
 
-        protected virtual Type LookupNamedViewModelType(Type candidateType)
+        protected virtual Type? LookupNamedViewModelType(Type candidateType)
         {
             var viewName = candidateType.Name;
             var viewModelName = _viewToViewModelNameMapping.Map(viewName);
 
-            _viewModelByNameLookup.TryLookupByName(viewModelName, out Type toReturn);
+            _viewModelByNameLookup.TryLookupByName(viewModelName, out Type? toReturn);
             return toReturn;
         }
 
-        protected virtual Type? LookupAssociatedConcreteViewModelType(Type candidateType)
+        protected virtual Type? LookupAssociatedConcreteViewModelType(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]Type candidateType)
         {
             var viewModelPropertyInfo =
                 Array.Find(candidateType.GetProperties(),
@@ -78,7 +81,7 @@ namespace MvvmCross.ViewModels
             return viewModelPropertyInfo?.PropertyType;
         }
 
-        protected virtual bool CheckCandidateTypeIsAView(Type candidateType)
+        protected virtual bool CheckCandidateTypeIsAView(Type? candidateType)
         {
             if (candidateType == null)
                 return false;

@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Base;
 using MvvmCross.Converters;
@@ -13,8 +13,12 @@ namespace MvvmCross.Binding.Binders
     {
         string FindName(Type type);
 
-        void FillFrom(IMvxNamedInstanceRegistry<T> registry, Type type);
+        void FillFrom(IMvxNamedInstanceRegistry<T> registry,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor |
+                DynamicallyAccessedMemberTypes.PublicFields)]Type type);
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         void FillFrom(IMvxNamedInstanceRegistry<T> registry, Assembly assembly);
     }
 

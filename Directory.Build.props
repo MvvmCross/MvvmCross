@@ -45,6 +45,11 @@
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIstvOS)' == 'True' ">10.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsMacCatalyst)' == 'True' ">13.2</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsAndroid)' == 'True' ">23</SupportedOSPlatformVersion>
+
+
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <SuppressTrimAnalysisWarnings>false</SuppressTrimAnalysisWarnings>
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

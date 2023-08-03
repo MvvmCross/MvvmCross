@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Exceptions;
 using MvvmCross.ViewModels;
@@ -16,6 +17,13 @@ namespace MvvmCross.Platforms.Tvos.Views
         , IMvxTvosViewsContainer
     {
         public MvxViewModelRequest CurrentRequest { get; private set; }
+
+        public virtual IMvxTvosView CreateView(IMvxViewModel viewModel)
+        {
+            var request = new MvxViewModelInstanceRequest(viewModel);
+            var view = CreateView(request);
+            return view;
+        }
 
         public virtual IMvxTvosView CreateView(MvxViewModelRequest request)
         {
@@ -36,7 +44,9 @@ namespace MvvmCross.Platforms.Tvos.Views
             }
         }
 
-        public virtual IMvxTvosView CreateViewOfType(Type viewType, MvxViewModelRequest request)
+        public virtual IMvxTvosView CreateViewOfType(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type viewType,
+            MvxViewModelRequest request)
         {
             var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
             if (storyboardAttribute != null)
@@ -54,19 +64,9 @@ namespace MvvmCross.Platforms.Tvos.Views
                 }
             }
 
-            var view = Activator.CreateInstance(viewType) as IMvxTvosView;
-            if (view == null)
+            if (Activator.CreateInstance(viewType) is not IMvxTvosView view)
                 throw new MvxException("View not loaded for " + viewType);
             return view;
         }
-
-        public virtual IMvxTvosView CreateView(IMvxViewModel viewModel)
-        {
-            var request = new MvxViewModelInstanceRequest(viewModel);
-            var view = CreateView(request);
-            return view;
-        }
-
-
     }
 }

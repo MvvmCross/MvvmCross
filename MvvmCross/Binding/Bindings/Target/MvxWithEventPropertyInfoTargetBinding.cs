@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.WeakSubscription;
 
@@ -33,7 +33,7 @@ namespace MvvmCross.Binding.Bindings.Target
                 return;
             }
 
-            var value = TargetPropertyInfo.GetGetMethod().Invoke(target, null);
+            var value = TargetPropertyInfo.GetGetMethod()?.Invoke(target, null);
             FireValueChanged(value);
         }
 
@@ -49,7 +49,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
             if (eventArgs.PropertyName == TargetPropertyInfo.Name)
             {
-                var value = TargetPropertyInfo.GetGetMethod().Invoke(target, null);
+                var value = TargetPropertyInfo.GetGetMethod()?.Invoke(target, null);
                 FireValueChanged(value);
             }
         }
@@ -100,7 +100,8 @@ namespace MvvmCross.Binding.Bindings.Target
             return eventInfo;
         }
 
-        private EventInfo GetPropertyChangedEvent(Type viewType)
+        private EventInfo GetPropertyChangedEvent(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]Type viewType)
         {
             var eventName = "PropertyChanged";
             var eventInfo = viewType.GetEvent(eventName);

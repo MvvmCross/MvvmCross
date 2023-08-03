@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Plugin
 {
@@ -18,14 +19,18 @@ namespace MvvmCross.Plugin
 
         bool IsPluginLoaded<TPlugin>() where TPlugin : IMvxPlugin;
 
-        void EnsurePluginLoaded(Type type, bool forceLoad = false);
+        void EnsurePluginLoaded(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type type, bool forceLoad = false);
 
-        void EnsurePluginLoaded<TPlugin>(bool forceLoad = false)
+        void EnsurePluginLoaded<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]TPlugin>(bool forceLoad = false)
             where TPlugin : IMvxPlugin;
 
-        bool TryEnsurePluginLoaded(Type type, bool forceLoad = false);
+        bool TryEnsurePluginLoaded(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type type, bool forceLoad = false);
 
-        bool TryEnsurePluginLoaded<TPlugin>(bool forceLoad = false)
+        bool TryEnsurePluginLoaded<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]TPlugin>(bool forceLoad = false)
             where TPlugin : IMvxPlugin;
     }
 #nullable restore

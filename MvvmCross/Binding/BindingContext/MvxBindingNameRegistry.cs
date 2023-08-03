@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -12,16 +11,18 @@ namespace MvvmCross.Binding.BindingContext
     public class MvxBindingNameRegistry
         : IMvxBindingNameLookup, IMvxBindingNameRegistry
     {
-        private readonly Dictionary<Type, string> _lookup = new Dictionary<Type, string>();
+        private readonly Dictionary<Type, string> _lookup = new();
 
-        public string DefaultFor(Type type)
+        public string DefaultFor([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type)
         {
             string toReturn;
             TryDefaultFor(type, out toReturn, true);
             return toReturn;
         }
 
-        private bool TryDefaultFor(Type type, out string toReturn, bool includeInterfaces = true)
+        private bool TryDefaultFor(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type,
+            out string toReturn, bool includeInterfaces = true)
         {
             if (type == typeof(object))
             {
@@ -35,7 +36,7 @@ namespace MvvmCross.Binding.BindingContext
             if (type.IsConstructedGenericType)
             {
                 var openType = type.GetGenericTypeDefinition();
-                if (openType != null && _lookup.TryGetValue(openType, out toReturn))
+                if (_lookup.TryGetValue(openType, out toReturn))
                     return true;
             }
 
@@ -55,15 +56,15 @@ namespace MvvmCross.Binding.BindingContext
             return TryDefaultFor(type.GetTypeInfo().BaseType, out toReturn, false);
         }
 
-        public void AddOrOverwrite(Type type, string name)
+        public void AddOrOverwrite([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type, string name)
         {
             _lookup[type] = name;
         }
 
         public void AddOrOverwrite<T>(Expression<Func<T, object>> nameExpression)
         {
-            var path = MvxBindingSingletonCache.Instance.PropertyExpressionParser.Parse(nameExpression);
-            _lookup[typeof(T)] = path.Print();
+            var path = MvxBindingSingletonCache.Instance?.PropertyExpressionParser.Parse(nameExpression);
+            _lookup[typeof(T)] = path?.Print();
         }
     }
 }

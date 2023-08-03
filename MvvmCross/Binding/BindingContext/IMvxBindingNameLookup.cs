@@ -3,11 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Binding.BindingContext
 {
     public interface IMvxBindingNameLookup
     {
-        string DefaultFor(Type type);
+        string DefaultFor([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type);
     }
 }

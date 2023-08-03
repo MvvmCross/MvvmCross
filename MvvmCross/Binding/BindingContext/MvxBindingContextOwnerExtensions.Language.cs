@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
@@ -15,7 +16,7 @@ namespace MvvmCross.Binding.BindingContext
     {
         // note that we don't add more default parameters here
         // - otherwise this overrides the other existing methods
-        public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
+        public static void BindLanguage<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]TTarget>(this IMvxBindingContextOwner owner
                                                  , TTarget target
                                                  , string sourceKey)
         {
@@ -23,7 +24,7 @@ namespace MvvmCross.Binding.BindingContext
             owner.BindLanguage(target, targetPath, sourceKey);
         }
 
-        public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
+        public static void BindLanguage<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]TTarget>(this IMvxBindingContextOwner owner
                                                  , TTarget target
                                                  , string sourceKey
                                                  , MvxBindingMode bindingMode)
@@ -32,7 +33,7 @@ namespace MvvmCross.Binding.BindingContext
             owner.BindLanguage(target, targetPath, sourceKey, bindingMode: bindingMode);
         }
 
-        public static void BindLanguage<TTarget, TViewModel>(this IMvxBindingContextOwner owner
+        public static void BindLanguage<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]TTarget, TViewModel>(this IMvxBindingContextOwner owner
                                                              , TTarget target
                                                              , string sourceKey
                                                              , Expression<Func<TViewModel, IMvxTextProvider>> textProvider

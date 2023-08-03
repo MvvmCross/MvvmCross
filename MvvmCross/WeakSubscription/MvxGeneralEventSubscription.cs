@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.WeakSubscription
@@ -24,7 +25,8 @@ namespace MvvmCross.WeakSubscription
         }
     }
 
-    public class MvxGeneralEventSubscription<TSource, TEventArgs>
+    public class MvxGeneralEventSubscription<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]TSource, TEventArgs>
         : MvxWeakEventSubscription<TSource, TEventArgs>
         where TSource : class
         where TEventArgs : EventArgs

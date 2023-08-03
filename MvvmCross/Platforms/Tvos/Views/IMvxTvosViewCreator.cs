@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Tvos.Views
@@ -13,6 +13,8 @@ namespace MvvmCross.Platforms.Tvos.Views
 
         IMvxTvosView CreateView(IMvxViewModel viewModel);
 
-        IMvxTvosView CreateViewOfType(Type viewType, MvxViewModelRequest request);
+        IMvxTvosView CreateViewOfType(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type viewType,
+            MvxViewModelRequest request);
     }
 }

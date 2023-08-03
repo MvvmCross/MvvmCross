@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using MvvmCross.Base;
 using MvvmCross.IoC;
@@ -49,14 +49,17 @@ namespace MvvmCross.Binding.Extensions
             return result.ConvertToBooleanCore();
         }
 
-        public static object MakeSafeValue(this Type propertyType, object value)
+        public static object MakeSafeValue(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            this Type propertyType,
+            object value)
         {
             if (value == null)
             {
                 return propertyType.CreateDefault();
             }
 
-            var autoConverter = MvxBindingSingletonCache.Instance.AutoValueConverters.Find(value.GetType(),
+            var autoConverter = MvxBindingSingletonCache.Instance?.AutoValueConverters.Find(value.GetType(),
                                                                                             propertyType);
             if (autoConverter != null)
             {

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
@@ -18,6 +19,7 @@ namespace MvvmCross.IoC
         public Dictionary<string, Type> NameCache { get; } = new Dictionary<string, Type>();
         public Dictionary<Assembly, bool> CachedAssemblies { get; } = new Dictionary<Assembly, bool>();
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         public void AddAssembly(Assembly assembly)
         {
             try

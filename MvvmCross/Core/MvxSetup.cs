@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
@@ -73,6 +74,7 @@ namespace MvvmCross.Core
             MvxLogHost.Default?.LogInformation("Setup: RegisterSetupType already called");
         }
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         public static IMvxSetup Instance()
         {
             var instance = SetupCreator?.Invoke();
@@ -130,6 +132,7 @@ namespace MvvmCross.Core
             }
         }
 
+        [RequiresUnreferencedCode("Gets types from assemblies")]
         public virtual void InitializeSecondary()
         {
             if (State != MvxSetupState.InitializedPrimary)
@@ -260,6 +263,7 @@ namespace MvvmCross.Core
             return iocProvider.Resolve<IMvxStringToTypeParser>() as IMvxFillableStringToTypeParser;
         }
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         protected virtual void PerformBootstrapActions()
         {
             var bootstrapRunner = new MvxBootstrapRunner();
@@ -385,6 +389,7 @@ namespace MvvmCross.Core
             return iocProvider.Resolve<IMvxNavigationService>();
         }
 
+        [RequiresUnreferencedCode("Gets types from assemblies")]
         protected virtual IMvxPluginManager InitializePluginFramework(IMvxIoCProvider iocProvider)
         {
             ValidateArguments(iocProvider);
@@ -406,6 +411,7 @@ namespace MvvmCross.Core
             return null;
         }
 
+        [RequiresUnreferencedCode("Gets types from assemblies")]
         public virtual IEnumerable<Assembly> GetPluginAssemblies()
         {
             var mvvmCrossAssemblyName = typeof(MvxPluginAttribute).Assembly.GetName().Name;
@@ -417,6 +423,7 @@ namespace MvvmCross.Core
                 .Where(assembly => AssemblyReferencesMvvmCross(assembly, mvvmCrossAssemblyName));
         }
 
+        [RequiresUnreferencedCode("Calls System.Reflection.Assembly.GetReferencedAssemblies()")]
         private static bool AssemblyReferencesMvvmCross(Assembly assembly, string mvvmCrossAssemblyName)
         {
             try
@@ -431,6 +438,7 @@ namespace MvvmCross.Core
             }
         }
 
+        [RequiresUnreferencedCode("Enumerates types from assemblies")]
         public virtual void LoadPlugins(IMvxPluginManager pluginManager)
         {
             if (pluginManager == null)

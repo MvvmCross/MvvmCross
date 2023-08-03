@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using MvvmCross.Binding.Binders;
@@ -13,7 +14,7 @@ using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.BindingContext
 {
-    public class MvxFluentBindingDescription<TTarget, TSource>
+    public class MvxFluentBindingDescription<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]TTarget, TSource>
         : MvxBaseFluentBindingDescription<TTarget>
         where TTarget : class
     {
@@ -184,7 +185,7 @@ namespace MvvmCross.Binding.BindingContext
         }
     }
 
-    public class MvxFluentBindingDescription<TTarget>
+    public class MvxFluentBindingDescription<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]TTarget>
         : MvxBaseFluentBindingDescription<TTarget>
         where TTarget : class
     {

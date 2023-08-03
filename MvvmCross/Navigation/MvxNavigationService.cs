@@ -232,9 +232,9 @@ namespace MvvmCross.Navigation
                 ParameterValues = parameterValues.SafeGetData()
             };
 
-            if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
+            if (viewModelType.IsAssignableTo(typeof(IMvxNavigationFacade)))
             {
-                var facade = (IMvxNavigationFacade)_iocProvider.IoCConstruct(viewModelType);
+                var facade = (IMvxNavigationFacade?)_iocProvider.IoCConstruct(viewModelType);
 
                 try
                 {

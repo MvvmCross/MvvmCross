@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.Binding.Bindings.Target.Construction
@@ -11,13 +10,14 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
     public class MvxSimplePropertyInfoTargetBindingFactory
         : IMvxPluginTargetBindingFactory
     {
-        private readonly Type _bindingType;
         private readonly MvxPropertyInfoTargetBindingFactory _innerFactory;
 
-        public MvxSimplePropertyInfoTargetBindingFactory(Type bindingType, Type targetType, string targetName)
+        public MvxSimplePropertyInfoTargetBindingFactory(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type bindingType, Type targetType, string targetName)
         {
-            _bindingType = bindingType;
-            _innerFactory = new MvxPropertyInfoTargetBindingFactory(targetType, targetName, CreateTargetBinding);
+            _innerFactory = new MvxPropertyInfoTargetBindingFactory(targetType, targetName,
+                (o, info) => CreateTargetBinding(bindingType, o, info));
         }
 
         #region IMvxPluginTargetBindingFactory Members
@@ -31,9 +31,10 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         #endregion IMvxPluginTargetBindingFactory Members
 
-        private IMvxTargetBinding CreateTargetBinding(object target, PropertyInfo targetPropertyInfo)
+        private static IMvxTargetBinding CreateTargetBinding(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type bindingType, object target, PropertyInfo targetPropertyInfo)
         {
-            var targetBindingCandidate = Activator.CreateInstance(_bindingType, target, targetPropertyInfo);
+            var targetBindingCandidate = Activator.CreateInstance(bindingType, target, targetPropertyInfo);
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;
             if (targetBinding == null)
             {

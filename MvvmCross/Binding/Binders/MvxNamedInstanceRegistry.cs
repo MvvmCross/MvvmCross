@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Base;
 
@@ -32,6 +33,7 @@ namespace MvvmCross.Binding.Binders
             _converters[name] = instance;
         }
 
+        [RequiresUnreferencedCode("Gets types from assembly")]
         public void AddOrOverwriteFrom(Assembly assembly)
         {
             this.Fill(assembly);
