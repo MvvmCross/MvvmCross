@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Foundation;
 using MvvmCross.Platforms.Ios;
@@ -27,7 +28,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
 
         public static DateTime DefaultDate { get; set; } = DateTime.Now;
 
-        protected override object MakeSafeValue(object value)
+        protected override object MakeSafeValue([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type valueType, object value)
         {
             // Convert from local DateTime (or default value) to universal NSDate based on system timezone.
             var valueLocal = (DateTime)(value ?? DefaultDate);

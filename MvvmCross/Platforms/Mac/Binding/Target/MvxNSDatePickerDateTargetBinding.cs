@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using AppKit;
 using Foundation;
 
@@ -36,7 +37,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             return this.GetLocalTime(view);
         }
 
-        protected override object MakeSafeValue(object value)
+        protected override object MakeSafeValue([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type valueType, object value)
         {
             if (value == null)
                 value = DateTime.Now;

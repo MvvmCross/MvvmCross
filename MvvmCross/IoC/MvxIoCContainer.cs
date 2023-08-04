@@ -24,6 +24,7 @@ namespace MvvmCross.IoC
 
         private IMvxIocOptions Options => _options;
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public MvxIoCContainer(IMvxIocOptions? options, IMvxIoCProvider? parentProvider = null)
         {
             _options = options ?? new MvxIocOptions();
@@ -41,6 +42,7 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public MvxIoCContainer(IMvxIoCProvider parentProvider)
             : this(null, parentProvider)
         {
@@ -52,6 +54,7 @@ namespace MvvmCross.IoC
 
         private interface IResolver
         {
+            [RequiresUnreferencedCode("Calls public constructors on each target property type")]
             object? Resolve();
 
             ResolverType ResolveType { get; }
@@ -64,13 +67,13 @@ namespace MvvmCross.IoC
             private readonly Type _type;
             private readonly IMvxIoCProvider _parent;
 
-            public ConstructingResolver(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type type, IMvxIoCProvider parent)
+            public ConstructingResolver(Type type, IMvxIoCProvider parent)
             {
                 _type = type;
                 _parent = parent;
             }
 
+            [RequiresUnreferencedCode("Calls public constructors on each target property type")]
             public object? Resolve()
             {
                 return _parent.IoCConstruct(_type, (object?)null);
@@ -93,6 +96,7 @@ namespace MvvmCross.IoC
                 _constructor = constructor;
             }
 
+            [RequiresUnreferencedCode("Calls public constructors on each target property type")]
             public object? Resolve()
             {
                 return _constructor();
@@ -115,6 +119,7 @@ namespace MvvmCross.IoC
                 _theObject = theObject;
             }
 
+            [RequiresUnreferencedCode("Calls public constructors on each target property type")]
             public object Resolve()
             {
                 return _theObject;
@@ -139,6 +144,7 @@ namespace MvvmCross.IoC
                 _constructor = theConstructor;
             }
 
+            [RequiresUnreferencedCode("Calls public constructors on each target property type")]
             public object? Resolve()
             {
                 if (_theObject != null)
@@ -183,6 +189,7 @@ namespace MvvmCross.IoC
                 _genericTypeParameters = genericTypeParameters;
             }
 
+            [RequiresUnreferencedCode("Calls public constructors on each target property type")]
             public object? Resolve()
             {
                 if (_genericTypeParameters == null)
@@ -220,6 +227,7 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public bool TryResolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>(out T? resolved)
             where T : class
         {
@@ -236,6 +244,7 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public bool TryResolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type type, out object? resolved)
         {
             lock (_lockObject)
@@ -244,12 +253,14 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public T? Resolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>()
             where T : class
         {
             return (T?)Resolve(typeof(T));
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public object? Resolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type type)
         {
             lock (_lockObject)
@@ -262,12 +273,14 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public T? GetSingleton<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>()
             where T : class
         {
             return (T?)GetSingleton(typeof(T));
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public object? GetSingleton([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type type)
         {
             lock (_lockObject)
@@ -280,12 +293,14 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public T? Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>()
             where T : class
         {
             return (T?)Create(typeof(T));
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public object? Create([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type type)
         {
             lock (_lockObject)
@@ -298,7 +313,7 @@ namespace MvvmCross.IoC
             }
         }
 
-        public void RegisterType<TInterface, TToConstruct>()
+        public void RegisterType<TInterface, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]TToConstruct>()
             where TInterface : class
             where TToConstruct : class, TInterface
         {
@@ -366,39 +381,46 @@ namespace MvvmCross.IoC
             InternalSetResolver(tInterface, new ConstructingSingletonResolver(theConstructor));
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public object? IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type type)
         {
             return IoCConstruct(type, (IDictionary<string, object>?)null);
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public object? IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type type, object? arguments)
         {
             return IoCConstruct(type, arguments?.ToPropertyDictionary());
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public T? IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]T>()
             where T : class
         {
             return (T?)IoCConstruct(typeof(T), (IDictionary<string, object>?)null);
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public T? IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]T>(IDictionary<string, object>? arguments)
             where T : class
         {
             return (T?)IoCConstruct(typeof(T), arguments);
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public T? IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]T>(object? arguments)
             where T : class
         {
             return (T?)IoCConstruct(typeof(T), arguments?.ToPropertyDictionary());
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public T? IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]T>(params object?[] arguments) where T : class
         {
             return (T?)IoCConstruct(typeof(T), arguments);
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type type, params object?[] arguments)
         {
             var selectedConstructor = type.FindApplicableConstructor(arguments);
@@ -413,6 +435,7 @@ namespace MvvmCross.IoC
             return IoCConstruct(type, selectedConstructor, parameters.ToArray());
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type type, IDictionary<string, object>? arguments)
         {
             var selectedConstructor = type.FindApplicableConstructor(arguments);
@@ -426,6 +449,7 @@ namespace MvvmCross.IoC
             return IoCConstruct(type, selectedConstructor, parameters.ToArray());
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         private object IoCConstruct(Type type, ConstructorInfo constructor, object[] arguments)
         {
             object toReturn;
@@ -495,6 +519,7 @@ namespace MvvmCross.IoC
             Unknown
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         public IMvxIoCProvider CreateChildContainer() => new MvxIoCContainer(this);
 
         private static readonly ResolverType? ResolverTypeNoneSpecified = null;
@@ -510,11 +535,13 @@ namespace MvvmCross.IoC
             return resolver.ResolveType == requiredResolverType.Value;
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         private bool InternalTryResolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type type, out object? resolved)
         {
             return InternalTryResolve(type, ResolverTypeNoneSpecified, out resolved);
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         private bool InternalTryResolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type type, ResolverType? requiredResolverType, out object? resolved)
         {
             if (!TryGetResolver(type, out var resolver))
@@ -537,6 +564,7 @@ namespace MvvmCross.IoC
             return InternalTryResolve(type, resolver!, out resolved);
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         private bool InternalTryResolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type type, IResolver resolver, out object? resolved)
         {
             var detectingCircular = ShouldDetectCircularReferencesFor(resolver);
@@ -641,11 +669,13 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         private void InjectProperties(object toReturn)
         {
             _propertyInjector?.Inject(toReturn, _options.PropertyInjectorOptions);
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         private List<object> GetIoCParameterValues(Type type, MethodBase selectedConstructor, IDictionary<string, object>? arguments)
         {
             var parameters = new List<object>();
@@ -664,6 +694,7 @@ namespace MvvmCross.IoC
             return parameters;
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         private List<object> GetIoCParameterValues(Type type, MethodBase selectedConstructor, object[]? arguments)
         {
             var parameters = new List<object>();
@@ -689,6 +720,7 @@ namespace MvvmCross.IoC
             return parameters;
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on each target property type")]
         private bool TryResolveParameter(Type type, ParameterInfo parameterInfo, out object? parameterValue)
         {
             if (!TryResolve(parameterInfo.ParameterType, out parameterValue))

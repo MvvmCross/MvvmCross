@@ -15,9 +15,6 @@ namespace MvvmCross.IoC
     {
         [RequiresUnreferencedCode("Method accesses assembly types")]
         public static IEnumerable<Type> ExceptionSafeGetTypes(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicNestedTypes |
-                DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
             this Assembly assembly)
         {
             try
@@ -184,6 +181,7 @@ namespace MvvmCross.IoC
                 .Select(t => new ServiceTypeAndImplementationTypePair(t.excludedList, t.pair.ImplementationType));
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on pair implementation types")]
         public static void RegisterAsSingleton(this IEnumerable<ServiceTypeAndImplementationTypePair> pairs)
         {
             foreach (var pair in pairs)
@@ -202,6 +200,7 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on pair implementation types")]
         public static void RegisterAsLazySingleton(this IEnumerable<ServiceTypeAndImplementationTypePair> pairs)
         {
             foreach (var pair in pairs)
@@ -219,6 +218,7 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("Calls public constructors on pair implementation types")]
         public static void RegisterAsDynamic(this IEnumerable<ServiceTypeAndImplementationTypePair> pairs)
         {
             foreach (var pair in pairs)

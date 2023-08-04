@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Base;
@@ -12,6 +13,7 @@ namespace MvvmCross.ViewModels
 #nullable enable
     public static class MvxViewModelExtensions
     {
+        [RequiresUnreferencedCode("Type is accessed dynamically and public constructors and interfaces are invoked")]
         public static void CallBundleMethods(this IMvxViewModel viewModel, string methodName, IMvxBundle? bundle)
         {
             if (viewModel == null)
@@ -28,6 +30,7 @@ namespace MvvmCross.ViewModels
             }
         }
 
+        [RequiresUnreferencedCode("Type is accessed dynamically and public constructors and interfaces are invoked")]
         public static void CallBundleMethod(this IMvxViewModel viewModel, MethodInfo methodInfo, IMvxBundle? bundle)
         {
             if (viewModel == null)

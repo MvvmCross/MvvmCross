@@ -12,6 +12,7 @@ namespace MvvmCross.IoC
 {
     public class MvxPropertyInjector : IMvxPropertyInjector
     {
+        [RequiresUnreferencedCode("Calls public parameterless constructors on each target property type")]
         public virtual void Inject(object target, IMvxPropertyInjectorOptions options = null)
         {
             options = options ?? MvxPropertyInjectorOptions.All;
@@ -30,6 +31,7 @@ namespace MvvmCross.IoC
             }
         }
 
+        [RequiresUnreferencedCode("Calls public parameterless constructors property type")]
         protected virtual void InjectProperty(object toReturn, PropertyInfo injectableProperty, IMvxPropertyInjectorOptions options)
         {
             object propertyValue;

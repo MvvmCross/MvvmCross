@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Platforms.Ios;
 using UIKit;
@@ -25,7 +26,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             throw new NotImplementedException();
         }
 
-        protected override object MakeSafeValue(object value)
+        protected override object MakeSafeValue([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type valueType, object value)
         {
             var valueUtc = ToUtcTime((DateTime)value);
             var valueNSDate = valueUtc.ToNSDate();

@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using AppKit;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 
@@ -35,7 +34,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             FireValueChanged(view.State == NSCellStateValue.On);
         }
 
-        protected override object MakeSafeValue(object value)
+        protected override object MakeSafeValue([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type valueType, object value)
         {
             if (value is bool)
             {
@@ -48,7 +47,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
                     return (NSCellStateValue.Off);
                 }
             }
-            return base.MakeSafeValue(value);
+            return base.MakeSafeValue(valueType, value);
         }
 
         public override MvxBindingMode DefaultMode

@@ -91,7 +91,7 @@ namespace MvvmCross.IoC
             };
         }
 
-        public static void CallbackWhenRegistered<T>(this IMvxIoCProvider ioc, Action<T> action)
+        public static void CallbackWhenRegistered<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]T>(this IMvxIoCProvider ioc, Action<T> action)
             where T : class
         {
             Action simpleAction = () =>

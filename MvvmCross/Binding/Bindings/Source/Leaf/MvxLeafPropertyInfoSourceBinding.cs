@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Binding.Extensions;
 using MvvmCross.Converters;
@@ -51,6 +52,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
         protected abstract object[] PropertyIndexParameters();
 
+        [RequiresUnreferencedCode("Type is accessed dynamically and public constructors are invoked")]
         public override void SetValue(object value)
         {
             if (PropertyInfo == null)

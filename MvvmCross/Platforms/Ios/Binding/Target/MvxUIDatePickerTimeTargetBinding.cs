@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Platforms.Ios;
 using UIKit;
@@ -26,7 +27,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
 
         //public override Type TargetValueType => typeof(TimeSpan);
 
-        protected override object MakeSafeValue(object value)
+        protected override object MakeSafeValue([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type valueType, object value)
         {
             if (value == null)
                 value = TimeSpan.FromSeconds(0);

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Base;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target;
@@ -51,6 +52,7 @@ namespace MvvmCross.Binding.Bindings
             }
         }
 
+        [RequiresUnreferencedCode("Calls public parameterless constructors target value type")]
         public MvxFullBinding(MvxBindingRequest bindingRequest)
         {
             _bindingDescription = bindingRequest.Description;
@@ -139,6 +141,7 @@ namespace MvvmCross.Binding.Bindings
             }
         }
 
+        [RequiresUnreferencedCode("Calls public parameterless constructors target value type")]
         private void CreateTargetBinding(object target)
         {
             _targetBinding = TargetBindingFactory.CreateBinding(target, _bindingDescription.TargetName);

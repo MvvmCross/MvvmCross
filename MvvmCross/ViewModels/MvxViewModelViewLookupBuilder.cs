@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Exceptions;
@@ -15,6 +16,7 @@ namespace MvvmCross.ViewModels
     public class MvxViewModelViewLookupBuilder
         : IMvxTypeToTypeLookupBuilder
     {
+        [RequiresUnreferencedCode("Gets types from assemblies")]
         public virtual IDictionary<Type, Type> Build(IEnumerable<Assembly> sourceAssemblies)
         {
             var associatedTypeFinder = Mvx.IoCProvider.Resolve<IMvxViewModelTypeFinder>();

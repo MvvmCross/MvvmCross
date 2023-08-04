@@ -2,11 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding.Extensions;
 
 namespace MvvmCross.Binding.Bindings.Target
 {
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
     public abstract class MvxConvertingTargetBinding : MvxTargetBinding
     {
         private bool _isUpdatingSource;
@@ -38,7 +39,7 @@ namespace MvvmCross.Binding.Bindings.Target
             if (ShouldSkipSetValueForViewSpecificReasons(target, value))
                 return;
 
-            var safeValue = MakeSafeValue(value);
+            var safeValue = MakeSafeValue(value?.GetType(), value);
 
             // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
             if (_isUpdatingSource)
@@ -76,9 +77,9 @@ namespace MvvmCross.Binding.Bindings.Target
             return false;
         }
 
-        protected virtual object MakeSafeValue(object value)
+        protected virtual object MakeSafeValue([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type valueType, object value)
         {
-            var safeValue = TargetValueType.MakeSafeValue(value);
+            var safeValue = valueType.MakeSafeValue(value);
             return safeValue;
         }
 
@@ -104,7 +105,7 @@ namespace MvvmCross.Binding.Bindings.Target
         }
     }
 
-    public abstract class MvxConvertingTargetBinding<TTarget, TValue> : MvxTargetBinding<TTarget, TValue>
+    public abstract class MvxConvertingTargetBinding<TTarget, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]TValue> : MvxTargetBinding<TTarget, TValue>
         where TTarget : class
     {
         private bool _isUpdatingSource;
@@ -135,7 +136,7 @@ namespace MvvmCross.Binding.Bindings.Target
             if (ShouldSkipSetValueForViewSpecificReasons(target, value))
                 return;
 
-            var safeValue = MakeSafeValue(value);
+            var safeValue = MakeSafeValue(typeof(TValue), value);
 
             // to prevent feedback loops, we don't pass on 'same value' updates from the source while we are updating it
             if (_isUpdatingSource && EqualityComparer<TValue>.Default.Equals(value, _updatingSourceWith))
@@ -164,9 +165,9 @@ namespace MvvmCross.Binding.Bindings.Target
             return false;
         }
 
-        protected virtual TValue MakeSafeValue(TValue value)
+        protected virtual TValue MakeSafeValue([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]Type valueType, TValue value)
         {
-            var safeValue = (TValue)TargetValueType.MakeSafeValue(value);
+            var safeValue = (TValue)valueType.MakeSafeValue(value);
             return safeValue;
         }
 

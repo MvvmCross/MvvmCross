@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Binding.Bindings.Source
 {
@@ -10,6 +11,7 @@ namespace MvvmCross.Binding.Bindings.Source
     {
         Type SourceType { get; }
 
+        [RequiresUnreferencedCode("Type is accessed dynamically and public constructors are invoked")]
         void SetValue(object value);
 
         event EventHandler Changed;
