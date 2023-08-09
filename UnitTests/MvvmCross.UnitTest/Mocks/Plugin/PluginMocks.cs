@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using MvvmCross.IoC;
 using MvvmCross.Plugin;
 
 namespace MvvmCross.UnitTest.Mocks.Plugin
@@ -11,7 +12,7 @@ namespace MvvmCross.UnitTest.Mocks.Plugin
     {
         public static int LoadCount { get; private set; }
 
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
             LoadCount++;
         }
@@ -22,7 +23,7 @@ namespace MvvmCross.UnitTest.Mocks.Plugin
     {
         public static int LoadCount { get; private set; }
 
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
             LoadCount++;
         }
@@ -33,7 +34,7 @@ namespace MvvmCross.UnitTest.Mocks.Plugin
     {
         public static int LoadCount { get; private set; }
 
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
             LoadCount++;
         }
@@ -44,7 +45,7 @@ namespace MvvmCross.UnitTest.Mocks.Plugin
     {
         public static int LoadCount { get; private set; }
 
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
             LoadCount++;
         }
@@ -55,7 +56,7 @@ namespace MvvmCross.UnitTest.Mocks.Plugin
     {
         public static int LoadCount { get; private set; }
 
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
             LoadCount++;
         }
@@ -66,7 +67,7 @@ namespace MvvmCross.UnitTest.Mocks.Plugin
     {
         public static int LoadCount { get; private set; }
 
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
             LoadCount++;
         }
@@ -77,7 +78,7 @@ namespace MvvmCross.UnitTest.Mocks.Plugin
     {
         public static int LoadCount { get; private set; }
 
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
             LoadCount++;
         }
@@ -88,7 +89,7 @@ namespace MvvmCross.UnitTest.Mocks.Plugin
     {
         public static int LoadCount { get; private set; }
 
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
             LoadCount++;
         }
@@ -99,7 +100,7 @@ namespace MvvmCross.UnitTest.Mocks.Plugin
     {
         public static int LoadCount { get; private set; }
 
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
             LoadCount++;
         }
@@ -110,7 +111,7 @@ namespace MvvmCross.UnitTest.Mocks.Plugin
     {
         public static int LoadCount { get; private set; }
 
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
             LoadCount++;
         }

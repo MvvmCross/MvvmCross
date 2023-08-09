@@ -130,7 +130,7 @@ namespace Playground.Droid
 
         public void Include(MvvmCross.Plugin.Json.Plugin plugin)
         {
-            plugin.Load();
+            plugin.Load(Mvx.IoCProvider);
         }
     }
 }
