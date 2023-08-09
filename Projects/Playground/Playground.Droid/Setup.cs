@@ -39,6 +39,7 @@ namespace Playground.Droid
             base.LoadPlugins(pluginManager);
 
             pluginManager.EnsurePluginLoaded<Plugin>();
+            pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.Json.Plugin>();
         }
 
         protected override ILoggerProvider CreateLogProvider()
