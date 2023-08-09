@@ -176,16 +176,6 @@ namespace MvvmCross.IoC
             return _provider.IoCConstruct(type, arguments);
         }
 
-        public void CallbackWhenRegistered<T>(Action action)
-        {
-            _provider.CallbackWhenRegistered<T>(action);
-        }
-
-        public void CallbackWhenRegistered(Type type, Action action)
-        {
-            _provider.CallbackWhenRegistered(type, action);
-        }
-
         public void CleanAllResolvers()
         {
             _provider.CleanAllResolvers();
