@@ -20,7 +20,7 @@
     <!--<Nullable>enable</Nullable>-->
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>true</ImplicitUsings>
-    <NoWarn>$(NoWarn);1591;1701;1702;1705;VSX1000;CS0109;CS0108;CS0618;CS0114;NU1603</NoWarn>
+    <NoWarn>$(NoWarn);CS0109;CS0108;CS0618;CS0114;NU1603</NoWarn>
 
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('MvvmCross'))</IsLibraryProject>
