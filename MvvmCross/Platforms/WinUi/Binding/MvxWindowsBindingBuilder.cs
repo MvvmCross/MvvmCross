@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml;
 using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
@@ -25,10 +26,22 @@ namespace MvvmCross.Platforms.WinUi.Binding
         }
 
         private readonly BindingType _bindingType;
+        private readonly Action<IMvxTargetBindingFactoryRegistry> _fillTargetFactories;
+        private readonly Action<IMvxBindingNameRegistry> _fillBindingNames;
+        private readonly Action<IMvxValueConverterRegistry> _fillValueConverters;
+        private readonly Action<IMvxValueCombinerRegistry> _fillValueCombiners;
 
         public MvxWindowsBindingBuilder(
+            Action<IMvxTargetBindingFactoryRegistry> fillTargetFactories,
+            Action<IMvxBindingNameRegistry> fillBindingNames,
+            Action<IMvxValueConverterRegistry> fillValueConverters,
+            Action<IMvxValueCombinerRegistry> fillValueCombiners,
             BindingType bindingType = BindingType.MvvmCross)
         {
+            _fillTargetFactories = fillTargetFactories;
+            _fillBindingNames = fillBindingNames;
+            _fillValueConverters = fillValueConverters;
+            _fillValueCombiners = fillValueCombiners;
             _bindingType = bindingType;
         }
 
@@ -91,6 +104,12 @@ namespace MvvmCross.Platforms.WinUi.Binding
             }
         }
 
+        protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
+        {
+            base.FillDefaultBindingNames(registry);
+            _fillBindingNames?.Invoke(registry);
+        }
+
         protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
@@ -102,6 +121,8 @@ namespace MvvmCross.Platforms.WinUi.Binding
                     registry.Fill(assembly);
                 }
             }
+
+            _fillValueConverters?.Invoke(registry);
         }
 
         protected override void FillValueCombiners(IMvxValueCombinerRegistry registry)
@@ -115,6 +136,8 @@ namespace MvvmCross.Platforms.WinUi.Binding
                     registry.Fill(assembly);
                 }
             }
+
+            _fillValueCombiners?.Invoke(registry);
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -132,6 +155,8 @@ namespace MvvmCross.Platforms.WinUi.Binding
                 view => new MvxCollapsedTargetBinding(view));
 
             base.FillTargetFactories(registry);
+
+            _fillTargetFactories?.Invoke(registry);
         }
     }
 }
