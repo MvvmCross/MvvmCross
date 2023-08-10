@@ -15,11 +15,11 @@ namespace MvvmCross.Plugin.Visibility.Platforms.WinUi
             if (!IsInDesignTool)
                 return;
 
-            if (Mvx.IoCProvider.CanResolve<IMvxNativeVisibility>())
+            if (Mvx.IoCProvider?.CanResolve<IMvxNativeVisibility>() == true)
                 return;
 
             var forceVisibilityLoaded = new Plugin();
-            forceVisibilityLoaded.Load();
+            forceVisibilityLoaded.Load(Mvx.IoCProvider);
         }
     }
 }
