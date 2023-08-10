@@ -32,10 +32,10 @@ namespace MvvmCross.Platforms.WinUi.Binding
         private readonly Action<IMvxValueCombinerRegistry> _fillValueCombiners;
 
         public MvxWindowsBindingBuilder(
-            Action<IMvxTargetBindingFactoryRegistry> fillTargetFactories,
-            Action<IMvxBindingNameRegistry> fillBindingNames,
-            Action<IMvxValueConverterRegistry> fillValueConverters,
-            Action<IMvxValueCombinerRegistry> fillValueCombiners,
+            Action<IMvxTargetBindingFactoryRegistry> fillTargetFactories = null,
+            Action<IMvxBindingNameRegistry> fillBindingNames = null,
+            Action<IMvxValueConverterRegistry> fillValueConverters = null,
+            Action<IMvxValueCombinerRegistry> fillValueCombiners = null,
             BindingType bindingType = BindingType.MvvmCross)
         {
             _fillTargetFactories = fillTargetFactories;
