@@ -3,15 +3,16 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Base;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platforms.WinUi
 {
     [MvxPlugin]
     public class Plugin : IMvxPlugin
     {
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
-            Mvx.IoCProvider?.RegisterType<IMvxResourceLoader, MvxStoreResourceLoader>();
+            provider.RegisterType<IMvxResourceLoader, MvxStoreResourceLoader>();
         }
     }
 }

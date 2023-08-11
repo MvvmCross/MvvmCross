@@ -4,6 +4,7 @@
 
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Plugin.Json
 {
@@ -13,14 +14,14 @@ namespace MvvmCross.Plugin.Json
     {
         private MvxJsonConfiguration _configuration;
 
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
-            Mvx.IoCProvider?.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
+            provider.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
             var configuration = _configuration ?? MvxJsonConfiguration.Default;
 
             if (configuration.RegisterAsTextSerializer)
             {
-                Mvx.IoCProvider?.RegisterType<IMvxTextSerializer, MvxJsonConverter>();
+                provider.RegisterType<IMvxTextSerializer, MvxJsonConverter>();
             }
         }
 

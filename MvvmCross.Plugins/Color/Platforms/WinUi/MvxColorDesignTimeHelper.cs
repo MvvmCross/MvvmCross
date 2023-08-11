@@ -19,7 +19,7 @@ namespace MvvmCross.Plugin.Color.Platforms.WinUi
                 return;
 
             var forceLoaded = new Plugin();
-            forceLoaded.Load();
+            forceLoaded.Load(Mvx.IoCProvider);
         }
     }
 }

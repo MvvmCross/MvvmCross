@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Base;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platforms.Android
 {
@@ -10,9 +11,9 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Android
     [Preserve(AllMembers = true)]
     public class Plugin : IMvxPlugin
     {
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
-            Mvx.IoCProvider?.RegisterType<IMvxResourceLoader, MvxAndroidResourceLoader>();
+            provider.RegisterType<IMvxResourceLoader, MvxAndroidResourceLoader>();
         }
     }
 }

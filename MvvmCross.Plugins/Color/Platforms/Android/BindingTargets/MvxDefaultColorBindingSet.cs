@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Plugin.Color.Platforms.Android.Binding;
 
@@ -14,9 +15,9 @@ namespace MvvmCross.Plugin.Color.Platforms.Android.BindingTargets
     [Preserve(AllMembers = true)]
     public class MvxDefaultColorBindingSet
     {
-        public void RegisterBindings()
+        public void RegisterBindings(IMvxIoCProvider provider)
         {
-            if (Mvx.IoCProvider?.TryResolve(out IMvxTargetBindingFactoryRegistry registry) != true)
+            if (!provider.TryResolve(out IMvxTargetBindingFactoryRegistry registry) || registry == null)
             {
                 MvxPluginLog.Instance.Log(LogLevel.Warning,
                     "No binding registry available - so color bindings will not be used");

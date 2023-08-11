@@ -72,10 +72,6 @@ namespace MvvmCross.IoC
 
         object? IoCConstruct(Type type, params object?[] arguments);
 
-        void CallbackWhenRegistered<T>(Action action);
-
-        void CallbackWhenRegistered(Type type, Action action);
-
         IMvxIoCProvider CreateChildContainer();
     }
 }

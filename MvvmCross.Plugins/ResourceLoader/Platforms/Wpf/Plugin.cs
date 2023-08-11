@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Base;
+using MvvmCross.IoC;
 using MvvmCross.Plugin;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platforms.Wpf
@@ -10,9 +11,9 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Wpf
     [MvxPlugin]
     public class Plugin : IMvxPlugin
     {
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
-            Mvx.IoCProvider?.RegisterType<IMvxResourceLoader, MvxWpfResourceLoader>();
+            provider.RegisterType<IMvxResourceLoader, MvxWpfResourceLoader>();
         }
     }
 }

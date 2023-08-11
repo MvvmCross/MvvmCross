@@ -11,9 +11,10 @@ namespace MvvmCross.Plugin.FieldBinding
     [Preserve(AllMembers = true)]
     public class Plugin : IMvxPlugin
     {
-        public void Load()
+        public void Load(IMvxIoCProvider provider)
         {
-            Mvx.IoCProvider?.CallbackWhenRegistered<IMvxSourceBindingFactoryExtensionHost>(OnHostRegistered);
+            if (provider.TryResolve(out IMvxSourceBindingFactoryExtensionHost host))
+                OnHostRegistered(host);
         }
 
         private void OnHostRegistered(IMvxSourceBindingFactoryExtensionHost host)

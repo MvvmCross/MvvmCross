@@ -177,26 +177,13 @@ public abstract class MvxAndroidSetup
         ValidateArguments(iocProvider);
 
         var bindingBuilder = CreateBindingBuilder();
-        RegisterBindingBuilderCallbacks(iocProvider);
         bindingBuilder.DoRegistration(iocProvider);
-    }
-
-    protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
-    {
-        ValidateArguments(iocProvider);
-
-        iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-        iocProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(FillValueCombiners);
-        iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-        iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
-        iocProvider.CallbackWhenRegistered<IMvxTypeCache<View>>(FillViewTypes);
-        iocProvider.CallbackWhenRegistered<IMvxAxmlNameViewTypeResolver>(FillAxmlViewTypeResolver);
-        iocProvider.CallbackWhenRegistered<IMvxNamespaceListViewTypeResolver>(FillNamespaceListViewTypeResolver);
     }
 
     protected virtual MvxBindingBuilder CreateBindingBuilder()
     {
-        return new MvxAndroidBindingBuilder();
+        return new MvxAndroidBindingBuilder(FillValueConverters, FillValueCombiners, FillTargetFactories,
+            FillBindingNames, FillViewTypes, FillAxmlViewTypeResolver, FillNamespaceListViewTypeResolver);
     }
 
     protected virtual void FillViewTypes(IMvxTypeCache<View> cache)
