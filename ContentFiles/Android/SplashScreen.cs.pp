@@ -10,7 +10,7 @@ namespace $rootnamespace$
         , MainLauncher = true
         , NoHistory = true
         , ScreenOrientation = ScreenOrientation.Portrait)]
-    public class SplashScreen : MvxSplashScreenActivity<MvxAndroidSetup<Core.App>, Core.App>
+    public class SplashScreen : MvxStartActivity
     {
         public SplashScreen()
              : base(Resource.Layout.SplashScreen)
