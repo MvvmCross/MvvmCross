@@ -11,11 +11,11 @@ See the documentation at https://www.mvvmcross.com/ to learn how to make full us
 
 -- Assumptions --
 
-1. Your solution already has a .NET Standard 2.x project where shared code will be located (often referred to as the Core project).
-2. Your solution already has a platform specific project for every platform you wish to support. 
+1. Your solution already has a .NET 6 or greater project where shared code will be located (often referred to as the Core project).
+2. Your solution already has a platform-specific project for every platform you wish to support. 
    Platforms include Xamarin.iOS, Xamarin.Android, Xamarin.Mac, Xamarin.tvOS, Universal Windows Platform (UWP) and Windows Presentation Foundation (WPF).
 3. You have added this NuGet package (MvvmCross) to all projects in your solution.
-4. Each of the platform specific projects have a reference to the Core project.
+4. Each of the platform-specific projects have a reference to the Core project.
 
 -- Changes to make to your project (Traditional Xamarin Solution - No Xamarin.Forms) --
 
@@ -32,12 +32,12 @@ However, any $rootnamespace$ instances will need to be changed to your project's
 
 - Core project -
 1. Add an App class to the root folder (See Core/App.cs in the Starter sample files).
-2. Add a ViewModels folder to the root of the project and add at least one ViewModel class to this folder (See Core/Viewmodels/MainViewModel.cs in the Starter sample files).
+2. Add a ViewModels folder to the root of the project and add at least one ViewModel class to this folder (See Core/ViewModels/MainViewModel.cs in the Starter sample files).
 
 
 - Android projects (ignore if not building for Android) -
 1. Change the MainActivity.cs to inherit from MvxActivity<MainViewModel> (See AndroidApp/MainActivity.cs in the Starter sample files).
-2. Add a MainApplication class (See AndroidApp/MainApplication.cs in the Starter sample files).
+2. Add a MainApplication class to the root of the project class (See AndroidApp/MainApplication.cs in the Starter sample files).
 3. Add a Views folder to the root of the project in which to add subsequent Views that correspond to the ViewModels in the Core project.
 
 Note: If you wish to use the AppCompat versions of Android classes, you can follow the above instructions with the following modifications
