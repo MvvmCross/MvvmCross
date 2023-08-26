@@ -36,9 +36,9 @@ However, any $rootnamespace$ instances will need to be changed to your project's
 
 
 - Android projects (ignore if not building for Android) -
-1. Change the MainActivity.cs to inherit from MvxActivity<MainViewModel> (See AndroidApp/MainActivity.cs in the Starter sample files).
-2. Add a MainApplication class to the root of the project class (See AndroidApp/MainApplication.cs in the Starter sample files).
-3. Add a Views folder to the root of the project in which to add subsequent Views that correspond to the ViewModels in the Core project.
+1. Change the MainActivity.cs to inherit from MvxActivity<MainViewModel> (See AndroidApp/Views/MainActivity.cs in the Starter sample files).
+2. Add a Views folder and move MainActivity.cs to this folder.  All subsequent views will be located in this folder.
+3. Add a MainApplication class to the root of the project class (See AndroidApp/MainApplication.cs in the Starter sample files).
 
 Note: If you wish to use the AppCompat versions of Android classes, you can follow the above instructions with the following modifications
 4. Add the MvvmCross DroidX Material NuGet package (MvvmCross.DroidX.Material) to your Android platform-specific project.
@@ -49,8 +49,8 @@ Note: If you wish to use the AppCompat versions of Android classes, you can foll
 - iOS projects (ignore if not building for iOS) -
 1. Inside AppDelegate.cs, change the AppDelegate class to inherit from MvxApplicationDelegate<Setup, App> instead of ApplicationDelegate (See iOSApp/AppDelegate.cs in the Starter sample files).
 2. Still inside AppDelegate.cs, delete all the pre-populated methods to leave a blank AppDelegate class.
-3. Add a Views folder to the root of the project and add at least one View class to this folder to correspond to the ViewModel class in the Core project (See iOS/HomeView.cs.pp in sample files).
-4. Add a new iOS Interface Builder layout (XIB) or StoryBoard file to the Views folder to correspond to the View created in the previous step. (See iOSApp/LaunchScreen.storyboard in sample files).
+3. Add a Views folder to the root of the project and add at least one View class to this folder to correspond to the ViewModel class in the Core project (See iOSApp/Views/MainViewController.cs in the Starter sample files).
+4. Add a new iOS Interface Builder layout (XIB) or StoryBoard file to the root folder to correspond to the View created in the previous step. (See iOSApp/LaunchScreen.storyboard in the Starter sample files).
 
 
 - macOS projects (ignore if not building for macOS) -
