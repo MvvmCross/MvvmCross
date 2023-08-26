@@ -55,9 +55,9 @@ Note: If you wish to use the AppCompat versions of Android classes, you can foll
 
 - macOS projects (ignore if not building for macOS) -
 1. Inside AppDelegate.cs, change the AppDelegate class to inherit from MvxApplicationDelegate<Setup, App> instead of ApplicationDelegate (See macOS/AppDelegate.cs.pp in sample files).
-3. Still inside AppDelegate, delete all the other pre-populated methods.
-4. Add a Views folder and add at least one View file to this folder to correspond to the ViewModel in the Core project (See macOS/HomeView.cs.pp in sample files).
-5. Add a new iOS Interface Builder layout (XIB) or StoryBoard file to the Views folder to correspond to the View created in the previous step. (See macOS/Home.storyboard.pp in sample files).
+2. Still inside AppDelegate, delete all the other pre-populated methods.
+3. Add a Views folder and add at least one View file to this folder to correspond to the ViewModel in the Core project (See macOS/HomeView.cs.pp in sample files).
+4. Add a new iOS Interface Builder layout (XIB) or StoryBoard file to the Views folder to correspond to the View created in the previous step. (See macOS/Home.storyboard.pp in sample files).
 
 
 - tvOS projects (ignore if not building for tvOS) -
