@@ -11,7 +11,7 @@ See the documentation at https://www.mvvmcross.com/ to learn how to make full us
 
 -- Assumptions --
 
-1. Your solution already has a .NET 6 or greater project where shared code will be located (often referred to as the Core project).
+1. Your solution already has a .NET 7 or greater project where shared code will be located (often referred to as the Core project).
 2. Your solution already has a platform-specific project for every platform you wish to support. 
    Platforms include Xamarin.iOS, Xamarin.Android, Xamarin.Mac, Xamarin.tvOS, Universal Windows Platform (UWP) and Windows Presentation Foundation (WPF).
 3. You have added this NuGet package (MvvmCross) to all projects in your solution.
