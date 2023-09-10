@@ -26,9 +26,6 @@ public class MvxHostBuilder : IMvxHostBuilder
 
         var host = new MvxHost(serviceCollection, loggerFactory);
 
-#if NET7_0_OR_GREATER
-#endif
-
         host.Run();
 
         return host;
