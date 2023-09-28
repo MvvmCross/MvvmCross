@@ -6,7 +6,7 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.4.230822000" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.4.230913002" />
     <PackageVersion Include="Moq" Version="4.18.4" />
     <PackageVersion Include="Roslynator.Analyzers" Version="4.5.0" />
     <PackageVersion Include="Serilog" Version="3.0.1" />
