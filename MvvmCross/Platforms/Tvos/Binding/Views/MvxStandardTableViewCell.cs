@@ -2,29 +2,26 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
 using System.Windows.Input;
-using Foundation;
 using MvvmCross.Binding.Bindings;
-using UIKit;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
     public class MvxStandardTableViewCell
         : MvxTableViewCell
     {
-        public MvxStandardTableViewCell(IntPtr handle)
+        public MvxStandardTableViewCell(NativeHandle handle)
             : this("TitleText" /* default binding is ToString() on the passed in item */, handle)
         {
         }
 
-        public MvxStandardTableViewCell(string bindingText, IntPtr handle)
+        public MvxStandardTableViewCell(string bindingText, NativeHandle handle)
             : base(bindingText, handle)
         {
         }
 
-        public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+        public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, NativeHandle handle)
             : base(bindingDescriptions, handle)
         {
         }

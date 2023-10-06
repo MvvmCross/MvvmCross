@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using AppKit;
-using Foundation;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Mac.Views
 {
@@ -12,7 +10,7 @@ namespace MvvmCross.Platforms.Mac.Views
         : NSWindowController
     {
         // Called when created from unmanaged code
-        public MvxWindowController(IntPtr handle) : base(handle)
+        public MvxWindowController(NativeHandle handle) : base(handle)
         {
         }
 

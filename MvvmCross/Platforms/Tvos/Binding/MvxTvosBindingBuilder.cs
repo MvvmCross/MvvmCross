@@ -2,17 +2,15 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
 using MvvmCross.Platforms.Tvos.Binding.Target;
 using MvvmCross.Platforms.Tvos.Binding.ValueConverters;
 using MvvmCross.Platforms.Tvos.Binding.Views;
-using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Binding
 {
@@ -21,21 +19,28 @@ namespace MvvmCross.Platforms.Tvos.Binding
     {
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
         private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
-        private readonly Action<IMvxAutoValueConverters> _fillAutoValueConvertersAction;
         private readonly Action<IMvxBindingNameRegistry> _fillBindingNamesAction;
+        private readonly Action<IMvxValueCombinerRegistry> _fillValueCombinersAction;
         private readonly MvxUnifiedTypesValueConverter _unifiedValueTypesConverter;
 
         public MvxTvosBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction = null,
                                     Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
-                                    Action<IMvxAutoValueConverters> fillAutoValueConvertersAction = null,
-                                    Action<IMvxBindingNameRegistry> fillBindingNamesAction = null)
+                                    Action<IMvxBindingNameRegistry> fillBindingNamesAction = null,
+                                    Action<IMvxValueCombinerRegistry> fillValueCombinersAction = null)
         {
             _fillRegistryAction = fillRegistryAction;
             _fillValueConvertersAction = fillValueConvertersAction;
-            _fillAutoValueConvertersAction = fillAutoValueConvertersAction;
             _fillBindingNamesAction = fillBindingNamesAction;
+            _fillValueCombinersAction = fillValueCombinersAction;
 
             _unifiedValueTypesConverter = new MvxUnifiedTypesValueConverter();
+        }
+
+        protected override IMvxValueCombinerRegistry CreateValueCombinerRegistry()
+        {
+            var registry = base.CreateValueCombinerRegistry();
+            _fillValueCombinersAction?.Invoke(registry);
+            return registry;
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -154,8 +159,6 @@ namespace MvvmCross.Platforms.Tvos.Binding
             //register converter for xamarin unified types
             foreach (var kvp in MvxUnifiedTypesValueConverter.UnifiedTypeConversions)
                 autoValueConverters.Register(kvp.Key, kvp.Value, _unifiedValueTypesConverter);
-
-            _fillAutoValueConvertersAction?.Invoke(autoValueConverters);
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)

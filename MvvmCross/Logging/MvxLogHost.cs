@@ -11,11 +11,11 @@ public static class MvxLogHost
 
     public static ILogger<T>? GetLog<T>() =>
         Mvx.IoCProvider?.TryResolve<ILoggerFactory>(out var loggerFactory) == true
-            ? loggerFactory.CreateLogger<T>()
+            ? loggerFactory?.CreateLogger<T>()
             : null;
 
     public static ILogger? GetLog(string categoryName) =>
         Mvx.IoCProvider?.TryResolve<ILoggerFactory>(out var loggerFactory) == true
-            ? loggerFactory.CreateLogger(categoryName)
+            ? loggerFactory?.CreateLogger(categoryName)
             : null;
 }

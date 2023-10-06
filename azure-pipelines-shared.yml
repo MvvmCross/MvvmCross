@@ -1,9 +1,10 @@
 steps:
 - task: UseDotNet@2
-  displayName: 'Install .NET 7.0.102'
+  displayName: 'Install .NET 8.0'
   inputs:
     packageType: sdk
-    version: 7.0.102
+    version: 8.0.x
+    includePreviewVersions: true
 
 - pwsh: |
     dotnet workload install android ios tvos macos maccatalyst maui-ios maui-android

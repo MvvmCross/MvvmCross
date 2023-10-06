@@ -1,17 +1,17 @@
 <Project>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('net6.0-ios'))">
+  <PropertyGroup Condition=" '$(_MvxTargetPlatformIsiOS)' == 'True' ">
     <DefineConstants>$(DefineConstants);MONO;UIKIT;COCOA;APPLE;IOS</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('net6.0-macos'))">
+  <PropertyGroup Condition=" '$(_MvxTargetPlatformIsmacOS)' == 'True' ">
     <DefineConstants>$(DefineConstants);MONO;COCOA;APPLE;MAC</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('net6.0-maccatalyst'))">
+  <PropertyGroup Condition=" '$(_MvxTargetPlatformIsMacCatalyst)' == 'True' ">
     <DefineConstants>$(DefineConstants);MONO;COCOA;APPLE;IOS;MACCATALYST</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('net6.0-tvos'))">
+  <PropertyGroup Condition=" '$(_MvxTargetPlatformIstvOS)' == 'True' ">
     <DefineConstants>$(DefineConstants);MONO;COCOA;APPLE;TVOS</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('net6.0-android'))">
+  <PropertyGroup Condition=" '$(_MvxTargetPlatformIsAndroid)' == 'True' ">
     <DefineConstants>$(DefineConstants);MONO;ANDROID</DefineConstants>
   </PropertyGroup>
 

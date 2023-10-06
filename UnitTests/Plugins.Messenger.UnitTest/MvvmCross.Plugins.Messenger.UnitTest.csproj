@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <AssemblyName>MvvmCross.Plugins.Messenger.UnitTest</AssemblyName>
     <RootNamespace>MvvmCross.Plugins.Messenger.UnitTest</RootNamespace>
+    <RollForward>Major</RollForward>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />

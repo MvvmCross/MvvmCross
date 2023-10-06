@@ -16,7 +16,7 @@ namespace Playground.iOS.Views
     {
         private UIDatePicker _datePicker;
 
-        public CustomBindingView(IntPtr handle) : base(handle)
+        public CustomBindingView(NativeHandle handle) : base(handle)
         {
         }
 

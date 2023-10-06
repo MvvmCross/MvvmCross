@@ -28,7 +28,7 @@ steps:
 - template: azure-pipelines-shared.yml
 
 - pwsh: |
-    $jdkPath = $env:JAVA_HOME_11_X64
+    $jdkPath = $env:JAVA_HOME_17_X64
     Write-Host "##vso[task.setvariable variable=JAVA_HOME]$jdkPath"
   displayName: "Use JDK11 in JAVA_HOME env var"
 

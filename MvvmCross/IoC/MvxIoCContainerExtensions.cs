@@ -90,17 +90,6 @@ namespace MvvmCross.IoC
             };
         }
 
-        public static void CallbackWhenRegistered<T>(this IMvxIoCProvider ioc, Action<T> action)
-            where T : class
-        {
-            Action simpleAction = () =>
-            {
-                var t = ioc.Resolve<T>();
-                action(t);
-            };
-            ioc.CallbackWhenRegistered<T>(simpleAction);
-        }
-
         public static TType ConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc)
             where TInterface : class
             where TType : class, TInterface

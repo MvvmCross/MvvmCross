@@ -312,7 +312,7 @@ namespace MvvmCross.Core
 
             iocProvider.LazyConstructAndRegisterSingleton<IMvxSettings, MvxSettings>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxStringToTypeParser, MvxStringToTypeParser>();
-            iocProvider.RegisterSingleton<IMvxPluginManager>(() => new MvxPluginManager(GetPluginConfiguration));
+            iocProvider.RegisterSingleton<IMvxPluginManager>(() => new MvxPluginManager(iocProvider, GetPluginConfiguration));
             iocProvider.RegisterSingleton(CreateApp(iocProvider));
             iocProvider.LazyConstructAndRegisterSingleton<IMvxViewModelLoader, MvxViewModelLoader>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxNavigationService, IMvxViewModelLoader, IMvxViewDispatcher, IMvxIoCProvider>(
@@ -421,7 +421,7 @@ namespace MvvmCross.Core
         {
             try
             {
-                return assembly.GetReferencedAssemblies().Any(a => a.Name == mvvmCrossAssemblyName);
+                return Array.Exists(assembly.GetReferencedAssemblies(), a => a.Name == mvvmCrossAssemblyName);
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception)

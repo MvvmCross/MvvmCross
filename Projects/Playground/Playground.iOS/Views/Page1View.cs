@@ -7,6 +7,7 @@ using MvvmCross.Platforms.Ios.Binding.Views;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using MvvmCross.Platforms.Ios.Views.Expandable;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 using UIKit;
 
@@ -19,7 +20,7 @@ namespace Playground.iOS.Views
         private UITableView _tableView;
         private TableSource _source;
 
-        public Page1View(IntPtr handle) : base(handle)
+        public Page1View(NativeHandle handle) : base(handle)
         {
         }
 
@@ -63,7 +64,7 @@ namespace Playground.iOS.Views
             private UIImageView _arrow;
             private UISwitch _switch;
 
-            public HeaderCell(IntPtr handle) : base(handle)
+            public HeaderCell(NativeHandle handle) : base(handle)
             {
                 Initialize();
             }
@@ -135,7 +136,7 @@ namespace Playground.iOS.Views
             public static NSString Identifier = new NSString(nameof(ItemCell));
             private UILabel _title;
 
-            public ItemCell(IntPtr handle) : base(handle)
+            public ItemCell(NativeHandle handle) : base(handle)
             {
                 Initialize();
             }

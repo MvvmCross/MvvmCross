@@ -23,7 +23,7 @@ namespace MvvmCross.Core
                 new[] { platformApplication.GetType().Assembly }.Union(assemblies ?? Array.Empty<Assembly>()).ToArray());
         }
 
-        public static TSetup CreateSetup<TSetup>(Assembly assembly, params object[] parameters) where TSetup : MvxSetup
+        public static TSetup? CreateSetup<TSetup>(Assembly assembly, params object[] parameters) where TSetup : MvxSetup
         {
             var setupType = FindSetupType<TSetup>(assembly);
             if (setupType == null)
@@ -33,7 +33,7 @@ namespace MvvmCross.Core
 
             try
             {
-                return (TSetup)Activator.CreateInstance(setupType, parameters);
+                return (TSetup?)Activator.CreateInstance(setupType, parameters);
             }
             catch (Exception exception)
             {
@@ -41,7 +41,7 @@ namespace MvvmCross.Core
             }
         }
 
-        public static TSetup CreateSetup<TSetup>() where TSetup : MvxSetup
+        public static TSetup? CreateSetup<TSetup>() where TSetup : MvxSetup
         {
             var setupType = FindSetupType<TSetup>();
             if (setupType == null)
@@ -51,7 +51,7 @@ namespace MvvmCross.Core
 
             try
             {
-                return (TSetup)Activator.CreateInstance(setupType);
+                return (TSetup?)Activator.CreateInstance(setupType);
             }
             catch (Exception exception)
             {

@@ -1,9 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using System.Collections.Generic;
+#nullable enable
 using Android.Views;
 using MvvmCross.IoC;
 
@@ -22,24 +20,23 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
         public void Add(string namespaceName)
         {
             namespaceName = namespaceName.ToLower();
-            if (!namespaceName.EndsWith("."))
-                namespaceName += ".";
+            if (!namespaceName.EndsWith('.'))
+                namespaceName += '.';
 
             Namespaces.Add(namespaceName);
         }
 
-        public override Type Resolve(string tagName)
+        public override Type? Resolve(string tagName)
         {
             // this resolver only handles simple namespaceless tagNames
-            if (tagName.Contains("."))
+            if (tagName.Contains('.'))
                 return null;
 
             var lowerTagName = tagName.ToLower();
             foreach (var ns in Namespaces)
             {
                 var candidateName = ns + lowerTagName;
-                Type type;
-                if (TypeCache.LowerCaseFullNameCache.TryGetValue(candidateName, out type))
+                if (TypeCache.LowerCaseFullNameCache.TryGetValue(candidateName, out var type))
                     return type;
             }
 

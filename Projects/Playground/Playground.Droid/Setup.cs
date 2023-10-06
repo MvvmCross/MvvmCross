@@ -7,6 +7,8 @@ using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.DroidX.RecyclerView;
 using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Plugin;
+using MvvmCross.Plugin.Color.Platforms.Android;
 using Playground.Core;
 using Playground.Droid.Bindings;
 using Playground.Droid.Controls;
@@ -32,6 +34,14 @@ namespace Playground.Droid
             base.FillTargetFactories(registry);
         }
 
+        public override void LoadPlugins(IMvxPluginManager pluginManager)
+        {
+            base.LoadPlugins(pluginManager);
+
+            pluginManager.EnsurePluginLoaded<Plugin>();
+            pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.Json.Plugin>();
+        }
+
         protected override ILoggerProvider CreateLogProvider()
         {
             return new SerilogLoggerProvider();
@@ -41,7 +51,8 @@ namespace Playground.Droid
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.AndroidLog()
+                .WriteTo.Async(a => a.AndroidLog())
+                .WriteTo.Async(a => a.Trace())
                 .CreateLogger();
 
             return new SerilogLoggerFactory();

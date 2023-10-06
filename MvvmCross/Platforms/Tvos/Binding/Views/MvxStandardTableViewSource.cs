@@ -2,31 +2,27 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using Foundation;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Logging;
-using UIKit;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
     public class MvxStandardTableViewSource : MvxTableViewSource
     {
-        private static readonly NSString DefaultCellIdentifier = new NSString("SimpleBindableTableViewCell");
+        private static readonly NSString DefaultCellIdentifier = new("SimpleBindableTableViewCell");
 
-        private static readonly MvxBindingDescription[] DefaultBindingDescription = new[]
-            {
-                new MvxBindingDescription
-                    {
+        private static readonly MvxBindingDescription[] DefaultBindingDescription = {
+                new()
+                {
                         TargetName = "TitleText",
-                        Source = new MvxPathSourceStepDescription()
-                            {
-                                SourcePropertyPath = string.Empty
-                            }
+                        Source = new MvxPathSourceStepDescription
+                        {
+                            SourcePropertyPath = string.Empty
+                        }
                     },
             };
 
@@ -52,11 +48,11 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         {
         }
 
-        public MvxStandardTableViewSource(IntPtr handle)
+        public MvxStandardTableViewSource(NativeHandle handle)
             : base(handle)
         {
             MvxLogHost.GetLog<MvxBaseTableViewSource>()?.Log(LogLevel.Warning,
-                "MvxStandardTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+                "MvxStandardTableViewSource NativeHandle constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         public MvxStandardTableViewSource(

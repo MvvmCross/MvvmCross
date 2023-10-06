@@ -7,7 +7,9 @@ using AppKit;
 using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Mac.Binding.Target;
 
 namespace MvvmCross.Platforms.Mac.Binding
@@ -18,14 +20,24 @@ namespace MvvmCross.Platforms.Mac.Binding
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
         private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
         private readonly Action<IMvxBindingNameRegistry> _fillBindingNamesAction;
+        private readonly Action<IMvxValueCombinerRegistry> _fillValueCombinersAction;
 
         public MvxMacBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction = null,
                                     Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
-                                    Action<IMvxBindingNameRegistry> fillBindingNamesAction = null)
+                                    Action<IMvxBindingNameRegistry> fillBindingNamesAction = null,
+                                    Action<IMvxValueCombinerRegistry> fillValueCombinersAction = null)
         {
             _fillRegistryAction = fillRegistryAction;
             _fillValueConvertersAction = fillValueConvertersAction;
             _fillBindingNamesAction = fillBindingNamesAction;
+            _fillValueCombinersAction = fillValueCombinersAction;
+        }
+
+        protected override IMvxValueCombinerRegistry CreateValueCombinerRegistry()
+        {
+            var registry = base.CreateValueCombinerRegistry();
+            _fillValueCombinersAction?.Invoke(registry);
+            return registry;
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

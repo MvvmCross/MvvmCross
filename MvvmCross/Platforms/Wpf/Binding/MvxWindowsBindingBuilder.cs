@@ -6,6 +6,7 @@ using System;
 using System.Windows;
 using MvvmCross.Base;
 using MvvmCross.Binding;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
@@ -26,10 +27,22 @@ namespace MvvmCross.Platforms.Wpf.Binding
         }
 
         private readonly BindingType _bindingType;
+        private readonly Action<IMvxTargetBindingFactoryRegistry> _fillTargetFactories;
+        private readonly Action<IMvxBindingNameRegistry> _fillBindingNames;
+        private readonly Action<IMvxValueConverterRegistry> _fillValueConverters;
+        private readonly Action<IMvxValueCombinerRegistry> _fillValueCombiners;
 
         public MvxWindowsBindingBuilder(
+            Action<IMvxTargetBindingFactoryRegistry> fillTargetFactories = null,
+            Action<IMvxBindingNameRegistry> fillBindingNames = null,
+            Action<IMvxValueConverterRegistry> fillValueConverters = null,
+            Action<IMvxValueCombinerRegistry> fillValueCombiners = null,
             BindingType bindingType = BindingType.MvvmCross)
         {
+            _fillTargetFactories = fillTargetFactories;
+            _fillBindingNames = fillBindingNames;
+            _fillValueConverters = fillValueConverters;
+            _fillValueCombiners = fillValueCombiners;
             _bindingType = bindingType;
         }
 
@@ -103,6 +116,8 @@ namespace MvvmCross.Platforms.Wpf.Binding
                     registry.Fill(assembly);
                 }
             }
+
+            _fillValueConverters?.Invoke(registry);
         }
 
         protected override void FillValueCombiners(IMvxValueCombinerRegistry registry)
@@ -116,6 +131,8 @@ namespace MvvmCross.Platforms.Wpf.Binding
                     registry.Fill(assembly);
                 }
             }
+
+            _fillValueCombiners?.Invoke(registry);
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -133,6 +150,14 @@ namespace MvvmCross.Platforms.Wpf.Binding
                 view => new MvxCollapsedTargetBinding(view));
 
             base.FillTargetFactories(registry);
+
+            _fillTargetFactories?.Invoke(registry);
+        }
+
+        protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
+        {
+            base.FillDefaultBindingNames(registry);
+            _fillBindingNames?.Invoke(registry);
         }
     }
 }

@@ -3,19 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Converters;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Plugin.Color
 {
     public abstract class BasePlugin : IMvxPlugin
     {
-        public virtual void Load()
+        public virtual void Load(IMvxIoCProvider provider)
         {
-            Mvx.IoCProvider?.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
-        }
-
-        private void RegisterValueConverters()
-        {
-            if (Mvx.IoCProvider?.TryResolve<IMvxValueConverterRegistry>(out var registry) == true)
+            if (provider.TryResolve<IMvxValueConverterRegistry>(out var registry) && registry != null)
             {
                 registry.AddOrOverwrite("ARGB", new MvxARGBValueConverter());
                 registry.AddOrOverwrite("NativeColor", new MvxNativeColorValueConverter());

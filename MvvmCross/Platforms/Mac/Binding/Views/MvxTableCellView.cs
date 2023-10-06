@@ -2,12 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using AppKit;
-using CoreGraphics;
-using Foundation;
 using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Mac.Binding.Views
 {
@@ -15,7 +12,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
     public class MvxTableCellView : NSTableCellView, IMvxBindingContextOwner, IMvxDataConsumer
     {
         // Called when created from unmanaged code
-        public MvxTableCellView(IntPtr handle) : base(handle)
+        public MvxTableCellView(NativeHandle handle) : base(handle)
         {
             this.Initialize(string.Empty);
         }

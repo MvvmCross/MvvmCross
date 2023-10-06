@@ -4,8 +4,6 @@
 
 using System.Reflection;
 using MvvmCross.Base;
-using MvvmCross.Binding.Combiners;
-using MvvmCross.Converters;
 using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.WinUi.Binding
@@ -45,13 +43,6 @@ namespace MvvmCross.Platforms.WinUi.Binding
             {
                 MvxWindowsAssemblyCache.EnsureInitialized();
                 MvxWindowsAssemblyCache.Instance?.Assemblies.Add(assembly);
-            }
-            else
-            {
-                Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(
-                    registry => registry.AddOrOverwriteFrom(assembly));
-                Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(
-                    registry => registry.AddOrOverwriteFrom(assembly));
             }
         }
     }

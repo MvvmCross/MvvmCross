@@ -62,10 +62,8 @@ public class MvxDialogFragmentPresentationAttribute : MvxFragmentPresentationAtt
         Cancelable = cancelable;
     }
 
-    public static bool DefaultCancelable { get; } = true;
-
     /// <summary>
-    ///     Indicates if the dialog can be canceled
+    /// Indicates if the dialog can be canceled
     /// </summary>
-    public bool Cancelable { get; set; }
+    public bool Cancelable { get; set; } = true;
 }

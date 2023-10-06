@@ -1,16 +1,15 @@
-using System;
 using MvvmCross;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
-using UIKit;
 
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
     public partial class SecondChildView : MvxViewController<SecondChildViewModel>
     {
-        public SecondChildView(IntPtr handle) : base(handle)
+        public SecondChildView(NativeHandle handle) : base(handle)
         {
         }
 

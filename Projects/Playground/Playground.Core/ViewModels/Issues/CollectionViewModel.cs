@@ -7,12 +7,13 @@ using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class CollectionViewModel : MvxViewModel
+    public record CollectionViewParameter(int InitialCount = 40);
+
+    public class CollectionViewModel : MvxViewModel<CollectionViewParameter>
     {
         private readonly Random _random;
 
-        public MvxObservableCollection<AnimalViewModel> Animals { get; }
-            = new MvxObservableCollection<AnimalViewModel>();
+        public MvxObservableCollection<AnimalViewModel> Animals { get; } = new();
 
         public MvxCommand<AnimalViewModel> DeleteAnimalCommand { get; }
         public MvxCommand<int> AddAnimalCommand { get; }
@@ -25,12 +26,14 @@ namespace Playground.Core.ViewModels
             DeleteAnimalCommand = new MvxCommand<AnimalViewModel>(DoDeleteAnimalCommand);
             AddAnimalCommand = new MvxCommand<int>(DoAddAnimalCommand);
             MarkFavoriteCommand = new MvxCommand<AnimalViewModel>(DoMarkFavoriteCommand);
-
-            DoAddAnimalCommand(40);
         }
 
-        private string[] _catImageUrls = new[]
+        public override void Prepare(CollectionViewParameter parameter)
         {
+            DoAddAnimalCommand(parameter.InitialCount);
+        }
+
+        private readonly string[] _catImageUrls = {
             "https://loremflickr.com/320/240/cat",
             "https://www.hillspet.com/content/dam/cp-sites/hills/hills-pet/en_us/exported/cat-care/new-pet-parent/images/mother-cat-and-kitten-sleeping.jpg",
             "https://www.hillspet.com/content/dam/cp-sites/hills/hills-pet/en_us/exported/cat-care/new-pet-parent/images/calico-kitten-hiding-under-chair.jpg",
@@ -41,8 +44,7 @@ namespace Playground.Core.ViewModels
             "https://www.petmd.com/sites/default/files/petmd-kitten-facts.jpg"
         };
 
-        private string[] _dogImageUrls = new[]
-        {
+        private readonly string[] _dogImageUrls = {
             "https://loremflickr.com/320/240/dog",
             "https://i.imgur.com/KSftE11.jpg",
             "https://www.thekennelclub.org.uk/media/220388/puppy_environment_alison_spiers.jpg",
@@ -52,8 +54,7 @@ namespace Playground.Core.ViewModels
             "https://www.fomobones.com/blog/wp-content/uploads/2018/12/puppy-grows-out.jpg"
         };
 
-        private string[] _monkeyImageUrls = new[]
-        {
+        private readonly string[] _monkeyImageUrls = {
             "https://loremflickr.com/320/240/monkey",
             "https://allthatsinteresting.com/wordpress/wp-content/uploads/2019/04/baby-primate.jpg",
             "https://images.law.com/contrib/content/uploads/sites/403/2018/04/monkey-selfie-Article-201804131946.jpg",
@@ -64,15 +65,13 @@ namespace Playground.Core.ViewModels
             "https://heritagecorridoraletrail.com/wp-content/uploads/2018/01/babymonkey.jpg"
         };
 
-        private string[] _names = new[]
-        {
+        private readonly string[] _names = {
             "Martijn", "Nicolas", "Nick", "Tomasz", "Stuart", "Marc", "Jeremy", "Jonathan", "Maurits", "Kerry",
             "Will", "Garfield", "Chris", "Przemyslaw", "Guillaume", "Trevor", "Mihal", "Sylvain", "Andres",
             "Erik", "Daniel", "Aaron", "Emmanuel", "Iain", "Martin"
         };
 
-        private Color[] _colors = new[]
-        {
+        private readonly Color[] _colors = {
             Color.Yellow, Color.Green, Color.Blue, Color.Red, Color.Brown,
             Color.Gold, Color.Orange, Color.Purple, Color.Teal, Color.Pink,
             Color.Azure, Color.Crimson, Color.Cyan, Color.Gray, Color.Silver,
