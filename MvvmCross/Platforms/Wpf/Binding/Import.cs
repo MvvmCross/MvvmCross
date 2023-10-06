@@ -4,9 +4,9 @@
 
 using System.Reflection;
 using MvvmCross.Base;
+using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
 using MvvmCross.IoC;
-using MvvmCross.Binding.Combiners;
 
 namespace MvvmCross.Platforms.Wpf.Binding
 {
@@ -41,19 +41,6 @@ namespace MvvmCross.Platforms.Wpf.Binding
             {
                 MvxWindowsAssemblyCache.EnsureInitialized();
                 MvxWindowsAssemblyCache.Instance?.Assemblies.Add(assembly);
-            }
-            else
-            {
-                Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(
-                    registry =>
-                        {
-                            registry.AddOrOverwriteFrom(assembly);
-                        });
-                Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(
-                    registry =>
-                        {
-                            registry.AddOrOverwriteFrom(assembly);
-                        });
             }
         }
     }

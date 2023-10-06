@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using AppKit;
-using Foundation;
 using MvvmCross.Base;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Mac.Views.Base
 {
@@ -24,7 +22,7 @@ namespace MvvmCross.Platforms.Mac.Views.Base
             this.Initialize();
         }
 
-        protected MvxEventSourceTabViewController(IntPtr handle)
+        protected MvxEventSourceTabViewController(NativeHandle handle)
             : base(handle)
         {
             this.Initialize();
@@ -38,6 +36,7 @@ namespace MvvmCross.Platforms.Mac.Views.Base
 
         private void Initialize()
         {
+            // Method intentionally left empty.
         }
 
         public override void LoadView()
@@ -97,7 +96,7 @@ namespace MvvmCross.Platforms.Mac.Views.Base
         {
             if (disposing)
             {
-                this.DisposeCalled.Raise(this);
+                DisposeCalled?.Raise(this);
             }
             base.Dispose(disposing);
         }

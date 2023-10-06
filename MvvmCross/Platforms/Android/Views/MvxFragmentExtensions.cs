@@ -1,8 +1,9 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -23,11 +24,11 @@ namespace MvvmCross.Platforms.Android.Views
             if (viewModelType == null)
             {
                 if (!type.HasBasePresentationAttribute())
-                    throw new InvalidOperationException($"Your fragment is not generic and it does not have {nameof(MvxFragmentPresentationAttribute)} attribute set!");
+                    throw new InvalidOperationException($"Your fragment of type {type.FullName} is not generic and it does not have {nameof(MvxFragmentPresentationAttribute)} attribute set!");
 
                 var cacheableFragmentAttribute = type.GetBasePresentationAttribute();
                 if (cacheableFragmentAttribute.ViewModelType == null)
-                    throw new InvalidOperationException($"Your fragment is not generic and it does not use {nameof(MvxFragmentPresentationAttribute)} with ViewModel Type constructor.");
+                    throw new InvalidOperationException($"Your fragment of type {type.FullName} is not generic and it does not use {nameof(MvxFragmentPresentationAttribute)} with ViewModel Type constructor.");
 
                 viewModelType = cacheableFragmentAttribute.ViewModelType;
             }
@@ -45,7 +46,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxLog.Instance.Trace("No ViewModel class specified for {0} in LoadViewModel",
+                MvxLogHost.Default?.Log(LogLevel.Trace, "No ViewModel class specified for {fragmentViewType} in LoadViewModel",
                     fragmentView.GetType().Name);
             }
 

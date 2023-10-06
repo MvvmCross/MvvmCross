@@ -23,8 +23,8 @@ namespace MvvmCross.Platforms.Wpf.Binding
 
             if (!Mvx.IoCProvider.CanResolve<IMvxBindingParser>())
             {
-                var builder = new MvxWindowsBindingBuilder(MvxWindowsBindingBuilder.BindingType.MvvmCross);
-                builder.DoRegistration();
+                var builder = new MvxWindowsBindingBuilder(bindingType: MvxWindowsBindingBuilder.BindingType.MvvmCross);
+                builder.DoRegistration(Mvx.IoCProvider);
             }
         }
     }

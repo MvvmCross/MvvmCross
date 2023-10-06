@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 
 namespace Playground.iOS.Views
@@ -9,7 +10,7 @@ namespace Playground.iOS.Views
     [MvxTabPresentation(WrapInNavigationController = true, TabIconName = "home", TabName = "Tab 1")]
     public partial class Tab1View : MvxViewController<Tab1ViewModel>
     {
-        public Tab1View(IntPtr handle) : base(handle)
+        public Tab1View(NativeHandle handle) : base(handle)
         {
         }
 

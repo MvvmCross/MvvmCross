@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -30,13 +30,13 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             : base(context, attrs)
         {
         }
-        
-        public MvxTimePicker(Context context, IAttributeSet attrs, int defStyleAttr) 
+
+        public MvxTimePicker(Context context, IAttributeSet attrs, int defStyleAttr)
             : base(context, attrs, defStyleAttr)
         {
         }
-        
-        public MvxTimePicker(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) 
+
+        public MvxTimePicker(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes)
             : base(context, attrs, defStyleAttr, defStyleRes)
         {
         }

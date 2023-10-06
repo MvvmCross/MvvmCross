@@ -1,12 +1,10 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System.Threading.Tasks;
+#nullable enable
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public interface IMvxViewModel
     {
         void ViewCreated();
@@ -37,23 +35,8 @@ namespace MvvmCross.ViewModels
     }
 
     public interface IMvxViewModel<in TParameter>
-        : IMvxViewModel where TParameter : notnull
+        : IMvxViewModel
     {
         void Prepare(TParameter parameter);
     }
-
-    public interface IMvxViewModelResult<TResult>
-        : IMvxViewModel
-        where TResult : notnull
-    {
-        TaskCompletionSource<object?>? CloseCompletionSource { get; set; }
-    }
-
-    public interface IMvxViewModel<in TParameter, TResult>
-        : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult>
-        where TParameter : notnull
-        where TResult : notnull
-    {
-    }
-#nullable restore
 }

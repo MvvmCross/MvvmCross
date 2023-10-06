@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -48,7 +48,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Lang
             AssertAreEquivalent(expectedDescription, resultKeyAndDescription.Value);
         }
 
-        private Dictionary<string, MvxSerializableBindingSpecification> _toTest = new Dictionary<string, MvxSerializableBindingSpecification>()
+        private readonly Dictionary<string, MvxSerializableBindingSpecification> _toTest = new Dictionary<string, MvxSerializableBindingSpecification>()
             {
                 {
                     "Text Fred",
@@ -188,7 +188,8 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Lang
                 },
             };
 
-        public MvxLangBindingTest(MvxTestFixture fixture, ITestOutputHelper testOutputHelper) : base(fixture, testOutputHelper)
+        public MvxLangBindingTest(MvxTestFixture fixture)
+            : base(fixture)
         {
         }
     }

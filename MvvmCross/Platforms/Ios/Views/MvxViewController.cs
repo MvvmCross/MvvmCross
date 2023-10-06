@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,6 +7,7 @@ using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Views.Base;
 using MvvmCross.ViewModels;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
@@ -29,7 +30,7 @@ namespace MvvmCross.Platforms.Ios.Views
             this.AdaptForBinding();
         }
 
-        protected internal MvxViewController(IntPtr handle) : base(handle)
+        protected internal MvxViewController(NativeHandle handle) : base(handle)
         {
             this.AdaptForBinding();
         }
@@ -62,28 +63,28 @@ namespace MvvmCross.Platforms.Ios.Views
         }
 
         public override void ViewWillAppear(bool animated)
-		{
-			base.ViewWillAppear(animated);
-			ViewModel?.ViewAppearing();
-		}
+        {
+            base.ViewWillAppear(animated);
+            ViewModel?.ViewAppearing();
+        }
 
-		public override void ViewDidAppear(bool animated)
-		{
-			base.ViewDidAppear(animated);
-			ViewModel?.ViewAppeared();
-		}
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+            ViewModel?.ViewAppeared();
+        }
 
-		public override void ViewWillDisappear(bool animated)
-		{
-			base.ViewWillDisappear(animated);
-			ViewModel?.ViewDisappearing();
-		}
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+            ViewModel?.ViewDisappearing();
+        }
 
-		public override void ViewDidDisappear(bool animated)
-		{
-			base.ViewDidDisappear(animated);
-			ViewModel?.ViewDisappeared();
-		}
+        public override void ViewDidDisappear(bool animated)
+        {
+            base.ViewDidDisappear(animated);
+            ViewModel?.ViewDisappeared();
+        }
 
         public override void DidMoveToParentViewController(UIViewController parent)
         {
@@ -92,13 +93,14 @@ namespace MvvmCross.Platforms.Ios.Views
                 ViewModel?.ViewDestroy();
         }
 
-        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender) {
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        {
             base.PrepareForSegue(segue, sender);
             this.ViewModelRequestForSegue(segue, sender);
         }
     }
 
-    public class MvxViewController<TViewModel> : MvxViewController, IMvxIosView<TViewModel> 
+    public class MvxViewController<TViewModel> : MvxViewController, IMvxIosView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public MvxViewController()
@@ -117,7 +119,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxViewController(IntPtr handle) : base(handle)
+        protected internal MvxViewController(NativeHandle handle) : base(handle)
         {
         }
 

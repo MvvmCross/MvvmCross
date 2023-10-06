@@ -21,13 +21,13 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             _state = state;
             if (button == null)
             {
-                MvxBindingLog.Error( "Error - UIButton is null in MvxUIButtonTitleTargetBinding");
+                MvxBindingLog.Error("Error - UIButton is null in MvxUIButtonTitleTargetBinding");
             }
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
         protected override void SetValueImpl(object target, object value)
         {

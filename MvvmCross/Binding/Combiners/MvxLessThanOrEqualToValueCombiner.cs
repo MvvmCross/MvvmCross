@@ -4,7 +4,7 @@
 
 namespace MvvmCross.Binding.Combiners
 {
-    public class MvxLessThanOrEqualToValueCombiner 
+    public class MvxLessThanOrEqualToValueCombiner
         : MvxObjectAsStringPairwiseValueCombiner
     {
         protected override bool CombineDoubleAndDouble(double input1, double input2, out object value)

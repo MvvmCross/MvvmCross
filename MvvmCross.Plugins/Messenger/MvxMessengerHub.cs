@@ -1,12 +1,8 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Plugin.Messenger.Subscriptions;
 using MvvmCross.Plugin.Messenger.ThreadRunners;
 
@@ -17,8 +13,10 @@ namespace MvvmCross.Plugin.Messenger
     // - https://github.com/jonathanpeppers/XPlatUtils
     // - inspiration consumed, ripped apart and loved under Ms-PL
     [Preserve(AllMembers = true)]
-	public class MvxMessengerHub : IMvxMessenger
+    public class MvxMessengerHub : IMvxMessenger
     {
+        private readonly Dictionary<Type, MvxMessage> _messageDictionary = new Dictionary<Type, MvxMessage>();
+
         private readonly object _locker = new object();
 
         private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions =
@@ -29,36 +27,39 @@ namespace MvvmCross.Plugin.Messenger
         public MvxSubscriptionToken Subscribe<TMessage>(
             Action<TMessage> deliveryAction,
             MvxReference reference = MvxReference.Weak,
-            string? tag = null)
+            string? tag = null,
+            bool isSticky = false)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxSimpleActionRunner(), reference, tag);
+            return SubscribeInternal(deliveryAction, new MvxSimpleActionRunner(), reference, tag, isSticky);
         }
 
         public MvxSubscriptionToken SubscribeOnMainThread<TMessage>(
             Action<TMessage> deliveryAction,
             MvxReference reference = MvxReference.Weak,
-            string? tag = null)
+            string? tag = null,
+            bool isSticky = false)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxMainThreadActionRunner(), reference, tag);
+            return SubscribeInternal(deliveryAction, new MvxMainThreadActionRunner(), reference, tag, isSticky);
         }
 
         public MvxSubscriptionToken SubscribeOnThreadPoolThread<TMessage>(
             Action<TMessage> deliveryAction,
             MvxReference reference = MvxReference.Weak,
-            string? tag = null)
+            string? tag = null,
+            bool isSticky = false)
             where TMessage : MvxMessage
         {
-            return SubscribeInternal(deliveryAction, new MvxThreadPoolActionRunner(), reference, tag);
+            return SubscribeInternal(deliveryAction, new MvxThreadPoolActionRunner(), reference, tag, isSticky);
         }
 
         private MvxSubscriptionToken SubscribeInternal<TMessage>(
             Action<TMessage> deliveryAction,
             IMvxActionRunner actionRunner,
             MvxReference reference,
-            string? tag)
-            where TMessage : MvxMessage
+            string? tag,
+            bool isSticky) where TMessage : MvxMessage
         {
             if (deliveryAction == null)
             {
@@ -89,10 +90,15 @@ namespace MvvmCross.Plugin.Messenger
                     messageSubscriptions = new Dictionary<Guid, BaseSubscription>();
                     _subscriptions[typeof(TMessage)] = messageSubscriptions;
                 }
-                MvxPluginLog.Instance?.Trace("Adding subscription {0} for {1}", subscription.Id, typeof(TMessage).Name);
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "Adding subscription {0} for {1}", subscription.Id, typeof(TMessage).Name);
                 messageSubscriptions[subscription.Id] = subscription;
 
                 PublishSubscriberChangeMessage<TMessage>(messageSubscriptions);
+            }
+
+            if (isSticky && _messageDictionary.ContainsKey(typeof(TMessage)))
+            {
+                deliveryAction.Invoke((TMessage)_messageDictionary[typeof(TMessage)]);
             }
 
             return new MvxSubscriptionToken(
@@ -114,7 +120,7 @@ namespace MvvmCross.Plugin.Messenger
                     typeof(TMessage), out Dictionary<Guid, BaseSubscription> messageSubscriptions) &&
                     messageSubscriptions.ContainsKey(subscriptionGuid))
                 {
-                    MvxPluginLog.Instance?.Trace("Removing subscription {0}", subscriptionGuid);
+                    MvxPluginLog.Instance?.Log(LogLevel.Trace, "Removing subscription {0}", subscriptionGuid);
                     messageSubscriptions.Remove(subscriptionGuid);
                     // Note - we could also remove messageSubscriptions if empty here
                     //      - but this isn't needed in our typical apps
@@ -205,24 +211,24 @@ namespace MvvmCross.Plugin.Messenger
             }
         }
 
-        public void Publish<TMessage>(TMessage message) where TMessage : MvxMessage
+        public void Publish<TMessage>(TMessage message, bool isSticky = false) where TMessage : MvxMessage
         {
             if (typeof(TMessage) == typeof(MvxMessage))
             {
-                MvxPluginLog.Instance?.Warn(
+                MvxPluginLog.Instance?.Log(LogLevel.Warning,
                                "MvxMessage publishing not allowed - this normally suggests non-specific generic used in calling code - switching to message.GetType()");
-                Publish(message, message.GetType());
+                Publish(message, message.GetType(), isSticky);
                 return;
             }
-            Publish(message, typeof(TMessage));
+            Publish(message, typeof(TMessage), isSticky);
         }
 
-        public void Publish(MvxMessage message)
+        public void Publish(MvxMessage message, bool isSticky = false)
         {
-            Publish(message, message.GetType());
+            Publish(message, message.GetType(), isSticky);
         }
 
-        public void Publish(MvxMessage message, Type messageType)
+        public void Publish(MvxMessage message, Type messageType, bool isSticky = false)
         {
             if (message == null)
             {
@@ -238,9 +244,14 @@ namespace MvvmCross.Plugin.Messenger
                 }
             }
 
+            if (isSticky)
+            {
+                _messageDictionary[message.GetType()] = message;
+            }
+
             if (toNotify == null || toNotify.Count == 0)
             {
-                MvxPluginLog.Instance?.Trace("Nothing registered for messages of type {0}", messageType.Name);
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "Nothing registered for messages of type {0}", messageType.Name);
                 return;
             }
 
@@ -252,7 +263,7 @@ namespace MvvmCross.Plugin.Messenger
 
             if (!allSucceeded)
             {
-                MvxPluginLog.Instance?.Trace("One or more listeners failed - purge scheduled");
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "One or more listeners failed - purge scheduled");
                 SchedulePurge(messageType);
             }
         }
@@ -267,6 +278,15 @@ namespace MvvmCross.Plugin.Messenger
             lock (_locker)
             {
                 SchedulePurge(_subscriptions.Keys.ToArray());
+            }
+        }
+
+        public void RemoveSticky<TMessageType>() where TMessageType : MvxMessage
+        {
+            var key = typeof(TMessageType);
+            if (_messageDictionary.ContainsKey(key))
+            {
+                _messageDictionary.Remove(key);
             }
         }
 
@@ -319,7 +339,7 @@ namespace MvvmCross.Plugin.Messenger
                     }
                 }
 
-                MvxPluginLog.Instance?.Trace("Purging {0} subscriptions", deadSubscriptionIds.Count);
+                MvxPluginLog.Instance?.Log(LogLevel.Trace, "Purging {0} subscriptions", deadSubscriptionIds.Count);
                 foreach (var id in deadSubscriptionIds)
                 {
                     messageSubscriptions.Remove(id);

@@ -1,18 +1,15 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using System.Collections.Generic;
+#nullable enable
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 
 namespace MvvmCross.IoC
 {
-#nullable enable
     public static class MvxTypeExtensions
     {
         public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
@@ -26,21 +23,23 @@ namespace MvvmCross.IoC
                 // MvxLog.Instance can be null, when reflecting for Setup.cs
                 // Check for null
 
-                MvxLog.Instance?.Warn("ReflectionTypeLoadException masked during loading of {0} - error {1}",
-                                      assembly.FullName, e.ToLongString());
+                MvxLogHost.Default?.Log(LogLevel.Warning,
+                    "ReflectionTypeLoadException masked during loading of {AssemblyName} - error {ErrorMessage}",
+                    assembly.FullName, e.ToLongString());
 
                 if (e.LoaderExceptions != null)
                 {
-                    foreach (var excp in e.LoaderExceptions)
+                    foreach (var exception in e.LoaderExceptions)
                     {
-                        MvxLog.Instance?.Warn(excp.ToLongString());
+                        MvxLogHost.Default?.Log(LogLevel.Warning, exception, "Failed to load type: {Message}",
+                            exception.ToLongString());
                     }
                 }
 
                 if (Debugger.IsAttached)
                     Debugger.Break();
 
-                return Array.Empty<Type>();
+                return Enumerable.Empty<Type>();
             }
         }
 
@@ -49,8 +48,7 @@ namespace MvvmCross.IoC
             return assembly
                 .ExceptionSafeGetTypes()
                 .Select(t => t.GetTypeInfo())
-                .Where(t => !t.IsAbstract)
-                .Where(t => t.DeclaredConstructors.Any(c => !c.IsStatic && c.IsPublic))
+                .Where(t => !t.IsAbstract && t.DeclaredConstructors.Any(c => c is { IsStatic: false, IsPublic: true }))
                 .Select(t => t.AsType());
         }
 
@@ -87,7 +85,7 @@ namespace MvvmCross.IoC
 
         public static IEnumerable<Type> Inherits(this IEnumerable<Type> types, Type baseType)
         {
-            return types.Where(x => baseType.IsAssignableFrom(x));
+            return types.Where(baseType.IsAssignableFrom);
         }
 
         public static IEnumerable<Type> Inherits<TBase>(this IEnumerable<Type> types)
@@ -121,9 +119,9 @@ namespace MvvmCross.IoC
         }
 
         public static bool IsGenericPartiallyClosed(this Type type) =>
-            type.GetTypeInfo().IsGenericType
-            && type.GetTypeInfo().ContainsGenericParameters
-            && type.GetGenericTypeDefinition() != type;
+            type.GetTypeInfo().IsGenericType &&
+            type.GetTypeInfo().ContainsGenericParameters &&
+            type.GetGenericTypeDefinition() != type;
 
         public class ServiceTypeAndImplementationTypePair
         {
@@ -139,10 +137,11 @@ namespace MvvmCross.IoC
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsTypes(this IEnumerable<Type> types)
         {
-            return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type>() { t }, t));
+            return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type> { t }, t));
         }
 
-        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types) => types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
+        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types) =>
+            types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types, params Type[] interfaces)
         {
@@ -162,21 +161,18 @@ namespace MvvmCross.IoC
                     types.Select(
                         t =>
                         new ServiceTypeAndImplementationTypePair(
-                            t.GetInterfaces().Where(iface => interfaces.Contains(iface)).ToList(), t));
+                            t.GetInterfaces().Where(interfaces.Contains).ToList(), t));
             }
         }
 
-        public static IEnumerable<ServiceTypeAndImplementationTypePair> ExcludeInterfaces(this IEnumerable<ServiceTypeAndImplementationTypePair> pairs, params Type[] toExclude)
+        public static IEnumerable<ServiceTypeAndImplementationTypePair> ExcludeInterfaces(
+            this IEnumerable<ServiceTypeAndImplementationTypePair> pairs, params Type[] toExclude)
         {
-            foreach (var pair in pairs)
-            {
-                var excludedList = pair.ServiceTypes.Where(c => !toExclude.Contains(c)).ToList();
-                if (excludedList.Count > 0)
-                {
-                    yield return new ServiceTypeAndImplementationTypePair(
-                        excludedList, pair.ImplementationType);
-                }
-            }
+            return pairs
+                .Select(pair =>
+                    new { pair, excludedList = pair.ServiceTypes.Where(c => !toExclude.Contains(c)).ToList() })
+                .Where(t => t.excludedList.Count > 0)
+                .Select(t => new ServiceTypeAndImplementationTypePair(t.excludedList, t.pair.ImplementationType));
         }
 
         public static void RegisterAsSingleton(this IEnumerable<ServiceTypeAndImplementationTypePair> pairs)
@@ -186,7 +182,10 @@ namespace MvvmCross.IoC
                 if (pair.ServiceTypes.Count == 0)
                     continue;
 
-                var instance = Mvx.IoCProvider.IoCConstruct(pair.ImplementationType);
+                var instance = Mvx.IoCProvider.IoCConstruct(pair.ImplementationType, (object?)null);
+                if (instance == null)
+                    continue;
+
                 foreach (var serviceType in pair.ServiceTypes)
                 {
                     Mvx.IoCProvider.RegisterSingleton(serviceType, instance);
@@ -222,12 +221,10 @@ namespace MvvmCross.IoC
             }
         }
 
-        public static object? CreateDefault(this Type type)
+        public static object? CreateDefault(this Type? type)
         {
             if (type == null)
-            {
                 return null;
-            }
 
             if (!type.GetTypeInfo().IsValueType)
             {
@@ -240,12 +237,12 @@ namespace MvvmCross.IoC
             return Activator.CreateInstance(type);
         }
 
-        public static ConstructorInfo? FindApplicableConstructor(this Type type, IDictionary<string, object> arguments)
+        public static ConstructorInfo? FindApplicableConstructor(this Type type, IDictionary<string, object>? arguments)
         {
             var constructors = type.GetConstructors();
             if (arguments == null || arguments.Count == 0)
             {
-                return constructors.OrderBy(c => c.GetParameters().Length).FirstOrDefault();
+                return constructors.MinBy(c => c.GetParameters().Length);
             }
 
             var unusedKeys = new List<string>(arguments.Keys);
@@ -271,12 +268,12 @@ namespace MvvmCross.IoC
             return null;
         }
 
-        public static ConstructorInfo? FindApplicableConstructor(this Type type, object[] arguments)
+        public static ConstructorInfo? FindApplicableConstructor(this Type type, object?[] arguments)
         {
             var constructors = type.GetConstructors();
-            if (arguments == null || arguments.Length == 0)
+            if (arguments.Length == 0)
             {
-                return constructors.OrderBy(c => c.GetParameters().Length).FirstOrDefault();
+                return constructors.MinBy(c => c.GetParameters().Length);
             }
 
             foreach (var constructor in constructors)
@@ -286,7 +283,7 @@ namespace MvvmCross.IoC
 
                 foreach (var parameterType in parameterTypes)
                 {
-                    var argumentMatch = unusedArguments.FirstOrDefault(arg => parameterType.IsInstanceOfType(arg));
+                    var argumentMatch = unusedArguments.Find(arg => parameterType.IsInstanceOfType(arg));
                     if (argumentMatch != null)
                     {
                         unusedArguments.Remove(argumentMatch);
@@ -302,5 +299,4 @@ namespace MvvmCross.IoC
             return null;
         }
     }
-#nullable restore
 }

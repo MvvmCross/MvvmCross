@@ -5,11 +5,11 @@
 using System;
 using Android.Content;
 using Android.OS;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Logging;
-using MvvmCross.Platforms.Android;
-using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.Android.Views
@@ -33,15 +33,16 @@ namespace MvvmCross.Platforms.Android.Views
             AndroidView.OnViewStart();
         }
 
-        protected override void EventSourceOnStartActivityForResultCalled(object sender, 
-                                                                          MvxValueEventArgs<MvxStartActivityForResultParameters> MvxValueEventArgs)
+        protected override void EventSourceOnStartActivityForResultCalled(
+            object sender, MvxValueEventArgs<MvxStartActivityForResultParameters> eventArgs)
         {
-            var requestCode = MvxValueEventArgs.Value.RequestCode;
+            var requestCode = eventArgs.Value.RequestCode;
             switch (requestCode)
             {
                 case (int)MvxIntentRequestCode.PickFromFile:
-                    MvxLog.Instance.Warn("Warning - activity request code may clash with Mvx code for {0}",
-                                   (MvxIntentRequestCode)requestCode);
+                    MvxLogHost.GetLog<MvxActivityAdapter>()?.Log(LogLevel.Warning,
+                        "Warning - activity request code may clash with Mvx code for {requestCode}",
+                        (MvxIntentRequestCode)requestCode);
                     break;
             }
         }
@@ -61,7 +62,7 @@ namespace MvvmCross.Platforms.Android.Views
             AndroidView.OnViewPause();
         }
 
-        protected override void EventSourceOnNewIntentCalled(object sender, MvxValueEventArgs<Intent> MvxValueEventArgs)
+        protected override void EventSourceOnNewIntentCalled(object sender, MvxValueEventArgs<Intent> eventArgs)
         {
             AndroidView.OnViewNewIntent();
         }
@@ -76,33 +77,40 @@ namespace MvvmCross.Platforms.Android.Views
             AndroidView.OnViewCreate(eventArgs.Value);
         }
 
-        protected override void EventSourceOnSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
+        protected override void EventSourceOnSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> eventArgs)
         {
             var mvxBundle = AndroidView.CreateSaveStateBundle();
             if (mvxBundle != null)
             {
-                IMvxSavedStateConverter converter;
-                if (!Mvx.IoCProvider.TryResolve<IMvxSavedStateConverter>(out converter))
+                if (Mvx.IoCProvider?.TryResolve<IMvxSavedStateConverter>(out var converter) != true)
                 {
-                    MvxLog.Instance.Warn("Saved state converter not available - saving state will be hard");
+                    MvxLogHost.GetLog<MvxActivityAdapter>()?.Log(LogLevel.Warning,
+                        "Saved state converter not available - saving state will be hard");
                 }
                 else
                 {
-                    converter.Write(bundleArgs.Value, mvxBundle);
+                    converter.Write(eventArgs.Value, mvxBundle);
                 }
             }
-            var cache = Mvx.IoCProvider.Resolve<IMvxSingleViewModelCache>();
-            cache.Cache(AndroidView.ViewModel, bundleArgs.Value);
+
+            if (Mvx.IoCProvider?.TryResolve<IMvxSingleViewModelCache>(out var cache) == true)
+            {
+                cache.Cache(AndroidView.ViewModel, eventArgs.Value);
+            }
         }
 
-        protected override void EventSourceOnActivityResultCalled(object sender,
-                                                                  MvxValueEventArgs<MvxActivityResultParameters> args)
+        protected override void EventSourceOnActivityResultCalled(
+            object sender, MvxValueEventArgs<MvxActivityResultParameters> eventArgs)
         {
-            var sink = Mvx.IoCProvider.Resolve<IMvxIntentResultSink>();
-            var resultParameters = args.Value;
-            var intentResult = new MvxIntentResultEventArgs(resultParameters.RequestCode, resultParameters.ResultCode,
-                                                            resultParameters.Data);
-            sink.OnResult(intentResult);
+            if (Mvx.IoCProvider?.TryResolve<IMvxIntentResultSink>(out var sink) == true)
+            {
+                var resultParameters = eventArgs.Value;
+                var intentResult = new MvxIntentResultEventArgs(
+                    resultParameters.RequestCode,
+                    resultParameters.ResultCode,
+                    resultParameters.Data);
+                sink.OnResult(intentResult);
+            }
         }
     }
 }

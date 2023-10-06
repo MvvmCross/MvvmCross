@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -166,7 +166,7 @@ namespace MvvmCross.UnitTest.Platform
             yield return new object[] { "garbage", Guid.Empty };
             yield return new object[] { null, Guid.Empty };
         }
-        
+
 
         [Theory]
         [MemberData(nameof(GuidCases))]

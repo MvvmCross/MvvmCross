@@ -1,7 +1,10 @@
 ---
-
-name: 💬 Questions and Help
+name: "\U0001F4AC Questions and Help"
 about: If you have questions, please use this for support
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 ## 💬 Questions and Help

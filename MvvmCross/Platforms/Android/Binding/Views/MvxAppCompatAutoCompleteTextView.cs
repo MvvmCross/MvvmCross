@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,9 +6,9 @@ using System;
 using System.Collections;
 using Android.Content;
 using Android.Runtime;
-using AndroidX.AppCompat.Widget;
 using Android.Util;
 using Android.Widget;
+using AndroidX.AppCompat.Widget;
 using MvvmCross.Binding.Attributes;
 
 namespace MvvmCross.Platforms.Android.Binding.Views
@@ -20,18 +20,20 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         public MvxAppCompatAutoCompleteTextView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxFilteringAdapter(context))
         {
-            // note - we shouldn't realy need both of these... but we do
-            ItemClick += OnItemClick;
-            ItemSelected += OnItemSelected;
         }
 
         public MvxAppCompatAutoCompleteTextView(Context context, IAttributeSet attrs,
             MvxFilteringAdapter adapter) : base(context, attrs)
         {
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
-            adapter.ItemTemplateId = itemTemplateId;
+            if (itemTemplateId > 0)
+                adapter.ItemTemplateId = itemTemplateId;
+
             Adapter = adapter;
+
+            // note - we shouldn't realy need both of these... but we do
             ItemClick += OnItemClick;
+            ItemSelected += OnItemSelected;
         }
 
         protected MvxAppCompatAutoCompleteTextView(IntPtr javaReference, JniHandleOwnership transfer)

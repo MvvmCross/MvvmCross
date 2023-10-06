@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -12,7 +12,7 @@ using Xunit;
 
 namespace MvvmCross.UnitTest.Plugin
 {
-    public class MvxPluginManagerTests
+    public static class MvxPluginManagerTests
     {
         public abstract class MvxPluginManagerTest : MvxIoCSupportingTest
         {
@@ -20,7 +20,7 @@ namespace MvvmCross.UnitTest.Plugin
 
             protected MvxPluginManagerTest()
             {
-                PluginManager = new MvxPluginManager(ConfigurationSource);
+                PluginManager = new MvxPluginManager(Ioc, ConfigurationSource);
 
                 Setup();
             }
@@ -38,7 +38,7 @@ namespace MvvmCross.UnitTest.Plugin
 
                 PluginManager.EnsurePluginLoaded(type);
 
-                Assert.Equal(PluginMock1.LoadCount, 1);
+                Assert.Equal(1, PluginMock1.LoadCount);
             }
 
             [Fact]
@@ -49,7 +49,7 @@ namespace MvvmCross.UnitTest.Plugin
                 PluginManager.EnsurePluginLoaded(type);
                 PluginManager.EnsurePluginLoaded(type);
 
-                Assert.Equal(PluginMock2.LoadCount, 1);
+                Assert.Equal(1, PluginMock2.LoadCount);
             }
 
             [Fact]
@@ -60,7 +60,7 @@ namespace MvvmCross.UnitTest.Plugin
                 PluginManager.EnsurePluginLoaded(type);
                 PluginManager.EnsurePluginLoaded(type, true);
 
-                Assert.Equal(PluginMock7.LoadCount, 2);
+                Assert.Equal(2, PluginMock7.LoadCount);
             }
 
             [Fact]
@@ -107,7 +107,7 @@ namespace MvvmCross.UnitTest.Plugin
 
                 var isLoaded = PluginManager.TryEnsurePluginLoaded(type);
 
-                Assert.Equal(PluginMock5.LoadCount, 1);
+                Assert.Equal(1, PluginMock5.LoadCount);
                 Assert.True(isLoaded);
             }
 
@@ -119,7 +119,7 @@ namespace MvvmCross.UnitTest.Plugin
                 PluginManager.TryEnsurePluginLoaded(type);
                 var isLoaded = PluginManager.TryEnsurePluginLoaded(type);
 
-                Assert.Equal(PluginMock6.LoadCount, 1);
+                Assert.Equal(1, PluginMock6.LoadCount);
                 Assert.True(isLoaded);
             }
 
@@ -131,7 +131,7 @@ namespace MvvmCross.UnitTest.Plugin
                 PluginManager.TryEnsurePluginLoaded(type);
                 PluginManager.TryEnsurePluginLoaded(type, true);
 
-                Assert.Equal(PluginMock8.LoadCount, 2);
+                Assert.Equal(2, PluginMock8.LoadCount);
             }
 
             [Fact]
@@ -157,7 +157,7 @@ namespace MvvmCross.UnitTest.Plugin
                     PluginManager.EnsurePluginLoaded(type);
                 }
 
-                Assert.Equal(PluginManager.LoadedPlugins.Count(), 2);
+                Assert.Equal(2, PluginManager.LoadedPlugins.Count());
             }
         }
     }

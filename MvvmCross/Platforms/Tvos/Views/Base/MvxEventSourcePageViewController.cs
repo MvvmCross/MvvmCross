@@ -1,11 +1,9 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Foundation;
 using MvvmCross.Base;
-using UIKit;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Views.Base
 {
@@ -35,7 +33,7 @@ namespace MvvmCross.Platforms.Tvos.Views.Base
         {
         }
 
-        protected internal MvxEventSourcePageViewController(IntPtr handle) : base(handle)
+        protected internal MvxEventSourcePageViewController(NativeHandle handle) : base(handle)
         {
         }
 
@@ -50,43 +48,43 @@ namespace MvvmCross.Platforms.Tvos.Views.Base
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            ViewDidLoadCalled.Raise(this);
+            ViewDidLoadCalled?.Raise(this);
         }
 
         public override void ViewDidLayoutSubviews()
         {
             base.ViewDidLayoutSubviews();
-            ViewDidLayoutSubviewsCalled.Raise(this);
+            ViewDidLayoutSubviewsCalled?.Raise(this);
         }
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            ViewWillAppearCalled.Raise(this, animated);
+            ViewWillAppearCalled?.Raise(this, animated);
         }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-            ViewDidAppearCalled.Raise(this, animated);
+            ViewDidAppearCalled?.Raise(this, animated);
         }
 
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
-            ViewDidDisappearCalled.Raise(this, animated);
+            ViewDidDisappearCalled?.Raise(this, animated);
         }
 
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
-            ViewWillDisappearCalled.Raise(this, animated);
+            ViewWillDisappearCalled?.Raise(this, animated);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-                DisposeCalled.Raise(this);
+                DisposeCalled?.Raise(this);
             base.Dispose(disposing);
         }
 

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Foundation;
 using MvvmCross.Binding.Bindings;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
@@ -14,17 +15,17 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
     public class MvxStandardTableViewCell
         : MvxTableViewCell
     {
-        public MvxStandardTableViewCell(IntPtr handle)
+        public MvxStandardTableViewCell(NativeHandle handle)
             : this("TitleText" /* default binding is ToString() on the passed in item */, handle)
         {
         }
 
-        public MvxStandardTableViewCell(string bindingText, IntPtr handle)
+        public MvxStandardTableViewCell(string bindingText, NativeHandle handle)
             : base(bindingText, handle)
         {
         }
 
-        public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+        public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, NativeHandle handle)
             : base(bindingDescriptions, handle)
         {
         }
@@ -41,7 +42,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
         }
-        
+
         public string TitleText
         {
             get { return TextLabel.Text; }
@@ -53,7 +54,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             get { return DetailTextLabel.Text; }
             set { DetailTextLabel.Text = value; }
         }
-       
+
         public ICommand SelectedCommand { get; set; }
 
         private bool _isSelected;

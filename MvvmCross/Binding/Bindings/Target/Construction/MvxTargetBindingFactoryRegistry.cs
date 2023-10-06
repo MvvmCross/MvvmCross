@@ -95,7 +95,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         private static int GenerateKey(Type type, string name)
         {
-			return (type.GetHashCode () * 9) ^ name.GetHashCode ();
+            return (type.GetHashCode() * 9) ^ name.GetHashCode();
         }
 
         private IMvxPluginTargetBindingFactory FindSpecificFactory(Type type, string name)

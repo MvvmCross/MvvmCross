@@ -1,13 +1,10 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using CoreGraphics;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings;
-using UIKit;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
@@ -21,13 +18,13 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             this.CreateBindingContext(bindingText);
         }
 
-        public MvxCollectionViewCell(IntPtr handle)
+        public MvxCollectionViewCell(NativeHandle handle)
             : base(handle)
         {
             this.CreateBindingContext();
         }
 
-        public MvxCollectionViewCell(string bindingText, IntPtr handle)
+        public MvxCollectionViewCell(string bindingText, NativeHandle handle)
             : base(handle)
         {
             this.CreateBindingContext(bindingText);
@@ -49,19 +46,6 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             : base(frame)
         {
             this.CreateBindingContext(bindingDescriptions);
-        }
-
-        /// <summary>
-        /// Should fix choppy scrolling on ios8+ by preventing a layout pass when autolayout is already computed
-        /// 
-        /// tvOS 8 provides a new self-sizing API for CollectionView and CollectionViewCells. It lets cells determine their own height, based on the content that they're about to load.
-        /// preferredLayoutAttributesFittingAttributes: (on the cell)
-        /// shouldLayoutAttributesFittingAttributes: (on the layout)
-        /// invalidationContextForPreferredLayoutAttributes:withOriginalAttributes: (on the layout)
-        /// </summary>
-        public override UICollectionViewLayoutAttributes PreferredLayoutAttributesFittingAttributes(UICollectionViewLayoutAttributes layoutAttributes)
-        {
-            return layoutAttributes;
         }
 
         protected override void Dispose(bool disposing)

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -62,7 +62,7 @@ namespace MvvmCross.DroidX.Leanback.Fragments
         public virtual IMvxViewModel ViewModel
         {
             get
-            { 
+            {
                 return DataContext as IMvxViewModel;
             }
             set
@@ -79,7 +79,7 @@ namespace MvvmCross.DroidX.Leanback.Fragments
         public string UniqueImmutableCacheTag => Tag;
     }
 
-    public abstract class MvxGuidedStepSupportFragment<TViewModel> : MvxGuidedStepSupportFragment, IMvxFragmentView<TViewModel> 
+    public abstract class MvxGuidedStepSupportFragment<TViewModel> : MvxGuidedStepSupportFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxGuidedStepSupportFragment()

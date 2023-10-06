@@ -3,8 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Logging;
 using MvvmCross.Platforms.Mac.Views.Base;
 
 namespace MvvmCross.Platforms.Mac.Views
@@ -29,7 +30,7 @@ namespace MvvmCross.Platforms.Mac.Views
         {
             if (MacView == null)
             {
-                MvxLog.Instance.Warn($"{nameof(MacView)} is null for clearup of bindings");
+                MvxLogHost.Default?.Log(LogLevel.Warning, "{PropertyName} is null for clearup of bindings", nameof(MacView));
                 return;
             }
             MacView.ClearAllBindings();

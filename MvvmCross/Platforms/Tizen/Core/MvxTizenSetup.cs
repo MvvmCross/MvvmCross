@@ -87,7 +87,7 @@ namespace MvvmCross.Platforms.Tizen.Core
         {
             RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
         protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
@@ -95,6 +95,7 @@ namespace MvvmCross.Platforms.Tizen.Core
             ValidateArguments(iocProvider);
 
             iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            iocProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(FillValueCombiners);
             iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
             iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
@@ -124,6 +125,11 @@ namespace MvvmCross.Platforms.Tizen.Core
             registry.Fill(ValueConverterAssemblies);
             registry.Fill(ValueConverterHolders);
         }
+        
+        protected virtual void FillValueCombiners(IMvxValueCombinerRegistry registry)
+        {
+            // this base class does nothing
+        }
 
         protected virtual List<Type> ValueConverterHolders => new List<Type>();
 
@@ -144,10 +150,11 @@ namespace MvvmCross.Platforms.Tizen.Core
         }
     }
 
-    public class MvxTizenSetup<TApplication> : MvxTizenSetup
+    public abstract class MvxTizenSetup<TApplication> : MvxTizenSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -42,7 +42,7 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
 
         private char[] _terminatingCharacters;
 
-        protected override IEnumerable<char> TerminatingCharacters() => 
+        protected override IEnumerable<char> TerminatingCharacters() =>
             _terminatingCharacters ?? (_terminatingCharacters = base.TerminatingCharacters().Union(OperatorCharacters).ToArray());
 
         protected override void ParseNextBindingDescriptionOptionInto(MvxSerializableBindingDescription description)

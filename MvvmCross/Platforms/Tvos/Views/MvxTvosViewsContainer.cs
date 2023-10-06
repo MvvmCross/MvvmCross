@@ -67,6 +67,6 @@ namespace MvvmCross.Platforms.Tvos.Views
             return view;
         }
 
-       
+
     }
 }

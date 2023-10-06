@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MvvmCross.Commands;
 using MvvmCross.Tests;
 using Xunit;

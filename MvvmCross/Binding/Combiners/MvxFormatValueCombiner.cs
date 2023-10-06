@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections.Generic;
-using System.Linq;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Converters;
 
@@ -22,7 +20,7 @@ namespace MvvmCross.Binding.Combiners
                 return true;
             }
 
-            var formatObject = list.First().GetValue();
+            var formatObject = list[0].GetValue();
             if (formatObject == MvxBindingConstant.DoNothing)
             {
                 value = MvxBindingConstant.DoNothing;
@@ -35,17 +33,17 @@ namespace MvvmCross.Binding.Combiners
                 return true;
             }
 
-            var formatString = formatObject == null ? "" : formatObject.ToString();
+            var formatString = formatObject == null ? string.Empty : formatObject.ToString();
 
             var values = list.Skip(1).Select(s => s.GetValue()).ToArray();
 
-            if (values.Any(v => v == MvxBindingConstant.DoNothing))
+            if (Array.Exists(values, v => v == MvxBindingConstant.DoNothing))
             {
                 value = MvxBindingConstant.DoNothing;
                 return true;
             }
 
-            if (values.Any(v => v == MvxBindingConstant.UnsetValue))
+            if (Array.Exists(values, v => v == MvxBindingConstant.UnsetValue))
             {
                 value = MvxBindingConstant.UnsetValue;
                 return true;

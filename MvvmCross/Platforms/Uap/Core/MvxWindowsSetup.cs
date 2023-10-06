@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Binding;
+using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.Binders;
 using MvvmCross.Converters;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
@@ -82,8 +82,8 @@ namespace MvvmCross.Platforms.Uap.Core
         protected sealed override IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider)
         {
             var container = CreateStoreViewsContainer();
-            Mvx.IoCProvider.RegisterSingleton<IMvxWindowsViewModelRequestTranslator>(container);
-            Mvx.IoCProvider.RegisterSingleton<IMvxWindowsViewModelLoader>(container);
+            iocProvider.RegisterSingleton<IMvxWindowsViewModelRequestTranslator>(container);
+            iocProvider.RegisterSingleton<IMvxWindowsViewModelLoader>(container);
             var viewsContainer = container as MvxViewsContainer;
             if (viewsContainer == null)
                 throw new MvxException("CreateViewsContainer must return an MvxViewsContainer");
@@ -142,7 +142,7 @@ namespace MvvmCross.Platforms.Uap.Core
         {
             RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
         protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
@@ -150,6 +150,7 @@ namespace MvvmCross.Platforms.Uap.Core
             ValidateArguments(iocProvider);
 
             iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            iocProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(FillValueCombiners);
             iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
             iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
@@ -163,6 +164,11 @@ namespace MvvmCross.Platforms.Uap.Core
         {
             registry.Fill(ValueConverterAssemblies);
             registry.Fill(ValueConverterHolders);
+        }
+
+        protected virtual void FillValueCombiners(IMvxValueCombinerRegistry registry)
+        {
+            // this base class does nothing
         }
 
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -196,15 +202,16 @@ namespace MvvmCross.Platforms.Uap.Core
         }
     }
 
-    public class MvxWindowsSetup<TApplication> : MvxWindowsSetup
+    public abstract class MvxWindowsSetup<TApplication> : MvxWindowsSetup
          where TApplication : class, IMvxApplication, new()
     {
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
+
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
-
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
     }
 #nullable restore
 }

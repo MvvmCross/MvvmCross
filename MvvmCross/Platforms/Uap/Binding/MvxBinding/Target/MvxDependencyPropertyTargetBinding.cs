@@ -1,13 +1,13 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Extensions;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 
 namespace MvvmCross.Platforms.Uap.Binding.MvxBinding.Target
 {
@@ -47,15 +47,15 @@ namespace MvvmCross.Platforms.Uap.Binding.MvxBinding.Target
             };
 
             var attachedProperty = DependencyProperty.RegisterAttached(
-                "ListenAttached" + _targetName + Guid.NewGuid().ToString("N"), 
-                typeof(object), 
-                typeof(FrameworkElement), 
+                "ListenAttached" + _targetName + Guid.NewGuid().ToString("N"),
+                typeof(object),
+                typeof(FrameworkElement),
                 new PropertyMetadata(null, (s, e) => FireValueChanged(e.NewValue)));
 
             frameworkElement.SetBinding(attachedProperty, listenerBinding);
         }
 
-        public override Type TargetType => _actualPropertyType;
+        public override Type TargetValueType => _actualPropertyType;
 
         public override MvxBindingMode DefaultMode { get; } = MvxBindingMode.TwoWay;
 

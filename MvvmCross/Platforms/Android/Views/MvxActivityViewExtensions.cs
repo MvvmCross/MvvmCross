@@ -1,18 +1,15 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Android.App;
-using Android.OS;
+using Microsoft.Extensions.Logging;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using MvvmCross.Core;
 
 namespace MvvmCross.Platforms.Android.Views
 {
@@ -36,11 +33,11 @@ namespace MvvmCross.Platforms.Android.Views
 
         public static void OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
         {
-            androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity, bundle));
 
-            var cache = Mvx.IoCProvider.Resolve<IMvxSingleViewModelCache>();
-            var cached = cache.GetAndClear(bundle);
+            IMvxViewModel cached = null;
+            if (Mvx.IoCProvider?.TryResolve<IMvxSingleViewModelCache>(out var cache) == true)
+                cached = cache.GetAndClear(bundle);
 
             var view = (IMvxView)androidView;
             var savedState = GetSavedStateFromBundle(bundle);
@@ -52,10 +49,9 @@ namespace MvvmCross.Platforms.Android.Views
             if (bundle == null)
                 return null;
 
-            IMvxSavedStateConverter converter;
-            if (!Mvx.IoCProvider.TryResolve<IMvxSavedStateConverter>(out converter))
+            if (Mvx.IoCProvider?.TryResolve<IMvxSavedStateConverter>(out var converter) != true)
             {
-                MvxLog.Instance.Trace("No saved state converter available - this is OK if seen during start");
+                MvxLogHost.Default?.Log(LogLevel.Trace, "No saved state converter available - this is OK if seen during start");
                 return null;
             }
             var savedState = converter.Read(bundle);
@@ -64,7 +60,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public static void OnViewNewIntent(this IMvxAndroidView androidView)
         {
-            MvxLog.Instance.Trace("OnViewNewIntent called - MvvmCross lifecycle won't run automatically in this case.");
+            MvxLogHost.Default?.Log(LogLevel.Trace, "OnViewNewIntent called - MvvmCross lifecycle won't run automatically in this case");
         }
 
         public static void OnViewDestroy(this IMvxAndroidView androidView)
@@ -73,11 +69,29 @@ namespace MvvmCross.Platforms.Android.Views
             var view = androidView as IMvxView;
             view.OnViewDestroy();
 
-            var currentActivity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity;
-            if (currentActivity == null && view is Activity destroyedActivity && destroyedActivity.IsFinishing && Mvx.IoCProvider.TryResolve<IMvxAppStart>(out var appStart))
+            if (Mvx.IoCProvider?.TryResolve<IMvxAppStart>(out var appStart) != true ||
+                Mvx.IoCProvider?.TryResolve<IMvxAndroidCurrentTopActivity>(out var topActivity) != true)
+            {
+                return;
+            }
+
+            var currentActivity = topActivity.Activity;
+            if (IsActivityTearingDown(currentActivity))
             {
                 appStart?.ResetStart();
             }
+            else if (currentActivity == null && IsActivityTearingDown(view as Activity))
+            {
+                appStart?.ResetStart();
+            }
+        }
+
+        private static bool IsActivityTearingDown(Activity? activity)
+        {
+            if (activity == null) return false;
+            if (activity.IsDestroyed) return true;
+            if (activity.IsFinishing) return true;
+            return false;
         }
 
         public static void OnViewStart(this IMvxAndroidView androidView)
@@ -105,8 +119,9 @@ namespace MvvmCross.Platforms.Android.Views
             androidView.OnLifetimeEvent((listener, activity) => listener.OnPause(activity));
         }
 
-        private static void OnLifetimeEvent(this IMvxAndroidView androidView,
-                                            Action<IMvxAndroidActivityLifetimeListener, Activity> report)
+        private static void OnLifetimeEvent(
+            this IMvxAndroidView androidView,
+            Action<IMvxAndroidActivityLifetimeListener, Activity> report)
         {
             var activityTracker = Mvx.IoCProvider.Resolve<IMvxAndroidActivityLifetimeListener>();
             report(activityTracker, androidView.ToActivity());
@@ -131,27 +146,14 @@ namespace MvvmCross.Platforms.Android.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxLog.Instance.Trace("No ViewModel class specified for {0} in LoadViewModel",
-                               androidView.GetType().Name);
+                MvxLogHost.Default?.Log(LogLevel.Trace, "No ViewModel class specified for {ViewType} in LoadViewModel",
+                    androidView.GetType().Name);
             }
 
             var translatorService = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelLoader>();
             var viewModel = translatorService.Load(activity.Intent, savedState, viewModelType);
 
             return viewModel;
-        }
-
-        private static void EnsureSetupInitialized(this IMvxAndroidView androidView)
-        {
-            if (androidView is IMvxSetupMonitor)
-            {
-                // setup monitor views manage their own setup initialization
-                return;
-            }
-
-            var activity = androidView.ToActivity();
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity.ApplicationContext);
-            setup.EnsureInitialized();
         }
     }
 }

@@ -1,26 +1,27 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using System.Collections.Generic;
+#nullable enable
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
+using MvvmCross.IoC;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin
 {
-#nullable enable
     public class MvxPluginManager : IMvxPluginManager
     {
-        private readonly object _lockObject = new object();
-        private readonly HashSet<Type> _loadedPlugins = new HashSet<Type>();
+        private readonly IMvxIoCProvider _provider;
+        private readonly object _lockObject = new();
+        private readonly HashSet<Type> _loadedPlugins = new();
 
         public Func<Type, IMvxPluginConfiguration?> ConfigurationSource { get; }
 
         public IEnumerable<Type> LoadedPlugins => _loadedPlugins;
 
-        public MvxPluginManager(Func<Type, IMvxPluginConfiguration?> configurationSource)
+        public MvxPluginManager(IMvxIoCProvider provider, Func<Type, IMvxPluginConfiguration?> configurationSource)
         {
+            _provider = provider;
             ConfigurationSource = configurationSource;
         }
 
@@ -45,7 +46,7 @@ namespace MvvmCross.Plugin
                     configurablePlugin.Configure(configuration);
             }
 
-            plugin.Load();
+            plugin.Load(_provider);
 
             lock (_lockObject)
             {
@@ -67,7 +68,7 @@ namespace MvvmCross.Plugin
             }
         }
 
-        public bool TryEnsurePluginLoaded<TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin 
+        public bool TryEnsurePluginLoaded<TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin
             => TryEnsurePluginLoaded(typeof(TPlugin), forceLoad);
 
         public bool TryEnsurePluginLoaded(Type type, bool forceLoad = false)
@@ -79,10 +80,9 @@ namespace MvvmCross.Plugin
             }
             catch (Exception ex)
             {
-                MvxLog.Instance?.Warn("Failed to load plugin {0} with exception {1}", type.FullName, ex.ToLongString());
+                MvxLogHost.Default?.Log(LogLevel.Warning, ex, "Failed to load plugin {FullPluginName}", type.FullName);
                 return false;
             }
         }
     }
-#nullable restore
 }

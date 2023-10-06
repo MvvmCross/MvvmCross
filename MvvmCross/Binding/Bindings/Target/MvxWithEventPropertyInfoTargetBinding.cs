@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.Bindings.Target
             var value = TargetPropertyInfo.GetGetMethod().Invoke(target, null);
             FireValueChanged(value);
         }
-        
+
         // Note - this is public because we use it in weak referenced situations
         public void OnPropertyChanged(object sender, PropertyChangedEventArgs eventArgs)
         {

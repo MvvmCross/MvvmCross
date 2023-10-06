@@ -38,7 +38,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             var view = View;
             if (view == null)
             {
-                MvxBindingLog.Error( "Error - NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
+                MvxBindingLog.Error("Error - NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
                 return;
             }
 
@@ -47,8 +47,10 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             {
                 ((MvxEventSourceTabViewController)view).DidSelectCalled += HandleValueChanged;
             }
-            else {
-                try {
+            else
+            {
+                try
+                {
                     view.TabView.DidSelect += HandleValueChanged;
                 }
                 catch (Exception ex)

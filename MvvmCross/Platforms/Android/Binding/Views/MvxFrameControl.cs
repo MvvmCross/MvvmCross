@@ -8,10 +8,11 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Exceptions;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 
 namespace MvvmCross.Platforms.Android.Binding.Views
@@ -43,7 +44,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 {
                     if (Content == null && _templateId != 0)
                     {
-                        MvxLog.Instance.Trace("DataContext is {0}", DataContext?.ToString() ?? "Null");
+                        MvxLogHost.GetLog<MvxFrameControl>()?.Log(LogLevel.Trace, "DataContext is {dataContext}", DataContext?.ToString() ?? "Null");
                         Content = _bindingContext.BindingInflate(_templateId, this);
                     }
                 });

@@ -1,19 +1,20 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Wpf.Presenters.Attributes;
 using MvvmCross.Platforms.Wpf.Views;
-using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
-using System.Threading.Tasks;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Wpf.Presenters
 {
@@ -57,34 +58,34 @@ namespace MvvmCross.Platforms.Wpf.Presenters
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Register<MvxWindowPresentationAttribute>(
-                    (viewType, attribute, request) =>
+                    (_, attribute, request) =>
                     {
                         var view = WpfViewLoader.CreateView(request);
-                        return ShowWindow(view, (MvxWindowPresentationAttribute)attribute, request);
+                        return ShowWindow(view, attribute, request);
                     },
-                    (viewModel, attribute) => CloseWindow(viewModel));
+                    (viewModel, _) => CloseWindow(viewModel));
 
             AttributeTypesToActionsDictionary.Register<MvxContentPresentationAttribute>(
-                    (viewType, attribute, request) =>
+                    (_, attribute, request) =>
                     {
                         var view = WpfViewLoader.CreateView(request);
-                        return ShowContentView(view, (MvxContentPresentationAttribute)attribute, request);
+                        return ShowContentView(view, attribute, request);
                     },
-                    (viewModel, attribute) => CloseContentView(viewModel));
+                    (viewModel, _) => CloseContentView(viewModel));
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             if (viewType.IsSubclassOf(typeof(Window)))
             {
-                MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. " +
-                    $"Assuming window presentation");
-                return new MvxWindowPresentationAttribute();
+                MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. " +
+                    "Assuming window presentation", viewType.Name);
+                return new MvxWindowPresentationAttribute { ViewModelType = viewModelType, ViewType = viewType };
             }
 
-            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. " +
-                    $"Assuming content presentation");
-            return new MvxContentPresentationAttribute();
+            MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. " +
+                    "Assuming content presentation", viewType.Name);
+            return new MvxContentPresentationAttribute { ViewType = viewType, ViewModelType = viewModelType };
         }
 
         public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
@@ -100,7 +101,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
 
                     if (presentationAttribute == null)
                     {
-                        MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
+                        MvxLogHost.Default?.Log(LogLevel.Warning, "Override PresentationAttribute null. Falling back to existing attribute.");
                     }
                     else
                     {
@@ -176,17 +177,17 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             return Task.FromResult(true);
         }
 
-        public override async Task<bool> Close(IMvxViewModel toClose)
+        public override async Task<bool> Close(IMvxViewModel viewModel)
         {
             // toClose is window
-            if (FrameworkElementsDictionary.Any(i => (i.Key as IMvxWpfView)?.ViewModel == toClose) && await CloseWindow(toClose))
+            if (FrameworkElementsDictionary.Any(i => (i.Key as IMvxWpfView)?.ViewModel == viewModel) && await CloseWindow(viewModel))
                 return true;
 
             // toClose is content
-            if (FrameworkElementsDictionary.Any(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose) && await CloseContentView(toClose))
+            if (FrameworkElementsDictionary.Any(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == viewModel) && await CloseContentView(viewModel))
                 return true;
 
-            MvxLog.Instance.Warn($"Could not close ViewModel type {toClose.GetType().Name}");
+            MvxLogHost.Default?.Log(LogLevel.Warning, "Could not close ViewModel type {ViewModelTypeName}", viewModel.GetType().Name);
             return false;
         }
 
@@ -201,7 +202,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
                 return Task.FromResult(true);
             }
 
-            return Task.FromResult(false); 
+            return Task.FromResult(false);
         }
 
         protected virtual Task<bool> CloseContentView(IMvxViewModel toClose)

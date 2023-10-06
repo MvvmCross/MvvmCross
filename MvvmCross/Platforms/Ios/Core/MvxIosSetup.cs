@@ -1,24 +1,22 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Converters;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Converters;
 using MvvmCross.Core;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Ios.Binding;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Views;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using UIKit;
-using MvvmCross.Presenters;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Ios.Core
 {
@@ -123,7 +121,7 @@ namespace MvvmCross.Platforms.Ios.Core
         {
             ValidateArguments(iocProvider);
 
-            iocProvider.RegisterSingleton<IMvxPopoverPresentationSourceProvider>(CreatePopoverPresentationSourceProvider());
+            iocProvider.RegisterSingleton(CreatePopoverPresentationSourceProvider());
         }
 
         protected virtual IMvxPopoverPresentationSourceProvider CreatePopoverPresentationSourceProvider()
@@ -139,21 +137,14 @@ namespace MvvmCross.Platforms.Ios.Core
 
         protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
-        }
-
-        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
-        {
-            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
-            return new MvxIosBindingBuilder();
+            return new MvxIosBindingBuilder(FillTargetFactories, FillValueConverters, FillValueCombiners,
+                FillBindingNames);
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry obj)
@@ -165,6 +156,11 @@ namespace MvvmCross.Platforms.Ios.Core
         {
             registry.Fill(ValueConverterAssemblies);
             registry.Fill(ValueConverterHolders);
+        }
+
+        protected virtual void FillValueCombiners(IMvxValueCombinerRegistry registry)
+        {
+            // this base class does nothing
         }
 
         protected virtual List<Type> ValueConverterHolders => new List<Type>();
@@ -191,10 +187,11 @@ namespace MvvmCross.Platforms.Ios.Core
         }
     }
 
-    public class MvxIosSetup<TApplication> : MvxIosSetup
+    public abstract class MvxIosSetup<TApplication> : MvxIosSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

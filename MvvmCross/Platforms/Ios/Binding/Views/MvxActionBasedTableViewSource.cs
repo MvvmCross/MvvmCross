@@ -5,8 +5,10 @@
 using System;
 using System.Collections.Generic;
 using Foundation;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings;
+using MvvmCross.Logging;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
@@ -19,28 +21,31 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             Initialize();
         }
 
-        public MvxActionBasedTableViewSource(IntPtr handle)
+        public MvxActionBasedTableViewSource(NativeHandle handle)
             : base(handle)
         {
-            MvxLog.Instance.Warn("MvxActionBasedTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+            MvxLogHost.GetLog<MvxActionBasedTableViewSource>()?.Log(
+                LogLevel.Warning, "MvxActionBasedTableViewSource NativeHandle constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
             Initialize();
         }
 
-        public MvxActionBasedTableViewSource(UITableView tableView,
-                                             UITableViewCellStyle style,
-                                             NSString cellIdentifier,
-                                             string bindingText,
-                                             UITableViewCellAccessory tableViewCellAccessory)
+        public MvxActionBasedTableViewSource(
+            UITableView tableView,
+            UITableViewCellStyle style,
+            NSString cellIdentifier,
+            string bindingText,
+            UITableViewCellAccessory tableViewCellAccessory)
             : base(tableView, style, cellIdentifier, bindingText, tableViewCellAccessory)
         {
             Initialize();
         }
 
-        public MvxActionBasedTableViewSource(UITableView tableView,
-                                             UITableViewCellStyle style,
-                                             NSString cellIdentifier,
-                                             IEnumerable<MvxBindingDescription> descriptions,
-                                             UITableViewCellAccessory tableViewCellAccessory)
+        public MvxActionBasedTableViewSource(
+            UITableView tableView,
+            UITableViewCellStyle style,
+            NSString cellIdentifier,
+            IEnumerable<MvxBindingDescription> descriptions,
+            UITableViewCellAccessory tableViewCellAccessory)
             : base(tableView, style, cellIdentifier, descriptions, tableViewCellAccessory)
         {
             Initialize();

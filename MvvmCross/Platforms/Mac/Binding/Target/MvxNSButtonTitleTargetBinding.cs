@@ -20,7 +20,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
         {
             if (button == null)
             {
-                MvxBindingLog.Error( "Error - NSButton is null in MvxNSButtonTitleTargetBinding");
+                MvxBindingLog.Error("Error - NSButton is null in MvxNSButtonTitleTargetBinding");
             }
         }
 
@@ -29,7 +29,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             get { return MvxBindingMode.OneWay; }
         }
 
-        public override Type TargetType
+        public override Type TargetValueType
         {
             get { return typeof(string); }
         }

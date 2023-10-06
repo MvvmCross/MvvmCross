@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -87,32 +87,6 @@ namespace MvvmCross.ViewModels
     }
 
     public abstract class MvxViewModel<TParameter> : MvxViewModel, IMvxViewModel<TParameter>
-        where TParameter : notnull
-    {
-        public abstract void Prepare(TParameter parameter);
-    }
-
-    public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult>
-        where TResult : notnull
-    {
-        public TaskCompletionSource<object?>? CloseCompletionSource { get; set; }
-
-        public override void ViewDestroy(bool viewFinishing = true)
-        {
-            if (viewFinishing && CloseCompletionSource != null &&
-                !CloseCompletionSource.Task.IsCompleted &&
-                !CloseCompletionSource.Task.IsFaulted)
-            {
-                CloseCompletionSource.TrySetCanceled();
-            }
-
-            base.ViewDestroy(viewFinishing);
-        }
-    }
-
-    public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult>
-        where TParameter : notnull
-        where TResult : notnull
     {
         public abstract void Prepare(TParameter parameter);
     }

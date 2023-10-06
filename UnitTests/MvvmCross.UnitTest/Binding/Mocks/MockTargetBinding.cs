@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,7 +13,7 @@ namespace MvvmCross.UnitTest.Binding.Mocks
     {
         public MockTargetBinding()
         {
-            TargetType = typeof(object);
+            TargetValueType = typeof(object);
         }
 
         public int DisposeCalled { get; set; }
@@ -30,7 +30,7 @@ namespace MvvmCross.UnitTest.Binding.Mocks
             SubscribeToEventsCalled++;
         }
 
-        public Type TargetType { get; set; }
+        public Type TargetValueType { get; set; }
         public MvxBindingMode DefaultMode { get; set; }
 
         public List<object> Values { get; } = new List<object>();

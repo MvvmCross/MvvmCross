@@ -3,6 +3,7 @@
 using System;
 using AppKit;
 using MvvmCross.Platforms.Mac.Views;
+using ObjCRuntime;
 
 namespace Playground.Mac
 {
@@ -11,14 +12,9 @@ namespace Playground.Mac
     {
         private static int _count;
 
-        public ToolbarWindow(IntPtr handle) : base(handle)
+        public ToolbarWindow(NativeHandle handle) : base(handle)
         {
             _count++;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
         }
 
         public NSTextField TextTitle => textTitle;

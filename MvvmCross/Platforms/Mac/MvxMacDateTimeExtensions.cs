@@ -19,6 +19,6 @@ namespace MvvmCross.Platforms.Mac
         public static NSDate ToNSDate(this DateTime date)
         {
             return NSDate.FromTimeIntervalSinceReferenceDate((date - ReferenceNSDateTime).TotalSeconds);
-        }        
+        }
     }
 }

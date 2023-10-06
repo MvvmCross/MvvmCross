@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,7 +11,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 {
     public class MvxViewMarginTargetBinding : MvxAndroidTargetBinding
     {
-        private string _whichMargin;
+        private readonly string _whichMargin;
 
         public MvxViewMarginTargetBinding(View target, string whichMargin) : base(target)
         {
@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             _whichMargin = whichMargin;
         }
 
-        public override Type TargetType => typeof(int);
+        public override Type TargetValueType => typeof(float);
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         protected override void SetValueImpl(object target, object value)
@@ -30,7 +30,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             var layoutParameters = view.LayoutParameters as ViewGroup.MarginLayoutParams;
             if (layoutParameters == null) return;
 
-            var dpMargin = (int)value;
+            var dpMargin = (float)value;
             var pxMargin = DpToPx(dpMargin);
 
             switch (_whichMargin)
@@ -57,9 +57,11 @@ namespace MvvmCross.Platforms.Android.Binding.Target
                     layoutParameters.MarginStart = pxMargin;
                     break;
             }
+
+            view.LayoutParameters = layoutParameters;
         }
 
-        private int DpToPx(int dp)
+        private int DpToPx(float dp)
             => (int)(dp * Resources.System.DisplayMetrics.Density);
     }
 }

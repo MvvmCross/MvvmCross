@@ -20,7 +20,7 @@ namespace MvvmCross.Platforms.Wpf.Views
             if (viewType == null)
                 throw new MvxException("View Type not found for " + request.ViewModelType);
 
-            var wpfView = CreateView(viewType) as IMvxWpfView;        
+            var wpfView = CreateView(viewType) as IMvxWpfView;
 
             if (request is MvxViewModelInstanceRequest instanceRequest)
             {

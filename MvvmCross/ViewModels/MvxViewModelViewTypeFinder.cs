@@ -1,10 +1,11 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Views;
@@ -44,7 +45,7 @@ namespace MvvmCross.ViewModels
             if (typeByName != null)
                 return typeByName;
 
-            MvxLog.Instance?.Trace("No view model association found for candidate view {0}", candidateType.Name);
+            MvxLogHost.Default?.Log(LogLevel.Warning, "No view model association found for candidate view {name}", candidateType.Name);
             return null;
         }
 
@@ -68,12 +69,11 @@ namespace MvvmCross.ViewModels
 
         protected virtual Type? LookupAssociatedConcreteViewModelType(Type candidateType)
         {
-            var viewModelPropertyInfo = candidateType
-                .GetProperties()
-                .FirstOrDefault(
-                    x => x.Name == "ViewModel" && 
-                    !x.PropertyType.GetTypeInfo().IsInterface &&
-                    !x.PropertyType.GetTypeInfo().IsAbstract);
+            var viewModelPropertyInfo =
+                Array.Find(candidateType.GetProperties(),
+                    x => x.Name == "ViewModel" &&
+                         !x.PropertyType.GetTypeInfo().IsInterface &&
+                         !x.PropertyType.GetTypeInfo().IsAbstract);
 
             return viewModelPropertyInfo?.PropertyType;
         }

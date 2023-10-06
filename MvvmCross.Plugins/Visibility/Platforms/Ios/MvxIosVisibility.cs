@@ -7,7 +7,7 @@ using MvvmCross.UI;
 namespace MvvmCross.Plugin.Visibility.Platforms.Ios
 {
     [Preserve(AllMembers = true)]
-	public class MvxIosVisibility : IMvxNativeVisibility
+    public class MvxIosVisibility : IMvxNativeVisibility
     {
         public object ToNative(MvxVisibility visibility)
         {

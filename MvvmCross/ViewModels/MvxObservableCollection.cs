@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -75,7 +75,7 @@ namespace MvvmCross.ViewModels
         /// <summary>
         /// Adds the specified items collection to the current <see cref="MvxObservableCollection{T}"/> instance.
         /// </summary>
-        /// <param name="items">The collection from which the items are copied.</param>
+        /// <param name="items">The collection of items to be added.</param>
         /// <exception cref="ArgumentNullException">The items list is null.</exception>
         public virtual void AddRange(IEnumerable<T> items)
         {
@@ -98,9 +98,42 @@ namespace MvvmCross.ViewModels
         }
 
         /// <summary>
+        /// Inserts the specified items collection in the current <see cref="MvxObservableCollection{T}"/> instance at the specified index.
+        /// </summary>
+        /// <param name="index">The position where the collection of items should be inserted at.</param>
+        /// <param name="items">The collection of items to be inserted.</param>
+        /// <exception cref="ArgumentNullException">The items list is null.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Index incorrect.</exception>
+        public virtual void InsertRange(int index, IEnumerable<T> items)
+        {
+            if (items == null)
+            {
+                throw new ArgumentNullException(nameof(items));
+            }
+
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+
+            int currentIndex = index;
+            var itemsList = items.ToList();
+            using (SuppressEvents())
+            {
+                foreach (var item in itemsList)
+                {
+                    InsertItem(currentIndex, item);
+                    currentIndex++;
+                }
+            }
+
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, itemsList, index));
+        }
+
+        /// <summary>
         /// Replaces the current <see cref="MvxObservableCollection{T}"/> instance items with the ones specified in the items collection, raising a single <see cref="NotifyCollectionChangedAction.Reset"/> event.
         /// </summary>
-        /// <param name="items">The collection from which the items are copied.</param>
+        /// <param name="items">The collection of items that will replace the current <see cref="MvxObservableCollection{T}"/> instance items.</param>
         /// <exception cref="ArgumentNullException">The items list is null.</exception>
         public virtual void ReplaceWith(IEnumerable<T> items)
         {
@@ -212,7 +245,7 @@ namespace MvvmCross.ViewModels
         /// </summary>
         /// <param name="start">The start index.</param>
         /// <param name="count">The count of items to remove.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Start index or count incorrect</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Start index or count incorrect.</exception>
         public virtual void RemoveRange(int start, int count)
         {
             if (start < 0)

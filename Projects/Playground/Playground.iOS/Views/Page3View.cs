@@ -1,7 +1,6 @@
-﻿using System;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 
 namespace Playground.iOS.Views
@@ -10,7 +9,7 @@ namespace Playground.iOS.Views
     [MvxPagePresentation(WrapInNavigationController = false)]
     public partial class Page3View : MvxViewController<Page3ViewModel>
     {
-        public Page3View(IntPtr handle) : base(handle)
+        public Page3View(NativeHandle handle) : base(handle)
         {
         }
     }

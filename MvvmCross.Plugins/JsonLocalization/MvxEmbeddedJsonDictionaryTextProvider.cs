@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,7 +10,7 @@ using MvvmCross.Exceptions;
 namespace MvvmCross.Plugin.JsonLocalization
 {
     [Preserve(AllMembers = true)]
-	public class MvxEmbeddedJsonDictionaryTextProvider
+    public class MvxEmbeddedJsonDictionaryTextProvider
         : MvxJsonDictionaryTextProvider
     {
         public MvxEmbeddedJsonDictionaryTextProvider(bool maskErrors = true)
@@ -32,17 +32,14 @@ namespace MvvmCross.Plugin.JsonLocalization
 
             try
             {
-                string text = null;
-                Stream stream = Assembly.Load(new AssemblyName(namespaceKey)).GetManifestResourceStream(path);
+                var assembly = Assembly.Load(new AssemblyName(namespaceKey));
+
+                using Stream stream = assembly.GetManifestResourceStream(path);
                 if (stream == null)
                     return null;
 
-                using (var textReader = new StreamReader(stream))
-                {
-                    text = textReader.ReadToEnd();
-                }
-
-                return text;
+                using var textReader = new StreamReader(stream);
+                return textReader.ReadToEnd();
             }
             catch (Exception ex)
             {

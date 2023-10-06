@@ -5,11 +5,13 @@
 using System;
 using System.Windows;
 using MvvmCross.Base;
-using MvvmCross.Converters;
 using MvvmCross.Binding;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
+using MvvmCross.Converters;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Wpf.Binding.MvxBinding;
 using MvvmCross.Platforms.Wpf.Binding.MvxBinding.Target;
 using MvvmCross.Platforms.Wpf.Binding.WindowsBinding;
@@ -25,20 +27,32 @@ namespace MvvmCross.Platforms.Wpf.Binding
         }
 
         private readonly BindingType _bindingType;
+        private readonly Action<IMvxTargetBindingFactoryRegistry> _fillTargetFactories;
+        private readonly Action<IMvxBindingNameRegistry> _fillBindingNames;
+        private readonly Action<IMvxValueConverterRegistry> _fillValueConverters;
+        private readonly Action<IMvxValueCombinerRegistry> _fillValueCombiners;
 
         public MvxWindowsBindingBuilder(
+            Action<IMvxTargetBindingFactoryRegistry> fillTargetFactories = null,
+            Action<IMvxBindingNameRegistry> fillBindingNames = null,
+            Action<IMvxValueConverterRegistry> fillValueConverters = null,
+            Action<IMvxValueCombinerRegistry> fillValueCombiners = null,
             BindingType bindingType = BindingType.MvvmCross)
         {
+            _fillTargetFactories = fillTargetFactories;
+            _fillBindingNames = fillBindingNames;
+            _fillValueConverters = fillValueConverters;
+            _fillValueCombiners = fillValueCombiners;
             _bindingType = bindingType;
         }
 
-        public override void DoRegistration()
+        public override void DoRegistration(IMvxIoCProvider iocProvider)
         {
-            base.DoRegistration();
+            base.DoRegistration(iocProvider);
             InitializeBindingCreator();
         }
 
-        protected override void RegisterBindingFactories()
+        protected override void RegisterBindingFactories(IMvxIoCProvider iocProvider)
         {
             switch (_bindingType)
             {
@@ -47,7 +61,7 @@ namespace MvvmCross.Platforms.Wpf.Binding
                     break;
 
                 case BindingType.MvvmCross:
-                    base.RegisterBindingFactories();
+                    base.RegisterBindingFactories(iocProvider);
                     break;
 
                 default:
@@ -102,6 +116,8 @@ namespace MvvmCross.Platforms.Wpf.Binding
                     registry.Fill(assembly);
                 }
             }
+
+            _fillValueConverters?.Invoke(registry);
         }
 
         protected override void FillValueCombiners(IMvxValueCombinerRegistry registry)
@@ -115,6 +131,8 @@ namespace MvvmCross.Platforms.Wpf.Binding
                     registry.Fill(assembly);
                 }
             }
+
+            _fillValueCombiners?.Invoke(registry);
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -132,6 +150,14 @@ namespace MvvmCross.Platforms.Wpf.Binding
                 view => new MvxCollapsedTargetBinding(view));
 
             base.FillTargetFactories(registry);
+
+            _fillTargetFactories?.Invoke(registry);
+        }
+
+        protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
+        {
+            base.FillDefaultBindingNames(registry);
+            _fillBindingNames?.Invoke(registry);
         }
     }
 }

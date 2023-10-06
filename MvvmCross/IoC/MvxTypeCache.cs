@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Exceptions;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 
 namespace MvvmCross.IoC
@@ -23,7 +23,7 @@ namespace MvvmCross.IoC
             try
             {
                 if (CachedAssemblies.ContainsKey(assembly))
-                return;
+                    return;
 
                 var viewType = typeof(TType);
                 var query = assembly.DefinedTypes.Where(ti => ti.IsSubclassOf(viewType)).Select(ti => ti.AsType());
@@ -46,8 +46,8 @@ namespace MvvmCross.IoC
             }
             catch (ReflectionTypeLoadException e)
             {
-                MvxLog.Instance.Warn("ReflectionTypeLoadException masked during loading of {0} - error {1}",
-                    assembly.FullName, e.ToLongString());
+                MvxLogHost.Default?.Log(LogLevel.Warning, e, "ReflectionTypeLoadException masked during loading of {assemblyName}",
+                    assembly.FullName);
             }
         }
     }

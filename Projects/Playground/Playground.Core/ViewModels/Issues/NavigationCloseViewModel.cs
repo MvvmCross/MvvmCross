@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
@@ -25,9 +25,9 @@ namespace Playground.Core.ViewModels
             await _mvxNavigationService.Close(this);
         }
 
-        private async Task TryToCloseNewViewModelAsync()
+        private Task TryToCloseNewViewModelAsync()
         {
-            await _mvxNavigationService.Close(Mvx.IoCProvider.Resolve<SecondChildViewModel>());
+            return _mvxNavigationService.Close(Mvx.IoCProvider.Resolve<SecondChildViewModel>());
         }
     }
 }

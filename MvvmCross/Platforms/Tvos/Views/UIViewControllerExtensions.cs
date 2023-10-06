@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using UIKit;
 
@@ -14,7 +15,8 @@ namespace MvvmCross.Platforms.Tvos.Views
             var mvxView = viewController as IMvxTvosView;
             if (mvxView == null)
             {
-                MvxLog.Instance.Warn($"Could not get IMvxIosView from ViewController {viewController.GetType().Name}");
+                MvxLogHost.Default?.Log(
+                    LogLevel.Warning, "Could not get IMvxIosView from ViewController {viewControllerName}", viewController.GetType().Name);
             }
             return mvxView;
         }

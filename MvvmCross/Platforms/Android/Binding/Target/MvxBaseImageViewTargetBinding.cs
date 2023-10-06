@@ -5,9 +5,9 @@
 using System;
 using Android.Graphics;
 using Android.Widget;
-using MvvmCross.Exceptions;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
+using MvvmCross.Logging;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
 {
@@ -36,7 +36,8 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             }
             catch (Exception ex)
             {
-                MvxLog.Instance.Error(ex.ToLongString());
+                MvxLogHost.GetLog<MvxBaseImageViewTargetBinding>()?
+                    .Log(LogLevel.Error, ex, "Failed to set bitmap on ImageView");
                 throw;
             }
         }

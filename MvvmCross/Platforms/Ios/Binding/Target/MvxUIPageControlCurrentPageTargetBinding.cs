@@ -43,7 +43,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             var pageControl = View;
             if (pageControl == null)
             {
-                MvxBindingLog.Error( "UIPageControl is null in MvxUIPageControlCurrentPageTargetBinding");
+                MvxBindingLog.Error("UIPageControl is null in MvxUIPageControlCurrentPageTargetBinding");
                 return;
             }
 

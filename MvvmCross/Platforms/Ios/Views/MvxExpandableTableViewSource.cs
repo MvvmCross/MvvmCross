@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,6 +13,7 @@ using MvvmCross.Base;
 using MvvmCross.Platforms.Ios.Binding.Views;
 using MvvmCross.Platforms.Ios.Views.Expandable;
 using MvvmCross.Platforms.Ios.Views.Expandable.Controllers;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
@@ -26,7 +27,7 @@ namespace MvvmCross.Platforms.Ios.Views
 
     public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : IEnumerable<TItem>
     {
-	    private SectionExpandableController _sectionExpandableController = new DefaultAllSectionsExpandableController();
+        private SectionExpandableController _sectionExpandableController = new DefaultAllSectionsExpandableController();
 
         private IEnumerable _itemsSource;
         public new IEnumerable ItemsSource
@@ -88,25 +89,25 @@ namespace MvvmCross.Platforms.Ios.Views
                 HeaderTappedCommand.Execute((int)section);
         }
 
-	    protected virtual void OnSectionExpanded(IEnumerable<int> sectionIndexes)
-	    {
-	    }
+        protected virtual void OnSectionExpanded(IEnumerable<int> sectionIndexes)
+        {
+        }
 
-	    protected virtual void OnSectionCollapsed(IEnumerable<int> collapsedSectionIndexes)
-	    {
-	    }
+        protected virtual void OnSectionCollapsed(IEnumerable<int> collapsedSectionIndexes)
+        {
+        }
 
-	    private void ScrollToSection(UITableView tableView, nint atIndex)
-	    {
-		    var sectionRect = tableView.RectForSection(atIndex);
-		    sectionRect.Height = tableView.Frame.Height;
-		    tableView.ScrollRectToVisible(sectionRect, true);
-	    }
+        private void ScrollToSection(UITableView tableView, nint atIndex)
+        {
+            var sectionRect = tableView.RectForSection(atIndex);
+            sectionRect.Height = tableView.Frame.Height;
+            tableView.ScrollRectToVisible(sectionRect, true);
+        }
 
         protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-	        _sectionExpandableController.ResetState();
-			base.CollectionChangedOnCollectionChanged(sender, args);
+            _sectionExpandableController.ResetState();
+            base.CollectionChangedOnCollectionChanged(sender, args);
         }
 
         public override nint RowsInSection(UITableView tableview, nint section)
@@ -146,15 +147,15 @@ namespace MvvmCross.Platforms.Ios.Views
         public override UIView GetViewForHeader(UITableView tableView, nint section)
         {
             var header = GetOrCreateHeaderCellFor(tableView, section);
-	        var expandableHeaderCell = header as IExpandableHeaderCell;
+            var expandableHeaderCell = header as IExpandableHeaderCell;
 
-	        if (expandableHeaderCell != null)
-	        {
-		        if (_sectionExpandableController.IsExpanded((int) section))
-			        expandableHeaderCell.OnExpanded();
-		        else
-			        expandableHeaderCell.OnCollapsed();
-	        }
+            if (expandableHeaderCell != null)
+            {
+                if (_sectionExpandableController.IsExpanded((int)section))
+                    expandableHeaderCell.OnExpanded();
+                else
+                    expandableHeaderCell.OnCollapsed();
+            }
 
             bool hasHiddenButton = false;
 
@@ -230,28 +231,28 @@ namespace MvvmCross.Platforms.Ios.Views
 
         protected abstract override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
 
-	    private bool isAccordionExpandCollapseEnabled;
-	    public bool IsAccordionExpandCollapseEnabled
-	    {
-		    get
+        private bool isAccordionExpandCollapseEnabled;
+        public bool IsAccordionExpandCollapseEnabled
+        {
+            get
             {
                 return isAccordionExpandCollapseEnabled;
             }
-		    set
-		    {
-				if (isAccordionExpandCollapseEnabled == value)
-					return;
+            set
+            {
+                if (isAccordionExpandCollapseEnabled == value)
+                    return;
 
-				isAccordionExpandCollapseEnabled = value;
+                isAccordionExpandCollapseEnabled = value;
 
-			    if (isAccordionExpandCollapseEnabled)
-				    _sectionExpandableController = new AccordionSectionExpandableController();
-			    else
-				    _sectionExpandableController = new DefaultAllSectionsExpandableController();
+                if (isAccordionExpandCollapseEnabled)
+                    _sectionExpandableController = new AccordionSectionExpandableController();
+                else
+                    _sectionExpandableController = new DefaultAllSectionsExpandableController();
 
-				ReloadTableData();
-			}
-		} 
+                ReloadTableData();
+            }
+        }
     }
 
     public class HiddenHeaderButton : UIButton

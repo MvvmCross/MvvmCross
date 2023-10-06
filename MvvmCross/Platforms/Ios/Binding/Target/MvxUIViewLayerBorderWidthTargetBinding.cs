@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
         {
         }
 
-        public override Type TargetType => typeof(float);
+        public override Type TargetValueType => typeof(float);
 
         protected override void SetValueImpl(object target, object value)
         {

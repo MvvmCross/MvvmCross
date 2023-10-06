@@ -12,7 +12,7 @@ namespace MvvmCross.Platforms.Tvos.Views.Base
         event EventHandler ViewDidLoadCalled;
 
         event EventHandler ViewDidLayoutSubviewsCalled;
-        
+
         event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
 
         event EventHandler<MvxValueEventArgs<bool>> ViewDidAppearCalled;

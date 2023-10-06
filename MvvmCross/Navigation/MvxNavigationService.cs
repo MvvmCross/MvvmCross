@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,8 +10,10 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
+using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Navigation.EventArguments;
 using MvvmCross.Presenters.Hints;
@@ -24,8 +26,10 @@ namespace MvvmCross.Navigation
     /// <inheritdoc cref="IMvxNavigationService"/>
     public class MvxNavigationService : IMvxNavigationService
     {
-        private readonly Lazy<IMvxLog> _log = new Lazy<IMvxLog>(() =>
-            Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor<MvxNavigationService>());
+        private readonly IMvxIoCProvider _iocProvider;
+
+        private readonly Lazy<ILogger?> _log = new Lazy<ILogger?>(() =>
+            MvxLogHost.GetLog<MvxNavigationService>());
 
         public IMvxViewDispatcher ViewDispatcher { get; }
 
@@ -50,12 +54,16 @@ namespace MvvmCross.Navigation
 
         public event EventHandler<ChangePresentationEventArgs>? DidChangePresentation;
 
-        public MvxNavigationService(IMvxViewModelLoader viewModelLoader,
-            IMvxViewDispatcher viewDispatcher)
+        public MvxNavigationService(
+            IMvxViewModelLoader viewModelLoader,
+            IMvxViewDispatcher viewDispatcher,
+            IMvxIoCProvider iocProvider)
         {
+            _iocProvider = iocProvider;
+
             ViewModelLoader = viewModelLoader;
             ViewDispatcher = viewDispatcher;
-            ViewsContainer = new Lazy<IMvxViewsContainer>(() => Mvx.IoCProvider.Resolve<IMvxViewsContainer>());
+            ViewsContainer = new Lazy<IMvxViewsContainer>(() => _iocProvider.Resolve<IMvxViewsContainer>());
         }
 
         public void LoadRoutes(IEnumerable<Assembly> assemblies)
@@ -85,7 +93,7 @@ namespace MvvmCross.Navigation
                 {
                     case 0:
                         entry = default;
-                        _log.Value.Trace("Unable to find routing for {0}", path);
+                        _log.Value?.Log(LogLevel.Trace, "Unable to find routing for {path}", path);
                         return false;
 
                     case 1:
@@ -101,7 +109,7 @@ namespace MvvmCross.Navigation
                     return true;
                 }
 
-                _log.Value.Warn("The following regular expressions match the provided url ({0}), each RegEx must be unique (otherwise try using IMvxRoutingFacade): {1}",
+                _log.Value?.Log(LogLevel.Warning, "The following regular expressions match the provided url ({count}), each RegEx must be unique (otherwise try using IMvxRoutingFacade): {matches}",
                     matches.Count - 1,
                     string.Join(", ", matches.Select(t => t.Key.ToString())));
 
@@ -111,7 +119,7 @@ namespace MvvmCross.Navigation
             }
             catch (Exception ex)
             {
-                _log.Value.Error("MvxNavigationService", "Unable to determine routability: {0}", ex);
+                _log.Value?.Log(LogLevel.Error, ex, "Unable to determine routability");
                 entry = default;
                 return false;
             }
@@ -162,7 +170,7 @@ namespace MvvmCross.Navigation
 
             if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
-                var facade = (IMvxNavigationFacade)Mvx.IoCProvider.IoCConstruct(viewModelType);
+                var facade = (IMvxNavigationFacade)_iocProvider.IoCConstruct(viewModelType);
 
                 try
                 {
@@ -203,7 +211,6 @@ namespace MvvmCross.Navigation
 
         protected async Task<MvxViewModelInstanceRequest> NavigationRouteRequest<TParameter>(
             string path, TParameter param, IMvxBundle? presentationBundle = null)
-            where TParameter : notnull
         {
             ValidateArguments(path, param);
 
@@ -227,7 +234,7 @@ namespace MvvmCross.Navigation
 
             if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
-                var facade = (IMvxNavigationFacade)Mvx.IoCProvider.IoCConstruct(viewModelType);
+                var facade = (IMvxNavigationFacade)_iocProvider.IoCConstruct(viewModelType);
 
                 try
                 {
@@ -297,99 +304,13 @@ namespace MvvmCross.Navigation
             return true;
         }
 
-        protected virtual async Task<TResult?> Navigate<TResult>(MvxViewModelRequest request,
-            IMvxViewModelResult<TResult> viewModel, IMvxBundle? presentationBundle = null,
-            CancellationToken cancellationToken = default)
-            where TResult : class
-        {
-            ValidateArguments(request, viewModel);
-
-            var hasNavigated = false;
-            var tcs = new TaskCompletionSource<object?>();
-
-            if (cancellationToken != default)
-            {
-                cancellationToken.Register(() =>
-                {
-                    // ReSharper disable once AccessToModifiedClosure
-                    if (hasNavigated && !tcs.Task.IsCompleted)
-                        Task.Run(() => Close(viewModel, default, CancellationToken.None), CancellationToken.None);
-                });
-            }
-
-            var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Show, cancellationToken);
-            OnWillNavigate(this, args);
-
-            viewModel.CloseCompletionSource = tcs;
-            TaskCompletionResults.Add(viewModel, tcs);
-
-            cancellationToken.ThrowIfCancellationRequested();
-
-            hasNavigated = await ViewDispatcher.ShowViewModel(request).ConfigureAwait(false);
-            if (!hasNavigated)
-                return default;
-
-            if (viewModel.InitializeTask?.Task != null)
-                await viewModel.InitializeTask.Task.ConfigureAwait(false);
-
-            OnDidNavigate(this, args);
-
-            try
-            {
-                return (TResult?)await tcs.Task.ConfigureAwait(false);
-            }
-            catch (Exception)
-            {
-                return default;
-            }
-        }
-
-        protected virtual async Task<TResult?> Navigate<TParameter, TResult>(MvxViewModelRequest request,
-            IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle? presentationBundle = null,
-            IMvxNavigateEventArgs? args = null, CancellationToken cancellationToken = default)
-            where TParameter : notnull
-            where TResult : class
-        {
-            ValidateArguments(request, viewModel, param);
-
-            var hasNavigated = false;
-            if (cancellationToken != default)
-            {
-                cancellationToken.Register(() =>
-                {
-                    // ReSharper disable once AccessToModifiedClosure
-                    if (hasNavigated)
-                        Task.Run(() => Close(viewModel, default, CancellationToken.None), CancellationToken.None);
-                });
-            }
-
-            args ??= new MvxNavigateEventArgs(viewModel, NavigationMode.Show, cancellationToken);
-
-            OnWillNavigate(this, args);
-
-            var tcs = new TaskCompletionSource<object?>();
-            viewModel.CloseCompletionSource = tcs;
-            TaskCompletionResults.Add(viewModel, tcs);
-
-            cancellationToken.ThrowIfCancellationRequested();
-
-            hasNavigated = await ViewDispatcher.ShowViewModel(request).ConfigureAwait(false);
-
-            if (viewModel.InitializeTask?.Task != null)
-                await viewModel.InitializeTask.Task.ConfigureAwait(false);
-
-            OnDidNavigate(this, args);
-
-            return (TResult?)await tcs.Task.ConfigureAwait(false);
-        }
-
         public virtual async Task<bool> Navigate(
             string path, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         {
             var request = await NavigationRouteRequest(path, presentationBundle).ConfigureAwait(false);
             if (request.ViewModelInstance == null)
             {
-                _log.Value.Warn("Navigation Route Request doesn't have a ViewModelInstance");
+                _log.Value?.Log(LogLevel.Warning, "Navigation Route Request doesn't have a ViewModelInstance");
                 return false;
             }
 
@@ -398,42 +319,14 @@ namespace MvvmCross.Navigation
 
         public virtual async Task<bool> Navigate<TParameter>(string path, TParameter param,
             IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
-            where TParameter : notnull
         {
             var request = await NavigationRouteRequest(path, param, presentationBundle).ConfigureAwait(false);
             if (request.ViewModelInstance == null)
             {
-                _log.Value.Warn("Navigation Route Request doesn't have a ViewModelInstance");
+                _log.Value?.Log(LogLevel.Warning, "Navigation Route Request doesn't have a ViewModelInstance");
                 return false;
             }
             return await Navigate(request, request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
-        }
-
-        public virtual async Task<TResult?> Navigate<TResult>(string path, IMvxBundle? presentationBundle = null,
-            CancellationToken cancellationToken = default)
-            where TResult : class
-        {
-            var request = await NavigationRouteRequest(path, presentationBundle).ConfigureAwait(false);
-            if (request.ViewModelInstance == null)
-            {
-                _log.Value.Warn("Navigation Route Request doesn't have a ViewModelInstance");
-                return null;
-            }
-            return await Navigate(request, (IMvxViewModelResult<TResult>)request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
-        }
-
-        public virtual async Task<TResult?> Navigate<TParameter, TResult>(string path, TParameter param,
-            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
-            where TParameter : notnull
-            where TResult : class
-        {
-            var request = await NavigationRouteRequest(path, param, presentationBundle).ConfigureAwait(false);
-            if (request.ViewModelInstance == null)
-            {
-                _log.Value.Warn("Navigation Route Request doesn't have a ViewModelInstance");
-                return null;
-            }
-            return await Navigate(request, (IMvxViewModel<TParameter, TResult>)request.ViewModelInstance, param, presentationBundle, cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         public virtual Task<bool> Navigate(Type viewModelType, IMvxBundle? presentationBundle = null,
@@ -449,7 +342,6 @@ namespace MvvmCross.Navigation
 
         public virtual Task<bool> Navigate<TParameter>(Type viewModelType, TParameter param,
             IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
-            where TParameter : notnull
         {
             var request = new MvxViewModelInstanceRequest(viewModelType)
             {
@@ -457,33 +349,6 @@ namespace MvvmCross.Navigation
             };
             request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, param, null);
             return Navigate(request, request.ViewModelInstance, presentationBundle, cancellationToken);
-        }
-
-        public virtual Task<TResult?> Navigate<TResult>(Type viewModelType, IMvxBundle? presentationBundle = null,
-            CancellationToken cancellationToken = default)
-            where TResult : class
-        {
-            var request = new MvxViewModelInstanceRequest(viewModelType)
-            {
-                PresentationValues = presentationBundle?.SafeGetData()
-            };
-            request.ViewModelInstance = (IMvxViewModelResult<TResult>)ViewModelLoader.LoadViewModel(request, null);
-            return Navigate(request, (IMvxViewModelResult<TResult>)request.ViewModelInstance, presentationBundle, cancellationToken);
-        }
-
-        public virtual Task<TResult?> Navigate<TParameter, TResult>(Type viewModelType, TParameter param,
-            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
-            where TParameter : notnull
-            where TResult : class
-        {
-            var args = new MvxNavigateEventArgs(NavigationMode.Show, cancellationToken);
-            var request = new MvxViewModelInstanceRequest(viewModelType)
-            {
-                PresentationValues = presentationBundle?.SafeGetData()
-            };
-            request.ViewModelInstance = (IMvxViewModel<TParameter, TResult>)ViewModelLoader.LoadViewModel(request, param, null);
-            args.ViewModel = request.ViewModelInstance;
-            return Navigate(request, (IMvxViewModel<TParameter, TResult>)request.ViewModelInstance, param, presentationBundle, args, cancellationToken);
         }
 
         public virtual Task<bool> Navigate<TViewModel>(
@@ -496,26 +361,8 @@ namespace MvvmCross.Navigation
         public virtual Task<bool> Navigate<TViewModel, TParameter>(
             TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
             where TViewModel : IMvxViewModel<TParameter>
-            where TParameter : notnull
         {
             return Navigate(typeof(TViewModel), param, presentationBundle, cancellationToken);
-        }
-
-        public virtual Task<TResult?> Navigate<TViewModel, TResult>(
-            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
-            where TViewModel : IMvxViewModelResult<TResult>
-            where TResult : class
-        {
-            return Navigate<TResult>(typeof(TViewModel), presentationBundle, cancellationToken);
-        }
-
-        public virtual Task<TResult?> Navigate<TViewModel, TParameter, TResult>(
-            TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
-            where TViewModel : IMvxViewModel<TParameter, TResult>
-            where TParameter : notnull
-            where TResult : class
-        {
-            return Navigate<TParameter, TResult>(typeof(TViewModel), param, presentationBundle, cancellationToken);
         }
 
         public virtual Task<bool> Navigate(
@@ -528,31 +375,10 @@ namespace MvvmCross.Navigation
 
         public virtual Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param,
             IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
-            where TParameter : notnull
         {
             var request = new MvxViewModelInstanceRequest(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
             ViewModelLoader.ReloadViewModel(viewModel, param, request, null);
             return Navigate(request, viewModel, presentationBundle, cancellationToken);
-        }
-
-        public virtual Task<TResult?> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel,
-            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
-            where TResult : class
-        {
-            var request = new MvxViewModelInstanceRequest(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
-            ViewModelLoader.ReloadViewModel(viewModel, request, null);
-            return Navigate(request, viewModel, presentationBundle, cancellationToken);
-        }
-
-        public virtual Task<TResult?> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel,
-            TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
-            where TParameter : notnull
-            where TResult : class
-        {
-            var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Show, cancellationToken);
-            var request = new MvxViewModelInstanceRequest(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
-            ViewModelLoader.ReloadViewModel(viewModel, param, request, null);
-            return Navigate(request, viewModel, param, presentationBundle, args, cancellationToken);
         }
 
         public virtual async Task<bool> ChangePresentation(
@@ -560,7 +386,7 @@ namespace MvvmCross.Navigation
         {
             ValidateArguments(hint);
 
-            MvxLog.Instance?.Trace("Requesting presentation change");
+            _log.Value?.Log(LogLevel.Trace, "Requesting presentation change");
             var args = new ChangePresentationEventArgs(hint, cancellationToken);
             OnWillChangePresentation(this, args);
 
@@ -589,36 +415,6 @@ namespace MvvmCross.Navigation
             OnDidClose(this, args);
 
             return close;
-        }
-
-        public virtual async Task<bool> Close<TResult>(
-            IMvxViewModelResult<TResult> viewModel, TResult? result, CancellationToken cancellationToken = default)
-            where TResult : class
-        {
-            ValidateArguments(viewModel);
-
-            TaskCompletionResults.TryGetValue(viewModel, out var tcs);
-
-            //Disable cancelation of the Task when closing ViewModel through the service
-            viewModel.CloseCompletionSource = null;
-
-            try
-            {
-                var closeResult = await Close(viewModel, cancellationToken).ConfigureAwait(false);
-                if (closeResult)
-                {
-                    tcs?.TrySetResult(result);
-                    TaskCompletionResults.Remove(viewModel);
-                }
-                else
-                    viewModel.CloseCompletionSource = tcs;
-                return closeResult;
-            }
-            catch (Exception ex)
-            {
-                tcs?.TrySetException(ex);
-                return false;
-            }
         }
 
         protected virtual void OnWillNavigate(object sender, IMvxNavigateEventArgs e)
@@ -651,15 +447,6 @@ namespace MvvmCross.Navigation
             DidChangePresentation?.Invoke(sender, e);
         }
 
-        private static void ValidateArguments<TParameter>(MvxViewModelRequest request, IMvxViewModel viewModel, TParameter param)
-            where TParameter : notnull
-        {
-            ValidateArguments(request, viewModel);
-
-            if (param == null)
-                throw new ArgumentNullException(nameof(param));
-        }
-
         private static void ValidateArguments(MvxViewModelRequest request, IMvxViewModel viewModel)
         {
             if (request == null)
@@ -669,7 +456,7 @@ namespace MvvmCross.Navigation
                 throw new ArgumentNullException(nameof(viewModel));
         }
 
-        private static void ValidateArguments<TParameter>(string path, TParameter param) where TParameter : notnull
+        private static void ValidateArguments<TParameter>(string path, TParameter param)
         {
             ValidateArguments(path);
 
@@ -690,12 +477,6 @@ namespace MvvmCross.Navigation
         }
 
         private static void ValidateArguments(IMvxViewModel viewModel)
-        {
-            if (viewModel == null)
-                throw new ArgumentNullException(nameof(viewModel));
-        }
-
-        private static void ValidateArguments<TResult>(IMvxViewModelResult<TResult> viewModel) where TResult : notnull
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));

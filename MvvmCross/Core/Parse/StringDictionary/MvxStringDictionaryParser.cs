@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -14,7 +14,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
     {
         protected Dictionary<string, string?>? CurrentEntries { get; private set; }
 
-        public IDictionary<string, string?> Parse(string textToParse)
+        public IDictionary<string, string> Parse(string textToParse)
         {
             Reset(textToParse);
 
@@ -27,7 +27,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
             return CurrentEntries!;
         }
 
-        protected override void Reset(string textToParse)
+        protected override void Reset(string? textToParse)
         {
             CurrentEntries = new Dictionary<string, string?>();
             base.Reset(textToParse);
@@ -59,7 +59,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
             SkipWhitespace();
 
             var value = ReadValue();
-            if(value == null)
+            if (value == null)
             {
                 CurrentEntries![(string)key] = null;
             }

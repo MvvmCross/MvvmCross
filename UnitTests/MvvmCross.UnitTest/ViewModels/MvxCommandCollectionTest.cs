@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -14,7 +14,7 @@ namespace MvvmCross.UnitTest.ViewModels
     [Collection("MvxTest")]
     public class MvxCommandCollectionTest
     {
-        private NavigationTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
         public MvxCommandCollectionTest(NavigationTestFixture fixture)
         {
@@ -414,15 +414,15 @@ namespace MvvmCross.UnitTest.ViewModels
         }
 
         private void CheckCounts(
-            CommandTestClass testObject, 
-            int countMyCalled = 0, 
-            int countCanExecuteMyCalled = 0, 
-            int countMyExCalled = 0, 
-            int countCanExecuteMyExCalled = 0, 
-            int countNotACalled = 0, 
-            int countAttributedCalled = 0, 
-            int countAttributed2Called = 0, 
-            int countCanExecuteAttributed2Called = 0, 
+            CommandTestClass testObject,
+            int countMyCalled = 0,
+            int countCanExecuteMyCalled = 0,
+            int countMyExCalled = 0,
+            int countCanExecuteMyExCalled = 0,
+            int countNotACalled = 0,
+            int countAttributedCalled = 0,
+            int countAttributed2Called = 0,
+            int countCanExecuteAttributed2Called = 0,
             int countIntReturningCalled = 0)
         {
             Assert.Equal(countMyCalled, testObject.CountMyCommandCalled);

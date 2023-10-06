@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Bindings.Target
             _eventSubscription = target.WeakSubscribe(targetEventName, HandleEvent);
         }
 
-        public override Type TargetType { get; } = typeof(ICommand);
+        public override Type TargetValueType { get; } = typeof(ICommand);
 
         public override MvxBindingMode DefaultMode { get; } = MvxBindingMode.OneWay;
 
@@ -29,7 +29,7 @@ namespace MvvmCross.Binding.Bindings.Target
         {
             if (isDisposing)
                 _eventSubscription.Dispose();
-            
+
             base.Dispose(isDisposing);
         }
 

@@ -1,11 +1,11 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Binding;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
@@ -13,7 +13,7 @@ using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 namespace MvvmCross.Plugin.MethodBinding
 {
     [Preserve(AllMembers = true)]
-	public class MvxMethodSourceBindingFactoryExtension
+    public class MvxMethodSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
         public bool TryCreateBinding(object source, MvxPropertyToken currentToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
@@ -48,7 +48,8 @@ namespace MvvmCross.Plugin.MethodBinding
             var parameters = methodInfo.GetParameters();
             if (parameters.Count(p => !p.IsOptional) > 1)
             {
-                MvxBindingLog.Warning("Problem binding to Method {0} - too many non-optional parameters");
+                MvxPluginLog.Instance?.Log(LogLevel.Warning,
+                    "Problem binding to Method {0} - too many non-optional parameters");
             }
 
             result = new MvxMethodSourceBinding(source, methodInfo);

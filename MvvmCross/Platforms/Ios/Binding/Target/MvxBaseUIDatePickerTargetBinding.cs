@@ -41,7 +41,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             var datePicker = View;
             if (datePicker == null)
             {
-                MvxBindingLog.Error( "Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
+                MvxBindingLog.Error("Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
             }
             // Only listen for value changes if we are binding against one of the value-derived properties.
             else if (TargetPropertyInfo.Name == nameof(UIDatePicker.Date) || TargetPropertyInfo.Name == nameof(UIDatePicker.CountDownDuration))

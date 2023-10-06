@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Plugin;
@@ -49,7 +50,7 @@ namespace MvvmCross.ViewModels
         /// </summary>
         public virtual Task Startup()
         {
-            MvxLog.Instance?.Trace("AppStart: Application Startup - On UI thread");
+            MvxLogHost.Default?.Log(LogLevel.Trace, "AppStart: Application Startup - On UI thread");
             return Task.CompletedTask;
         }
 
@@ -71,24 +72,24 @@ namespace MvvmCross.ViewModels
         protected void RegisterCustomAppStart<TMvxAppStart>()
             where TMvxAppStart : class, IMvxAppStart
         {
-            Mvx.IoCProvider.ConstructAndRegisterSingleton<IMvxAppStart, TMvxAppStart>();
+            Mvx.IoCProvider?.ConstructAndRegisterSingleton<IMvxAppStart, TMvxAppStart>();
         }
 
         protected void RegisterAppStart<TViewModel>()
             where TViewModel : IMvxViewModel
         {
-            Mvx.IoCProvider.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel>>();
+            Mvx.IoCProvider?.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel>>();
         }
 
         protected void RegisterAppStart(IMvxAppStart appStart)
         {
-            Mvx.IoCProvider.RegisterSingleton(appStart);
+            Mvx.IoCProvider?.RegisterSingleton(appStart);
         }
 
         protected virtual void RegisterAppStart<TViewModel, TParameter>()
           where TViewModel : IMvxViewModel<TParameter> where TParameter : class
         {
-            Mvx.IoCProvider.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
+            Mvx.IoCProvider?.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
         }
 
         protected IEnumerable<Type> CreatableTypes()

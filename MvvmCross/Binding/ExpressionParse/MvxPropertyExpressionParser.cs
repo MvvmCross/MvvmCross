@@ -5,7 +5,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Binding.ExpressionParse
 {
@@ -14,9 +14,16 @@ namespace MvvmCross.Binding.ExpressionParse
     // Inspiration used under Microsoft Public License Ms-PL
     public class MvxPropertyExpressionParser : IMvxPropertyExpressionParser
     {
+        private readonly ILogger<MvxPropertyExpressionParser> _log;
+
+        public MvxPropertyExpressionParser(ILoggerFactory loggerFactory)
+        {
+            _log = loggerFactory.CreateLogger<MvxPropertyExpressionParser>();
+        }
+
         public IMvxParsedExpression Parse<TObj, TRet>(Expression<Func<TObj, TRet>> propertyPath)
         {
-            if (propertyPath.Body is MethodCallExpression 
+            if (propertyPath.Body is MethodCallExpression
                 && (propertyPath.Body as MethodCallExpression).Method.Name.Contains("Bind"))
             {
                 return ParseBindExtensionMethod(propertyPath as LambdaExpression, default(TObj));
@@ -33,13 +40,13 @@ namespace MvvmCross.Binding.ExpressionParse
             while (current != null
                    && current.NodeType != ExpressionType.Parameter)
             {
-                current = ParseTo(current, toReturn);
+                current = ParseTo(current, toReturn, _log);
             }
 
             return toReturn;
         }
 
-        private static Expression ParseTo(Expression current, MvxParsedExpression toReturn)
+        private static Expression ParseTo(Expression current, MvxParsedExpression toReturn, ILogger log)
         {
             // This happens when a value type gets boxed
             if (current.NodeType == ExpressionType.Convert || current.NodeType == ExpressionType.ConvertChecked)
@@ -54,14 +61,14 @@ namespace MvvmCross.Binding.ExpressionParse
 
             if (current is MethodCallExpression)
             {
-                return ParseMethodCall(current, toReturn);
+                return ParseMethodCall(current, toReturn, log);
             }
 
             throw new ArgumentException(
                 "Property expression must be of the form 'x => x.SomeProperty.SomeOtherProperty'");
         }
 
-        private static Expression ParseMethodCall(Expression current, MvxParsedExpression toReturn)
+        private static Expression ParseMethodCall(Expression current, MvxParsedExpression toReturn, ILogger log)
         {
             var me = (MethodCallExpression)current;
             if (me.Method.Name != "get_Item"
@@ -71,7 +78,7 @@ namespace MvvmCross.Binding.ExpressionParse
                     "Property expression must be of the form 'x => x.SomeProperty.SomeOtherProperty' or 'x => x.SomeCollection[0].Property'");
             }
             var argument = me.Arguments[0];
-            argument = ConvertMemberAccessToConstant(argument);
+            argument = ConvertMemberAccessToConstant(argument, log);
             toReturn.PrependIndexed(argument.ToString());
             current = me.Object;
             return current;
@@ -87,7 +94,7 @@ namespace MvvmCross.Binding.ExpressionParse
             return toReturn;
         }
 
-        private static Expression ConvertMemberAccessToConstant(Expression argument)
+        private static Expression ConvertMemberAccessToConstant(Expression argument, ILogger log)
         {
             var memberExpr = argument as MemberExpression;
             if (memberExpr == null)
@@ -95,7 +102,7 @@ namespace MvvmCross.Binding.ExpressionParse
 
             try
             {
-                var constExpr = ConvertMemberAccessToConstant(memberExpr.Expression) as ConstantExpression;
+                var constExpr = ConvertMemberAccessToConstant(memberExpr.Expression, log) as ConstantExpression;
                 var value = constExpr?.Value;
 
                 var property = memberExpr.Member as PropertyInfo;
@@ -114,7 +121,7 @@ namespace MvvmCross.Binding.ExpressionParse
             }
             catch
             {
-                MvxLog.Instance.Trace("Failed to evaluate member expression.");
+                log.LogTrace("Failed to evaluate member expression.");
             }
 
             return argument;

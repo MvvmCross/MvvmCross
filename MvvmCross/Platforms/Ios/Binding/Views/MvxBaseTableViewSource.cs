@@ -1,13 +1,14 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Windows.Input;
 using Foundation;
-using MvvmCross.Exceptions;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Logging;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
@@ -16,21 +17,33 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
     {
         public event EventHandler SelectedItemChanged;
         private object _selectedItem;
+        private readonly WeakReference<UITableView> _tableView;
 
         protected MvxBaseTableViewSource(UITableView tableView)
         {
-            TableView = tableView;
+            _tableView = new WeakReference<UITableView>(tableView);
         }
 
-        protected MvxBaseTableViewSource(IntPtr handle)
+        protected MvxBaseTableViewSource(NativeHandle handle)
             : base(handle)
         {
-            MvxLog.Instance.Warn(
-                "MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+            MvxLogHost.GetLog<MvxBaseTableViewSource>()?.Log(LogLevel.Warning,
+                "MvxBaseTableViewSource NativeHandle constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
-        [field: Weak]
-        protected UITableView TableView { get; }
+        protected UITableView TableView
+        {
+            get
+            {
+                if (_tableView.TryGetTarget(out var tableView))
+                    return tableView;
+
+                // This is not a array Sonar. You are drunk...
+#pragma warning disable S1168 // Empty arrays and collections should be returned instead of null
+                return null;
+#pragma warning restore S1168 // Empty arrays and collections should be returned instead of null
+            }
+        }
 
         public bool DeselectAutomatically { get; set; }
 
@@ -59,7 +72,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
             catch (Exception exception)
             {
-                MvxLog.Instance.Warn("Exception masked during TableView ReloadData {0}", exception.ToLongString());
+                MvxLogHost.GetLog<MvxBaseTableViewSource>()?.Log(LogLevel.Warning, exception,
+                    "Exception masked during TableView ReloadData");
             }
         }
 
@@ -120,13 +134,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
         public override void CellDisplayingEnded(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
         {
-            //Don't bind to NULL to speed up cells in lists when fast scrolling
-            //There should be almost no scenario in which this is required
-            //If it is required, do this in your own subclass using this code:
-
-            //var bindable = cell as IMvxDataConsumer;
-            //if (bindable != null)
-            //    bindable.DataContext = null;
+            // Don't bind to NULL to speed up cells in lists when fast scrolling
+            // There should be almost no scenario in which this is required
         }
 
         public override nint NumberOfSections(UITableView tableView)

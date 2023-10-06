@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
 using Foundation;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
@@ -153,38 +154,39 @@ namespace MvvmCross.Platforms.Ios.Views
             return landscape;
         }
 
-		/// <summary>
-		/// Finds all descendants of a type within the view
-		/// </summary>
-		/// <returns>List of views of the type</returns>
-		/// <param name="view">View</param>
-		/// <typeparam name="T">The type to find.</typeparam>
-		public static List<T> DescendantViewsOfType<T>(this UIView view) where T : UIView
-		{
-			return view.DescendantViews().OfType<T>().ToList();
-		}
+        /// <summary>
+        /// Finds all descendants of a type within the view
+        /// </summary>
+        /// <returns>List of views of the type</returns>
+        /// <param name="view">View</param>
+        /// <typeparam name="T">The type to find.</typeparam>
+        public static List<T> DescendantViewsOfType<T>(this UIView view) where T : UIView
+        {
+            return view.DescendantViews().OfType<T>().ToList();
+        }
 
-		private static List<UIView> DescendantViews(this UIView view)
-		{
-			var descendantViews = new List<UIView>();
+        private static List<UIView> DescendantViews(this UIView view)
+        {
+            var descendantViews = new List<UIView>();
 
-			if (view.Subviews.Any())
-			{
-				descendantViews.AddRange(view.Subviews);
+            if (view.Subviews.Any())
+            {
+                descendantViews.AddRange(view.Subviews);
 
-				foreach (var subview in view.Subviews)
-				{
-					descendantViews.AddRange(subview.DescendantViews());
-				}
-			}
+                foreach (var subview in view.Subviews)
+                {
+                    descendantViews.AddRange(subview.DescendantViews());
+                }
+            }
 
-			return descendantViews;
-		}
+            return descendantViews;
+        }
 
         public static UIViewController GetTopModalHostViewController(this UIWindow window)
         {
             var vc = window.RootViewController;
-            do {
+            do
+            {
                 if (vc.PresentedViewController != null)
                     vc = vc.PresentedViewController;
             } while (vc.PresentedViewController != null);

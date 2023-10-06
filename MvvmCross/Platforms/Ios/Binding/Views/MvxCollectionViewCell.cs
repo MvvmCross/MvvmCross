@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using CoreGraphics;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
@@ -43,34 +44,21 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             this.CreateBindingContext(bindingDescriptions);
         }
 
-        public MvxCollectionViewCell(IntPtr handle)
+        public MvxCollectionViewCell(NativeHandle handle)
             : this(string.Empty, handle)
         {
         }
 
-        public MvxCollectionViewCell(string bindingText, IntPtr handle)
+        public MvxCollectionViewCell(string bindingText, NativeHandle handle)
             : base(handle)
         {
             this.CreateBindingContext(bindingText);
         }
 
-        public MvxCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
+        public MvxCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, NativeHandle handle)
             : base(handle)
         {
             this.CreateBindingContext(bindingDescriptions);
-        }
-
-        /// <summary>
-        /// Should fix choppy scrolling on ios8+ by preventing a layout pass when autolayout is already computed
-        /// 
-        /// iOS 8 provides a new self-sizing API for CollectionView and CollectionViewCells. It lets cells determine their own height, based on the content that they're about to load.
-        /// preferredLayoutAttributesFittingAttributes: (on the cell)
-        /// shouldLayoutAttributesFittingAttributes: (on the layout)
-        /// invalidationContextForPreferredLayoutAttributes:withOriginalAttributes: (on the layout)
-        /// </summary>
-        public override UICollectionViewLayoutAttributes PreferredLayoutAttributesFittingAttributes(UICollectionViewLayoutAttributes layoutAttributes)
-        {
-            return layoutAttributes;
         }
 
         protected override void Dispose(bool disposing)

@@ -1,13 +1,13 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Playground.Core.Models;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
-using MvvmCross.Commands;
-using MvvmCross.Logging;
+using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
@@ -24,9 +24,11 @@ namespace Playground.Core.ViewModels
         public string Title => $"No.{Count} Window View";
 
         private Modes _mode = Modes.Blue;
-        public Modes Mode {
+        public Modes Mode
+        {
             get { return _mode; }
-            set {
+            set
+            {
                 if (value == _mode) return;
                 _mode = value;
                 RaisePropertyChanged(() => Mode);
@@ -34,9 +36,11 @@ namespace Playground.Core.ViewModels
         }
 
         private bool _isItem1 = true;
-        public bool IsItem1 {
+        public bool IsItem1
+        {
             get { return _isItem1; }
-            set { 
+            set
+            {
                 if (value == _isItem1) return;
                 _isItem1 = value;
                 RaisePropertyChanged(() => IsItem1);
@@ -81,7 +85,8 @@ namespace Playground.Core.ViewModels
 
         public int Count { get; set; }
 
-        public WindowViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        public WindowViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
+            : base(logProvider, navigationService)
         {
             _count++;
             Count = _count;
@@ -95,9 +100,9 @@ namespace Playground.Core.ViewModels
                 });
             });
 
-            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
 
-            ToggleSettingCommand = new MvxAsyncCommand(async () => 
+            ToggleSettingCommand = new MvxAsyncCommand(async () =>
             {
                 await Task.Run(() =>
                 {
@@ -106,9 +111,8 @@ namespace Playground.Core.ViewModels
             });
         }
 
-        public IMvxAsyncCommand CloseCommand { get; private set; }
-        public IMvxAsyncCommand<int> ShowWindowChildCommand { get; private set; }
-
-        public IMvxAsyncCommand ToggleSettingCommand { get; private set; }    
+        public IMvxAsyncCommand CloseCommand { get; }
+        public IMvxAsyncCommand<int> ShowWindowChildCommand { get; }
+        public IMvxAsyncCommand ToggleSettingCommand { get; }
     }
 }

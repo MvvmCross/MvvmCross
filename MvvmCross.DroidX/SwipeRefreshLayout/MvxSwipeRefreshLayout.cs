@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,10 +8,10 @@ using Android.Content;
 using Android.Runtime;
 using Android.Util;
 
-namespace MvvmCross.DroidX 
+namespace MvvmCross.DroidX
 {
     [Register("mvvmcross.droidx.MvxSwipeRefreshLayout")]
-    public class MvxSwipeRefreshLayout : AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout 
+    public class MvxSwipeRefreshLayout : AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout
     {
         protected MvxSwipeRefreshLayout(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -27,7 +27,7 @@ namespace MvvmCross.DroidX
             : base(context, attributes)
         {
         }
-    
+
         private ICommand _refreshCommand;
         private bool _refreshOverloaded;
 
@@ -42,7 +42,7 @@ namespace MvvmCross.DroidX
                 _refreshCommand = value;
                 if (_refreshCommand != null)
                     EnsureRefreshCommandOverloaded();
-            }		
+            }
         }
 
         private void EnsureRefreshCommandOverloaded()

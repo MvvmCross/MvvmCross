@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -20,11 +20,7 @@ namespace Playground.Core.Services
         {
             get
             {
-                var dictionary = GetType().GetTypeInfo()
-                                     .Assembly
-                                     .CreatableTypes()
-                                     .Where(t => t.Name.EndsWith("ViewModel"))
-                                     .ToDictionary(t => t.Name, t => t.Name);
+                var dictionary = new Dictionary<string, string>();
 
                 dictionary.Add("Text", "Text");
 

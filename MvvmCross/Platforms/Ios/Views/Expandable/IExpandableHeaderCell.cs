@@ -4,10 +4,10 @@
 
 namespace MvvmCross.Platforms.Ios.Views.Expandable
 {
-	public interface IExpandableHeaderCell
-	{
-		void OnExpanded();
+    public interface IExpandableHeaderCell
+    {
+        void OnExpanded();
 
-		void OnCollapsed();
-	}
+        void OnCollapsed();
+    }
 }

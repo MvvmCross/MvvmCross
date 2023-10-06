@@ -1,13 +1,11 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Tvos.Views.Base;
 using MvvmCross.ViewModels;
-using UIKit;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Views
 {
@@ -20,7 +18,7 @@ namespace MvvmCross.Platforms.Tvos.Views
             this.AdaptForBinding();
         }
 
-        protected MvxTableViewController(IntPtr handle)
+        protected MvxTableViewController(NativeHandle handle)
             : base(handle)
         {
             this.AdaptForBinding();
@@ -106,7 +104,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         public override void DidMoveToParentViewController(UIViewController parent)
         {
             base.DidMoveToParentViewController(parent);
-            if(parent == null)
+            if (parent == null)
                 ViewModel?.ViewDestroy();
         }
 
@@ -117,7 +115,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         }
     }
 
-    public class MvxTableViewController<TViewModel> : MvxTableViewController, IMvxTvosView<TViewModel> 
+    public class MvxTableViewController<TViewModel> : MvxTableViewController, IMvxTvosView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
@@ -125,7 +123,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
         }
 
-        protected MvxTableViewController(IntPtr handle)
+        protected MvxTableViewController(NativeHandle handle)
             : base(handle)
         {
         }

@@ -1,4 +1,4 @@
-﻿using Android.App;
+using Android.App;
 using Android.OS;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
@@ -6,7 +6,7 @@ using MvvmCross.Platforms.Android.Views;
 namespace Playground.Droid.Activities
 {
     [MvxActivityPresentation]
-    [Activity(Label = "View for CustomBindingViewModel")]
+    [Activity(Label = "View for CustomBindingViewModel", Theme = "@style/AppTheme")]
     public class CustomBindingView : MvxActivity
     {
         protected override void OnCreate(Bundle bundle)

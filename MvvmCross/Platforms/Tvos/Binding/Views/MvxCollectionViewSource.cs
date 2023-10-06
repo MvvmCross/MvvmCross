@@ -78,20 +78,20 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         {
             return ItemsSource?.ElementAt(indexPath.Row);
         }
-            
+
         /// <summary>
         /// Wait for all animations to finish
         /// </summary>
-        public async Task WaitAnimationsCompletedAsync()
+        public Task WaitAnimationsCompletedAsync()
         {
-            await CollectionView.PerformBatchUpdatesAsync(() => { }); 
+            return CollectionView.PerformBatchUpdatesAsync(() => { });
         }
 
         protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             ReloadData();
         }
-        
+
         public override nint GetItemsCount(UICollectionView collectionView, nint section)
         {
             if (ItemsSource == null)

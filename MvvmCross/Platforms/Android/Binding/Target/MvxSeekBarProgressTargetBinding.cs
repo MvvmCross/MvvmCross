@@ -5,8 +5,8 @@
 using System;
 using System.Reflection;
 using Android.Widget;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding;
+using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             var seekBar = View;
             if (seekBar == null)
             {
-                MvxBindingLog.Error( "Error - SeekBar is null in MvxSeekBarProgressTargetBinding");
+                MvxBindingLog.Error("Error - SeekBar is null in MvxSeekBarProgressTargetBinding");
                 return;
             }
 

@@ -16,7 +16,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
 
         protected UITextField TextField => Target as UITextField;
 
-        public override Type TargetType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 

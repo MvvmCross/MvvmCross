@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using Android.OS;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.ViewModels;
@@ -27,10 +28,10 @@ namespace MvvmCross.Platforms.Android.Views
                 var data = converter.Serializer.DeserializeObject<Dictionary<string, string>>(extras);
                 return new MvxBundle(data);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MvxLog.Instance.Error("Problem getting the saved state - will return null - from {0}",
-                               extras);
+                MvxLogHost.Default?.Log(LogLevel.Error, ex,
+                    "Problem getting the saved state - will return null - from {extras}", extras);
                 return null;
             }
         }

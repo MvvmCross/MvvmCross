@@ -20,6 +20,6 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             return view.CountDownDuration;
         }
 
-        public override Type TargetType => typeof(double);
+        public override Type TargetValueType => typeof(double);
     }
 }

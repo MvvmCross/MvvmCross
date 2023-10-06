@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Windows.UI.Xaml.Media;
 using MvvmCross.UI;
+using Windows.UI.Xaml.Media;
 
 namespace MvvmCross.Plugin.Color.Platforms.Uap
 {

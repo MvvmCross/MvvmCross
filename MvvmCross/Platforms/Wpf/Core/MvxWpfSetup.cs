@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -12,6 +12,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
 using MvvmCross.Core;
 using MvvmCross.IoC;
@@ -110,18 +111,8 @@ namespace MvvmCross.Platforms.Wpf.Core
 
         protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
-        }
-
-        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
-        {
-            ValidateArguments(iocProvider);
-
-            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
@@ -133,6 +124,11 @@ namespace MvvmCross.Platforms.Wpf.Core
         {
             registry.Fill(ValueConverterAssemblies);
             registry.Fill(ValueConverterHolders);
+        }
+
+        protected virtual void FillValueCombiners(IMvxValueCombinerRegistry registry)
+        {
+            // this base class does nothing
         }
 
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -156,14 +152,16 @@ namespace MvvmCross.Platforms.Wpf.Core
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
-            return new MvxWindowsBindingBuilder();
+            return new MvxWindowsBindingBuilder(
+                FillTargetFactories, FillBindingNames, FillValueConverters, FillValueCombiners);
         }
     }
 
-    public class MvxWpfSetup<TApplication> : MvxWpfSetup
+    public abstract class MvxWpfSetup<TApplication> : MvxWpfSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

@@ -1,15 +1,16 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.ViewModels;
-using UIKit;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
-using System.Linq;
+using MvvmCross.ViewModels;
+using ObjCRuntime;
+using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
 {
@@ -35,7 +36,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxPageViewController(IntPtr handle) : base(handle)
+        protected internal MvxPageViewController(NativeHandle handle) : base(handle)
         {
         }
 
@@ -50,12 +51,12 @@ namespace MvvmCross.Platforms.Ios.Views
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            
+
             GetNextViewController = (pc, rc) => GetNextViewControllerPage(rc);
             GetPreviousViewController = (pc, rc) => GetPreviousViewControllerPage(rc);
         }
 
-        public IList<UIViewController> Pages { get; protected set;  } = new List<UIViewController>();
+        public IList<UIViewController> Pages { get; protected set; } = new List<UIViewController>();
 
         public virtual bool IsFirstPage(UIViewController viewController) => Pages.IndexOf(viewController) == 0;
 
@@ -96,7 +97,7 @@ namespace MvvmCross.Platforms.Ios.Views
         }
     }
 
-    public class MvxPageViewController<TViewModel> : MvxPageViewController, IMvxIosView<TViewModel> 
+    public class MvxPageViewController<TViewModel> : MvxPageViewController, IMvxIosView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public MvxPageViewController()
@@ -131,7 +132,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxPageViewController(IntPtr handle) : base(handle)
+        protected internal MvxPageViewController(NativeHandle handle) : base(handle)
         {
         }
 

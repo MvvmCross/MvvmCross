@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Android.Views;
-using MvvmCross.IoC;
 using MvvmCross.Binding;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {

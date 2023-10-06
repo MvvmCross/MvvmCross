@@ -1,7 +1,10 @@
 ---
-
-name: 🐛 Bug Report
+name: "\U0001F41B Bug Report"
 about: Create a report to help us fix bugs and make improvements
+title: ''
+labels: t/bug
+assignees: ''
+
 ---
 
 ## 🐛 Bug Report

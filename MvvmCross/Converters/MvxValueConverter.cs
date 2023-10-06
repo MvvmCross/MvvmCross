@@ -1,9 +1,10 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Globalization;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Converters
@@ -34,7 +35,7 @@ namespace MvvmCross.Converters
             }
             catch (Exception e)
             {
-                GetLog()?.Error($"Failed to Convert from {typeof(TFrom)} to {typeof(TTo)} with Exception: {e}");
+                GetLog()?.Log(LogLevel.Error, $"Failed to Convert from {typeof(TFrom)} to {typeof(TTo)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
         }
@@ -52,7 +53,7 @@ namespace MvvmCross.Converters
             }
             catch (Exception e)
             {
-                GetLog()?.Error($"Failed to Convert from {typeof(TFrom)} to {typeof(TTo)} with Exception: {e}");
+                GetLog()?.Log(LogLevel.Error, $"Failed to Convert from {typeof(TFrom)} to {typeof(TTo)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
         }
@@ -62,15 +63,7 @@ namespace MvvmCross.Converters
             throw new NotImplementedException();
         }
 
-        private static IMvxLog? GetLog()
-        {
-            if (Mvx.IoCProvider.TryResolve(out IMvxLogProvider logProvider))
-            {
-                return logProvider.GetLogFor<MvxValueConverter>();
-            }
-
-            return null;
-        }
+        private static ILogger? GetLog() => MvxLogHost.GetLog<MvxValueConverter>();
     }
 
     public abstract class MvxValueConverter<TFrom>
@@ -84,7 +77,7 @@ namespace MvvmCross.Converters
             }
             catch (Exception e)
             {
-                GetLog()?.Error($"Failed to Convert from {typeof(TFrom)} with Exception: {e}");
+                GetLog()?.Log(LogLevel.Error, $"Failed to Convert from {typeof(TFrom)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
         }
@@ -102,7 +95,7 @@ namespace MvvmCross.Converters
             }
             catch (Exception e)
             {
-                GetLog()?.Error($"Failed to ConvertBack to {typeof(TFrom)} with Exception: {e}");
+                GetLog()?.Log(LogLevel.Error, $"Failed to ConvertBack to {typeof(TFrom)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
         }
@@ -112,15 +105,7 @@ namespace MvvmCross.Converters
             throw new NotImplementedException();
         }
 
-        private static IMvxLog? GetLog()
-        {
-            if (Mvx.IoCProvider.TryResolve(out IMvxLogProvider logProvider))
-            {
-                return logProvider.GetLogFor<MvxValueConverter>();
-            }
-
-            return null;
-        }
+        private static ILogger? GetLog() => MvxLogHost.GetLog<MvxValueConverter>();
     }
 #nullable restore
 }

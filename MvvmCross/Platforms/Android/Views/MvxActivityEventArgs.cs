@@ -16,8 +16,8 @@ namespace MvvmCross.Platforms.Android.Views
             Extras = extras;
         }
 
-        public MvxActivityState ActivityState { get; private set; }
-        public Activity Activity { get; private set; }
-        public object Extras { get; private set; }
+        public MvxActivityState ActivityState { get; }
+        public Activity Activity { get; }
+        public object Extras { get; }
     }
 }

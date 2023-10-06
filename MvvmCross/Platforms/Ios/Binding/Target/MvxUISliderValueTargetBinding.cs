@@ -43,7 +43,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             var slider = View;
             if (slider == null)
             {
-                MvxBindingLog.Error( "Error - UISlider is null in MvxUISliderValueTargetBinding");
+                MvxBindingLog.Error("Error - UISlider is null in MvxUISliderValueTargetBinding");
                 return;
             }
 

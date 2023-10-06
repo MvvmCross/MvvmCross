@@ -1,13 +1,11 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
+#nullable enable
 using System.Windows.Input;
 
 namespace MvvmCross.Commands
 {
-#nullable enable
     public interface IMvxCommand : ICommand
     {
         void RaiseCanExecuteChanged();
@@ -31,5 +29,4 @@ namespace MvvmCross.Commands
 
         void RaiseCanExecuteChanged();
     }
-#nullable restore
 }

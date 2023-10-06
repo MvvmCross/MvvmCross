@@ -27,7 +27,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof(bool);
+        public override Type TargetValueType => typeof(bool);
 
         protected UIActivityIndicatorView View => Target as UIActivityIndicatorView;
 

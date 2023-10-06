@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,7 +11,7 @@ namespace MvvmCross.UnitTest.ViewModels
     [Collection("MvxTest")]
     public class MvxCommandCollationTestNoIoC
     {
-        private NavigationTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
         public MvxCommandCollationTestNoIoC(NavigationTestFixture fixture)
         {

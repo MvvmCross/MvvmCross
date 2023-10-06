@@ -9,7 +9,6 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
-using MvvmCross.Logging;
 using MvvmCross.Binding.Extensions;
 using UIKit;
 
@@ -69,9 +68,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 
         private async Task CollectionChangedOnCollectionChangedAsync(NotifyCollectionChangedEventArgs args, Task existingTask, IEnumerable itemsSource)
         {
-            MvxLog.Instance.Trace($"CollectionChanged received action:{args.Action} newItems:{args.NewItems?.Count} oldItems:{args.OldItems?.Count} itemsSourceCount:{itemsSource.Count()}");
             await existingTask;
-            MvxLog.Instance.Trace($"CollectionChanged starting action:{args.Action}");
             itemsSourceBeforeAnimation = itemsSource;
 
             if (args.NewItems?.Count > MaxAnimatedItems || args.OldItems?.Count > MaxAnimatedItems)
@@ -127,7 +124,6 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             }
 
             itemsSourceBeforeAnimation = null;
-            MvxLog.Instance.Trace($"CollectionChanged done action:{args.Action} newItems:{args.NewItems?.Count} oldItems:{args.OldItems?.Count}");
         }
     }
 }

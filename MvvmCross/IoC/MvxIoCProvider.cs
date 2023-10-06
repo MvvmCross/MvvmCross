@@ -1,9 +1,7 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using System.Collections.Generic;
+#nullable enable
 using MvvmCross.Base;
 
 namespace MvvmCross.IoC
@@ -13,10 +11,10 @@ namespace MvvmCross.IoC
     ///
     /// Delegates to the <see cref="MvxIoCContainer"/> implementation
     /// </summary>
-    public class MvxIoCProvider
+    public sealed class MvxIoCProvider
         : MvxSingleton<IMvxIoCProvider>, IMvxIoCProvider
     {
-        public static IMvxIoCProvider Initialize(IMvxIocOptions options = null)
+        public static IMvxIoCProvider Initialize(IMvxIocOptions? options = null)
         {
             if (Instance != null)
             {
@@ -25,15 +23,15 @@ namespace MvvmCross.IoC
 
             // create a new ioc container - it will register itself as the singleton
             // ReSharper disable ObjectCreationAsStatement
-            new MvxIoCProvider(options);
+            var instance = new MvxIoCProvider(options);
 
             // ReSharper restore ObjectCreationAsStatement
-            return Instance;
+            return instance;
         }
 
         private readonly MvxIoCContainer _provider;
 
-        protected MvxIoCProvider(IMvxIocOptions options)
+        private MvxIoCProvider(IMvxIocOptions? options)
         {
             _provider = new MvxIoCContainer(options);
         }
@@ -49,46 +47,46 @@ namespace MvvmCross.IoC
             return _provider.CanResolve(type);
         }
 
-        public bool TryResolve<T>(out T resolved)
+        public bool TryResolve<T>(out T? resolved)
             where T : class
         {
-            return _provider.TryResolve<T>(out resolved);
+            return _provider.TryResolve(out resolved);
         }
 
-        public bool TryResolve(Type type, out object resolved)
+        public bool TryResolve(Type type, out object? resolved)
         {
             return _provider.TryResolve(type, out resolved);
         }
 
-        public T Resolve<T>()
+        public T? Resolve<T>()
             where T : class
         {
             return _provider.Resolve<T>();
         }
 
-        public object Resolve(Type type)
+        public object? Resolve(Type type)
         {
             return _provider.Resolve(type);
         }
 
-        public T GetSingleton<T>()
+        public T? GetSingleton<T>()
             where T : class
         {
             return _provider.GetSingleton<T>();
         }
 
-        public object GetSingleton(Type type)
+        public object? GetSingleton(Type type)
         {
             return _provider.GetSingleton(type);
         }
 
-        public T Create<T>()
+        public T? Create<T>()
             where T : class
         {
             return _provider.Create<T>();
         }
 
-        public object Create(Type type)
+        public object? Create(Type type)
         {
             return _provider.Create(type);
         }
@@ -138,55 +136,44 @@ namespace MvvmCross.IoC
             _provider.RegisterSingleton(tInterface, theConstructor);
         }
 
-        public T IoCConstruct<T>()
-            where T : class
+        public T? IoCConstruct<T>() where T : class
         {
-            return _provider.IoCConstruct<T>();
+            return _provider.IoCConstruct<T>((IDictionary<string, object>?)null);
         }
 
-        public virtual object IoCConstruct(Type type)
-        {
-            return _provider.IoCConstruct(type);
-        }
-
-        public T IoCConstruct<T>(IDictionary<string, object> arguments) where T : class
+        public T? IoCConstruct<T>(IDictionary<string, object>? arguments) where T : class
         {
             return _provider.IoCConstruct<T>(arguments);
         }
 
-        public T IoCConstruct<T>(params object[] arguments) where T : class
+        public T? IoCConstruct<T>(params object?[] arguments) where T : class
         {
             return _provider.IoCConstruct<T>(arguments);
         }
 
-        public T IoCConstruct<T>(object arguments) where T : class
+        public T? IoCConstruct<T>(object? arguments) where T : class
         {
             return _provider.IoCConstruct<T>(arguments);
         }
 
-        public object IoCConstruct(Type type, IDictionary<string, object>? arguments = null)
+        public object? IoCConstruct(Type type)
+        {
+            return _provider.IoCConstruct(type, (IDictionary<string, object>?)null);
+        }
+
+        public object? IoCConstruct(Type type, IDictionary<string, object>? arguments)
         {
             return _provider.IoCConstruct(type, arguments);
         }
 
-        public object IoCConstruct(Type type, object arguments)
+        public object? IoCConstruct(Type type, object? arguments)
         {
             return _provider.IoCConstruct(type, arguments);
         }
 
-        public object IoCConstruct(Type type, params object[] arguments)
+        public object? IoCConstruct(Type type, params object?[] arguments)
         {
             return _provider.IoCConstruct(type, arguments);
-        }
-
-        public void CallbackWhenRegistered<T>(Action action)
-        {
-            _provider.CallbackWhenRegistered<T>(action);
-        }
-
-        public void CallbackWhenRegistered(Type type, Action action)
-        {
-            _provider.CallbackWhenRegistered(type, action);
         }
 
         public void CleanAllResolvers()

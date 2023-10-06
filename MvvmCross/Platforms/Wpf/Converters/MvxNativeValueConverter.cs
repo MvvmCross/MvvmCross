@@ -50,9 +50,9 @@ namespace MvvmCross.Platforms.Wpf.Converters
             return toReturn;
         }
 
-        public override object ProvideValue(IServiceProvider serviceProvider) 
-        { 
-            return this; 
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
         }
     }
 

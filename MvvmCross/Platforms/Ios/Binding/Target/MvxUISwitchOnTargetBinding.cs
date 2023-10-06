@@ -29,7 +29,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
             var uiSwitch = Target;
             if (uiSwitch == null)
             {
-                MvxBindingLog.Error( "Error - Switch is null in MvxUISwitchOnTargetBinding");
+                MvxBindingLog.Error("Error - Switch is null in MvxUISwitchOnTargetBinding");
                 return;
             }
 

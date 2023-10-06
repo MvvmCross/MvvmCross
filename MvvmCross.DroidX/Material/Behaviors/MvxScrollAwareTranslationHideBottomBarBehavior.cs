@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -15,7 +15,7 @@ using Object = Java.Lang.Object;
 namespace MvvmCross.DroidX.Material.Behaviors
 {
     [Register("mvvmcross.droidx.material.behaviors.MvxScrollAwareTranslationAutoHideBehavior")]
-    public class MvxScrollAwareTranslationHideBottomBarBehavior 
+    public class MvxScrollAwareTranslationHideBottomBarBehavior
         : CoordinatorLayout.Behavior
     {
         private static readonly float MinimalScrollDistance = 25;

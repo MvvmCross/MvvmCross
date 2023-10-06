@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -29,7 +29,7 @@ namespace MvvmCross.Base
         }
 
         public static void ApplyTo<T>(this IEnumerable<IMvxApplicableTo<T>> toApply, T what)
-            where T: notnull
+            where T : notnull
         {
             if (toApply == null)
                 throw new ArgumentNullException(nameof(toApply));

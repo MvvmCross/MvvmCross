@@ -1,20 +1,21 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CoreGraphics;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Tvos.Presenters.Attributes;
 using MvvmCross.Platforms.Tvos.Views;
-using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
-using UIKit;
 using MvvmCross.Presenters.Attributes;
-using System.Threading.Tasks;
+using MvvmCross.ViewModels;
+using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Presenters
 {
@@ -25,6 +26,8 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         protected IUIApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
         private readonly UIWindow _window;
+        private readonly ILogger<MvxTvosViewPresenter> _logger;
+
         protected UIWindow Window => _window;
 
         public UINavigationController MasterNavigationController { get; protected set; }
@@ -41,6 +44,8 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         {
             _applicationDelegate = applicationDelegate;
             _window = window;
+
+            _logger = MvxLogHost.GetLog<MvxTvosViewPresenter>();
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
@@ -48,8 +53,9 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             if (MasterNavigationController == null &&
                (TabBarViewController == null || !TabBarViewController.CanShowChildView()))
             {
-                MvxLog.Instance.Trace($"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. " +
-                    $"Assuming Root presentation");
+                _logger?.LogTrace(
+                    "PresentationAttribute nor MasterNavigationController found for {viewTypeName}. Assuming Root presentation",
+                    viewType.Name);
                 return new MvxRootPresentationAttribute()
                 {
                     WrapInNavigationController = true,
@@ -57,8 +63,10 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                     ViewModelType = viewModelType
                 };
             }
-            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. " +
-                $"Assuming animated Child presentation");
+
+            _logger?.LogTrace(
+                    "PresentationAttribute not found for {viewTypeName}. Assuming Root presentation",
+                    viewType.Name);
             return new MvxChildPresentationAttribute()
             {
                 ViewType = viewType,
@@ -78,7 +86,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
                     if (presentationAttribute == null)
                     {
-                        MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
+                        _logger?.LogWarning("Override PresentationAttribute null. Falling back to existing attribute.");
                     }
                     else
                     {
@@ -149,7 +157,8 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         protected virtual Task<bool> CloseRootViewController(IMvxViewModel viewModel,
                                      MvxRootPresentationAttribute attribute)
         {
-            MvxLog.Instance.Warn($"Ignored attempt to close the window root (ViewModel type: {viewModel.GetType().Name}");
+            _logger?.LogWarning("Ignored attempt to close the window root (ViewModel type: {viewModelName}",
+                viewModel.GetType().Name);
             return Task.FromResult(false);
         }
 
@@ -218,7 +227,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 return Task.FromResult(false);
 
             var modal = ModalViewControllers
-                .FirstOrDefault(v => v is IMvxTvosView && v.GetIMvxTvosView().ViewModel == viewModel);
+                .Find(v => v is IMvxTvosView && v.GetIMvxTvosView().ViewModel == viewModel);
             if (modal != null)
             {
                 return CloseModalViewController(modal);
@@ -300,9 +309,9 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             if (!SplitViewController.ViewControllers.Any())
                 return Task.FromResult(false);
 
-            var toClose = SplitViewController.ViewControllers.ToList()
-                                         .Select(v => v.GetIMvxTvosView())
-                                         .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+            var toClose = SplitViewController.ViewControllers
+                .Select(v => v.GetIMvxTvosView())
+                .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
             if (toClose != null)
             {
                 var newStack = SplitViewController.ViewControllers.Where(v => v.GetIMvxTvosView() != toClose);
@@ -333,33 +342,33 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                                            MvxRootPresentationAttribute attribute,
                                            MvxViewModelRequest request)
         {
-            if (viewController is IMvxTabBarViewController)
+            if (viewController is IMvxTabBarViewController controller)
             {
                 //NOTE clean up must be done first incase we are enbedding into a navigation controller
                 //before setting the tab view controller, otherwise this will reset the view stack and your tab
                 //controller will be null. 
                 await SetupWindowRootNavigation(viewController, attribute);
-                this.TabBarViewController = (IMvxTabBarViewController)viewController;
+                this.TabBarViewController = controller;
 
                 return await CloseModalViewControllers();
             }
 
-            if (viewController is IMvxPageViewController)
+            if (viewController is IMvxPageViewController pageViewController)
             {
                 //NOTE clean up must be done first incase we are enbedding into a navigation controller
                 //before setting the page view controller, otherwise this will reset the view stack and your page
                 //controller will be null. 
                 await SetupWindowRootNavigation(viewController, attribute);
-                this.PageViewController = (IMvxPageViewController)viewController;
+                this.PageViewController = pageViewController;
 
                 return await CloseModalViewControllers();
             }
 
             await SetupWindowRootNavigation(viewController, attribute);
 
-            if(!(await CloseModalViewControllers()))return false;
-            if(!(await CloseTabBarViewController()))return false;
-            if(!(await CloseSplitViewController()))return false;
+            if (!(await CloseModalViewControllers())) return false;
+            if (!(await CloseTabBarViewController())) return false;
+            if (!(await CloseSplitViewController())) return false;
             return true;
         }
 
@@ -532,7 +541,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
         public virtual Task<bool> CloseTopModalViewController()
         {
-            return CloseModalViewController(ModalViewControllers?.Last());
+            return CloseModalViewController(ModalViewControllers?[^1]);
         }
 
         protected virtual void PushViewControllerIntoStack(UINavigationController navigationController, UIViewController viewController, bool animated)
@@ -595,7 +604,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             }
 
             var viewControllers = navigationController.ViewControllers.ToList();
-            var viewController = viewControllers.FirstOrDefault(vc => vc.GetIMvxTvosView().ViewModel == viewModel);
+            var viewController = viewControllers.Find(vc => vc.GetIMvxTvosView().ViewModel == viewModel);
             if (viewController != null)
             {
                 viewControllers.Remove(viewController);
@@ -616,7 +625,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         {
             while (ModalViewControllers.Any())
             {
-                if(!(await CloseModalViewController(ModalViewControllers.LastOrDefault())))return false;
+                if (!(await CloseModalViewController(ModalViewControllers.LastOrDefault()))) return false;
             }
             return true;
         }

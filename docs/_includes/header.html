@@ -45,7 +45,9 @@
         <ul role="menu" aria-hidden="true" aria-label="Navigation menu">
         {% assign items = category.items | sort: "order"  %}
         {% for item in items %}
+        {% unless item.exclude %}
         <li role="menuitem" aria-label="Navigation menu item"><a href="{{ item.url | relative_url }}" class="doc-link" role="link" aria-label="{{ item.title }}">{{ item.title }}</a></li>
+        {% endunless %}
         {% endfor %}
         </ul>
         {% endfor %}

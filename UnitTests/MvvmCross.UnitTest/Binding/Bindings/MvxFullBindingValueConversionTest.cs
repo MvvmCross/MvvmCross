@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -458,7 +458,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         }
 
         private MvxFullBinding TestSetupCommon(IMvxValueConverter valueConverter, object converterParameter, object fallbackValue,
-            Type targetType, out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
+            Type targetValueType, out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
         {
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(new InlineMockMainThreadDispatcher());
@@ -491,7 +491,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             };
 
             mockSource = new MockSourceBinding();
-            mockTarget = new MockTargetBinding() { TargetType = targetType };
+            mockTarget = new MockTargetBinding() { TargetValueType = targetValueType };
             mockTarget.DefaultMode = MvxBindingMode.TwoWay;
 
             var localSource = mockSource;

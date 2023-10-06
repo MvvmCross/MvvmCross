@@ -1,20 +1,15 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using System.Collections.Generic;
+#nullable enable
 using Android.Content;
-using Android.OS;
 using Android.Runtime;
-using Android.Views;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platforms.Android.Views.Base;
+using MvvmCross.Core;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.ViewModels;
-using MvvmCross.Core;
-using Fragment = AndroidX.Fragment.App.Fragment;
 
 namespace MvvmCross.Platforms.Android.Views
 {
@@ -23,8 +18,6 @@ namespace MvvmCross.Platforms.Android.Views
         : MvxEventSourceActivity
         , IMvxAndroidView
     {
-        protected View _view;
-
         protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
@@ -36,18 +29,19 @@ namespace MvvmCross.Platforms.Android.Views
             this.AddEventListeners();
         }
 
-        public object DataContext
+        public object? DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get => BindingContext?.DataContext;
+            set
+            {
+                if (BindingContext != null)
+                    BindingContext.DataContext = value;
+            }
         }
 
-        public IMvxViewModel ViewModel
+        public IMvxViewModel? ViewModel
         {
-            get
-            {
-                return DataContext as IMvxViewModel;
-            }
+            get => DataContext as IMvxViewModel;
             set
             {
                 DataContext = value;
@@ -60,20 +54,29 @@ namespace MvvmCross.Platforms.Android.Views
             StartActivityForResult(intent, requestCode);
         }
 
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBindingContext? BindingContext { get; set; }
 
-        public override void SetContentView(int layoutResId)
+        // ReSharper disable once InconsistentNaming
+        public override void SetContentView(int layoutResID)
         {
-            _view = this.BindingInflate(layoutResId, null);
+            if (BaseContextToAttach(this) is MvxContextWrapper)
+            {
+                var view = this.BindingInflate(layoutResID, null);
+                SetContentView(view);
+                return;
+            }
 
-            SetContentView(_view);
+            base.SetContentView(layoutResID);
         }
 
         protected virtual void OnViewModelSet()
         {
         }
 
-        protected override void AttachBaseContext(Context @base)
+        protected virtual Context BaseContextToAttach(Context? @base)
+            => MvxContextWrapper.Wrap(@base, this);
+
+        protected override void AttachBaseContext(Context? @base)
         {
             if (this is IMvxSetupMonitor)
             {
@@ -81,38 +84,12 @@ namespace MvvmCross.Platforms.Android.Views
                 base.AttachBaseContext(@base);
                 return;
             }
-            base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
+            base.AttachBaseContext(BaseContextToAttach(@base));
         }
 
-        private readonly List<WeakReference<Fragment>> _fragList = new List<WeakReference<Fragment>>();
-
-        public override void OnAttachFragment(Fragment fragment)
+        protected override void OnCreate(Bundle? savedInstanceState)
         {
-            base.OnAttachFragment(fragment);
-            _fragList.Add(new WeakReference<Fragment>(fragment));
-        }
-
-        public List<Fragment> Fragments
-        {
-            get
-            {
-                var fragments = new List<Fragment>();
-                foreach (var weakReference in _fragList)
-                {
-                    if (weakReference.TryGetTarget(out Fragment f))
-                    {
-                        if (f.IsVisible)
-                            fragments.Add(f);
-                    }
-                }
-
-                return fragments;
-            }
-        }
-
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
+            base.OnCreate(savedInstanceState);
             ViewModel?.ViewCreated();
         }
 
@@ -147,26 +124,25 @@ namespace MvvmCross.Platforms.Android.Views
         }
     }
 
-    public abstract class MvxActivity<TViewModel> : MvxActivity, IMvxAndroidView<TViewModel> 
+    public abstract class MvxActivity<TViewModel> : MvxActivity, IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
-        public new TViewModel ViewModel
+        public new TViewModel? ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get => (TViewModel?)base.ViewModel;
+            set => base.ViewModel = value;
         }
 
-        protected MvxActivity() : base()
+        protected MvxActivity()
         {
         }
 
-        protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
         {
         }
 
         public MvxFluentBindingDescriptionSet<IMvxAndroidView<TViewModel>, TViewModel> CreateBindingSet()
-        {
-            return this.CreateBindingSet<IMvxAndroidView<TViewModel>, TViewModel>();
-        }
+            => this.CreateBindingSet<IMvxAndroidView<TViewModel>, TViewModel>();
     }
 }

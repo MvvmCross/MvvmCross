@@ -1,15 +1,16 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
 {
-    
     public class MvxSourcePropertyPathParserTest
     {
         [Fact]
@@ -18,7 +19,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
             foreach (var test in new[] { null, string.Empty, ".", "\t", " .\r\n" })
             {
                 var result = Tokenise(test);
-                Assert.Equal(1, result.Count);
+                Assert.Single(result);
                 Assert.IsType<MvxEmptyPropertyToken>(result[0]);
             }
         }
@@ -27,7 +28,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
         public void TestTokeniser_OnWhitespace()
         {
             var result = Tokenise(" \t\r \n ");
-            Assert.Equal(1, result.Count);
+            Assert.Single(result);
             Assert.IsType<MvxEmptyPropertyToken>(result[0]);
         }
 
@@ -36,11 +37,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
         {
             var text = "Hello";
             var result = Tokenise(text);
-            Assert.Equal(1, result.Count);
+            Assert.Single(result);
             AssertIsSimplePropertyToken(result[0], text);
 
             var result2 = Tokenise(AddWhitespace(text));
-            Assert.Equal(1, result2.Count);
+            Assert.Single(result2);
             AssertIsSimplePropertyToken(result2[0], text);
         }
 
@@ -74,11 +75,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
                 var text = "[" + u + "]";
 
                 var result = Tokenise(text);
-                Assert.Equal(1, result.Count);
+                Assert.Single(result);
                 AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result[0], u);
 
                 var result2 = Tokenise(AddWhitespace(text));
-                Assert.Equal(1, result2.Count);
+                Assert.Single(result2);
                 AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result2[0], u);
             }
         }
@@ -96,11 +97,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
                     text = text.Replace("\\", "\\\\");
 
                     var result = Tokenise(text);
-                    Assert.Equal(1, result.Count);
+                    Assert.Single(result);
                     AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[0], s);
 
                     var result2 = Tokenise(AddWhitespace(text));
-                    Assert.Equal(1, result2.Count);
+                    Assert.Single(result2);
                     AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result2[0], s);
                 }
             }
@@ -190,6 +191,33 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
         {
             var tokeniser = new MvxSourcePropertyPathParser();
             return tokeniser.Parse(text);
+        }
+
+        [Fact]
+        public void TestTokeniser_ReturnsParsedValueSimilarToOriginalValueForSimpleExpressions()
+        {
+            var random = new Random(123);
+            for (int i = 0; i < 100_000; i++)
+            {
+                var originalExpression = CreateRandomExpression(random);
+                var mvxPropertyTokens = Tokenise(originalExpression);
+
+                var actual = string.Join<string>(".",
+                    mvxPropertyTokens.Cast<MvxPropertyNamePropertyToken>().Select(t => t.PropertyName));
+
+                Assert.Equal(originalExpression, actual);
+            }
+        }
+
+        private static string CreateRandomExpression(Random random)
+        {
+            return string.Join<string>(".",
+                Enumerable.Repeat(0, random.Next() % 6 + 3).Select(_ =>
+                {
+                    var length = random.Next() % 6 + 3;
+                    return new string(Enumerable.Repeat("qwertyuiopasdfghjklzxcvbnm", length)
+                        .Select(s => s[random.Next(s.Length)]).ToArray());
+                }));
         }
     }
 }

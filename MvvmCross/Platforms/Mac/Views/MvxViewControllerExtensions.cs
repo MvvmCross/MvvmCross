@@ -4,9 +4,10 @@
 
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Core;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
@@ -24,7 +25,7 @@ namespace MvvmCross.Platforms.Mac.Views
         {
             if (macView.Request == null)
             {
-                MvxLog.Instance.Trace(
+                MvxLogHost.Default?.Log(LogLevel.Trace,
                     "Request is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
                 macView.Request = Mvx.IoCProvider.Resolve<IMvxCurrentRequest>().CurrentRequest;
             }

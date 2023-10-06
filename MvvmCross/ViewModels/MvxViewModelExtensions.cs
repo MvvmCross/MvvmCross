@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -41,7 +41,7 @@ namespace MvvmCross.ViewModels
             // Make sure we have a bundle that matches function parameters
             if (bundle == null && parameters.Length > 0)
                 return;
-            
+
             if (bundle != null && parameters.Length == 1)
             {
                 if (parameters[0].ParameterType == typeof(IMvxBundle))

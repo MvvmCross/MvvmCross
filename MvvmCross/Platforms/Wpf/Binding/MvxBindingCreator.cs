@@ -5,8 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings;
+using MvvmCross.Logging;
 
 namespace MvvmCross.Platforms.Wpf.Binding
 {
@@ -18,7 +19,7 @@ namespace MvvmCross.Platforms.Wpf.Binding
             var attachedObject = sender as FrameworkElement;
             if (attachedObject == null)
             {
-                MvxLog.Instance.Warn("Null attached FrameworkElement seen in Bi.nd binding");
+                MvxLogHost.Default?.Log(LogLevel.Warning, "Null attached FrameworkElement seen in Bi.nd binding");
                 return;
             }
 

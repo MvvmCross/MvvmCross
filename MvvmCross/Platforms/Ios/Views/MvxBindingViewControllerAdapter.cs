@@ -3,8 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios.Views.Base;
 
 namespace MvvmCross.Platforms.Ios.Views
@@ -17,16 +18,18 @@ namespace MvvmCross.Platforms.Ios.Views
             : base(eventSource)
         {
             if (!(eventSource is IMvxIosView))
-                throw new ArgumentException(nameof(eventSource), $"{nameof(eventSource)} should be a {nameof(IMvxIosView)}");
+                throw new ArgumentException($"{nameof(eventSource)} should be a {nameof(IMvxIosView)}", nameof(eventSource));
 
-            IosView.BindingContext = Mvx.IoCProvider.Resolve<IMvxBindingContext>();
+            if (Mvx.IoCProvider?.TryResolve<IMvxBindingContext>(out var bindingContext) == true)
+                IosView.BindingContext = bindingContext;
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
             if (IosView == null)
             {
-                MvxLog.Instance.Warn($"{nameof(IosView)} is null for clearup of bindings");
+                MvxLogHost.GetLog<MvxBindingViewControllerAdapter>()?.LogWarning(
+                    "{IosView} is null for clear-up of bindings", nameof(IosView));
                 return;
             }
             IosView.ClearAllBindings();

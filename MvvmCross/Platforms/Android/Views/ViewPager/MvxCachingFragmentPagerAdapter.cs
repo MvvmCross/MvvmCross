@@ -1,17 +1,18 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using AndroidX.Fragment.App;
 using AndroidX.ViewPager.Widget;
 using Java.Lang;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
+using Fragment = AndroidX.Fragment.App.Fragment;
+using FragmentManager = AndroidX.Fragment.App.FragmentManager;
+using FragmentTransaction = AndroidX.Fragment.App.FragmentTransaction;
 
 namespace MvvmCross.Platforms.Android.Views.ViewPager
 {
@@ -57,7 +58,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
                 _curTransaction = _fragmentManager.BeginTransaction();
 
 #if DEBUG
-            MvxLog.Instance.Trace(
+            MvxLogHost.GetLog<MvxCachingFragmentPagerAdapter>()?.Log(LogLevel.Trace,
                 $"Removing item #{position}: f={objectValue} v={((Fragment)objectValue).View} t={fragment.Tag}");
 #endif
 
@@ -120,7 +121,8 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             }
 
 #if DEBUG
-            MvxLog.Instance.Trace("Adding item #{0}: f={1} t={2}", position, fragment, fragmentTag);
+            MvxLogHost.GetLog<MvxCachingFragmentPagerAdapter>()?.Log(LogLevel.Trace,
+                "Adding item #{position}: f={fragment} t={tag}", position, fragment, fragmentTag);
 #endif
 
             while (_fragments.Count <= position)
@@ -169,7 +171,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             var keys = bundle.KeySet();
             foreach (var key in keys)
             {
-                if (!key.StartsWith("f"))
+                if (!key.StartsWith('f'))
                     continue;
 
                 var index = Integer.ParseInt(key.Substring(1));

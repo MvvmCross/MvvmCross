@@ -16,7 +16,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
         {
         }
 
-        public override Type TargetType => typeof(ImageView);
+        public override Type TargetValueType => typeof(ImageView);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 

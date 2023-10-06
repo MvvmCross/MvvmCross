@@ -1,32 +1,30 @@
-#module nuget:?package=Cake.DotNetTool.Module&version=0.4.0
-#tool dotnet:n?package=GitVersion.Tool&version=5.6.6
-#tool nuget:?package=vswhere&version=2.8.4
-#tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.8.0
-#addin nuget:?package=Cake.Figlet&version=1.3.1
-#addin nuget:?package=Cake.Sonar&version=1.1.25
+#tool dotnet:n?package=GitVersion.Tool&version=5.12.0
+#tool dotnet:n?package=dotnet-sonarscanner&version=5.13.0
+#addin nuget:?package=Cake.Figlet&version=2.0.1
 
 var solutionName = "MvvmCross";
 var repoName = "mvvmcross/mvvmcross";
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var verbosityArg = Argument("verbosity", "Minimal");
 var artifactsDir = Argument("artifactsDir", "./artifacts");
-var sln = new FilePath("./" + solutionName + ".sln");
 var outputDir = new DirectoryPath(artifactsDir);
 var gitVersionLog = new FilePath("./gitversion.log");
 var nuspecDir = new DirectoryPath("./nuspec");
 var verbosity = Verbosity.Minimal;
+var verbosityDotNet = DotNetVerbosity.Minimal;
 var sonarKey = Argument("sonarKey", "");
+var java11sdkPath = EnvironmentVariable<string>("JAVA_HOME_11_X64", "");
 
-var githubToken = Argument("github_token", "");
-var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
-var sinceTag = Argument("since_tag", "");
-
-var isRunningOnPipelines = AzurePipelines.IsRunningOnAzurePipelines || AzurePipelines.IsRunningOnAzurePipelinesHosted;
+var isRunningOnPipelines = AzurePipelines.IsRunningOnAzurePipelines;
 GitVersion versionInfo = null;
+
+FilePath solution;
 
 Setup(context => 
 {
+    var slnPath = IsRunningOnMacOs() ? "./MvvmCross-macos.slnf" : "./MvvmCross.sln";
+    solution = new FilePath(slnPath);
+
     versionInfo = context.GitVersion(new GitVersionSettings 
     {
         UpdateAssemblyInfo = true,
@@ -50,7 +48,14 @@ Setup(context =>
         target,
         cakeVersion);
 
-    verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
+    verbosity = context.Log.Verbosity;
+    verbosityDotNet = verbosity switch {
+        Verbosity.Quiet => DotNetVerbosity.Quiet,
+        Verbosity.Normal => DotNetVerbosity.Normal,
+        Verbosity.Verbose => DotNetVerbosity.Detailed,
+        Verbosity.Diagnostic => DotNetVerbosity.Diagnostic,
+        _ => DotNetVerbosity.Minimal
+    };
 });
 
 Task("Clean")
@@ -65,33 +70,10 @@ Task("Clean")
     CopyFile(gitVersionLog, outputDir + "/gitversion.log");
 });
 
-FilePath msBuildPath;
-Task("ResolveBuildTools")
-    .WithCriteria(() => IsRunningOnWindows())
-    .Does(() => 
-{
-    var vsWhereSettings = new VSWhereLatestSettings
-    {
-        IncludePrerelease = true,
-        Requires = "Component.Xamarin"
-    };
-    
-    var vsLatest = VSWhereLatest(vsWhereSettings);
-    msBuildPath = (vsLatest == null)
-        ? null
-        : vsLatest.CombineWithFilePath("./MSBuild/Current/Bin/MSBuild.exe");
-
-    if (msBuildPath != null)
-        Information("Found MSBuild at {0}", msBuildPath.ToString());
-});
-
 Task("Restore")
-    .IsDependentOn("ResolveBuildTools")
-    .Does(() => 
+    .Does(() =>
 {
-    var settings = GetDefaultBuildSettings()
-        .WithTarget("Restore");
-    MSBuild(sln, settings);
+    DotNetRestore(solution.ToString());
 });
 
 Task("PatchBuildProps")
@@ -105,54 +87,67 @@ Task("SonarStart")
     .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
     .Does(() => 
 {
-    var settings = new SonarBeginSettings
-    {
-        Key = "MvvmCross_MvvmCross",
-        Url = "https://sonarcloud.io",
-        Organization = "mvx",
-        Login = sonarKey,
-        XUnitReportsPath = new DirectoryPath(outputDir + "/Tests/").FullPath
-    };
+    StringBuilder args = new StringBuilder();
+    args.Append("begin ");
+    args.Append("/key:MvvmCross_MvvmCross ");
+    args.Append("/o:mvx ");
+    args.Append("/d:sonar.host.url=https://sonarcloud.io ");
+    args.AppendFormat("/d:sonar.cs.xunit.reportsPaths={0} ", new DirectoryPath(outputDir + "/Tests/").FullPath);
+    args.AppendFormat("/d:sonar.login={0} ", sonarKey);
 
     if (AzurePipelines.Environment.PullRequest.IsPullRequest)
     {
-        settings.PullRequestKey = AzurePipelines.Environment.PullRequest.Number;
-        settings.PullRequestBranch = AzurePipelines.Environment.PullRequest.SourceBranch;
-        settings.PullRequestBase = AzurePipelines.Environment.PullRequest.TargetBranch;
+        args.AppendFormat("/d:sonar.pullrequest.key={0} ", AzurePipelines.Environment.PullRequest.Number);
+        args.AppendFormat("/d:sonar.pullrequest.branch={0} ", AzurePipelines.Environment.PullRequest.SourceBranch);
+        args.AppendFormat("/d:sonar.pullrequest.base={0}", AzurePipelines.Environment.PullRequest.TargetBranch);
     }
     else
     {
-        settings.Branch = versionInfo.BranchName;
+        args.AppendFormat("/d:sonar.branch.name={0}", versionInfo.BranchName);
     }
 
-    SonarBegin(settings);
+    DotNetTool("./", "dotnet-sonarscanner", args.ToString());
 });
 
 Task("SonarEnd")
     .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
     .Does(() => 
 {   
-    SonarEnd(new SonarEndSettings
-    {
-        Login = sonarKey
-    });
+    StringBuilder args = new StringBuilder();
+    args.Append("end ");
+    args.AppendFormat("/d:sonar.login={0}", sonarKey);
+
+    DotNetTool("./", "dotnet-sonarscanner", args.ToString());
 });
 
 Task("Build")
-    .IsDependentOn("ResolveBuildTools")
     .IsDependentOn("Clean")
     .IsDependentOn("PatchBuildProps")
     .IsDependentOn("Restore")
-    .Does(() =>  {
+    .Does(() =>
+{
 
-    var settings = GetDefaultBuildSettings()
-        .WithProperty("Version", versionInfo.SemVer)
-        .WithProperty("PackageVersion", versionInfo.SemVer)
-        .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
-        .WithProperty("NoPackageAnalysis", "True")
-        .WithTarget("Build");
-	
-    MSBuild(sln, settings);
+    var msBuildSettings = new DotNetMSBuildSettings
+    {
+        Version = versionInfo.SemVer,
+        PackageVersion = versionInfo.SemVer,
+        InformationalVersion = versionInfo.InformationalVersion
+    };
+    
+    if (!string.IsNullOrEmpty(java11sdkPath) && isRunningOnPipelines)
+    {
+        Information("Using Java at Path: {0} for MSBuild", java11sdkPath);
+        msBuildSettings = msBuildSettings.WithProperty("JavaSdkDirectory", java11sdkPath);
+    }
+
+    var settings = new DotNetBuildSettings
+    {
+         Configuration = configuration,
+         MSBuildSettings = msBuildSettings,
+         Verbosity = verbosityDotNet
+    };
+
+    DotNetBuild(solution.ToString(), settings);
 });
 
 Task("UnitTest")
@@ -162,10 +157,11 @@ Task("UnitTest")
     EnsureDirectoryExists(outputDir + "/Tests/");
 
     var testPaths = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
-    var settings = new DotNetCoreTestSettings
+    var settings = new DotNetTestSettings
     {
         Configuration = configuration,
-        NoBuild = true
+        NoBuild = true,
+        Verbosity = verbosityDotNet
     };
 
     foreach(var project in testPaths)
@@ -175,7 +171,7 @@ Task("UnitTest")
         settings.Loggers = new string[] { $"xunit;LogFilePath={testXml.FullPath}" };
         try 
         {
-            DotNetCoreTest(project.ToString(), settings);
+            DotNetTest(project.ToString(), settings);
         }
         catch
         {
@@ -207,55 +203,6 @@ Task("CopyPackages")
     CopyFiles(nugetFiles, new DirectoryPath(outputDir + "/NuGet/"));
 });
 
-Task("UpdateChangelog")
-    .Does(() => 
-{
-    var arguments = new ProcessArgumentBuilder();
-    if (!string.IsNullOrEmpty(githubToken))
-        arguments.Append("--token {0}", githubToken);
-    else if (!string.IsNullOrEmpty(githubTokenEnv))
-        arguments.Append("--token {0}", githubTokenEnv);
-
-    // Exclude labels
-    var excludeLabels = new [] {
-        "t/question",
-        "s/wont-fix",
-        "s/duplicate",
-        "s/invalid",
-        "s/needs-more-info",
-    };
-    arguments.Append("--exclude-labels {0}", string.Join(",", excludeLabels));
-
-    // bug labels
-    arguments.Append("--bug-labels {0}", "t/bug");
-
-    // enhancement labels
-    arguments.Append("--enhancement-labels {0}", "t/feature,t/enhancement");
-    arguments.Append("--breaking-labels {0}", "t/breaking");
-    arguments.Append("--security-labels {0}", "t/security");
-    arguments.Append("--deprecated_labels {0}", "t/deprecated");
-    arguments.Append("--no-issues_wo_labels");
-
-    arguments.Append("--max-issues 200");
-    arguments.Append("--user MvvmCross");
-    arguments.Append("--project MvvmCross");
-
-    if (!string.IsNullOrEmpty(sinceTag))
-        arguments.Append("--since-tag {0}", sinceTag);
-
-    if (versionInfo.BranchName.Contains("release/"))
-        arguments.Append("--future-release {0}", versionInfo.MajorMinorPatch);
-
-    Information("Starting github_changelog_generator with arguments: {0}", arguments.Render());
-
-    using(var process = StartAndReturnProcess("github_changelog_generator",
-        new ProcessSettings { Arguments = arguments }))
-    {
-        process.WaitForExit();
-        Information("Exit code: {0}", process.GetExitCode());
-    }
-});
-
 Task("Sonar")
     .IsDependentOn("Clean")
     .IsDependentOn("SonarStart")
@@ -276,23 +223,3 @@ Task("Default")
 });
 
 RunTarget(target);
-
-MSBuildSettings GetDefaultBuildSettings()
-{
-    var settings = new MSBuildSettings 
-    {
-        Configuration = configuration,
-        ToolPath = msBuildPath,
-        Verbosity = verbosity
-    };
-
-    if (isRunningOnPipelines)
-    {
-        // remove this when Xamarin.Android supports JDK11
-        var javaSdkDir = EnvironmentVariable("JAVA_HOME_8_X64");
-        Information("Setting JavaSdkDirectory to: " + javaSdkDir);
-        settings = settings.WithProperty("JavaSdkDirectory", javaSdkDir);
-    }
-
-    return settings;
-}

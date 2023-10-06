@@ -1,0 +1,22 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  groups:
+    android-dependencies:
+      patterns:
+        - "Xamarin.*"
+        - "Xamarin.*"
+    unittest-dependencies:
+      patterns:
+        - "xunit"
+        - "xunit.*"
+        - "XunitXml.*"
+        - "Microsoft.NET.Test.Sdk"
+    analyzers:
+      patterns:
+        - "AsyncFixer"
+        - "*Analyzer*"

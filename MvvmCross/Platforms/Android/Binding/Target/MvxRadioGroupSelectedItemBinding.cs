@@ -6,12 +6,12 @@ using System;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding;
-using MvvmCross.Platforms.Android.WeakSubscription;
 using MvvmCross.Platforms.Android.Binding.Views;
+using MvvmCross.Platforms.Android.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
 {
-    public class MvxRadioGroupSelectedItemBinding 
+    public class MvxRadioGroupSelectedItemBinding
         : MvxAndroidTargetBinding
     {
         private object _currentValue;
@@ -85,7 +85,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
                     {
                         if (newValue.Equals(data))
                         {
-							var radioButton = li as RadioButton;
+                            var radioButton = li as RadioButton;
                             if (radioButton != null)
                             {
                                 checkid = radioButton.Id;
@@ -108,7 +108,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
-        public override Type TargetType => typeof(object);
+        public override Type TargetValueType => typeof(object);
 
         protected override void Dispose(bool isDisposing)
         {

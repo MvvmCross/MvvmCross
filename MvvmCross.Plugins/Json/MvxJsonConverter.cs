@@ -1,58 +1,44 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using System.Collections.Generic;
-using System.IO;
+#nullable enable
+using System.Text.Json;
 using MvvmCross.Base;
-using Newtonsoft.Json;
 
 namespace MvvmCross.Plugin.Json
 {
     [Preserve(AllMembers = true)]
-	public class MvxJsonConverter 
+    public class MvxJsonConverter
         : IMvxJsonConverter
     {
-        private static readonly JsonSerializerSettings Settings;
+        public JsonSerializerOptions Settings { get; set; }
 
-        static MvxJsonConverter()
+        public MvxJsonConverter()
         {
-            Settings = new JsonSerializerSettings
+            Settings = new JsonSerializerOptions
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                Converters = new List<JsonConverter>
-                {
-                    new MvxEnumJsonConverter()
-                },
-                DateFormatHandling = DateFormatHandling.IsoDateFormat
+                WriteIndented = false
             };
         }
 
-        public T DeserializeObject<T>(string inputText)
+        public T? DeserializeObject<T>(string inputText)
         {
-            return JsonConvert.DeserializeObject<T>(inputText, Settings);
+            return JsonSerializer.Deserialize<T>(inputText, Settings);
+        }
+
+        public object? DeserializeObject(Type type, string inputText)
+        {
+            return JsonSerializer.Deserialize(inputText, type, Settings);
+        }
+
+        public T? DeserializeObject<T>(Stream stream)
+        {
+            return JsonSerializer.Deserialize<T>(stream, Settings);
         }
 
         public string SerializeObject(object toSerialise)
         {
-            return JsonConvert.SerializeObject(toSerialise, Formatting.None, Settings);
-        }
-
-        public object DeserializeObject(Type type, string inputText)
-        {
-            return JsonConvert.DeserializeObject(inputText, type, Settings);
-        }
-
-        public T DeserializeObject<T>(Stream stream)
-        {
-			var serializer = JsonSerializer.Create(Settings);
-
-            using (var sr = new StreamReader(stream))
-            using (var jsonTextReader = new JsonTextReader(sr))
-            {
-                return serializer.Deserialize<T>(jsonTextReader);
-            }
+            return JsonSerializer.Serialize(toSerialise, Settings);
         }
     }
 }

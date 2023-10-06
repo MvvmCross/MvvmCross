@@ -1,17 +1,15 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Collections;
 using System.Collections.Specialized;
-using Foundation;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
+using MvvmCross.Logging;
 using MvvmCross.WeakSubscription;
-using UIKit;
-using System.Linq;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
@@ -25,10 +23,11 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         {
         }
 
-        protected MvxTableViewSource(IntPtr handle)
+        protected MvxTableViewSource(NativeHandle handle)
             : base(handle)
         {
-            MvxLog.Instance.Warn("TableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+            MvxLogHost.GetLog<MvxBaseTableViewSource>()?.Log(LogLevel.Warning,
+                "TableViewSource NativeHandle constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         protected override void Dispose(bool disposing)
@@ -117,13 +116,13 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             {
                 case NotifyCollectionChangedAction.Add:
                     {
-                        var newIndexPaths = CreateNSIndexPathArray(args.NewStartingIndex, args.NewItems.Count);
+                        var newIndexPaths = CreateIndexPathArray(args.NewStartingIndex, args.NewItems.Count);
                         TableView.InsertRows(newIndexPaths, AddAnimation);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Remove:
                     {
-                        var oldIndexPaths = CreateNSIndexPathArray(args.OldStartingIndex, args.OldItems.Count);
+                        var oldIndexPaths = CreateIndexPathArray(args.OldStartingIndex, args.OldItems.Count);
                         TableView.DeleteRows(oldIndexPaths, RemoveAnimation);
                         return true;
                     }
@@ -152,7 +151,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             }
         }
 
-        protected static NSIndexPath[] CreateNSIndexPathArray(int startingPosition, int count)
+        protected static NSIndexPath[] CreateIndexPathArray(int startingPosition, int count)
         {
             var newIndexPaths = new NSIndexPath[count];
             for (var i = 0; i < count; i++)
@@ -162,7 +161,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             return newIndexPaths;
         }
 
-        public override nint RowsInSection(UITableView tableview, nint section)
+        public override nint RowsInSection(UITableView tableView, nint section)
         {
             if (ItemsSource == null)
                 return 0;

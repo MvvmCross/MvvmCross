@@ -1,17 +1,15 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+#nullable enable
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Core
 {
-#nullable enable
     public class MvxStringToTypeParser
         : IMvxStringToTypeParser, IMvxFillableStringToTypeParser
     {
@@ -27,7 +25,7 @@ namespace MvvmCross.Core
             object? ReadValue(Type t, string input, string fieldOrParameterName);
         }
 
-        public class EnumParser : IExtraParser
+        private sealed class EnumParser : IExtraParser
         {
             public bool Parses(Type t)
             {
@@ -43,8 +41,8 @@ namespace MvvmCross.Core
                 }
                 catch (Exception)
                 {
-                    MvxLog.Instance?.Error(
-                        "Failed to parse enum parameter {0} from string {1}", 
+                    MvxLogHost.Default?.Log(LogLevel.Error,
+                        "Failed to parse enum parameter {FieldOrParameterName} from string {Input}",
                         fieldOrParameterName,
                         input);
                 }
@@ -57,15 +55,16 @@ namespace MvvmCross.Core
                     }
                     catch (Exception)
                     {
-                        MvxLog.Instance?.Error("Failed to create default enum value for {0} - will return null",
-                                       fieldOrParameterName);
+                        MvxLogHost.Default?.Log(LogLevel.Error,
+                            "Failed to create default enum value for {FieldOrParameterName} - will return null",
+                            fieldOrParameterName);
                     }
                 }
                 return enumValue;
             }
         }
 
-        public class StringParser : IParser
+        private sealed class StringParser : IParser
         {
             public object? ReadValue(string input, string fieldOrParameterName)
             {
@@ -79,17 +78,17 @@ namespace MvvmCross.Core
 
             public object? ReadValue(string input, string fieldOrParameterName)
             {
-                object result;
-                if (!TryParse(input, out result))
+                if (!TryParse(input, out var result))
                 {
-                    MvxLog.Instance?.Error("Failed to parse {0} parameter {1} from string {2}",
-                                   GetType().Name, fieldOrParameterName, input);
+                    MvxLogHost.Default?.Log(LogLevel.Error,
+                        "Failed to parse {Type} parameter {FieldOrParameterName} from string {Input}",
+                        GetType().Name, fieldOrParameterName, input);
                 }
                 return result;
             }
         }
 
-        public class NumberParser<T> : ValueParser where T : struct
+        private sealed class NumberParser<T> : ValueParser where T : struct
         {
             // See also https://stackoverflow.com/questions/2961656/generic-tryparse/6553694
             // Piers Myers(https://stackoverflow.com/users/275751/piers-myers)'s question and
@@ -108,7 +107,7 @@ namespace MvvmCross.Core
             }
         }
 
-        public class CharParser : ValueParser
+        private sealed class CharParser : ValueParser
         {
             protected override bool TryParse(string input, out object result)
             {
@@ -118,7 +117,7 @@ namespace MvvmCross.Core
             }
         }
 
-        public class BoolParser : ValueParser
+        private sealed class BoolParser : ValueParser
         {
             protected override bool TryParse(string input, out object result)
             {
@@ -128,47 +127,22 @@ namespace MvvmCross.Core
             }
         }
 
-#if !UNITY3D
-
-        public class GuidParser : ValueParser
+        private sealed class GuidParser : ValueParser
         {
             protected override bool TryParse(string input, out object result)
             {
-                Guid value;
-                var toReturn = Guid.TryParse(input, out value);
+                var toReturn = Guid.TryParse(input, out var value);
                 result = value;
                 return toReturn;
             }
         }
 
-#else
-
-        // UNITY3D does not support Guid.TryParse
-        // See https://github.com/slodge/MvvmCross/issues/215
-        public class GuidParser : ValueParser
+        private sealed class DateTimeParser : ValueParser
         {
             protected override bool TryParse(string input, out object result)
             {
-                try
-                {
-                    result = new Guid(input);
-                    return true;
-                }
-                catch (Exception)
-                {
-                    result = null;
-                    return false;
-                }
-            }
-        }
-#endif
-
-        public class DateTimeParser : ValueParser
-        {
-            protected override bool TryParse(string input, out object result)
-            {
-                DateTime value;
-                var toReturn = DateTime.TryParse(input, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out value);
+                var toReturn = DateTime.TryParse(input, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind,
+                    out var value);
                 result = value;
                 return toReturn;
             }
@@ -216,8 +190,7 @@ namespace MvvmCross.Core
 
         public object? ReadValue(string rawValue, Type targetType, string fieldOrParameterName)
         {
-            IParser parser;
-            if (TypeParsers.TryGetValue(targetType, out parser))
+            if (TypeParsers.TryGetValue(targetType, out var parser))
             {
                 return parser.ReadValue(rawValue, fieldOrParameterName);
             }
@@ -228,10 +201,10 @@ namespace MvvmCross.Core
                 return extra.ReadValue(targetType, rawValue, fieldOrParameterName);
             }
 
-            MvxLog.Instance?.Error("Parameter {0} is invalid targetType {1}", fieldOrParameterName,
-                           targetType.Name);
+            MvxLogHost.Default?.Log(LogLevel.Error,
+                "Parameter {ParameterName} is invalid targetType {TypeName}",
+                fieldOrParameterName, targetType.Name);
             return null;
         }
     }
-#nullable restore
 }

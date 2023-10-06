@@ -1,20 +1,18 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using AndroidX.Fragment.App;
 using Java.Lang;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.ViewModels;
+using Fragment = AndroidX.Fragment.App.Fragment;
+using FragmentTransaction = AndroidX.Fragment.App.FragmentTransaction;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platforms.Android.Views
@@ -80,8 +78,6 @@ namespace MvvmCross.Platforms.Android.Views
 
             SetContentView(_layoutId);
 
-            _view = Window.DecorView.RootView;
-
             InitializeTabHost(savedInstanceState);
 
             if (savedInstanceState != null)
@@ -92,7 +88,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public override void SetContentView(int layoutResId)
         {
-           var view = this.BindingInflate(layoutResId, null);
+            var view = this.BindingInflate(layoutResId, null);
 
             SetContentView(view);
         }

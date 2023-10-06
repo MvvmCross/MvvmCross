@@ -1,11 +1,13 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
@@ -21,6 +23,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
 #nullable enable
     public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresenter
     {
+        private readonly MvxIosMajorVersionChecker _iosVersion13Checker = new MvxIosMajorVersionChecker(13);
+
         protected IUIApplicationDelegate ApplicationDelegate { get; }
         protected UIWindow Window { get; }
 
@@ -49,15 +53,17 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (MasterNavigationController == null &&
                 TabBarViewController?.CanShowChildView() != true)
             {
-                MvxLog.Instance?.Trace(
+                MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogTrace(
                     $"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. Assuming Root presentation");
                 return new MvxRootPresentationAttribute
                 {
-                    WrapInNavigationController = true, ViewType = viewType, ViewModelType = viewModelType
+                    WrapInNavigationController = true,
+                    ViewType = viewType,
+                    ViewModelType = viewModelType
                 };
             }
 
-            MvxLog.Instance?.Trace(
+            MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogTrace(
                 $"PresentationAttribute not found for {viewType.Name}. Assuming animated Child presentation");
 
             return new MvxChildPresentationAttribute { ViewType = viewType, ViewModelType = viewModelType };
@@ -404,12 +410,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
         {
             ValidateArguments(viewController, attribute);
 
-            // Content size should be set to a target view controller, not the navigation one
-            if (attribute.PreferredContentSize != default)
-            {
-                viewController.PreferredContentSize = attribute.PreferredContentSize;
-            }
-
             // setup modal based on attribute
             if (attribute.WrapInNavigationController)
             {
@@ -418,22 +418,23 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
             viewController.ModalTransitionStyle = attribute.ModalTransitionStyle;
+            if (attribute.PreferredContentSize != default(CGSize))
+                viewController.PreferredContentSize = attribute.PreferredContentSize;
+
+            if (_iosVersion13Checker.IsVersionOrHigher && viewController.PresentationController != null)
+            {
+                viewController.PresentationController.Delegate =
+                    new MvxModalPresentationControllerDelegate(this, viewController, attribute);
+            }
 
             // Check if there is a modal already presented first. Otherwise use the window root
             var modalHost = ModalViewControllers.LastOrDefault() ?? Window.RootViewController;
-            if (modalHost != null)
-            {
-                modalHost.PresentViewController(
-                    viewController,
-                    attribute.Animated,
-                    null);
 
-                ModalViewControllers.Add(viewController);
+            modalHost.PresentViewController(viewController, attribute.Animated, null);
 
-                return Task.FromResult(true);
-            }
+            ModalViewControllers.Add(viewController);
 
-            return Task.FromResult(false);
+            return Task.FromResult(true);
         }
 
         protected virtual async Task<bool> ShowPopoverViewController(
@@ -470,7 +471,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             var sourceProvider = Mvx.IoCProvider.Resolve<IMvxPopoverPresentationSourceProvider>();
             sourceProvider.SetSource(presentationController);
-            presentationController.Delegate = new MvxPopoverDelegate(this);
+            presentationController.Delegate = new MvxPopoverPresentationControllerDelegate(this);
 
             PopoverViewController = viewController;
             await viewHost.PresentViewControllerAsync(viewController, attribute.Animated).ConfigureAwait(true);
@@ -510,7 +511,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
 
-            MvxLog.Instance?.Warn($"Ignored attempt to close the window root (ViewModel type: {viewModel.GetType().Name}");
+            MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogWarning(
+                "Ignored attempt to close the window root (ViewModel type: {viewModelType}", viewModel.GetType().Name);
 
             return Task.FromResult(false);
         }
@@ -746,7 +748,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             while (ModalViewControllers.Count > 0)
             {
                 var didClose =
-                    await CloseModalViewController(ModalViewControllers.Last(),
+                    await CloseModalViewController(ModalViewControllers[^1],
                         new MvxModalPresentationAttribute()).ConfigureAwait(true);
 
                 if (!didClose)
@@ -760,7 +762,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
         {
             ValidateArguments(viewController, attribute);
 
-            if (viewController is UINavigationController popoverNavController && popoverNavController.ViewControllers != null)
+            if (viewController is UINavigationController { ViewControllers: not null } popoverNavController)
             {
                 foreach (var item in popoverNavController.ViewControllers)
                     item.DidMoveToParentViewController(null);

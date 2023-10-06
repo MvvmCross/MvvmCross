@@ -1,12 +1,12 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Windows.Input;
 using Foundation;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
-using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using UIKit;
 
@@ -16,6 +16,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
     {
         public event EventHandler SelectedItemChanged;
 
+        private readonly WeakReference<UICollectionView> _collectionView;
         private object _selectedItem;
 
         public static readonly NSString UnknownCellIdentifier = NSString.Empty;
@@ -30,12 +31,23 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         protected MvxBaseCollectionViewSource(UICollectionView collectionView,
                                               NSString cellIdentifier)
         {
-            CollectionView = collectionView;
+            _collectionView = new WeakReference<UICollectionView>(collectionView);
             DefaultCellIdentifier = cellIdentifier;
         }
 
-        [field: Weak]
-        protected UICollectionView CollectionView { get; }
+        protected UICollectionView CollectionView
+        {
+            get
+            {
+                if (_collectionView.TryGetTarget(out var collectionView))
+                    return collectionView;
+
+                // This is not a array Sonar. You are drunk...
+#pragma warning disable S1168 // Empty arrays and collections should be returned instead of null
+                return null;
+#pragma warning restore S1168 // Empty arrays and collections should be returned instead of null
+            }
+        }
 
         public ICommand SelectionChangedCommand { get; set; }
 
@@ -47,7 +59,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
             catch (Exception exception)
             {
-                MvxLog.Instance.Warn("Exception masked during CollectionView ReloadData {0}", exception.ToLongString());
+                MvxLogHost.GetLog<MvxBaseCollectionViewSource>()?.Log(LogLevel.Warning, exception,
+                    "Exception masked during CollectionView ReloadData");
             }
         }
 

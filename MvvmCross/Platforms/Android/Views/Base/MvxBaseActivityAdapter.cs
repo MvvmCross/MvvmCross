@@ -36,13 +36,13 @@ namespace MvvmCross.Platforms.Android.Views.Base
             _eventSource.StartActivityForResultCalled += EventSourceOnStartActivityForResultCalled;
         }
 
-        protected virtual void EventSourceOnSaveInstanceStateCalled(object sender,
-                                                                    MvxValueEventArgs<Bundle> mvxValueEventArgs)
+        protected virtual void EventSourceOnSaveInstanceStateCalled(
+            object sender, MvxValueEventArgs<Bundle> eventArgs)
         {
         }
 
-        protected virtual void EventSourceOnCreateWillBeCalled(object sender,
-                                                               MvxValueEventArgs<Bundle> MvxValueEventArgs)
+        protected virtual void EventSourceOnCreateWillBeCalled(
+            object sender, MvxValueEventArgs<Bundle> eventArgs)
         {
         }
 
@@ -54,8 +54,8 @@ namespace MvvmCross.Platforms.Android.Views.Base
         {
         }
 
-        protected virtual void EventSourceOnStartActivityForResultCalled(object sender, 
-                                                                         MvxValueEventArgs<MvxStartActivityForResultParameters> MvxValueEventArgs)
+        protected virtual void EventSourceOnStartActivityForResultCalled(
+            object sender, MvxValueEventArgs<MvxStartActivityForResultParameters> eventArgs)
         {
         }
 
@@ -71,7 +71,7 @@ namespace MvvmCross.Platforms.Android.Views.Base
         {
         }
 
-        protected virtual void EventSourceOnNewIntentCalled(object sender, MvxValueEventArgs<Intent> MvxValueEventArgs)
+        protected virtual void EventSourceOnNewIntentCalled(object sender, MvxValueEventArgs<Intent> eventArgs)
         {
         }
 
@@ -83,12 +83,12 @@ namespace MvvmCross.Platforms.Android.Views.Base
         {
         }
 
-        protected virtual void EventSourceOnCreateCalled(object sender, MvxValueEventArgs<Bundle> MvxValueEventArgs)
+        protected virtual void EventSourceOnCreateCalled(object sender, MvxValueEventArgs<Bundle> eventArgs)
         {
         }
 
-        protected virtual void EventSourceOnActivityResultCalled(object sender,
-                                                                 MvxValueEventArgs<MvxActivityResultParameters> MvxValueEventArgs)
+        protected virtual void EventSourceOnActivityResultCalled(
+            object sender, MvxValueEventArgs<MvxActivityResultParameters> eventArgs)
         {
         }
     }

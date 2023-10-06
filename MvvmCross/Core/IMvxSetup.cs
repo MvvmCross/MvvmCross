@@ -1,12 +1,11 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Plugin;
-using MvvmCross.Logging;
-using System;
 
 namespace MvvmCross.Core
 {
@@ -24,8 +23,6 @@ namespace MvvmCross.Core
         IEnumerable<Type> CreatableTypes(Assembly assembly);
 
         void LoadPlugins(IMvxPluginManager pluginManager);
-
-        MvxLogProviderType GetDefaultLogProviderType();
 
         event EventHandler<MvxSetupStateEventArgs>? StateChanged;
         MvxSetupState State { get; }

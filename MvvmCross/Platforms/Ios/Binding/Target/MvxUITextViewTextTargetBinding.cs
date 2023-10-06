@@ -42,18 +42,18 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
                 return;
             }
 
-			var textStorage = target.LayoutManager?.TextStorage;
-			if (textStorage == null)
-			{ 
-			    MvxBindingLog.Error(
-						  "Error - NSTextStorage of UITextView is null in MvxUITextViewTextTargetBinding");
-				return;
-			}
+            var textStorage = target.LayoutManager?.TextStorage;
+            if (textStorage == null)
+            {
+                MvxBindingLog.Error(
+                          "Error - NSTextStorage of UITextView is null in MvxUITextViewTextTargetBinding");
+                return;
+            }
 
             _subscription = textStorage.WeakSubscribe<NSTextStorage, NSTextStorageEventArgs>(nameof(textStorage.DidProcessEditing), EditTextOnChanged);
         }
 
-        public override Type TargetType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
         protected override void SetValueImpl(object target, object value)
         {

@@ -1,6 +1,6 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>monoandroid10.0;</TargetFrameworks>
+    <TargetFrameworks>net7.0-android;net8.0-android</TargetFrameworks>
     <AssemblyName>MvvmCross.DroidX.Leanback</AssemblyName>
     <RootNamespace>MvvmCross.DroidX.Leanback</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
@@ -24,6 +24,4 @@ This package contains AndroidX Leanback support for MvvmCross.</Description>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\RecyclerView\MvvmCross.DroidX.RecyclerView.csproj" />
   </ItemGroup>
-
-  <Import Project="..\..\XamarinBuild.targets" />
 </Project>

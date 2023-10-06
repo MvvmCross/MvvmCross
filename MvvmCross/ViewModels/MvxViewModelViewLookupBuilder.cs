@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -45,7 +45,7 @@ namespace MvvmCross.ViewModels
         protected virtual Exception ReportBuildProblem(
             IEnumerable<KeyValuePair<Type, Type>> views, ArgumentException exception)
         {
-            var overSizedCounts = 
+            var overSizedCounts =
                 views.GroupBy(x => x.Key)
                 .Select(x => new { x.Key.Name, Count = x.Count(), ViewNames = x.Select(v => v.Value.Name).ToList() })
                 .Where(x => x.Count > 1)

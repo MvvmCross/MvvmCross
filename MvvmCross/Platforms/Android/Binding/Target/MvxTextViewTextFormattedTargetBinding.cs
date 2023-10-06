@@ -24,14 +24,14 @@ namespace MvvmCross.Platforms.Android.Binding.Target
         {
             if (target == null)
             {
-                MvxBindingLog.Error( "Error - TextView is null in MvxTextViewTextFormattedTargetBinding");
+                MvxBindingLog.Error("Error - TextView is null in MvxTextViewTextFormattedTargetBinding");
                 return;
             }
 
             _isEditTextBinding = target is EditText;
         }
 
-        public override Type TargetType => typeof(ISpanned);
+        public override Type TargetValueType => typeof(ISpanned);
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
         {

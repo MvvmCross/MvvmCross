@@ -1,9 +1,9 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
@@ -12,20 +12,21 @@ namespace Playground.Core.ViewModels
 {
     public class NestedChildViewModel : MvxNavigationViewModel
     {
-        public NestedChildViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        public NestedChildViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
+            : base(logProvider, navigationService)
         {
-            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
-            PopToChildCommand = new MvxCommand(() => NavigationService.ChangePresentation(new MvxPopPresentationHint(typeof(ChildViewModel))));
-            PopToRootCommand = new MvxCommand(() => NavigationService.ChangePresentation(new MvxPopToRootPresentationHint()));
-            RemoveCommand = new MvxCommand(() => NavigationService.ChangePresentation(new MvxRemovePresentationHint(typeof(SecondChildViewModel))));
+            CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
+            PopToChildCommand = new MvxAsyncCommand(() => NavigationService.ChangePresentation(new MvxPopPresentationHint(typeof(ChildViewModel))));
+            PopToRootCommand = new MvxAsyncCommand(() => NavigationService.ChangePresentation(new MvxPopToRootPresentationHint()));
+            RemoveCommand = new MvxAsyncCommand(() => NavigationService.ChangePresentation(new MvxRemovePresentationHint(typeof(SecondChildViewModel))));
         }
 
-        public IMvxAsyncCommand CloseCommand { get; private set; }
+        public IMvxAsyncCommand CloseCommand { get; }
 
-        public IMvxCommand PopToChildCommand { get; private set; }
+        public IMvxAsyncCommand PopToChildCommand { get; }
 
-        public IMvxCommand PopToRootCommand { get; private set; }
+        public IMvxAsyncCommand PopToRootCommand { get; }
 
-        public IMvxCommand RemoveCommand { get; private set; }
+        public IMvxAsyncCommand RemoveCommand { get; }
     }
 }

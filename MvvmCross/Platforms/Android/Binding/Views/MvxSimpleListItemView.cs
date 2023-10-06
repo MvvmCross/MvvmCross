@@ -12,8 +12,8 @@ namespace MvvmCross.Platforms.Android.Binding.Views
     [Register("mvvmcross.platforms.android.binding.views.MvxSimpleListItemView")]
     public class MvxSimpleListItemView : MvxListItemView
     {
-        public MvxSimpleListItemView(Context context, IMvxLayoutInflaterHolder layoutInflaterHolder, 
-            object dataContext, ViewGroup parent, int templateId) 
+        public MvxSimpleListItemView(Context context, IMvxLayoutInflaterHolder layoutInflaterHolder,
+            object dataContext, ViewGroup parent, int templateId)
             : base(context, layoutInflaterHolder, dataContext, parent, templateId)
         {
         }

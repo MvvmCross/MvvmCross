@@ -1,11 +1,8 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+#nullable enable
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.Presenters.Hints;
@@ -14,20 +11,19 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Presenters
 {
-#nullable enable
     public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttributeViewPresenter
     {
         private readonly Lazy<IMvxViewModelTypeFinder> _viewModelTypeFinder =
-            new Lazy<IMvxViewModelTypeFinder>(() => Mvx.IoCProvider.Resolve<IMvxViewModelTypeFinder>());
+            new(() => Mvx.IoCProvider.Resolve<IMvxViewModelTypeFinder>());
 
         private readonly Lazy<IMvxViewsContainer> _viewsContainer =
-            new Lazy<IMvxViewsContainer>(() => Mvx.IoCProvider.Resolve<IMvxViewsContainer>());
+            new(() => Mvx.IoCProvider.Resolve<IMvxViewsContainer>());
 
         private IDictionary<Type, MvxPresentationAttributeAction>? _attributeTypesActionsDictionary;
 
-        public virtual IMvxViewModelTypeFinder? ViewModelTypeFinder => _viewModelTypeFinder.Value;
+        public virtual IMvxViewModelTypeFinder ViewModelTypeFinder => _viewModelTypeFinder.Value;
 
-        public virtual IMvxViewsContainer? ViewsContainer => _viewsContainer.Value;
+        public virtual IMvxViewsContainer ViewsContainer => _viewsContainer.Value;
 
         public virtual IDictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
         {
@@ -142,9 +138,7 @@ namespace MvvmCross.Presenters
 
             attribute = presentationAttribute;
 
-            if (AttributeTypesToActionsDictionary != null &&
-                AttributeTypesToActionsDictionary.TryGetValue(attributeType,
-                out MvxPresentationAttributeAction attributeAction))
+            if (AttributeTypesToActionsDictionary.TryGetValue(attributeType, out var attributeAction))
             {
                 if (attributeAction.ShowAction == null)
                 {
@@ -174,21 +168,21 @@ namespace MvvmCross.Presenters
                 return await Close(presentationHint.ViewModelToClose).ConfigureAwait(true);
             }
 
-            MvxLog.Instance?.Warn("Hint ignored {0}", hint.GetType().Name);
+            MvxLogHost.Default?.Log(LogLevel.Warning, "Hint ignored {Name}", hint.GetType().Name);
             return false;
         }
 
         public override Task<bool> Close(IMvxViewModel viewModel)
         {
             return GetPresentationAttributeAction(
-                new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute)
+                new MvxViewModelInstanceRequest(viewModel), out var attribute)
                     .CloseAction?
                     .Invoke(viewModel, attribute) ?? Task.FromResult(false);
         }
 
         public override Task<bool> Show(MvxViewModelRequest request)
         {
-            var attributeAction = GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute);
+            var attributeAction = GetPresentationAttributeAction(request, out var attribute);
 
             if (attributeAction.ShowAction != null && attribute.ViewType != null)
                 return attributeAction.ShowAction.Invoke(attribute.ViewType, attribute, request);
@@ -196,5 +190,4 @@ namespace MvvmCross.Presenters
             return Task.FromResult(false);
         }
     }
-#nullable restore
 }

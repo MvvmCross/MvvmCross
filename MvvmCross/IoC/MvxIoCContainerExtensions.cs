@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace MvvmCross.IoC
@@ -88,17 +88,6 @@ namespace MvvmCross.IoC
                 ioc.TryResolve(typeof(TParameter5), out var parameter5);
                 return typedConstructor((TParameter1)parameter1, (TParameter2)parameter2, (TParameter3)parameter3, (TParameter4)parameter4, (TParameter5)parameter5);
             };
-        }
-
-        public static void CallbackWhenRegistered<T>(this IMvxIoCProvider ioc, Action<T> action)
-            where T : class
-        {
-            Action simpleAction = () =>
-            {
-                var t = ioc.Resolve<T>();
-                action(t);
-            };
-            ioc.CallbackWhenRegistered<T>(simpleAction);
         }
 
         public static TType ConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc)

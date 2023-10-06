@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -290,8 +290,17 @@ namespace MvvmCross.Binding.BindingContext
             if (!string.IsNullOrEmpty(BindingDescription.TargetName))
                 return;
 
-            BindingDescription.TargetName =
-                MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+            var defaultTargetName =
+                MvxBindingSingletonCache.Instance?.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+
+            if (string.IsNullOrEmpty(defaultTargetName))
+            {
+                throw new MvxException(
+                    "Default Target Name, could not be found for Target: {0}. Did you register a default?",
+                    typeof(TTarget));
+            }
+
+            BindingDescription.TargetName = defaultTargetName;
         }
     }
 }

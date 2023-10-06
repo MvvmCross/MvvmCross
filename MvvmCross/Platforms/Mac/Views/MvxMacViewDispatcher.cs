@@ -1,9 +1,10 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Mac.Presenters;
 using MvvmCross.ViewModels;
@@ -26,7 +27,7 @@ namespace MvvmCross.Platforms.Mac.Views
         {
             Func<Task> action = () =>
             {
-                MvxLog.Instance.Trace("MacNavigation", "Navigate requested");
+                MvxLogHost.Default?.Log(LogLevel.Trace, "MacNavigation", "Navigate requested");
                 return _presenter.Show(request);
             };
             await ExecuteOnMainThreadAsync(action);
@@ -36,10 +37,10 @@ namespace MvvmCross.Platforms.Mac.Views
         public async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
             Func<Task> action = () =>
-                                {
-                                    MvxLog.Instance.Trace("MacNavigation", "Change presentation requested");
-                                    return _presenter.ChangePresentation(hint);
-                                };
+            {
+                MvxLogHost.Default?.Log(LogLevel.Trace, "MacNavigation", "Change presentation requested");
+                return _presenter.ChangePresentation(hint);
+            };
             await ExecuteOnMainThreadAsync(action);
             return true;
         }

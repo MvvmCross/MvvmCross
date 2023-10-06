@@ -47,7 +47,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             _subscribed = true;
         }
 
-        public override Type TargetType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
         {

@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public MvxMultipleViewModelCache()
         {
-            _lazyCurrentViewModels = 
+            _lazyCurrentViewModels =
                 new Lazy<ConcurrentDictionary<CachedViewModelType, IMvxViewModel>>(
                     () => new ConcurrentDictionary<CachedViewModelType, IMvxViewModel>());
         }

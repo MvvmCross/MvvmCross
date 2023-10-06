@@ -1,10 +1,10 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.Localization;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using Playground.Core.ViewModels.Bindings;
@@ -17,31 +17,31 @@ namespace Playground.Core.ViewModels
 
         private int _counter = 2;
 
-        public MainViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        public MainViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
+            : base(logProvider, navigationService)
         {
-            ShowChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ChildViewModel>());
+            ShowChildCommand = new MvxAsyncCommand(() => NavigationService.Navigate<ChildViewModel>());
 
-            ShowModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalViewModel>());
+            ShowModalCommand = new MvxAsyncCommand(() => NavigationService.Navigate<ModalViewModel>());
 
             ShowModalNavCommand =
-                new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalNavViewModel>());
+                new MvxAsyncCommand(() => NavigationService.Navigate<ModalNavViewModel>());
 
-            ShowTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootViewModel>());
+            ShowTabsCommand = new MvxAsyncCommand(() => NavigationService.Navigate<TabsRootViewModel>());
 
-            ShowSplitCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SplitRootViewModel>());
+            ShowSplitCommand = new MvxAsyncCommand(() => NavigationService.Navigate<SplitRootViewModel>());
 
-            ShowOverrideAttributeCommand = new MvxAsyncCommand(async () =>
-                await NavigationService.Navigate<OverrideAttributeViewModel>());
+            ShowOverrideAttributeCommand = new MvxAsyncCommand(() => NavigationService.Navigate<OverrideAttributeViewModel>());
 
-            ShowSheetCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SheetViewModel>());
+            ShowSheetCommand = new MvxAsyncCommand(() => NavigationService.Navigate<SheetViewModel>());
 
-            ShowWindowCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<WindowViewModel>());
+            ShowWindowCommand = new MvxAsyncCommand(() => NavigationService.Navigate<WindowViewModel>());
 
             ShowMixedNavigationCommand =
-                new MvxAsyncCommand(async () => await NavigationService.Navigate<MixedNavFirstViewModel>());
+                new MvxAsyncCommand(() => NavigationService.Navigate<MixedNavFirstViewModel>());
 
             ShowCustomBindingCommand =
-                new MvxAsyncCommand(async () => await NavigationService.Navigate<CustomBindingViewModel>());
+                new MvxAsyncCommand(() => NavigationService.Navigate<CustomBindingViewModel>());
 
             _counter = 3;
         }

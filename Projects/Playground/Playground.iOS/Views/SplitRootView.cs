@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
+using ObjCRuntime;
 using Playground.Core.ViewModels;
 
 namespace Playground.iOS.Views
@@ -11,7 +12,7 @@ namespace Playground.iOS.Views
     {
         private bool _isPresentedFirstTime = true;
 
-        public SplitRootView(IntPtr handle) : base(handle)
+        public SplitRootView(NativeHandle handle) : base(handle)
         {
         }
 

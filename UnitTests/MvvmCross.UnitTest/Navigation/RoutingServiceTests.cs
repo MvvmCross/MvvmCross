@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -60,7 +60,7 @@ namespace MvvmCross.UnitTest.Navigation
 
             var loader = new MvxViewModelLoader(mockCollection.Object);
             MockDispatcher = new Mock<NavigationMockDispatcher>(MockBehavior.Loose) { CallBase = true };
-            var navigationService = RoutingService = new MvxNavigationService(loader, MockDispatcher.Object);
+            var navigationService = RoutingService = new MvxNavigationService(loader, MockDispatcher.Object, fixture.Ioc);
             RoutingService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
             fixture.Ioc.RegisterSingleton(navigationService);
             fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());

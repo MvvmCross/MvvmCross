@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,14 +7,13 @@ using System.Collections;
 using System.Collections.Specialized;
 using Android.Runtime;
 using AndroidX.Leanback.Widget;
-using MvvmCross.Exceptions;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.DroidX.Leanback.Adapters
 {
-    public abstract class MvxBaseObjectAdapter 
+    public abstract class MvxBaseObjectAdapter
         : ObjectAdapter, IMvxObjectAdapter
     {
         public event EventHandler DataSetChanged;
@@ -50,7 +49,8 @@ namespace MvvmCross.DroidX.Leanback.Adapters
                 {
                     if (!(value is ICollection))
                     {
-                        MvxAndroidLog.Instance.Warn("Using a enumerable is not recommended due to performance issues. Consider using an ICollection (e.g. List) as ItemsSource.");
+                        MvxAndroidLog.Instance.Log(LogLevel.Warning,
+                            "Using a enumerable is not recommended due to performance issues. Consider using an ICollection (e.g. List) as ItemsSource.");
                     }
                 }
 
@@ -73,29 +73,29 @@ namespace MvvmCross.DroidX.Leanback.Adapters
             BindingContext = bindingContext;
         }
 
-        protected MvxBaseObjectAdapter(Presenter presenter) 
+        protected MvxBaseObjectAdapter(Presenter presenter)
             : this(presenter, MvxAndroidBindingContextHelpers.Current())
         {
         }
 
-        protected MvxBaseObjectAdapter(Presenter presenter, IMvxAndroidBindingContext bindingContext) 
+        protected MvxBaseObjectAdapter(Presenter presenter, IMvxAndroidBindingContext bindingContext)
             : base(presenter)
         {
             BindingContext = bindingContext;
         }
 
-        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector) 
+        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector)
             : this(presenterSelector, MvxAndroidBindingContextHelpers.Current())
         {
         }
 
-        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector, IMvxAndroidBindingContext bindingContext) 
+        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector, IMvxAndroidBindingContext bindingContext)
             : base(presenterSelector)
         {
             BindingContext = bindingContext;
         }
 
-        protected MvxBaseObjectAdapter(IntPtr javaReference, JniHandleOwnership transfer) 
+        protected MvxBaseObjectAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
@@ -137,7 +137,7 @@ namespace MvvmCross.DroidX.Leanback.Adapters
             }
             catch (Exception exception)
             {
-                MvxAndroidLog.Instance.Warn("Exception masked during Adapter NotifyChanged {0}", exception.ToLongString());
+                MvxAndroidLog.Instance.Log(LogLevel.Warning, exception, "Exception masked during Adapter NotifyChanged");
             }
         }
 

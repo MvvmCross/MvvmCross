@@ -1,18 +1,18 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Xunit;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using MvvmCross.Converters;
+using Xunit;
 
 namespace MvvmCross.UnitTest.Base.Converters
 {
     public class MvxDictionaryValueConverterTests : MvxDictionaryValueConverter<MvxDictionaryValueConverterTests.TestStates, string>
     {
-        private Dictionary<TestStates, string> _testStatedictionary;
+        private readonly Dictionary<TestStates, string> _testStatedictionary;
 
         private const string StateRunning = "State Running";
         private const string StateCompleted = "State Completed";
@@ -59,7 +59,7 @@ namespace MvvmCross.UnitTest.Base.Converters
 
             var result = Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, Fallback, true), CultureInfo.CurrentUICulture);
 
-            Assert.Equal(result, Fallback);
+            Assert.Equal(Fallback, result);
         }
 
         [Fact]

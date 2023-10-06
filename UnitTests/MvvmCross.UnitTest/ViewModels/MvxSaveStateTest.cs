@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -45,7 +45,7 @@ namespace MvvmCross.UnitTest.ViewModels
                     TheInt1 = 123,
                     TheInt2 = 456,
                     TheString1 = "Hello World",
-                    TheString2 = null
+                    TheString2 = string.Empty
                 }
             };
 
@@ -65,7 +65,7 @@ namespace MvvmCross.UnitTest.ViewModels
             var viewModel = new Test3ViewModel();
 
             var bundle = viewModel.SaveStateBundle();
-            Assert.Equal(0, bundle.Data.Count);
+            Assert.Empty(bundle.Data);
         }
     }
 }

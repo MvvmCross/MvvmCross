@@ -11,28 +11,29 @@ using Android.Content;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Exceptions;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.WeakSubscription;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platforms.Android.Binding.Views
 {
-	public class MvxAdapter
+    public class MvxAdapter
         : BaseAdapter
         , IMvxAdapter
-	{
-	    private static int[] SimpleItemTemplateIds { get; } =
-	    {
+    {
+        private static int[] SimpleItemTemplateIds { get; } =
+        {
             global::Android.Resource.Layout.SimpleListItem1,
-	        global::Android.Resource.Layout.SimpleSpinnerItem
-	    };
+            global::Android.Resource.Layout.SimpleSpinnerItem
+        };
 
-	    private int _itemTemplateId = global::Android.Resource.Layout.SimpleListItem1;
+        private int _itemTemplateId = global::Android.Resource.Layout.SimpleListItem1;
         private int _dropDownItemTemplateId = global::Android.Resource.Layout.SimpleSpinnerDropDownItem;
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
@@ -101,7 +102,9 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             if (ReferenceEquals(_itemsSource, value)
                 && !ReloadOnAllItemsSourceSets)
+            {
                 return;
+            }
 
             _subscription?.Dispose();
             _subscription = null;
@@ -109,14 +112,16 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             _itemsSource = value;
 
             if (_itemsSource != null && !(_itemsSource is IList))
-                MvxBindingLog.Warning(
+            {
+                MvxLogHost.GetLog<MvxAdapter>()?.Log(LogLevel.Warning,
                   "You are currently binding to IEnumerable - " +
                   "this can be inefficient, especially for large collections. " +
                   "Binding to IList is more efficient.");
+            }
 
             if (_itemsSource is INotifyCollectionChanged newObservable)
                 _subscription = newObservable?.WeakSubscribe(OnItemsSourceCollectionChanged);
-            
+
             NotifyDataSetChanged();
         }
 
@@ -143,11 +148,8 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
             catch (Exception exception)
             {
-                MvxLog.Instance.Warn(
-                    "Exception masked during Adapter RealNotifyDataSetChanged " +
-                    "{0}. Are you trying to update your collection from a " +
-                    "background task? See http://goo.gl/0nW0L6",
-                    exception.ToLongString());
+                MvxLogHost.GetLog<MvxAdapter>()?.Log(LogLevel.Warning, exception,
+                    "Exception masked during Adapter RealNotifyDataSetChanged Are you trying to update your collection from a background task? See http://goo.gl/0nW0L6");
             }
         }
 
@@ -174,23 +176,23 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return position;
         }
 
-        public override View GetDropDownView(int position, View convertView, ViewGroup parent) 
+        public override View GetDropDownView(int position, View convertView, ViewGroup parent)
             => GetView(position, convertView, parent, DropDownItemTemplateId);
 
-        public override View GetView(int position, View convertView, ViewGroup parent) 
+        public override View GetView(int position, View convertView, ViewGroup parent)
             => GetView(position, convertView, parent, ItemTemplateId);
 
         protected virtual View GetView(int position, View convertView, ViewGroup parent, int templateId)
         {
             if (ItemsSource == null)
             {
-                MvxBindingLog.Error( "GetView called when ItemsSource is null");
+                MvxBindingLog.Error("GetView called when ItemsSource is null");
                 return null;
             }
 
             var source = GetRawItem(position);
 
-			return GetBindableView(convertView, source, parent, templateId);
+            return GetBindableView(convertView, source, parent, templateId);
         }
 
         protected virtual View GetBindableView(
@@ -209,7 +211,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 viewToUse = CreateBindableView(dataContext, parent, templateId);
                 viewToUse.Content.Tag = viewToUse as Object;
             }
-                
+
             BindBindableView(dataContext, viewToUse);
 
             return viewToUse.Content;// as View;
@@ -234,28 +236,28 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         }
     }
 
-	public class MvxAdapter<TItem> : MvxAdapter where TItem : class
-	{
-		public MvxAdapter(Context context) 
+    public class MvxAdapter<TItem> : MvxAdapter where TItem : class
+    {
+        public MvxAdapter(Context context)
             : base(context, MvxAndroidBindingContextHelpers.Current())
-		{
-		}
+        {
+        }
 
-		public MvxAdapter(Context context, IMvxAndroidBindingContext bindingContext) 
+        public MvxAdapter(Context context, IMvxAndroidBindingContext bindingContext)
             : base(context, bindingContext)
-		{
-		}
+        {
+        }
 
-		public MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer) 
+        public MvxAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-		{
-		}
+        {
+        }
 
         [MvxSetToNullAfterBinding]
         public new IEnumerable<TItem> ItemsSource
-		{
-			get => base.ItemsSource as IEnumerable<TItem>;
-			set => base.ItemsSource = value;
-		}
-	}
+        {
+            get => base.ItemsSource as IEnumerable<TItem>;
+            set => base.ItemsSource = value;
+        }
+    }
 }

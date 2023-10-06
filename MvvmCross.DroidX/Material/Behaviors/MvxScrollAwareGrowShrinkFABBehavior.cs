@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -15,10 +15,10 @@ using Object = Java.Lang.Object;
 namespace MvvmCross.DroidX.Material.Behaviors
 {
     [Register("mvvmcross.droidx.material.behaviors.MvxScrollAwareGrowShrinkFABBehavior")]
-    public class MvxScrollAwareGrowShrinkFABBehavior 
+    public class MvxScrollAwareGrowShrinkFABBehavior
         : CoordinatorLayout.Behavior
     {
-        public MvxScrollAwareGrowShrinkFABBehavior(IntPtr handle, JniHandleOwnership ownership) 
+        public MvxScrollAwareGrowShrinkFABBehavior(IntPtr handle, JniHandleOwnership ownership)
             : base(handle, ownership)
         {
         }
@@ -27,7 +27,7 @@ namespace MvvmCross.DroidX.Material.Behaviors
         {
         }
 
-        public MvxScrollAwareGrowShrinkFABBehavior(Context context, IAttributeSet attributeSet) 
+        public MvxScrollAwareGrowShrinkFABBehavior(Context context, IAttributeSet attributeSet)
             : base(context, attributeSet)
         {
         }
@@ -48,6 +48,6 @@ namespace MvvmCross.DroidX.Material.Behaviors
                 floatingActionButtonChild.Hide();
             else if (dyConsumed < 0 && floatingActionButtonChild.Visibility != ViewStates.Visible)
                 floatingActionButtonChild.Show();
-        }    
+        }
     }
 }

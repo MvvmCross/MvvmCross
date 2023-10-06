@@ -17,6 +17,6 @@ namespace MvvmCross.Platforms.Android.Binding.Target
         {
         }
 
-        public override Type TargetType => typeof(bool);
+        public override Type TargetValueType => typeof(bool);
     }
 }

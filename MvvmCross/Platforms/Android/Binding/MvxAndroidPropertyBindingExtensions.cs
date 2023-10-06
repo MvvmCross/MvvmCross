@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -122,16 +122,16 @@ namespace MvvmCross.Platforms.Android.Binding
 
         public static string BindMarginEnd(this View view)
             => MvxAndroidPropertyBinding.View_MarginEnd;
-        
+
         public static string BindFocus(this View view)
             => MvxAndroidPropertyBinding.View_Focus;
-        
+
         public static string BindVideoUri(this VideoView view)
             => MvxAndroidPropertyBinding.VideoView_Uri;
-        
+
         public static string BindWebViewUri(this WebView view)
             => MvxAndroidPropertyBinding.WebView_Uri;
-        
+
         public static string BindWebViewHtml(this WebView view)
             => MvxAndroidPropertyBinding.WebView_Html;
     }

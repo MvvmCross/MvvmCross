@@ -1,18 +1,16 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using MvvmCross.Binding.BindingContext;
-using Foundation;
 using MvvmCross.Platforms.Tvos.Views.Base;
 using MvvmCross.ViewModels;
-using UIKit;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Views
 {
     public class MvxBaseTabBarViewController
-        : MvxEventSourceTabBarController, IMvxTvosView 
+        : MvxEventSourceTabBarController, IMvxTvosView
     {
         public MvxBaseTabBarViewController()
         {
@@ -29,7 +27,7 @@ namespace MvvmCross.Platforms.Tvos.Views
             this.AdaptForBinding();
         }
 
-        protected internal MvxBaseTabBarViewController(IntPtr handle) : base(handle)
+        protected internal MvxBaseTabBarViewController(NativeHandle handle) : base(handle)
         {
             this.AdaptForBinding();
         }
@@ -125,7 +123,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
         }
 
-        protected internal MvxBaseTabBarViewController(IntPtr handle) : base(handle)
+        protected internal MvxBaseTabBarViewController(NativeHandle handle) : base(handle)
         {
         }
 

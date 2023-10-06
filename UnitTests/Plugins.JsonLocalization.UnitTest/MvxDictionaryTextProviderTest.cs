@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -26,7 +26,7 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
 
             var actual = textProvider.GetText(
                 TestDictionaryTextProvider.LocalizationNamespace,
-                TestDictionaryTextProvider.TypeKey, 
+                TestDictionaryTextProvider.TypeKey,
                 "DummyKey");
 
             Assert.Equal(expected, actual);
@@ -64,7 +64,7 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
         public void GetTextWithNonExistingValueThrowsKeyNotFoundExceptionWhenNotMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
-            
+
             Assert.Throws<KeyNotFoundException>(() => textProvider.GetText(
                 TestDictionaryTextProvider.LocalizationNamespace,
                 TestDictionaryTextProvider.TypeKey,
@@ -114,7 +114,7 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
             var expected = $"{TestDictionaryTextProvider.LocalizationNamespace}|{TestDictionaryTextProvider.TypeKey}|NonExistingKey";
 
             string actual;
-            textProvider.TryGetText(out actual, 
+            textProvider.TryGetText(out actual,
                 TestDictionaryTextProvider.LocalizationNamespace,
                 TestDictionaryTextProvider.TypeKey, "NonExistingKey");
 

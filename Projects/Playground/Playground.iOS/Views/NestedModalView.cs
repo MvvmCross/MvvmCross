@@ -1,8 +1,9 @@
-﻿using System;
-using MvvmCross.Platforms.Ios.Views;
-using UIKit;
-using Playground.Core.ViewModels;
+using System;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
+using MvvmCross.Platforms.Ios.Views;
+using ObjCRuntime;
+using Playground.Core.ViewModels;
+using UIKit;
 
 namespace Playground.iOS.Views
 {
@@ -10,7 +11,7 @@ namespace Playground.iOS.Views
     [MvxModalPresentation(WrapInNavigationController = true)]
     public partial class NestedModalView : MvxViewController<NestedModalViewModel>
     {
-        public NestedModalView(IntPtr handle) : base(handle)
+        public NestedModalView(NativeHandle handle) : base(handle)
         {
         }
 

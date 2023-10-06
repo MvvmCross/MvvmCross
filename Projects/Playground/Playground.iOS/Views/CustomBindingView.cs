@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
@@ -16,7 +16,7 @@ namespace Playground.iOS.Views
     {
         private UIDatePicker _datePicker;
 
-        public CustomBindingView(IntPtr handle) : base(handle)
+        public CustomBindingView(NativeHandle handle) : base(handle)
         {
         }
 

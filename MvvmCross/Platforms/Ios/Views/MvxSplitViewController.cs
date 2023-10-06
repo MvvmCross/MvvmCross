@@ -1,13 +1,15 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Linq;
 using Foundation;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
@@ -26,11 +28,15 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxSplitViewController(IntPtr handle) : base(handle)
+        protected internal MvxSplitViewController(NativeHandle handle) : base(handle)
         {
         }
 
         public MvxSplitViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        public MvxSplitViewController(UISplitViewControllerStyle style) : base(style)
         {
         }
 
@@ -67,9 +73,11 @@ namespace MvvmCross.Platforms.Ios.Views
             if (!ViewControllers.Any())
                 return false;
 
-            var toClose = ViewControllers.ToList()
-                                         .Select(v => v.GetIMvxIosView())
-                                         .FirstOrDefault(mvxView => mvxView?.ViewModel == viewModel);
+            var toClose =
+                ViewControllers
+                    .Select(v => v.GetIMvxIosView())
+                    .FirstOrDefault(mvxView => mvxView?.ViewModel == viewModel);
+
             if (toClose != null)
             {
                 var newStack = ViewControllers.Where(v => v.GetIMvxIosView() != toClose);
@@ -82,8 +90,8 @@ namespace MvvmCross.Platforms.Ios.Views
         }
     }
 
-    public class MvxSplitViewController<TViewModel> : MvxSplitViewController
-        where TViewModel : IMvxViewModel
+    public class MvxSplitViewController<TViewModel> : MvxSplitViewController, IMvxIosView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
         public MvxSplitViewController()
         {
@@ -101,7 +109,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxSplitViewController(IntPtr handle) : base(handle)
+        protected internal MvxSplitViewController(NativeHandle handle) : base(handle)
         {
         }
 
@@ -109,6 +117,11 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxIosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxIosView<TViewModel>, TViewModel>();
         }
     }
 }

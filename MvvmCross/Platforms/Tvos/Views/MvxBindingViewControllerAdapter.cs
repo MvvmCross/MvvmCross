@@ -3,8 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Logging;
 using MvvmCross.Platforms.Tvos.Views.Base;
 
 namespace MvvmCross.Platforms.Tvos.Views
@@ -26,7 +27,8 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
             if (TvosView == null)
             {
-                MvxLog.Instance.Warn($"{nameof(TvosView)} is null for clearup of bindings");
+                MvxLogHost.GetLog<MvxBindingViewControllerAdapter>()?.Log(
+                    LogLevel.Warning, "{viewName} is null for clearup of bindings", nameof(TvosView));
                 return;
             }
             TvosView.ClearAllBindings();

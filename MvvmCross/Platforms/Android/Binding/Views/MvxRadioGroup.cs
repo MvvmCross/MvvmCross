@@ -53,7 +53,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             //var li = (args.Child as MvxListItemView);
             var radioButton = args.Child as RadioButton;
-            
+
             // radio buttons require an id so that they get un-checked correctly
             if (radioButton?.Id == NoId)
             {
@@ -73,7 +73,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             get
             {
-                return _adapter; 
+                return _adapter;
             }
             protected set
             {
@@ -127,7 +127,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private static new int GenerateViewId()
         {
-            for (;;)
+            for (; ; )
             {
                 int result = (int)Interlocked.Read(ref _nextGeneratedViewId);
 

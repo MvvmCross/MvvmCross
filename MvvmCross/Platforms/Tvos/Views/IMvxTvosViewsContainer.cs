@@ -7,5 +7,6 @@ using MvvmCross.Views;
 namespace MvvmCross.Platforms.Tvos.Views
 {
     public interface IMvxTvosViewsContainer
-        : IMvxViewsContainer, IMvxTvosViewCreator { }
+        : IMvxViewsContainer, IMvxTvosViewCreator
+    { }
 }

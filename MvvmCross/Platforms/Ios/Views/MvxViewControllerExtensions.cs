@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
@@ -13,7 +14,6 @@ namespace MvvmCross.Platforms.Ios.Views
     {
         public static void OnViewCreate(this IMvxIosView iosView)
         {
-            //var view = iosView as IMvxView<TViewModel>;
             iosView.OnViewCreate(iosView.LoadViewModel);
         }
 
@@ -21,8 +21,9 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             if (iosView.Request == null)
             {
-                MvxLog.Instance.Trace(
+                MvxLogHost.Default?.LogTrace(
                     "Request is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
+
                 iosView.Request = Mvx.IoCProvider.Resolve<IMvxCurrentRequest>().CurrentRequest;
             }
 

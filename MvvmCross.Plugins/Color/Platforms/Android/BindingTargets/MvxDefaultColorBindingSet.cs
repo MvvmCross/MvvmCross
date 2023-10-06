@@ -1,10 +1,12 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using Android.Views;
 using Android.Widget;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Plugin.Color.Platforms.Android.Binding;
 
@@ -13,13 +15,12 @@ namespace MvvmCross.Plugin.Color.Platforms.Android.BindingTargets
     [Preserve(AllMembers = true)]
     public class MvxDefaultColorBindingSet
     {
-        public void RegisterBindings()
+        public void RegisterBindings(IMvxIoCProvider provider)
         {
-            IMvxTargetBindingFactoryRegistry registry;
-            if (!Mvx.IoCProvider.TryResolve(out registry))
+            if (!provider.TryResolve(out IMvxTargetBindingFactoryRegistry registry) || registry == null)
             {
-                MvxPluginLog.Instance.Warn(
-                               "No binding registry available - so color bindings will not be used");
+                MvxPluginLog.Instance.Log(LogLevel.Warning,
+                    "No binding registry available - so color bindings will not be used");
                 return;
             }
 

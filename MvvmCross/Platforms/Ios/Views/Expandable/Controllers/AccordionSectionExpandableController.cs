@@ -8,22 +8,22 @@ using System.Linq;
 namespace MvvmCross.Platforms.Ios.Views.Expandable.Controllers
 {
     internal class AccordionSectionExpandableController : SectionExpandableController
-	{
-		public override ToggleExpandStateResponse ToggleState(int atIndex)
-		{
-			var collapsedIndexes = ExpandedIndexesSet.ToList();
-			var expandedIndexes = new List<int>();
-  
-			bool isIndexExpanded = IsExpanded(atIndex);
-			ResetState();
+    {
+        public override ToggleExpandStateResponse ToggleState(int atIndex)
+        {
+            var collapsedIndexes = ExpandedIndexesSet.ToList();
+            var expandedIndexes = new List<int>();
 
-			if (!isIndexExpanded)
-			{
-				ExpandedIndexesSet.Add(atIndex);
-				expandedIndexes.Add(atIndex);
-			}
+            bool isIndexExpanded = IsExpanded(atIndex);
+            ResetState();
 
-			return new ToggleExpandStateResponse(expandedIndexes, collapsedIndexes);
-		}
-	}
+            if (!isIndexExpanded)
+            {
+                ExpandedIndexesSet.Add(atIndex);
+                expandedIndexes.Add(atIndex);
+            }
+
+            return new ToggleExpandStateResponse(expandedIndexes, collapsedIndexes);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -38,10 +38,10 @@ namespace MvvmCross.ViewModels
         /// <param name="propertyName">The name of the property that changed.</param>
         public PropertyChangedEventArgs Get(string propertyName)
         {
-            lock(_cache)
+            lock (_cache)
             {
                 PropertyChangedEventArgs result;
-                if(_cache.TryGetValue(propertyName, out result))
+                if (_cache.TryGetValue(propertyName, out result))
                     return result;
                 result = new PropertyChangedEventArgs(propertyName);
                 _cache.Add(propertyName, result);

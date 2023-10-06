@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,6 +9,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
 using MvvmCross.Core;
 using MvvmCross.IoC;
@@ -119,23 +120,14 @@ namespace MvvmCross.Platforms.Mac.Core
 
         protected virtual void InitialiseBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
-        }
-
-        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
-        {
-            ValidateArguments(iocProvider);
-
-            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
-            return new MvxMacBindingBuilder();
+            return new MvxMacBindingBuilder(FillTargetFactories, FillValueConverters, FillBindingNames,
+                FillValueCombiners);
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
@@ -147,6 +139,11 @@ namespace MvvmCross.Platforms.Mac.Core
         {
             registry.Fill(ValueConverterAssemblies);
             registry.Fill(ValueConverterHolders);
+        }
+
+        protected virtual void FillValueCombiners(IMvxValueCombinerRegistry registry)
+        {
+            // this base class does nothing
         }
 
         protected virtual List<Assembly> ValueConverterAssemblies
@@ -168,10 +165,11 @@ namespace MvvmCross.Platforms.Mac.Core
         }
     }
 
-    public class MvxMacSetup<TApplication> : MvxMacSetup
+    public abstract class MvxMacSetup<TApplication> : MvxMacSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

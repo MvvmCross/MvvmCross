@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Commands;
@@ -18,7 +18,7 @@ namespace MvvmCross.Tests
 
         public bool HasCalledRaisePropertyChangedFor(object item)
         {
-            if(item != null && items.Any() && items.ContainsKey(item))
+            if (item != null && items.Any() && items.ContainsKey(item))
             {
                 return items[item] > 0;
             }

@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
         {
         }
 
-        public override Type TargetType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
         protected override Stream GetStream(object value)
         {

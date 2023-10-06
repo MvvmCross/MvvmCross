@@ -8,7 +8,7 @@ namespace MvvmCross.Platforms.Ios.Views
     {
         string TabName { get; }
         string TabIconName { get; }
-        
-        string TabSelectedIconName { get;  }
+
+        string TabSelectedIconName { get; }
     }
 }

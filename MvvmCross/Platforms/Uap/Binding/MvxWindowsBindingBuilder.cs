@@ -1,17 +1,18 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Windows.UI.Xaml;
 using MvvmCross.Base;
-using MvvmCross.Converters;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
+using MvvmCross.Converters;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Uap.Binding.MvxBinding;
 using MvvmCross.Platforms.Uap.Binding.MvxBinding.Target;
+using Windows.UI.Xaml;
 
 namespace MvvmCross.Platforms.Uap.Binding
 {
@@ -31,13 +32,13 @@ namespace MvvmCross.Platforms.Uap.Binding
             _bindingType = bindingType;
         }
 
-        public override void DoRegistration()
+        public override void DoRegistration(IMvxIoCProvider iocProvider)
         {
-            base.DoRegistration();
+            base.DoRegistration(iocProvider);
             InitializeBindingCreator();
         }
 
-        protected override void RegisterBindingFactories()
+        protected override void RegisterBindingFactories(IMvxIoCProvider iocProvider)
         {
             switch (_bindingType)
             {
@@ -46,11 +47,11 @@ namespace MvvmCross.Platforms.Uap.Binding
                     break;
 
                 case BindingType.MvvmCross:
-                    base.RegisterBindingFactories();
+                    base.RegisterBindingFactories(iocProvider);
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new InvalidOperationException($"Unable to register binding factories for BindingType: {_bindingType}");
             }
         }
 
@@ -65,7 +66,7 @@ namespace MvvmCross.Platforms.Uap.Binding
                     return new MvxWindowsTargetBindingFactoryRegistry();
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new InvalidOperationException($"Unable to create target binding registry for BindingType: {_bindingType}");
             }
         }
 
@@ -86,7 +87,7 @@ namespace MvvmCross.Platforms.Uap.Binding
                     return new MvxMvvmCrossBindingCreator();
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new InvalidOperationException($"Unable to create binding creator for BindingType: {_bindingType}");
             }
         }
 

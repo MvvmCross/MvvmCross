@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 
@@ -34,7 +35,7 @@ namespace MvvmCross.IoC
         protected virtual void InjectProperty(object toReturn, PropertyInfo injectableProperty, IMvxPropertyInjectorOptions options)
         {
             object propertyValue;
-            if (Mvx.IoCProvider.TryResolve(injectableProperty.PropertyType, out propertyValue))
+            if (Mvx.IoCProvider?.TryResolve(injectableProperty.PropertyType, out propertyValue) == true)
             {
                 try
                 {
@@ -48,9 +49,15 @@ namespace MvvmCross.IoC
             else
             {
                 if (options.ThrowIfPropertyInjectionFails)
+                {
                     throw new MvxIoCResolveException("IoC property injection failed for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
+                }
                 else
-                    MvxLog.Instance.Warn("IoC property injection skipped for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
+                {
+                    MvxLogHost.Default?.Log(LogLevel.Warning,
+                        "IoC property injection skipped for {propertyName} on {typeName}",
+                        injectableProperty.Name, toReturn.GetType().Name);
+                }
             }
         }
 
@@ -73,7 +80,7 @@ namespace MvvmCross.IoC
                     break;
 
                 case MvxPropertyInjection.None:
-                    MvxLog.Instance.Error("Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
+                    MvxLogHost.Default?.Log(LogLevel.Error, "Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
                     injectableProperties = new PropertyInfo[0];
                     break;
 

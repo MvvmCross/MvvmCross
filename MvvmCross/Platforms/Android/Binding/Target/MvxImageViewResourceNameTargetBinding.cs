@@ -6,16 +6,16 @@ using Android.Widget;
 
 namespace MvvmCross.Platforms.Android.Binding.Target
 {
-	public class MvxImageViewResourceNameTargetBinding : MvxImageViewDrawableNameTargetBinding
-	{
-		public MvxImageViewResourceNameTargetBinding(ImageView imageView)
-			: base(imageView)
-		{
-		}
+    public class MvxImageViewResourceNameTargetBinding : MvxImageViewDrawableNameTargetBinding
+    {
+        public MvxImageViewResourceNameTargetBinding(ImageView imageView)
+            : base(imageView)
+        {
+        }
 
-		protected override void SetImage(ImageView imageView, int id)
-		{
-			imageView.SetImageResource(id);
-		}
-	}
+        protected override void SetImage(ImageView imageView, int id)
+        {
+            imageView.SetImageResource(id);
+        }
+    }
 }

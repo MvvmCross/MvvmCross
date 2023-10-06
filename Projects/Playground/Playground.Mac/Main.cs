@@ -1,4 +1,4 @@
-﻿using AppKit;
+using AppKit;
 
 namespace Playground.Mac
 {

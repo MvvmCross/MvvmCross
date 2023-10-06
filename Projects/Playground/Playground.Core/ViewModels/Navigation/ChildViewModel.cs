@@ -1,8 +1,9 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -11,7 +12,7 @@ using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
-    public class ChildViewModel : MvxNavigationViewModel<SampleModel, SampleModel>
+    public class ChildViewModel : MvxNavigationViewModel<SampleModel>
     {
         public string BrokenTextValue { get => _brokenTextValue; set => SetProperty(ref _brokenTextValue, value); }
         public string AnotherBrokenTextValue { get => _anotherBrokenTextValue; set => SetProperty(ref _anotherBrokenTextValue, value); }
@@ -20,17 +21,14 @@ namespace Playground.Core.ViewModels
         private string _brokenTextValue;
         private string _anotherBrokenTextValue;
 
-        public ChildViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        public ChildViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
+            : base(logProvider, navigationService)
         {
-            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this, new SampleModel
-            {
-                Message = "This returned correctly",
-                Value = 5.67m
-            }));
+            CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
 
-            ShowSecondChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SecondChildViewModel>());
+            ShowSecondChildCommand = new MvxAsyncCommand(() => NavigationService.Navigate<SecondChildViewModel>());
 
-            ShowRootCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>());
+            ShowRootCommand = new MvxAsyncCommand(() => NavigationService.Navigate<RootViewModel>());
 
             PropertyChanged += ChildViewModel_PropertyChanged;
         }
@@ -43,24 +41,9 @@ namespace Playground.Core.ViewModels
                 throw new System.NotImplementedException();
         }
 
-        public override void Prepare()
-        {
-            base.Prepare();
-        }
-
         public override void Prepare(SampleModel parameter)
         {
             _parameter = parameter;
-        }
-
-        protected override void SaveStateToBundle(IMvxBundle bundle)
-        {
-            base.SaveStateToBundle(bundle);
-        }
-
-        protected override void ReloadFromBundle(IMvxBundle state)
-        {
-            base.ReloadFromBundle(state);
         }
 
         public override async System.Threading.Tasks.Task Initialize()
@@ -72,11 +55,7 @@ namespace Playground.Core.ViewModels
 
         public void Init()
         {
-        }
-
-        public override void Start()
-        {
-            base.Start();
+            // Method intentionally left empty.
         }
 
         public IMvxAsyncCommand CloseCommand { get; private set; }

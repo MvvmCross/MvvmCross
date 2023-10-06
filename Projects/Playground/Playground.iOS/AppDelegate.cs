@@ -1,4 +1,4 @@
-﻿using Foundation;
+using Foundation;
 using MvvmCross;
 using MvvmCross.Platforms.Ios.Core;
 using MvvmCross.ViewModels;

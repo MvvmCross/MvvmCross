@@ -1,33 +1,50 @@
-<Project>
+﻿<Project>
   <PropertyGroup>
     <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
     <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MvvmCross/MvvmCross</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
     <Authors>.NET Foundation and Contributors</Authors>
-    <Owners>MvvmCross;slodge;cheesebaron;martijn00</Owners>
-    <PackageTags>mvvm;mvvmcross;xamarin;android;ios;mac;forms;monodroid;monotouch;xamarin.android;xamarin.ios;xamarin.forms;xamarin.mac;wpf;net;net45;uwp;tizen</PackageTags>
+    <Owners>MvvmCross;slodge;cheesebaron</Owners>
+    <PackageTags>mvvm;mvvmcross;xamarin;android;ios;mac</PackageTags>
     <PackageReleaseNotes>https://github.com/MvvmCross/MvvmCross/blob/develop/CHANGELOG.md</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <MinClientVersion>2.12</MinClientVersion>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryUrl>https://github.com/MvvmCross/MvvmCross</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <Version>7.0.0</Version>
+    <Version>8.1.0-net6.1</Version>
 
     <!--<Nullable>enable</Nullable>-->
-    <LangVersion>8.0</LangVersion>
-    <NoWarn>$(NoWarn);1591;1701;1702;1705;VSX1000;CS0109;CS0108;CS0618;CS0114;NU1603</NoWarn>
-    <Platform>AnyCPU</Platform>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>true</ImplicitUsings>
+    <NoWarn>$(NoWarn);CS0109;CS0108;CS0618;CS0114;NU1603</NoWarn>
 
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('MvvmCross'))</IsLibraryProject>
-    <IsXamarinForms>$(MSBuildProjectName.Contains('.Forms'))</IsXamarinForms>
 
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+
+    <_MvxTargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</_MvxTargetPlatformIdentifier>
+    <_MvxTargetPlatformIsAndroid>false</_MvxTargetPlatformIsAndroid>
+    <_MvxTargetPlatformIsAndroid Condition="'$(_MvxTargetPlatformIdentifier)' == 'android'">True</_MvxTargetPlatformIsAndroid>
+    <_MvxTargetPlatformIsiOS>false</_MvxTargetPlatformIsiOS>
+    <_MvxTargetPlatformIsiOS Condition="'$(_MvxTargetPlatformIdentifier)' == 'ios'">True</_MvxTargetPlatformIsiOS>
+    <_MvxTargetPlatformIsMacCatalyst>false</_MvxTargetPlatformIsMacCatalyst>
+    <_MvxTargetPlatformIsMacCatalyst Condition="'$(_MvxTargetPlatformIdentifier)' == 'maccatalyst'">True</_MvxTargetPlatformIsMacCatalyst>
+    <_MvxTargetPlatformIsmacOS>false</_MvxTargetPlatformIsmacOS>
+    <_MvxTargetPlatformIsmacOS Condition="'$(_MvxTargetPlatformIdentifier)' == 'macos'">True</_MvxTargetPlatformIsmacOS>
+    <_MvxTargetPlatformIstvOS>false</_MvxTargetPlatformIstvOS>
+    <_MvxTargetPlatformIstvOS Condition="'$(_MvxTargetPlatformIdentifier)' == 'tvos'">True</_MvxTargetPlatformIstvOS>
+    <_MvxTargetPlatformIsWindows>false</_MvxTargetPlatformIsWindows>
+    <_MvxTargetPlatformIsWindows Condition="$(_MvxTargetPlatformIdentifier.Contains('windows')) == 'True'">True</_MvxTargetPlatformIsWindows>
+
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsiOS)' == 'True' ">10.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIstvOS)' == 'True' ">10.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsMacCatalyst)' == 'True' ">13.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsAndroid)' == 'True' ">23</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -49,29 +66,19 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
+  <!--
+    For Version 1.1 of Windows App SDK there is known issue with building
+      WinUI 3 library that results in error if the property EnableMsixTooling
+      is not set. This is set here since the base MvvmCross assembly and plugins
+      will need this property set.
+   -->
+  <PropertyGroup Condition=" '$(_MvxTargetPlatformIsWindows)' == 'True' ">
+    <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsLibraryProject)' == 'true'">
     <None Include="$(MSBuildThisFileDirectory)\LICENSE" Pack="true" PackagePath="\" />
     <None Include="$(MSBuildThisFileDirectory)\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <TargetsToBuild>All</TargetsToBuild>
-    <!-- <TargetsToBuild>Android</TargetsToBuild> -->
-    <!-- <TargetsToBuild>Uap</TargetsToBuild> -->
-    <!-- <TargetsToBuild>iOS</TargetsToBuild> -->
-    <!-- <TargetsToBuild>Tizen</TargetsToBuild> -->
-    <!-- <TargetsToBuild>Mac</TargetsToBuild> -->
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' != 'Debug' ">
-    <TargetsToBuild>All</TargetsToBuild>
-  </PropertyGroup>
-
-
 
 </Project>

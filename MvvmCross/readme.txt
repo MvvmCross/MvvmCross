@@ -11,11 +11,11 @@ See the documentation at https://www.mvvmcross.com/ to learn how to make full us
 
 -- Assumptions --
 
-1. Your solution already has a .NET Standard 2.x project where shared code will be located (often referred to as the Core project).
-2. Your solution already has a platform specific project for every platform you wish to support. 
+1. Your solution already has a .NET 7 or greater project where shared code will be located (often referred to as the Core project).
+2. Your solution already has a platform-specific project for every platform you wish to support. 
    Platforms include Xamarin.iOS, Xamarin.Android, Xamarin.Mac, Xamarin.tvOS, Universal Windows Platform (UWP) and Windows Presentation Foundation (WPF).
 3. You have added this NuGet package (MvvmCross) to all projects in your solution.
-4. Each of the platform specific projects have a reference to the Core project.
+4. Each of the platform-specific projects have a reference to the Core project.
 
 -- Changes to make to your project (Traditional Xamarin Solution - No Xamarin.Forms) --
 
@@ -24,47 +24,40 @@ If you wish to use Xamarin.Forms to write shared code for your user interfaces, 
 in the Readme file included in that NuGet package instead. An MvvmCross project with Xamarin.Forms requires a slightly different setup and therefore has a different set of instructions to this Readme.
 
 Samples of all files referenced below can be found here:
-https://github.com/MvvmCross/MvvmCross/blob/develop/ContentFiles/
+ https://github.com/MvvmCross/MvvmCross-Samples/tree/master/Starter
 
 Most of these sample files can be copied directly into a newly created solution and will work. 
 However, any $rootnamespace$ instances will need to be changed to your project's namespace and you will also need to add appropriate using statements (Visual Studio IntelliSense should suggest these).
 
 
 - Core project -
-1. Add an App class to the root folder (See Core/App.cs.pp in sample files).
-2. Add a ViewModels folder to the root of the project and add at least one ViewModel class to this folder (See Core/HomeViewModel.cs.pp in sample files).
+1. Add an App class to the root folder (See Core/App.cs in the Starter sample files).
+2. Add a ViewModels folder to the root of the project and add at least one ViewModel class to this folder (See Core/ViewModels/MainViewModel.cs in the Starter sample files).
 
 
 - Android projects (ignore if not building for Android) -
-1. Add a reference to the Mono.Android.Export assembly.
-2. Delete MainActivity.cs, and add a new activity class called SplashScreen to the root folder.
-3. Change the SplashScreen activity class to inherit from MvxSplashScreenActivity<MvxAndroidSetup<Core.App>, Core.App> instead of Activity (See Android/SplashScreen.cs.pp in sample files).
-4. Add a new Android layout to the Resources/layout folder to correspond to the SplashScreen created in the previous step. (See Android/SplashScreen.axml.pp in sample files).
-5. Add a Views folder to the root of the project and add at least one View class to this folder to correspond to the ViewModel class in the Core project (See Android/HomeView.cs.pp in sample files).
-6. Add a new Android layout to the Resources/layout folder to correspond to the View class created in the previous step. (See Android/HomeView.axml.pp in sample files).
+1. Change the MainActivity.cs to inherit from MvxActivity<MainViewModel> (See AndroidApp/Views/MainActivity.cs in the Starter sample files).
+2. Add a Views folder and move MainActivity.cs to this folder.  All subsequent views will be located in this folder.
+3. Add a MainApplication class to the root of the project class (See AndroidApp/MainApplication.cs in the Starter sample files).
 
 Note: If you wish to use the AppCompat versions of Android classes, you can follow the above instructions with the following modifications
-7. Add the MvvmCross v7 Android AppCompat Support Libraries NuGet package (MvvmCross.Droid.Support.v7.AppCompat) to your Android platform specific project.
-8. When changing the the inheritance for the SplashScreen activity class, use MvxSplashScreenAppCompatActivity instead of MvxSplashScreenActivity.
-9. Add a new XML file that defines an AppCompat theme to the Resources/values folder called styles.xml. (See Android/styles.xml.pp in sample files)
-10. Ensure the theme created in the previous step is referenced in the Attribute for the MainActivity class (Theme = "@style/MainTheme").
+4. Add the MvvmCross DroidX Material NuGet package (MvvmCross.DroidX.Material) to your Android platform-specific project.
+5. Add a new XML file that defines an AppCompat theme to the Resources/values folder called styles.xml. (See AndroidApp/Resources/styles.xml in the Starter sample files)
+6. Ensure the theme created in the previous step is referenced in the Attribute for the MainActivity class (Theme = "@style/MainTheme").
 
 
 - iOS projects (ignore if not building for iOS) -
-1. Inside AppDelegate.cs, change the AppDelegate class to inherit from MvxApplicationDelegate<MvxIosSetup<Core.App>, Core.App> instead of ApplicationDelegate (See iOS/AppDelegate.cs.pp in sample files).
+1. Inside AppDelegate.cs, change the AppDelegate class to inherit from MvxApplicationDelegate<Setup, App> instead of ApplicationDelegate (See iOSApp/AppDelegate.cs in the Starter sample files).
 2. Still inside AppDelegate.cs, delete all the pre-populated methods to leave a blank AppDelegate class.
-3. Add a Views folder to the root of the project and add at least one View class to this folder to correspond to the ViewModel class in the Core project (See iOS/HomeView.cs.pp in sample files).
-4. Add a new iOS Interface Builder layout (XIB) or StoryBoard file to the Views folder to correspond to the View created in the previous step. (See iOS/HomeView.xib.pp in sample files).
+3. Add a Views folder to the root of the project and add at least one View class to this folder to correspond to the ViewModel class in the Core project (See iOSApp/Views/MainViewController.cs in the Starter sample files).
+4. Add a new iOS Interface Builder layout (XIB) or StoryBoard file to the root folder to correspond to the View created in the previous step. (See iOSApp/LaunchScreen.storyboard in the Starter sample files).
 
 
 - macOS projects (ignore if not building for macOS) -
-1. Inside AppDelegate.cs, change the AppDelegate class to inherit from MvxApplicationDelegate<MvxMacSetup<Core.App>, Core.App> instead of ApplicationDelegate (See macOS/AppDelegate.cs.pp in sample files).
-2. Still inside AppDelegate.cs replace the contents of the DidFinishLaunching method with the following:
-   MvxMacSetupSingleton.EnsureSingletonAvailable(this).EnsureInitialized();
-   RunAppStart();
-3. Still inside AppDelegate, delete all the other pre-populated methods.
-4. Add a Views folder and add at least one View file to this folder to correspond to the ViewModel in the Core project (See macOS/HomeView.cs.pp in sample files).
-5. Add a new iOS Interface Builder layout (XIB) or StoryBoard file to the Views folder to correspond to the View created in the previous step. (See macOS/Home.storyboard.pp in sample files).
+1. Inside AppDelegate.cs, change the AppDelegate class to inherit from MvxApplicationDelegate<Setup, App> instead of ApplicationDelegate (See macOS/AppDelegate.cs.pp in sample files).
+2. Still inside AppDelegate, delete all the other pre-populated methods.
+3. Add a Views folder and add at least one View file to this folder to correspond to the ViewModel in the Core project (See macOS/HomeView.cs.pp in sample files).
+4. Add a new iOS Interface Builder layout (XIB) or StoryBoard file to the Views folder to correspond to the View created in the previous step. (See macOS/Home.storyboard.pp in sample files).
 
 
 - tvOS projects (ignore if not building for tvOS) -

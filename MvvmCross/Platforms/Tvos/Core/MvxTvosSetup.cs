@@ -1,24 +1,25 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Converters;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Converters;
 using MvvmCross.Core;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Tvos.Binding;
 using MvvmCross.Platforms.Tvos.Presenters;
 using MvvmCross.Platforms.Tvos.Views;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using UIKit;
-using MvvmCross.Presenters;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Tvos.Core
 {
@@ -133,23 +134,14 @@ namespace MvvmCross.Platforms.Tvos.Core
 
         protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
-        }
-
-        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
-        {
-            ValidateArguments(iocProvider);
-
-            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
-            return new MvxTvosBindingBuilder();
+            return new MvxTvosBindingBuilder(FillTargetFactories, FillValueConverters, FillBindingNames,
+                FillValueCombiners);
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry obj)
@@ -161,6 +153,11 @@ namespace MvvmCross.Platforms.Tvos.Core
         {
             registry.Fill(ValueConverterAssemblies);
             registry.Fill(ValueConverterHolders);
+        }
+
+        protected virtual void FillValueCombiners(IMvxValueCombinerRegistry registry)
+        {
+            // this base class does nothing
         }
 
         protected virtual List<Type> ValueConverterHolders => new List<Type>();
@@ -187,10 +184,11 @@ namespace MvvmCross.Platforms.Tvos.Core
         }
     }
 
-    public class MvxTvosSetup<TApplication> : MvxTvosSetup
+    public abstract class MvxTvosSetup<TApplication> : MvxTvosSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
+            iocProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
-{ 
+{
     public interface IMvxAxmlNameViewTypeResolver
     {
         IDictionary<string, string> ViewNamespaceAbbreviations { get; }

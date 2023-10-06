@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,7 +13,7 @@ namespace MvvmCross.Core
 #nullable enable
     public static class MvxSetupExtensions
     {
-        public static void RegisterSetupType<TMvxSetup>(this object platformApplication,  params Assembly[] assemblies)
+        public static void RegisterSetupType<TMvxSetup>(this object platformApplication, params Assembly[] assemblies)
             where TMvxSetup : MvxSetup, new()
         {
             if (platformApplication == null)
@@ -23,7 +23,7 @@ namespace MvvmCross.Core
                 new[] { platformApplication.GetType().Assembly }.Union(assemblies ?? Array.Empty<Assembly>()).ToArray());
         }
 
-        public static TSetup CreateSetup<TSetup>(Assembly assembly, params object[] parameters) where TSetup : MvxSetup
+        public static TSetup? CreateSetup<TSetup>(Assembly assembly, params object[] parameters) where TSetup : MvxSetup
         {
             var setupType = FindSetupType<TSetup>(assembly);
             if (setupType == null)
@@ -33,7 +33,7 @@ namespace MvvmCross.Core
 
             try
             {
-                return (TSetup)Activator.CreateInstance(setupType, parameters);
+                return (TSetup?)Activator.CreateInstance(setupType, parameters);
             }
             catch (Exception exception)
             {
@@ -41,7 +41,7 @@ namespace MvvmCross.Core
             }
         }
 
-        public static TSetup CreateSetup<TSetup>() where TSetup : MvxSetup
+        public static TSetup? CreateSetup<TSetup>() where TSetup : MvxSetup
         {
             var setupType = FindSetupType<TSetup>();
             if (setupType == null)
@@ -51,7 +51,7 @@ namespace MvvmCross.Core
 
             try
             {
-                return (TSetup)Activator.CreateInstance(setupType);
+                return (TSetup?)Activator.CreateInstance(setupType);
             }
             catch (Exception exception)
             {

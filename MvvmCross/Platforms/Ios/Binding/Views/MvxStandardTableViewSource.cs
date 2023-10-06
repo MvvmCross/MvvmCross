@@ -5,10 +5,12 @@
 using System;
 using System.Collections.Generic;
 using Foundation;
-using MvvmCross.Logging;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Logging;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views
@@ -51,10 +53,10 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         {
         }
 
-        public MvxStandardTableViewSource(IntPtr handle)
+        public MvxStandardTableViewSource(NativeHandle handle)
             : base(handle)
         {
-            MvxLog.Instance.Warn("MvxStandardTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+            MvxLogHost.Default?.LogWarning("MvxStandardTableViewSource NativeHandle constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         public MvxStandardTableViewSource(

@@ -3,9 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Base;
-using System;
-using AppKit;
-using Foundation;
+using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Mac.Views.Base
 {
@@ -17,7 +15,7 @@ namespace MvvmCross.Platforms.Mac.Views.Base
             this.Initialize();
         }
 
-        protected MvxEventSourceViewController(IntPtr handle)
+        protected MvxEventSourceViewController(NativeHandle handle)
             : base(handle)
         {
             this.Initialize();
@@ -37,6 +35,7 @@ namespace MvvmCross.Platforms.Mac.Views.Base
 
         private void Initialize()
         {
+            // Method intentionally left empty.
         }
 
         public override void LoadView()

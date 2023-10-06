@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -89,6 +89,24 @@ namespace MvvmCross.Binding.BindingContext
         {
             SetCombiner(combiner, properties, useParser: true);
             return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> ByCombining<TValueCombiner>(params Expression<Func<TSource, object>>[] properties)
+            where TValueCombiner : IMvxValueCombiner
+        {
+            var filler = Mvx.IoCProvider.Resolve<IMvxValueCombinerRegistryFiller>();
+            var combinerName = filler.FindName(typeof(TValueCombiner));
+
+            return ByCombining(combinerName, properties);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> ByCombining<TValueCombiner>(params string[] properties)
+            where TValueCombiner : IMvxValueCombiner
+        {
+            var filler = Mvx.IoCProvider.Resolve<IMvxValueCombinerRegistryFiller>();
+            var combinerName = filler.FindName(typeof(TValueCombiner));
+
+            return ByCombining(combinerName, properties);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> CommandParameter(object parameter)

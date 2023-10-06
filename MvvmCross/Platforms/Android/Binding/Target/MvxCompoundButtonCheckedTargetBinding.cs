@@ -31,7 +31,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
                                       "Error - compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
                 return;
             }
-            
+
             _subscription = compoundButton.WeakSubscribe<CompoundButton, CompoundButton.CheckedChangeEventArgs>(
                 nameof(compoundButton.CheckedChange),
                 CompoundButtonOnCheckedChange);

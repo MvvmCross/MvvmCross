@@ -1,19 +1,14 @@
 steps:
 - task: UseDotNet@2
-  displayName: 'Use .NET Core sdk'
+  displayName: 'Install .NET 8.0'
   inputs:
     packageType: sdk
-    version: 3.1.402
+    version: 8.0.x
+    includePreviewVersions: true
 
-- task: Cache@2
-  displayName: Cache NuGet packages
-  inputs:
-    key: 'nuget | "$(Agent.OS)" | Directory.Packages.props'
-    restoreKeys: |
-      nuget | "$(Agent.OS)"
-      nuget
-    path: '$(NUGET_PACKAGES)'
-  continueOnError: true
+- pwsh: |
+    dotnet workload install android ios tvos macos maccatalyst maui-ios maui-android
+  displayName: Install dotnet workloads
 
 - task: Cache@2
   displayName: Cache Cake tools

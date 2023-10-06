@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Foundation;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.ViewModels;
+using ObjCRuntime;
 using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
@@ -33,7 +35,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxTabBarViewController(IntPtr handle) : base(handle)
+        protected internal MvxTabBarViewController(NativeHandle handle) : base(handle)
         {
         }
 
@@ -76,7 +78,7 @@ namespace MvvmCross.Platforms.Ios.Views
 
             if (IsMovingFromParentViewController)
             {
-                if (Mvx.IoCProvider.TryResolve(out IMvxIosViewPresenter iPresenter)
+                if (Mvx.IoCProvider?.TryResolve(out IMvxIosViewPresenter iPresenter) == true
                     && iPresenter is MvxIosViewPresenter mvxIosViewPresenter)
                 {
                     mvxIosViewPresenter.CloseTabBarViewController();
@@ -148,7 +150,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             if (SelectedIndex > 5 && (MoreNavigationController?.ViewControllers?.Any() ?? false))
             {
-                var lastViewController = (MoreNavigationController.ViewControllers.Last()).GetIMvxIosView();
+                var lastViewController = MoreNavigationController.ViewControllers[0].GetIMvxIosView();
 
                 if (lastViewController != null && lastViewController.ViewModel == viewModel)
                 {
@@ -157,19 +159,18 @@ namespace MvvmCross.Platforms.Ios.Views
                 }
             }
 
-            if (SelectedViewController is UINavigationController navController
-                && navController.ViewControllers != null
-                && navController.ViewControllers.Any())
+            if (SelectedViewController is UINavigationController { ViewControllers: not null } navController &&
+                navController.ViewControllers.Any())
             {
                 // if the ViewModel to close if the last in the stack, close it animated
-                if (navController.TopViewController.GetIMvxIosView().ViewModel == viewModel)
+                if (navController.TopViewController.GetIMvxIosView()?.ViewModel == viewModel)
                 {
                     navController.PopViewController(true);
                     return true;
                 }
 
                 var controllers = navController.ViewControllers.ToList();
-                var controllerToClose = controllers.FirstOrDefault(vc => vc.GetIMvxIosView().ViewModel == viewModel);
+                var controllerToClose = controllers.Find(vc => vc.GetIMvxIosView()?.ViewModel == viewModel);
 
                 if (controllerToClose != null)
                 {
@@ -230,8 +231,8 @@ namespace MvvmCross.Platforms.Ios.Views
         }
     }
 
-    public class MvxTabBarViewController<TViewModel> : MvxTabBarViewController
-        where TViewModel : IMvxViewModel
+    public class MvxTabBarViewController<TViewModel> : MvxTabBarViewController, IMvxIosView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
         public MvxTabBarViewController()
         {
@@ -249,7 +250,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        protected internal MvxTabBarViewController(IntPtr handle) : base(handle)
+        protected internal MvxTabBarViewController(NativeHandle handle) : base(handle)
         {
         }
 
@@ -257,6 +258,11 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxIosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxIosView<TViewModel>, TViewModel>();
         }
     }
 }

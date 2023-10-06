@@ -1,20 +1,17 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Tests;
-using MvvmCross.UnitTest.Common;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding
 {
     public abstract class MvxBindingTest : IClassFixture<MvxTestFixture>
     {
-        public MvxBindingTest(MvxTestFixture fixture, ITestOutputHelper testOutputHelper)
+        protected MvxBindingTest(MvxTestFixture fixture)
         {
-            fixture.SetupTestLogger(new XunitTestLogger("MvxTest", testOutputHelper));
             fixture.ClearAll();
         }
 

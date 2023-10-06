@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -15,8 +15,8 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
     public class MvxSwissBindingTest
         : MvxBaseSwissBindingTest<MvxSwissBindingParser>
     {
-        public MvxSwissBindingTest(MvxTestFixture fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture, testOutputHelper)
+        public MvxSwissBindingTest(MvxTestFixture fixture)
+            : base(fixture)
         {
         }
 
@@ -42,7 +42,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -69,7 +68,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -96,7 +94,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -123,7 +120,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -150,7 +146,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -177,7 +172,6 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
     }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using MvvmCross.DroidX.RecyclerView.ItemTemplates;
 using static Playground.Core.ViewModels.CollectionViewModel;

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -108,7 +108,7 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         public void UnsubscribePreventsMessagesBeingReceived()
         {
             var messenger = new MvxMessengerHub();
-            Action<TestMessage> action = _ => Assert.True(false, "This event should not fire!");
+            Action<TestMessage> action = _ => Assert.Fail("This event should not fire!");
 
             var id = messenger.Subscribe(action);
             messenger.Unsubscribe<TestMessage>(id);
@@ -119,7 +119,7 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         public void DisposeTokenPreventsMessagesBeingReceived()
         {
             var messenger = new MvxMessengerHub();
-            Action<TestMessage> action = _ => Assert.True(false, "This event should not fire!");
+            Action<TestMessage> action = _ => Assert.Fail("This event should not fire!");
 
             var id = messenger.Subscribe(action);
             id.Dispose();
@@ -129,7 +129,8 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         [Fact]
         public void NullSenderCausesException()
         {
-            Assert.Throws<ArgumentNullException>(() => {
+            Assert.Throws<ArgumentNullException>(() =>
+            {
                 var message = new TestMessage(null);
             });
         }
@@ -138,9 +139,7 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         public void NullSubscribeCausesException()
         {
             var messenger = new MvxMessengerHub();
-            Assert.Throws<ArgumentNullException>(() => {
-                messenger.Subscribe<TestMessage>(null);
-            });
+            Assert.Throws<ArgumentNullException>(() => messenger.Subscribe<TestMessage>(null));
         }
 
         [Fact]
@@ -148,19 +147,22 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         {
             var messenger = new MvxMessengerHub();
             messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.NewGuid(), () => { }, new object()));
-            messenger.Subscribe<TestMessage>(m =>
-                {
-                    // stuff
-                });
+            messenger.Subscribe<TestMessage>(_ =>
+            {
+                // stuff
+            });
             messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.NewGuid(), () => { }, new object()));
             messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.Empty, () => { }, new object()));
+
+            Assert.True(messenger.HasSubscriptionsFor<TestMessage>());
         }
 
         [Fact]
         public void NullPublishCausesException()
         {
             var messenger = new MvxMessengerHub();
-            Assert.Throws<ArgumentNullException>(() => {
+            Assert.Throws<ArgumentNullException>(() =>
+            {
                 messenger.Publish<TestMessage>(null);
             });
         }
@@ -322,22 +324,22 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
             Assert.Empty(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>());
             Assert.Empty(messenger.GetSubscriptionTagsFor<TestMessage>());
             var changeToken = messenger.Subscribe<MvxSubscriberChangeMessage>(message => { });
-            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Single(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>());
             Assert.Null(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
             Assert.Empty(messenger.GetSubscriptionTagsFor<TestMessage>());
             var token = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
             }, tag: testTag1);
-            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Single(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>());
             Assert.Null(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
-            Assert.Equal(1, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
+            Assert.Single(messenger.GetSubscriptionTagsFor<TestMessage>());
             Assert.Equal(testTag1, messenger.GetSubscriptionTagsFor<TestMessage>()[0]);
             var token2 = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
             }, tag: testTag1);
-            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Single(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>());
             Assert.Null(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
             Assert.Equal(2, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
             Assert.Equal(testTag1, messenger.GetSubscriptionTagsFor<TestMessage>()[0]);
@@ -346,27 +348,27 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
             {
                 // stuff
             }, tag: testTag2);
-            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Single(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>());
             Assert.Null(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
             Assert.Equal(3, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
             Assert.Equal(2, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag1).Count());
             Assert.Single(messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag2));
             messenger.Unsubscribe<TestMessage>(token);
-            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Single(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>());
             Assert.Null(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
             Assert.Equal(2, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
             Assert.Single(messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag1));
             Assert.Single(messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag2));
             messenger.Unsubscribe<TestMessage>(token2);
-            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Single(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>());
             Assert.Null(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
-            Assert.Equal(1, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
+            Assert.Single(messenger.GetSubscriptionTagsFor<TestMessage>());
             Assert.Empty(messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag1));
             Assert.Single(messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag2));
             messenger.Unsubscribe<TestMessage>(token3);
-            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Single(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>());
             Assert.Null(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
-            Assert.Equal(0, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
+            Assert.Empty(messenger.GetSubscriptionTagsFor<TestMessage>());
         }
 
         [Fact]

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -83,7 +83,7 @@ namespace MvvmCross.Binding.Bindings
             // does the right thing.
             _dataContext = source;
             _sourceStep = SourceStepFactory.Create(_bindingDescription.Source);
-            _sourceStep.TargetType = _targetBinding.TargetType;
+            _sourceStep.TargetType = _targetBinding.TargetValueType;
             _sourceStep.DataContext = source;
 
             if (NeedToObserveSourceChanges)
@@ -158,7 +158,7 @@ namespace MvvmCross.Binding.Bindings
                 _targetBinding.ValueChanged += _targetBindingOnValueChanged;
             }
 
-            _defaultTargetValue = _targetBinding.TargetType.CreateDefault();
+            _defaultTargetValue = _targetBinding.TargetValueType.CreateDefault();
         }
 
         private async void UpdateTargetFromSource(object value, CancellationToken cancel)

@@ -1,21 +1,22 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AppKit;
 using CoreGraphics;
+using Foundation;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
-using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
-using System.Threading.Tasks;
-using Foundation;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Mac.Presenters
 {
@@ -26,8 +27,8 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
-            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new window presentation");
-            return new MvxWindowPresentationAttribute();
+            MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. Assuming new window presentation", viewType.Name);
+            return new MvxWindowPresentationAttribute { ViewModelType = viewModelType, ViewType = viewType };
         }
 
         public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
@@ -41,7 +42,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
                     if (presentationAttribute == null)
                     {
-                        MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
+                        MvxLogHost.Default?.Log(LogLevel.Warning, "Override PresentationAttribute null. Falling back to existing attribute.");
                     }
                     else
                     {
@@ -260,8 +261,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
         {
             var window = FindPresentingWindow(attribute.WindowIdentifier, viewController);
 
-            var tabViewController = window.ContentViewController as IMvxTabViewController;
-            if (tabViewController == null)
+            if (window.ContentViewController is not IMvxTabViewController tabViewController)
                 throw new MvxException($"Trying to display a tab but there is no TabViewController to host it! View type: {viewController.GetType()}");
 
             tabViewController.ShowTabView(viewController, attribute.TabTitle);
@@ -273,7 +273,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             NSWindow window = null;
 
             if (!string.IsNullOrEmpty(identifier))
-                window = Windows.FirstOrDefault(w => w.Identifier == identifier);
+                window = Windows.Find(w => w.Identifier == identifier);
 
             if (window == null)
                 window = MainWindow ?? Windows.LastOrDefault();
@@ -289,7 +289,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             for (int i = Windows.Count - 1; i >= 0; i--)
             {
                 var window = Windows[i];
-                
+
                 // closing controller is a tab
                 var tabViewController = window.ContentViewController as IMvxTabViewController;
                 if (tabViewController != null && tabViewController.CloseTabView(viewModel))

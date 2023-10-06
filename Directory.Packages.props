@@ -1,43 +1,43 @@
 <Project>
   <ItemGroup>
-    <PackageVersion Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.2" />
-    <PackageVersion Include="Xamarin.AndroidX.CardView" Version="1.0.0.8" />
-    <PackageVersion Include="Xamarin.AndroidX.Leanback" Version="1.0.0.6" />
-    <PackageVersion Include="Xamarin.AndroidX.RecyclerView" Version="1.1.0.8" />
-    <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.2.0.7" />
-    <PackageVersion Include="Xamarin.AndroidX.Fragment" Version="1.3.0.1" />
-    <PackageVersion Include="Xamarin.AndroidX.ViewPager" Version="1.0.0.7" />
-    <PackageVersion Include="Xamarin.AndroidX.Preference" Version="1.1.1.8" />
-    <PackageVersion Include="Xamarin.AndroidX.ExifInterface" Version="1.3.2.1" />
-    <PackageVersion Include="Xamarin.AndroidX.MediaRouter" Version="1.2.2.1" />
-    <PackageVersion Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.3.0.1" />
-    <PackageVersion Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.7" />
-    <PackageVersion Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.2.0.7" />
-    <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.3.0.1" />
-    <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="117.6.0" />
-    <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="117.1.0" />
-    <PackageVersion Include="Microsoft.CodeAnalysis" Version="3.8.0" />
-    <PackageVersion Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageVersion Include="SidebarNavigation" Version="2.1.0" />
-    <PackageVersion Include="Xamarin.Build.Download" Version="0.10.0" />
-    <PackageVersion Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.1931" />
-    <PackageVersion Include="Xamarin.Forms" Version="5.0.0.1931" />
-    <PackageVersion Include="Roslynator.Analyzers" Version="3.1.0" />
-    <PackageVersion Include="AsyncFixer" Version="1.5.1" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.18.0.27296" />
+    <PackageVersion Include="AsyncFixer" Version="1.6.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0-preview.23420.2" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
+    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.4.230913002" />
+    <PackageVersion Include="Moq" Version="4.18.4" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="4.5.0" />
+    <PackageVersion Include="Serilog" Version="3.0.1" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="7.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageVersion Include="Serilog.Sinks.Trace" Version="3.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Debug" Version="2.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.11.0.78383" />
     <PackageVersion Include="SourceLink.Create.CommandLine" Version="2.8.3" />
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.0.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
-    <PackageVersion Include="Moq" Version="4.16.0" />
-    <PackageVersion Include="xunit" Version="2.4.1" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.3" />
-    <PackageVersion Include="XunitXml.TestLogger" Version="3.0.62" />
-    <PackageVersion Include="System.Console" Version="4.3.1" />
-    <PackageVersion Include="Plugin.Permissions" Version="6.0.1" />
-    <PackageVersion Include="Newtonsoft.Json" Version="12.0.3"/>
-    <PackageVersion Include="Serilog" Version="2.10.0"/>
-    <PackageVersion Include="Serilog.Sinks.Xamarin" Version="0.2.0.64"/>
+    <PackageVersion Include="Xamarin.Android.Glide" Version="4.15.1.2" />
+    <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.4" />
+    <PackageVersion Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.6.1.5" />
+    <PackageVersion Include="Xamarin.AndroidX.CardView" Version="1.0.0.22" />
+    <PackageVersion Include="Xamarin.AndroidX.ExifInterface" Version="1.3.6.4" />
+    <PackageVersion Include="Xamarin.AndroidX.Fragment" Version="1.6.1.1" />
+    <PackageVersion Include="Xamarin.AndroidX.Leanback" Version="1.0.0.22" />
+    <PackageVersion Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.20" />
+    <PackageVersion Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.6.2.1" />
+    <PackageVersion Include="Xamarin.AndroidX.MediaRouter" Version="1.4.0.3" />
+    <PackageVersion Include="Xamarin.AndroidX.Preference" Version="1.2.1.1" />
+    <PackageVersion Include="Xamarin.AndroidX.RecyclerView" Version="1.3.1.1" />
+    <PackageVersion Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.15" />
+    <PackageVersion Include="Xamarin.AndroidX.ViewPager" Version="1.0.0.20" />
     <PackageVersion Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
+    <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.9.0.3" />
+    <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="118.2.0.2" />
+    <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="121.0.1.1" />
+    <PackageVersion Include="XunitXml.TestLogger" Version="3.1.17" />
+    <PackageVersion Include="xunit" Version="2.5.1" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.1" />
+    <PackageVersion Include="Microsoft.Maui.Essentials" Version="8.0.0-rc.1.9171" />
   </ItemGroup>
 </Project>

@@ -1,17 +1,16 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using MvvmCross.Converters;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Converters;
 using MvvmCross.Platforms.Ios.Binding.Target;
 using MvvmCross.Platforms.Ios.Binding.ValueConverters;
 using MvvmCross.Platforms.Ios.Binding.Views;
-using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Binding
 {
@@ -20,18 +19,18 @@ namespace MvvmCross.Platforms.Ios.Binding
     {
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
         private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
-        private readonly Action<IMvxAutoValueConverters> _fillAutoValueConvertersAction;
         private readonly Action<IMvxBindingNameRegistry> _fillBindingNamesAction;
         private readonly MvxUnifiedTypesValueConverter _unifiedValueTypesConverter;
+        private readonly Action<IMvxValueCombinerRegistry> _fillValueCombinersAction;
 
         public MvxIosBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction = null,
                                     Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
-                                    Action<IMvxAutoValueConverters> fillAutoValueConvertersAction = null,
+                                    Action<IMvxValueCombinerRegistry> fillValueCombinersAction = null,
                                     Action<IMvxBindingNameRegistry> fillBindingNamesAction = null)
         {
             _fillRegistryAction = fillRegistryAction;
             _fillValueConvertersAction = fillValueConvertersAction;
-            _fillAutoValueConvertersAction = fillAutoValueConvertersAction;
+            _fillValueCombinersAction = fillValueCombinersAction;
             _fillBindingNamesAction = fillBindingNamesAction;
 
             _unifiedValueTypesConverter = new MvxUnifiedTypesValueConverter();
@@ -48,7 +47,7 @@ namespace MvvmCross.Platforms.Ios.Binding
             registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_TouchDownRepeat,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDownRepeat));
-            
+
             registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_TouchDragInside,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDragInside));
@@ -88,7 +87,7 @@ namespace MvvmCross.Platforms.Ios.Binding
             registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_AllEditingEvents,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllEditingEvents));
-            
+
             registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_AllEvents,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllEvents));
@@ -99,7 +98,7 @@ namespace MvvmCross.Platforms.Ios.Binding
 
             registry.RegisterCustomBindingFactory<UIView>(
                 MvxIosPropertyBinding.UIView_Visible,
-                view =>   new MvxUIViewVisibleTargetBinding(view));
+                view => new MvxUIViewVisibleTargetBinding(view));
 
             registry.RegisterCustomBindingFactory<UIActivityIndicatorView>(
                 MvxIosPropertyBinding.UIActivityIndicatorView_Hidden,
@@ -237,6 +236,12 @@ namespace MvvmCross.Platforms.Ios.Binding
             _fillValueConvertersAction?.Invoke(registry);
         }
 
+        protected override void FillValueCombiners(IMvxValueCombinerRegistry registry)
+        {
+            base.FillValueCombiners(registry);
+            _fillValueCombinersAction?.Invoke(registry);
+        }
+
         protected override void FillAutoValueConverters(IMvxAutoValueConverters autoValueConverters)
         {
             base.FillAutoValueConverters(autoValueConverters);
@@ -244,8 +249,6 @@ namespace MvvmCross.Platforms.Ios.Binding
             //register converter for xamarin unified types
             foreach (var kvp in MvxUnifiedTypesValueConverter.UnifiedTypeConversions)
                 autoValueConverters.Register(kvp.Key, kvp.Value, _unifiedValueTypesConverter);
-
-            _fillAutoValueConvertersAction?.Invoke(autoValueConverters);
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)

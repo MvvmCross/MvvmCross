@@ -5,6 +5,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Core;
 using MvvmCross.IoC;
@@ -44,17 +45,30 @@ namespace MvvmCross.Platforms.Wpf
                 Mvx.IoCProvider.RegisterSingleton(iocProvider);
             }
 
-            MvxSetup.RegisterSetupType<MvxWpfSetup<App>>(System.Reflection.Assembly.GetExecutingAssembly());
+            MvxSetup.RegisterSetupType<Setup>(System.Reflection.Assembly.GetExecutingAssembly());
             var instance = MvxWpfSetupSingleton.EnsureSingletonAvailable(Application.Current.Dispatcher, new Content());
-            instance.InitializeAndMonitor(null);
+            instance.EnsureInitialized();
         }
 
-        class App : ViewModels.MvxApplication
+        private class App : ViewModels.MvxApplication
         {
         }
 
-        class Content : ContentControl
+        private class Content : ContentControl
         {
+        }
+
+        private class Setup : MvxWpfSetup<App>
+        {
+            protected override ILoggerFactory CreateLogFactory()
+            {
+                return null;
+            }
+
+            protected override ILoggerProvider CreateLogProvider()
+            {
+                return null;
+            }
         }
     }
 }

@@ -1,16 +1,12 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
+#nullable enable
 using System.Reflection;
 using MvvmCross.IoC;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public class MvxViewModelByNameLookup : IMvxViewModelByNameLookup, IMvxViewModelByNameRegistry
     {
         private readonly Dictionary<string, Type> _availableViewModelsByName;
@@ -22,20 +18,21 @@ namespace MvvmCross.ViewModels
             _availableViewModelsByFullName = new Dictionary<string, Type>();
         }
 
-        public bool TryLookupByName(string name, out Type viewModelType)
+        public bool TryLookupByName(string name, out Type? viewModelType)
         {
             return _availableViewModelsByName.TryGetValue(name, out viewModelType);
         }
 
-        public bool TryLookupByFullName(string name, out Type viewModelType)
+        public bool TryLookupByFullName(string name, out Type? viewModelType)
         {
             return _availableViewModelsByFullName.TryGetValue(name, out viewModelType);
         }
 
         public void Add(Type viewModelType)
         {
-            _availableViewModelsByName[viewModelType.Name] = viewModelType;
-            _availableViewModelsByFullName[viewModelType.FullName] = viewModelType;
+            _availableViewModelsByName.TryAdd(viewModelType.Name, viewModelType);
+            if (viewModelType.FullName != null)
+                _availableViewModelsByFullName.TryAdd(viewModelType.FullName, viewModelType);
         }
 
         public void Add<TViewModel>() where TViewModel : IMvxViewModel
@@ -57,5 +54,4 @@ namespace MvvmCross.ViewModels
             }
         }
     }
-#nullable restore
 }
