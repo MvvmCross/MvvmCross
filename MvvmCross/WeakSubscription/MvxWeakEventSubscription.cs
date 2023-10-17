@@ -176,7 +176,7 @@ namespace MvvmCross.WeakSubscription
 
             AddEventHandler();
         }
-        
+
         private static EventInfo GetEventInfo(string sourceEventName)
         {
             var eventInfo = typeof(TSource).GetEvent(sourceEventName);
