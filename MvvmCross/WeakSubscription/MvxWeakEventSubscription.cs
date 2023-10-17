@@ -33,15 +33,11 @@ namespace MvvmCross.WeakSubscription
 
         protected MvxWeakEventSubscription(
             TSource source,
-            EventInfo? sourceEventInfo,
+            EventInfo sourceEventInfo,
             EventHandler<TEventArgs> targetEventHandler)
         {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source), "missing source in MvxWeakEventSubscription");
-
-            if (sourceEventInfo == null)
-                throw new ArgumentNullException(nameof(sourceEventInfo),
-                                                "missing source event info in MvxWeakEventSubscription");
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(sourceEventInfo);
 
             _eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
             _targetReference = new WeakReference(targetEventHandler.Target);
@@ -164,15 +160,11 @@ namespace MvvmCross.WeakSubscription
 
         protected MvxWeakEventSubscription(
             TSource source,
-            EventInfo? sourceEventInfo,
+            EventInfo sourceEventInfo,
             EventHandler targetEventHandler)
         {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source), "missing source in MvxWeakEventSubscription");
-
-            if (sourceEventInfo == null)
-                throw new ArgumentNullException(nameof(sourceEventInfo),
-                                                "missing source event info in MvxWeakEventSubscription");
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(sourceEventInfo);
 
             _eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
             _targetReference = new WeakReference(targetEventHandler.Target);
