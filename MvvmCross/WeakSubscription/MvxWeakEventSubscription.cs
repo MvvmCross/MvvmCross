@@ -27,21 +27,17 @@ namespace MvvmCross.WeakSubscription
             TSource source,
             string sourceEventName,
             EventHandler<TEventArgs> targetEventHandler)
-            : this(source, typeof(TSource).GetEvent(sourceEventName), targetEventHandler)
+            : this(source, GetEventInfo(sourceEventName), targetEventHandler)
         {
         }
 
         protected MvxWeakEventSubscription(
             TSource source,
-            EventInfo? sourceEventInfo,
+            EventInfo sourceEventInfo,
             EventHandler<TEventArgs> targetEventHandler)
         {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source), "missing source in MvxWeakEventSubscription");
-
-            if (sourceEventInfo == null)
-                throw new ArgumentNullException(nameof(sourceEventInfo),
-                                                "missing source event info in MvxWeakEventSubscription");
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(sourceEventInfo);
 
             _eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
             _targetReference = new WeakReference(targetEventHandler.Target);
@@ -51,6 +47,15 @@ namespace MvvmCross.WeakSubscription
             _ourEventHandler = Init();
 
             AddEventHandler();
+        }
+
+        private static EventInfo GetEventInfo(string sourceEventName)
+        {
+            var eventInfo = typeof(TSource).GetEvent(sourceEventName);
+            if (eventInfo == null)
+                throw new ArgumentOutOfRangeException(sourceEventName);
+
+            return eventInfo;
         }
 
         private Delegate Init()
@@ -149,21 +154,17 @@ namespace MvvmCross.WeakSubscription
             TSource source,
             string sourceEventName,
             EventHandler targetEventHandler)
-            : this(source, typeof(TSource).GetEvent(sourceEventName), targetEventHandler)
+            : this(source, GetEventInfo(sourceEventName), targetEventHandler)
         {
         }
 
         protected MvxWeakEventSubscription(
             TSource source,
-            EventInfo? sourceEventInfo,
+            EventInfo sourceEventInfo,
             EventHandler targetEventHandler)
         {
-            if (source == null)
-                throw new ArgumentNullException(nameof(source), "missing source in MvxWeakEventSubscription");
-
-            if (sourceEventInfo == null)
-                throw new ArgumentNullException(nameof(sourceEventInfo),
-                                                "missing source event info in MvxWeakEventSubscription");
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(sourceEventInfo);
 
             _eventHandlerMethodInfo = targetEventHandler.GetMethodInfo();
             _targetReference = new WeakReference(targetEventHandler.Target);
@@ -174,6 +175,15 @@ namespace MvvmCross.WeakSubscription
             _ourEventHandler = CreateEventHandler();
 
             AddEventHandler();
+        }
+
+        private static EventInfo GetEventInfo(string sourceEventName)
+        {
+            var eventInfo = typeof(TSource).GetEvent(sourceEventName);
+            if (eventInfo == null)
+                throw new ArgumentOutOfRangeException(sourceEventName);
+
+            return eventInfo;
         }
 
         protected virtual object? GetTargetObject()
