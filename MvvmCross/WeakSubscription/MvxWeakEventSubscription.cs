@@ -27,7 +27,7 @@ namespace MvvmCross.WeakSubscription
             TSource source,
             string sourceEventName,
             EventHandler<TEventArgs> targetEventHandler)
-            : this(source, typeof(TSource).GetEvent(sourceEventName), targetEventHandler)
+            : this(source, GetEventInfo(sourceEventName), targetEventHandler)
         {
         }
 
@@ -51,6 +51,15 @@ namespace MvvmCross.WeakSubscription
             _ourEventHandler = Init();
 
             AddEventHandler();
+        }
+
+        private static EventInfo GetEventInfo(string sourceEventName)
+        {
+            var eventInfo = typeof(TSource).GetEvent(sourceEventName);
+            if (eventInfo == null)
+                throw new ArgumentOutOfRangeException(sourceEventName);
+
+            return eventInfo;
         }
 
         private Delegate Init()
@@ -149,7 +158,7 @@ namespace MvvmCross.WeakSubscription
             TSource source,
             string sourceEventName,
             EventHandler targetEventHandler)
-            : this(source, typeof(TSource).GetEvent(sourceEventName), targetEventHandler)
+            : this(source, GetEventInfo(sourceEventName), targetEventHandler)
         {
         }
 
@@ -174,6 +183,15 @@ namespace MvvmCross.WeakSubscription
             _ourEventHandler = CreateEventHandler();
 
             AddEventHandler();
+        }
+        
+        private static EventInfo GetEventInfo(string sourceEventName)
+        {
+            var eventInfo = typeof(TSource).GetEvent(sourceEventName);
+            if (eventInfo == null)
+                throw new ArgumentOutOfRangeException(sourceEventName);
+
+            return eventInfo;
         }
 
         protected virtual object? GetTargetObject()
