@@ -9,7 +9,6 @@ updates:
     android-dependencies:
       patterns:
         - "Xamarin.*"
-        - "Xamarin.*"
     unittest-dependencies:
       patterns:
         - "xunit"
