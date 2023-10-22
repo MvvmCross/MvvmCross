@@ -5,20 +5,19 @@
 using MvvmCross.Converters;
 using MvvmCross.IoC;
 
-namespace MvvmCross.Plugin.Visibility
-{
-    public abstract class BasePlugin : IMvxPlugin
-    {
-        public virtual void Load(IMvxIoCProvider provider)
-        {
-            if (provider.TryResolve(out IMvxValueConverterRegistry registry))
-                RegisterValueConverters(registry);
-        }
+namespace MvvmCross.Plugin.Visibility;
 
-        private void RegisterValueConverters(IMvxValueConverterRegistry registry)
-        {
-            registry.AddOrOverwrite("Visibility", new MvxVisibilityValueConverter());
-            registry.AddOrOverwrite("InvertedVisibility", new MvxVisibilityValueConverter());
-        }
+public abstract class BasePlugin : IMvxPlugin
+{
+    public virtual void Load(IMvxIoCProvider provider)
+    {
+        if (provider.TryResolve(out IMvxValueConverterRegistry registry))
+            RegisterValueConverters(registry);
+    }
+
+    private static void RegisterValueConverters(IMvxValueConverterRegistry registry)
+    {
+        registry.AddOrOverwrite("Visibility", new MvxVisibilityValueConverter());
+        registry.AddOrOverwrite("InvertedVisibility", new MvxVisibilityValueConverter());
     }
 }
