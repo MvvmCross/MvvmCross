@@ -31,4 +31,16 @@
         android:layout_height="wrap_content"
         android:text="Toggle Visibility"
         local:MvxBind="Click ToggleVisibilityCommand" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        local:MvxBind="Text ColorText; TextColor NativeColor(TextColor)"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Toggle Color"
+        local:MvxBind="Click ToggleColorCommand" />
 </LinearLayout>
