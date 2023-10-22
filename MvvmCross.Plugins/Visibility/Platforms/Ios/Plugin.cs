@@ -13,8 +13,8 @@ namespace MvvmCross.Plugin.Visibility.Platforms.Ios
     {
         public override void Load(IMvxIoCProvider provider)
         {
-            base.Load(provider);
             provider.RegisterSingleton<IMvxNativeVisibility>(new MvxIosVisibility());
+            base.Load(provider);
         }
     }
 }
