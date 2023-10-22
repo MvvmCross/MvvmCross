@@ -110,21 +110,27 @@
                 android:layout_marginTop="10dp"
                 android:text="Location"
                 local:MvxBind="Click ShowLocationCommand;" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Converters"
+                local:MvxBind="Click ShowConvertersCommand;" />
             <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        local:MvxBind="Text TimeToRegister" />
-          <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        local:MvxBind="Text TimeToResolve" />
-             <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        local:MvxBind="Text TotalTime" />
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="40dp"
+                local:MvxBind="Text TimeToRegister" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="40dp"
+                local:MvxBind="Text TimeToResolve" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="40dp"
+                local:MvxBind="Text TotalTime" />
         </LinearLayout>
     </ScrollView>
     <FrameLayout
