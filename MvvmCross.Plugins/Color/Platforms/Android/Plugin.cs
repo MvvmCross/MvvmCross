@@ -15,9 +15,9 @@ namespace MvvmCross.Plugin.Color.Platforms.Android
     {
         public override void Load(IMvxIoCProvider provider)
         {
-            base.Load(provider);
             provider.RegisterSingleton<IMvxNativeColor>(new MvxAndroidColor());
             RegisterDefaultBindings(provider);
+            base.Load(provider);
         }
 
         private static void RegisterDefaultBindings(IMvxIoCProvider provider)

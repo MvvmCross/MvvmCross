@@ -13,8 +13,8 @@ namespace MvvmCross.Plugin.Color.Platforms.Ios
     {
         public override void Load(IMvxIoCProvider provider)
         {
-            base.Load(provider);
             provider.RegisterSingleton<IMvxNativeColor>(new MvxIosColor());
+            base.Load(provider);
         }
     }
 }
