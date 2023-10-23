@@ -154,14 +154,12 @@ namespace MvvmCross.Core
                 InitializeStringToTypeParser(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: FillableStringToTypeParser start");
                 InitializeFillableStringToTypeParser(_iocProvider);
-                SetupLog?.Log(LogLevel.Trace, "Setup: PluginManagerFramework start");
-                var pluginManager = InitializePluginFramework(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: Create App");
                 var app = InitializeMvxApplication(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: NavigationService");
                 InitializeNavigationService(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: App start");
-                InitializeApp(pluginManager, app);
+                InitializeApp(app);
                 SetupLog?.Log(LogLevel.Trace, "Setup: ViewModelTypeFinder start");
                 InitializeViewModelTypeFinder(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: ViewsContainer start");
@@ -180,6 +178,9 @@ namespace MvvmCross.Core
                 InitializeViewModelCache(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: LastChance start");
                 InitializeLastChance(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: PluginManagerFramework start");
+                var pluginManager = InitializePluginFramework(_iocProvider);
+                app.LoadPlugins(pluginManager);
                 SetupLog?.Log(LogLevel.Trace, "Setup: Secondary end");
                 State = MvxSetupState.Initialized;
             }
@@ -472,12 +473,10 @@ namespace MvvmCross.Core
             return app;
         }
 
-        protected virtual void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
+        protected virtual void InitializeApp(IMvxApplication app)
         {
-            if (app == null)
-                throw new ArgumentNullException(nameof(app));
+            ArgumentNullException.ThrowIfNull(app);
 
-            app.LoadPlugins(pluginManager);
             SetupLog?.Log(LogLevel.Trace, "Setup: Application Initialize - On background thread");
             app.Initialize();
         }

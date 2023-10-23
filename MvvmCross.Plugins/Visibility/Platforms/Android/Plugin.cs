@@ -13,8 +13,8 @@ namespace MvvmCross.Plugin.Visibility.Platforms.Android
     {
         public override void Load(IMvxIoCProvider provider)
         {
-            base.Load(provider);
             provider.RegisterSingleton<IMvxNativeVisibility>(new MvxDroidVisibility());
+            base.Load(provider);
         }
     }
 }
