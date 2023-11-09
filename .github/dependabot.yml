@@ -14,7 +14,7 @@ updates:
         - "xunit"
         - "xunit.*"
         - "XunitXml.*"
-        - "Microsoft.NET.Test.Sdk"
+        - "Microsoft.NET.Test*"
     analyzers:
       patterns:
         - "AsyncFixer"
