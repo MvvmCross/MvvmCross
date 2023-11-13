@@ -8,7 +8,7 @@
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.2428" />
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.4.231008000" />
     <PackageVersion Include="Moq" Version="4.18.4" />
-    <PackageVersion Include="Roslynator.Analyzers" Version="4.6.1" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="4.6.2" />
     <PackageVersion Include="Serilog" Version="3.0.1" />
     <PackageVersion Include="Serilog.Extensions.Logging" Version="7.0.0" />
     <PackageVersion Include="Serilog.Sinks.Async" Version="1.5.0" />
