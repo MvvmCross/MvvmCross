@@ -19,7 +19,7 @@ updates:
     analyzers:
       patterns:
         - "AsyncFixer"
-        - "*Analyzer*".
+        - "*Analyzer*"
     logging:
       patterns:
         - "*.Extensions.Logging.*"
