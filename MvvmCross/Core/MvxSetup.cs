@@ -176,11 +176,11 @@ namespace MvvmCross.Core
                 InitializeInpcInterception(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: InpcInterception start");
                 InitializeViewModelCache(_iocProvider);
-                SetupLog?.Log(LogLevel.Trace, "Setup: LastChance start");
-                InitializeLastChance(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: PluginManagerFramework start");
                 var pluginManager = InitializePluginFramework(_iocProvider);
                 app.LoadPlugins(pluginManager);
+                SetupLog?.Log(LogLevel.Trace, "Setup: LastChance start");
+                InitializeLastChance(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: Secondary end");
                 State = MvxSetupState.Initialized;
             }
