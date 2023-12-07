@@ -158,8 +158,6 @@ namespace MvvmCross.Core
                 var app = InitializeMvxApplication(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: NavigationService");
                 InitializeNavigationService(_iocProvider);
-                SetupLog?.Log(LogLevel.Trace, "Setup: App start");
-                InitializeApp(app);
                 SetupLog?.Log(LogLevel.Trace, "Setup: ViewModelTypeFinder start");
                 InitializeViewModelTypeFinder(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: ViewsContainer start");
@@ -179,6 +177,8 @@ namespace MvvmCross.Core
                 SetupLog?.Log(LogLevel.Trace, "Setup: PluginManagerFramework start");
                 var pluginManager = InitializePluginFramework(_iocProvider);
                 app.LoadPlugins(pluginManager);
+                SetupLog?.Log(LogLevel.Trace, "Setup: App start");
+                InitializeApp(app);
                 SetupLog?.Log(LogLevel.Trace, "Setup: LastChance start");
                 InitializeLastChance(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: Secondary end");
