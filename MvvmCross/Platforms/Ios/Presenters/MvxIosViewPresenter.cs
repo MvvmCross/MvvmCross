@@ -418,7 +418,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
             viewController.ModalTransitionStyle = attribute.ModalTransitionStyle;
-            if (attribute.PreferredContentSize != default(CGSize))
+            if (attribute.PreferredContentSize != default)
                 viewController.PreferredContentSize = attribute.PreferredContentSize;
 
             if (_iosVersion13Checker.IsVersionOrHigher && viewController.PresentationController != null)
@@ -427,10 +427,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
                     new MvxModalPresentationControllerDelegate(this, viewController, attribute);
             }
 
-            // Check if there is a modal already presented first. Otherwise use the window root
-            var modalHost = ModalViewControllers.LastOrDefault() ?? Window.RootViewController;
-
-            modalHost.PresentViewController(viewController, attribute.Animated, null);
+            var parentViewController = GetParentViewController();
+            parentViewController.PresentViewController(viewController, attribute.Animated, null);
 
             ModalViewControllers.Add(viewController);
 
@@ -459,11 +457,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 viewController = CreateNavigationController(viewController);
             }
 
-            // Check if there is a modal already presented first. Otherwise use the topmost view controller.
-            var viewHost = ModalViewControllers.LastOrDefault() ?? Window.RootViewController;
-            if (viewHost == null)
-                throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as popover, but could not find a view host!");
-
             viewController.ModalPresentationStyle = UIModalPresentationStyle.Popover;
 
             var presentationController = viewController.PopoverPresentationController;
@@ -474,8 +467,17 @@ namespace MvvmCross.Platforms.Ios.Presenters
             presentationController.Delegate = new MvxPopoverPresentationControllerDelegate(this);
 
             PopoverViewController = viewController;
-            await viewHost.PresentViewControllerAsync(viewController, attribute.Animated).ConfigureAwait(true);
+
+            var parentViewController = GetParentViewController();
+            await parentViewController.PresentViewControllerAsync(viewController, attribute.Animated).ConfigureAwait(true);
             return true;
+        }
+
+        private UIViewController GetParentViewController()
+        {
+            //Ensure to get a ViewController that is not being dismissed. See related bugs https://github.com/MvvmCross/MvvmCross/issues/4781
+            return ModalViewControllers.LastOrDefault(x => !x.IsBeingDismissed) ?? Window.RootViewController
+                ?? throw new MvxException($"No parent ViewController found.");
         }
 
         protected virtual Task<bool> ShowMasterSplitViewController(
@@ -726,8 +728,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             MasterNavigationController = null;
         }
 
-        public virtual async Task<bool> CloseModalViewController(
-            UIViewController viewController, MvxModalPresentationAttribute attribute)
+        public virtual async Task<bool> CloseModalViewController(UIViewController viewController, MvxModalPresentationAttribute attribute)
         {
             ValidateArguments(viewController, attribute);
 
