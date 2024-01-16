@@ -19,8 +19,8 @@ public class MvxModalPresentationControllerDelegate : UIAdaptivePresentationCont
         _attribute = attribute;
     }
 
-    public override Task DidDismiss(UIPresentationController presentationController)
+    public override async void DidDismiss(UIPresentationController presentationController)
     {
-        return _presenter.CloseModalViewController(_viewController, _attribute);
+        await _presenter.CloseModalViewController(_viewController, _attribute).ConfigureAwait(false);
     }
 }
