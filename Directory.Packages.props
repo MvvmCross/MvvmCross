@@ -36,7 +36,7 @@
     <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="118.2.0.2" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="121.0.1.1" />
     <PackageVersion Include="XunitXml.TestLogger" Version="3.1.17" />
-    <PackageVersion Include="xunit" Version="2.6.5" />
+    <PackageVersion Include="xunit" Version="2.6.6" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.6" />
     <PackageVersion Include="Microsoft.Maui.Essentials" Version="8.0.3" />
   </ItemGroup>
