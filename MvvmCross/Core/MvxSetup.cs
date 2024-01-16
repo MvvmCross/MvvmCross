@@ -174,6 +174,8 @@ namespace MvvmCross.Core
                 InitializeInpcInterception(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: InpcInterception start");
                 InitializeViewModelCache(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: BindingBuilder start");
+                InitializeBindingBuilder(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: PluginManagerFramework start");
                 var pluginManager = InitializePluginFramework(_iocProvider);
                 app.LoadPlugins(pluginManager);
@@ -597,6 +599,11 @@ namespace MvvmCross.Core
             var container = iocProvider.Resolve<IMvxViewsContainer>();
             container.AddAll(viewModelViewLookup);
             return container;
+        }
+
+        protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
+        {
+            
         }
 
         protected virtual void InitializeLastChance(IMvxIoCProvider iocProvider)
