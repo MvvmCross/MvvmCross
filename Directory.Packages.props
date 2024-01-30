@@ -15,7 +15,7 @@
     <PackageVersion Include="Serilog.Sinks.Trace" Version="3.0.0" />
     <PackageVersion Include="Serilog.Sinks.Debug" Version="2.0.0" />
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.17.0.82934" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.18.0.83559" />
     <PackageVersion Include="SourceLink.Create.CommandLine" Version="2.8.3" />
     <PackageVersion Include="Xamarin.Android.Glide" Version="4.15.1.2" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.4" />
