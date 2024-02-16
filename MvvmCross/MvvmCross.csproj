@@ -18,6 +18,13 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <None Include="Platforms\**\*.cs" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
+    <None Remove="Platforms\WinUi\Presenters\Attributes\MvxNewWindowPresentationAttribute.cs" />
+    <None Remove="Platforms\WinUi\Presenters\IMvxMultiWindowsService.cs" />
+    <None Remove="Platforms\WinUi\Presenters\Models\INeedWindow.cs" />
+    <None Remove="Platforms\WinUi\Presenters\Models\WindowInformation.cs" />
+    <None Remove="Platforms\WinUi\Presenters\MvxMultiWindowViewPresenter.cs" />
+    <None Remove="Platforms\WinUi\Presenters\Utils\AppWindowUtils.cs" />
+
     <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
   
@@ -61,6 +68,7 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <RootNamespace>MvvmCross</RootNamespace>
     <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
     <UseWinUI>true</UseWinUI>
+    <UseWindowsForms>true</UseWindowsForms>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
 
@@ -77,5 +85,6 @@ This package contains the 'Core' libraries for MvvmCross</Description>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="PInvoke.User32" />
   </ItemGroup>
 </Project>

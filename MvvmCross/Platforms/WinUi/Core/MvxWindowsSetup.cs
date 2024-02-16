@@ -109,7 +109,7 @@ namespace MvvmCross.Platforms.WinUi.Core
 
         protected virtual IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
-            return new MvxWindowsViewPresenter(rootFrame);
+            return new MvxMultiWindowViewPresenter(rootFrame);
         }
 
         protected virtual MvxWindowsViewDispatcher CreateViewDispatcher(IMvxWindowsFrame rootFrame)

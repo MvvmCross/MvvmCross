@@ -1,0 +1,24 @@
+<app:NewWindowPage x:Class="Playground.WinUi3.Views.NewWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:app="using:Playground.WinUi3.Views"
+                   mc:Ignorable="d">
+    <StackPanel>
+        <TextBlock Text="{StaticResource WelcomeText}" />
+        <Button Content="Show Region"
+                Command="{Binding ShowRegionCommand}"
+                Margin="5"
+                Padding="5" />
+        <Frame HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Visible" x:Name="PopupLocation">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition>
+                        <SuppressNavigationTransitionInfo></SuppressNavigationTransitionInfo>
+                    </NavigationThemeTransition>
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+        </Frame>
+    </StackPanel>
+</app:NewWindowPage>

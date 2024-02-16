@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -13,14 +14,23 @@ using MvvmCross.Platforms.WinUi.Views.Suspension;
 using MvvmCross.ViewModels;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using MvvmCross.Platforms.WinUi.Presenters;
+using Application = Microsoft.UI.Xaml.Application;
 using LaunchActivatedEventArgs = Microsoft.UI.Xaml.LaunchActivatedEventArgs;
 
 namespace MvvmCross.Platforms.WinUi.Views
 {
+
     public abstract class MvxApplication : Application
     {
+        private IntPtr _oldWndProc = IntPtr.Zero;
+        private WinProc? _newWndProc;
+
+        // ReSharper disable once InconsistentNaming
+        private delegate IntPtr WinProc(IntPtr hWnd, PInvoke.User32.WindowMessage Msg, IntPtr wParam, IntPtr lParam);
+
         protected Frame RootFrame { get; set; }
-        protected Window MainWindow { get; set; }
+        public Window MainWindow { get; protected set; }
 
         protected MvxApplication()
         {
@@ -100,6 +110,52 @@ namespace MvvmCross.Platforms.WinUi.Views
         protected virtual void RegisterSetup()
         {
 
+        }
+
+        [DllImport("user32.dll")]
+        // ReSharper disable once InconsistentNaming
+        private static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, PInvoke.User32.WindowMessage Msg, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll", EntryPoint = "SetWindowLong")]
+        private static extern IntPtr SetWindowLongPtr32(IntPtr hWnd, PInvoke.User32.WindowLongIndexFlags nIndex, WinProc newProc);
+
+        [DllImport("user32.dll", EntryPoint = "SetWindowLongPtr")]
+        private static extern IntPtr SetWindowLongPtr64(IntPtr hWnd, PInvoke.User32.WindowLongIndexFlags nIndex, WinProc newProc);
+
+        // This static method is required because Win32 does not support
+        // GetWindowLongPtr directly
+        private static IntPtr SetWindowLongPtr(IntPtr hWnd, PInvoke.User32.WindowLongIndexFlags nIndex, WinProc newProc)
+            => IntPtr.Size == 8 ? SetWindowLongPtr64(hWnd, nIndex, newProc) : SetWindowLongPtr32(hWnd, nIndex, newProc);
+
+        private IntPtr NewWindowProc(IntPtr hWnd, PInvoke.User32.WindowMessage msg, IntPtr wParam, IntPtr lParam)
+        {
+            switch (msg)
+            {
+                case PInvoke.User32.WindowMessage.WM_SYSCOMMAND:
+                    if (wParam.ToInt32() == (int)PInvoke.User32.SysCommands.SC_CLOSE)
+                    {
+                        this.ApplicationIsStoppingAsync();
+                    }
+
+                    break;
+            }
+
+            return CallWindowProc(this._oldWndProc, hWnd, msg, wParam, lParam);
+        }
+
+        protected virtual void ApplicationIsStoppingAsync()
+        {
+            try
+            {
+                if (Mvx.IoCProvider?.Resolve<IMvxWindowsViewPresenter>() is MvxMultiWindowViewPresenter presenter)
+                {
+                    presenter.CloseAllWindows();
+                }
+            }
+            finally
+            {
+                Current.Exit();
+            }
         }
     }
 

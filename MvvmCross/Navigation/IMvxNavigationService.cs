@@ -2,11 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using MvvmCross.Navigation.EventArguments;
 using MvvmCross.ViewModels;
 
@@ -177,6 +173,100 @@ namespace MvvmCross.Navigation
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<bool> ChangePresentation(MvxPresentationHint hint, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        ///     Loads a view model targeting the window for the given source.
+        /// </summary>
+        /// <typeparam name="TViewModel">The viewmodel type.</typeparam>
+        /// <typeparam name="TParameter">The parameter type.</typeparam>
+        /// <param name="param">The parameter value.</param>
+        /// <param name="source">
+        ///     This is used to find the window to execute the navigate in.
+        ///     This is usually the viewmodel instance which calls this method. 
+        /// </param>
+        /// <param name="presentationBundle">The presentation bungle.</param>
+        /// <param name="cancellationToken">Any cancellation token.</param>
+        /// <returns>True if navigation was successful.</returns>
+        Task<bool> Navigate<TViewModel, TParameter>(TParameter param, IMvxViewModel source, IMvxBundle? presentationBundle = null,
+            CancellationToken cancellationToken = default) where TViewModel : IMvxViewModel<TParameter>
+            where TParameter : notnull;
+
+        /// <summary>
+        ///     Loads a view model targeting the window for the given source.
+        /// </summary>
+        /// <typeparam name="TParameter">The parameter</typeparam>
+        /// <param name="viewModelType">The viewmodel type.</param>
+        /// <param name="param">The parameter value.</param>
+        /// <param name="source">
+        ///     This is used to find the window to execute the navigate in.
+        ///     This is usually the viewmodel instance which calls this method. 
+        /// </param>
+        /// <param name="presentationBundle">The presentation bungle.</param>
+        /// <param name="cancellationToken">Any cancellation token.</param>
+        /// <returns>True if navigation was successful.</returns>
+        Task<bool> Navigate<TParameter>(Type viewModelType, TParameter param, IMvxViewModel source, IMvxBundle? presentationBundle = null,
+            CancellationToken cancellationToken = default)
+            where TParameter : notnull;
+
+        /// <summary>
+        ///     Navigates to a view for the given type.
+        /// </summary>
+        /// <param name="viewModelType">The type of the viewmodel to navigate to.</param>
+        /// <param name="source">
+        ///     This is used to find the window to execute the navigate in.
+        ///     This is usually the viewmodel instance which calls this method. 
+        /// </param>
+        /// <param name="presentationBundle">A presentation bundle.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        Task<bool> Navigate(Type viewModelType, IMvxViewModel source, IMvxBundle? presentationBundle = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        ///     Navigates to the viewmodel for the given type.
+        /// </summary>
+        /// <typeparam name="TViewModel">The type of the viewmodel to navigate to.</typeparam>
+        /// <param name="source">
+        ///     This is used to find the window to execute the navigate in.
+        ///     This is usually the viewmodel instance which calls this method. 
+        /// </param>
+        /// <param name="presentationBundle">The presentation bundle.</param>
+        /// <param name="cancellationToken">Any cancellation token.</param>
+        /// <returns>True if successful, false otherwise.</returns>
+        Task<bool> Navigate<TViewModel>(IMvxViewModel source,
+            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TViewModel : IMvxViewModel;
+
+        /// <summary>
+        ///     Navigates to a view for the given viewmodel.
+        /// </summary>
+        /// <param name="viewModel">The viewmodel to navigate to.</param>
+        /// <param name="source">
+        ///     This is used to find the window to execute the navigate in.
+        ///     This is usually the viewmodel instance which calls this method. 
+        /// </param>
+        /// <param name="presentationBundle">The presentation bundle.</param>
+        /// <param name="cancellationToken">Any cancellation token.</param>
+        /// <returns>True if successful, false otherwise.</returns>
+        Task<bool> Navigate(
+            IMvxViewModel viewModel, IMvxViewModel source, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        ///     Navigates to a view for the given viewmodel.
+        /// </summary>
+        /// <typeparam name="TParameter">The parameter type.</typeparam>
+        /// <param name="viewModel">The viewmodel to navigate to.</param>
+        /// <param name="param">Any parameters.</param>
+        /// <param name="source">
+        ///     This is used to find the window to execute the navigate in.
+        ///     This is usually the viewmodel instance which calls this method. 
+        /// </param>
+        /// <param name="presentationBundle">The presentation bundle.</param>
+        /// <param name="cancellationToken">Any cancellation token.</param>
+        /// <returns>True if successful, false otherwise.</returns>
+        Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxViewModel source,
+            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TParameter : notnull;
     }
 #nullable restore
 }

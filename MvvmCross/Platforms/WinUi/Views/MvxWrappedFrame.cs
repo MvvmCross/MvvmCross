@@ -5,6 +5,7 @@
 using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Control = Microsoft.UI.Xaml.Controls.Control;
 
 namespace MvvmCross.Platforms.WinUi.Views
 {

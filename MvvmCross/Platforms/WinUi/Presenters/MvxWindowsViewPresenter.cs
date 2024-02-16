@@ -19,6 +19,7 @@ using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using Windows.UI.Core;
+using Control = Microsoft.UI.Xaml.Controls.Control;
 
 namespace MvvmCross.Platforms.WinUi.Presenters
 {
