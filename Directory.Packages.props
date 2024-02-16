@@ -9,7 +9,7 @@
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.4.231008000" />
     <PackageVersion Include="Moq" Version="4.18.4" />
     <PackageVersion Include="PInvoke.User32" Version="0.7.124" />
-    <PackageVersion Include="Roslynator.Analyzers" Version="4.9.0" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="4.10.0" />
     <PackageVersion Include="Serilog" Version="3.1.1" />
     <PackageVersion Include="Serilog.Extensions.Logging" Version="8.0.0" />
     <PackageVersion Include="Serilog.Sinks.Async" Version="1.5.0" />
@@ -38,7 +38,7 @@
     <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="121.0.1.1" />
     <PackageVersion Include="XunitXml.TestLogger" Version="3.1.20" />
     <PackageVersion Include="xunit" Version="2.6.6" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.6" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.7" />
     <PackageVersion Include="Microsoft.Maui.Essentials" Version="8.0.7" />
   </ItemGroup>
 </Project>
