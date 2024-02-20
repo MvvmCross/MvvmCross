@@ -68,7 +68,6 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <RootNamespace>MvvmCross</RootNamespace>
     <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
     <UseWinUI>true</UseWinUI>
-    <UseWindowsForms>true</UseWindowsForms>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
 

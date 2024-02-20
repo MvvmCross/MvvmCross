@@ -38,7 +38,6 @@ namespace MvvmCross.Platforms.WinUi.Presenters
         private const int DefaultWindowHeight = 456;
         private const int DefaultWindowWidth = 786;
 
-        private const string DialogSubViewmodelName = "DIALOG_SUB_VIEWMODEL";
         private const string WindowTitle = "WindowTitle";
         private readonly ILogger<MvxWindowsViewPresenter>? _logger;
         private readonly WindowInformation _mainFrame;
@@ -455,7 +454,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters
                     await contentDialog.ShowAsync(attribute.Placement);
                     if (contentDialog is IMvxView mvxControl && mvxControl.ViewModel != null)
                     {
-                        windowInfo.RegisterSubViewModel(DialogSubViewmodelName, mvxControl.ViewModel);
+                        windowInfo.RegisterSubViewModel(mvxControl.ViewModel);
                     }
 
                     return true;
@@ -503,7 +502,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters
                 if (request is MvxViewModelInstanceRequestWithSource targetRequest &&
                     targetRequest.ViewModelInstance != null)
                 {
-                    windowInformation.RegisterSubViewModel(viewType.GetRegionName(), targetRequest.ViewModelInstance);
+                    windowInformation.RegisterSubViewModel(targetRequest.ViewModelInstance);
                 }
 
                 if (containerView != null)
@@ -551,8 +550,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters
 
                     if (request is MvxViewModelInstanceRequest instanceReq && instanceReq.ViewModelInstance != null)
                     {
-                        windowInformation.RegisterSubViewModel(SplitPanePosition.Content.ToString(),
-                            instanceReq.ViewModelInstance);
+                        windowInformation.RegisterSubViewModel(instanceReq.ViewModelInstance);
                     }
                 }
                 else if (attribute.Position == SplitPanePosition.Pane)
@@ -569,8 +567,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters
 
                     if (request is MvxViewModelInstanceRequest instanceReq && instanceReq.ViewModelInstance != null)
                     {
-                        windowInformation.RegisterSubViewModel(SplitPanePosition.Pane.ToString(),
-                            instanceReq.ViewModelInstance);
+                        windowInformation.RegisterSubViewModel(instanceReq.ViewModelInstance);
                     }
                 }
             }
@@ -642,7 +639,6 @@ namespace MvvmCross.Platforms.WinUi.Presenters
         private void CloseWindow(Window newWindow)
         {
             var windowInformation = this.GetWindowInformation(newWindow);
-            windowInformation.GetSubViewModels().ForEach(subModel => { this.Close(subModel); });
             if (windowInformation.ViewModel != null)
             {
                 this.Close(windowInformation.ViewModel);

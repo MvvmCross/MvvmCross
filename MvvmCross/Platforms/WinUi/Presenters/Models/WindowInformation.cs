@@ -11,7 +11,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters.Models
     /// </summary>
     public class WindowInformation
     {
-        private readonly ConcurrentDictionary<string, IMvxViewModel> _subViewModels = new();
+        private readonly List<IMvxViewModel> _subViewModels = new();
 
         /// <summary>
         /// Initializes a new instance of the WindowInformation class.
@@ -44,29 +44,13 @@ namespace MvvmCross.Platforms.WinUi.Presenters.Models
         /// <summary>
         /// Registers the given viewmodel to a specific key (usually region name).
         /// </summary>
-        /// <param name="key">The key to register the subview model under.</param>
         /// <param name="viewModel">the viewmodel to register.</param>
-        public void RegisterSubViewModel(string key, IMvxViewModel viewModel)
+        public void RegisterSubViewModel(IMvxViewModel viewModel)
         {
-            this._subViewModels.AddOrUpdate(key, viewModel, (_,_) => viewModel);
-        }
-
-        /// <summary>
-        /// Gets a list of sub view models.
-        /// </summary>
-        /// <returns>The list of subview models currently registered.</returns>
-        public List<IMvxViewModel> GetSubViewModels()
-        {
-            return this._subViewModels.Values.ToList();
-        }
-
-        /// <summary>
-        /// Removes the viewmodel registration.
-        /// </summary>
-        /// <param name="key">The key to remove the viewmodel registration for.</param>
-        public void UnregisterSubViewModel(string key)
-        {
-            this._subViewModels.TryRemove(key, out _);
+            if (!this._subViewModels.Contains(viewModel))
+            {
+                this._subViewModels.Add(viewModel);
+            }
         }
 
         /// <summary>
@@ -75,11 +59,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters.Models
         /// <param name="viewModel">The viewmodel to remove the viewmodel registration for.</param>
         public void UnregisterSubViewModel(IMvxViewModel viewModel)
         {
-            var key = this._subViewModels.FirstOrDefault(v => v.Value == viewModel).Key;
-            if (key != null)
-            {
-                this.UnregisterSubViewModel(key);
-            }
+            this._subViewModels.Remove(viewModel);
         }
 
         /// <summary>
@@ -99,7 +79,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters.Models
         /// <returns>True if it is a match.</returns>
         public bool IsFor(IMvxViewModel viewModel)
         {
-            return this.ViewModel == viewModel || this._subViewModels.Any(v => v.Value == viewModel);
+            return this.ViewModel == viewModel || this._subViewModels.Any(v => v == viewModel);
         }
     }
 }
