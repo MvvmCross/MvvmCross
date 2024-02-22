@@ -8,14 +8,14 @@
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.2428" />
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.4.231115000" />
     <PackageVersion Include="Moq" Version="4.18.4" />
-    <PackageVersion Include="Roslynator.Analyzers" Version="4.6.4" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="4.10.0" />
     <PackageVersion Include="Serilog" Version="3.1.1" />
     <PackageVersion Include="Serilog.Extensions.Logging" Version="8.0.0" />
     <PackageVersion Include="Serilog.Sinks.Async" Version="1.5.0" />
     <PackageVersion Include="Serilog.Sinks.Trace" Version="3.0.0" />
     <PackageVersion Include="Serilog.Sinks.Debug" Version="2.0.0" />
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.12.0.78982" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.20.0.85982" />
     <PackageVersion Include="SourceLink.Create.CommandLine" Version="2.8.3" />
     <PackageVersion Include="Xamarin.Android.Glide" Version="4.15.1.2" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.4" />
@@ -35,9 +35,9 @@
     <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.9.0.3" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="118.2.0.2" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="121.0.1.1" />
-    <PackageVersion Include="XunitXml.TestLogger" Version="3.1.17" />
-    <PackageVersion Include="xunit" Version="2.6.2" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.4" />
-    <PackageVersion Include="Microsoft.Maui.Essentials" Version="8.0.3" />
+    <PackageVersion Include="XunitXml.TestLogger" Version="3.1.20" />
+    <PackageVersion Include="xunit" Version="2.7.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.7" />
+    <PackageVersion Include="Microsoft.Maui.Essentials" Version="8.0.7" />
   </ItemGroup>
 </Project>

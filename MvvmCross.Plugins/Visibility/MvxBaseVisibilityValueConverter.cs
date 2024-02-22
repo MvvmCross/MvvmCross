@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Globalization;
 using MvvmCross.Converters;
 using MvvmCross.UI;
@@ -23,9 +22,9 @@ namespace MvvmCross.Plugin.Visibility
     public abstract class MvxBaseVisibilityValueConverter
         : MvxValueConverter
     {
-        private IMvxNativeVisibility _nativeVisiblity;
+        private IMvxNativeVisibility _nativeVisibility;
 
-        private IMvxNativeVisibility NativeVisibility => _nativeVisiblity ?? (_nativeVisiblity = Mvx.IoCProvider.Resolve<IMvxNativeVisibility>());
+        private IMvxNativeVisibility NativeVisibility => _nativeVisibility ??= Mvx.IoCProvider.Resolve<IMvxNativeVisibility>();
 
         protected abstract MvxVisibility Convert(object value, object parameter, CultureInfo culture);
 

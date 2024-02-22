@@ -1,3 +1,4 @@
+#nullable enable
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
@@ -7,7 +8,6 @@ using Android.Content.Res;
 using Android.Util;
 using Microsoft.Extensions.Logging;
 using MvvmCross.DroidX.RecyclerView.ItemTemplates;
-using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 
 namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
 {
@@ -19,22 +19,31 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
 
         private static string ReadRecyclerViewItemTemplateSelectorClassName(Context context, IAttributeSet attrs)
         {
-            TryInitializeBindingResourcePaths();
+            if (!_areBindingResourcesInitialized)
+            {
+                if (!TryInitializeBindingResourcePaths(out _recyclerViewItemTemplateSelectorGroupId, out _recyclerViewItemTemplateSelector))
+                {
+                    _areBindingResourcesInitialized = true;
+                    return string.Empty;
+                }
+                _areBindingResourcesInitialized = true;
+            }
 
-            TypedArray typedArray = null;
+            TypedArray? typedArray = null;
 
-            string className = string.Empty;
             try
             {
                 typedArray = context.ObtainStyledAttributes(attrs, _recyclerViewItemTemplateSelectorGroupId);
-                int numberOfStyles = typedArray.IndexCount;
+                var numberOfStyles = typedArray.IndexCount;
 
-                for (int i = 0; i < numberOfStyles; ++i)
+                for (var i = 0; i < numberOfStyles; ++i)
                 {
                     var attributeId = typedArray.GetIndex(i);
+                    if (attributeId != _recyclerViewItemTemplateSelector) continue;
 
-                    if (attributeId == _recyclerViewItemTemplateSelector)
-                        className = typedArray.GetString(attributeId);
+                    var className = typedArray.GetString(attributeId);
+                    if (!string.IsNullOrEmpty(className))
+                        return className;
                 }
             }
             finally
@@ -42,13 +51,13 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
                 typedArray?.Recycle();
             }
 
-            return className;
+            return string.Empty;
         }
 
-        public static IMvxTemplateSelector BuildItemTemplateSelector(Context context, IAttributeSet attrs, int itemTemplateId)
+        public static IMvxTemplateSelector? BuildItemTemplateSelector(Context context, IAttributeSet attrs, int itemTemplateId)
         {
             var templateSelectorClassName = ReadRecyclerViewItemTemplateSelectorClassName(context, attrs);
-            Type type = string.IsNullOrEmpty(templateSelectorClassName)
+            var type = string.IsNullOrEmpty(templateSelectorClassName)
                 ? typeof(MvxDefaultTemplateSelector)
                 : Type.GetType(templateSelectorClassName);
 
@@ -76,7 +85,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
                 throw new InvalidOperationException(message);
             }
 
-            var templateSelector = Activator.CreateInstance(type) as IMvxTemplateSelector;
+            var templateSelector = (IMvxTemplateSelector?)Activator.CreateInstance(type);
 
             if (itemTemplateId != 0 && templateSelector != null)
                 templateSelector.ItemTemplateId = itemTemplateId;
@@ -84,22 +93,65 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
             return templateSelector;
         }
 
-        private static void TryInitializeBindingResourcePaths()
+        private static bool TryInitializeBindingResourcePaths(out int[] selectorGroup, out int selector)
         {
-            if (_areBindingResourcesInitialized)
-                return;
-            _areBindingResourcesInitialized = true;
-
-            var resourceTypeFinder = Mvx.IoCProvider.Resolve<IMvxAppResourceTypeFinder>().Find();
-            var styleableType = resourceTypeFinder.GetNestedType("Styleable");
-
+            try
+            {
 #if NET7_0
-            _recyclerViewItemTemplateSelectorGroupId = (int[])styleableType.GetField("MvxRecyclerView").GetValue(null);
-            _recyclerViewItemTemplateSelector = (int)styleableType.GetField("MvxRecyclerView_MvxTemplateSelector").GetValue(null);
+                if (Mvx.IoCProvider?.TryResolve(
+                    out MvvmCross.Platforms.Android.Binding.ResourceHelpers.IMvxAppResourceTypeFinder? resourceTypeFinder) != true)
+                {
+                    selectorGroup = Array.Empty<int>();
+                    selector = 0;
+                    return false;
+                }
+
+                var resourceType = resourceTypeFinder?.Find();
+                if (resourceType == null)
+                {
+                    MvxAndroidLog.Instance?.LogWarning("Could not find Resource Type - MvxRecyclerView binding won't work correctly");
+                    selectorGroup = Array.Empty<int>();
+                    selector = 0;
+                    return false;
+                }
+
+                var styleableType = resourceType.GetNestedType("Styleable");
+                if (styleableType == null)
+                {
+                    MvxAndroidLog.Instance?.LogWarning("Could not find Styleable Type - MvxRecyclerView binding won't work correctly");
+                    selectorGroup = Array.Empty<int>();
+                    selector = 0;
+                    return false;
+                }
+
+                MvxAndroidLog.Instance?.LogTrace("Styleable Type found: {Type}", styleableType.FullName);
+                selectorGroup = (int[])(styleableType.GetField("MvxRecyclerView")?.GetValue(null) ?? Array.Empty<int>());
+                selector = (int)(styleableType.GetField("MvxRecyclerView_MvxTemplateSelector")?.GetValue(null) ?? 0);
+                return true;
 #elif NET8_0_OR_GREATER
-            _recyclerViewItemTemplateSelectorGroupId = (int[])styleableType.GetProperty("MvxRecyclerView").GetValue(null);
-            _recyclerViewItemTemplateSelector = (int)styleableType.GetProperty("MvxRecyclerView_MvxTemplateSelector").GetValue(null);
+                var styleableType = typeof(global::_Microsoft.Android.Resource.Designer.Resource).GetNestedType("Styleable");
+                if (styleableType == null)
+                {
+                    MvxAndroidLog.Instance?.LogWarning("Could not find Styleable Type - MvxRecyclerView binding won't work correctly");
+                    selectorGroup = Array.Empty<int>();
+                    selector = 0;
+                    return false;
+                }
+                MvxAndroidLog.Instance?.LogTrace("Styleable Type found: {Type}", styleableType.FullName);
+
+                selectorGroup = (int[])(styleableType.GetProperty("MvxRecyclerView")?.GetValue(null) ?? Array.Empty<int>());
+                selector = (int)(styleableType.GetProperty("MvxRecyclerView_MvxTemplateSelector")?.GetValue(null) ?? 0);
+                return true;
 #endif
+            }
+            catch (Exception e)
+            {
+                MvxAndroidLog.Instance?.LogError(e, "Failed to initialize MvxRecyclerView binding resources");
+            }
+
+            selectorGroup = Array.Empty<int>();
+            selector = 0;
+            return false;
         }
     }
 }
