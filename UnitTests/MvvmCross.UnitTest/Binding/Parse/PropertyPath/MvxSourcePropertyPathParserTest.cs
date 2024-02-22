@@ -19,7 +19,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
             foreach (var test in new[] { null, string.Empty, ".", "\t", " .\r\n" })
             {
                 var result = Tokenise(test);
-                Assert.Equal(1, result.Count);
+                Assert.Single(result);
                 Assert.IsType<MvxEmptyPropertyToken>(result[0]);
             }
         }
@@ -28,7 +28,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
         public void TestTokeniser_OnWhitespace()
         {
             var result = Tokenise(" \t\r \n ");
-            Assert.Equal(1, result.Count);
+            Assert.Single(result);
             Assert.IsType<MvxEmptyPropertyToken>(result[0]);
         }
 
@@ -37,11 +37,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
         {
             var text = "Hello";
             var result = Tokenise(text);
-            Assert.Equal(1, result.Count);
+            Assert.Single(result);
             AssertIsSimplePropertyToken(result[0], text);
 
             var result2 = Tokenise(AddWhitespace(text));
-            Assert.Equal(1, result2.Count);
+            Assert.Single(result2);
             AssertIsSimplePropertyToken(result2[0], text);
         }
 
@@ -75,11 +75,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
                 var text = "[" + u + "]";
 
                 var result = Tokenise(text);
-                Assert.Equal(1, result.Count);
+                Assert.Single(result);
                 AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result[0], u);
 
                 var result2 = Tokenise(AddWhitespace(text));
-                Assert.Equal(1, result2.Count);
+                Assert.Single(result2);
                 AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result2[0], u);
             }
         }
@@ -97,11 +97,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
                     text = text.Replace("\\", "\\\\");
 
                     var result = Tokenise(text);
-                    Assert.Equal(1, result.Count);
+                    Assert.Single(result);
                     AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[0], s);
 
                     var result2 = Tokenise(AddWhitespace(text));
-                    Assert.Equal(1, result2.Count);
+                    Assert.Single(result2);
                     AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result2[0], s);
                 }
             }

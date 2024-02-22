@@ -126,32 +126,16 @@ namespace MvvmCross.Platforms.Tvos.Core
             iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
+        protected override void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            InitializeBindingBuilder(iocProvider);
-            base.InitializeLastChance(iocProvider);
-        }
-
-        protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
-        {
-            RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
             bindingBuilder.DoRegistration(iocProvider);
         }
 
-        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
-        {
-            ValidateArguments(iocProvider);
-
-            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            iocProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(FillValueCombiners);
-            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
-        }
-
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
-            return new MvxTvosBindingBuilder();
+            return new MvxTvosBindingBuilder(FillTargetFactories, FillValueConverters, FillBindingNames,
+                FillValueCombiners);
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry obj)

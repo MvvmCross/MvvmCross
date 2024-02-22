@@ -112,32 +112,16 @@ namespace MvvmCross.Platforms.Mac.Core
             iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
+        protected override void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            InitialiseBindingBuilder(iocProvider);
-            base.InitializeLastChance(iocProvider);
-        }
-
-        protected virtual void InitialiseBindingBuilder(IMvxIoCProvider iocProvider)
-        {
-            RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
             bindingBuilder.DoRegistration(iocProvider);
         }
 
-        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
-        {
-            ValidateArguments(iocProvider);
-
-            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            iocProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(FillValueCombiners);
-            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
-        }
-
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
-            return new MvxMacBindingBuilder();
+            return new MvxMacBindingBuilder(FillTargetFactories, FillValueConverters, FillBindingNames,
+                FillValueCombiners);
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)

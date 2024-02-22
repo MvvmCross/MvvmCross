@@ -64,8 +64,8 @@ namespace MvvmCross.UnitTest.Parse
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
             Assert.Equal(typeof(Test1ViewModel), deserialized.ViewModelType);
-            Assert.Equal(0, deserialized.PresentationValues.Count);
-            Assert.Equal(0, deserialized.ParameterValues.Count);
+            Assert.Empty(deserialized.PresentationValues);
+            Assert.Empty(deserialized.ParameterValues);
         }
     }
 }

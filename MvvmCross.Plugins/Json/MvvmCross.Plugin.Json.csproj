@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
     <AssemblyName>MvvmCross.Plugin.Json</AssemblyName>
     <RootNamespace>MvvmCross.Plugin.Json</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.

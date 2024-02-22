@@ -148,7 +148,7 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowContentViewCommand =>
             new MvxAsyncCommand(() => NavigationService.Navigate<ParentContentViewModel>());
 
-        public IMvxAsyncCommand ConvertersCommand =>
+        public IMvxAsyncCommand ShowConvertersCommand =>
             new MvxAsyncCommand(() => NavigationService.Navigate<ConvertersViewModel>());
 
         public IMvxAsyncCommand ShowSharedElementsCommand { get; }

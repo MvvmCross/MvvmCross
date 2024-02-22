@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net6.0-android;net6.0-ios;net6.0-maccatalyst;net6.0-tvos;net6.0-macos</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net6.0-windows10.0.19041.0;$(TargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>net7.0;net7.0-android;net7.0-ios;net7.0-maccatalyst;net7.0-tvos;net7.0-macos;net8.0;net8.0-android;net8.0-ios;net8.0-maccatalyst;net8.0-tvos;net8.0-macos</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net7.0-windows10.0.19041.0;net8.0-windows10.0.19041.0;$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -21,7 +21,7 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
   
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' Or '$(TargetFramework)' == 'net8.0' ">
     <Compile Include="Platforms\Netstandard\**\*.cs" />
     <Compile Include="Platforms\Console\**\*.cs" />
   </ItemGroup>
@@ -59,7 +59,7 @@ This package contains the 'Core' libraries for MvvmCross</Description>
   <PropertyGroup Condition=" '$(_MvxTargetPlatformIsWindows)' == 'True' ">
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <RootNamespace>MvvmCross</RootNamespace>
-    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
     <UseWinUI>true</UseWinUI>
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>

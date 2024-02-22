@@ -48,7 +48,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Lang
             AssertAreEquivalent(expectedDescription, resultKeyAndDescription.Value);
         }
 
-        private Dictionary<string, MvxSerializableBindingSpecification> _toTest = new Dictionary<string, MvxSerializableBindingSpecification>()
+        private readonly Dictionary<string, MvxSerializableBindingSpecification> _toTest = new Dictionary<string, MvxSerializableBindingSpecification>()
             {
                 {
                     "Text Fred",

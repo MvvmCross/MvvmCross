@@ -11,13 +11,11 @@ We had a plan to produce a UI based on this concept:
 
 ![TipCalc]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
 
-To satisfy this we built a 'Core' .NET Standard project which contained:
+To satisfy this we built a 'Core' .NET Core project which contained:
 
 - Our 'business logic' - `ICalculationService`
 - Our ViewModel - `TipViewModel`
 - Our `App` - which contains some bootstrapping code.
-
-We even added User Interfaces for Xamarin.Android, Xamarin.iOS and UWP so far.
 
 Now let's build a UI for WPF (Windows Presentation Foundation)!
 
@@ -25,12 +23,10 @@ Once again, we will build up a new project 'from empty', just as we did before.
 
 ## Create a new WPF Project
 
-Add a new project to your solution - a 'WPF App (.NET Framework)' named `TipCalc.WPF`.
+Add a new project to your solution - a 'WPF App (.NET Core)' named `TipCalc.WPF`.
 
 Within this, you will find the normal WPF application constructs:
 
-- The `Properties` folder with the `AssemblyInfo` file, some resources and a settings file
-- The `App.config` configuration file
 - The `App.xaml` file, which we will edit shortly
 - A `MainWindow.xaml` and `MainWindow.xaml.cs` files that define a default Window for this app
 
@@ -50,6 +46,8 @@ If you don't really enjoy the NuGet UI experience, then you can alternatively op
 
 Same as you did with the `MvvmCross` package, install the specific one for `Wpf`.
 
+    Install-Package MvvmCross.Platforms.Wpf
+
 ## Add a reference to TipCalc.Core project
 
 Add a reference to your `TipCalc.Core` project - the project we created in the first step.
@@ -64,30 +62,15 @@ Open the `App.xaml.cs` and delete all the class content. Leave only the default 
 public partial class App : MvxApplication
 ```
 
-Now override the method `RegisterSetup` and use the object extension method `RegisterSetupType`:
-
-```c#
-this.RegisterSetupType<MvxWpfSetup<Core.App>>();
-```
-
-This line of code tells MvvmCross we want to use the default provided Setup class, and also that our _Core_ application is `Core.App`.
-
 Altogether this is what your App.xaml.cs should loook like:
 
 ```c#
-using MvvmCross.Core;
-using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.Platforms.Wpf.Views;
 
-namespace TipCalc.WPF
+namespace TipCalc.WPF;
+
+public partial class App : MvxApplication
 {
-    public partial class App : MvxApplication
-    {
-        protected override void RegisterSetup()
-        {
-            this.RegisterSetupType<MvxWpfSetup<Core.App>>();
-        }
-    }
 }
 ```
 
@@ -96,22 +79,18 @@ namespace TipCalc.WPF
 Now it's time to edit the xaml part of our WPF `App` class. Open the file and replace all the content for this code:
 
 ```xml
-<views:MvxApplication
-    xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
-    x:Class="TipCalc.WPF.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    StartupUri="MainWindow.xaml">
+<views:MvxApplication  xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
+             x:Class="TipCalc.WPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TipCalc.WPF"
+             StartupUri="MainWindow.xaml">
 </views:MvxApplication>
 ```
 
-That's it! We now only need to build the UI.
+## Create Setup class
 
-### Some more details about the Setup class
-
-Every MvvmCross UI project requires a `Setup` class, but if your app is fairly simple, like the TipCalc is, then you can safely use the default one, provided by the framework.
-
-The `Setup` class is responsible for performing the initialization of the MvvmCross framework, including:
+Every MvvmCross UI project requires a `Setup` class. The `Setup` class is responsible for performing the initialization of the MvvmCross framework, including:
 
 - The IoC Container and DI engine
 - The Data-Binding engine
@@ -121,7 +100,20 @@ The `Setup` class is responsible for performing the initialization of the MvvmCr
 
 Finally, the `Setup` class is also responsible for initializing your `App` class.
 
-Luckily for us, all this functionality is provided for you automatically, unless you want / need to use a custom `Setup` class (since it is an excellent place to register your own services / plugins, it is often the case).
+Let's create `Setup` class:
+```c#
+using Microsoft.Extensions.Logging;
+using MvvmCross.Platforms.Wpf.Core;
+
+namespace TipCalc.WPF;
+
+public class Setup : MvxWpfSetup<Core.App>
+{
+    protected override ILoggerFactory? CreateLogFactory() => default!;
+
+    protected override ILoggerProvider? CreateLogProvider() => default!;
+}
+```
 
 ## Make MainWindow be a MvvmCross window
 
@@ -130,14 +122,13 @@ Open up `MainWindow.xaml.cs` and change the base class to `MvxWindow`:
 ```c#
 using MvvmCross.Platforms.Wpf.Views;
 
-namespace TipCalc.WPF
+namespace TipCalc.WPF;
+
+public partial class MainWindow : MvxWindow
 {
-    public partial class MainWindow : MvxWindow
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
 ```
@@ -176,28 +167,30 @@ This will generate two files:
 
 Open the `TipView.xaml.cs` file.
 
-Change the class to inherit from `MvxWpfView`
+Change the class to inherit from `MvxWpfView<T>`
 
 ```c#
-public partial class TipView : MvxWpfView
+public partial class TipView : MvxWpfView<TipViewModel>
 ```
 
 Altogether this looks like:
 
 ```c#
 using MvvmCross.Platforms.Wpf.Views;
+using TipCalc.Core.ViewModels;
 
-namespace TipCalc.WPF.Views
+namespace TipCalc.WPF.Views;
+
+public partial class TipView : MvxWpfView<TipViewModel>
 {
-    public partial class TipView : MvxWpfView
+    public TipView()
     {
-        public TipView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
 ```
+
+Now in `TipView` your can get access to `TipViewModel` instance using `ViewModel` property. In xaml code you can access all view model public properties directly. It is available because the `DataContext` view property refers to view model instance.
 
 ### Edit the XAML layout
 
@@ -214,8 +207,10 @@ Change the root node from:
 To:
 
 ```xml
-<views:MvxWpfView
-	xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"               
+<views:MvxWpfView 
+    x:TypeArguments="viewModels:TipViewModel"
+    xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
+    xmlns:viewModels="clr-namespace:TipCalc.Core.ViewModels;assembly=TipCalc.Core"          
         ...>
 </views:MvxWpfView>
 ```
@@ -234,14 +229,18 @@ We now need to fill the content of the view with some widgets:
 This will produce finished XAML like:
 
 ```xml
-<views:MvxWpfView x:Class="TipCalc.WPF.Views.TipView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
+<views:MvxWpfView 
+    x:TypeArguments="viewModels:TipViewModel"
+    xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Views;assembly=MvvmCross.Platforms.Wpf"
+    xmlns:viewModels="clr-namespace:TipCalc.Core.ViewModels;assembly=TipCalc.Core"
+    x:Class="TipCalc.WPF.Views.TipView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:TipCalc.WPF.Views"
+    mc:Ignorable="d" 
+    d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{d:DesignInstance viewModels:TipViewModel }">
     <Grid>
         <StackPanel Margin="12,0,12,0">
             <TextBlock Text="SubTotal" />
@@ -257,7 +256,6 @@ This will produce finished XAML like:
         </StackPanel>
     </Grid>
 </views:MvxWpfView>
-
 ```
 
 **Note** that in XAML, `OneWay` binding is generally the default. To provide TwoWay binding we explicitly add `Mode` to our binding expressions: e.g. `Value="{Binding Generosity,Mode=TwoWay}"`

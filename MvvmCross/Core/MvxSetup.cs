@@ -154,14 +154,10 @@ namespace MvvmCross.Core
                 InitializeStringToTypeParser(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: FillableStringToTypeParser start");
                 InitializeFillableStringToTypeParser(_iocProvider);
-                SetupLog?.Log(LogLevel.Trace, "Setup: PluginManagerFramework start");
-                var pluginManager = InitializePluginFramework(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: Create App");
                 var app = InitializeMvxApplication(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: NavigationService");
                 InitializeNavigationService(_iocProvider);
-                SetupLog?.Log(LogLevel.Trace, "Setup: App start");
-                InitializeApp(pluginManager, app);
                 SetupLog?.Log(LogLevel.Trace, "Setup: ViewModelTypeFinder start");
                 InitializeViewModelTypeFinder(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: ViewsContainer start");
@@ -178,6 +174,13 @@ namespace MvvmCross.Core
                 InitializeInpcInterception(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: InpcInterception start");
                 InitializeViewModelCache(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: BindingBuilder start");
+                InitializeBindingBuilder(_iocProvider);
+                SetupLog?.Log(LogLevel.Trace, "Setup: PluginManagerFramework start");
+                var pluginManager = InitializePluginFramework(_iocProvider);
+                app.LoadPlugins(pluginManager);
+                SetupLog?.Log(LogLevel.Trace, "Setup: App start");
+                InitializeApp(app);
                 SetupLog?.Log(LogLevel.Trace, "Setup: LastChance start");
                 InitializeLastChance(_iocProvider);
                 SetupLog?.Log(LogLevel.Trace, "Setup: Secondary end");
@@ -312,7 +315,7 @@ namespace MvvmCross.Core
 
             iocProvider.LazyConstructAndRegisterSingleton<IMvxSettings, MvxSettings>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxStringToTypeParser, MvxStringToTypeParser>();
-            iocProvider.RegisterSingleton<IMvxPluginManager>(() => new MvxPluginManager(GetPluginConfiguration));
+            iocProvider.RegisterSingleton<IMvxPluginManager>(() => new MvxPluginManager(iocProvider, GetPluginConfiguration));
             iocProvider.RegisterSingleton(CreateApp(iocProvider));
             iocProvider.LazyConstructAndRegisterSingleton<IMvxViewModelLoader, MvxViewModelLoader>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxNavigationService, IMvxViewModelLoader, IMvxViewDispatcher, IMvxIoCProvider>(
@@ -472,12 +475,10 @@ namespace MvvmCross.Core
             return app;
         }
 
-        protected virtual void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
+        protected virtual void InitializeApp(IMvxApplication app)
         {
-            if (app == null)
-                throw new ArgumentNullException(nameof(app));
+            ArgumentNullException.ThrowIfNull(app);
 
-            app.LoadPlugins(pluginManager);
             SetupLog?.Log(LogLevel.Trace, "Setup: Application Initialize - On background thread");
             app.Initialize();
         }
@@ -598,6 +599,11 @@ namespace MvvmCross.Core
             var container = iocProvider.Resolve<IMvxViewsContainer>();
             container.AddAll(viewModelViewLookup);
             return container;
+        }
+
+        protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
+        {
+            
         }
 
         protected virtual void InitializeLastChance(IMvxIoCProvider iocProvider)

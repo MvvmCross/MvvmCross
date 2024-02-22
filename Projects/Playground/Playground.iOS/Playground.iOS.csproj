@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-ios</TargetFramework>
+    <TargetFramework>net8.0-ios</TargetFramework>
     <AssemblyName>Playground.iOS</AssemblyName>
     <RootNamespace>Playground.iOS</RootNamespace>
     <OutputType>Exe</OutputType>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
-    <UseMauiEssentials>true</UseMauiEssentials>
     <Platforms>AnyCPU;iPhone;iPhoneSimulator</Platforms>
     <EnableAssemblyILStripping>false</EnableAssemblyILStripping>
     <MtouchLink>None</MtouchLink>
@@ -26,6 +25,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Essentials" />
     <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Serilog" />
   </ItemGroup>

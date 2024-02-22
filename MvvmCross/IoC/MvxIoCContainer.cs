@@ -14,7 +14,6 @@ namespace MvvmCross.IoC
         : IMvxIoCProvider
     {
         private readonly Dictionary<Type, IResolver> _resolvers = new();
-        private readonly Dictionary<Type, List<Action>> _waiters = new();
         private readonly Dictionary<Type, bool> _circularTypeDetection = new();
         private readonly object _lockObject = new();
         private readonly IMvxIocOptions _options;
@@ -451,39 +450,13 @@ namespace MvvmCross.IoC
             return toReturn;
         }
 
-        public void CallbackWhenRegistered<T>(Action action)
-        {
-            CallbackWhenRegistered(typeof(T), action);
-        }
-
-        public void CallbackWhenRegistered(Type type, Action action)
+        public void CleanAllResolvers()
         {
             lock (_lockObject)
             {
-                if (!CanResolve(type))
-                {
-                    if (_waiters.TryGetValue(type, out var actions))
-                    {
-                        actions.Add(action);
-                    }
-                    else
-                    {
-                        actions = new List<Action> { action };
-                        _waiters[type] = actions;
-                    }
-                    return;
-                }
+                _resolvers.Clear();
+                _circularTypeDetection.Clear();
             }
-
-            // if we get here then the type is already registered - so call the aciton immediately
-            action();
-        }
-
-        public void CleanAllResolvers()
-        {
-            _resolvers.Clear();
-            _waiters.Clear();
-            _circularTypeDetection.Clear();
         }
 
         private enum ResolverType
@@ -620,22 +593,9 @@ namespace MvvmCross.IoC
 
         private void InternalSetResolver(Type interfaceType, IResolver resolver)
         {
-            List<Action>? actions;
             lock (_lockObject)
             {
                 _resolvers[interfaceType] = resolver;
-                if (_waiters.TryGetValue(interfaceType, out actions))
-                {
-                    _waiters.Remove(interfaceType);
-                }
-            }
-
-            if (actions != null)
-            {
-                foreach (var action in actions)
-                {
-                    action();
-                }
             }
         }
 

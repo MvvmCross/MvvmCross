@@ -2,22 +2,22 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Reflection;
 using MvvmCross.Converters;
+using MvvmCross.IoC;
 
-namespace MvvmCross.Plugin.Visibility
+namespace MvvmCross.Plugin.Visibility;
+
+public abstract class BasePlugin : IMvxPlugin
 {
-    public abstract class BasePlugin : IMvxPlugin
+    public virtual void Load(IMvxIoCProvider provider)
     {
-        public virtual void Load()
-        {
-            Mvx.IoCProvider?.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
-        }
+        if (provider.TryResolve(out IMvxValueConverterRegistry registry))
+            RegisterValueConverters(registry);
+    }
 
-        private void RegisterValueConverters()
-        {
-            var registry = Mvx.IoCProvider.Resolve<IMvxValueConverterRegistry>();
-            registry.AddOrOverwriteFrom(GetType().GetTypeInfo().Assembly);
-        }
+    private static void RegisterValueConverters(IMvxValueConverterRegistry registry)
+    {
+        registry.AddOrOverwrite("Visibility", new MvxVisibilityValueConverter());
+        registry.AddOrOverwrite("InvertedVisibility", new MvxInvertedVisibilityValueConverter());
     }
 }

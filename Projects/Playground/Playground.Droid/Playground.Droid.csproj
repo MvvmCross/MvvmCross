@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-android</TargetFramework>
+    <TargetFramework>net8.0-android</TargetFramework>
     <AssemblyName>Playground.Droid</AssemblyName>
     <RootNamespace>Playground.Droid</RootNamespace>
     <OutputType>Exe</OutputType>
-    <UseMauiEssentials>true</UseMauiEssentials>
+    <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +15,7 @@
     <PackageReference Include="Serilog.Sinks.Xamarin" />
     <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Xamarin.Android.Glide" />
+    <PackageReference Include="Microsoft.Maui.Essentials" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,7 @@
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Visibility\MvvmCross.Plugin.Visibility.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
   </ItemGroup>

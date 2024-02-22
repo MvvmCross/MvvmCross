@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Runtime;
-using Microsoft.Maui.ApplicationModel;
 using MvvmCross.Platforms.Android.Views;
 using Playground.Core;
 
@@ -14,12 +13,6 @@ namespace Playground.Droid
     {
         public MainApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-        }
-
-        public override void OnCreate()
-        {
-            base.OnCreate();
-            Platform.Init(this);
         }
     }
 }

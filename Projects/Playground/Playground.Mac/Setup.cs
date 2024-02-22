@@ -1,8 +1,8 @@
+using Microsoft.Extensions.Logging;
 using MvvmCross.Platforms.Mac.Core;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using Playground.Core;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Extensions.Logging;
 

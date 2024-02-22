@@ -8,7 +8,6 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.DroidX.RecyclerView;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Plugin;
-using MvvmCross.Plugin.Color.Platforms.Android;
 using Playground.Core;
 using Playground.Droid.Bindings;
 using Playground.Droid.Controls;
@@ -38,7 +37,9 @@ namespace Playground.Droid
         {
             base.LoadPlugins(pluginManager);
 
-            pluginManager.EnsurePluginLoaded<Plugin>();
+            pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.Visibility.Platforms.Android.Plugin>();
+            pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.Color.Platforms.Android.Plugin>();
+            pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.Json.Plugin>();
         }
 
         protected override ILoggerProvider CreateLogProvider()
@@ -49,7 +50,7 @@ namespace Playground.Droid
         protected override ILoggerFactory CreateLogFactory()
         {
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
+                .MinimumLevel.Verbose()
                 .WriteTo.Async(a => a.AndroidLog())
                 .WriteTo.Async(a => a.Trace())
                 .CreateLogger();

@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <UseMauiEssentials>true</UseMauiEssentials>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Color\MvvmCross.Plugin.Color.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Messenger\MvvmCross.Plugin.Messenger.csproj" />
@@ -24,6 +24,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Essentials" />
     <PackageReference Include="Serilog.Extensions.Logging" />
   </ItemGroup>
 

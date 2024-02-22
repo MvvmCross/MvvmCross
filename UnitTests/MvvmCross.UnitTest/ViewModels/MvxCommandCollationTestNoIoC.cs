@@ -11,7 +11,7 @@ namespace MvvmCross.UnitTest.ViewModels
     [Collection("MvxTest")]
     public class MvxCommandCollationTestNoIoC
     {
-        private NavigationTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
         public MvxCommandCollationTestNoIoC(NavigationTestFixture fixture)
         {

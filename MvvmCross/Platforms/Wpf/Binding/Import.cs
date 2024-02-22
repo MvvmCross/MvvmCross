@@ -42,19 +42,6 @@ namespace MvvmCross.Platforms.Wpf.Binding
                 MvxWindowsAssemblyCache.EnsureInitialized();
                 MvxWindowsAssemblyCache.Instance?.Assemblies.Add(assembly);
             }
-            else
-            {
-                Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(
-                    registry =>
-                        {
-                            registry.AddOrOverwriteFrom(assembly);
-                        });
-                Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(
-                    registry =>
-                        {
-                            registry.AddOrOverwriteFrom(assembly);
-                        });
-            }
         }
     }
 }

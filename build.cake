@@ -13,10 +13,7 @@ var nuspecDir = new DirectoryPath("./nuspec");
 var verbosity = Verbosity.Minimal;
 var verbosityDotNet = DotNetVerbosity.Minimal;
 var sonarKey = Argument("sonarKey", "");
-
-var githubToken = Argument("github_token", "");
-var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
-var sinceTag = Argument("since_tag", "");
+var java11sdkPath = EnvironmentVariable<string>("JAVA_HOME_11_X64", "");
 
 var isRunningOnPipelines = AzurePipelines.IsRunningOnAzurePipelines;
 GitVersion versionInfo = null;
@@ -136,6 +133,12 @@ Task("Build")
         PackageVersion = versionInfo.SemVer,
         InformationalVersion = versionInfo.InformationalVersion
     };
+    
+    if (!string.IsNullOrEmpty(java11sdkPath) && isRunningOnPipelines)
+    {
+        Information("Using Java at Path: {0} for MSBuild", java11sdkPath);
+        msBuildSettings = msBuildSettings.WithProperty("JavaSdkDirectory", java11sdkPath);
+    }
 
     var settings = new DotNetBuildSettings
     {
@@ -198,55 +201,6 @@ Task("CopyPackages")
 
     var nugetFiles = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg");
     CopyFiles(nugetFiles, new DirectoryPath(outputDir + "/NuGet/"));
-});
-
-Task("UpdateChangelog")
-    .Does(() => 
-{
-    var arguments = new ProcessArgumentBuilder();
-    if (!string.IsNullOrEmpty(githubToken))
-        arguments.Append("--token {0}", githubToken);
-    else if (!string.IsNullOrEmpty(githubTokenEnv))
-        arguments.Append("--token {0}", githubTokenEnv);
-
-    // Exclude labels
-    var excludeLabels = new [] {
-        "t/question",
-        "s/wont-fix",
-        "s/duplicate",
-        "s/invalid",
-        "s/needs-more-info",
-    };
-    arguments.Append("--exclude-labels {0}", string.Join(",", excludeLabels));
-
-    // bug labels
-    arguments.Append("--bug-labels {0}", "t/bug");
-
-    // enhancement labels
-    arguments.Append("--enhancement-labels {0}", "t/feature,t/enhancement");
-    arguments.Append("--breaking-labels {0}", "t/breaking");
-    arguments.Append("--security-labels {0}", "t/security");
-    arguments.Append("--deprecated_labels {0}", "t/deprecated");
-    arguments.Append("--no-issues_wo_labels");
-
-    arguments.Append("--max-issues 200");
-    arguments.Append("--user MvvmCross");
-    arguments.Append("--project MvvmCross");
-
-    if (!string.IsNullOrEmpty(sinceTag))
-        arguments.Append("--since-tag {0}", sinceTag);
-
-    if (versionInfo.BranchName.Contains("release/"))
-        arguments.Append("--future-release {0}", versionInfo.MajorMinorPatch);
-
-    Information("Starting github_changelog_generator with arguments: {0}", arguments.Render());
-
-    using(var process = StartAndReturnProcess("github_changelog_generator",
-        new ProcessSettings { Arguments = arguments }))
-    {
-        process.WaitForExit();
-        Information("Exit code: {0}", process.GetExitCode());
-    }
 });
 
 Task("Sonar")

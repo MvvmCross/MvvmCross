@@ -133,27 +133,10 @@ namespace MvvmCross.Platforms.WinUi.Core
             iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
+        protected override void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            InitializeBindingBuilder(iocProvider);
-            base.InitializeLastChance(iocProvider);
-        }
-
-        protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
-        {
-            RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
             bindingBuilder.DoRegistration(iocProvider);
-        }
-
-        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
-        {
-            ValidateArguments(iocProvider);
-
-            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            iocProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(FillValueCombiners);
-            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
@@ -194,7 +177,7 @@ namespace MvvmCross.Platforms.WinUi.Core
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
-            return new MvxWindowsBindingBuilder();
+            return new MvxWindowsBindingBuilder(FillTargetFactories, FillBindingNames, FillValueConverters, FillValueCombiners);
         }
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()
