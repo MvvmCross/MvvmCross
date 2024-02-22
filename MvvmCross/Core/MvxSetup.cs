@@ -603,7 +603,7 @@ namespace MvvmCross.Core
 
         protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            
+
         }
 
         protected virtual void InitializeLastChance(IMvxIoCProvider iocProvider)
