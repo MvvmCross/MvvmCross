@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.IoC;
 
@@ -88,9 +89,10 @@ namespace MvvmCross.Binding.Binders
                     MvxBindingLog.Trace("Registering value converter {0}:{1}", pair.Name, pair.Type.Name);
                     registry.AddOrOverwrite(pair.Name, converter);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    // ignore this
+                    MvxBindingLog.Instance?.LogError(ex, "Failed to register {Name} from {Type}", pair.Name,
+                        pair.Type.Name);
                 }
             }
         }

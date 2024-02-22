@@ -167,12 +167,10 @@ public abstract class MvxAndroidSetup
         ValidateArguments(iocProvider);
 
         InitializeSavedStateConverter(iocProvider);
-
-        InitializeBindingBuilder(iocProvider);
         base.InitializeLastChance(iocProvider);
     }
 
-    protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
+    protected override void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
     {
         ValidateArguments(iocProvider);
 

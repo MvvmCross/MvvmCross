@@ -50,7 +50,7 @@ namespace Playground.Droid
         protected override ILoggerFactory CreateLogFactory()
         {
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
+                .MinimumLevel.Verbose()
                 .WriteTo.Async(a => a.AndroidLog())
                 .WriteTo.Async(a => a.Trace())
                 .CreateLogger();
