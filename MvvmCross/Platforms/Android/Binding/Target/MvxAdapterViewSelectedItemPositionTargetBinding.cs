@@ -11,7 +11,7 @@ public class MvxAdapterViewSelectedItemPositionTargetBinding
     : MvxAndroidTargetBinding
 {
     private IDisposable? _subscription;
-        
+
     private AdapterView? AdapterView => (AdapterView?)Target;
 
     public MvxAdapterViewSelectedItemPositionTargetBinding(AdapterView adapterView)
