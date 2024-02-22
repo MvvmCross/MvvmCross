@@ -7,16 +7,12 @@ using MvvmCross.Binding.Extensions;
 
 namespace MvvmCross.Binding.Bindings.Target;
 
-public abstract class MvxConvertingTargetBinding : MvxTargetBinding
+public abstract class MvxConvertingTargetBinding(object target)
+    : MvxTargetBinding(target)
 {
     private bool _isUpdatingSource;
     private bool _isUpdatingTarget;
     private object? _updatingSourceWith;
-
-    protected MvxConvertingTargetBinding(object target)
-        : base(target)
-    {
-    }
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
