@@ -13,7 +13,7 @@ public abstract class MvxTargetBinding : MvxBinding, IMvxTargetBinding
 
     private readonly WeakReference _target;
 
-    protected MvxTargetBinding(object target)
+    protected MvxTargetBinding(object? target)
     {
         _target = new WeakReference(target);
     }
