@@ -7,14 +7,9 @@ using MvvmCross.Binding.Attributes;
 
 namespace MvvmCross.Binding.Bindings.Target;
 
-public abstract class MvxPropertyInfoTargetBinding : MvxConvertingTargetBinding
+public abstract class MvxPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
+    : MvxConvertingTargetBinding(target)
 {
-    protected MvxPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
-        : base(target)
-    {
-        TargetPropertyInfo = targetPropertyInfo;
-    }
-
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)
@@ -33,7 +28,7 @@ public abstract class MvxPropertyInfoTargetBinding : MvxConvertingTargetBinding
 
     public override Type TargetValueType => TargetPropertyInfo.PropertyType;
 
-    protected PropertyInfo TargetPropertyInfo { get; }
+    protected PropertyInfo TargetPropertyInfo { get; } = targetPropertyInfo;
 
     protected override void SetValueImpl(object target, object? value)
     {
