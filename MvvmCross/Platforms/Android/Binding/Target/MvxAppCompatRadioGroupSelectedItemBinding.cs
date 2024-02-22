@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using AndroidX.AppCompat.Widget;
 using MvvmCross.Binding;
@@ -16,7 +17,9 @@ public class MvxAppCompatRadioGroupSelectedItemBinding
     private object? _currentValue;
     private IDisposable? _subscription;
 
-    public MvxAppCompatRadioGroupSelectedItemBinding(MvxAppCompatRadioGroup radioGroup)
+    public MvxAppCompatRadioGroupSelectedItemBinding(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+            MvxAppCompatRadioGroup radioGroup)
         : base(radioGroup)
     {
         _subscription = radioGroup.WeakSubscribe<RadioGroup, RadioGroup.CheckedChangeEventArgs>(
