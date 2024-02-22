@@ -9,12 +9,10 @@ namespace MvvmCross.Binding.Bindings.Target;
 
 public abstract class MvxPropertyInfoTargetBinding : MvxConvertingTargetBinding
 {
-    private readonly PropertyInfo _targetPropertyInfo;
-
     protected MvxPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
         : base(target)
     {
-        _targetPropertyInfo = targetPropertyInfo;
+        TargetPropertyInfo = targetPropertyInfo;
     }
 
     protected override void Dispose(bool isDisposing)
@@ -35,7 +33,7 @@ public abstract class MvxPropertyInfoTargetBinding : MvxConvertingTargetBinding
 
     public override Type TargetValueType => TargetPropertyInfo.PropertyType;
 
-    protected PropertyInfo TargetPropertyInfo => _targetPropertyInfo;
+    protected PropertyInfo TargetPropertyInfo { get; }
 
     protected override void SetValueImpl(object target, object? value)
     {
