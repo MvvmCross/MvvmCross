@@ -2,61 +2,59 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.WeakSubscription;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public class MvxUIStepperValueTargetBinding(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+        UIStepper target,
+        PropertyInfo targetPropertyInfo)
+    : MvxPropertyInfoTargetBinding<UIStepper>(target, targetPropertyInfo)
 {
-    public class MvxUIStepperValueTargetBinding : MvxPropertyInfoTargetBinding<UIStepper>
+    private IDisposable? _subscription;
+
+    protected override void SetValueImpl(object target, object? value)
     {
-        private IDisposable _subscription;
+        if (target is not UIStepper view || value == null)
+            return;
 
-        public MvxUIStepperValueTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
+        view.Value = (double)value;
+    }
+
+    private void HandleValueChanged(object? sender, EventArgs e)
+    {
+        var view = View;
+        if (view == null) return;
+
+        FireValueChanged(view.Value);
+    }
+
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+    public override void SubscribeToEvents()
+    {
+        var stepper = View;
+        if (stepper == null)
         {
+            MvxBindingLog.Error("UIStepper is null in MvxUIStepperValueTargetBinding");
+            return;
         }
 
-        protected override void SetValueImpl(object target, object value)
-        {
-            var view = target as UIStepper;
-            if (view == null) return;
+        _subscription = stepper.WeakSubscribe(nameof(stepper.ValueChanged), HandleValueChanged);
+    }
 
-            view.Value = (double)value;
-        }
+    protected override void Dispose(bool isDisposing)
+    {
+        base.Dispose(isDisposing);
+        if (!isDisposing) return;
 
-        private void HandleValueChanged(object sender, EventArgs e)
-        {
-            var view = View;
-            if (view == null) return;
-
-            FireValueChanged(view.Value);
-        }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
-        public override void SubscribeToEvents()
-        {
-            var stepper = View;
-            if (stepper == null)
-            {
-                MvxBindingLog.Error("UIStepper is null in MvxUIStepperValueTargetBinding");
-                return;
-            }
-
-            _subscription = stepper.WeakSubscribe(nameof(stepper.ValueChanged), HandleValueChanged);
-        }
-
-        protected override void Dispose(bool isDisposing)
-        {
-            base.Dispose(isDisposing);
-            if (!isDisposing) return;
-
-            _subscription?.Dispose();
-            _subscription = null;
-        }
+        _subscription?.Dispose();
+        _subscription = null;
     }
 }
