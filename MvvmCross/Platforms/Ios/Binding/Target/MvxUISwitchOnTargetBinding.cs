@@ -2,54 +2,51 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.WeakSubscription;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public class MvxUISwitchOnTargetBinding(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+        UISwitch target)
+    : MvxTargetBinding<UISwitch, bool>(target)
 {
-    public class MvxUISwitchOnTargetBinding : MvxTargetBinding<UISwitch, bool>
+    private MvxWeakEventSubscription<UISwitch>? _subscription;
+
+    protected override void SetValue(bool value)
     {
-        private IDisposable _subscription;
+        Target?.SetState(value, true);
+    }
 
-        public MvxUISwitchOnTargetBinding(UISwitch target)
-            : base(target)
+    public override void SubscribeToEvents()
+    {
+        var uiSwitch = Target;
+        if (uiSwitch == null)
         {
+            MvxBindingLog.Error("Error - Switch is null in MvxUISwitchOnTargetBinding");
+            return;
         }
 
-        protected override void SetValue(bool value)
-        {
-            Target.SetState(value, true);
-        }
+        _subscription = uiSwitch.WeakSubscribe(nameof(uiSwitch.ValueChanged), HandleValueChanged);
+    }
 
-        public override void SubscribeToEvents()
-        {
-            var uiSwitch = Target;
-            if (uiSwitch == null)
-            {
-                MvxBindingLog.Error("Error - Switch is null in MvxUISwitchOnTargetBinding");
-                return;
-            }
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
-            _subscription = uiSwitch.WeakSubscribe(nameof(uiSwitch.ValueChanged), HandleValueChanged);
-        }
+    protected override void Dispose(bool isDisposing)
+    {
+        base.Dispose(isDisposing);
+        if (!isDisposing) return;
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+        _subscription?.Dispose();
+        _subscription = null;
+    }
 
-        protected override void Dispose(bool isDisposing)
-        {
-            base.Dispose(isDisposing);
-            if (!isDisposing) return;
-
-            _subscription?.Dispose();
-            _subscription = null;
-        }
-
-        private void HandleValueChanged(object sender, EventArgs e)
-        {
-            FireValueChanged(Target.On);
-        }
+    private void HandleValueChanged(object? sender, EventArgs e)
+    {
+        FireValueChanged(Target?.On ?? false);
     }
 }

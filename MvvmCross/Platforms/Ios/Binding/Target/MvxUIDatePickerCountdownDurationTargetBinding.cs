@@ -2,24 +2,18 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
 using System.Reflection;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public class MvxUIDatePickerCountDownDurationTargetBinding(UIDatePicker target, PropertyInfo targetPropertyInfo)
+    : MvxBaseUIDatePickerTargetBinding(target, targetPropertyInfo)
 {
-    public class MvxUIDatePickerCountDownDurationTargetBinding : MvxBaseUIDatePickerTargetBinding
+    protected override object GetValueFrom(UIDatePicker view)
     {
-        public MvxUIDatePickerCountDownDurationTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
-        {
-        }
-
-        protected override object GetValueFrom(UIDatePicker view)
-        {
-            return view.CountDownDuration;
-        }
-
-        public override Type TargetValueType => typeof(double);
+        return view.CountDownDuration;
     }
+
+    public override Type TargetValueType => typeof(double);
 }

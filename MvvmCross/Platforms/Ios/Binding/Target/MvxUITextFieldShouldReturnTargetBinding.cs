@@ -2,59 +2,58 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
 using System.Windows.Input;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public class MvxUITextFieldShouldReturnTargetBinding
+    : MvxTargetBinding
 {
-    public class MvxUITextFieldShouldReturnTargetBinding : MvxTargetBinding
+    private ICommand? _command;
+
+    protected UITextField? View => Target as UITextField;
+
+    public MvxUITextFieldShouldReturnTargetBinding(UITextField target)
+        : base(target)
     {
-        private ICommand _command;
+        target.ShouldReturn = HandleShouldReturn;
+    }
 
-        protected UITextField View => Target as UITextField;
+    private bool HandleShouldReturn(UITextField textField)
+    {
+        if (_command == null)
+            return false;
 
-        public MvxUITextFieldShouldReturnTargetBinding(UITextField target)
-            : base(target)
-        {
-            target.ShouldReturn = HandleShouldReturn;
-        }
+        var text = textField.Text;
+        if (!_command.CanExecute(text))
+            return false;
 
-        private bool HandleShouldReturn(UITextField textField)
-        {
-            if (_command == null)
-                return false;
+        textField.ResignFirstResponder();
+        _command.Execute(text);
+        return true;
+    }
 
-            var text = textField.Text;
-            if (!_command.CanExecute(text))
-                return false;
+    public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-            textField.ResignFirstResponder();
-            _command.Execute(text);
-            return true;
-        }
+    public override void SetValue(object? value)
+    {
+        var command = value as ICommand;
+        _command = command;
+    }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+    public override Type TargetValueType => typeof(ICommand);
 
-        public override void SetValue(object value)
-        {
-            var command = value as ICommand;
-            _command = command;
-        }
+    protected override void Dispose(bool isDisposing)
+    {
+        base.Dispose(isDisposing);
+        if (!isDisposing) return;
 
-        public override Type TargetValueType => typeof(ICommand);
+        var editText = View;
+        if (editText == null) return;
 
-        protected override void Dispose(bool isDisposing)
-        {
-            base.Dispose(isDisposing);
-            if (!isDisposing) return;
-
-            var editText = View;
-            if (editText == null) return;
-
-            editText.ShouldReturn = null;
-        }
+        editText.ShouldReturn = null;
     }
 }

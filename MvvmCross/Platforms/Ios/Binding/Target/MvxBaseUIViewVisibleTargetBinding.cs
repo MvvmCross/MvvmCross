@@ -2,24 +2,18 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public abstract class MvxBaseUIViewVisibleTargetBinding(UIView target)
+    : MvxConvertingTargetBinding(target)
 {
-    public abstract class MvxBaseUIViewVisibleTargetBinding : MvxConvertingTargetBinding
-    {
-        protected UIView View => (UIView)Target;
+    protected UIView? View => (UIView?)Target;
 
-        protected MvxBaseUIViewVisibleTargetBinding(UIView target)
-            : base(target)
-        {
-        }
+    public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
-
-        public override Type TargetValueType => typeof(bool);
-    }
+    public override Type TargetValueType => typeof(bool);
 }

@@ -2,55 +2,52 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using Android.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.WeakSubscription;
 
-namespace MvvmCross.Platforms.Android.Binding.Target
+namespace MvvmCross.Platforms.Android.Binding.Target;
+
+public class MvxCompoundButtonCheckedTargetBinding(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+        object target,
+        PropertyInfo targetPropertyInfo)
+    : MvxAndroidPropertyInfoTargetBinding<CompoundButton>(target, targetPropertyInfo)
 {
-    public class MvxCompoundButtonCheckedTargetBinding
-        : MvxAndroidPropertyInfoTargetBinding<CompoundButton>
+    private MvxAndroidTargetEventSubscription<CompoundButton, CompoundButton.CheckedChangeEventArgs>? _subscription;
+
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+    public override void SubscribeToEvents()
     {
-        private IDisposable _subscription;
-
-        public MvxCompoundButtonCheckedTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
+        var compoundButton = View;
+        if (compoundButton == null)
         {
+            MvxBindingLog.Error(
+                "Error - compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
+            return;
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+        _subscription = compoundButton.WeakSubscribe<CompoundButton, CompoundButton.CheckedChangeEventArgs>(
+            nameof(compoundButton.CheckedChange),
+            CompoundButtonOnCheckedChange);
+    }
 
-        public override void SubscribeToEvents()
+    private void CompoundButtonOnCheckedChange(object? sender, CompoundButton.CheckedChangeEventArgs args)
+    {
+        FireValueChanged(View?.Checked);
+    }
+
+    protected override void Dispose(bool isDisposing)
+    {
+        if (isDisposing)
         {
-            var compoundButton = View;
-            if (compoundButton == null)
-            {
-                MvxBindingLog.Error(
-                                      "Error - compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
-                return;
-            }
-
-            _subscription = compoundButton.WeakSubscribe<CompoundButton, CompoundButton.CheckedChangeEventArgs>(
-                nameof(compoundButton.CheckedChange),
-                CompoundButtonOnCheckedChange);
+            _subscription?.Dispose();
+            _subscription = null;
         }
 
-        private void CompoundButtonOnCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs args)
-        {
-            FireValueChanged(View.Checked);
-        }
-
-        protected override void Dispose(bool isDisposing)
-        {
-            if (isDisposing)
-            {
-                _subscription?.Dispose();
-                _subscription = null;
-            }
-
-            base.Dispose(isDisposing);
-        }
+        base.Dispose(isDisposing);
     }
 }
