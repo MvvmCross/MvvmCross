@@ -28,7 +28,7 @@ public class MvxUIDatePickerMinMaxTargetBinding
     {
         if (value == null)
             return NSDate.FromTimeIntervalSince1970(0);
-        
+
         var valueUtc = ToUtcTime((DateTime)value);
         var valueNSDate = valueUtc.ToNSDate();
 
