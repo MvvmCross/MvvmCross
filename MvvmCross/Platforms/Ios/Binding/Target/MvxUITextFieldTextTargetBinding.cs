@@ -4,6 +4,7 @@
 
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Extensions;
@@ -33,16 +34,16 @@ public class MvxUITextFieldTextTargetBinding(
 
     public override void SubscribeToEvents()
     {
-        var target = View;
-        if (target == null)
+        var view = View;
+        if (view == null)
         {
-            MvxBindingLog.Error(
-                "Error - UITextField is null in MvxUITextFieldTextTargetBinding");
+            MvxBindingLog.Instance?.LogError(
+                "UITextField is null in MvxUITextFieldTextTargetBinding");
             return;
         }
 
-        _subscriptionChanged = target.WeakSubscribe(nameof(target.EditingChanged), HandleEditTextValueChanged);
-        _subscriptionEndEditing = target.WeakSubscribe(nameof(target.EditingDidEnd), HandleEditTextValueChanged);
+        _subscriptionChanged = view.WeakSubscribe(nameof(target.EditingChanged), HandleEditTextValueChanged);
+        _subscriptionEndEditing = view.WeakSubscribe(nameof(target.EditingDidEnd), HandleEditTextValueChanged);
     }
 
     public override Type TargetValueType => typeof(string);
