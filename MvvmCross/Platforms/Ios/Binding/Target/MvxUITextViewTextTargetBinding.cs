@@ -2,74 +2,74 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
+using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.WeakSubscription;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public class MvxUITextViewTextTargetBinding(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+        UITextView target)
+    : MvxConvertingTargetBinding(target)
 {
-    public class MvxUITextViewTextTargetBinding : MvxConvertingTargetBinding
+    private IDisposable? _subscription;
+
+    protected UITextView? View => Target as UITextView;
+
+
+    private void EditTextOnChanged(object? sender, NSTextStorageEventArgs eventArgs)
     {
-        private IDisposable _subscription;
+        var view = View;
+        if (view == null) return;
 
-        protected UITextView View => Target as UITextView;
+        FireValueChanged(view.Text);
+    }
 
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
-        public MvxUITextViewTextTargetBinding(UITextView target)
-            : base(target)
+    public override void SubscribeToEvents()
+    {
+        var view = View;
+        if (view == null)
         {
+            MvxBindingLog.Instance?.LogError(
+                "UITextView is null in MvxUITextViewTextTargetBinding");
+            return;
         }
 
-        private void EditTextOnChanged(object sender, NSTextStorageEventArgs eventArgs)
+        var textStorage = view.LayoutManager.TextStorage;
+        if (textStorage == null)
         {
-            var view = View;
-            if (view == null) return;
-
-            FireValueChanged(view.Text);
+            MvxBindingLog.Instance?.LogError(
+                "NSTextStorage of UITextView is null in MvxUITextViewTextTargetBinding");
+            return;
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+        _subscription =
+            textStorage.WeakSubscribe<NSTextStorage, NSTextStorageEventArgs>(nameof(textStorage.DidProcessEditing),
+                EditTextOnChanged);
+    }
 
-        public override void SubscribeToEvents()
-        {
-            var target = View;
-            if (target == null)
-            {
-                MvxBindingLog.Error(
-                                      "Error - UITextView is null in MvxUITextViewTextTargetBinding");
-                return;
-            }
+    public override Type TargetValueType => typeof(string);
 
-            var textStorage = target.LayoutManager?.TextStorage;
-            if (textStorage == null)
-            {
-                MvxBindingLog.Error(
-                          "Error - NSTextStorage of UITextView is null in MvxUITextViewTextTargetBinding");
-                return;
-            }
+    protected override void SetValueImpl(object target, object? value)
+    {
+        var view = (UITextView?)target;
+        if (view == null) return;
 
-            _subscription = textStorage.WeakSubscribe<NSTextStorage, NSTextStorageEventArgs>(nameof(textStorage.DidProcessEditing), EditTextOnChanged);
-        }
+        view.Text = (string?)value;
+    }
 
-        public override Type TargetValueType => typeof(string);
+    protected override void Dispose(bool isDisposing)
+    {
+        base.Dispose(isDisposing);
+        if (!isDisposing) return;
 
-        protected override void SetValueImpl(object target, object value)
-        {
-            var view = (UITextView)target;
-            if (view == null) return;
-
-            view.Text = (string)value;
-        }
-
-        protected override void Dispose(bool isDisposing)
-        {
-            base.Dispose(isDisposing);
-            if (!isDisposing) return;
-
-            _subscription?.Dispose();
-            _subscription = null;
-        }
+        _subscription?.Dispose();
+        _subscription = null;
     }
 }
