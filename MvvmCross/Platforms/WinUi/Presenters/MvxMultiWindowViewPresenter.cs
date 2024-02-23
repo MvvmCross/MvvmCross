@@ -53,7 +53,13 @@ namespace MvvmCross.Platforms.WinUi.Presenters
         /// <param name="rootFrame">The root frame.</param>
         public MvxMultiWindowViewPresenter(IMvxWindowsFrame rootFrame)
         {
+            
             var window = (Microsoft.UI.Xaml.Application.Current as MvxApplication)?.MainWindow;
+            if (window != null)
+            {
+                window.AppWindow.Closing += (o, e) => { this.CloseAllWindows(); };
+            }
+
             this._mainFrame = new WindowInformation(window!, rootFrame, null);
             this._logger = MvxLogHost.GetLog<MvxWindowsViewPresenter>();
 

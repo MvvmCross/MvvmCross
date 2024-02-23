@@ -74,7 +74,6 @@ This package contains the 'Core' libraries for MvvmCross</Description>
 
     <PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
-    <PackageReference Include="PInvoke.User32" />
   </ItemGroup>
 
   <ItemGroup>
