@@ -15,7 +15,7 @@ public class MvxNumberPickerDisplayedValuesTargetBinding(NumberPicker target)
             return;
 
         var arrayVal = value?.ToArray() ?? [];
-        
+
         if (Target.MaxValue == 0)
             Target.MaxValue = arrayVal.Length - 1;
         Target.SetDisplayedValues(arrayVal);
