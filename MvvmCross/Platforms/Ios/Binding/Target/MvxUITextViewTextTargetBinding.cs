@@ -20,7 +20,6 @@ public class MvxUITextViewTextTargetBinding(
 
     protected UITextView? View => Target as UITextView;
 
-
     private void EditTextOnChanged(object? sender, NSTextStorageEventArgs eventArgs)
     {
         var view = View;

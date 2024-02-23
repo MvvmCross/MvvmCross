@@ -15,7 +15,7 @@ public class MvxUIControlTargetBinding : MvxConvertingTargetBinding
 {
     private readonly string _controlEvent;
     private readonly EventHandler<EventArgs> _canExecuteEventHandler;
-    
+
     private ICommand? _command;
     private MvxCanExecuteChangedEventSubscription? _canExecuteSubscription;
     private MvxWeakEventSubscription<UIControl>? _controlEventSubscription;
