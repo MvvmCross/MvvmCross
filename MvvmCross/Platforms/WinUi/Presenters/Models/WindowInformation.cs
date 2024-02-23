@@ -8,7 +8,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters.Models;
 /// <summary>
 /// Holds information regarding the different windows.
 /// </summary>
-internal sealed class WindowInformation
+public sealed class WindowInformation
 {
     private readonly List<IMvxViewModel> _subViewModels = new();
 
