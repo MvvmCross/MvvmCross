@@ -16,10 +16,9 @@ public class MvxTextViewTextTargetBinding
         , IMvxEditableTextView
 {
     private readonly bool _isEditTextBinding;
+    private MvxAndroidTargetEventSubscription<TextView, AfterTextChangedEventArgs>? _subscription;
 
     protected TextView? TextView => Target as TextView;
-
-    private IDisposable? _subscription;
 
     public MvxTextViewTextTargetBinding(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]

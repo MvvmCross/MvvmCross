@@ -15,9 +15,10 @@ public class MvxViewClickBinding
     : MvxAndroidTargetBinding
 {
     private ICommand? _command;
-    private IDisposable? _clickSubscription;
-    private IDisposable? _canExecuteSubscription;
+
     private readonly EventHandler<EventArgs> _canExecuteEventHandler;
+    private MvxWeakEventSubscription<View>? _clickSubscription;
+    private MvxCanExecuteChangedEventSubscription? _canExecuteSubscription;
 
     protected View? View => (View?)Target;
 

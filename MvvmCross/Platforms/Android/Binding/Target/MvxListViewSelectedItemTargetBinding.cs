@@ -17,7 +17,7 @@ public class MvxListViewSelectedItemTargetBinding(
     : MvxAndroidTargetBinding(view)
 {
     private object? _currentValue;
-    private IDisposable? _subscription;
+    private MvxAndroidTargetEventSubscription<ListView, AdapterView.ItemClickEventArgs>? _subscription;
 
     protected MvxListView? ListView => (MvxListView?)Target;
 

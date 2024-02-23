@@ -17,7 +17,7 @@ public class MvxTextViewTextFormattedTargetBinding(
     : MvxAndroidTargetBinding(target), IMvxEditableTextView
 {
     private readonly bool _isEditTextBinding = target is EditText;
-    private IDisposable? _subscription;
+    private MvxAndroidTargetEventSubscription<TextView, AfterTextChangedEventArgs>? _subscription;
 
     protected TextView? TextView => Target as TextView;
 

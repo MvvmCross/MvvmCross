@@ -15,7 +15,7 @@ public class MvxUITextFieldTextFocusTargetBinding(
         UITextField target)
     : MvxTargetBinding(target)
 {
-    private IDisposable? _subscription;
+    private MvxWeakEventSubscription<UITextField>? _subscription;
 
     protected UITextField? TextField => Target as UITextField;
 

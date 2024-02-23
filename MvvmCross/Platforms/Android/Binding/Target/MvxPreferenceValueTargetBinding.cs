@@ -15,7 +15,7 @@ public class MvxPreferenceValueTargetBinding(
         Preference preference)
     : MvxAndroidTargetBinding(preference)
 {
-    private IDisposable? _subscription;
+    private MvxAndroidTargetEventSubscription<Preference, Preference.PreferenceChangeEventArgs>? _subscription;
 
     public Preference? Preference => Target as Preference;
 

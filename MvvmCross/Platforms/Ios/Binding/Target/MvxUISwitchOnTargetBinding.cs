@@ -15,7 +15,7 @@ public class MvxUISwitchOnTargetBinding(
         UISwitch target)
     : MvxTargetBinding<UISwitch, bool>(target)
 {
-    private IDisposable? _subscription;
+    private MvxWeakEventSubscription<UISwitch>? _subscription;
 
     protected override void SetValue(bool value)
     {

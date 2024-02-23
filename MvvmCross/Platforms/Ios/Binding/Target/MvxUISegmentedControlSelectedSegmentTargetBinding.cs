@@ -18,7 +18,7 @@ public class MvxUISegmentedControlSelectedSegmentTargetBinding(
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UISegmentedControl>(target, targetPropertyInfo)
 {
-    private IDisposable? _subscription;
+    private MvxWeakEventSubscription<UISegmentedControl>? _subscription;
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 

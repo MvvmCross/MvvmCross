@@ -10,8 +10,8 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 
 public class MvxViewFocusChangedTargetBinding : MvxAndroidTargetBinding
 {
-    private IDisposable? _focusChangeSubscription;
     private ICommand? _command;
+    private MvxWeakEventSubscription<View, FocusChangeEventArgs>? _focusChangeSubscription;
 
     public MvxViewFocusChangedTargetBinding(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]

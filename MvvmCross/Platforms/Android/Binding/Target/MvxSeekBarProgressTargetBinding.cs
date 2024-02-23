@@ -14,14 +14,14 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 public class MvxSeekBarProgressTargetBinding
     : MvxPropertyInfoTargetBinding<SeekBar>
 {
+    private MvxWeakEventSubscription<SeekBar, SeekBar.ProgressChangedEventArgs>? _subscription;
+
     public MvxSeekBarProgressTargetBinding(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.PublicProperties)]
         object target, PropertyInfo targetPropertyInfo)
         : base(target, targetPropertyInfo)
     {
     }
-
-    private IDisposable? _subscription;
 
     protected override void SetValueImpl(object target, object? value)
     {

@@ -15,7 +15,7 @@ public class MvxViewLongClickBinding
     : MvxAndroidTargetBinding
 {
     private ICommand? _command;
-    private IDisposable? _subscription;
+    private MvxAndroidTargetEventSubscription<View, View.LongClickEventArgs>? _subscription;
 
     protected View? View => (View?)Target;
 

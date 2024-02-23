@@ -15,7 +15,7 @@ public class MvxAppCompatRadioGroupSelectedItemBinding
     : MvxAndroidTargetBinding
 {
     private object? _currentValue;
-    private IDisposable? _subscription;
+    private MvxWeakEventSubscription<RadioGroup, RadioGroup.CheckedChangeEventArgs>? _subscription;
 
     public MvxAppCompatRadioGroupSelectedItemBinding(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
@@ -90,7 +90,6 @@ public class MvxAppCompatRadioGroupSelectedItemBinding
     private static int GetRadioButtonId(object? value, MvxAppCompatRadioGroup radioGroup)
     {
         var checkid = View.NoId;
-
 
         if (value == null)
             return checkid;

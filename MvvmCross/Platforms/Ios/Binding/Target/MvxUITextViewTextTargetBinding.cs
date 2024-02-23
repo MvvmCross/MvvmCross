@@ -16,7 +16,7 @@ public class MvxUITextViewTextTargetBinding(
         UITextView target)
     : MvxConvertingTargetBinding(target)
 {
-    private IDisposable? _subscription;
+    private MvxWeakEventSubscription<NSTextStorage, NSTextStorageEventArgs>? _subscription;
 
     protected UITextView? View => Target as UITextView;
 

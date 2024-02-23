@@ -17,10 +17,10 @@ public class MvxUITextFieldTextTargetBinding(
         UITextField target)
     : MvxConvertingTargetBinding(target), IMvxEditableTextView
 {
-    protected UITextField? View => Target as UITextField;
+    private MvxWeakEventSubscription<UITextField>? _subscriptionChanged;
+    private MvxWeakEventSubscription<UITextField>? _subscriptionEndEditing;
 
-    private IDisposable? _subscriptionChanged;
-    private IDisposable? _subscriptionEndEditing;
+    protected UITextField? View => Target as UITextField;
 
     private void HandleEditTextValueChanged(object? sender, EventArgs e)
     {

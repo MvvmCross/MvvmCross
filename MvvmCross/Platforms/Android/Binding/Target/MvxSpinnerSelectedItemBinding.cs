@@ -17,7 +17,7 @@ public class MvxSpinnerSelectedItemBinding
     protected MvxSpinner? Spinner => (MvxSpinner?)Target;
 
     private object? _currentValue;
-    private IDisposable? _subscription;
+    private MvxAndroidTargetEventSubscription<AdapterView, AdapterView.ItemSelectedEventArgs>? _subscription;
 
     public MvxSpinnerSelectedItemBinding(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]

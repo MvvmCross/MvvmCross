@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target;
 public class MvxUIPageControlCurrentPageTargetBinding(UIPageControl target, PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UIPageControl>(target, targetPropertyInfo)
 {
-    private IDisposable? _subscription;
+    private MvxWeakEventSubscription<UIPageControl>? _subscription;
 
     protected override void SetValueImpl(object target, object? value)
     {

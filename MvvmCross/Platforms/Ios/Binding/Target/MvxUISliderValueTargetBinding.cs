@@ -18,7 +18,7 @@ public class MvxUISliderValueTargetBinding(
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UISlider>(target, targetPropertyInfo)
 {
-    private IDisposable? _subscription;
+    private MvxWeakEventSubscription<UISlider>? _subscription;
 
     protected override void SetValueImpl(object target, object? value)
     {

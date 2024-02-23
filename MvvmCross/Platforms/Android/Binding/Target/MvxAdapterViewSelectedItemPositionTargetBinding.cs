@@ -7,17 +7,13 @@ using MvvmCross.Platforms.Android.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target;
 
-public class MvxAdapterViewSelectedItemPositionTargetBinding
-    : MvxAndroidTargetBinding
+public class MvxAdapterViewSelectedItemPositionTargetBinding(AdapterView adapterView)
+    : MvxAndroidTargetBinding(adapterView)
 {
-    private IDisposable? _subscription;
+    private MvxAndroidTargetEventSubscription<AdapterView, AdapterView.ItemSelectedEventArgs>? _subscription;
+
 
     private AdapterView? AdapterView => (AdapterView?)Target;
-
-    public MvxAdapterViewSelectedItemPositionTargetBinding(AdapterView adapterView)
-        : base(adapterView)
-    {
-    }
 
     protected override void SetValueImpl(object target, object? value)
     {
@@ -34,12 +30,12 @@ public class MvxAdapterViewSelectedItemPositionTargetBinding
 
     public override void SubscribeToEvents()
     {
-        var adapterView = AdapterView;
+        var view = AdapterView;
 
-        if (adapterView == null)
+        if (view == null)
             return;
 
-        _subscription = adapterView.WeakSubscribe<AdapterView, AdapterView.ItemSelectedEventArgs>(
+        _subscription = view.WeakSubscribe<AdapterView, AdapterView.ItemSelectedEventArgs>(
             nameof(adapterView.ItemSelected), AdapterViewOnItemSelected);
     }
 

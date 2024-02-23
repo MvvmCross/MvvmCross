@@ -13,7 +13,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 public class MvxTextViewFocusTargetBinding
     : MvxAndroidTargetBinding
 {
-    private IDisposable? _subscription;
+    private MvxAndroidTargetEventSubscription<View, View.FocusChangeEventArgs>? _subscription;
 
     protected EditText? TextField => Target as EditText;
 

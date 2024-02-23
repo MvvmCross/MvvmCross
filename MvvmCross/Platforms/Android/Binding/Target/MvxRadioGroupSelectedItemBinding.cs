@@ -13,7 +13,7 @@ public class MvxRadioGroupSelectedItemBinding
     : MvxAndroidTargetBinding
 {
     private object? _currentValue;
-    private IDisposable? _subscription;
+    private MvxAndroidTargetEventSubscription<RadioGroup, RadioGroup.CheckedChangeEventArgs>? _subscription;
 
     public MvxRadioGroupSelectedItemBinding(MvxRadioGroup radioGroup)
         : base(radioGroup)

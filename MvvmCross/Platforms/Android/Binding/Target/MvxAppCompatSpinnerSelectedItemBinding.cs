@@ -13,8 +13,8 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 public class MvxAppCompatSpinnerSelectedItemBinding
     : MvxAndroidTargetBinding
 {
-    private IDisposable? _subscription;
     private object? _currentValue;
+    private MvxAndroidTargetEventSubscription<MvxAppCompatSpinner, AdapterView.ItemSelectedEventArgs>? _subscription;
 
     protected MvxAppCompatSpinner? Spinner => (MvxAppCompatSpinner?)Target;
 

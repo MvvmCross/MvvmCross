@@ -11,10 +11,10 @@ namespace MvvmCross.Platforms.Ios.Binding.Target;
 
 public class MvxUIBarButtonItemTargetBinding : MvxConvertingTargetBinding
 {
-    private ICommand? _command;
-    private IDisposable? _clickSubscription;
-    private IDisposable? _canExecuteSubscription;
     private readonly EventHandler<EventArgs> _canExecuteEventHandler;
+    private ICommand? _command;
+    private MvxWeakEventSubscription<UIBarButtonItem>? _clickSubscription;
+    private MvxCanExecuteChangedEventSubscription? _canExecuteSubscription;
 
     protected UIBarButtonItem? Control => Target as UIBarButtonItem;
 

@@ -14,11 +14,11 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 public class MvxAutoCompleteTextViewSelectedObjectTargetBinding
     : MvxAndroidPropertyInfoTargetBinding<MvxAutoCompleteTextView>
 {
-    private IDisposable? _subscription;
+    private MvxJavaEventSubscription<MvxAutoCompleteTextView>? _subscription;
 
     public MvxAutoCompleteTextViewSelectedObjectTargetBinding(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            object target,
+            MvxAutoCompleteTextView target,
             PropertyInfo targetPropertyInfo)
         : base(target, targetPropertyInfo)
     {

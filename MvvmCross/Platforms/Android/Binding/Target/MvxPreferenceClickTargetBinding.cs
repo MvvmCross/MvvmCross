@@ -8,6 +8,7 @@ using System.Windows.Input;
 using AndroidX.Preference;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.WeakSubscription;
+using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target;
 
@@ -16,8 +17,8 @@ public class MvxPreferenceClickTargetBinding
 {
     private readonly EventHandler<EventArgs> _canExecuteEventHandler;
     private ICommand? _command;
-    private IDisposable? _clickSubscription;
-    private IDisposable? _canExecuteSubscription;
+    private MvxAndroidTargetEventSubscription<Preference, Preference.PreferenceClickEventArgs>? _clickSubscription;
+    private MvxCanExecuteChangedEventSubscription? _canExecuteSubscription;
 
     protected Preference? Preference => (Preference?)Target;
 
@@ -28,8 +29,7 @@ public class MvxPreferenceClickTargetBinding
     {
         _canExecuteEventHandler = OnCanExecuteChanged;
 
-        _clickSubscription = view.WeakSubscribe<Preference, Preference.PreferenceClickEventArgs>(
-            nameof(Preference.PreferenceClick),
+        _clickSubscription = MvxAndroidWeakSubscriptionExtensions.WeakSubscribe<Preference, Preference.PreferenceClickEventArgs>(view, nameof(Preference.PreferenceClick),
             ViewOnPreferenceClick);
     }
 
@@ -52,9 +52,7 @@ public class MvxPreferenceClickTargetBinding
         _command = value as ICommand;
         if (_command != null)
         {
-            _canExecuteSubscription =
-                MvvmCross.WeakSubscription.MvxWeakSubscriptionExtensions.WeakSubscribe(_command,
-                    _canExecuteEventHandler);
+            _canExecuteSubscription = _command.WeakSubscribe(_canExecuteEventHandler);
         }
         RefreshEnabledState();
     }

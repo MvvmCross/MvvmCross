@@ -20,7 +20,8 @@ public class MvxNumberPickerValueTargetBinding(
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<NumberPicker>(target, targetPropertyInfo)
 {
-    private IDisposable? _subscription;
+    private MvxAndroidTargetEventSubscription<NumberPicker, NumberPicker.ValueChangeEventArgs>? _subscription;
+
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 

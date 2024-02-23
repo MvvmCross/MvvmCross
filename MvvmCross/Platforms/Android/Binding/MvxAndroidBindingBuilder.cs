@@ -304,7 +304,7 @@ namespace MvvmCross.Platforms.Android.Binding
                 MvxAndroidPropertyBinding.Toolbar_Subtitle,
                 toolbar => new MvxToolbarSubtitleBinding(toolbar));
 
-            registry.RegisterCustomBindingFactory<MvxAppCompatSearchViewQueryTextTargetBinding>(
+            registry.RegisterCustomBindingFactory<AppCompatSearchView>(
                 MvxAndroidPropertyBinding.SearchView_Query,
                 searchView => new MvxAppCompatSearchViewQueryTextTargetBinding(searchView));
 

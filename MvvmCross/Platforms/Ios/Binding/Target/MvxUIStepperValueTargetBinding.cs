@@ -17,7 +17,7 @@ public class MvxUIStepperValueTargetBinding(
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UIStepper>(target, targetPropertyInfo)
 {
-    private IDisposable? _subscription;
+    private MvxWeakEventSubscription<UIStepper>? _subscription;
 
     protected override void SetValueImpl(object target, object? value)
     {

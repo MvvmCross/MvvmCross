@@ -12,11 +12,11 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 public class MvxAppCompatSearchViewQueryTextTargetBinding
     : MvxAndroidTargetBinding
 {
-    private IDisposable? _subscription;
+    private MvxAndroidTargetEventSubscription<SearchView, SearchView.QueryTextChangeEventArgs>? _subscription;
 
     public MvxAppCompatSearchViewQueryTextTargetBinding(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            object target)
+            SearchView target)
         : base(target)
     {
     }

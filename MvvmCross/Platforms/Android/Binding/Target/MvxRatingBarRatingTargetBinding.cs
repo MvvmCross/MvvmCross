@@ -12,7 +12,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 public class MvxRatingBarRatingTargetBinding
     : MvxAndroidTargetBinding
 {
-    private IDisposable? _subscription;
+    private MvxAndroidTargetEventSubscription<RatingBar, RatingBar.RatingBarChangeEventArgs>? _subscription;
 
     protected RatingBar? RatingBar => (RatingBar?)Target;
 

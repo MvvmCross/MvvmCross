@@ -12,9 +12,10 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 public class MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding
     : MvxAndroidPropertyInfoTargetBinding<MvxAppCompatAutoCompleteTextView>
 {
-    private IDisposable? _subscription;
+    private MvxJavaEventSubscription<MvxAppCompatAutoCompleteTextView>? _subscription;
 
-    public MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
+    public MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding(
+        MvxAppCompatAutoCompleteTextView target, PropertyInfo targetPropertyInfo)
         : base(target, targetPropertyInfo)
     {
         var autoComplete = View;
@@ -48,6 +49,7 @@ public class MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding
         if (isDisposing)
         {
             _subscription?.Dispose();
+            _subscription = null;
         }
         base.Dispose(isDisposing);
     }

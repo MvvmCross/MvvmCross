@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target;
 public class MvxUISearchBarTextTargetBinding(UISearchBar target, PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UISearchBar>(target, targetPropertyInfo)
 {
-    private IDisposable? _subscription;
+    private MvxWeakEventSubscription<UISearchBar, UISearchBarTextChangedEventArgs>? _subscription;
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
@@ -28,7 +28,9 @@ public class MvxUISearchBarTextTargetBinding(UISearchBar target, PropertyInfo ta
             return;
         }
 
-        _subscription = searchBar.WeakSubscribe<UISearchBar, UISearchBarTextChangedEventArgs>(nameof(searchBar.TextChanged), HandleSearchBarValueChanged);
+        _subscription =
+            searchBar.WeakSubscribe<UISearchBar, UISearchBarTextChangedEventArgs>(nameof(searchBar.TextChanged),
+                HandleSearchBarValueChanged);
     }
 
     protected override void Dispose(bool isDisposing)

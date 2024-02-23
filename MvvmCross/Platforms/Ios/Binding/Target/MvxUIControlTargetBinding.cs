@@ -13,12 +13,12 @@ namespace MvvmCross.Platforms.Ios.Binding.Target;
 
 public class MvxUIControlTargetBinding : MvxConvertingTargetBinding
 {
-    private ICommand? _command;
-    private IDisposable? _canExecuteSubscription;
-    private IDisposable? _controlEventSubscription;
-
     private readonly string _controlEvent;
     private readonly EventHandler<EventArgs> _canExecuteEventHandler;
+    
+    private ICommand? _command;
+    private MvxCanExecuteChangedEventSubscription? _canExecuteSubscription;
+    private MvxWeakEventSubscription<UIControl>? _controlEventSubscription;
 
     protected UIControl? Control => Target as UIControl;
 

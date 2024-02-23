@@ -39,6 +39,6 @@ public class MvxImageViewDrawableTargetBinding(ImageView imageView)
         var context = view.Context;
         Drawable? drawable = context?.Resources?.GetDrawable(id, context.Theme);
         if (drawable != null)
-            imageView.SetImageDrawable(drawable);
+            view.SetImageDrawable(drawable);
     }
 }

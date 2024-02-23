@@ -22,7 +22,8 @@ public class MvxExpandableListViewSelectedItemTargetBinding(
     : MvxAndroidTargetBinding(target)
 {
     private object? _currentValue;
-    private IDisposable? _subscription;
+    private MvxAndroidTargetEventSubscription<ExpandableListView, ExpandableListView.ChildClickEventArgs>? _subscription;
+
 
     protected MvxExpandableListView? ListView => (MvxExpandableListView?)Target;
 
