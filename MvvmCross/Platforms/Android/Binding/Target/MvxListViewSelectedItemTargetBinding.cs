@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.Binding.Views;
@@ -9,7 +10,9 @@ using MvvmCross.Platforms.Android.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target;
 
-public class MvxListViewSelectedItemTargetBinding(MvxListView view)
+public class MvxListViewSelectedItemTargetBinding(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+        MvxListView view)
     : MvxAndroidTargetBinding(view)
 {
     private object? _currentValue;
