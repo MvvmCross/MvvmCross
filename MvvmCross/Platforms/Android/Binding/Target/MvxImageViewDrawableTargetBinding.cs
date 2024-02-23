@@ -24,7 +24,7 @@ public class MvxImageViewDrawableTargetBinding(ImageView imageView)
         {
             MvxBindingLog.Warning(
                 "Value was not a valid Drawable");
-            imageView.SetImageDrawable(null);
+            view.SetImageDrawable(null);
             return;
         }
 

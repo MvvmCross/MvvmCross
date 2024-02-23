@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 public class MvxAutoCompleteTextViewPartialTextTargetBinding
     : MvxAndroidPropertyInfoTargetBinding<MvxAutoCompleteTextView>
 {
-    private IDisposable? _subscription;
+    private MvxJavaEventSubscription<MvxAutoCompleteTextView>? _subscription;
 
     public MvxAutoCompleteTextViewPartialTextTargetBinding(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]

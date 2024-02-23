@@ -9,6 +9,6 @@ public class MvxImageViewResourceNameTargetBinding(ImageView imageView)
 {
     protected override void SetImage(ImageView view, int id)
     {
-        imageView.SetImageResource(id);
+        view.SetImageResource(id);
     }
 }

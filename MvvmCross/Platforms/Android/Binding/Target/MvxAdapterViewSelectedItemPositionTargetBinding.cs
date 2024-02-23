@@ -12,7 +12,6 @@ public class MvxAdapterViewSelectedItemPositionTargetBinding(AdapterView adapter
 {
     private MvxAndroidTargetEventSubscription<AdapterView, AdapterView.ItemSelectedEventArgs>? _subscription;
 
-
     private AdapterView? AdapterView => (AdapterView?)Target;
 
     protected override void SetValueImpl(object target, object? value)
