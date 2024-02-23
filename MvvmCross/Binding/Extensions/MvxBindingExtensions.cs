@@ -44,7 +44,7 @@ public static class MvxBindingExtensions
         return false;
     }
 
-    public static bool ConvertToBoolean(this object result)
+    public static bool ConvertToBoolean(this object? result)
     {
         return result.ConvertToBooleanCore();
     }

@@ -13,7 +13,7 @@ namespace MvvmCross.Base
     public static class MvxCoreExtensions
     {
         // core implementation of ConvertToBoolean
-        public static bool ConvertToBooleanCore(this object result)
+        public static bool ConvertToBooleanCore(this object? result)
         {
             if (result == null)
                 return false;
