@@ -1,27 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.Widget;
+#nullable enable
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 
-namespace MvvmCross.Platforms.Android.Binding.Target
+namespace MvvmCross.Platforms.Android.Binding.Target;
+
+public class MvxNumberPickerDisplayedValuesTargetBinding(NumberPicker target)
+    : MvxTargetBinding<NumberPicker, IEnumerable<string>?>(target)
 {
-    public class MvxNumberPickerDisplayedValuesTargetBinding : MvxTargetBinding<NumberPicker, IEnumerable<string>>
+    public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+
+    protected override void SetValue(IEnumerable<string>? value)
     {
-        public MvxNumberPickerDisplayedValuesTargetBinding(NumberPicker target) : base(target)
-        {
-        }
+        if (Target == null)
+            return;
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
-
-        protected override void SetValue(IEnumerable<string> value)
-        {
-            if (Target.MaxValue == 0)
-                Target.MaxValue = value?.Count() - 1 ?? 0;
-            Target.SetDisplayedValues(value?.ToArray());
-            Target.Invalidate();
-        }
+        var arrayVal = value?.ToArray() ?? [];
+        
+        if (Target.MaxValue == 0)
+            Target.MaxValue = arrayVal.Length - 1;
+        Target.SetDisplayedValues(arrayVal);
+        Target.Invalidate();
     }
 }
