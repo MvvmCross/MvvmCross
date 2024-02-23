@@ -499,7 +499,7 @@ namespace MvvmCross.Navigation
             CancellationToken cancellationToken = default) where TViewModel : IMvxViewModel<TParameter>
             where TParameter : notnull
         {
-            return this.Navigate(typeof(TViewModel), param, source, presentationBundle, cancellationToken);
+            return Navigate(typeof(TViewModel), param, source, presentationBundle, cancellationToken);
         }
 
         /// <summary>
@@ -523,8 +523,8 @@ namespace MvvmCross.Navigation
             {
                 PresentationValues = presentationBundle?.SafeGetData()
             };
-            mvxViewModelInstanceRequest.ViewModelInstance = this.ViewModelLoader.LoadViewModel(mvxViewModelInstanceRequest, param, null);
-            return this.NavigateAsync(mvxViewModelInstanceRequest, mvxViewModelInstanceRequest.ViewModelInstance, presentationBundle, cancellationToken);
+            mvxViewModelInstanceRequest.ViewModelInstance = ViewModelLoader.LoadViewModel(mvxViewModelInstanceRequest, param, null);
+            return NavigateAsync(mvxViewModelInstanceRequest, mvxViewModelInstanceRequest.ViewModelInstance, presentationBundle, cancellationToken);
         }
 
         /// <summary>
@@ -545,8 +545,8 @@ namespace MvvmCross.Navigation
             {
                 PresentationValues = presentationBundle?.SafeGetData()
             };
-            request.ViewModelInstance = this.ViewModelLoader.LoadViewModel(request, null);
-            return this.NavigateAsync(request, request.ViewModelInstance, presentationBundle, cancellationToken);
+            request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, null);
+            return NavigateAsync(request, request.ViewModelInstance, presentationBundle, cancellationToken);
         }
 
         /// <summary>
@@ -564,7 +564,7 @@ namespace MvvmCross.Navigation
             IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
             where TViewModel : IMvxViewModel
         {
-            return this.Navigate(typeof(TViewModel), source, presentationBundle, cancellationToken);
+            return Navigate(typeof(TViewModel), source, presentationBundle, cancellationToken);
         }
 
         /// <summary>
@@ -582,8 +582,8 @@ namespace MvvmCross.Navigation
             IMvxViewModel viewModel, IMvxViewModel source, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         {
             var request = new MvxViewModelInstanceRequestWithSource(viewModel, source) { PresentationValues = presentationBundle?.SafeGetData() };
-            this.ViewModelLoader.ReloadViewModel(viewModel, request, null);
-            return this.NavigateAsync(request, viewModel, presentationBundle, cancellationToken);
+            ViewModelLoader.ReloadViewModel(viewModel, request, null);
+            return NavigateAsync(request, viewModel, presentationBundle, cancellationToken);
         }
 
         /// <summary>
@@ -604,8 +604,8 @@ namespace MvvmCross.Navigation
             where TParameter : notnull
         {
             var request = new MvxViewModelInstanceRequestWithSource(viewModel, source) { PresentationValues = presentationBundle?.SafeGetData() };
-            this.ViewModelLoader.ReloadViewModel(viewModel, param, request, null);
-            return this.NavigateAsync(request, viewModel, presentationBundle, cancellationToken);
+            ViewModelLoader.ReloadViewModel(viewModel, param, request, null);
+            return NavigateAsync(request, viewModel, presentationBundle, cancellationToken);
         }
 
         /// <summary>
@@ -622,14 +622,14 @@ namespace MvvmCross.Navigation
             ValidateArguments(request, viewModel);
 
             var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Show, cancellationToken);
-            this.OnWillNavigate(this, args);
+            OnWillNavigate(this, args);
 
             if (args.Cancel)
             {
                 return false;
             }
 
-            bool hasNavigated = await this.ViewDispatcher.ShowViewModel(request).ConfigureAwait(false);
+            bool hasNavigated = await ViewDispatcher.ShowViewModel(request).ConfigureAwait(false);
             if (!hasNavigated)
             {
                 return false;
@@ -640,7 +640,7 @@ namespace MvvmCross.Navigation
                 await viewModel.InitializeTask.Task.ConfigureAwait(false);
             }
 
-            this.OnDidNavigate(this, args);
+            OnDidNavigate(this, args);
             return true;
         }
 

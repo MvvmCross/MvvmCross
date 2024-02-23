@@ -27,7 +27,7 @@ namespace Playground.WinUi3.Views
 {
     [MvxViewFor(typeof(NewWindowViewModel))]
     [MvxNewWindowPresentation]
-    public sealed partial class NewWindow : NewWindowPage, INeedWindow
+    public sealed partial class NewWindow : NewWindowPage, IMvxNeedWindow
     {
         public NewWindow()
         {

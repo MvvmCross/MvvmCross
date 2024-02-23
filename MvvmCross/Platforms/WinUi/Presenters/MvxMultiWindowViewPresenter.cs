@@ -703,7 +703,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters
                 this._windowInformation.Add(new WindowInformation(newWindow, frame, model));
             }
 
-            if (page is INeedWindow needWindow)
+            if (page is IMvxNeedWindow needWindow)
             {
                 needWindow.SetWindow(newWindow, appWindow);
             }
@@ -711,7 +711,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters
             // Closing will be handled before Closed of the Window.
             appWindow.Closing += (_, e) =>
             {
-                if (page is INeedWindow needWindow2 && !needWindow2.CanClose())
+                if (page is IMvxNeedWindow needWindow2 && !needWindow2.CanClose())
                 {
                     e.Cancel = true;
                     return;
