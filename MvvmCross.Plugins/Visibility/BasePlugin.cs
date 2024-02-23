@@ -18,6 +18,6 @@ public abstract class BasePlugin : IMvxPlugin
     private static void RegisterValueConverters(IMvxValueConverterRegistry registry)
     {
         registry.AddOrOverwrite("Visibility", new MvxVisibilityValueConverter());
-        registry.AddOrOverwrite("InvertedVisibility", new MvxVisibilityValueConverter());
+        registry.AddOrOverwrite("InvertedVisibility", new MvxInvertedVisibilityValueConverter());
     }
 }

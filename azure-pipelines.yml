@@ -2,7 +2,7 @@ trigger:
   branches:
     include:
     - develop
-    - releases/*
+    - release/*
   paths:
     exclude:
     - '**/*.md'
@@ -11,7 +11,7 @@ pr:
   branches:
     include:
     - develop
-    - releases/*
+    - release/*
   paths:
     exclude:
     - '**/*.md'

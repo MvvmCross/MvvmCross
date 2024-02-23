@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        local:MvxBind="Text ColorText; TextColor NativeColor(TextColor)"/>
+        local:MvxBind="Text ColorText; TextColor TextToColor(ColorText)"/>
 
     <Button
         android:layout_width="match_parent"
