@@ -268,7 +268,7 @@ namespace MvvmCross.Platforms.Android.Binding
 
             registry.RegisterCustomBindingFactory<View>(
                 MvxAndroidPropertyBinding.View_Focus,
-                view => new MvxViewFocusChangedTargetbinding(view));
+                view => new MvxViewFocusChangedTargetBinding(view));
 
             registry.RegisterCustomBindingFactory<VideoView>(
                 MvxAndroidPropertyBinding.VideoView_Uri,
