@@ -1,21 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
+#nullable enable
+namespace MvvmCross.Platforms.Android.Binding.Target;
 
-using Android.Widget;
-
-namespace MvvmCross.Platforms.Android.Binding.Target
+public class MvxImageViewResourceNameTargetBinding(ImageView imageView)
+    : MvxImageViewDrawableNameTargetBinding(imageView)
 {
-    public class MvxImageViewResourceNameTargetBinding : MvxImageViewDrawableNameTargetBinding
+    protected override void SetImage(ImageView view, int id)
     {
-        public MvxImageViewResourceNameTargetBinding(ImageView imageView)
-            : base(imageView)
-        {
-        }
-
-        protected override void SetImage(ImageView imageView, int id)
-        {
-            imageView.SetImageResource(id);
-        }
+        imageView.SetImageResource(id);
     }
 }
