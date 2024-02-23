@@ -2,53 +2,42 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+/// <summary>
+/// Custom binding for UIActivityIndicator hidden.
+/// This binding will ensure the indicator animates when shown and stops when hidden
+/// </summary>
+public class MvxUIActivityIndicatorViewHiddenTargetBinding(UIActivityIndicatorView target)
+    : MvxConvertingTargetBinding(target)
 {
-    /// <summary>
-    /// Custom binding for UIActivityIndicator hidden.
-    /// This binding will ensure the indicator animates when shown and stops when hidden
-    /// </summary>
-    public class MvxUIActivityIndicatorViewHiddenTargetBinding : MvxConvertingTargetBinding
+    public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+
+    public override Type TargetValueType => typeof(bool);
+
+    protected UIActivityIndicatorView? View => Target as UIActivityIndicatorView;
+
+    protected override void SetValueImpl(object target, object? value)
     {
-        public MvxUIActivityIndicatorViewHiddenTargetBinding(UIActivityIndicatorView target)
-            : base(target)
+        var view = (UIActivityIndicatorView?)target;
+        if (view == null || value == null)
         {
-            if (target == null)
-            {
-                MvxBindingLog.Error(
-                                    "Error - UIActivityIndicatorView is null in MvxUIActivityIndicatorViewHiddenTargetBinding");
-            }
+            return;
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+        view.Hidden = (bool)value;
 
-        public override Type TargetValueType => typeof(bool);
-
-        protected UIActivityIndicatorView View => Target as UIActivityIndicatorView;
-
-        protected override void SetValueImpl(object target, object value)
+        if (view.Hidden)
         {
-            var view = (UIActivityIndicatorView)target;
-            if (view == null)
-            {
-                return;
-            }
-
-            view.Hidden = (bool)value;
-
-            if (view.Hidden)
-            {
-                view.StopAnimating();
-            }
-            else
-            {
-                view.StartAnimating();
-            }
+            view.StopAnimating();
+        }
+        else
+        {
+            view.StartAnimating();
         }
     }
 }
