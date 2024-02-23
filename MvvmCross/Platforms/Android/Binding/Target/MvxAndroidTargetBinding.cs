@@ -17,9 +17,6 @@ public abstract class MvxAndroidTargetBinding
     {
     }
 
-    protected Lazy<IMvxAndroidGlobals?> AndroidGlobals { get; } =
-        new(() => Mvx.IoCProvider?.Resolve<IMvxAndroidGlobals>());
-
     protected override bool ShouldSkipSetValueForPlatformSpecificReasons(object target, object? value)
     {
         return TargetIsInvalid(target);
@@ -45,9 +42,6 @@ public abstract class MvxAndroidTargetBinding<TTarget, TValue>
         : base(target)
     {
     }
-
-    protected Lazy<IMvxAndroidGlobals?> AndroidGlobals { get; } =
-        new(() => Mvx.IoCProvider?.Resolve<IMvxAndroidGlobals>());
 
     protected override bool ShouldSkipSetValueForPlatformSpecificReasons(TTarget target, TValue? value)
     {
