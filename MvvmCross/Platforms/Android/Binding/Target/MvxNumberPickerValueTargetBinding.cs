@@ -1,68 +1,62 @@
-using System;
-using System.Collections.Generic;
+#nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using System.Text;
-using Android.Widget;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platforms.Android.WeakSubscription;
 
-namespace MvvmCross.Platforms.Android.Binding.Target
+namespace MvvmCross.Platforms.Android.Binding.Target;
+
+public class MvxNumberPickerValueTargetBinding(
+    [DynamicallyAccessedMembers(
+        DynamicallyAccessedMemberTypes.PublicEvents |
+                    DynamicallyAccessedMemberTypes.PublicProperties)]
+        object target,
+        PropertyInfo targetPropertyInfo)
+    : MvxPropertyInfoTargetBinding<NumberPicker>(target, targetPropertyInfo)
 {
-    public class MvxNumberPickerValueTargetBinding : MvxPropertyInfoTargetBinding<NumberPicker>
+    private IDisposable? _subscription;
+
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+    protected override void SetValueImpl(object target, object? value)
     {
-        public MvxNumberPickerValueTargetBinding(object target, PropertyInfo targetPropertyInfo) : base(target, targetPropertyInfo)
-        {
-        }
+        var numberPicker = (NumberPicker?)target;
+        if (numberPicker == null)
+            return;
 
-        private IDisposable _subscription;
-
-        // this variable isn't used, but including this here prevents Mono from optimising the call out!
-        private int JustForReflection
-        {
-            get { return View.Value; }
-            set { View.Value = value; }
-        }
-
-        protected override void SetValueImpl(object target, object value)
-        {
-            var numberPicker = (NumberPicker)target;
-            if (numberPicker == null)
-                return;
-
+        if (value != null)
             numberPicker.Value = (int)value;
-        }
+    }
 
-        private void NumberPickerValueChanged(object sender, NumberPicker.ValueChangeEventArgs e)
+    private void NumberPickerValueChanged(object? sender, NumberPicker.ValueChangeEventArgs e)
+    {
+        if (!e.OldVal.Equals(e.NewVal))
+            FireValueChanged(e.NewVal);
+    }
+
+    public override void SubscribeToEvents()
+    {
+        var numberPicker = View;
+        if (numberPicker == null)
         {
-            if (!e.OldVal.Equals(e.NewVal))
-                FireValueChanged(e.NewVal);
+            MvxBindingLog.Instance?.LogError("NumberPicker is null in MvxNumberPickerValueTargetBinding");
+            return;
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+        _subscription = numberPicker.WeakSubscribe<NumberPicker, NumberPicker.ValueChangeEventArgs>(
+            nameof(numberPicker.ValueChanged),
+            NumberPickerValueChanged);
+    }
 
-        public override void SubscribeToEvents()
+    protected override void Dispose(bool isDisposing)
+    {
+        if (isDisposing)
         {
-            var numberPicker = View;
-            if (numberPicker == null)
-            {
-                MvxBindingLog.Error("Error - NumberPicker is null in MvxNumberPickerValueTargetBinding");
-                return;
-            }
-
-            _subscription = numberPicker.WeakSubscribe<NumberPicker, NumberPicker.ValueChangeEventArgs>(
-                nameof(numberPicker.ValueChanged),
-                NumberPickerValueChanged);
+            _subscription?.Dispose();
+            _subscription = null;
         }
-
-        protected override void Dispose(bool isDisposing)
-        {
-            if (isDisposing)
-            {
-                _subscription?.Dispose();
-                _subscription = null;
-            }
-            base.Dispose(isDisposing);
-        }
+        base.Dispose(isDisposing);
     }
 }
