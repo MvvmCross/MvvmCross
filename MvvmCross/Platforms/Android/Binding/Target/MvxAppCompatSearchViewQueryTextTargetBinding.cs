@@ -39,7 +39,7 @@ public class MvxAppCompatSearchViewQueryTextTargetBinding
         if (target is SearchView searchView)
             searchView.SetQuery((string?)value, true);
     }
-    
+
     private void HandleQueryTextChanged(object? sender, SearchView.QueryTextChangeEventArgs e)
     {
         if (Target is not SearchView searchView)

@@ -91,7 +91,7 @@ public class MvxAppCompatRadioGroupSelectedItemBinding
     {
         var checkid = View.NoId;
 
-        
+
         if (value == null)
             return checkid;
 
