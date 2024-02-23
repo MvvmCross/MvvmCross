@@ -20,18 +20,18 @@ public abstract class MvxConvertingTargetBinding(object target)
 
     public override void SetValue(object? value)
     {
-        MvxBindingLog.Trace("Receiving SetValue to " + (value ?? ""));
-        var target = Target;
-        if (target == null)
+        MvxBindingLog.Instance?.LogTrace("Receiving SetValue to {Value}", value);
+        var t = Target;
+        if (t == null)
         {
-            MvxBindingLog.Warning("Weak Target is null in {0} - skipping set", GetType().Name);
+            MvxBindingLog.Instance?.LogWarning("Weak Target is null in {TypeName} - skipping set", GetType().Name);
             return;
         }
 
-        if (ShouldSkipSetValueForPlatformSpecificReasons(target, value))
+        if (ShouldSkipSetValueForPlatformSpecificReasons(t, value))
             return;
 
-        if (ShouldSkipSetValueForViewSpecificReasons(target, value))
+        if (ShouldSkipSetValueForViewSpecificReasons(t, value))
             return;
 
         var safeValue = MakeSafeValue(value);
@@ -54,7 +54,7 @@ public abstract class MvxConvertingTargetBinding(object target)
         try
         {
             _isUpdatingTarget = true;
-            SetValueImpl(target, safeValue);
+            SetValueImpl(t, safeValue);
         }
         finally
         {
