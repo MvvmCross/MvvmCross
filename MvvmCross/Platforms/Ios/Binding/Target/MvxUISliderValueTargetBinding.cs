@@ -2,62 +2,61 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.WeakSubscription;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public class MvxUISliderValueTargetBinding(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+        UISlider target,
+        PropertyInfo targetPropertyInfo)
+    : MvxPropertyInfoTargetBinding<UISlider>(target, targetPropertyInfo)
 {
-    public class MvxUISliderValueTargetBinding : MvxPropertyInfoTargetBinding<UISlider>
+    private IDisposable? _subscription;
+
+    protected override void SetValueImpl(object target, object? value)
     {
-        private IDisposable _subscription;
+        if (target is not UISlider view || value == null)
+            return;
 
-        public MvxUISliderValueTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
+        view.Value = (float)value;
+    }
+
+    private void HandleSliderValueChanged(object? sender, EventArgs e)
+    {
+        var view = View;
+        if (view == null) return;
+
+        FireValueChanged(view.Value);
+    }
+
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+    public override void SubscribeToEvents()
+    {
+        var slider = View;
+        if (slider == null)
         {
+            MvxBindingLog.Instance?.LogError("UISlider is null in MvxUISliderValueTargetBinding");
+            return;
         }
 
-        protected override void SetValueImpl(object target, object value)
-        {
-            var view = target as UISlider;
-            if (view == null) return;
+        _subscription = slider.WeakSubscribe(nameof(slider.ValueChanged), HandleSliderValueChanged);
+    }
 
-            view.Value = (float)value;
-        }
+    protected override void Dispose(bool isDisposing)
+    {
+        base.Dispose(isDisposing);
+        if (!isDisposing)
+            return;
 
-        private void HandleSliderValueChanged(object sender, EventArgs e)
-        {
-            var view = View;
-            if (view == null) return;
-
-            FireValueChanged(view.Value);
-        }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
-        public override void SubscribeToEvents()
-        {
-            var slider = View;
-            if (slider == null)
-            {
-                MvxBindingLog.Error("Error - UISlider is null in MvxUISliderValueTargetBinding");
-                return;
-            }
-
-            _subscription = slider.WeakSubscribe(nameof(slider.ValueChanged), HandleSliderValueChanged);
-        }
-
-        protected override void Dispose(bool isDisposing)
-        {
-            base.Dispose(isDisposing);
-            if (!isDisposing)
-                return;
-
-            _subscription?.Dispose();
-            _subscription = null;
-        }
+        _subscription?.Dispose();
+        _subscription = null;
     }
 }
