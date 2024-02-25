@@ -131,7 +131,6 @@ Remember GitHub issues support [markdown](https://github.github.com/github-flavo
 ## Contributing code
 
 We are happy to receive Pull Requests and code changes. Please read [CONTRIBUTING.md](https://github.com/MvvmCross/MvvmCross/blob/develop/CONTRIBUTING.md) for more information.
-Requests](https://www.igvita.com/2011/12/19/dont-push-your-pull-requests/)
 
 ## Questions & support
 
