@@ -56,8 +56,8 @@ namespace MvvmCross.Plugin.JsonLocalization
                 }
                 catch (Exception exception)
                 {
-                    MvxPluginLog.Instance?.Log(LogLevel.Warning, "Language file could not be loaded for {0}.{1} - {2}",
-                                   whichLocalizationFolder, kvp.Key, exception.ToLongString());
+                    MvxPluginLog.Instance?.LogWarning(exception, "Language file could not be loaded for {FolderName}.{FileName}",
+                                   whichLocalizationFolder, kvp.Key);
                 }
             }
         }
