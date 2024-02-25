@@ -8,7 +8,7 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Binding;
 
-internal static class MvxBindingLog
+public static class MvxBindingLog
 {
     public static ILogger? Instance { get; } = MvxLogHost.GetLog("MvxBind");
 }
