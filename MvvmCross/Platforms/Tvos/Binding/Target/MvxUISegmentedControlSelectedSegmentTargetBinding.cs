@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Target
 {
@@ -34,7 +33,8 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             var segmentedControl = View;
             if (segmentedControl == null)
             {
-                MvxBindingLog.Error("Error - UISegmentedControl is null in MvxUISegmentedControlSelectedSegmentTargetBinding");
+                MvxBindingLog.Instance?.LogError(
+                    "UISegmentedControl is null in MvxUISegmentedControlSelectedSegmentTargetBinding");
                 return;
             }
 

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Bindings
@@ -20,7 +21,7 @@ namespace MvvmCross.Binding.Bindings
             switch (bindingMode)
             {
                 case MvxBindingMode.Default:
-                    MvxBindingLog.Warning("Mode of default seen for binding - assuming TwoWay");
+                    MvxBindingLog.Instance?.LogWarning("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case MvxBindingMode.OneWay:
@@ -41,7 +42,7 @@ namespace MvvmCross.Binding.Bindings
             switch (bindingMode)
             {
                 case MvxBindingMode.Default:
-                    MvxBindingLog.Warning("Mode of default seen for binding - assuming TwoWay");
+                    MvxBindingLog.Instance?.LogWarning("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case MvxBindingMode.OneWay:
@@ -62,7 +63,7 @@ namespace MvvmCross.Binding.Bindings
             switch (bindingMode)
             {
                 case MvxBindingMode.Default:
-                    MvxBindingLog.Warning("Mode of default seen for binding - assuming TwoWay");
+                    MvxBindingLog.Instance?.LogWarning("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case MvxBindingMode.OneWay:

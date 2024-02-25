@@ -6,6 +6,7 @@ using System;
 using System.Reflection;
 using AppKit;
 using Foundation;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 
@@ -19,7 +20,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             var slider = View;
             if (slider == null)
             {
-                MvxBindingLog.Error("Error - NSSlider is null in MvxNSSliderValueTargetBinding");
+                MvxBindingLog.Instance?.LogError("NSSlider is null in MvxNSSliderValueTargetBinding");
             }
             else
             {

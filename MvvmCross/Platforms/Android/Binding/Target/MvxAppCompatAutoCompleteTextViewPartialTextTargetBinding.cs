@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.Platforms.Android.WeakSubscription;
@@ -21,8 +22,8 @@ public class MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding
         var autoComplete = View;
         if (autoComplete == null)
         {
-            MvxBindingLog.Error(
-                "Error - autoComplete is null in MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding");
+            MvxBindingLog.Instance?.LogError(
+                "autoComplete is null in MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding");
         }
     }
 

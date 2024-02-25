@@ -4,6 +4,7 @@
 
 using System;
 using AppKit;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 
 namespace MvvmCross.Platforms.Mac.Binding.Target
@@ -20,7 +21,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
         {
             if (button == null)
             {
-                MvxBindingLog.Error("Error - NSButton is null in MvxNSButtonTitleTargetBinding");
+                MvxBindingLog.Instance?.LogError("NSButton is null in MvxNSButtonTitleTargetBinding");
             }
         }
 

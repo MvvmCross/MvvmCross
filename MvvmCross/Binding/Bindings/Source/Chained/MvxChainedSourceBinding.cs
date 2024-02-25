@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using MvvmCross.Converters;
@@ -104,7 +105,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
         {
             if (_currentChildBinding == null)
             {
-                MvxBindingLog.Warning("SetValue ignored in binding - target property path missing");
+                MvxBindingLog.Instance?.LogWarning("SetValue ignored in binding - target property path missing");
                 return;
             }
 

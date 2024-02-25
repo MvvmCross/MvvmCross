@@ -23,16 +23,15 @@ namespace MvvmCross.IoC
                 // MvxLog.Instance can be null, when reflecting for Setup.cs
                 // Check for null
 
-                MvxLogHost.Default?.Log(LogLevel.Warning,
-                    "ReflectionTypeLoadException masked during loading of {AssemblyName} - error {ErrorMessage}",
-                    assembly.FullName, e.ToLongString());
+                MvxLogHost.Default?.LogWarning(e,
+                    "ReflectionTypeLoadException masked during loading of {AssemblyName}",
+                    assembly.FullName);
 
                 if (e.LoaderExceptions != null)
                 {
                     foreach (var exception in e.LoaderExceptions)
                     {
-                        MvxLogHost.Default?.Log(LogLevel.Warning, exception, "Failed to load type: {Message}",
-                            exception.ToLongString());
+                        MvxLogHost.Default?.LogWarning(exception, "Failed to load type");
                     }
                 }
 

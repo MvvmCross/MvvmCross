@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using MvvmCross.Exceptions;
@@ -58,10 +59,10 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
 
             if (source != null)
             {
-                MvxBindingLog.Warning(
-                    "Unable to bind: source property source not found {0} on {1}"
-                    , currentToken
-                    , source.GetType().Name);
+                MvxBindingLog.Instance?.LogWarning(
+                    "Unable to bind: source property source not found @{CurrentToken} on {SourceTypeName}",
+                    currentToken,
+                    source.GetType().Name);
             }
 
             return new MvxMissingSourceBinding(source);

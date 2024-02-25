@@ -4,6 +4,7 @@
 
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.WeakSubscription;
@@ -27,7 +28,7 @@ public class MvxUISwitchOnTargetBinding(
         var uiSwitch = Target;
         if (uiSwitch == null)
         {
-            MvxBindingLog.Error("Error - Switch is null in MvxUISwitchOnTargetBinding");
+            MvxBindingLog.Instance?.LogError("Switch is null in MvxUISwitchOnTargetBinding");
             return;
         }
 

@@ -5,6 +5,7 @@
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.WeakSubscription;
@@ -130,7 +131,7 @@ public class MvxUIControlTargetBinding : MvxConvertingTargetBinding
                 _controlEventSubscription = control.WeakSubscribe(nameof(control.AllEvents), ControlEvent);
                 break;
             default:
-                MvxBindingLog.Error("Error - Invalid controlEvent in MvxUIControlTargetBinding");
+                MvxBindingLog.Instance?.LogError("Error - Invalid controlEvent in MvxUIControlTargetBinding");
                 break;
         }
     }
@@ -155,7 +156,7 @@ public class MvxUIControlTargetBinding : MvxConvertingTargetBinding
                 _controlEventSubscription?.Dispose();
                 break;
             default:
-                MvxBindingLog.Error("Error - Invalid controlEvent in MvxUIControlTargetBinding");
+                MvxBindingLog.Instance?.LogError("Error - Invalid controlEvent in MvxUIControlTargetBinding");
                 break;
         }
     }

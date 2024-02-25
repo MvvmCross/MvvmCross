@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
-using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Base
@@ -24,17 +22,17 @@ namespace MvvmCross.Base
             }
             catch (TargetInvocationException exception)
             {
-                MvxLogHost.Default?.Log(LogLevel.Warning, "Exception thrown when invoking action via dispatcher", exception);
+                MvxLogHost.Default?.LogWarning(exception, "Exception thrown when invoking action via dispatcher");
                 if (maskExceptions)
-                    MvxLogHost.Default?.Log(LogLevel.Warning, "TargetInvocationException masked " + exception.InnerException.ToLongString());
+                    MvxLogHost.Default?.LogWarning(exception.InnerException, "TargetInvocationException masked");
                 else
                     throw;
             }
             catch (Exception exception)
             {
-                MvxLogHost.Default?.Log(LogLevel.Warning, "Exception thrown when invoking action via dispatcher", exception);
+                MvxLogHost.Default?.LogWarning(exception, "Exception thrown when invoking action via dispatcher");
                 if (maskExceptions)
-                    MvxLogHost.Default?.Log(LogLevel.Warning, "Exception masked " + exception.ToLongString());
+                    MvxLogHost.Default?.LogWarning(exception, "Exception masked");
                 else
                     throw;
             }

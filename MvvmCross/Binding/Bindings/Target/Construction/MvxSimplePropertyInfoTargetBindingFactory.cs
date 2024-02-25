@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Binding.Bindings.Target.Construction
 {
@@ -37,7 +38,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;
             if (targetBinding == null)
             {
-                MvxBindingLog.Warning("The TargetBinding created did not support IMvxTargetBinding");
+                MvxBindingLog.Instance?.LogWarning("The TargetBinding created did not support IMvxTargetBinding");
                 var disposable = targetBindingCandidate as IDisposable;
                 disposable?.Dispose();
             }

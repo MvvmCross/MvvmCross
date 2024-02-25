@@ -4,6 +4,7 @@
 
 using System;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.Platforms.Android.WeakSubscription;
@@ -21,8 +22,8 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             var autoComplete = this.View;
             if (autoComplete == null)
             {
-                MvxBindingLog.Error(
-                    "Error - autoComplete is null in MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding");
+                MvxBindingLog.Instance?.LogError(
+                    "autoComplete is null in MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding");
             }
         }
 

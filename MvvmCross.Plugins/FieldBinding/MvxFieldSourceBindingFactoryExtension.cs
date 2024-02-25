@@ -5,10 +5,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin.FieldBinding
 {
@@ -69,7 +71,8 @@ namespace MvvmCross.Plugin.FieldBinding
             var fieldValue = fieldInfo.GetValue(source) as INotifyChange;
             if (fieldValue == null)
             {
-                MvxBindingLog.Warning("INotifyChange is null for {0}", propertyNameToken.PropertyName);
+                MvxLogHost.GetLog("MvxBind")?.LogWarning("INotifyChange is null for {PropertyName}",
+                    propertyNameToken.PropertyName);
                 result = null;
                 return false;
             }

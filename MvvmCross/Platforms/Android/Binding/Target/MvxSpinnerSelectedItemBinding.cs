@@ -59,7 +59,7 @@ public class MvxSpinnerSelectedItemBinding
 
         if (value == null)
         {
-            MvxBindingLog.Warning("Null values not permitted in spinner SelectedItem binding currently");
+            MvxBindingLog.Instance?.LogWarning("Null values not permitted in spinner SelectedItem binding currently");
             return;
         }
 

@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
@@ -87,7 +88,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 }
                 else
                 {
-                    MvxBindingLog.Warning(
+                    MvxBindingLog.Instance?.LogWarning(
                         "Setting Adapter to null is not recommended - you may lose ItemsSource binding when doing this");
                 }
 

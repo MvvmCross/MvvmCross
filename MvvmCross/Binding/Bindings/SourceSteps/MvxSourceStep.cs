@@ -4,6 +4,7 @@
 
 using System;
 using System.Globalization;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Converters;
 using MvvmCross.Exceptions;
 
@@ -101,10 +102,10 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             {
                 // pokemon exception - force the use of Fallback in this case
                 // we expect this exception to occur sometimes - so only "Diagnostic" level logging here
-                MvxBindingLog.Trace(
-                    "Problem seen during binding execution for {0} - problem {1}",
-                    _description.ToString(),
-                    exception.ToLongString());
+                MvxBindingLog.Instance?.LogTrace(
+                    exception,
+                    "Problem seen during binding execution for {BindingDescription}",
+                    _description.ToString());
             }
 
             return MvxBindingConstant.UnsetValue;

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
@@ -57,14 +58,14 @@ namespace MvvmCross.Binding.Parse.Binding
 
             var toReturn = ValueConverterLookup.Find(converterName);
             if (toReturn == null)
-                MvxBindingLog.Trace("Could not find named converter for {0}", converterName);
+                MvxBindingLog.Instance?.LogTrace("Could not find named converter for {ConverterName}", converterName);
 
             return toReturn;
         }
 
         protected IMvxValueCombiner FindCombiner(string combiner)
         {
-            return MvxBindingSingletonCache.Instance.ValueCombinerLookup.Find(combiner);
+            return MvxBindingSingletonCache.Instance?.ValueCombinerLookup.Find(combiner);
         }
 
         public IEnumerable<MvxBindingDescription> Parse(string text)
@@ -78,7 +79,7 @@ namespace MvvmCross.Binding.Parse.Binding
             MvxSerializableBindingSpecification specification;
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
-                MvxBindingLog.Error("Failed to parse binding description starting with {0}",
+                MvxBindingLog.Instance?.LogError("Failed to parse binding description starting with {BindingText}",
                     GetErrorTextParameter(text));
                 return Array.Empty<MvxBindingDescription>();
             }
@@ -102,7 +103,7 @@ namespace MvvmCross.Binding.Parse.Binding
             var parser = BindingParser;
             if (!parser.TryParseBindingDescription(text, out description))
             {
-                MvxBindingLog.Error("Failed to parse binding description starting with {0}",
+                MvxBindingLog.Instance?.LogError("Failed to parse binding description starting with {BindingText}",
                     GetErrorTextParameter(text));
                 return null;
             }
@@ -113,13 +114,13 @@ namespace MvvmCross.Binding.Parse.Binding
             return SerializableBindingToBinding(null, description);
         }
 
-        private string GetErrorTextParameter(string text)
+        private static string GetErrorTextParameter(string text)
         {
             if (text == null)
                 return string.Empty;
 
             if (text.Length > 20)
-                return text.Substring(0, 20);
+                return text[..20];
 
             return text;
         }
@@ -186,12 +187,14 @@ namespace MvvmCross.Binding.Parse.Binding
                     var converter = FindConverter(description.Function);
                     if (converter == null)
                     {
-                        MvxBindingLog.Error("Failed to find combiner or converter for {0}", description.Function);
+                        MvxBindingLog.Instance?.LogError("Failed to find combiner or converter for {FunctionName}",
+                            description.Function);
                     }
 
                     if (description.Sources == null || description.Sources.Count == 0)
                     {
-                        MvxBindingLog.Error("Value Converter {0} supplied with no source", description.Function);
+                        MvxBindingLog.Instance?.LogError("Value Converter {FunctionName} supplied with no source",
+                            description.Function);
                         return new MvxLiteralSourceStepDescription()
                         {
                             Literal = null,
@@ -199,7 +202,9 @@ namespace MvvmCross.Binding.Parse.Binding
                     }
                     else if (description.Sources.Count > 2)
                     {
-                        MvxBindingLog.Error("Value Converter {0} supplied with too many parameters - {1}", description.Function, description.Sources.Count);
+                        MvxBindingLog.Instance?.LogError(
+                            "Value Converter {FunctionName} supplied with too many parameters - {ParameterCount}",
+                            description.Function, description.Sources.Count);
                         return new MvxLiteralSourceStepDescription()
                         {
                             Literal = null,

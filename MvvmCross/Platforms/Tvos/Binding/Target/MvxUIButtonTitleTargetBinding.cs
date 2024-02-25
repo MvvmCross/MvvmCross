@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Target
 {
@@ -21,7 +20,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             _state = state;
             if (button == null)
             {
-                MvxBindingLog.Error("Error - UIButton is null in MvxUIButtonTitleTargetBinding");
+                MvxBindingLog.Instance?.LogError("UIButton is null in MvxUIButtonTitleTargetBinding");
             }
         }
 

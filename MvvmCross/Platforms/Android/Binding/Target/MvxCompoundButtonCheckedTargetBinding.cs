@@ -5,6 +5,7 @@
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.WeakSubscription;
 
@@ -25,8 +26,8 @@ public class MvxCompoundButtonCheckedTargetBinding(
         var compoundButton = View;
         if (compoundButton == null)
         {
-            MvxBindingLog.Error(
-                "Error - compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
+            MvxBindingLog.Instance?.LogError(
+                "compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
             return;
         }
 
