@@ -74,7 +74,7 @@ namespace MvvmCross.Platforms.WinUi.Binding.MvxBinding.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            MvxBindingLog.Trace("Receiving setValue to " + (value ?? ""));
+            MvxBindingLog.Instance?.LogTrace("Receiving setValue to {Value}", value);
             var frameworkElement = target as FrameworkElement;
             if (frameworkElement == null)
             {
