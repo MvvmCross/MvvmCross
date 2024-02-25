@@ -104,9 +104,8 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
                 // we expect this exception to occur sometimes - so only "Diagnostic" level logging here
                 MvxBindingLog.Instance?.LogTrace(
                     exception,
-                    "Problem seen during binding execution for {BindingDescription} - problem {ExceptionMessage}",
-                    _description.ToString(),
-                    exception.ToLongString());
+                    "Problem seen during binding execution for {BindingDescription}",
+                    _description.ToString());
             }
 
             return MvxBindingConstant.UnsetValue;

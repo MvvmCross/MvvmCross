@@ -119,7 +119,7 @@ namespace MvvmCross.Binding.Bindings
                 }
                 catch (Exception exception)
                 {
-                    MvxBindingLog.Instance?.LogTrace(exception, "Exception masked in UpdateTargetOnBind {ExceptionMessage}", exception.ToLongString());
+                    MvxBindingLog.Instance?.LogTrace(exception, "Exception masked in UpdateTargetOnBind");
                 }
             }
         }
@@ -186,9 +186,8 @@ namespace MvvmCross.Binding.Bindings
                 {
                     MvxBindingLog.Instance?.LogError(
                         exception,
-                        "Problem seen during binding execution for {BindingDescription} - problem {ExceptionMessage}",
-                        _bindingDescription.ToString(),
-                        exception.ToLongString());
+                        "Problem seen during binding execution for {BindingDescription}",
+                        _bindingDescription.ToString());
                 }
             });
         }
@@ -209,9 +208,8 @@ namespace MvvmCross.Binding.Bindings
             {
                 MvxBindingLog.Instance?.LogError(
                     exception,
-                    "Problem seen during binding execution for {BindingDescription} - problem {ExceptionMessage}",
-                    _bindingDescription.ToString(),
-                    exception.ToLongString());
+                    "Problem seen during binding execution for {BindingDescription}",
+                    _bindingDescription.ToString());
             }
         }
 
