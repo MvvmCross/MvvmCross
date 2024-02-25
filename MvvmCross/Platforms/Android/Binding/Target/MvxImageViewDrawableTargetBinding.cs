@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 using Android.Graphics.Drawables;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 
 namespace MvvmCross.Platforms.Android.Binding.Target;
@@ -22,8 +23,7 @@ public class MvxImageViewDrawableTargetBinding(ImageView imageView)
 
         if (value is not int resourceIdentifier)
         {
-            MvxBindingLog.Warning(
-                "Value was not a valid Drawable");
+            MvxBindingLog.Instance?.LogWarning("Value '{ResourceIdentifier}' was not a valid Drawable", value);
             view.SetImageDrawable(null);
             return;
         }

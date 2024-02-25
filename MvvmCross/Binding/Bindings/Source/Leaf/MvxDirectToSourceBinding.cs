@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Binding.Bindings.Source.Leaf
 {
@@ -17,7 +18,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
         public override void SetValue(object value)
         {
-            MvxBindingLog.Warning("ToSource binding is not available for direct pathed source bindings");
+            MvxBindingLog.Instance?.LogWarning("ToSource binding is not available for direct pathed source bindings");
         }
 
         public override object GetValue()

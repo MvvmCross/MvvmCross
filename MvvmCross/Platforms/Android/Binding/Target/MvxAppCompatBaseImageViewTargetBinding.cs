@@ -5,6 +5,7 @@
 using System;
 using Android.Graphics;
 using AndroidX.AppCompat.Widget;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Exceptions;
 
@@ -35,7 +36,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             }
             catch (Exception ex)
             {
-                MvxBindingLog.Error(ex.ToLongString());
+                MvxBindingLog.Instance?.LogError(ex, "Failed to set value");
                 throw;
             }
         }

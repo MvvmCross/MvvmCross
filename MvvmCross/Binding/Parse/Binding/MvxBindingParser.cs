@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 
@@ -26,7 +27,8 @@ namespace MvvmCross.Binding.Parse.Binding
             }
             catch (Exception exception)
             {
-                MvxBindingLog.Error("Problem parsing binding {0}", exception.ToLongString());
+                MvxBindingLog.Instance?.LogError(exception, "Problem parsing binding {ExceptionMessage}",
+                    exception.ToLongString());
                 requestedDescription = null;
                 return false;
             }
@@ -52,7 +54,7 @@ namespace MvvmCross.Binding.Parse.Binding
             }
             catch (Exception exception)
             {
-                MvxBindingLog.Error("Problem parsing binding {0}", exception.ToLongString());
+                MvxBindingLog.Instance?.LogError(exception, "Problem parsing binding {ExceptionMessage}", exception.ToLongString());
                 requestedBindings = null;
                 return false;
             }

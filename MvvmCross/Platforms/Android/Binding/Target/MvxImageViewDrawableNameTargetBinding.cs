@@ -35,8 +35,8 @@ public class MvxImageViewDrawableNameTargetBinding(ImageView imageView)
         var id = resources.GetIdentifier(drawableName, "drawable", appContext.PackageName);
         if (id == 0)
         {
-            MvxBindingLog.Warning(
-                "Value '{0}' was not a known drawable name", drawableName);
+            MvxBindingLog.Instance?.LogWarning(
+                "Value '{DrawableName}' was not a known drawable name", drawableName);
             view.SetImageDrawable(null);
             return;
         }

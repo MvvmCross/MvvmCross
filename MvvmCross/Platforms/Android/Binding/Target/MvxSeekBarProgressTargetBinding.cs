@@ -5,6 +5,7 @@
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.WeakSubscription;
@@ -45,7 +46,7 @@ public class MvxSeekBarProgressTargetBinding
         var seekBar = View;
         if (seekBar == null)
         {
-            MvxBindingLog.Error("Error - SeekBar is null in MvxSeekBarProgressTargetBinding");
+            MvxBindingLog.Instance?.LogError("SeekBar is null in MvxSeekBarProgressTargetBinding");
             return;
         }
 

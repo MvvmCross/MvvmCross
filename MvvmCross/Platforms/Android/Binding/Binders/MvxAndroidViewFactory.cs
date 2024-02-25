@@ -7,6 +7,7 @@ using System.Threading;
 using Android.Content;
 using Android.Util;
 using Android.Views;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Exceptions;
 using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
@@ -37,8 +38,9 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
                 var view = Activator.CreateInstance(viewType, context, attrs) as View;
                 if (view == null)
                 {
-                    MvxBindingLog.Error("Unable to load view {0} from type {1}", name,
-                                          viewType.FullName ?? string.Empty);
+                    MvxBindingLog.Instance?.LogError("Unable to load view {ViewName} from type {ViewTypeName}", 
+                        name,
+                        viewType.FullName);
                 }
                 return view;
             }
@@ -48,9 +50,9 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingLog.Error(
-                                      "Exception during creation of {0} from type {1} - exception {2}", name,
-                                      viewType.FullName ?? string.Empty, exception.ToLongString());
+                MvxBindingLog.Instance?.LogError(
+                    exception,
+                    "Exception during creation of {ViewName} from type {ViewTypeName}", name, viewType.FullName);
                 return null;
             }
         }

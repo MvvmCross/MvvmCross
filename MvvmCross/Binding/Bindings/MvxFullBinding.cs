@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target;
@@ -118,7 +119,7 @@ namespace MvvmCross.Binding.Bindings
                 }
                 catch (Exception exception)
                 {
-                    MvxBindingLog.Trace("Exception masked in UpdateTargetOnBind {0}", exception.ToLongString());
+                    MvxBindingLog.Instance?.LogTrace(exception, "Exception masked in UpdateTargetOnBind {ExceptionMessage}", exception.ToLongString());
                 }
             }
         }
@@ -147,7 +148,7 @@ namespace MvvmCross.Binding.Bindings
 
             if (_targetBinding == null)
             {
-                MvxBindingLog.Warning("Failed to create target binding for {0}", _bindingDescription.ToString());
+                MvxBindingLog.Instance?.LogWarning("Failed to create target binding for {BindingDescription}", _bindingDescription.ToString());
                 _targetBinding = new MvxNullTargetBinding();
             }
 
@@ -183,8 +184,9 @@ namespace MvvmCross.Binding.Bindings
                 }
                 catch (Exception exception)
                 {
-                    MvxBindingLog.Error(
-                        "Problem seen during binding execution for {0} - problem {1}",
+                    MvxBindingLog.Instance?.LogError(
+                        exception,
+                        "Problem seen during binding execution for {BindingDescription} - problem {ExceptionMessage}",
                         _bindingDescription.ToString(),
                         exception.ToLongString());
                 }
@@ -205,8 +207,9 @@ namespace MvvmCross.Binding.Bindings
             }
             catch (Exception exception)
             {
-                MvxBindingLog.Error(
-                    "Problem seen during binding execution for {0} - problem {1}",
+                MvxBindingLog.Instance?.LogError(
+                    exception,
+                    "Problem seen during binding execution for {BindingDescription} - problem {ExceptionMessage}",
                     _bindingDescription.ToString(),
                     exception.ToLongString());
             }

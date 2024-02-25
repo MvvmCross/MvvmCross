@@ -5,6 +5,7 @@
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.WeakSubscription;
@@ -42,7 +43,7 @@ public class MvxUIStepperValueTargetBinding(
         var stepper = View;
         if (stepper == null)
         {
-            MvxBindingLog.Error("UIStepper is null in MvxUIStepperValueTargetBinding");
+            MvxBindingLog.Instance?.LogError("UIStepper is null in MvxUIStepperValueTargetBinding");
             return;
         }
 
