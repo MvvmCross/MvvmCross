@@ -319,7 +319,7 @@ public class MvxRecyclerAdapter
 
         if (value != null && value is not IList)
         {
-            MvxBindingLog.Warning("Binding to IEnumerable rather than IList - this can be inefficient, especially for large lists");
+            MvxAndroidLog.Instance?.LogWarning("Binding to IEnumerable rather than IList - this can be inefficient, especially for large lists");
         }
 
         if (value is INotifyCollectionChanged newObservable)
