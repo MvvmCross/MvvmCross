@@ -52,8 +52,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters
         /// </summary>
         /// <param name="rootFrame">The root frame.</param>
         public MvxMultiWindowViewPresenter(IMvxWindowsFrame rootFrame)
-        {
-            
+        {            
             var window = (Microsoft.UI.Xaml.Application.Current as MvxApplication)?.MainWindow;
             if (window != null)
             {

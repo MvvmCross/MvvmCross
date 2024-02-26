@@ -43,7 +43,7 @@ public static class AppWindowUtils
         {
             return;
         }
-        
+
         if (string.IsNullOrEmpty(appWindow!.Title))
         {
             appWindow.Title = Assembly.GetEntryAssembly()?.GetName().Name ?? "Bronkhorst FlowSuite 2";
