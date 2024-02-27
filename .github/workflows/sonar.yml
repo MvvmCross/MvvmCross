@@ -3,13 +3,9 @@ name: Sonar
 on:
   push:
     branches: 
-      - develop
-      - feature/**
-      - release/**
-      - hotfix/**
+    - develop
   pull_request:
-    branches: 
-      - develop
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
