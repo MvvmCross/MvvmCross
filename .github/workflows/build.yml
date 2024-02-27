@@ -39,7 +39,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: 'microsoft'
-        java-version: '11'
+        java-version: '17'
 
     - name: Build
       run: dotnet cake --verbosity=Normal --artifactsDir="output"
