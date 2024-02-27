@@ -101,6 +101,10 @@ Task("SonarStart")
         args.AppendFormat("/d:sonar.pullrequest.branch={0} ", AzurePipelines.Environment.PullRequest.SourceBranch);
         args.AppendFormat("/d:sonar.pullrequest.base={0}", AzurePipelines.Environment.PullRequest.TargetBranch);
     }
+    else if (GitHubActions.Environment.PullRequest.IsPullRequest)
+    {
+        // Nothing to do here
+    }
     else
     {
         args.AppendFormat("/d:sonar.branch.name={0}", versionInfo.BranchName);
