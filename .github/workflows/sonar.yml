@@ -1,16 +1,14 @@
-name: Build
+name: Sonar
 
 on:
   push:
     branches: 
       - develop
-      - master
       - feature/**
       - release/**
       - hotfix/**
   pull_request:
     branches: 
-      - master
       - develop
 
 jobs:
@@ -42,10 +40,6 @@ jobs:
         java-version: '17'
 
     - name: Build
-      run: dotnet cake --verbosity=Minimal --artifactsDir="output"
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: build-artifacts
-        path: output
+      run: dotnet cake --verbosity=Minimal --artifactsDir="output" --target=Sonar --sonarKey=$env:SONARY_KEY
+      env:
+        SONARY_KEY: ${{secrets.SONAR_TOKEN}}
