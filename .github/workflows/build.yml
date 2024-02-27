@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    branches: 
+      - develop
+      - master
+      - feature/**
+      - release/**
+      - hotfix/**
+  pull_request:
+    branches: 
+      - master
+      - develop
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install .NET 8.0.201
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.201'
+
+    - name: Restore .NET tools
+      run: dotnet tool restore
+
+    - name: Build
+      run: dotnet cake --verbosity=Normal --artifactsDir="output"
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifacts
+        path: output
