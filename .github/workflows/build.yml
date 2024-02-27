@@ -32,6 +32,9 @@ jobs:
     - name: Restore .NET tools
       run: dotnet tool restore
 
+    - name: Install .NET workloads
+      run: dotnet workload install android ios tvos macos maccatalyst maui-ios maui-android
+
     - name: Build
       run: dotnet cake --verbosity=Normal --artifactsDir="output"
 
