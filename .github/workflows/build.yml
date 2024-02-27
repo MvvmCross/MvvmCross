@@ -35,6 +35,12 @@ jobs:
     - name: Install .NET workloads
       run: dotnet workload install android ios tvos macos maccatalyst maui-ios maui-android
 
+    - name: Setup Java JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'microsoft'
+        java-version: '11'
+
     - name: Build
       run: dotnet cake --verbosity=Normal --artifactsDir="output"
 
