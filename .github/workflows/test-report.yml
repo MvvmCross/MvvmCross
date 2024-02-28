@@ -1,0 +1,23 @@
+name: 'Test Report'
+on:
+  workflow_run:
+    workflows: ['build']                     # runs after CI workflow
+    types:
+      - completed
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+        name: xUnit Tests
+        path: '*.xml'
+        reporter: dotnet-trx 

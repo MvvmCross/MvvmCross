@@ -7,11 +7,6 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
-permissions:
-  contents: read
-  actions: read
-  checks: write
-
 jobs:
   build:
     runs-on: windows-latest
@@ -44,11 +39,3 @@ jobs:
       run: dotnet cake --verbosity=Minimal --artifactsDir="output" --target=Sonar --sonarKey=$env:SONARY_KEY
       env:
         SONARY_KEY: ${{secrets.SONAR_TOKEN}}
-
-    - name: Test Report
-      uses: dorny/test-reporter@v1
-      if: success() || failure()
-      with:
-        name: xUnit Tests
-        path: output/Tests/*.xml
-        reporter: xunit 
