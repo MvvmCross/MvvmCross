@@ -1,7 +1,7 @@
 name: 'Test Report'
 on:
   workflow_run:
-    workflows: ['Build']                     # runs after CI workflow
+    workflows: ['Build']
     types:
       - completed
 
@@ -14,6 +14,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
     - name: Test Report
       uses: dorny/test-reporter@v1
       if: success() || failure()
