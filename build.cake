@@ -1,5 +1,4 @@
 #tool dotnet:n?package=GitVersion.Tool&version=5.12.0
-#tool dotnet:n?package=dotnet-sonarscanner&version=5.13.0
 #addin nuget:?package=Cake.Figlet&version=2.0.1
 
 var solutionName = "MvvmCross";
@@ -9,13 +8,10 @@ var configuration = Argument("configuration", "Release");
 var artifactsDir = Argument("artifactsDir", "./artifacts");
 var outputDir = new DirectoryPath(artifactsDir);
 var gitVersionLog = new FilePath("./gitversion.log");
-var nuspecDir = new DirectoryPath("./nuspec");
 var verbosity = Verbosity.Minimal;
 var verbosityDotNet = DotNetVerbosity.Minimal;
 var sonarKey = Argument("sonarKey", "");
-var java11sdkPath = EnvironmentVariable<string>("JAVA_HOME_11_X64", "");
 
-var isRunningOnPipelines = AzurePipelines.IsRunningOnAzurePipelines;
 GitVersion versionInfo = null;
 
 FilePath solution;
@@ -31,13 +27,6 @@ Setup(context =>
         OutputType = GitVersionOutput.Json,
         LogFilePath = gitVersionLog.MakeAbsolute(context.Environment)
     });
-
-    if (isRunningOnPipelines)
-    {
-        var buildNumber = versionInfo.InformationalVersion + "-" + AzurePipelines.Environment.Build.Number;
-        buildNumber = buildNumber.Replace("/", "-");
-        AzurePipelines.Commands.UpdateBuildNumber(buildNumber);
-    }
 
     var cakeVersion = typeof(ICakeContext).Assembly.GetName().Version.ToString();
 
@@ -95,17 +84,6 @@ Task("SonarStart")
     args.AppendFormat("/d:sonar.cs.xunit.reportsPaths={0} ", new DirectoryPath(outputDir + "/Tests/").FullPath);
     args.AppendFormat("/d:sonar.login={0} ", sonarKey);
 
-    if (AzurePipelines.Environment.PullRequest.IsPullRequest)
-    {
-        args.AppendFormat("/d:sonar.pullrequest.key={0} ", AzurePipelines.Environment.PullRequest.Number);
-        args.AppendFormat("/d:sonar.pullrequest.branch={0} ", AzurePipelines.Environment.PullRequest.SourceBranch);
-        args.AppendFormat("/d:sonar.pullrequest.base={0}", AzurePipelines.Environment.PullRequest.TargetBranch);
-    }
-    else
-    {
-        args.AppendFormat("/d:sonar.branch.name={0}", versionInfo.BranchName);
-    }
-
     DotNetTool("./", "dotnet-sonarscanner", args.ToString());
 });
 
@@ -133,12 +111,6 @@ Task("Build")
         PackageVersion = versionInfo.SemVer,
         InformationalVersion = versionInfo.InformationalVersion
     };
-    
-    if (!string.IsNullOrEmpty(java11sdkPath) && isRunningOnPipelines)
-    {
-        Information("Using Java at Path: {0} for MSBuild", java11sdkPath);
-        msBuildSettings = msBuildSettings.WithProperty("JavaSdkDirectory", java11sdkPath);
-    }
 
     var settings = new DotNetBuildSettings
     {
@@ -168,7 +140,7 @@ Task("UnitTest")
     {
         var projectName = project.GetFilenameWithoutExtension();
         var testXml = MakeAbsolute(new FilePath(outputDir + "/Tests/" + projectName + ".xml"));
-        settings.Loggers = new string[] { $"xunit;LogFilePath={testXml.FullPath}" };
+        settings.Loggers = new string[] { $"trx;LogFileName={testXml.FullPath}" };
         try 
         {
             DotNetTest(project.ToString(), settings);
@@ -177,19 +149,6 @@ Task("UnitTest")
         {
             // ignore
         }
-    }
-
-    if (isRunningOnPipelines)
-    {
-        var data = new AzurePipelinesPublishTestResultsData
-        {
-            Configuration = configuration,
-            TestResultsFiles = GetFiles(outputDir + "/Tests/*.xml").ToList(),
-            TestRunner = AzurePipelinesTestRunnerType.XUnit,
-            TestRunTitle = "MvvmCross Unit Tests",
-            MergeTestResults = true
-        };
-        AzurePipelines.Commands.PublishTestResults(data);
     }
 });
 
