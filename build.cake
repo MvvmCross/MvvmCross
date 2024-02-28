@@ -140,7 +140,7 @@ Task("UnitTest")
     {
         var projectName = project.GetFilenameWithoutExtension();
         var testXml = MakeAbsolute(new FilePath(outputDir + "/Tests/" + projectName + ".xml"));
-        settings.Loggers = new string[] { $"xunit;LogFilePath={testXml.FullPath}" };
+        settings.Loggers = new string[] { $"trx;LogFileName={testXml.FullPath}" };
         try 
         {
             DotNetTest(project.ToString(), settings);
