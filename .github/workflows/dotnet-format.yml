@@ -18,8 +18,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet tool restore
 
-    - uses: xt0rted/dotnet-format-problem-matcher@v1
-
     - name: Run dotnet format
       run: |
         dotnet format whitespace --no-restore --verify-no-changes MvvmCross.sln
