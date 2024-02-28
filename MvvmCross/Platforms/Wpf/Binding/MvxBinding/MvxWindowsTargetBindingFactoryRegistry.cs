@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
@@ -33,7 +34,7 @@ namespace MvvmCross.Platforms.Wpf.Binding.MvxBinding
 
             if (string.IsNullOrEmpty(targetName))
             {
-                MvxBindingLog.Error(
+                MvxBindingLog.Instance?.LogError(
                                       "Empty binding target passed to MvxWindowsTargetBindingFactoryRegistry");
                 binding = null;
                 return false;

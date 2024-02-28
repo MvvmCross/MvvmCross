@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Binding.Bindings;
 
@@ -76,7 +77,8 @@ namespace MvvmCross.Binding.BindingContext
                 }
                 else
                 {
-                    MvxBindingLog.Warning("Fluent binding description must implement {0} in order to add {1}",
+                    MvxBindingLog.Instance?.LogWarning(
+                        "Fluent binding description must implement {InterfaceName} in order to add {Description}",
                         nameof(IMvxBaseFluentBindingDescription),
                         nameof(IMvxBaseFluentBindingDescription.ClearBindingKey));
                 }

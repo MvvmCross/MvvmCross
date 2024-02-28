@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Extensions;
 using MvvmCross.Converters;
@@ -25,7 +26,7 @@ namespace MvvmCross.Binding.Combiners
                     return TryEvaluateif(list[0], list[1], list[2], out value);
 
                 default:
-                    MvxBindingLog.Warning("Unexpected substep count of {0} in 'If' ValueCombiner", list.Count);
+                    MvxBindingLog.Instance?.LogWarning("Unexpected substep count of {Count} in 'If' ValueCombiner", list.Count);
                     return base.TryGetValue(list, out value);
             }
         }

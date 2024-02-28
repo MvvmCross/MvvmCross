@@ -2,39 +2,27 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public class MvxUILabelTextTargetBinding(UILabel target)
+    : MvxConvertingTargetBinding(target)
 {
-    public class MvxUILabelTextTargetBinding
-        : MvxConvertingTargetBinding
+    protected UILabel? View => Target as UILabel;
+
+    public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+
+    public override Type TargetValueType => typeof(string);
+
+    protected override void SetValueImpl(object target, object? value)
     {
-        protected UILabel View => Target as UILabel;
+        var view = (UILabel?)target;
+        if (view == null || value == null)
+            return;
 
-        public MvxUILabelTextTargetBinding(UILabel target)
-            : base(target)
-        {
-            if (target == null)
-            {
-                MvxBindingLog.Error(
-                                      "Error - UILabel is null in MvxUILabelTextTargetBinding");
-            }
-        }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
-
-        public override Type TargetValueType => typeof(string);
-
-        protected override void SetValueImpl(object target, object value)
-        {
-            var view = (UILabel)target;
-            if (view == null)
-                return;
-
-            view.Text = (string)value;
-        }
+        view.Text = (string)value;
     }
 }

@@ -18,7 +18,7 @@ MvvmCross
 
 👀 Check out [mvvmcross.com](https://www.mvvmcross.com) to get started with MvvmCross 👀
 
-MvvmCross is a cross-platform MVVM framework. It enables developers to create apps using the MVVM pattern on *Xamarin.iOS, Xamarin.Android, Xamarin.Mac, Xamarin.Forms, Universal Windows Platform (UWP) and Windows Presentation Framework (WPF)*. This allows for better code sharing by allowing you to share behavior and business logic between platforms.
+MvvmCross is a opinionated cross-platform MVVM framework. It enables developers to create apps using the MVVM pattern in the .NET ecosystem. We support Android, iOS, MacCatalyst, TvOS, macOS, WinUI, WPF. Using MvvmCross allows for better code sharing by allowing you to share behavior and business logic between platforms.
 
 Among the features MvvmCross provides are:
 
@@ -130,48 +130,11 @@ Remember GitHub issues support [markdown](https://github.github.com/github-flavo
 
 ## Contributing code
 
-We are happy to receive Pull Requests adding new features and solving bugs. As for new features, please contact us before doing major work. To ensure you are not working on something that will be rejected due to not fitting into the roadmap or ideal of the framework.
-
-### Git setup
-
-Since Windows and UNIX-based systems differ in terms of line endings, it is a very good idea to configure git autocrlf settings.
-
-On *Windows* we recommend setting `core.autocrlf` to `true`.
-
-```
-git config --global core.autocrlf true
-```
-
-On *Mac* we recommend setting `core.autocrlf` to `input`.
-
-```
-git config --global core.autocrlf input
-```
-
-### Code style guidelines
-
-Please use 4 spaces for indentation.
-
-Otherwise default ReSharper C# code style applies.
-
-### Project Workflow
-
-Our workflow is loosely based on [Github Flow](http://scottchacon.com/2011/08/31/github-flow.html).
-We actively do development on the **develop** branch. This means that all pull requests by contributors need to be develop and requested against the develop branch.
-The master branch contains tags reflecting what is currently on NuGet.org.
-
-### Submitting Pull Requests
-
-Make sure you can build the code. Familiarize yourself with the project workflow and our coding conventions. If you don't know what a pull request is
-read this https://help.github.com/articles/using-pull-requests.
-
-Before submitting a feature or substantial code contribution please discuss it with the team and ensure it follows the MvvmCross roadmap.
-Note that code submissions will be reviewed and tested. Only code that meets quality and design/roadmap appropriateness will be merged into the source. [Don't "Push" Your Pull Requests](https://www.igvita.com/2011/12/19/dont-push-your-pull-requests/)
+We are happy to receive Pull Requests and code changes. Please read [CONTRIBUTING.md](https://github.com/MvvmCross/MvvmCross/blob/develop/CONTRIBUTING.md) for more information.
 
 ## Questions & support
 
 * [StackOverflow](https://stackoverflow.com/questions/tagged/mvvmcross)
-* [Xamarin forums](https://forums.xamarin.com)
 * [Discord](https://aka.ms/dotnet-discord) #mvvmcross channel
 
 ### Licensing
@@ -183,7 +146,6 @@ MvvmCross is licensed under the [MS-PL License](https://opensource.org/licenses/
 * Messenger ideas from [JonathanPeppers/XPlatUtils](https://github.com/jonathanpeppers/XPlatUtils) under Apache License Version 2.0, and from GrumpyDev/TinyMessenger under simple license of "THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY"
 * [Color codes](https://github.com/mono/sysdrawing-coregraphics) under MIT License
 * Some bits of [Mvvm.Async](https://github.com/StephenCleary/Mvvm.Async) are redistributed and modified under MIT License
-
 
 ### Acknowledgements
 

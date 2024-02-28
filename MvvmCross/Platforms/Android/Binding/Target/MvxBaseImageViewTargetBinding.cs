@@ -1,52 +1,41 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
+#nullable enable
 using Android.Graphics;
-using Android.Widget;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Logging;
 
-namespace MvvmCross.Platforms.Android.Binding.Target
+namespace MvvmCross.Platforms.Android.Binding.Target;
+
+public abstract class MvxBaseImageViewTargetBinding(ImageView imageView)
+    : MvxAndroidTargetBinding(imageView)
 {
-    public abstract class MvxBaseImageViewTargetBinding
-        : MvxAndroidTargetBinding
+    protected ImageView? ImageView => (ImageView?)Target;
+
+    public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+
+    protected override void SetValueImpl(object target, object? value)
     {
-        protected ImageView ImageView => (ImageView)Target;
+        var view = (ImageView)target;
 
-        protected MvxBaseImageViewTargetBinding(ImageView imageView)
-            : base(imageView)
+        try
         {
+            if (!GetBitmap(value, out var bitmap))
+                return;
+            SetImageBitmap(view, bitmap);
         }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
-
-        protected override void SetValueImpl(object target, object value)
+        catch (Exception ex)
         {
-            var imageView = (ImageView)target;
-
-            try
-            {
-                Bitmap bitmap;
-                if (!GetBitmap(value, out bitmap))
-                    return;
-                SetImageBitmap(imageView, bitmap);
-            }
-            catch (Exception ex)
-            {
-                MvxLogHost.GetLog<MvxBaseImageViewTargetBinding>()?
-                    .Log(LogLevel.Error, ex, "Failed to set bitmap on ImageView");
-                throw;
-            }
+            MvxLogHost.GetLog<MvxBaseImageViewTargetBinding>()?
+                .Log(LogLevel.Error, ex, "Failed to set bitmap on ImageView");
+            throw;
         }
-
-        protected virtual void SetImageBitmap(ImageView imageView, Bitmap bitmap)
-        {
-            imageView.SetImageBitmap(bitmap);
-        }
-
-        protected abstract bool GetBitmap(object value, out Bitmap bitmap);
     }
+
+    protected virtual void SetImageBitmap(ImageView imageView, Bitmap? bitmap) =>
+        imageView.SetImageBitmap(bitmap);
+
+    protected abstract bool GetBitmap(object? value, out Bitmap? bitmap);
 }

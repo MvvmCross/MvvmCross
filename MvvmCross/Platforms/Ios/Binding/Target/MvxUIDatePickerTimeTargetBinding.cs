@@ -2,53 +2,43 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
 using System.Reflection;
-using MvvmCross.Platforms.Ios;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public class MvxUIDatePickerTimeTargetBinding(UIDatePicker target, PropertyInfo targetPropertyInfo)
+    : MvxBaseUIDatePickerTargetBinding(target, targetPropertyInfo)
 {
-    public class MvxUIDatePickerTimeTargetBinding : MvxBaseUIDatePickerTargetBinding
+    protected override object GetValueFrom(UIDatePicker view)
     {
-        public MvxUIDatePickerTimeTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
-        {
-        }
+        // Convert from universal NSDate back to a local DateTime based on system timezone, and return its time of day.
+        var valueUtc = view.Date.ToDateTimeUtc();
+        var valueLocal = ToLocalTime(valueUtc);
+        return valueLocal.TimeOfDay;
+    }
 
-        protected override object GetValueFrom(UIDatePicker view)
-        {
-            // Convert from universal NSDate back to a local DateTime based on system timezone, and return its time of day.
-            var valueUtc = view.Date.ToDateTimeUtc();
-            var valueLocal = ToLocalTime(valueUtc);
-            return valueLocal.TimeOfDay;
-        }
+    protected override object MakeSafeValue(object? value)
+    {
+        value ??= TimeSpan.FromSeconds(0);
 
-        //public override Type TargetValueType => typeof(TimeSpan);
+        var time = (TimeSpan)value;
+        var now = DateTime.Now;
 
-        protected override object MakeSafeValue(object value)
-        {
-            if (value == null)
-                value = TimeSpan.FromSeconds(0);
+        // Convert from local DateTime with the TimeSpan as its time of day to universal NSDate based on system timezone.
 
-            var time = (TimeSpan)value;
-            var now = DateTime.Now;
+        var dateLocal = new DateTime(
+            now.Year,
+            now.Month,
+            now.Day,
+            time.Hours,
+            time.Minutes,
+            time.Seconds,
+            DateTimeKind.Local);
 
-            // Convert from local DateTime with the TimeSpan as its time of day to universal NSDate based on system timezone.
+        var dateUtc = ToUtcTime(dateLocal);
+        var nsDate = dateUtc.ToNSDate();
 
-            var dateLocal = new DateTime(
-                now.Year,
-                now.Month,
-                now.Day,
-                time.Hours,
-                time.Minutes,
-                time.Seconds,
-                DateTimeKind.Local);
-
-            var dateUtc = ToUtcTime(dateLocal);
-            var nsDate = dateUtc.ToNSDate();
-
-            return nsDate;
-        }
+        return nsDate;
     }
 }

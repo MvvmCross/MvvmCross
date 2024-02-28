@@ -2,71 +2,66 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using Android.Widget;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.WeakSubscription;
 
-namespace MvvmCross.Platforms.Android.Binding.Target
+namespace MvvmCross.Platforms.Android.Binding.Target;
+
+public class MvxSeekBarProgressTargetBinding
+    : MvxPropertyInfoTargetBinding<SeekBar>
 {
-    public class MvxSeekBarProgressTargetBinding
-        : MvxPropertyInfoTargetBinding<SeekBar>
+    private MvxWeakEventSubscription<SeekBar, SeekBar.ProgressChangedEventArgs>? _subscription;
+
+    public MvxSeekBarProgressTargetBinding(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.PublicProperties)]
+        object target, PropertyInfo targetPropertyInfo)
+        : base(target, targetPropertyInfo)
     {
-        public MvxSeekBarProgressTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
+    }
+
+    protected override void SetValueImpl(object target, object? value)
+    {
+        var seekbar = (SeekBar?)target;
+        if (seekbar == null || value == null)
+            return;
+
+        seekbar.Progress = (int)value;
+    }
+
+    private void SeekBarProgressChanged(object? sender, SeekBar.ProgressChangedEventArgs e)
+    {
+        if (e.FromUser)
+            FireValueChanged(e.Progress);
+    }
+
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+    public override void SubscribeToEvents()
+    {
+        var seekBar = View;
+        if (seekBar == null)
         {
+            MvxBindingLog.Instance?.LogError("SeekBar is null in MvxSeekBarProgressTargetBinding");
+            return;
         }
 
-        private IDisposable _subscription;
+        _subscription = seekBar.WeakSubscribe<SeekBar, SeekBar.ProgressChangedEventArgs>(
+            nameof(seekBar.ProgressChanged),
+            SeekBarProgressChanged);
+    }
 
-        // this variable isn't used, but including this here prevents Mono from optimising the call out!
-        private int JustForReflection
+    protected override void Dispose(bool isDisposing)
+    {
+        if (isDisposing)
         {
-            get { return View.Progress; }
-            set { View.Progress = value; }
+            _subscription?.Dispose();
+            _subscription = null;
         }
-
-        protected override void SetValueImpl(object target, object value)
-        {
-            var seekbar = (SeekBar)target;
-            if (seekbar == null)
-                return;
-
-            seekbar.Progress = (int)value;
-        }
-
-        private void SeekBarProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
-        {
-            if (e.FromUser)
-                FireValueChanged(e.Progress);
-        }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
-        public override void SubscribeToEvents()
-        {
-            var seekBar = View;
-            if (seekBar == null)
-            {
-                MvxBindingLog.Error("Error - SeekBar is null in MvxSeekBarProgressTargetBinding");
-                return;
-            }
-
-            _subscription = seekBar.WeakSubscribe<SeekBar, SeekBar.ProgressChangedEventArgs>(
-                nameof(seekBar.ProgressChanged),
-                SeekBarProgressChanged);
-        }
-
-        protected override void Dispose(bool isDisposing)
-        {
-            if (isDisposing)
-            {
-                _subscription?.Dispose();
-                _subscription = null;
-            }
-            base.Dispose(isDisposing);
-        }
+        base.Dispose(isDisposing);
     }
 }

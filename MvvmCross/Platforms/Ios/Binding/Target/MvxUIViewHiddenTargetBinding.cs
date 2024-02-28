@@ -2,25 +2,21 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+#nullable enable
 using MvvmCross.Binding.Extensions;
 using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public class MvxUIViewHiddenTargetBinding(UIView target)
+    : MvxBaseUIViewVisibleTargetBinding(target)
 {
-    public class MvxUIViewHiddenTargetBinding : MvxBaseUIViewVisibleTargetBinding
+    protected override void SetValueImpl(object target, object? value)
     {
-        public MvxUIViewHiddenTargetBinding(UIView target)
-            : base(target)
-        {
-        }
+        var view = View;
+        if (view == null) return;
 
-        protected override void SetValueImpl(object target, object value)
-        {
-            var view = View;
-            if (view == null) return;
-
-            var hidden = value.ConvertToBoolean();
-            view.Hidden = hidden;
-        }
+        var hidden = value.ConvertToBoolean();
+        view.Hidden = hidden;
     }
 }

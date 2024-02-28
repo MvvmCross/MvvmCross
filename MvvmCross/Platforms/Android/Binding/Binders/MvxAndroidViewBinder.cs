@@ -9,6 +9,7 @@ using Android.Content;
 using Android.Content.Res;
 using Android.Util;
 using Android.Views;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
@@ -69,8 +70,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingLog.Error("Exception thrown during the view binding {0}",
-                                      exception.ToLongString());
+                MvxBindingLog.Instance?.LogError(exception, "Exception thrown during the view binding");
             }
         }
 
@@ -92,8 +92,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingLog.Error("Exception thrown during the view language binding {0}",
-                                      exception.ToLongString());
+                MvxBindingLog.Instance?.LogError(exception, "Exception thrown during the view language binding");
                 throw;
             }
         }

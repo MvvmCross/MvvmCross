@@ -2,45 +2,37 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.UI;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public class MvxUIViewVisibilityTargetBinding(UIView target)
+    : MvxConvertingTargetBinding(target)
 {
-    public class MvxUIViewVisibilityTargetBinding : MvxConvertingTargetBinding
+    protected UIView? View => (UIView?)Target;
+
+    public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+
+    public override Type TargetValueType => typeof(MvxVisibility);
+
+    protected override void SetValueImpl(object target, object? value)
     {
-        protected UIView View => (UIView)Target;
-
-        public MvxUIViewVisibilityTargetBinding(UIView target)
-            : base(target)
+        var view = (UIView)target;
+        if (value is not MvxVisibility visibility)
         {
+            MvxBindingLog.Instance?.LogWarning("Visibility out of range {Value}", value);
+            return;
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
-
-        public override Type TargetValueType => typeof(MvxVisibility);
-
-        protected override void SetValueImpl(object target, object value)
+        view.Hidden = visibility switch
         {
-            var view = (UIView)target;
-            var visibility = (MvxVisibility)value;
-            switch (visibility)
-            {
-                case MvxVisibility.Visible:
-                    view.Hidden = false;
-                    break;
-
-                case MvxVisibility.Collapsed:
-                    view.Hidden = true;
-                    break;
-
-                default:
-                    MvxBindingLog.Warning("Visibility out of range {0}", value);
-                    break;
-            }
-        }
+            MvxVisibility.Visible => false,
+            MvxVisibility.Collapsed => true,
+            _ => view.Hidden
+        };
     }
 }

@@ -2,88 +2,92 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 using Android.Views;
 using MvvmCross.Binding;
 using MvvmCross.WeakSubscription;
 
-namespace MvvmCross.Platforms.Android.Binding.Target
+namespace MvvmCross.Platforms.Android.Binding.Target;
+
+public class MvxViewClickBinding
+    : MvxAndroidTargetBinding
 {
-    public class MvxViewClickBinding : MvxAndroidTargetBinding
+    private ICommand? _command;
+
+    private readonly EventHandler<EventArgs> _canExecuteEventHandler;
+    private MvxWeakEventSubscription<View>? _clickSubscription;
+    private MvxCanExecuteChangedEventSubscription? _canExecuteSubscription;
+
+    protected View? View => (View?)Target;
+
+    public MvxViewClickBinding(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+            View view)
+        : base(view)
     {
-        private ICommand _command;
-        private IDisposable _clickSubscription;
-        private IDisposable _canExecuteSubscription;
-        private readonly EventHandler<EventArgs> _canExecuteEventHandler;
+        _canExecuteEventHandler = OnCanExecuteChanged;
+        _clickSubscription = view.WeakSubscribe(nameof(view.Click), ViewOnClick);
+    }
 
-        protected View View => (View)Target;
+    private void ViewOnClick(object? sender, EventArgs args)
+    {
+        if (_command == null)
+            return;
 
-        public MvxViewClickBinding(View view)
-            : base(view)
+        if (!_command.CanExecute(null))
+            return;
+
+        _command.Execute(null);
+    }
+
+    protected override void SetValueImpl(object target, object? value)
+    {
+        _canExecuteSubscription?.Dispose();
+        _canExecuteSubscription = null;
+
+        _command = value as ICommand;
+        if (_command != null)
         {
-            _canExecuteEventHandler = OnCanExecuteChanged;
-            _clickSubscription = view.WeakSubscribe(nameof(view.Click), ViewOnClick);
+            _canExecuteSubscription = _command.WeakSubscribe(_canExecuteEventHandler);
         }
+        RefreshEnabledState();
+    }
 
-        private void ViewOnClick(object sender, EventArgs args)
+    private void RefreshEnabledState()
+    {
+        var view = View;
+        if (view == null)
+            return;
+
+        var shouldBeEnabled = false;
+        if (_command != null)
         {
-            if (_command == null)
-                return;
-
-            if (!_command.CanExecute(null))
-                return;
-
-            _command.Execute(null);
+            shouldBeEnabled = _command.CanExecute(null);
         }
+        view.Enabled = shouldBeEnabled;
+    }
 
-        protected override void SetValueImpl(object target, object value)
+    private void OnCanExecuteChanged(object? sender, EventArgs e)
+    {
+        RefreshEnabledState();
+    }
+
+    public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+
+    public override Type TargetValueType => typeof(ICommand);
+
+    protected override void Dispose(bool isDisposing)
+    {
+        if (isDisposing)
         {
+            _clickSubscription?.Dispose();
+            _clickSubscription = null;
+
             _canExecuteSubscription?.Dispose();
             _canExecuteSubscription = null;
-
-            _command = value as ICommand;
-            if (_command != null)
-            {
-                _canExecuteSubscription = _command.WeakSubscribe(_canExecuteEventHandler);
-            }
-            RefreshEnabledState();
         }
-
-        private void RefreshEnabledState()
-        {
-            var view = View;
-            if (view == null)
-                return;
-
-            var shouldBeEnabled = false;
-            if (_command != null)
-            {
-                shouldBeEnabled = _command.CanExecute(null);
-            }
-            view.Enabled = shouldBeEnabled;
-        }
-
-        private void OnCanExecuteChanged(object sender, EventArgs e)
-        {
-            RefreshEnabledState();
-        }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
-
-        public override Type TargetValueType => typeof(ICommand);
-
-        protected override void Dispose(bool isDisposing)
-        {
-            if (isDisposing)
-            {
-                _clickSubscription?.Dispose();
-                _clickSubscription = null;
-
-                _canExecuteSubscription?.Dispose();
-                _canExecuteSubscription = null;
-            }
-            base.Dispose(isDisposing);
-        }
+        base.Dispose(isDisposing);
     }
 }
