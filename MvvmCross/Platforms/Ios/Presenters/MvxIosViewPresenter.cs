@@ -188,9 +188,9 @@ namespace MvvmCross.Platforms.Ios.Presenters
         {
             SetupWindowRootNavigation(viewController, attribute);
 
-            if (!await CloseModalViewControllers().ConfigureAwait(false)) return false;
-            if (!await CloseTabBarViewController().ConfigureAwait(false)) return false;
-            if (!await CloseSplitViewController().ConfigureAwait(false)) return false;
+            if (!await CloseModalViewControllers().ConfigureAwait(true)) return false;
+            if (!await CloseTabBarViewController().ConfigureAwait(true)) return false;
+            if (!await CloseSplitViewController().ConfigureAwait(true)) return false;
             return true;
         }
 
@@ -202,8 +202,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
             // set root
             SetupWindowRootNavigation(viewController, attribute);
 
-            if (!await CloseModalViewControllers().ConfigureAwait(false)) return false;
-            if (!await CloseTabBarViewController().ConfigureAwait(false)) return false;
+            if (!await CloseModalViewControllers().ConfigureAwait(true)) return false;
+            if (!await CloseTabBarViewController().ConfigureAwait(true)) return false;
 
             return true;
         }
@@ -216,8 +216,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
             // set root
             SetupWindowRootNavigation(viewController, attribute);
 
-            if (!await CloseModalViewControllers().ConfigureAwait(false)) return false;
-            if (!await CloseSplitViewController().ConfigureAwait(false)) return false;
+            if (!await CloseModalViewControllers().ConfigureAwait(true)) return false;
+            if (!await CloseSplitViewController().ConfigureAwait(true)) return false;
 
             return true;
         }
