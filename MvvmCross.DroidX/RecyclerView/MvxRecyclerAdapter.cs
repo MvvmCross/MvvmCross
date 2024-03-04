@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-#nullable enable
+
 using System.Collections;
 using System.Collections.Specialized;
 using System.Windows.Input;
@@ -9,7 +9,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Microsoft.Extensions.Logging;
-using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
 using MvvmCross.DroidX.RecyclerView.ItemTemplates;
@@ -26,7 +25,7 @@ namespace MvvmCross.DroidX.RecyclerView;
 public class MvxRecyclerAdapter
     : RecyclerViewAdapter, IMvxRecyclerAdapter, IMvxRecyclerAdapterBindableHolder
 {
-    public event Action<MvxViewHolderBoundEventArgs>? MvxViewHolderBound;
+    public event EventHandler<MvxViewHolderBoundEventArgs>? MvxViewHolderBound;
 
     private ICommand? _itemClick, _itemLongClick;
     private IEnumerable? _itemsSource;
@@ -91,7 +90,7 @@ public class MvxRecyclerAdapter
 
             if (_itemLongClick != null && value != null)
             {
-                MvxAndroidLog.Instance.Log(LogLevel.Warning,
+                MvxAndroidLog.Instance?.Log(LogLevel.Warning,
                     "Changing ItemLongClick may cause inconsistencies where some items still call the old command");
             }
 
@@ -168,8 +167,8 @@ public class MvxRecyclerAdapter
 
     public override ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
     {
-        if (parent == null)
-            throw new ArgumentNullException(nameof(parent), "parent is null, cannot get Android Context.");
+        if (parent.Context == null)
+            throw new ArgumentNullException(nameof(parent), "parent context is null");
 
         if (BindingContext == null)
             throw new InvalidOperationException("BindingContext is null. Cannot inflate view for ViewHolder");
@@ -307,7 +306,7 @@ public class MvxRecyclerAdapter
     {
         if (Looper.MainLooper != Looper.MyLooper())
         {
-            MvxAndroidLog.Instance.Log(LogLevel.Error,
+            MvxAndroidLog.Instance?.Log(LogLevel.Error,
                 "ItemsSource property set on a worker thread. This leads to crash in the RecyclerView. It must be set only from the main thread");
         }
 
@@ -340,7 +339,7 @@ public class MvxRecyclerAdapter
         }
         else
         {
-            MvxAndroidLog.Instance.Log(LogLevel.Error,
+            MvxAndroidLog.Instance?.Log(LogLevel.Error,
                 "ItemsSource collection content changed on a worker thread." +
                 "This leads to crash in the RecyclerView as it will not be aware of changes" +
                 "immediately and may get a deleted item or update an item with a bad item template." +
@@ -379,7 +378,7 @@ public class MvxRecyclerAdapter
 
     protected virtual void OnMvxViewHolderBound(MvxViewHolderBoundEventArgs obj)
     {
-        MvxViewHolderBound?.Invoke(obj);
+        MvxViewHolderBound?.Invoke(this, obj);
     }
 
     private void AttachClickListeners(IMvxRecyclerViewHolder viewHolder)
