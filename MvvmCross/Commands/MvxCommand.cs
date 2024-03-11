@@ -27,8 +27,8 @@ namespace MvvmCross.Commands
     public class MvxWeakCommandHelper
         : IMvxCommandHelper
     {
-        private readonly List<WeakReference> _eventHandlers = new List<WeakReference>();
-        private readonly object _syncRoot = new object();
+        private readonly List<WeakReference> _eventHandlers = [];
+        private readonly object _syncRoot = new();
 
         public event EventHandler? CanExecuteChanged
         {
