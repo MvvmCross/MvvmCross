@@ -119,7 +119,7 @@ namespace MvvmCross.Commands
             ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
         }
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add => _commandHelper.CanExecuteChanged += value;
             remove => _commandHelper.CanExecuteChanged -= value;
