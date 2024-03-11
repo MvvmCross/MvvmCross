@@ -35,8 +35,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
         protected virtual MvxChainedSourceBinding CreateChainedBinding(object source, MvxPropertyToken propertyToken,
                                                                        List<MvxPropertyToken> remainingTokens)
         {
-            var indexPropertyToken = propertyToken as MvxIndexerPropertyToken;
-            if (indexPropertyToken != null)
+            if (propertyToken is MvxIndexerPropertyToken indexPropertyToken)
             {
                 var itemPropertyInfo = FindPropertyInfo(source);
                 if (itemPropertyInfo == null)
@@ -46,8 +45,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
                                                           remainingTokens);
             }
 
-            var propertyNameToken = propertyToken as MvxPropertyNamePropertyToken;
-            if (propertyNameToken != null)
+            if (propertyToken is MvxPropertyNamePropertyToken propertyNameToken)
             {
                 var propertyInfo = FindPropertyInfo(source, propertyNameToken.PropertyName);
 
@@ -64,8 +62,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
 
         protected virtual IMvxSourceBinding CreateLeafBinding(object source, MvxPropertyToken propertyToken)
         {
-            var indexPropertyToken = propertyToken as MvxIndexerPropertyToken;
-            if (indexPropertyToken != null)
+            if (propertyToken is MvxIndexerPropertyToken indexPropertyToken)
             {
                 var itemPropertyInfo = FindPropertyInfo(source);
                 if (itemPropertyInfo == null)
@@ -73,8 +70,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
                 return new MvxIndexerLeafPropertyInfoSourceBinding(source, itemPropertyInfo, indexPropertyToken);
             }
 
-            var propertyNameToken = propertyToken as MvxPropertyNamePropertyToken;
-            if (propertyNameToken != null)
+            if (propertyToken is MvxPropertyNamePropertyToken propertyNameToken)
             {
                 var propertyInfo = FindPropertyInfo(source, propertyNameToken.PropertyName);
                 if (propertyInfo == null)
