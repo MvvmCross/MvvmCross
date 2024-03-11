@@ -88,17 +88,17 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             _pickerView.ReloadComponent(0);
         }
 
-        public override nint GetComponentCount(UIPickerView picker)
+        public override nint GetComponentCount(UIPickerView pickerView)
         {
             return 1;
         }
 
-        public override nint GetRowsInComponent(UIPickerView picker, nint component)
+        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
         {
             return _itemsSource?.Count() ?? 0;
         }
 
-        public override string GetTitle(UIPickerView picker, nint row, nint component)
+        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
         {
             return _itemsSource == null ? "-" : RowTitle(row, _itemsSource.ElementAt((int)row));
         }
@@ -108,7 +108,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             return item.ToString();
         }
 
-        public override void Selected(UIPickerView picker, nint row, nint component)
+        public override void Selected(UIPickerView pickerView, nint row, nint component)
         {
             if (_itemsSource.Count() == 0)
                 return;
