@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
     {
         private static readonly ConcurrentDictionary<int, PropertyInfo> PropertyInfoCache = new ConcurrentDictionary<int, PropertyInfo>();
 
-        public bool TryCreateBinding(object source, MvxPropertyToken currentToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+        public bool TryCreateBinding(object source, MvxPropertyToken propertyToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
             if (source == null)
             {
@@ -28,7 +28,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
                 return false;
             }
 
-            result = remainingTokens.Count == 0 ? CreateLeafBinding(source, currentToken) : CreateChainedBinding(source, currentToken, remainingTokens);
+            result = remainingTokens.Count == 0 ? CreateLeafBinding(source, propertyToken) : CreateChainedBinding(source, propertyToken, remainingTokens);
             return result != null;
         }
 
