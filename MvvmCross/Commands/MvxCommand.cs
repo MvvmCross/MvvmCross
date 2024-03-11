@@ -103,9 +103,15 @@ namespace MvvmCross.Commands
 
         protected MvxCommandBase()
         {
-            // fallback on MvxWeakCommandHelper if no IoC has been set up
-            if (Mvx.IoCProvider?.TryResolve(out _commandHelper) != true)
+            if (Mvx.IoCProvider?.TryResolve(out IMvxCommandHelper? commandHelper) == true && commandHelper != null)
+            {
+                _commandHelper = commandHelper;
+            }
+            else
+            {
+                // fallback on MvxWeakCommandHelper if no IoC has been set up
                 _commandHelper = new MvxWeakCommandHelper();
+            }
 
             // default to true if no Singleton Cache has been set up
             var alwaysOnUIThread =
