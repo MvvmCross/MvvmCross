@@ -20,9 +20,6 @@ public static class MvxTypeExtensions
         }
         catch (ReflectionTypeLoadException e)
         {
-            // MvxLog.Instance can be null, when reflecting for Setup.cs
-            // Check for null
-
             MvxLogHost.Default?.LogWarning(e,
                 "ReflectionTypeLoadException masked during loading of {AssemblyName}",
                 assembly.FullName);
