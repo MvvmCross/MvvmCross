@@ -1,51 +1,61 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
+#nullable enable
 
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Source.Chained;
 using MvvmCross.Binding.Bindings.Source.Leaf;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using MvvmCross.Exceptions;
 
-namespace MvvmCross.Binding.Bindings.Source.Construction
+namespace MvvmCross.Binding.Bindings.Source.Construction;
+
+/// <summary>
+/// Uses a global cache of calls in Reflection namespace
+/// </summary>
+public class MvxPropertySourceBindingFactoryExtension
+    : IMvxSourceBindingFactoryExtension
 {
-    /// <summary>
-    /// Uses a global cache of calls in Reflection namespace
-    /// </summary>
-    public class MvxPropertySourceBindingFactoryExtension
-        : IMvxSourceBindingFactoryExtension
+    private readonly ConcurrentDictionary<int, PropertyInfo> _propertyInfoCache = new();
+
+    public bool TryCreateBinding(
+        object? source,
+        MvxPropertyToken propertyToken,
+        List<MvxPropertyToken> remainingTokens,
+        out IMvxSourceBinding? result)
     {
-        private static readonly ConcurrentDictionary<int, PropertyInfo> PropertyInfoCache = new ConcurrentDictionary<int, PropertyInfo>();
-
-        public bool TryCreateBinding(object source, MvxPropertyToken propertyToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+        if (source == null)
         {
-            if (source == null)
-            {
-                result = null;
-                return false;
-            }
-
-            result = remainingTokens.Count == 0 ? CreateLeafBinding(source, propertyToken) : CreateChainedBinding(source, propertyToken, remainingTokens);
-            return result != null;
+            result = null;
+            return false;
         }
 
-        protected virtual MvxChainedSourceBinding CreateChainedBinding(object source, MvxPropertyToken propertyToken,
-                                                                       List<MvxPropertyToken> remainingTokens)
+        result = remainingTokens.Count == 0
+            ? CreateLeafBinding(source, propertyToken)
+            : CreateChainedBinding(source, propertyToken, remainingTokens);
+
+        return result != null;
+    }
+
+    protected virtual MvxChainedSourceBinding? CreateChainedBinding(
+        object source,
+        MvxPropertyToken propertyToken,
+        List<MvxPropertyToken> remainingTokens)
+    {
+        switch (propertyToken)
         {
-            if (propertyToken is MvxIndexerPropertyToken indexPropertyToken)
+            case MvxIndexerPropertyToken indexPropertyToken:
             {
                 var itemPropertyInfo = FindPropertyInfo(source);
                 if (itemPropertyInfo == null)
                     return null;
 
                 return new MvxIndexerChainedSourceBinding(source, itemPropertyInfo, indexPropertyToken,
-                                                          remainingTokens);
+                    remainingTokens);
             }
-
-            if (propertyToken is MvxPropertyNamePropertyToken propertyNameToken)
+            case MvxPropertyNamePropertyToken propertyNameToken:
             {
                 var propertyInfo = FindPropertyInfo(source, propertyNameToken.PropertyName);
 
@@ -53,62 +63,65 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
                     return null;
 
                 return new MvxSimpleChainedSourceBinding(source, propertyInfo,
-                                                         remainingTokens);
+                    remainingTokens);
             }
+            default:
+                throw new MvxException("Unexpected property chaining - seen token type {0}",
+                    propertyToken.GetType().FullName);
+        }
+    }
 
-            throw new MvxException("Unexpected property chaining - seen token type {0}",
-                                   propertyToken.GetType().FullName);
+    protected virtual IMvxSourceBinding? CreateLeafBinding(object source, MvxPropertyToken propertyToken)
+    {
+        if (propertyToken is MvxIndexerPropertyToken indexPropertyToken)
+        {
+            var itemPropertyInfo = FindPropertyInfo(source);
+            if (itemPropertyInfo == null)
+                return null;
+            return new MvxIndexerLeafPropertyInfoSourceBinding(source, itemPropertyInfo, indexPropertyToken);
         }
 
-        protected virtual IMvxSourceBinding CreateLeafBinding(object source, MvxPropertyToken propertyToken)
+        if (propertyToken is MvxPropertyNamePropertyToken propertyNameToken)
         {
-            if (propertyToken is MvxIndexerPropertyToken indexPropertyToken)
-            {
-                var itemPropertyInfo = FindPropertyInfo(source);
-                if (itemPropertyInfo == null)
-                    return null;
-                return new MvxIndexerLeafPropertyInfoSourceBinding(source, itemPropertyInfo, indexPropertyToken);
-            }
-
-            if (propertyToken is MvxPropertyNamePropertyToken propertyNameToken)
-            {
-                var propertyInfo = FindPropertyInfo(source, propertyNameToken.PropertyName);
-                if (propertyInfo == null)
-                    return null;
-                return new MvxSimpleLeafPropertyInfoSourceBinding(source, propertyInfo);
-            }
-
-            if (propertyToken is MvxEmptyPropertyToken)
-            {
-                return new MvxDirectToSourceBinding(source);
-            }
-
-            throw new MvxException("Unexpected property source - seen token type {0}", propertyToken.GetType().FullName);
+            var propertyInfo = FindPropertyInfo(source, propertyNameToken.PropertyName);
+            if (propertyInfo == null)
+                return null;
+            return new MvxSimpleLeafPropertyInfoSourceBinding(source, propertyInfo);
         }
 
-        protected PropertyInfo FindPropertyInfo(object source, string propertyName = "Item")
+        if (propertyToken is MvxEmptyPropertyToken)
         {
-            var sourceType = source.GetType();
-            var key = (sourceType.FullName + "." + propertyName).GetHashCode();
+            return new MvxDirectToSourceBinding(source);
+        }
 
-            PropertyInfo pi;
-            if (PropertyInfoCache.TryGetValue(key, out pi))
-                return pi;
+        throw new MvxException("Unexpected property source - seen token type {0}", propertyToken.GetType().FullName);
+    }
 
-            //Get lowest property
-            while (sourceType != null)
-            {
-                //Use BindingFlags.DeclaredOnly to avoid AmbiguousMatchException
-                pi = sourceType.GetProperty(propertyName, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
-                if (pi != null)
-                {
-                    break;
-                }
-                sourceType = sourceType.BaseType;
-            }
+    protected PropertyInfo? FindPropertyInfo(object source, string propertyName = "Item")
+    {
+        var sourceType = source.GetType();
+        var key = (sourceType.FullName + "." + propertyName).GetHashCode();
 
-            PropertyInfoCache.TryAdd(key, pi);
+        if (_propertyInfoCache.TryGetValue(key, out PropertyInfo? pi))
             return pi;
+
+        // Get lowest property
+        while (sourceType != null)
+        {
+            // Use BindingFlags.DeclaredOnly to avoid AmbiguousMatchException
+            pi = sourceType.GetProperty(propertyName,
+                BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
+
+            if (pi != null)
+            {
+                break;
+            }
+            sourceType = sourceType.BaseType;
         }
+
+        if (pi != null)
+            _propertyInfoCache.TryAdd(key, pi);
+
+        return pi;
     }
 }
