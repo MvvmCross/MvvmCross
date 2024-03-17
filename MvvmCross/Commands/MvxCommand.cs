@@ -115,7 +115,7 @@ namespace MvvmCross.Commands
 
             // default to true if no Singleton Cache has been set up
             var alwaysOnUIThread =
-                MvxSingletonCache.Instance?.Settings.AlwaysRaiseInpcOnUserInterfaceThread ?? true;
+                MvxSingletonCache.Instance?.Settings?.AlwaysRaiseInpcOnUserInterfaceThread ?? true;
             ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
         }
 
