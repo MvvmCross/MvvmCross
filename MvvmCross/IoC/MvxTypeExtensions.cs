@@ -105,10 +105,8 @@ public static class MvxTypeExtensions
             var lookup = except.ToDictionary(x => x, _ => true);
             return types.Where(x => !lookup.ContainsKey(x));
         }
-        else
-        {
-            return types.Where(x => !except.Contains(x));
-        }
+
+        return types.Where(x => !except.Contains(x));
     }
 
     public static bool IsGenericPartiallyClosed(this Type type) =>
@@ -130,7 +128,7 @@ public static class MvxTypeExtensions
 
     public static IEnumerable<ServiceTypeAndImplementationTypePair> AsTypes(this IEnumerable<Type> types)
     {
-        return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type> { t }, t));
+        return types.Select(t => new ServiceTypeAndImplementationTypePair([t], t));
     }
 
     public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types) =>
@@ -148,14 +146,12 @@ public static class MvxTypeExtensions
                         new ServiceTypeAndImplementationTypePair(
                             t.GetInterfaces().Where(iface => lookup.ContainsKey(iface)).ToList(), t));
         }
-        else
-        {
-            return
-                types.Select(
-                    t =>
-                        new ServiceTypeAndImplementationTypePair(
-                            t.GetInterfaces().Where(interfaces.Contains).ToList(), t));
-        }
+
+        return
+            types.Select(
+                t =>
+                    new ServiceTypeAndImplementationTypePair(
+                        t.GetInterfaces().Where(interfaces.Contains).ToList(), t));
     }
 
     public static IEnumerable<ServiceTypeAndImplementationTypePair> ExcludeInterfaces(
