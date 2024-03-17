@@ -31,12 +31,12 @@ namespace MvvmCross.Platforms.Android.Views
 
         #region Implementation of IMvxAndroidViewModelRequestTranslator
 
-        public virtual IMvxViewModel? Load(Intent intent, IMvxBundle? savedState)
+        public virtual IMvxViewModel? Load(Intent? intent, IMvxBundle? savedState)
         {
             return Load(intent, null, null);
         }
 
-        public virtual IMvxViewModel? Load(Intent intent, IMvxBundle? savedState, Type? viewModelTypeHint)
+        public virtual IMvxViewModel? Load(Intent? intent, IMvxBundle? savedState, Type? viewModelTypeHint)
         {
             if (intent == null)
             {
