@@ -239,18 +239,9 @@ public static class MvxTypeExtensions
         }
 
         var unusedKeys = new List<string>(arguments.Keys);
-
         foreach (var constructor in constructors)
         {
-            foreach (var parameter in constructor.GetParameters())
-            {
-                if (parameter.Name != null &&
-                    unusedKeys.Contains(parameter.Name) &&
-                    parameter.ParameterType.IsInstanceOfType(arguments[parameter.Name]))
-                {
-                    unusedKeys.Remove(parameter.Name);
-                }
-            }
+            CheckConstructors(arguments, constructor, ref unusedKeys);
 
             if (unusedKeys.Count == 0)
             {
@@ -290,5 +281,19 @@ public static class MvxTypeExtensions
         }
 
         return null;
+    }
+    
+    private static void CheckConstructors(
+        IDictionary<string, object> arguments, MethodBase constructor, ref List<string> unusedKeys)
+    {
+        foreach (var parameter in constructor.GetParameters())
+        {
+            if (parameter.Name != null &&
+                unusedKeys.Contains(parameter.Name) &&
+                parameter.ParameterType.IsInstanceOfType(arguments[parameter.Name]))
+            {
+                unusedKeys.Remove(parameter.Name);
+            }
+        }
     }
 }
