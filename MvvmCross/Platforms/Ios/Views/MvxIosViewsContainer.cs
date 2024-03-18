@@ -1,13 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
+#nullable enable
 
-using System;
 using System.Reflection;
 using MvvmCross.Exceptions;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
 {
@@ -15,7 +14,7 @@ namespace MvvmCross.Platforms.Ios.Views
         : MvxViewsContainer
         , IMvxIosViewsContainer
     {
-        public MvxViewModelRequest CurrentRequest { get; private set; }
+        public MvxViewModelRequest? CurrentRequest { get; private set; }
 
         public virtual IMvxIosView CreateView(MvxViewModelRequest request)
         {
@@ -26,7 +25,7 @@ namespace MvvmCross.Platforms.Ios.Views
                 if (viewType == null)
                     throw new MvxException("View Type not found for " + request.ViewModelType);
 
-                var view = CreateViewOfType(viewType, request);
+                var view = CreateViewOfType(viewType);
                 view.Request = request;
                 return view;
             }
@@ -35,8 +34,15 @@ namespace MvvmCross.Platforms.Ios.Views
                 CurrentRequest = null;
             }
         }
+        
+        public virtual IMvxIosView CreateView(IMvxViewModel viewModel)
+        {
+            var request = new MvxViewModelInstanceRequest(viewModel);
+            var view = CreateView(request);
+            return view;
+        }
 
-        public virtual IMvxIosView CreateViewOfType(Type viewType, MvxViewModelRequest request)
+        public virtual IMvxIosView CreateViewOfType(Type viewType)
         {
             var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
             if (storyboardAttribute != null)
@@ -54,16 +60,9 @@ namespace MvvmCross.Platforms.Ios.Views
                 }
             }
 
-            var view = Activator.CreateInstance(viewType) as IMvxIosView;
-            if (view == null)
+            if (Activator.CreateInstance(viewType) is not IMvxIosView view)
                 throw new MvxException("View not loaded for " + viewType);
-            return view;
-        }
 
-        public virtual IMvxIosView CreateView(IMvxViewModel viewModel)
-        {
-            var request = new MvxViewModelInstanceRequest(viewModel);
-            var view = CreateView(request);
             return view;
         }
     }

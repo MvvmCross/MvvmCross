@@ -35,10 +35,9 @@ public static class MvxCanCreateIosViewExtensions
     }
 
     public static IMvxIosView? CreateViewControllerFor(
-        this IMvxCanCreateIosView view, Type viewType,
-        MvxViewModelRequest request)
+        this IMvxCanCreateIosView view, Type viewType)
     {
-        return Mvx.IoCProvider?.Resolve<IMvxIosViewCreator>()?.CreateViewOfType(viewType, request);
+        return Mvx.IoCProvider?.Resolve<IMvxIosViewCreator>()?.CreateViewOfType(viewType);
     }
 
     public static IMvxIosView? CreateViewControllerFor(
