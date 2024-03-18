@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Text;
 using MvvmCross.Core;
 
 namespace MvvmCross.ViewModels;
@@ -34,6 +35,25 @@ public class MvxViewModelRequest
     public static MvxViewModelRequest GetDefaultRequest(Type viewModelType)
     {
         return new MvxViewModelRequest(viewModelType, null, null);
+    }
+
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        sb.Append($"MvxViewModelRequest - ViewModelType: '{ViewModelType}'");
+        if (ParameterValues != null)
+        {
+            sb.Append(
+                $", ParameterValues: '{string.Join(", ", ParameterValues.Select(kv => $"{{{kv.Key}: {kv.Value}}}"))}'");
+        }
+
+        if (PresentationValues != null)
+        {
+            sb.Append(
+                $", PresentationValues: '{string.Join(", ", PresentationValues.Select(kv => $"{{{kv.Key}: {kv.Value}}}"))}'");
+        } 
+
+        return sb.ToString();
     }
 }
 
