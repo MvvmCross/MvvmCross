@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.Ios.Views
         /// <returns>
         /// A <see cref="UIView"/> that is the first responder or null if there is no first responder
         /// </returns>
-        public static UIView FindFirstResponder(this UIView view)
+    public static UIView? FindFirstResponder(this UIView view)
         {
             if (view.IsFirstResponder)
             {
@@ -48,9 +48,7 @@ namespace MvvmCross.Platforms.Ios.Views
         /// <returns>
         /// A <see cref="UIView"/> if it is found, otherwise null
         /// </returns>
-        public static UIView FindSuperviewOfType(this UIView view, UIView stopAt, Type type)
-        {
-            if (view.Superview != null)
+    public static UIView? FindSuperviewOfType(this UIView view, UIView stopAt, Type type)
             {
                 if (type.IsInstanceOfType(view.Superview))
                 {
@@ -61,12 +59,11 @@ namespace MvvmCross.Platforms.Ios.Views
                 {
                     return view.Superview.FindSuperviewOfType(stopAt, type);
                 }
-            }
 
             return null;
         }
 
-        public static UIView FindTopSuperviewOfType(this UIView view, UIView stopAt, Type type)
+    public static UIView? FindTopSuperviewOfType(this UIView view, UIView stopAt, Type type)
         {
             var superview = view.FindSuperviewOfType(stopAt, type);
             var topSuperView = superview;
@@ -149,9 +146,8 @@ namespace MvvmCross.Platforms.Ios.Views
 
         public static bool IsLandscape()
         {
-            var orientation = UIApplication.SharedApplication.StatusBarOrientation;
-            bool landscape = orientation == UIInterfaceOrientation.LandscapeLeft || orientation == UIInterfaceOrientation.LandscapeRight;
-            return landscape;
+        var orientation = UIDevice.CurrentDevice.Orientation;
+        return orientation is UIDeviceOrientation.LandscapeLeft or UIDeviceOrientation.LandscapeRight;
         }
 
         /// <summary>
@@ -182,14 +178,14 @@ namespace MvvmCross.Platforms.Ios.Views
             return descendantViews;
         }
 
-        public static UIViewController GetTopModalHostViewController(this UIWindow window)
+    public static UIViewController? GetTopModalHostViewController(this UIWindow window)
         {
             var vc = window.RootViewController;
             do
             {
-                if (vc.PresentedViewController != null)
+            if (vc?.PresentedViewController != null)
                     vc = vc.PresentedViewController;
-            } while (vc.PresentedViewController != null);
+        } while (vc?.PresentedViewController != null);
 
             return vc;
         }
