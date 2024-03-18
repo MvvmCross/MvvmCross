@@ -35,17 +35,16 @@ namespace MvvmCross.Platforms.Android.Presenters
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
         public const string SharedElementsBundleKey = "__sharedElementsKey";
 
-        private readonly Lazy<IMvxAndroidCurrentTopActivity> _androidCurrentTopActivity =
-            new Lazy<IMvxAndroidCurrentTopActivity>(() => Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>());
+        private readonly Lazy<IMvxAndroidCurrentTopActivity?> _androidCurrentTopActivity =
+            new (() => Mvx.IoCProvider?.Resolve<IMvxAndroidCurrentTopActivity>());
 
-        private readonly Lazy<IMvxAndroidActivityLifetimeListener> _activityLifetimeListener =
-            new Lazy<IMvxAndroidActivityLifetimeListener>(() => Mvx.IoCProvider.Resolve<IMvxAndroidActivityLifetimeListener>());
+        private readonly Lazy<IMvxAndroidActivityLifetimeListener?> _activityLifetimeListener =
+            new(() => Mvx.IoCProvider?.Resolve<IMvxAndroidActivityLifetimeListener>());
 
-        private readonly Lazy<IMvxNavigationSerializer> _navigationSerializer =
-            new Lazy<IMvxNavigationSerializer>(() => Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>());
+        private readonly Lazy<IMvxNavigationSerializer?> _navigationSerializer =
+            new(() => Mvx.IoCProvider?.Resolve<IMvxNavigationSerializer>());
 
-        private readonly Lazy<ILogger?> _logger =
-            new Lazy<ILogger?>(() => MvxLogHost.GetLog<MvxAndroidViewPresenter>());
+        private readonly Lazy<ILogger?> _logger = new(() => MvxLogHost.GetLog<MvxAndroidViewPresenter>());
 
         protected IEnumerable<Assembly> AndroidViewAssemblies { get; set; }
 
@@ -63,18 +62,19 @@ namespace MvvmCross.Platforms.Android.Presenters
         }
 
         protected virtual Activity? CurrentActivity =>
-            _androidCurrentTopActivity.Value.Activity as Activity;
+            _androidCurrentTopActivity.Value?.Activity as Activity;
 
-        protected IMvxAndroidActivityLifetimeListener ActivityLifetimeListener =>
+        protected IMvxAndroidActivityLifetimeListener? ActivityLifetimeListener =>
             _activityLifetimeListener.Value;
 
-        protected IMvxNavigationSerializer NavigationSerializer =>
+        protected IMvxNavigationSerializer? NavigationSerializer =>
             _navigationSerializer.Value;
 
         public MvxAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies)
         {
             AndroidViewAssemblies = androidViewAssemblies;
-            ActivityLifetimeListener.ActivityChanged += ActivityLifetimeListenerOnActivityChanged;
+            if (ActivityLifetimeListener != null)
+                ActivityLifetimeListener.ActivityChanged += ActivityLifetimeListenerOnActivityChanged;
         }
 
         protected virtual void ActivityLifetimeListenerOnActivityChanged(object? sender, MvxActivityEventArgs e)
@@ -84,11 +84,11 @@ namespace MvvmCross.Platforms.Android.Presenters
                 Show(PendingRequest);
                 PendingRequest = null;
             }
-            else if (e.ActivityState == MvxActivityState.OnCreate && e.Extras is Bundle savedBundle)
+            else if (e is { ActivityState: MvxActivityState.OnCreate, Extras: Bundle })
             {
                 //TODO: Restore fragments from bundle
             }
-            else if (e.ActivityState == MvxActivityState.OnSaveInstanceState && e.Extras is Bundle outBundle)
+            else if (e is { ActivityState: MvxActivityState.OnSaveInstanceState, Extras: Bundle })
             {
                 //TODO: Save fragments into bundle
             }
@@ -320,6 +320,9 @@ namespace MvvmCross.Platforms.Android.Presenters
             ValidateArguments(view, attribute, request);
 
             var intent = CreateIntentForRequest(request);
+            if (intent == null)
+                return Task.FromResult(false);
+
             if (attribute.Extras != null)
                 intent.PutExtras(attribute.Extras);
 
@@ -502,7 +505,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
             else if (CurrentActivity.IsActivityAlive())
             {
-                if (CurrentActivity!.FindViewById(attribute!.FragmentContentId) == null)
+                if (CurrentActivity!.FindViewById(attribute.FragmentContentId) == null)
                     throw new InvalidOperationException("FrameLayout to show Fragment not found");
 
                 PerformShowFragmentTransaction(CurrentActivity.SupportFragmentManager, attribute, request);
@@ -564,8 +567,9 @@ namespace MvvmCross.Platforms.Android.Presenters
 #pragma warning disable CA2000 // Dispose objects before losing scope
             var bundle = new Bundle();
 #pragma warning restore CA2000 // Dispose objects before losing scope
-            var serializedRequest = NavigationSerializer.Serializer.SerializeObject(request);
-            bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
+            var serializedRequest = NavigationSerializer?.Serializer.SerializeObject(request);
+            if (!string.IsNullOrEmpty(serializedRequest))
+                bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
 
             if (fragment.Arguments == null)
             {
@@ -692,7 +696,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
             else
             {
-                mvxFragmentView.LoadViewModelFrom(request, null);
+                mvxFragmentView.LoadViewModelFrom(request);
             }
 
             dialog.Cancelable = attribute.Cancelable;
@@ -734,8 +738,10 @@ namespace MvvmCross.Platforms.Android.Presenters
                     throw new MvxException("Fragment not found", attribute.FragmentHostViewType.Name);
 
                 if (fragment.View == null)
+                {
                     throw new MvxException("Fragment.View is null. Please consider calling Navigate later in your code",
-                        attribute!.FragmentHostViewType.Name);
+                        attribute.FragmentHostViewType.Name);
+                }
 
                 viewPager = fragment.View.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
                 fragmentManager = fragment.ChildFragmentManager;
@@ -810,7 +816,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
 
             // check for a ViewPager inside an Activity
-            if (CurrentActivity.IsActivityAlive() && attribute?.ActivityHostViewModelType != null)
+            if (CurrentActivity.IsActivityAlive() && attribute.ActivityHostViewModelType != null)
             {
                 viewPager = CurrentActivity?.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
                 tabLayout = CurrentActivity?.FindViewById<TabLayout>(attribute.TabLayoutResourceId);
@@ -982,7 +988,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             string fragmentName, FragmentManager fragmentManager, MvxFragmentPresentationAttribute fragmentAttribute)
         {
             var popBackStackFragmentName =
-                string.IsNullOrEmpty(fragmentAttribute.PopBackStackImmediateName?.Trim())
+                string.IsNullOrEmpty(fragmentAttribute.PopBackStackImmediateName.Trim())
                     ? fragmentName
                     : fragmentAttribute.PopBackStackImmediateName;
 
@@ -1026,7 +1032,10 @@ namespace MvvmCross.Platforms.Android.Presenters
                 {
                     var fragment = fragmentManager.FindFragmentByTag(fragmentInfo.Tag);
                     adapter.FragmentsInfo.Remove(fragmentInfo);
-                    ft.Remove(fragment);
+
+                    if (fragment != null)
+                        ft.Remove(fragment);
+
                     ft.CommitAllowingStateLoss();
                     adapter.NotifyDataSetChanged();
 
@@ -1056,6 +1065,9 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (fragmentInfo != null)
                 return fragmentInfo;
 
+            fragmentInfo = adapter.FragmentsInfo?.Find(IsMatch);
+            return fragmentInfo;
+
             bool IsMatch(MvxViewPagerFragmentInfo? info)
             {
                 if (attribute.ViewType == null) return false;
@@ -1067,9 +1079,6 @@ namespace MvvmCross.Platforms.Android.Presenters
 
                 return viewTypeMatches;
             }
-
-            fragmentInfo = adapter.FragmentsInfo?.Find(IsMatch);
-            return fragmentInfo;
         }
         #endregion
 
@@ -1080,11 +1089,8 @@ namespace MvvmCross.Platforms.Android.Presenters
         {
             ValidateArguments(attribute);
 
-            if (fragmentManager == null)
-                throw new ArgumentNullException(nameof(fragmentManager));
-
-            if (fragmentType == null)
-                throw new ArgumentNullException(nameof(fragmentType));
+            ArgumentNullException.ThrowIfNull(fragmentManager);
+            ArgumentNullException.ThrowIfNull(fragmentType);
 
             try
             {
@@ -1154,9 +1160,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         private static void ValidateArguments(Type? view, MvxBasePresentationAttribute? attribute, MvxViewModelRequest? request)
         {
-            if (view == null)
-                throw new ArgumentNullException(nameof(view));
-
+            ArgumentNullException.ThrowIfNull(view);
             ValidateArguments(attribute, request);
         }
 
@@ -1169,14 +1173,12 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         private static void ValidateArguments(MvxBasePresentationAttribute? attribute)
         {
-            if (attribute == null)
-                throw new ArgumentNullException(nameof(attribute));
+            ArgumentNullException.ThrowIfNull(attribute);
         }
 
         private static void ValidateArguments(MvxViewModelRequest? request)
         {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
+            ArgumentNullException.ThrowIfNull(request);
         }
     }
 }
