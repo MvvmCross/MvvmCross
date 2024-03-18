@@ -1,77 +1,74 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
+#nullable enable
 
-using System.Collections.Generic;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 
-namespace MvvmCross.Core.Parse.StringDictionary
+namespace MvvmCross.Core.Parse.StringDictionary;
+
+public class MvxStringDictionaryParser
+    : MvxParser, IMvxStringDictionaryParser
 {
-#nullable enable
-    public class MvxStringDictionaryParser
-        : MvxParser, IMvxStringDictionaryParser
+    protected Dictionary<string, string?>? CurrentEntries { get; private set; }
+
+    public IDictionary<string, string> Parse(string textToParse)
     {
-        protected Dictionary<string, string?>? CurrentEntries { get; private set; }
+        Reset(textToParse);
 
-        public IDictionary<string, string> Parse(string textToParse)
+        while (!IsComplete)
         {
-            Reset(textToParse);
-
-            while (!IsComplete)
-            {
-                ParseNextKeyValuePair();
-                SkipWhitespaceAndCharacters(';');
-            }
-
-            return CurrentEntries!;
+            ParseNextKeyValuePair();
+            SkipWhitespaceAndCharacters(';');
         }
 
-        protected override void Reset(string? textToParse)
+        return CurrentEntries!;
+    }
+
+    protected override void Reset(string? textToParse)
+    {
+        CurrentEntries = new Dictionary<string, string?>();
+        base.Reset(textToParse);
+    }
+
+    private void ParseNextKeyValuePair()
+    {
+        SkipWhitespace();
+
+        if (IsComplete)
         {
-            CurrentEntries = new Dictionary<string, string?>();
-            base.Reset(textToParse);
+            return;
         }
 
-        private void ParseNextKeyValuePair()
+        var key = ReadValue();
+        if (key is not string keyString)
         {
-            SkipWhitespace();
+            throw new MvxException($"Unexpected object in key for key/value pair {key?.GetType().Name} at position {CurrentIndex}");
+        }
 
-            if (IsComplete)
-            {
-                return;
-            }
+        SkipWhitespace();
 
-            var key = ReadValue();
-            if (!(key is string))
-            {
-                throw new MvxException($"Unexpected object in key for keyvalue pair {key?.GetType().Name} at position {CurrentIndex}");
-            }
+        if (CurrentChar != '=')
+        {
+            throw new MvxException($"Unexpected character in key/value pair {CurrentChar} at position {CurrentIndex}");
+        }
 
-            SkipWhitespace();
+        MoveNext();
+        SkipWhitespace();
 
-            if (CurrentChar != '=')
-            {
-                throw new MvxException($"Unexpected character in keyvalue pair {CurrentChar} at position {CurrentIndex}");
-            }
-
-            MoveNext();
-            SkipWhitespace();
-
-            var value = ReadValue();
-            if (value == null)
-            {
-                CurrentEntries![(string)key] = null;
-            }
-            else if (value is string stringValue)
-            {
-                CurrentEntries![(string)key] = stringValue;
-            }
-            else
-            {
-                throw new MvxException($"Unexpected object in value for keyvalue pair {value?.GetType().Name} for key {key} at position {CurrentIndex}");
-            }
+        var value = ReadValue();
+        if (value == null)
+        {
+            CurrentEntries![keyString] = null;
+        }
+        else if (value is string stringValue)
+        {
+            CurrentEntries![keyString] = stringValue;
+        }
+        else
+        {
+            throw new MvxException($"Unexpected object in value for key/value pair {value.GetType().Name} for key {key} at position {CurrentIndex}");
         }
     }
-#nullable restore
 }
