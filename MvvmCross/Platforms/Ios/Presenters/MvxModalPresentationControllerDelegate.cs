@@ -1,26 +1,20 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
+#nullable enable
 
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 
 namespace MvvmCross.Platforms.Ios.Presenters;
 
-public class MvxModalPresentationControllerDelegate : UIAdaptivePresentationControllerDelegate
+public sealed class MvxModalPresentationControllerDelegate(
+        MvxIosViewPresenter presenter,
+        UIViewController viewController,
+        MvxModalPresentationAttribute attribute)
+    : UIAdaptivePresentationControllerDelegate
 {
-    private readonly MvxIosViewPresenter _presenter;
-    private readonly UIViewController _viewController;
-    private readonly MvxModalPresentationAttribute _attribute;
-
-    public MvxModalPresentationControllerDelegate(MvxIosViewPresenter presenter, UIViewController viewController, MvxModalPresentationAttribute attribute)
+    public override void DidDismiss(UIPresentationController presentationController)
     {
-        _presenter = presenter;
-        _viewController = viewController;
-        _attribute = attribute;
-    }
-
-    public override async void DidDismiss(UIPresentationController presentationController)
-    {
-        await _presenter.CloseModalViewController(_viewController, _attribute).ConfigureAwait(false);
+        _ = presenter.CloseModalViewController(viewController, attribute);
     }
 }
