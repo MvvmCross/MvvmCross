@@ -19,11 +19,11 @@ namespace MvvmCross.Plugin.FieldBinding
     {
         public static bool DisableWarnIndexedValueBindingWarning = false;
 
-        private readonly List<MvxPropertyToken> _childTokens;
+        private readonly List<IMvxPropertyToken> _childTokens;
         private IMvxSourceBinding _currentChildBinding;
 
         public MvxChainedNotifyChangeFieldSourceBinding(object source, INotifyChange notifyChange,
-                                                        List<MvxPropertyToken> childTokens)
+                                                        List<IMvxPropertyToken> childTokens)
             : base(source, notifyChange)
         {
             _childTokens = childTokens;

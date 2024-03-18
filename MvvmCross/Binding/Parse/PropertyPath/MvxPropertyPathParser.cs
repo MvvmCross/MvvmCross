@@ -8,159 +8,158 @@ using MvvmCross.Base;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using MvvmCross.Exceptions;
 
-namespace MvvmCross.Binding.Parse.PropertyPath
+namespace MvvmCross.Binding.Parse.PropertyPath;
+
+public class MvxPropertyPathParser : MvxParser
 {
-    public class MvxPropertyPathParser : MvxParser
+    protected List<IMvxPropertyToken> CurrentTokens { get; } = [];
+
+    protected override void Reset(string textToParse)
     {
-        protected List<MvxPropertyToken> CurrentTokens { get; } = new List<MvxPropertyToken>();
+        CurrentTokens.Clear();
+        textToParse = MakeSafe(textToParse);
+        base.Reset(textToParse);
+    }
 
-        protected override void Reset(string textToParse)
+    public static string MakeSafe(string textToParse)
+    {
+        if (textToParse == null)
+            return string.Empty;
+        if (textToParse.Trim() == ".")
+            return string.Empty;
+        return textToParse;
+    }
+
+    public IList<IMvxPropertyToken> Parse(string textToParse)
+    {
+        Reset(textToParse);
+
+        while (!IsComplete)
         {
-            CurrentTokens.Clear();
-            textToParse = MakeSafe(textToParse);
-            base.Reset(textToParse);
+            ParseNextToken();
         }
 
-        public static string MakeSafe(string textToParse)
+        if (CurrentTokens.Count == 0)
         {
-            if (textToParse == null)
-                return string.Empty;
-            if (textToParse.Trim() == ".")
-                return string.Empty;
-            return textToParse;
+            CurrentTokens.Add(new MvxEmptyPropertyToken());
         }
 
-        public IList<MvxPropertyToken> Parse(string textToParse)
+        return CurrentTokens;
+    }
+
+    private void ParseNextToken()
+    {
+        SkipWhitespaceAndPeriods();
+
+        if (IsComplete)
         {
-            Reset(textToParse);
-
-            while (!IsComplete)
-            {
-                ParseNextToken();
-            }
-
-            if (CurrentTokens.Count == 0)
-            {
-                CurrentTokens.Add(new MvxEmptyPropertyToken());
-            }
-
-            return CurrentTokens;
+            return;
         }
 
-        private void ParseNextToken()
+        var currentChar = CurrentChar;
+        if (currentChar == '[')
         {
-            SkipWhitespaceAndPeriods();
+            ParseIndexer();
+        }
+        else if (char.IsLetter(currentChar) || currentChar == '_')
+        {
+            ParsePropertyName();
+        }
+        else
+        {
+            throw new MvxException("Unexpected character {0} at position {1} in targetProperty text {2}",
+                currentChar,
+                CurrentIndex, FullText);
+        }
+    }
 
-            if (IsComplete)
-            {
-                return;
-            }
-
+    private void ParsePropertyName()
+    {
+        var propertyText = new StringBuilder();
+        while (!IsComplete)
+        {
             var currentChar = CurrentChar;
-            if (currentChar == '[')
-            {
-                ParseIndexer();
-            }
-            else if (char.IsLetter(currentChar) || currentChar == '_')
-            {
-                ParsePropertyName();
-            }
-            else
-            {
-                throw new MvxException("Unexpected character {0} at position {1} in targetProperty text {2}",
-                    currentChar,
-                    CurrentIndex, FullText);
-            }
-        }
-
-        private void ParsePropertyName()
-        {
-            var propertyText = new StringBuilder();
-            while (!IsComplete)
-            {
-                var currentChar = CurrentChar;
-                if (!char.IsLetterOrDigit(currentChar) && currentChar != '_')
-                    break;
-                propertyText.Append(currentChar);
-                MoveNext();
-            }
-
-            var text = propertyText.ToString();
-            CurrentTokens.Add(new MvxPropertyNamePropertyToken(text));
-        }
-
-        private void ParseIndexer()
-        {
-            if (CurrentChar != '[')
-            {
-                throw new MvxException(
-                    "Internal error - ParseIndexer should only be called with a string starting with [");
-            }
-
-            MoveNext();
-            if (IsComplete)
-            {
-                throw new MvxException("Invalid indexer targetProperty text {0}", FullText);
-            }
-
-            SkipWhitespaceAndPeriods();
-
-            if (IsComplete)
-            {
-                throw new MvxException("Invalid indexer targetProperty text {0}", FullText);
-            }
-
-            if (CurrentChar == '\'' || CurrentChar == '\"')
-            {
-                ParseQuotedStringIndexer();
-            }
-            else if (char.IsDigit(CurrentChar))
-            {
-                ParseIntegerIndexer();
-            }
-            else
-            {
-                ParseUnquotedStringIndexer();
-            }
-
-            SkipWhitespaceAndPeriods();
-            if (IsComplete)
-            {
-                throw new MvxException("Invalid termination of indexer targetProperty text in {0}", FullText);
-            }
-
-            if (CurrentChar != ']')
-            {
-                throw new MvxException(
-                    "Unexpected character {0} at position {1} in targetProperty text {2} - expected terminator",
-                    CurrentChar,
-                    CurrentIndex, FullText);
-            }
-
+            if (!char.IsLetterOrDigit(currentChar) && currentChar != '_')
+                break;
+            propertyText.Append(currentChar);
             MoveNext();
         }
 
-        private void ParseIntegerIndexer()
+        var text = propertyText.ToString();
+        CurrentTokens.Add(new MvxPropertyNamePropertyToken(text));
+    }
+
+    private void ParseIndexer()
+    {
+        if (CurrentChar != '[')
         {
-            var index = (int)ReadUnsignedInteger();
-            CurrentTokens.Add(new MvxIntegerIndexerPropertyToken(index));
+            throw new MvxException(
+                "Internal error - ParseIndexer should only be called with a string starting with [");
         }
 
-        private void ParseQuotedStringIndexer()
+        MoveNext();
+        if (IsComplete)
         {
-            var text = ReadQuotedString();
-            CurrentTokens.Add(new MvxStringIndexerPropertyToken(text));
+            throw new MvxException("Invalid indexer targetProperty text {0}", FullText);
         }
 
-        private void ParseUnquotedStringIndexer()
+        SkipWhitespaceAndPeriods();
+
+        if (IsComplete)
         {
-            var text = ReadTextUntil(']');
-            CurrentTokens.Add(new MvxStringIndexerPropertyToken(text));
+            throw new MvxException("Invalid indexer targetProperty text {0}", FullText);
         }
 
-        private void SkipWhitespaceAndPeriods()
+        if (CurrentChar == '\'' || CurrentChar == '\"')
         {
-            SkipWhitespaceAndCharacters('.');
+            ParseQuotedStringIndexer();
         }
+        else if (char.IsDigit(CurrentChar))
+        {
+            ParseIntegerIndexer();
+        }
+        else
+        {
+            ParseUnquotedStringIndexer();
+        }
+
+        SkipWhitespaceAndPeriods();
+        if (IsComplete)
+        {
+            throw new MvxException("Invalid termination of indexer targetProperty text in {0}", FullText);
+        }
+
+        if (CurrentChar != ']')
+        {
+            throw new MvxException(
+                "Unexpected character {0} at position {1} in targetProperty text {2} - expected terminator",
+                CurrentChar,
+                CurrentIndex, FullText);
+        }
+
+        MoveNext();
+    }
+
+    private void ParseIntegerIndexer()
+    {
+        var index = (int)ReadUnsignedInteger();
+        CurrentTokens.Add(new MvxIntegerIndexerPropertyToken(index));
+    }
+
+    private void ParseQuotedStringIndexer()
+    {
+        var text = ReadQuotedString();
+        CurrentTokens.Add(new MvxStringIndexerPropertyToken(text));
+    }
+
+    private void ParseUnquotedStringIndexer()
+    {
+        var text = ReadTextUntil(']');
+        CurrentTokens.Add(new MvxStringIndexerPropertyToken(text));
+    }
+
+    private void SkipWhitespaceAndPeriods()
+    {
+        SkipWhitespaceAndCharacters('.');
     }
 }

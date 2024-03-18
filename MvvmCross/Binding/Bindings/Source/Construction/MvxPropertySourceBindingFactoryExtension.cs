@@ -22,8 +22,8 @@ public class MvxPropertySourceBindingFactoryExtension
 
     public bool TryCreateBinding(
         object? source,
-        MvxPropertyToken propertyToken,
-        List<MvxPropertyToken> remainingTokens,
+        IMvxPropertyToken propertyToken,
+        List<IMvxPropertyToken> remainingTokens,
         out IMvxSourceBinding? result)
     {
         if (source == null)
@@ -41,8 +41,8 @@ public class MvxPropertySourceBindingFactoryExtension
 
     protected virtual MvxChainedSourceBinding? CreateChainedBinding(
         object source,
-        MvxPropertyToken propertyToken,
-        List<MvxPropertyToken> remainingTokens)
+        IMvxPropertyToken propertyToken,
+        List<IMvxPropertyToken> remainingTokens)
     {
         switch (propertyToken)
         {
@@ -71,7 +71,7 @@ public class MvxPropertySourceBindingFactoryExtension
         }
     }
 
-    protected virtual IMvxSourceBinding? CreateLeafBinding(object source, MvxPropertyToken propertyToken)
+    protected virtual IMvxSourceBinding? CreateLeafBinding(object source, IMvxPropertyToken propertyToken)
     {
         if (propertyToken is MvxIndexerPropertyToken indexPropertyToken)
         {

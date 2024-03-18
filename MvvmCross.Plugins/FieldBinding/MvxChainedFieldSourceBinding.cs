@@ -17,10 +17,10 @@ namespace MvvmCross.Plugin.FieldBinding
     public class MvxChainedFieldSourceBinding
         : MvxFieldSourceBinding
     {
-        private readonly IList<MvxPropertyToken> _childTokens;
+        private readonly IList<IMvxPropertyToken> _childTokens;
         private IMvxSourceBinding _currentChildBinding;
 
-        public MvxChainedFieldSourceBinding(object source, FieldInfo fieldInfo, IList<MvxPropertyToken> childTokens)
+        public MvxChainedFieldSourceBinding(object source, FieldInfo fieldInfo, IList<IMvxPropertyToken> childTokens)
             : base(source, fieldInfo)
         {
             _childTokens = childTokens;

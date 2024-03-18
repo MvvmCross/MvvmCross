@@ -21,8 +21,8 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
 
         private readonly List<IMvxSourceBindingFactoryExtension> _extensions = new List<IMvxSourceBindingFactoryExtension>();
 
-        protected bool TryCreateBindingFromExtensions(object source, MvxPropertyToken propertyToken,
-                                            List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+        protected bool TryCreateBindingFromExtensions(object source, IMvxPropertyToken propertyToken,
+                                            List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
             foreach (var extension in _extensions)
             {
@@ -42,7 +42,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             return CreateBinding(source, tokens);
         }
 
-        public IMvxSourceBinding CreateBinding(object source, IList<MvxPropertyToken> tokens)
+        public IMvxSourceBinding CreateBinding(object source, IList<IMvxPropertyToken> tokens)
         {
             if (tokens == null || tokens.Count == 0)
             {
