@@ -60,9 +60,9 @@ public static class MvxSetupExtensions
     public static Type? FindSetupType<TSetup>(Assembly assembly)
     {
         var query = from type in assembly.ExceptionSafeGetTypes()
-            where type.Name == "Setup"
-            where typeof(TSetup).IsAssignableFrom(type)
-            select type;
+                    where type.Name == "Setup"
+                    where typeof(TSetup).IsAssignableFrom(type)
+                    select type;
 
         return query.FirstOrDefault();
     }
@@ -70,10 +70,10 @@ public static class MvxSetupExtensions
     public static Type? FindSetupType<TSetup>()
     {
         var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-            from type in assembly.ExceptionSafeGetTypes()
-            where type.Name == "Setup"
-            where typeof(TSetup).IsAssignableFrom(type)
-            select type;
+                    from type in assembly.ExceptionSafeGetTypes()
+                    where type.Name == "Setup"
+                    where typeof(TSetup).IsAssignableFrom(type)
+                    select type;
 
         return query.FirstOrDefault();
     }

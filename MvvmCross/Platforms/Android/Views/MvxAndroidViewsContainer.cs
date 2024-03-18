@@ -108,7 +108,7 @@ public class MvxAndroidViewsContainer
     {
         if (viewModelRequest == null)
             return null;
-        
+
         if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelLoader? viewModelLoader) == true && viewModelLoader != null)
         {
             viewModelLoader.LoadViewModel(viewModelRequest, savedState);
@@ -161,7 +161,7 @@ public class MvxAndroidViewsContainer
         intent.PutExtra(ExtrasKey, requestText);
         AdjustIntentForPresentation(intent, request);
 
-        return intent;    
+        return intent;
     }
 
     protected virtual void AdjustIntentForPresentation(Intent intent, MvxViewModelRequest request)

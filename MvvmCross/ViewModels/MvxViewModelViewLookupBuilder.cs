@@ -35,13 +35,13 @@ public class MvxViewModelViewLookupBuilder
         }
     }
 
-    protected virtual IEnumerable<(Type,Type)>? FilterViews(IEnumerable<(Type,Type)>? views)
+    protected virtual IEnumerable<(Type, Type)>? FilterViews(IEnumerable<(Type, Type)>? views)
     {
         return views;
     }
 
     protected virtual Exception ReportBuildProblem(
-        IEnumerable<(Type,Type)> views, ArgumentException exception)
+        IEnumerable<(Type, Type)> views, ArgumentException exception)
     {
         var overSizedCounts =
             views.GroupBy(x => x.Item1)

@@ -278,7 +278,7 @@ public static class MvxTypeExtensions
 
         return null;
     }
-    
+
     private static void CheckConstructors(
         IDictionary<string, object> arguments, MethodBase constructor, ref List<string> unusedKeys)
     {

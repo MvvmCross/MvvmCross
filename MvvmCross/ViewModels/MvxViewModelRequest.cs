@@ -51,7 +51,7 @@ public class MvxViewModelRequest
         {
             sb.Append(
                 $", PresentationValues: '{string.Join(", ", PresentationValues.Select(kv => $"{{{kv.Key}: {kv.Value}}}"))}'");
-        } 
+        }
 
         return sb.ToString();
     }

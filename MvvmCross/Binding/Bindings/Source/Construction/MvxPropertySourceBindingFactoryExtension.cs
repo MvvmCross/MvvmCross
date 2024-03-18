@@ -47,24 +47,24 @@ public class MvxPropertySourceBindingFactoryExtension
         switch (propertyToken)
         {
             case MvxIndexerPropertyToken indexPropertyToken:
-            {
-                var itemPropertyInfo = FindPropertyInfo(source);
-                if (itemPropertyInfo == null)
-                    return null;
+                {
+                    var itemPropertyInfo = FindPropertyInfo(source);
+                    if (itemPropertyInfo == null)
+                        return null;
 
-                return new MvxIndexerChainedSourceBinding(source, itemPropertyInfo, indexPropertyToken,
-                    remainingTokens);
-            }
+                    return new MvxIndexerChainedSourceBinding(source, itemPropertyInfo, indexPropertyToken,
+                        remainingTokens);
+                }
             case MvxPropertyNamePropertyToken propertyNameToken:
-            {
-                var propertyInfo = FindPropertyInfo(source, propertyNameToken.PropertyName);
+                {
+                    var propertyInfo = FindPropertyInfo(source, propertyNameToken.PropertyName);
 
-                if (propertyInfo == null)
-                    return null;
+                    if (propertyInfo == null)
+                        return null;
 
-                return new MvxSimpleChainedSourceBinding(source, propertyInfo,
-                    remainingTokens);
-            }
+                    return new MvxSimpleChainedSourceBinding(source, propertyInfo,
+                        remainingTokens);
+                }
             default:
                 throw new MvxException("Unexpected property chaining - seen token type {0}",
                     propertyToken.GetType().FullName);

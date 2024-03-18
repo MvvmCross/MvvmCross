@@ -36,7 +36,7 @@ namespace MvvmCross.Platforms.Android.Presenters
         public const string SharedElementsBundleKey = "__sharedElementsKey";
 
         private readonly Lazy<IMvxAndroidCurrentTopActivity?> _androidCurrentTopActivity =
-            new (() => Mvx.IoCProvider?.Resolve<IMvxAndroidCurrentTopActivity>());
+            new(() => Mvx.IoCProvider?.Resolve<IMvxAndroidCurrentTopActivity>());
 
         private readonly Lazy<IMvxAndroidActivityLifetimeListener?> _activityLifetimeListener =
             new(() => Mvx.IoCProvider?.Resolve<IMvxAndroidActivityLifetimeListener>());

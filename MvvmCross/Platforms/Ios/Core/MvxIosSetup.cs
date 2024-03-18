@@ -121,7 +121,7 @@ public abstract class MvxIosSetup
                 nameof(CreateViewPresenter), nameof(PlatformInitialize));
             return null;
         }
-        
+
         if (Window == null)
         {
             SetupLog?.LogError(
@@ -129,7 +129,7 @@ public abstract class MvxIosSetup
                 nameof(CreateViewPresenter), nameof(PlatformInitialize));
             return null;
         }
-        
+
         return new MvxIosViewPresenter(ApplicationDelegate, Window);
     }
 

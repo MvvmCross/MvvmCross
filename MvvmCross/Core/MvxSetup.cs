@@ -170,7 +170,7 @@ public abstract class MvxSetup : IMvxSetup
                 SetupLog?.LogWarning("Lookup dictionary is null returning from {MethodName}",
                     nameof(InitializeLookupDictionary));
             }
-            
+
             SetupLog?.Log(LogLevel.Trace, "Setup: CommandCollectionBuilder start");
             InitializeCommandCollectionBuilder(_iocProvider);
             SetupLog?.Log(LogLevel.Trace, "Setup: NavigationSerializer start");
@@ -186,7 +186,7 @@ public abstract class MvxSetup : IMvxSetup
             if (pluginManager != null)
             {
                 app?.LoadPlugins(pluginManager);
-                SetupLog?.Log(LogLevel.Trace, "Setup: App start");    
+                SetupLog?.Log(LogLevel.Trace, "Setup: App start");
             }
             else
             {
@@ -450,7 +450,7 @@ public abstract class MvxSetup : IMvxSetup
     {
         if (string.IsNullOrEmpty(mvvmCrossAssemblyName))
             return false;
-        
+
         try
         {
             return Array.Exists(assembly.GetReferencedAssemblies(), a => a.Name == mvvmCrossAssemblyName);
@@ -541,7 +541,7 @@ public abstract class MvxSetup : IMvxSetup
         if (navigationService != null)
         {
             SetupLog?.Log(LogLevel.Trace, "Setup: Load navigation routes");
-            LoadNavigationServiceRoutes(navigationService, iocProvider);    
+            LoadNavigationServiceRoutes(navigationService, iocProvider);
         }
         return navigationService;
     }
