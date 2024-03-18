@@ -20,7 +20,7 @@ public static class MvxExceptionExtensions
         return new MvxException(exception, message);
     }
 
-    public static Exception MvxWrap(this Exception exception, string messageFormat, params object[] formatArguments)
+    public static Exception MvxWrap(this Exception exception, string messageFormat, params object?[] formatArguments)
     {
         return new MvxException(exception, messageFormat, formatArguments);
     }
