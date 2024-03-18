@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
@@ -9,211 +10,209 @@ using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Logging;
 
-namespace MvvmCross.ViewModels
+namespace MvvmCross.ViewModels;
+
+public abstract class MvxNotifyPropertyChanged
+    : MvxMainThreadDispatchingObject, IMvxNotifyPropertyChanged
 {
-    public abstract class MvxNotifyPropertyChanged
-        : MvxMainThreadDispatchingObject
-        , IMvxNotifyPropertyChanged
+    private static readonly PropertyChangedEventArgs AllPropertiesChanged = new(string.Empty);
+    public event PropertyChangedEventHandler? PropertyChanged;
+    public event PropertyChangingEventHandler? PropertyChanging;
+
+    private bool _shouldAlwaysRaiseInpcOnUserInterfaceThread;
+    private bool _shouldRaisePropertyChanging;
+    private bool _shouldLogInpc;
+
+    public bool ShouldAlwaysRaiseInpcOnUserInterfaceThread()
     {
-        private static readonly PropertyChangedEventArgs AllPropertiesChanged = new PropertyChangedEventArgs(string.Empty);
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public event PropertyChangingEventHandler? PropertyChanging;
+        return _shouldAlwaysRaiseInpcOnUserInterfaceThread;
+    }
 
-        private bool _shouldAlwaysRaiseInpcOnUserInterfaceThread;
-        private bool _shouldRaisePropertyChanging;
-        private bool _shouldLogInpc;
+    public void ShouldAlwaysRaiseInpcOnUserInterfaceThread(bool value)
+    {
+        _shouldAlwaysRaiseInpcOnUserInterfaceThread = value;
+    }
 
-        public bool ShouldAlwaysRaiseInpcOnUserInterfaceThread()
+    public bool ShouldRaisePropertyChanging()
+    {
+        return _shouldRaisePropertyChanging;
+    }
+
+    public void ShouldRaisePropertyChanging(bool value)
+    {
+        _shouldRaisePropertyChanging = value;
+    }
+    public bool ShouldLogInpc()
+    {
+        return _shouldLogInpc;
+    }
+
+    public void ShouldLogInpc(bool value)
+    {
+        _shouldLogInpc = value;
+    }
+
+    protected MvxNotifyPropertyChanged()
+    {
+        var alwaysOnUIThread = MvxSingletonCache.Instance?.Settings?.AlwaysRaiseInpcOnUserInterfaceThread != false;
+        ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
+        var raisePropertyChanging = MvxSingletonCache.Instance?.Settings?.ShouldRaisePropertyChanging != false;
+        ShouldRaisePropertyChanging(raisePropertyChanging);
+        var shouldLogInpc = MvxSingletonCache.Instance?.Settings?.ShouldLogInpc == true;
+        ShouldLogInpc(shouldLogInpc);
+    }
+
+    public bool RaisePropertyChanging<T>(T newValue, Expression<Func<T>> propertyExpression)
+    {
+        var name = this.GetPropertyNameFromExpression(propertyExpression);
+        return RaisePropertyChanging(newValue, name);
+    }
+
+    public bool RaisePropertyChanging<T>(T newValue, [CallerMemberName] string? whichProperty = "")
+    {
+        var changedArgs = new MvxPropertyChangingEventArgs<T>(whichProperty, newValue);
+        return RaisePropertyChanging(changedArgs);
+    }
+
+    public virtual bool RaisePropertyChanging<T>(MvxPropertyChangingEventArgs<T>? changingArgs)
+    {
+        if (changingArgs == null)
+            return false;
+
+        // check for interception before broadcasting change
+        if (InterceptRaisePropertyChanging(changingArgs)
+            == MvxInpcInterceptionResult.DoNotRaisePropertyChanging)
         {
-            return _shouldAlwaysRaiseInpcOnUserInterfaceThread;
-        }
-
-        public void ShouldAlwaysRaiseInpcOnUserInterfaceThread(bool value)
-        {
-            _shouldAlwaysRaiseInpcOnUserInterfaceThread = value;
-        }
-
-        public bool ShouldRaisePropertyChanging()
-        {
-            return _shouldRaisePropertyChanging;
-        }
-
-        public void ShouldRaisePropertyChanging(bool value)
-        {
-            _shouldRaisePropertyChanging = value;
-        }
-        public bool ShouldLogInpc()
-        {
-            return _shouldLogInpc;
-        }
-
-        public void ShouldLogInpc(bool value)
-        {
-            _shouldLogInpc = value;
-        }
-
-        protected MvxNotifyPropertyChanged()
-        {
-            var alwaysOnUIThread = MvxSingletonCache.Instance?.Settings.AlwaysRaiseInpcOnUserInterfaceThread != false;
-            ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
-            var raisePropertyChanging = MvxSingletonCache.Instance?.Settings.ShouldRaisePropertyChanging != false;
-            ShouldRaisePropertyChanging(raisePropertyChanging);
-            var shouldLogInpc = MvxSingletonCache.Instance?.Settings.ShouldLogInpc == true;
-            ShouldLogInpc(shouldLogInpc);
-        }
-
-        public bool RaisePropertyChanging<T>(T newValue, Expression<Func<T>> propertyExpression)
-        {
-            var name = this.GetPropertyNameFromExpression(propertyExpression);
-            return RaisePropertyChanging(newValue, name);
-        }
-
-        public bool RaisePropertyChanging<T>(T newValue, [CallerMemberName] string? whichProperty = "")
-        {
-            var changedArgs = new MvxPropertyChangingEventArgs<T>(whichProperty, newValue);
-            return RaisePropertyChanging(changedArgs);
-        }
-
-        public virtual bool RaisePropertyChanging<T>(MvxPropertyChangingEventArgs<T> changingArgs)
-        {
-            if (changingArgs == null)
-                return false;
-
-            // check for interception before broadcasting change
-            if (InterceptRaisePropertyChanging(changingArgs)
-                == MvxInpcInterceptionResult.DoNotRaisePropertyChanging)
-            {
-                return !changingArgs.Cancel;
-            }
-
-            if (ShouldLogInpc())
-            {
-                MvxLogHost.Default?.Log(LogLevel.Trace, "Property '{propertyName}' changing value to {newValue}",
-                    changingArgs.PropertyName, changingArgs.NewValue);
-            }
-
-            PropertyChanging?.Invoke(this, changingArgs);
-
             return !changingArgs.Cancel;
         }
 
+        if (ShouldLogInpc())
+        {
+            MvxLogHost.Default?.Log(LogLevel.Trace, "Property '{PropertyName}' changing value to {NewValue}",
+                changingArgs.PropertyName, changingArgs.NewValue);
+        }
+
+        PropertyChanging?.Invoke(this, changingArgs);
+
+        return !changingArgs.Cancel;
+    }
+
 #pragma warning disable CA1030 // Use events where appropriate
-        public virtual Task RaiseAllPropertiesChanged()
+    public virtual Task RaiseAllPropertiesChanged()
 #pragma warning restore CA1030 // Use events where appropriate
+    {
+        return RaisePropertyChanged(AllPropertiesChanged);
+    }
+
+    public Task RaisePropertyChanged<T>(Expression<Func<T>> propertyExpression)
+    {
+        var name = this.GetPropertyNameFromExpression(propertyExpression);
+        return RaisePropertyChanged(name);
+    }
+
+    public virtual Task RaisePropertyChanged([CallerMemberName] string? whichProperty = "")
+    {
+        var changedArgs = new PropertyChangedEventArgs(whichProperty);
+        return RaisePropertyChanged(changedArgs);
+    }
+
+    public virtual async Task RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
+    {
+        // check for interception before broadcasting change
+        if (InterceptRaisePropertyChanged(changedArgs)
+            == MvxInpcInterceptionResult.DoNotRaisePropertyChanged)
         {
-            return RaisePropertyChanged(AllPropertiesChanged);
+            return;
         }
 
-        public Task RaisePropertyChanged<T>(Expression<Func<T>> propertyExpression)
+        void RaiseChange()
         {
-            var name = this.GetPropertyNameFromExpression(propertyExpression);
-            return RaisePropertyChanged(name);
+            if (ShouldLogInpc())
+                MvxLogHost.Default?.Log(LogLevel.Trace, "Property '{PropertyName}' value changed", changedArgs.PropertyName);
+            PropertyChanged?.Invoke(this, changedArgs);
         }
 
-        public virtual Task RaisePropertyChanged([CallerMemberName] string? whichProperty = "")
-        {
-            var changedArgs = new PropertyChangedEventArgs(whichProperty);
-            return RaisePropertyChanged(changedArgs);
-        }
+        void ExceptionMasked() => MvxMainThreadDispatcher.ExceptionMaskedAction(RaiseChange, true);
 
-        public virtual async Task RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
+        if (ShouldAlwaysRaiseInpcOnUserInterfaceThread())
         {
-            // check for interception before broadcasting change
-            if (InterceptRaisePropertyChanged(changedArgs)
-                == MvxInpcInterceptionResult.DoNotRaisePropertyChanged)
-            {
+            // check for subscription before potentially causing a cross-threaded call
+            if (PropertyChanged == null)
                 return;
-            }
 
-            void raiseChange()
-            {
-                if (ShouldLogInpc())
-                    MvxLogHost.Default?.Log(LogLevel.Trace, "Property '{propertyName}' value changed", changedArgs.PropertyName);
-                PropertyChanged?.Invoke(this, changedArgs);
-            }
+            await InvokeOnMainThreadAsync(ExceptionMasked).ConfigureAwait(true);
+        }
+        else
+        {
+            ExceptionMasked();
+        }
+    }
 
-            void exceptionMasked() => MvxMainThreadDispatcher.ExceptionMaskedAction(raiseChange, true);
-
-            if (ShouldAlwaysRaiseInpcOnUserInterfaceThread())
-            {
-                // check for subscription before potentially causing a cross-threaded call
-                if (PropertyChanged == null)
-                    return;
-
-                await InvokeOnMainThreadAsync(exceptionMasked).ConfigureAwait(true);
-            }
-            else
-            {
-                exceptionMasked();
-            }
+    protected virtual void SetProperty<T>(ref T storage, T value, Action<bool>? action, [CallerMemberName] string? propertyName = null)
+    {
+        if (action == null)
+        {
+            throw new ArgumentException($"{nameof(action)} should not be null", nameof(action));
         }
 
-        protected virtual void SetProperty<T>(ref T storage, T value, Action<bool>? action, [CallerMemberName] string? propertyName = null)
+        action.Invoke(SetProperty(ref storage, value, propertyName));
+    }
+
+    protected virtual bool SetProperty<T>(ref T storage, T value, Action? afterAction, [CallerMemberName] string? propertyName = null)
+    {
+        if (SetProperty(ref storage, value, propertyName))
         {
-            if (action == null)
-            {
-                throw new ArgumentException($"{nameof(action)} should not be null", nameof(action));
-            }
-
-            action.Invoke(SetProperty(ref storage, value, propertyName));
-        }
-
-        protected virtual bool SetProperty<T>(ref T storage, T value, Action? afterAction, [CallerMemberName] string? propertyName = null)
-        {
-            if (SetProperty(ref storage, value, propertyName))
-            {
-                afterAction?.Invoke();
-                return true;
-            }
-
-            return false;
-        }
-
-        protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string? propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(storage, value))
-            {
-                return false;
-            }
-
-            if (ShouldRaisePropertyChanging())
-            {
-                var shouldSetValue = RaisePropertyChanging(value, propertyName);
-                if (!shouldSetValue)
-                    return false;
-            }
-
-            storage = value;
-            RaisePropertyChanged(propertyName);
+            afterAction?.Invoke();
             return true;
         }
 
-        protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanged(PropertyChangedEventArgs changedArgs)
-        {
-            if (MvxSingletonCache.Instance != null)
-            {
-                var interceptor = MvxSingletonCache.Instance.InpcInterceptor;
-                if (interceptor != null)
-                {
-                    return interceptor.Intercept(this, changedArgs);
-                }
-            }
+        return false;
+    }
 
-            return MvxInpcInterceptionResult.NotIntercepted;
+    protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(storage, value))
+        {
+            return false;
         }
 
-        protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanging(PropertyChangingEventArgs changingArgs)
+        if (ShouldRaisePropertyChanging())
         {
-            if (MvxSingletonCache.Instance != null)
-            {
-                var interceptor = MvxSingletonCache.Instance.InpcInterceptor;
-                if (interceptor != null)
-                {
-                    return interceptor.Intercept(this, changingArgs);
-                }
-            }
-
-            return MvxInpcInterceptionResult.NotIntercepted;
+            var shouldSetValue = RaisePropertyChanging(value, propertyName);
+            if (!shouldSetValue)
+                return false;
         }
+
+        storage = value;
+        RaisePropertyChanged(propertyName);
+        return true;
+    }
+
+    protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanged(PropertyChangedEventArgs changedArgs)
+    {
+        if (MvxSingletonCache.Instance != null)
+        {
+            var interceptor = MvxSingletonCache.Instance.InpcInterceptor;
+            if (interceptor != null)
+            {
+                return interceptor.Intercept(this, changedArgs);
+            }
+        }
+
+        return MvxInpcInterceptionResult.NotIntercepted;
+    }
+
+    protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanging(PropertyChangingEventArgs changingArgs)
+    {
+        if (MvxSingletonCache.Instance != null)
+        {
+            var interceptor = MvxSingletonCache.Instance.InpcInterceptor;
+            if (interceptor != null)
+            {
+                return interceptor.Intercept(this, changingArgs);
+            }
+        }
+
+        return MvxInpcInterceptionResult.NotIntercepted;
     }
 }
