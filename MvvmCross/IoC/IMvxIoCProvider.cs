@@ -53,16 +53,16 @@ public interface IMvxIoCProvider
 
     void RegisterSingleton(Type tInterface, Func<object> theConstructor);
 
-    T? IoCConstruct<T>()
+    T IoCConstruct<T>()
         where T : class;
 
-    T? IoCConstruct<T>(IDictionary<string, object>? arguments)
+    T IoCConstruct<T>(IDictionary<string, object>? arguments)
         where T : class;
 
-    T? IoCConstruct<T>(object? arguments)
+    T IoCConstruct<T>(object? arguments)
         where T : class;
 
-    T? IoCConstruct<T>(params object?[] arguments)
+    T IoCConstruct<T>(params object?[] arguments)
         where T : class;
 
     object IoCConstruct(Type type);

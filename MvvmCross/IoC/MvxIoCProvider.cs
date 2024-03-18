@@ -136,22 +136,22 @@ public sealed class MvxIoCProvider
         _provider.RegisterSingleton(tInterface, theConstructor);
     }
 
-    public T? IoCConstruct<T>() where T : class
+    public T IoCConstruct<T>() where T : class
     {
         return _provider.IoCConstruct<T>((IDictionary<string, object>?)null);
     }
 
-    public T? IoCConstruct<T>(IDictionary<string, object>? arguments) where T : class
+    public T IoCConstruct<T>(IDictionary<string, object>? arguments) where T : class
     {
         return _provider.IoCConstruct<T>(arguments);
     }
 
-    public T? IoCConstruct<T>(params object?[] arguments) where T : class
+    public T IoCConstruct<T>(params object?[] arguments) where T : class
     {
         return _provider.IoCConstruct<T>(arguments);
     }
 
-    public T? IoCConstruct<T>(object? arguments) where T : class
+    public T IoCConstruct<T>(object? arguments) where T : class
     {
         return _provider.IoCConstruct<T>(arguments);
     }

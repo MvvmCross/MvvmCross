@@ -374,27 +374,27 @@ public sealed class MvxIoCContainer
         return IoCConstruct(type, arguments?.ToPropertyDictionary());
     }
 
-    public T? IoCConstruct<T>()
+    public T IoCConstruct<T>()
         where T : class
     {
-        return (T?)IoCConstruct(typeof(T), (IDictionary<string, object>?)null);
+        return (T)IoCConstruct(typeof(T), (IDictionary<string, object>?)null);
     }
 
-    public T? IoCConstruct<T>(IDictionary<string, object>? arguments)
+    public T IoCConstruct<T>(IDictionary<string, object>? arguments)
         where T : class
     {
-        return (T?)IoCConstruct(typeof(T), arguments);
+        return (T)IoCConstruct(typeof(T), arguments);
     }
 
-    public T? IoCConstruct<T>(object? arguments)
+    public T IoCConstruct<T>(object? arguments)
         where T : class
     {
-        return (T?)IoCConstruct(typeof(T), arguments?.ToPropertyDictionary());
+        return (T)IoCConstruct(typeof(T), arguments?.ToPropertyDictionary());
     }
 
-    public T? IoCConstruct<T>(params object?[] arguments) where T : class
+    public T IoCConstruct<T>(params object?[] arguments) where T : class
     {
-        return (T?)IoCConstruct(typeof(T), arguments);
+        return (T)IoCConstruct(typeof(T), arguments);
     }
 
     public object IoCConstruct(Type type, params object?[] arguments)
