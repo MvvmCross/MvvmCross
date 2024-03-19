@@ -36,6 +36,6 @@ jobs:
         java-version: '17'
 
     - name: Build
-      run: dotnet cake --verbosity=Diagnostic --artifactsDir="output" --target=Sonar --sonarKey=$env:SONARY_KEY
+      run: dotnet cake --verbosity=Normal --artifactsDir="output" --target=Sonar --sonarKey=$env:SONARY_KEY
       env:
         SONARY_KEY: ${{secrets.SONAR_TOKEN}}
