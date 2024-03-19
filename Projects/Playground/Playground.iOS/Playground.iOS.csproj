@@ -5,7 +5,7 @@
     <AssemblyName>Playground.iOS</AssemblyName>
     <RootNamespace>Playground.iOS</RootNamespace>
     <OutputType>Exe</OutputType>
-    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
     <Platforms>AnyCPU;iPhone;iPhoneSimulator</Platforms>
     <EnableAssemblyILStripping>false</EnableAssemblyILStripping>

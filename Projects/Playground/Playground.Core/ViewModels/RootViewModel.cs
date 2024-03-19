@@ -151,6 +151,11 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowConvertersCommand =>
             new MvxAsyncCommand(() => NavigationService.Navigate<ConvertersViewModel>());
 
+        public IMvxAsyncCommand ShowNewWindowCommand =>
+            new MvxAsyncCommand(() => NavigationService.Navigate<NewWindowViewModel>());
+        public IMvxAsyncCommand ShowRegionCommand =>
+            new MvxAsyncCommand(() => this.NavigationService.Navigate<RegionViewModel>(this));
+
         public IMvxAsyncCommand ShowSharedElementsCommand { get; }
 
         public IMvxAsyncCommand ShowFluentBindingCommand { get; }
