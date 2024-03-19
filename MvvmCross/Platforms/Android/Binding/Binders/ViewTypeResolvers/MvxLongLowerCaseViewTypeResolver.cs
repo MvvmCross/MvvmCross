@@ -10,7 +10,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {
     public abstract class MvxLongLowerCaseViewTypeResolver : MvxReflectionViewTypeResolver
     {
-        protected MvxLongLowerCaseViewTypeResolver(IMvxTypeCache<View> typeCache)
+        protected MvxLongLowerCaseViewTypeResolver(IMvxTypeCache typeCache)
             : base(typeCache)
         {
         }

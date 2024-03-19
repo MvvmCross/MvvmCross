@@ -10,7 +10,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {
     public class MvxJustNameViewTypeResolver : MvxReflectionViewTypeResolver
     {
-        public MvxJustNameViewTypeResolver(IMvxTypeCache<View> typeCache) : base(typeCache)
+        public MvxJustNameViewTypeResolver(IMvxTypeCache typeCache) : base(typeCache)
         {
         }
 
