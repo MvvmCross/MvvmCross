@@ -82,7 +82,7 @@ Task("SonarStart")
     args.Append("/o:mvx ");
     args.Append("/d:sonar.host.url=https://sonarcloud.io ");
     args.AppendFormat("/d:sonar.cs.xunit.reportsPaths={0} ", new DirectoryPath(outputDir + "/Tests/").FullPath);
-    args.AppendFormat("/d:sonar.login={0} ", sonarKey);
+    args.AppendFormat("/d:sonar.token={0} ", sonarKey);
 
     if (GitHubActions.Environment.PullRequest.IsPullRequest)
     {
@@ -98,7 +98,7 @@ Task("SonarEnd")
 {   
     StringBuilder args = new StringBuilder();
     args.Append("end ");
-    args.AppendFormat("/d:sonar.login={0}", sonarKey);
+    args.AppendFormat("/d:sonar.token={0}", sonarKey);
 
     DotNetTool("./", "dotnet-sonarscanner", args.ToString());
 });
