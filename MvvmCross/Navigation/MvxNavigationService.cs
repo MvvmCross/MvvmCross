@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -76,7 +77,7 @@ public class MvxNavigationService : IMvxNavigationService
 
     protected virtual bool TryGetRoute(string path, out KeyValuePair<Regex, Type> entry)
     {
-        ValidateArguments(path);
+        ArgumentNullException.ThrowIfNull(path);
 
         try
         {
@@ -138,7 +139,7 @@ public class MvxNavigationService : IMvxNavigationService
     protected virtual async Task<MvxViewModelInstanceRequest> NavigationRouteRequest(
         string path, IMvxBundle? presentationBundle = null)
     {
-        ValidateArguments(path);
+        ArgumentNullException.ThrowIfNull(path);
 
         if (!TryGetRoute(path, out var entry))
         {
@@ -202,7 +203,8 @@ public class MvxNavigationService : IMvxNavigationService
     protected async Task<MvxViewModelInstanceRequest> NavigationRouteRequest<TParameter>(
         string path, TParameter param, IMvxBundle? presentationBundle = null)
     {
-        ValidateArguments(path, param);
+        ArgumentNullException.ThrowIfNull(path);
+        ArgumentNullException.ThrowIfNull(param);
 
         if (!TryGetRoute(path, out var entry))
         {
@@ -275,7 +277,8 @@ public class MvxNavigationService : IMvxNavigationService
     protected virtual async Task<bool> Navigate(MvxViewModelRequest request, IMvxViewModel viewModel,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
-        ValidateArguments(request, viewModel);
+        ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(viewModel);
 
         var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Show, cancellationToken);
         OnWillNavigate(this, args);
@@ -377,7 +380,7 @@ public class MvxNavigationService : IMvxNavigationService
     public virtual async Task<bool> ChangePresentation(
         MvxPresentationHint hint, CancellationToken cancellationToken = default)
     {
-        ValidateArguments(hint);
+        ArgumentNullException.ThrowIfNull(hint);
 
         _log.Value?.Log(LogLevel.Trace, "Requesting presentation change");
         var args = new ChangePresentationEventArgs(hint, cancellationToken);
@@ -396,7 +399,7 @@ public class MvxNavigationService : IMvxNavigationService
 
     public virtual async Task<bool> Close(IMvxViewModel viewModel, CancellationToken cancellationToken = default)
     {
-        ValidateArguments(viewModel);
+        ArgumentNullException.ThrowIfNull(viewModel);
 
         var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Close, cancellationToken);
         OnWillClose(this, args);
@@ -440,38 +443,166 @@ public class MvxNavigationService : IMvxNavigationService
         DidChangePresentation?.Invoke(sender, e);
     }
 
-    private static void ValidateArguments(MvxViewModelRequest request, IMvxViewModel viewModel)
+    /// <summary>
+    ///     Loads a view model targeting the window for the given source.
+    /// </summary>
+    /// <typeparam name="TViewModel">The viewmodel type.</typeparam>
+    /// <typeparam name="TParameter">The parameter type.</typeparam>
+    /// <param name="param">The parameter value.</param>
+    /// <param name="source">
+    ///     This is used to find the window to execute the navigate in.
+    ///     This is usually the viewmodel instance which calls this method. 
+    /// </param>
+    /// <param name="presentationBundle">The presentation bungle.</param>
+    /// <param name="cancellationToken">Any cancellation token.</param>
+    /// <returns>True if navigation was successful.</returns>
+    public virtual Task<bool> Navigate<TViewModel, TParameter>(TParameter param, IMvxViewModel source, IMvxBundle? presentationBundle = null,
+        CancellationToken cancellationToken = default) where TViewModel : IMvxViewModel<TParameter>
+        where TParameter : notnull
     {
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
-
-        if (viewModel == null)
-            throw new ArgumentNullException(nameof(viewModel));
+        return Navigate(typeof(TViewModel), param, source, presentationBundle, cancellationToken);
     }
 
-    private static void ValidateArguments<TParameter>(string path, TParameter param)
+    /// <summary>
+    ///     Loads a view model targeting the window for the given source.
+    /// </summary>
+    /// <typeparam name="TParameter">The parameter</typeparam>
+    /// <param name="viewModelType">The viewmodel type.</param>
+    /// <param name="param">The parameter value.</param>
+    /// <param name="source">
+    ///     This is used to find the window to execute the navigate in.
+    ///     This is usually the viewmodel instance which calls this method. 
+    /// </param>
+    /// <param name="presentationBundle">The presentation bungle.</param>
+    /// <param name="cancellationToken">Any cancellation token.</param>
+    /// <returns>True if navigation was successful.</returns>
+    public virtual Task<bool> Navigate<TParameter>(Type viewModelType, TParameter param, IMvxViewModel source, IMvxBundle? presentationBundle = null,
+        CancellationToken cancellationToken = default)
+        where TParameter : notnull
     {
-        ValidateArguments(path);
-
-        if (param == null)
-            throw new ArgumentNullException(nameof(param));
+        var mvxViewModelInstanceRequest = new MvxViewModelInstanceRequestWithSource(viewModelType, source)
+        {
+            PresentationValues = presentationBundle?.SafeGetData()
+        };
+        mvxViewModelInstanceRequest.ViewModelInstance = ViewModelLoader.LoadViewModel(mvxViewModelInstanceRequest, param, null);
+        return NavigateAsync(mvxViewModelInstanceRequest, mvxViewModelInstanceRequest.ViewModelInstance, presentationBundle, cancellationToken);
     }
 
-    private static void ValidateArguments(string path)
+    /// <summary>
+    ///     Navigates to a view for the given type.
+    /// </summary>
+    /// <param name="viewModelType">The type of the viewmodel to navigate to.</param>
+    /// <param name="source">
+    ///     This is used to find the window to execute the navigate in.
+    ///     This is usually the viewmodel instance which calls this method. 
+    /// </param>
+    /// <param name="presentationBundle">A presentation bundle.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns></returns>
+    public virtual Task<bool> Navigate(Type viewModelType, IMvxViewModel source, IMvxBundle? presentationBundle = null,
+        CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrEmpty(path))
-            throw new ArgumentNullException(nameof(path));
+        var request = new MvxViewModelInstanceRequestWithSource(viewModelType, source)
+        {
+            PresentationValues = presentationBundle?.SafeGetData()
+        };
+        request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, null);
+        return NavigateAsync(request, request.ViewModelInstance, presentationBundle, cancellationToken);
     }
 
-    private static void ValidateArguments(MvxPresentationHint hint)
+    /// <summary>
+    ///     Navigates to the viewmodel for the given type.
+    /// </summary>
+    /// <typeparam name="TViewModel">The type of the viewmodel to navigate to.</typeparam>
+    /// <param name="source">
+    ///     This is used to find the window to execute the navigate in.
+    ///     This is usually the viewmodel instance which calls this method. 
+    /// </param>
+    /// <param name="presentationBundle">The presentation bundle.</param>
+    /// <param name="cancellationToken">Any cancellation token.</param>
+    /// <returns>True if successful, false otherwise.</returns>
+    public virtual Task<bool> Navigate<TViewModel>(IMvxViewModel source,
+        IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+        where TViewModel : IMvxViewModel
     {
-        if (hint == null)
-            throw new ArgumentNullException(nameof(hint));
+        return Navigate(typeof(TViewModel), source, presentationBundle, cancellationToken);
     }
 
-    private static void ValidateArguments(IMvxViewModel viewModel)
+    /// <summary>
+    ///     Navigates to a view for the given viewmodel.
+    /// </summary>
+    /// <param name="viewModel">The viewmodel to navigate to.</param>
+    /// <param name="source">
+    ///     This is used to find the window to execute the navigate in.
+    ///     This is usually the viewmodel instance which calls this method. 
+    /// </param>
+    /// <param name="presentationBundle">The presentation bundle.</param>
+    /// <param name="cancellationToken">Any cancellation token.</param>
+    /// <returns>True if successful, false otherwise.</returns>
+    public virtual Task<bool> Navigate(
+        IMvxViewModel viewModel, IMvxViewModel source, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
-        if (viewModel == null)
-            throw new ArgumentNullException(nameof(viewModel));
+        var request = new MvxViewModelInstanceRequestWithSource(viewModel, source) { PresentationValues = presentationBundle?.SafeGetData() };
+        ViewModelLoader.ReloadViewModel(viewModel, request, null);
+        return NavigateAsync(request, viewModel, presentationBundle, cancellationToken);
+    }
+
+    /// <summary>
+    ///     Navigates to a view for the given viewmodel.
+    /// </summary>
+    /// <typeparam name="TParameter">The parameter type.</typeparam>
+    /// <param name="viewModel">The viewmodel to navigate to.</param>
+    /// <param name="param">Any parameters.</param>
+    /// <param name="source">
+    ///     This is used to find the window to execute the navigate in.
+    ///     This is usually the viewmodel instance which calls this method. 
+    /// </param>
+    /// <param name="presentationBundle">The presentation bundle.</param>
+    /// <param name="cancellationToken">Any cancellation token.</param>
+    /// <returns>True if successful, false otherwise.</returns>
+    public virtual Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxViewModel source,
+        IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+        where TParameter : notnull
+    {
+        var request = new MvxViewModelInstanceRequestWithSource(viewModel, source) { PresentationValues = presentationBundle?.SafeGetData() };
+        ViewModelLoader.ReloadViewModel(viewModel, param, request, null);
+        return NavigateAsync(request, viewModel, presentationBundle, cancellationToken);
+    }
+
+    /// <summary>
+    ///     Shows the ViewModel for the given request.
+    /// </summary>
+    /// <param name="request">The request to show the viewmodel for.</param>
+    /// <param name="viewModel">The viewmodel for the navigation arguments.</param>
+    /// <param name="presentationBundle">The presentation bundle.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>True is successful. False otherwise.</returns>
+    protected virtual async Task<bool> NavigateAsync(MvxViewModelInstanceRequestWithSource request, IMvxViewModel viewModel,
+        IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(viewModel);
+
+        var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Show, cancellationToken);
+        OnWillNavigate(this, args);
+
+        if (args.Cancel)
+        {
+            return false;
+        }
+
+        bool hasNavigated = await ViewDispatcher.ShowViewModel(request).ConfigureAwait(false);
+        if (!hasNavigated)
+        {
+            return false;
+        }
+
+        if (viewModel.InitializeTask?.Task != null)
+        {
+            await viewModel.InitializeTask.Task.ConfigureAwait(false);
+        }
+
+        OnDidNavigate(this, args);
+        return true;
     }
 }

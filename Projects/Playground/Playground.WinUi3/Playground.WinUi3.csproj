@@ -7,8 +7,14 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x86;x64;arm64</Platforms>
     <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
     <UseWinUI>true</UseWinUI>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Views\BlankPage.xaml" />
+    <None Remove="Views\NewWindow.xaml" />
+    <None Remove="Views\RegionView.xaml" />
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" />
@@ -26,5 +32,20 @@
        package has not yet been restored -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\BlankPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\RegionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\NewWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

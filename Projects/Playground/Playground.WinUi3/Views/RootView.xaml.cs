@@ -2,6 +2,7 @@ using MvvmCross.Platforms.WinUi.Presenters.Attributes;
 using MvvmCross.Platforms.WinUi.Views;
 using MvvmCross.ViewModels;
 using Playground.Core.ViewModels;
+using Playground.WinUi3.Views;
 
 namespace Playground.WinUi.Views
 {
@@ -12,6 +13,7 @@ namespace Playground.WinUi.Views
         public RootView()
         {
             this.InitializeComponent();
+            this.PopupLocation.Navigate(typeof(BlankPage));
         }
     }
 
