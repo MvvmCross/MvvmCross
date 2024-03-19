@@ -13,10 +13,10 @@ namespace MvvmCross.Binding.Parse.PropertyPath
     /// </summary>
     public class MvxSourcePropertyPathParser : IMvxSourcePropertyPathParser
     {
-        private static readonly ConcurrentDictionary<string, IList<MvxPropertyToken>> ParseCache =
-            new ConcurrentDictionary<string, IList<MvxPropertyToken>>();
+        private static readonly ConcurrentDictionary<string, IList<IMvxPropertyToken>> ParseCache =
+            new ConcurrentDictionary<string, IList<IMvxPropertyToken>>();
 
-        public IList<MvxPropertyToken> Parse(string textToParse)
+        public IList<IMvxPropertyToken> Parse(string textToParse)
         {
             textToParse = MvxPropertyPathParser.MakeSafe(textToParse);
             if (ParseCache.TryGetValue(textToParse, out var cachedItem))

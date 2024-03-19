@@ -13,6 +13,6 @@ namespace MvvmCross.Platforms.Ios.Views
 
         IMvxIosView CreateView(IMvxViewModel viewModel);
 
-        IMvxIosView CreateViewOfType(Type viewType, MvxViewModelRequest request);
+        IMvxIosView CreateViewOfType(Type viewType);
     }
 }

@@ -80,7 +80,6 @@ namespace MvvmCross.ViewModels
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
             IMvxNavigateEventArgs? navigationArgs = null)
-            where TParameter : notnull
         {
             RunViewModelLifecycle(viewModel, param, parameterValues, savedState, navigationArgs);
 
@@ -139,7 +138,6 @@ namespace MvvmCross.ViewModels
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
             IMvxNavigateEventArgs? navigationArgs)
-            where TParameter : notnull
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));

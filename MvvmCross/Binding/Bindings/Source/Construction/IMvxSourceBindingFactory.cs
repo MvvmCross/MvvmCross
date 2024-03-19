@@ -11,6 +11,6 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
     {
         IMvxSourceBinding CreateBinding(object source, string combinedPropertyName);
 
-        IMvxSourceBinding CreateBinding(object source, IList<MvxPropertyToken> tokens);
+        IMvxSourceBinding CreateBinding(object source, IList<IMvxPropertyToken> tokens);
     }
 }

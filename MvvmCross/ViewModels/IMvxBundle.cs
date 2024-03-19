@@ -1,25 +1,20 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using System.Collections.Generic;
+#nullable enable
 using System.Reflection;
 
-namespace MvvmCross.ViewModels
+namespace MvvmCross.ViewModels;
+
+public interface IMvxBundle
 {
-#nullable enable
-    public interface IMvxBundle
-    {
-        IDictionary<string, string> Data { get; }
+    IDictionary<string, string> Data { get; }
 
-        void Write(object toStore);
+    void Write(object toStore);
 
-        T Read<T>() where T : new();
+    T? Read<T>() where T : new();
 
-        object Read(Type type);
+    object? Read(Type type);
 
-        IEnumerable<object> CreateArgumentList(IEnumerable<ParameterInfo> requiredParameters, string? debugText);
-    }
-#nullable restore
+    IEnumerable<object> CreateArgumentList(IEnumerable<ParameterInfo> requiredParameters, string? debugText);
 }

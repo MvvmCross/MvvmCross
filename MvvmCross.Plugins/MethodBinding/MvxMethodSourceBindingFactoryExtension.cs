@@ -16,7 +16,7 @@ namespace MvvmCross.Plugin.MethodBinding
     public class MvxMethodSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
-        public bool TryCreateBinding(object source, MvxPropertyToken currentToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+        public bool TryCreateBinding(object source, IMvxPropertyToken currentToken, List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
             if (source == null)
             {

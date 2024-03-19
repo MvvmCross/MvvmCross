@@ -184,7 +184,7 @@ namespace MvvmCross.Commands
             if (execute == null)
                 throw new ArgumentNullException(nameof(execute));
 
-            _execute = (_) => execute();
+            _execute = _ => execute();
             _canExecute = canExecute;
         }
 

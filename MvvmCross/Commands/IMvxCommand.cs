@@ -4,29 +4,22 @@
 #nullable enable
 using System.Windows.Input;
 
-namespace MvvmCross.Commands
+namespace MvvmCross.Commands;
+
+public interface IMvxCommand : ICommand
 {
-    public interface IMvxCommand : ICommand
-    {
-        void RaiseCanExecuteChanged();
+    void RaiseCanExecuteChanged();
 
-        void Execute();
+    void Execute();
 
-        bool CanExecute();
-    }
+    bool CanExecute();
+}
 
-    public interface IMvxCommand<in TParameter> : ICommand
-    {
-        [Obsolete("Use the strongly typed version of Execute instead", true)]
-        new void Execute(object parameter);
+public interface IMvxCommand<in TParameter> : ICommand
+{
+    void Execute(TParameter parameter);
 
-        void Execute(TParameter parameter);
+    bool CanExecute(TParameter parameter);
 
-        [Obsolete("Use the strongly typed version of CanExecute instead", true)]
-        new bool CanExecute(object parameter);
-
-        bool CanExecute(TParameter parameter);
-
-        void RaiseCanExecuteChanged();
-    }
+    void RaiseCanExecuteChanged();
 }
