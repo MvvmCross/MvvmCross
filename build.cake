@@ -153,9 +153,15 @@ Task("UnitTest")
     foreach(var project in testPaths)
     {
         var projectName = project.GetFilenameWithoutExtension();
-        var testXml = MakeAbsolute(new FilePath(outputDir + "/Tests/" + projectName + ".xml"));
-        settings.Loggers = new string[] { $"trx;LogFileName={testXml.FullPath}" };
-        try 
+        var testTrx = MakeAbsolute(new FilePath(outputDir + "/Tests/" + projectName + ".trx"));
+        var testXml= MakeAbsolute(new FilePath(outputDir + "/Tests/" + projectName + ".xml"));
+        settings.Loggers = new string[]
+        {
+            $"trx;LogFileName={testTrx.FullPath}",
+            $"xunit;LogFilePath={testXml.FullPath};Title={projectName}"
+        };
+
+        try
         {
             DotNetTest(project.ToString(), settings);
         }
