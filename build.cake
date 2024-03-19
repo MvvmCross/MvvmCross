@@ -187,18 +187,12 @@ Task("Sonar")
     .IsDependentOn("SonarStart")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
-    .IsDependentOn("SonarEnd")
-    .Does(() => 
-{
-});
+    .IsDependentOn("SonarEnd");
 
 Task("Default")
     .IsDependentOn("Clean")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
-    .IsDependentOn("CopyPackages")
-    .Does(() => 
-{
-});
+    .IsDependentOn("CopyPackages");
 
 RunTarget(target);
