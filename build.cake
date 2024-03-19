@@ -37,6 +37,14 @@ Setup(context =>
         target,
         cakeVersion);
 
+    if (GitHubActions.Environment.PullRequest.IsPullRequest)
+    {
+        Information("PR HeadRef: {0}", GitHubActions.Environment.Workflow.HeadRef);
+        Information("PR BaseRef: {0}", GitHubActions.Environment.Workflow.BaseRef);
+    }
+
+    Information("RefName: {0}", GitHubActions.Environment.Workflow.RefName);
+
     verbosity = context.Log.Verbosity;
     verbosityDotNet = verbosity switch {
         Verbosity.Quiet => DotNetVerbosity.Quiet,
