@@ -22,7 +22,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
-                    viewGroup.Remove(viewGroup.Adapter, eventArgs.OldStartingIndex, eventArgs.OldItems.Count);
+                    viewGroup.Remove(eventArgs.OldStartingIndex, eventArgs.OldItems.Count);
                     break;
 
                 case NotifyCollectionChangedAction.Replace:
@@ -68,7 +68,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        private static void Remove(this ViewGroup viewGroup, IAdapter adapter, int removalIndex, int count)
+        private static void Remove(this ViewGroup viewGroup, int removalIndex, int count)
         {
             for (var i = 0; i < count; i++)
             {
