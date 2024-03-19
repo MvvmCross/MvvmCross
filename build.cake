@@ -86,6 +86,7 @@ Task("SonarStart")
 
     if (GitHubActions.Environment.PullRequest.IsPullRequest)
     {
+        args.AppendFormat("/d:sonar.pullrequest.branch={0}", GitHubActions.Environment.Workflow.HeadRef);
         args.AppendFormat("/d:sonar.pullrequest.base={0}", GitHubActions.Environment.Workflow.BaseRef);
     }
 
