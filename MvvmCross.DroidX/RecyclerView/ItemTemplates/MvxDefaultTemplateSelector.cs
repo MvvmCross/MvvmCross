@@ -2,26 +2,24 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace MvvmCross.DroidX.RecyclerView.ItemTemplates
+namespace MvvmCross.DroidX.RecyclerView.ItemTemplates;
+
+public class MvxDefaultTemplateSelector : IMvxTemplateSelector
 {
-    //MvxDefaultTemplateSelector
-    public class MvxDefaultTemplateSelector : IMvxTemplateSelector
+    public int ItemTemplateId { get; set; }
+
+    public MvxDefaultTemplateSelector(int itemTemplateId)
     {
-        public int ItemTemplateId { get; set; }
-
-        public MvxDefaultTemplateSelector(int itemTemplateId)
-        {
-            ItemTemplateId = itemTemplateId;
-        }
-
-        public MvxDefaultTemplateSelector()
-        {
-        }
-
-        public int GetItemViewType(object forItemObject)
-            => 0;
-
-        public int GetItemLayoutId(int fromViewType)
-            => ItemTemplateId;
+        ItemTemplateId = itemTemplateId;
     }
+
+    public MvxDefaultTemplateSelector()
+    {
+    }
+
+    public int GetItemViewType(object? forItemObject)
+        => 0;
+
+    public int GetItemLayoutId(int fromViewType)
+        => ItemTemplateId;
 }

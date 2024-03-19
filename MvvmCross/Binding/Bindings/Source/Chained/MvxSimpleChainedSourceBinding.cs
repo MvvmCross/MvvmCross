@@ -15,7 +15,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
         public MvxSimpleChainedSourceBinding(
             object source,
             PropertyInfo propertyInfo,
-            IList<MvxPropertyToken> childTokens)
+            IList<IMvxPropertyToken> childTokens)
             : base(source, propertyInfo, childTokens)
         {
             UpdateChildBinding();

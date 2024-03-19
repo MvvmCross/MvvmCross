@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace MvvmCross.DroidX.RecyclerView.ItemTemplates
-{
-    public interface IMvxTemplateSelector
-    {
-        int ItemTemplateId { get; set; }
-        int GetItemViewType(object forItemObject);
+namespace MvvmCross.DroidX.RecyclerView.ItemTemplates;
 
-        int GetItemLayoutId(int fromViewType);
-    }
+public interface IMvxTemplateSelector
+{
+    int ItemTemplateId { get; set; }
+    int GetItemViewType(object? forItemObject);
+
+    int GetItemLayoutId(int fromViewType);
 }

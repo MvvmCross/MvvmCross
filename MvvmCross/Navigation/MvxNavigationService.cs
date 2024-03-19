@@ -23,19 +23,19 @@ public class MvxNavigationService : IMvxNavigationService
 {
     private readonly IMvxIoCProvider _iocProvider;
 
-    private readonly Lazy<ILogger?> _log = new Lazy<ILogger?>(() =>
+    private readonly Lazy<ILogger?> _log = new(() =>
         MvxLogHost.GetLog<MvxNavigationService>());
 
     public IMvxViewDispatcher ViewDispatcher { get; }
 
-    protected Lazy<IMvxViewsContainer> ViewsContainer { get; }
+    protected Lazy<IMvxViewsContainer?> ViewsContainer { get; }
 
-    protected Dictionary<Regex, Type> Routes { get; } = new Dictionary<Regex, Type>();
+    protected Dictionary<Regex, Type> Routes { get; } = new();
 
     protected IMvxViewModelLoader ViewModelLoader { get; set; }
 
     protected ConditionalWeakTable<IMvxViewModel, TaskCompletionSource<object?>> TaskCompletionResults { get; } =
-        new ConditionalWeakTable<IMvxViewModel, TaskCompletionSource<object?>>();
+        new();
 
     public event EventHandler<IMvxNavigateEventArgs>? WillNavigate;
 
@@ -58,27 +58,26 @@ public class MvxNavigationService : IMvxNavigationService
 
         ViewModelLoader = viewModelLoader;
         ViewDispatcher = viewDispatcher;
-        ViewsContainer = new Lazy<IMvxViewsContainer>(() => _iocProvider.Resolve<IMvxViewsContainer>());
+        ViewsContainer = new Lazy<IMvxViewsContainer?>(() => _iocProvider.Resolve<IMvxViewsContainer>());
     }
 
     public void LoadRoutes(IEnumerable<Assembly> assemblies)
     {
-        if (assemblies == null)
-            throw new ArgumentNullException(nameof(assemblies));
+        ArgumentNullException.ThrowIfNull(assemblies);
 
         Routes.Clear();
         foreach (var routeAttr in
-            assemblies.SelectMany(a => a.GetCustomAttributes<MvxNavigationAttribute>()))
+                 assemblies.SelectMany(a => a.GetCustomAttributes<MvxNavigationAttribute>()))
         {
             Routes.Add(new Regex(routeAttr.UriRegex,
-                RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline),
+                    RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline),
                 routeAttr.ViewModelOrFacade);
         }
     }
 
     protected virtual bool TryGetRoute(string path, out KeyValuePair<Regex, Type> entry)
     {
-        ValidateArguments(path);
+        ArgumentNullException.ThrowIfNull(path);
 
         try
         {
@@ -88,7 +87,7 @@ public class MvxNavigationService : IMvxNavigationService
             {
                 case 0:
                     entry = default;
-                    _log.Value?.Log(LogLevel.Trace, "Unable to find routing for {path}", path);
+                    _log.Value?.Log(LogLevel.Trace, "Unable to find routing for {Path}", path);
                     return false;
 
                 case 1:
@@ -104,7 +103,7 @@ public class MvxNavigationService : IMvxNavigationService
                 return true;
             }
 
-            _log.Value?.Log(LogLevel.Warning, "The following regular expressions match the provided url ({count}), each RegEx must be unique (otherwise try using IMvxRoutingFacade): {matches}",
+            _log.Value?.Log(LogLevel.Warning, "The following regular expressions match the provided url ({Count}), each RegEx must be unique (otherwise try using IMvxRoutingFacade): {Matches}",
                 matches.Count - 1,
                 string.Join(", ", matches.Select(t => t.Key.ToString())));
 
@@ -122,11 +121,8 @@ public class MvxNavigationService : IMvxNavigationService
 
     protected virtual IDictionary<string, string> BuildParamDictionary(Regex regex, Match match)
     {
-        if (regex == null)
-            throw new ArgumentNullException(nameof(regex));
-
-        if (match == null)
-            throw new ArgumentNullException(nameof(match));
+        ArgumentNullException.ThrowIfNull(regex);
+        ArgumentNullException.ThrowIfNull(match);
 
         var paramDict = new Dictionary<string, string>();
 
@@ -143,7 +139,7 @@ public class MvxNavigationService : IMvxNavigationService
     protected virtual async Task<MvxViewModelInstanceRequest> NavigationRouteRequest(
         string path, IMvxBundle? presentationBundle = null)
     {
-        ValidateArguments(path);
+        ArgumentNullException.ThrowIfNull(path);
 
         if (!TryGetRoute(path, out var entry))
         {
@@ -207,7 +203,8 @@ public class MvxNavigationService : IMvxNavigationService
     protected async Task<MvxViewModelInstanceRequest> NavigationRouteRequest<TParameter>(
         string path, TParameter param, IMvxBundle? presentationBundle = null)
     {
-        ValidateArguments(path, param);
+        ArgumentNullException.ThrowIfNull(path);
+        ArgumentNullException.ThrowIfNull(param);
 
         if (!TryGetRoute(path, out var entry))
         {
@@ -269,18 +266,19 @@ public class MvxNavigationService : IMvxNavigationService
     public virtual Task<bool> CanNavigate<TViewModel>()
         where TViewModel : IMvxViewModel
     {
-        return Task.FromResult(ViewsContainer.Value.GetViewType(typeof(TViewModel)) != null);
+        return Task.FromResult(ViewsContainer.Value?.GetViewType(typeof(TViewModel)) != null);
     }
 
     public virtual Task<bool> CanNavigate(Type viewModelType)
     {
-        return Task.FromResult(ViewsContainer.Value.GetViewType(viewModelType) != null);
+        return Task.FromResult(ViewsContainer.Value?.GetViewType(viewModelType) != null);
     }
 
     protected virtual async Task<bool> Navigate(MvxViewModelRequest request, IMvxViewModel viewModel,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
-        ValidateArguments(request, viewModel);
+        ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(viewModel);
 
         var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Show, cancellationToken);
         OnWillNavigate(this, args);
@@ -312,8 +310,11 @@ public class MvxNavigationService : IMvxNavigationService
         return await Navigate(request, request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
     }
 
-    public virtual async Task<bool> Navigate<TParameter>(string path, TParameter param,
-        IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+    public virtual async Task<bool> Navigate<TParameter>(
+            string path,
+            TParameter param,
+            IMvxBundle? presentationBundle = null,
+            CancellationToken cancellationToken = default)
     {
         var request = await NavigationRouteRequest(path, param, presentationBundle).ConfigureAwait(false);
         if (request.ViewModelInstance == null)
@@ -379,7 +380,7 @@ public class MvxNavigationService : IMvxNavigationService
     public virtual async Task<bool> ChangePresentation(
         MvxPresentationHint hint, CancellationToken cancellationToken = default)
     {
-        ValidateArguments(hint);
+        ArgumentNullException.ThrowIfNull(hint);
 
         _log.Value?.Log(LogLevel.Trace, "Requesting presentation change");
         var args = new ChangePresentationEventArgs(hint, cancellationToken);
@@ -398,7 +399,7 @@ public class MvxNavigationService : IMvxNavigationService
 
     public virtual async Task<bool> Close(IMvxViewModel viewModel, CancellationToken cancellationToken = default)
     {
-        ValidateArguments(viewModel);
+        ArgumentNullException.ThrowIfNull(viewModel);
 
         var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Close, cancellationToken);
         OnWillClose(this, args);
@@ -440,41 +441,6 @@ public class MvxNavigationService : IMvxNavigationService
     protected virtual void OnDidChangePresentation(object sender, ChangePresentationEventArgs e)
     {
         DidChangePresentation?.Invoke(sender, e);
-    }
-
-    private static void ValidateArguments(MvxViewModelRequest request, IMvxViewModel viewModel)
-    {
-        if (request == null)
-            throw new ArgumentNullException(nameof(request));
-
-        if (viewModel == null)
-            throw new ArgumentNullException(nameof(viewModel));
-    }
-
-    private static void ValidateArguments<TParameter>(string path, TParameter param)
-    {
-        ValidateArguments(path);
-
-        if (param == null)
-            throw new ArgumentNullException(nameof(param));
-    }
-
-    private static void ValidateArguments(string path)
-    {
-        if (string.IsNullOrEmpty(path))
-            throw new ArgumentNullException(nameof(path));
-    }
-
-    private static void ValidateArguments(MvxPresentationHint hint)
-    {
-        if (hint == null)
-            throw new ArgumentNullException(nameof(hint));
-    }
-
-    private static void ValidateArguments(IMvxViewModel viewModel)
-    {
-        if (viewModel == null)
-            throw new ArgumentNullException(nameof(viewModel));
     }
 
     /// <summary>
@@ -614,7 +580,8 @@ public class MvxNavigationService : IMvxNavigationService
     protected virtual async Task<bool> NavigateAsync(MvxViewModelInstanceRequestWithSource request, IMvxViewModel viewModel,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
-        ValidateArguments(request, viewModel);
+        ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(viewModel);
 
         var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Show, cancellationToken);
         OnWillNavigate(this, args);
@@ -637,23 +604,5 @@ public class MvxNavigationService : IMvxNavigationService
 
         OnDidNavigate(this, args);
         return true;
-    }
-
-    private static void ValidateArguments(MvxViewModelInstanceRequestWithSource request, IMvxViewModel viewModel)
-    {
-        if (request == null)
-        {
-            throw new ArgumentNullException(nameof(request));
-        }
-
-        if (request.Source == null)
-        {
-            throw new ArgumentNullException(nameof(request.Source));
-        }
-
-        if (viewModel == null)
-        {
-            throw new ArgumentNullException(nameof(viewModel));
-        }
     }
 }

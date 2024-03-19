@@ -1,0 +1,25 @@
+changelog:
+  exclude:
+    labels:
+      - "s/invalid"
+      - "s/wont-fix"
+      - "s/question"
+  categories:
+    - title: Breaking Changes 🛠
+      labels:
+        - "t/breaking"
+    - title: New Features 🎉
+      labels:
+        - "t/feature"
+    - title: Fixed Bugs 🐛
+      labels:
+        - "t/bug"
+    - title: Deprecations ‼️
+      labels:
+        - "t/deprecated"
+    - title: Dependencies 👒
+      labels:
+        - dependencies
+    - title: Other Changes 🌱
+      labels:
+        - "*"

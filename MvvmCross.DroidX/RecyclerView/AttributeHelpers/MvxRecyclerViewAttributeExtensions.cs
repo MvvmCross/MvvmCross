@@ -1,4 +1,3 @@
-#nullable enable
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
@@ -14,7 +13,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
     public static class MvxRecyclerViewAttributeExtensions
     {
         private static bool _areBindingResourcesInitialized;
-        private static int[] _recyclerViewItemTemplateSelectorGroupId;
+        private static int[]? _recyclerViewItemTemplateSelectorGroupId;
         private static int _recyclerViewItemTemplateSelector;
 
         private static string ReadRecyclerViewItemTemplateSelectorClassName(Context context, IAttributeSet attrs)
@@ -64,7 +63,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
             if (type == null)
             {
                 const string message =
-                    "Sorry but type with class name: {TemplateSelectorClassName} does not exist." +
+                    "Type with class name: {TemplateSelectorClassName} does not exist." +
                     "Make sure you have provided full Type name: namespace + class name, AssemblyName." +
                     "Example (check Example.Droid sample!): Example.Droid.Common.TemplateSelectors.MultiItemTemplateModelTemplateSelector, Example.Droid";
                 MvxAndroidLog.Instance?.Log(LogLevel.Error, message, templateSelectorClassName);
@@ -73,14 +72,14 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
 
             if (!typeof(IMvxTemplateSelector).IsAssignableFrom(type))
             {
-                const string message = "Sorry but type: {Type} does not implement {TemplateSelectorType} interface.";
+                const string message = "Type: {Type} does not implement {TemplateSelectorType} interface.";
                 MvxAndroidLog.Instance?.Log(LogLevel.Error, message, type, nameof(IMvxTemplateSelector));
                 throw new InvalidOperationException(message);
             }
 
             if (type.IsAbstract)
             {
-                const string message = "Sorry can not instatiate {TemplateSelectorType} as provided type: {Type} is abstract/interface.";
+                const string message = "Cannot instantiate {TemplateSelectorType} as provided type: {Type} is abstract/interface.";
                 MvxAndroidLog.Instance?.Log(LogLevel.Error, message, nameof(IMvxTemplateSelector), type);
                 throw new InvalidOperationException(message);
             }
@@ -101,7 +100,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
                 if (Mvx.IoCProvider?.TryResolve(
                     out MvvmCross.Platforms.Android.Binding.ResourceHelpers.IMvxAppResourceTypeFinder? resourceTypeFinder) != true)
                 {
-                    selectorGroup = Array.Empty<int>();
+                    selectorGroup = [];
                     selector = 0;
                     return false;
                 }
@@ -110,7 +109,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
                 if (resourceType == null)
                 {
                     MvxAndroidLog.Instance?.LogWarning("Could not find Resource Type - MvxRecyclerView binding won't work correctly");
-                    selectorGroup = Array.Empty<int>();
+                    selectorGroup = [];
                     selector = 0;
                     return false;
                 }
@@ -119,7 +118,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
                 if (styleableType == null)
                 {
                     MvxAndroidLog.Instance?.LogWarning("Could not find Styleable Type - MvxRecyclerView binding won't work correctly");
-                    selectorGroup = Array.Empty<int>();
+                    selectorGroup = [];
                     selector = 0;
                     return false;
                 }
@@ -133,7 +132,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
                 if (styleableType == null)
                 {
                     MvxAndroidLog.Instance?.LogWarning("Could not find Styleable Type - MvxRecyclerView binding won't work correctly");
-                    selectorGroup = Array.Empty<int>();
+                    selectorGroup = [];
                     selector = 0;
                     return false;
                 }
@@ -149,7 +148,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
                 MvxAndroidLog.Instance?.LogError(e, "Failed to initialize MvxRecyclerView binding resources");
             }
 
-            selectorGroup = Array.Empty<int>();
+            selectorGroup = [];
             selector = 0;
             return false;
         }

@@ -28,7 +28,7 @@ body:
         Expected outcome: a bug was added
         Actual outcome: a ladybug appeared
     validations:
-      required: false
+      required: true
   - type: input
     id: repro-link
     attributes:

@@ -13,11 +13,11 @@ namespace Playground.Core.ViewModels
     {
         public ModalNavViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService) : base(logFactory, navigationService)
         {
-            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
 
-            ShowChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ChildViewModel>());
+            ShowChildCommand = new MvxAsyncCommand(() => NavigationService.Navigate<ChildViewModel>());
 
-            ShowNestedModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<NestedModalViewModel>());
+            ShowNestedModalCommand = new MvxAsyncCommand(() => NavigationService.Navigate<NestedModalViewModel>());
         }
 
         public IMvxAsyncCommand CloseCommand { get; private set; }

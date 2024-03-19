@@ -29,7 +29,7 @@ namespace MvvmCross.Platforms.Android.Binding
         private readonly Action<IMvxValueCombinerRegistry> _fillValueCombiners;
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillTargetFactories;
         private readonly Action<IMvxBindingNameRegistry> _fillBindingNames;
-        private readonly Action<IMvxTypeCache<View>> _fillViewTypes;
+        private readonly Action<IMvxTypeCache> _fillViewTypes;
         private readonly Action<IMvxAxmlNameViewTypeResolver> _fillAxmlViewTypeResolver;
         private readonly Action<IMvxNamespaceListViewTypeResolver> _fillNamespaceListViewTypeResolver;
 
@@ -38,7 +38,7 @@ namespace MvvmCross.Platforms.Android.Binding
             Action<IMvxValueCombinerRegistry> fillValueCombiners,
             Action<IMvxTargetBindingFactoryRegistry> fillTargetFactories,
             Action<IMvxBindingNameRegistry> fillBindingNames,
-            Action<IMvxTypeCache<View>> fillViewTypes,
+            Action<IMvxTypeCache> fillViewTypes,
             Action<IMvxAxmlNameViewTypeResolver> fillAxmlViewTypeResolver,
             Action<IMvxNamespaceListViewTypeResolver> fillNamespaceListViewTypeResolver)
         {
@@ -358,7 +358,7 @@ namespace MvvmCross.Platforms.Android.Binding
         protected virtual void InitializeViewTypeResolver(IMvxIoCProvider iocProvider)
         {
             var typeCache = CreateViewTypeCache();
-            iocProvider.RegisterSingleton<IMvxTypeCache<View>>(typeCache);
+            iocProvider.RegisterSingleton(typeCache);
 
             var fullNameViewTypeResolver = new MvxAxmlNameViewTypeResolver(typeCache);
             iocProvider.RegisterSingleton<IMvxAxmlNameViewTypeResolver>(fullNameViewTypeResolver);
@@ -375,7 +375,7 @@ namespace MvvmCross.Platforms.Android.Binding
             _fillNamespaceListViewTypeResolver?.Invoke(listViewTypeResolver);
         }
 
-        protected virtual IMvxTypeCache<View> CreateViewTypeCache()
+        protected virtual IMvxTypeCache CreateViewTypeCache()
         {
             return new MvxTypeCache<View>();
         }

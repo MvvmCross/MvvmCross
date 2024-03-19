@@ -34,11 +34,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         {
             if (disposing)
             {
-                if (_subscription != null)
-                {
-                    _subscription.Dispose();
-                    _subscription = null;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
 
             base.Dispose(disposing);
@@ -55,7 +52,9 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             {
                 if (ReferenceEquals(_itemsSource, value)
                     && !ReloadOnAllItemsSourceSets)
+                {
                     return;
+                }
 
                 if (_subscription != null)
                 {
@@ -65,8 +64,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
                 _itemsSource = value;
 
-                var collectionChanged = _itemsSource as INotifyCollectionChanged;
-                if (collectionChanged != null)
+                if (_itemsSource is INotifyCollectionChanged collectionChanged)
                 {
                     _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
                 }
@@ -88,17 +86,17 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             _pickerView.ReloadComponent(0);
         }
 
-        public override nint GetComponentCount(UIPickerView picker)
+        public override nint GetComponentCount(UIPickerView pickerView)
         {
             return 1;
         }
 
-        public override nint GetRowsInComponent(UIPickerView picker, nint component)
+        public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
         {
             return _itemsSource?.Count() ?? 0;
         }
 
-        public override string GetTitle(UIPickerView picker, nint row, nint component)
+        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
         {
             return _itemsSource == null ? "-" : RowTitle(row, _itemsSource.ElementAt((int)row));
         }
@@ -108,7 +106,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             return item.ToString();
         }
 
-        public override void Selected(UIPickerView picker, nint row, nint component)
+        public override void Selected(UIPickerView pickerView, nint row, nint component)
         {
             if (_itemsSource.Count() == 0)
                 return;
@@ -119,17 +117,13 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             handler?.Invoke(this, EventArgs.Empty);
 
             var command = SelectedChangedCommand;
-            if (command != null)
-                if (command.CanExecute(_selectedItem))
-                    command.Execute(_selectedItem);
+            if (command?.CanExecute(_selectedItem) == true)
+                command.Execute(_selectedItem);
         }
 
         public object SelectedItem
         {
-            get
-            {
-                return _selectedItem;
-            }
+            get => _selectedItem;
             set
             {
                 _selectedItem = value;

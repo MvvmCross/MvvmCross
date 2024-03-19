@@ -15,13 +15,13 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
     public abstract class MvxChainedSourceBinding
         : MvxPropertyInfoSourceBinding
     {
-        private readonly IList<MvxPropertyToken> _childTokens;
+        private readonly IList<IMvxPropertyToken> _childTokens;
         private IMvxSourceBinding _currentChildBinding;
 
         protected MvxChainedSourceBinding(
             object source,
             PropertyInfo propertyInfo,
-            IList<MvxPropertyToken> childTokens)
+            IList<IMvxPropertyToken> childTokens)
             : base(source, propertyInfo)
         {
             _childTokens = childTokens;

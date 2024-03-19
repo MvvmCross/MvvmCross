@@ -7,19 +7,18 @@ using System.Windows.Input;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.DroidX.RecyclerView.ItemTemplates;
 
-namespace MvvmCross.DroidX.RecyclerView
+namespace MvvmCross.DroidX.RecyclerView;
+
+public interface IMvxRecyclerAdapter
 {
-    public interface IMvxRecyclerAdapter
-    {
-        [MvxSetToNullAfterBinding]
-        IEnumerable ItemsSource { get; set; }
+    [MvxSetToNullAfterBinding]
+    IEnumerable? ItemsSource { get; set; }
 
-        IMvxTemplateSelector ItemTemplateSelector { get; set; }
-        ICommand ItemClick { get; set; }
-        ICommand ItemLongClick { get; set; }
+    IMvxTemplateSelector? ItemTemplateSelector { get; set; }
+    ICommand? ItemClick { get; set; }
+    ICommand? ItemLongClick { get; set; }
 
-        object GetItem(int viewPosition);
+    object? GetItem(int viewPosition);
 
-        int ItemTemplateId { get; set; }
-    }
+    int ItemTemplateId { get; set; }
 }
