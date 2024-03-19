@@ -84,6 +84,11 @@ Task("SonarStart")
     args.AppendFormat("/d:sonar.cs.xunit.reportsPaths={0} ", new DirectoryPath(outputDir + "/Tests/").FullPath);
     args.AppendFormat("/d:sonar.login={0} ", sonarKey);
 
+    if (GitHubActions.Environment.PullRequest.IsPullRequest)
+    {
+        args.AppendFormat("/d:sonar.pullrequest.base={0}", GitHubActions.Environment.Workflow.BaseRef);
+    }
+
     DotNetTool("./", "dotnet-sonarscanner", args.ToString());
 });
 
