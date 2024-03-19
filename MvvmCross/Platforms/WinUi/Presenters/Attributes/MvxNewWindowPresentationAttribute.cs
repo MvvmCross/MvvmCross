@@ -1,6 +1,6 @@
 namespace MvvmCross.Platforms.WinUi.Presenters.Attributes;
 
-    using MvvmCross.Presenters.Attributes;
+using MvvmCross.Presenters.Attributes;
 
 /// <summary>
 /// Attribute to indicate that a view should be shown in a new window.

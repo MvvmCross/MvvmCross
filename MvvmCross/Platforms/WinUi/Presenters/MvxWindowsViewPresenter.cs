@@ -293,7 +293,7 @@ public class MvxWindowsViewPresenter
 
         var popups = VisualTreeHelper.GetOpenPopupsForXamlRoot(frame.XamlRoot).FirstOrDefault(p =>
         {
-            if (attribute.ViewType.IsAssignableFrom(p.Child.GetType())
+            if (attribute.ViewType.IsInstanceOfType(p.Child)
                 && p.Child is IMvxWindowsContentDialog dialog)
             {
                 return dialog.ViewModel == viewModel;

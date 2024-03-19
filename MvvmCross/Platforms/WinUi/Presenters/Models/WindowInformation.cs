@@ -1,7 +1,7 @@
 #nullable enable
-using MvvmCross.ViewModels;
 using Microsoft.UI.Xaml;
 using MvvmCross.Platforms.WinUi.Views;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.WinUi.Presenters.Models;
 

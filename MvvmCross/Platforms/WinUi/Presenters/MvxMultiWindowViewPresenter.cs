@@ -1,9 +1,6 @@
 #nullable enable
 
 using System.Windows;
-using Windows.Graphics;
-using Windows.Graphics.Display;
-using Windows.UI.Core;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Controls;
@@ -22,6 +19,9 @@ using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
+using Windows.Graphics;
+using Windows.Graphics.Display;
+using Windows.UI.Core;
 using Control = Microsoft.UI.Xaml.Controls.Control;
 using HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment;
 using MvxApplication = MvvmCross.Platforms.WinUi.Views.MvxApplication;
@@ -52,7 +52,7 @@ namespace MvvmCross.Platforms.WinUi.Presenters
         /// </summary>
         /// <param name="rootFrame">The root frame.</param>
         public MvxMultiWindowViewPresenter(IMvxWindowsFrame rootFrame)
-        {            
+        {
             var window = (Microsoft.UI.Xaml.Application.Current as MvxApplication)?.MainWindow;
             if (window != null)
             {
