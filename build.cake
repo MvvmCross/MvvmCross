@@ -84,32 +84,48 @@ Task("SonarStart")
     .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
     .Does(() => 
 {
-    StringBuilder args = new StringBuilder();
-    args.Append("begin ");
-    args.Append("/key:MvvmCross_MvvmCross ");
-    args.Append("/o:mvx ");
-    args.Append("/d:sonar.host.url=https://sonarcloud.io ");
-    args.AppendFormat("/d:sonar.cs.xunit.reportsPaths={0} ", new DirectoryPath(outputDir + "/Tests/").FullPath);
-    args.AppendFormat("/d:sonar.token={0} ", sonarKey);
+    var xunitReportsPath = MakeAbsolute(new DirectoryPath(outputDir + "/Tests")) + "/**/*.xml";
+    Information("XUnitReportsPath {0}", xunitReportsPath);
 
-    if (GitHubActions.Environment.PullRequest.IsPullRequest)
+    ProcessArgumentBuilder PrepareSonarArguments(ProcessArgumentBuilder args)
     {
-        args.AppendFormat("/d:sonar.pullrequest.branch={0}", GitHubActions.Environment.Workflow.HeadRef);
-        args.AppendFormat("/d:sonar.pullrequest.base={0}", GitHubActions.Environment.Workflow.BaseRef);
+        args.Append("begin");
+        args.Append("/key:{0}", "MvvmCross_MvvmCross");
+        args.Append("/o:{0}", "mvx");
+        args.Append("/d:sonar.host.url={0}", "https://sonarcloud.io");
+        args.Append("/d:sonar.cs.xunit.reportsPaths={0}", xunitReportsPath);
+        args.AppendSecret("/d:sonar.token={0}", sonarKey);
+
+        if (GitHubActions.Environment.PullRequest.IsPullRequest)
+        {
+            args.Append("/d:sonar.pullrequest.key={0}", GitHubActions.Environment.Workflow.RefName.Replace("/merge", ""));
+            args.Append("/d:sonar.pullrequest.branch={0}", GitHubActions.Environment.Workflow.HeadRef);
+            args.Append("/d:sonar.pullrequest.base={0}", GitHubActions.Environment.Workflow.BaseRef);
+        }
+
+        return args;
     }
 
-    DotNetTool("./", "dotnet-sonarscanner", args.ToString());
+    var settings = new DotNetToolSettings
+    {
+        ArgumentCustomization = PrepareSonarArguments
+    };
+
+    DotNetTool("sonarscanner", settings);
 });
 
 Task("SonarEnd")
     .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
     .Does(() => 
-{   
-    StringBuilder args = new StringBuilder();
-    args.Append("end ");
-    args.AppendFormat("/d:sonar.token={0}", sonarKey);
+{
+    var settings = new DotNetToolSettings
+    {
+        ArgumentCustomization = args => args
+            .Append("end")
+            .AppendSecret("/d:sonar.token={0}", sonarKey)
+    };
 
-    DotNetTool("./", "dotnet-sonarscanner", args.ToString());
+    DotNetTool("sonarscanner", settings);
 });
 
 Task("Build")
