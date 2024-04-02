@@ -27,8 +27,8 @@ namespace MvvmCross.Commands
     public class MvxWeakCommandHelper
         : IMvxCommandHelper
     {
-        private readonly List<WeakReference> _eventHandlers = new List<WeakReference>();
-        private readonly object _syncRoot = new object();
+        private readonly List<WeakReference> _eventHandlers = [];
+        private readonly object _syncRoot = new();
 
         public event EventHandler? CanExecuteChanged
         {
@@ -103,17 +103,23 @@ namespace MvvmCross.Commands
 
         protected MvxCommandBase()
         {
-            // fallback on MvxWeakCommandHelper if no IoC has been set up
-            if (Mvx.IoCProvider?.TryResolve(out _commandHelper) != true)
+            if (Mvx.IoCProvider?.TryResolve(out IMvxCommandHelper? commandHelper) == true && commandHelper != null)
+            {
+                _commandHelper = commandHelper;
+            }
+            else
+            {
+                // fallback on MvxWeakCommandHelper if no IoC has been set up
                 _commandHelper = new MvxWeakCommandHelper();
+            }
 
             // default to true if no Singleton Cache has been set up
             var alwaysOnUIThread =
-                MvxSingletonCache.Instance?.Settings.AlwaysRaiseInpcOnUserInterfaceThread ?? true;
+                MvxSingletonCache.Instance?.Settings?.AlwaysRaiseInpcOnUserInterfaceThread ?? true;
             ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
         }
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add => _commandHelper.CanExecuteChanged += value;
             remove => _commandHelper.CanExecuteChanged -= value;

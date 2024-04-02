@@ -1,0 +1,42 @@
+name: Sonar
+
+on:
+  push:
+    branches: 
+    - develop
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        fetch-tags: true
+
+    - name: Install .NET 8.0.201
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.201'
+
+    - name: Restore .NET tools
+      run: dotnet tool restore
+
+    - name: Install .NET workloads
+      run: dotnet workload install android ios tvos macos maccatalyst
+
+    - name: Setup Java JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'microsoft'
+        java-version: '17'
+
+    - name: Build
+      run: dotnet cake --verbosity=Normal --artifactsDir="output" --target=Sonar --sonarKey=$env:SONARY_KEY
+      env:
+        SONARY_KEY: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

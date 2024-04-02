@@ -4,6 +4,7 @@
 
 using System;
 using AppKit;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 
 namespace MvvmCross.Platforms.Mac.Binding.Target
@@ -28,8 +29,8 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
 
             if (datePicker == null)
             {
-                MvxBindingLog.Error(
-                                      "Error - NSDatePicker is null in MvxBaseNSDatePickerTargetBinding");
+                MvxBindingLog.Instance?.LogError(
+                                      "NSDatePicker is null in MvxBaseNSDatePickerTargetBinding");
                 return;
             }
             datePicker.Activated += HandleActivated;

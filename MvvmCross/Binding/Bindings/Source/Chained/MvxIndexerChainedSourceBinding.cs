@@ -14,7 +14,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
         private readonly MvxIndexerPropertyToken _indexerPropertyToken;
 
         public MvxIndexerChainedSourceBinding(object source, PropertyInfo itemPropertyInfo, MvxIndexerPropertyToken indexerPropertyToken,
-                                                  IList<MvxPropertyToken> childTokens)
+                                                  IList<IMvxPropertyToken> childTokens)
             : base(source, itemPropertyInfo, childTokens)
         {
             _indexerPropertyToken = indexerPropertyToken;

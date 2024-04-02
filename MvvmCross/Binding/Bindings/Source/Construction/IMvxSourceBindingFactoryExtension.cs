@@ -9,6 +9,6 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
 {
     public interface IMvxSourceBindingFactoryExtension
     {
-        bool TryCreateBinding(object source, MvxPropertyToken propertyToken, List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result);
+        bool TryCreateBinding(object source, IMvxPropertyToken propertyToken, List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding result);
     }
 }

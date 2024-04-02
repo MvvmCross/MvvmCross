@@ -8,7 +8,7 @@ using UIKit;
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
-    [MvxModalPresentation(WrapInNavigationController = true)]
+    [MvxModalPresentation(WrapInNavigationController = true, ModalPresentationStyle = UIModalPresentationStyle.FormSheet)]
     public partial class ModalNavView : MvxViewController<ModalNavViewModel>
     {
         public ModalNavView(NativeHandle handle) : base(handle)

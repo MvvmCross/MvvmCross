@@ -1,0 +1,51 @@
+name: Build
+
+on:
+  push:
+    branches: 
+      - develop
+      - master
+      - feature/**
+      - release/**
+      - hotfix/**
+  pull_request:
+    branches: 
+      - master
+      - develop
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        fetch-tags: true
+
+    - name: Install .NET 8.0.201
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.201'
+
+    - name: Restore .NET tools
+      run: dotnet tool restore
+
+    - name: Install .NET workloads
+      run: dotnet workload install android ios tvos macos maccatalyst
+
+    - name: Setup Java JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'microsoft'
+        java-version: '17'
+
+    - name: Build
+      run: dotnet cake --verbosity=Minimal --artifactsDir="output"
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifacts
+        path: output

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Android.Views;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.IoC;
 
@@ -13,7 +14,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {
     public class MvxAxmlNameViewTypeResolver : MvxLongLowerCaseViewTypeResolver, IMvxAxmlNameViewTypeResolver
     {
-        public MvxAxmlNameViewTypeResolver(IMvxTypeCache<View> typeCache)
+        public MvxAxmlNameViewTypeResolver(IMvxTypeCache typeCache)
             : base(typeCache)
         {
             ViewNamespaceAbbreviations = new Dictionary<string, string>();
@@ -44,7 +45,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
                     }
                     else
                     {
-                        MvxBindingLog.Trace("Abbreviation not found {0}", abbreviate);
+                        MvxBindingLog.Instance?.LogTrace("Abbreviation not found {Abbreviation}", abbreviate);
                     }
                 }
             }

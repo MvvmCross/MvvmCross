@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Windows.Input;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.WeakSubscription;
-using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Target
 {
@@ -25,8 +24,8 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         {
             if (control == null)
             {
-                MvxBindingLog.Error(
-                    "Error - UIControl is null in MvxUIControlValueChangedTargetBinding");
+                MvxBindingLog.Instance?.LogError(
+                    "UIControl is null in MvxUIControlValueChangedTargetBinding");
             }
             else
             {

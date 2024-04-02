@@ -41,8 +41,8 @@ public static class MvxViewExtensions
         if (view == null)
             throw new ArgumentNullException(nameof(view));
 
-        if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelTypeFinder associatedTypeFinder) == true)
-            return associatedTypeFinder.FindTypeOrNull(view.GetType());
+        if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelTypeFinder? associatedTypeFinder) == true)
+            return associatedTypeFinder?.FindTypeOrNull(view.GetType());
 
         MvxLogHost.Default?.Log(LogLevel.Trace,
             "No view model type finder available - assuming we are looking for a splash screen - returning null");

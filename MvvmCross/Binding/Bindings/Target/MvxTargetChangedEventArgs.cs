@@ -2,18 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
+namespace MvvmCross.Binding.Bindings.Target;
 
-namespace MvvmCross.Binding.Bindings.Target
+public class MvxTargetChangedEventArgs(object? value) : EventArgs
 {
-    public class MvxTargetChangedEventArgs
-        : EventArgs
-    {
-        public MvxTargetChangedEventArgs(object value)
-        {
-            Value = value;
-        }
-
-        public object Value { get; private set; }
-    }
+    public object? Value { get; } = value;
 }

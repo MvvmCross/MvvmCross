@@ -186,7 +186,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             if (ItemsSource == null)
             {
-                MvxBindingLog.Error("GetView called when ItemsSource is null");
+                MvxBindingLog.Instance?.LogError("GetView called when ItemsSource is null");
                 return null;
             }
 

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discussions
+    url: https://github.com/MvvmCross/MvvmCross/discussions
+    about: Please use discussions to ask questions and share ideas.
+  - name: Discord
+    url: https://aka.ms/dotnet-discord
+    about: Please ask and answer questions in the \#MvvmCross channel.
+  - name: StackOverflow
+    url: https://stackoverflow.com/questions/tagged/mvvmcross
+    about: Use the \#MvvmCross tag to ask questions.

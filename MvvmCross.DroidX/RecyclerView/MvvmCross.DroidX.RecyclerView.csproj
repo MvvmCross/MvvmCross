@@ -7,6 +7,8 @@
 
 This package contains AndroidX RecyclerView support for MvvmCross.</Description>
     <PackageId>MvvmCross.DroidX.RecyclerView</PackageId>
+    
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   
   <ItemGroup>

@@ -2,27 +2,21 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
 using MvvmCross.Binding.Bindings.Target;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public class MvxUIViewLayerBorderWidthTargetBinding(UIView target)
+    : MvxConvertingTargetBinding(target)
 {
-    public class MvxUIViewLayerBorderWidthTargetBinding : MvxConvertingTargetBinding
+    public override Type TargetValueType => typeof(float);
+
+    protected override void SetValueImpl(object target, object? value)
     {
-        public MvxUIViewLayerBorderWidthTargetBinding(object target)
-            : base(target)
-        {
-        }
+        var view = target as UIView;
+        if (view?.Layer == null || value == null) return;
 
-        public override Type TargetValueType => typeof(float);
-
-        protected override void SetValueImpl(object target, object value)
-        {
-            var view = target as UIView;
-            if (view?.Layer == null || value == null) return;
-
-            view.Layer.BorderWidth = (float)value;
-        }
+        view.Layer.BorderWidth = (float)value;
     }
 }

@@ -2,25 +2,23 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Platforms.WinUi.Core;
-using MvvmCross.Platforms.WinUi.Views.Suspension;
 using MvvmCross.ViewModels;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
+using Application = Microsoft.UI.Xaml.Application;
 using LaunchActivatedEventArgs = Microsoft.UI.Xaml.LaunchActivatedEventArgs;
 
 namespace MvvmCross.Platforms.WinUi.Views
 {
+
     public abstract class MvxApplication : Application
     {
         protected Frame RootFrame { get; set; }
-        protected Window MainWindow { get; set; }
+        public Window MainWindow { get; protected set; }
 
         protected MvxApplication()
         {

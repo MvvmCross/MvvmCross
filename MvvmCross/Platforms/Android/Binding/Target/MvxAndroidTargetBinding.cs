@@ -1,72 +1,61 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
+#nullable enable
 using Android.Runtime;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 
-namespace MvvmCross.Platforms.Android.Binding.Target
+namespace MvvmCross.Platforms.Android.Binding.Target;
+
+public abstract class MvxAndroidTargetBinding
+    : MvxConvertingTargetBinding
 {
-    public abstract class MvxAndroidTargetBinding
-        : MvxConvertingTargetBinding
+    protected MvxAndroidTargetBinding(object target)
+        : base(target)
     {
-        private IMvxAndroidGlobals _androidGlobals;
-
-        protected MvxAndroidTargetBinding(object target)
-            : base(target)
-        {
-        }
-
-        protected IMvxAndroidGlobals AndroidGlobals
-            => _androidGlobals ?? (_androidGlobals = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>());
-
-        protected override bool ShouldSkipSetValueForPlatformSpecificReasons(object target, object value)
-        {
-            return TargetIsInvalid(target);
-        }
-
-        public static bool TargetIsInvalid(object target)
-        {
-            var javaTarget = target as IJavaObject;
-            if (javaTarget != null && javaTarget.Handle == IntPtr.Zero)
-            {
-                MvxBindingLog.Warning("Weak Target has been GCed by Android {0}", javaTarget.GetType().Name);
-                return true;
-            }
-            return false;
-        }
     }
 
-    public abstract class MvxAndroidTargetBinding<TTarget, TValue>
-        : MvxConvertingTargetBinding<TTarget, TValue>
-        where TTarget : class
+    protected override bool ShouldSkipSetValueForPlatformSpecificReasons(object target, object? value)
     {
-        private IMvxAndroidGlobals _androidGlobals;
+        return TargetIsInvalid(target);
+    }
 
-        protected MvxAndroidTargetBinding(TTarget target)
-            : base(target)
+    public static bool TargetIsInvalid(object target)
+    {
+        if (target is IJavaObject javaTarget && javaTarget.Handle == IntPtr.Zero)
         {
+            MvxBindingLog.Instance?.LogWarning("Weak Target has been GCed by Android {TargetTypeName}",
+                javaTarget.GetType().Name);
+            return true;
         }
+        return false;
+    }
+}
 
-        protected IMvxAndroidGlobals AndroidGlobals
-            => _androidGlobals ?? (_androidGlobals = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>());
+public abstract class MvxAndroidTargetBinding<TTarget, TValue>
+    : MvxConvertingTargetBinding<TTarget, TValue>
+    where TTarget : class
+{
+    protected MvxAndroidTargetBinding(TTarget target)
+        : base(target)
+    {
+    }
 
-        protected override bool ShouldSkipSetValueForPlatformSpecificReasons(TTarget target, TValue value)
+    protected override bool ShouldSkipSetValueForPlatformSpecificReasons(TTarget target, TValue? value)
+    {
+        return TargetIsInvalid(target);
+    }
+
+    public static bool TargetIsInvalid(TTarget target)
+    {
+        if (target is IJavaObject javaTarget && javaTarget.Handle == IntPtr.Zero)
         {
-            return TargetIsInvalid(target);
+            MvxBindingLog.Instance?.LogWarning("Weak Target has been GCed by Android {TargetTypeName}",
+                javaTarget.GetType().Name);
+            return true;
         }
-
-        public static bool TargetIsInvalid(TTarget target)
-        {
-            var javaTarget = target as IJavaObject;
-            if (javaTarget != null && javaTarget.Handle == IntPtr.Zero)
-            {
-                MvxBindingLog.Warning("Weak Target has been GCed by Android {0}", javaTarget.GetType().Name);
-                return true;
-            }
-            return false;
-        }
+        return false;
     }
 }

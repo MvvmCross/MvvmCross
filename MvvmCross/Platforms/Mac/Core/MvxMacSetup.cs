@@ -112,13 +112,7 @@ namespace MvvmCross.Platforms.Mac.Core
             iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
-        {
-            InitialiseBindingBuilder(iocProvider);
-            base.InitializeLastChance(iocProvider);
-        }
-
-        protected virtual void InitialiseBindingBuilder(IMvxIoCProvider iocProvider)
+        protected override void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
             var bindingBuilder = CreateBindingBuilder();
             bindingBuilder.DoRegistration(iocProvider);

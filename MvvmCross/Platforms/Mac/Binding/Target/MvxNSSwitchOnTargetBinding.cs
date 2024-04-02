@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Reflection;
-using AppKit;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 
@@ -18,7 +17,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             var checkBox = View;
             if (checkBox == null)
             {
-                MvxBindingLog.Error("Error - NSButton is null in MvxNSSwitchOnTargetBinding");
+                MvxBindingLog.Instance?.LogError("NSButton is null in MvxNSSwitchOnTargetBinding");
             }
             else
             {

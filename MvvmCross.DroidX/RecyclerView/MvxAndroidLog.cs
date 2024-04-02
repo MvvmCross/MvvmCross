@@ -5,10 +5,9 @@
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 
-namespace MvvmCross
+namespace MvvmCross.DroidX.RecyclerView;
+
+internal static class MvxAndroidLog
 {
-    internal static class MvxAndroidLog
-    {
-        internal static ILogger Instance { get; } = MvxLogHost.GetLog("RecyclerView");
-    }
+    internal static ILogger? Instance { get; } = MvxLogHost.GetLog("RecyclerView");
 }

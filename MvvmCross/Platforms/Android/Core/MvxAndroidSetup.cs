@@ -167,12 +167,10 @@ public abstract class MvxAndroidSetup
         ValidateArguments(iocProvider);
 
         InitializeSavedStateConverter(iocProvider);
-
-        InitializeBindingBuilder(iocProvider);
         base.InitializeLastChance(iocProvider);
     }
 
-    protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
+    protected override void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
     {
         ValidateArguments(iocProvider);
 
@@ -186,7 +184,7 @@ public abstract class MvxAndroidSetup
             FillBindingNames, FillViewTypes, FillAxmlViewTypeResolver, FillNamespaceListViewTypeResolver);
     }
 
-    protected virtual void FillViewTypes(IMvxTypeCache<View> cache)
+    protected virtual void FillViewTypes(IMvxTypeCache cache)
     {
         ArgumentNullException.ThrowIfNull(cache);
 

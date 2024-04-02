@@ -18,10 +18,11 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <None Include="Platforms\**\*.cs" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
+
     <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
   
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' Or '$(TargetFramework)' == 'net8.0' ">
     <Compile Include="Platforms\Netstandard\**\*.cs" />
     <Compile Include="Platforms\Console\**\*.cs" />
   </ItemGroup>

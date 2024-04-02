@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-#nullable enable
+
 using System.Collections;
 using System.Windows.Input;
 using Android.Content;
@@ -41,7 +41,7 @@ public class MvxRecyclerView : AndroidX.RecyclerView.Widget.RecyclerView
     /// <param name="defStyle"></param>
     /// <param name="adapter"><para><see cref="IMvxRecyclerAdapter"/> to use.</para>
     /// <para>If this is set to <code>null</code>, then it is up to you setting a <see cref="ItemTemplateSelector"/>.</para></param>
-    public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter)
+    public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter? adapter)
         : base(context, attrs, defStyle)
     {
         // Note: Any calling derived class passing a null adapter is responsible for setting
@@ -64,7 +64,7 @@ public class MvxRecyclerView : AndroidX.RecyclerView.Widget.RecyclerView
         if (itemTemplateId == 0)
             itemTemplateId = global::Android.Resource.Layout.SimpleListItem1;
 
-        if (itemTemplateSelector.GetType() == typeof(MvxDefaultTemplateSelector))
+        if (itemTemplateSelector?.GetType() == typeof(MvxDefaultTemplateSelector))
             ItemTemplateId = itemTemplateId;
     }
 

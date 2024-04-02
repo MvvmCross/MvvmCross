@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Combiners;
@@ -165,7 +166,7 @@ namespace MvvmCross.Binding.BindingContext
 
             if (newBindingDescription.Count > 1)
             {
-                MvxBindingLog.Warning("More than one description found - only first will be used in {0}", bindingDescription);
+                MvxBindingLog.Instance?.LogWarning("More than one description found - only first will be used in: {BindingDescription}", bindingDescription);
             }
 
             return FullyDescribed(newBindingDescription.FirstOrDefault());
@@ -300,7 +301,9 @@ namespace MvvmCross.Binding.BindingContext
 
             if (newBindingDescription.Count > 1)
             {
-                MvxBindingLog.Warning("More than one description found - only first will be used in {0}", bindingDescription);
+                MvxBindingLog.Instance?.LogWarning(
+                    "More than one description found - only first will be used in: {BindingDescription}",
+                    bindingDescription);
             }
 
             return FullyDescribed(newBindingDescription.FirstOrDefault());

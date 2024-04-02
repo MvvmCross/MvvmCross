@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Binding.Bindings.Target.Construction
 {
@@ -43,8 +44,9 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
                 }
                 catch (Exception exception)
                 {
-                    MvxBindingLog.Error(
-                        "Problem creating target binding for {0} - exception {1}", _targetType.Name,
+                    MvxBindingLog.Instance?.LogError(
+                        exception,
+                        "Problem creating target binding for {TargetName} - exception {ExceptionMessage}", _targetType.Name,
                         exception.ToString());
                 }
             }

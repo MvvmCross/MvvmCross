@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Reflection;
-using AppKit;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platforms.Mac.Views.Base;
@@ -38,7 +37,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             var view = View;
             if (view == null)
             {
-                MvxBindingLog.Error("Error - NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
+                MvxBindingLog.Instance?.LogError("NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
                 return;
             }
 
@@ -55,7 +54,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
                 }
                 catch (Exception ex)
                 {
-                    MvxBindingLog.Error(ex.Message);
+                    MvxBindingLog.Instance?.LogError(ex, "Failed to subscribe to events");
                 }
             }
         }
@@ -89,7 +88,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
                         }
                         catch (Exception ex)
                         {
-                            MvxBindingLog.Error(ex.Message);
+                            MvxBindingLog.Instance?.LogError(ex, "Failed to unsubscribe from event");
                         }
                     }
                     _subscribed = false;

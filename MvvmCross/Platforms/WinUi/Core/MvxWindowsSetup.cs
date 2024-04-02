@@ -109,7 +109,7 @@ namespace MvvmCross.Platforms.WinUi.Core
 
         protected virtual IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
-            return new MvxWindowsViewPresenter(rootFrame);
+            return new MvxMultiWindowViewPresenter(rootFrame);
         }
 
         protected virtual MvxWindowsViewDispatcher CreateViewDispatcher(IMvxWindowsFrame rootFrame)
@@ -133,13 +133,7 @@ namespace MvvmCross.Platforms.WinUi.Core
             iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
-        {
-            InitializeBindingBuilder(iocProvider);
-            base.InitializeLastChance(iocProvider);
-        }
-
-        protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
+        protected override void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
             var bindingBuilder = CreateBindingBuilder();
             bindingBuilder.DoRegistration(iocProvider);

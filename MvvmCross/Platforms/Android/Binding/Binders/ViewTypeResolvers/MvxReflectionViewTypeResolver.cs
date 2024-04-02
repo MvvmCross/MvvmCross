@@ -10,9 +10,9 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {
     public abstract class MvxReflectionViewTypeResolver : IMvxViewTypeResolver
     {
-        protected IMvxTypeCache<View> TypeCache { get; }
+        protected IMvxTypeCache TypeCache { get; }
 
-        protected MvxReflectionViewTypeResolver(IMvxTypeCache<View> typeCache)
+        protected MvxReflectionViewTypeResolver(IMvxTypeCache typeCache)
         {
             TypeCache = typeCache;
         }
