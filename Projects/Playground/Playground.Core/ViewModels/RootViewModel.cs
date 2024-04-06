@@ -13,6 +13,7 @@ using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
+using MvvmCross.ViewModels.Result;
 using Playground.Core.Models;
 using Playground.Core.Services;
 using Playground.Core.ViewModels.Bindings;
@@ -21,7 +22,7 @@ using Playground.Core.ViewModels.Samples;
 
 namespace Playground.Core.ViewModels
 {
-    public class RootViewModel : MvxNavigationViewModel
+    public class RootViewModel : MvxNavigationResultAwaitingViewModel<SampleModel>
     {
         private readonly IMvxViewModelLoader _mvxViewModelLoader;
 
@@ -48,7 +49,7 @@ namespace Playground.Core.ViewModels
                 Console.WriteLine(e.ToString());
             }
 
-            ShowChildCommand = new MvxAsyncCommand(() => NavigationService.Navigate<ChildViewModel, SampleModel>(new SampleModel
+            ShowChildCommand = new MvxAsyncCommand(() => NavigationService.NavigateRegisteringToResult<ChildViewModel, SampleModel, SampleModel>(this, new SampleModel
             {
                 Message = "Hey",
                 Value = 1.23m
@@ -290,6 +291,12 @@ namespace Playground.Core.ViewModels
             TimeToResolve = $"Time to resolve - NO reflection - {resolved}";
             TotalTime = $"Total time - NO reflection - {total}";
             await RaiseAllPropertiesChanged();
+        }
+
+        public override bool ResultSet(IMvxResultSettingViewModel<SampleModel> viewModel, SampleModel result)
+        {
+            Log.LogInformation($"Result {result} from {viewModel}");
+            return true;
         }
     }
 }
