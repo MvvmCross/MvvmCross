@@ -437,7 +437,7 @@ public abstract class MvxSetup : IMvxSetup
 
     public virtual IEnumerable<Assembly> GetPluginAssemblies()
     {
-        var mvvmCrossAssemblyName = typeof(MvxPluginAttribute).Assembly.GetName().Name;
+        var mvvmCrossAssemblyName = typeof(MvxPluginAttribute).Assembly.FullName;
 
         var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
@@ -453,7 +453,8 @@ public abstract class MvxSetup : IMvxSetup
 
         try
         {
-            return Array.Exists(assembly.GetReferencedAssemblies(), a => a.Name == mvvmCrossAssemblyName);
+            return Array.Exists(assembly.GetReferencedAssemblies(), a =>
+                a.FullName == mvvmCrossAssemblyName);
         }
 #pragma warning disable CA1031 // Do not catch general exception types
         catch (Exception)
