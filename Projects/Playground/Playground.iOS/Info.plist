@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleName</key>
-	<string>Playground</string>
+	<string>Mvx Playground</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.mvvmcross.playground</string>
 	<key>CFBundleShortVersionString</key>
