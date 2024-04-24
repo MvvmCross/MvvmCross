@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using MvvmCross.Extensions;
 
 namespace MvvmCross.Hosting;
 
@@ -21,6 +22,7 @@ public class MvxHostBuilder : IMvxHostBuilder
     public virtual IMvxHost Build()
     {
         ConfigureDefaultNullLogging(Services);
+        AddMvvmCrossServices(Services);
         var serviceCollection = ConfigureContainer(Services);
         var loggerFactory = serviceCollection.GetRequiredService<ILoggerFactory>();
 
@@ -29,6 +31,11 @@ public class MvxHostBuilder : IMvxHostBuilder
         host.Run();
 
         return host;
+    }
+    
+    protected virtual void AddMvvmCrossServices(IServiceCollection services)
+    {
+        services.AddCoreServices();
     }
 
     private static void ConfigureDefaultNullLogging(IServiceCollection services)
