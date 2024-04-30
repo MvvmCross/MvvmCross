@@ -4,7 +4,6 @@
 #nullable enable
 
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Core;
@@ -33,9 +32,6 @@ public class MvxNavigationService : IMvxNavigationService
     protected Dictionary<Regex, Type> Routes { get; } = new();
 
     protected IMvxViewModelLoader ViewModelLoader { get; set; }
-
-    protected ConditionalWeakTable<IMvxViewModel, TaskCompletionSource<object?>> TaskCompletionResults { get; } =
-        new();
 
     public event EventHandler<IMvxNavigateEventArgs>? WillNavigate;
 

@@ -28,7 +28,7 @@ namespace MvvmCross.Base
             if (action == null)
                 return;
 
-            var completion = new TaskCompletionSource<bool>();
+            var completion = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             var syncAction = new Action(async () =>
             {
                 await action();
