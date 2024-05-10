@@ -702,14 +702,13 @@ public class MvxMultiWindowViewPresenter
             if (page is IMvxNeedWindow needWindow2 && !needWindow2.CanClose())
             {
                 e.Cancel = true;
-                return;
             }
 
-            CloseWindow(newWindow);
         };
 
         newWindow.Closed += (_, _) =>
         {
+            CloseWindow(newWindow);
             page.DisposeIfDisposable();
 
             lock (_windowInformationLock)
