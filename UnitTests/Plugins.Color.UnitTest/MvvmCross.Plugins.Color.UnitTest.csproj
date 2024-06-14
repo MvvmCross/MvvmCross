@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <AssemblyName>MvvmCross.Plugins.Color.UnitTest</AssemblyName>
     <RootNamespace>MvvmCross.Plugins.Color.UnitTest</RootNamespace>
