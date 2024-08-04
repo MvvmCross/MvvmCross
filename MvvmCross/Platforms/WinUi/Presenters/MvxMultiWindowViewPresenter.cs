@@ -611,7 +611,8 @@ public class MvxMultiWindowViewPresenter
 
         static Task TryEnqueue(DispatcherQueue dispatcher, Action function, DispatcherQueuePriority priority)
         {
-            var taskCompletionSource = new TaskCompletionSource<object?>();
+            var taskCompletionSource =
+                new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
 
             if (!dispatcher.TryEnqueue(
                     priority,
