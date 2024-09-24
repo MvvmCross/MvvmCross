@@ -10,10 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+    - name: Install .NET 9.0.100-rc.1.24452.12
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.201
+        dotnet-version: '9.0.100-rc.1.24452.12'
 
     - name: Restore dependencies
       run: dotnet tool restore
