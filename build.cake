@@ -13,7 +13,6 @@ var verbosityDotNet = DotNetVerbosity.Minimal;
 var sonarToken = Argument("sonarToken", "");
 var sonarKey = Argument("sonarKey", "");
 var sonarOrg = Argument("sonarOrg", "");
-var javaSdkPath = Argument("javaSdkPath", "");
 
 GitVersion versionInfo = null;
 
@@ -213,12 +212,6 @@ DotNetMSBuildSettings GetDefaultDotNetMSBuildSettings()
         PackageVersion = versionInfo.SemVer,
         InformationalVersion = versionInfo.InformationalVersion
     };
-
-    if (!string.IsNullOrEmpty(javaSdkPath))
-    {
-        Information("Using Java at Path: {0} for MSBuild", javaSdkPath);
-        settings = settings.WithProperty("JavaSdkDirectory", javaSdkPath);
-    }
 
     return settings;
 }

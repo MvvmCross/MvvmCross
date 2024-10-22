@@ -35,6 +35,6 @@ jobs:
       run: dotnet workload install android ios tvos macos maccatalyst
 
     - name: Build
-      run: dotnet cake --verbosity=${{ env.verbosity }} --artifactsDir="output" --target=Sonar --sonarToken=${{ secrets.SONAR_TOKEN }} --sonarKey=${{ env.sonarKey }} --sonarOrg=${{ env.sonarOrg }} --javaSdkPath=$JAVA_HOME_17_X64
+      run: dotnet cake --verbosity=${{ env.verbosity }} --artifactsDir="output" --target=Sonar --sonarToken=${{ secrets.SONAR_TOKEN }} --sonarKey=${{ env.sonarKey }} --sonarOrg=${{ env.sonarOrg }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
