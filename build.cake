@@ -85,6 +85,7 @@ Task("SonarStart")
         args.Append("/key:{0}", sonarKey);
         args.Append("/o:{0}", sonarOrg);
         args.Append("/d:sonar.host.url={0}", "https://sonarcloud.io");
+        args.Append("/d:sonar.scm.exclusions.disabled=true");
         args.Append("/d:sonar.cs.xunit.reportsPaths={0}", xunitReportsPath);
         args.AppendSecret("/d:sonar.token={0}", sonarToken);
 
@@ -93,6 +94,10 @@ Task("SonarStart")
             args.Append("/d:sonar.pullrequest.key={0}", GitHubActions.Environment.Workflow.RefName.Replace("/merge", ""));
             args.Append("/d:sonar.pullrequest.branch={0}", GitHubActions.Environment.Workflow.HeadRef);
             args.Append("/d:sonar.pullrequest.base={0}", GitHubActions.Environment.Workflow.BaseRef);
+        }
+        else
+        {
+            args.Append("/d:sonar.branch.name={0}", GitHubActions.Environment.Workflow.RefName);
         }
 
         return args;
