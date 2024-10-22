@@ -2,7 +2,6 @@ using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platforms.Ios.Core;
 using MvvmCross.Plugin;
-using MvvmCross.Plugin.Json;
 using Playground.Core;
 using Playground.iOS.Bindings;
 using Playground.iOS.Controls;
