@@ -10,7 +10,10 @@ var outputDir = new DirectoryPath(artifactsDir);
 var gitVersionLog = new FilePath("./gitversion.log");
 var verbosity = Verbosity.Minimal;
 var verbosityDotNet = DotNetVerbosity.Minimal;
+var sonarToken = Argument("sonarToken", "");
 var sonarKey = Argument("sonarKey", "");
+var sonarOrg = Argument("sonarOrg", "");
+var javaSdkPath = Argument("javaSdkPath", "");
 
 GitVersion versionInfo = null;
 
@@ -58,30 +61,20 @@ Setup(context =>
 Task("Clean")
     .Does(() =>
 {
-    EnsureDirectoryExists(outputDir.FullPath);
-
     CleanDirectories("MvvmCross*/**/bin");
     CleanDirectories("MvvmCross*/**/obj");
+    CleanDirectories("MvvmCross*/**/TestResults");
     CleanDirectories(outputDir.FullPath);
+
+    EnsureDirectoryExists(outputDir);
 
     CopyFile(gitVersionLog, outputDir + "/gitversion.log");
 });
 
-Task("Restore")
-    .Does(() =>
-{
-    DotNetRestore(solution.ToString());
-});
-
-Task("PatchBuildProps")
-    .Does(() => 
-{
-    var buildProp = new FilePath("./Directory.Build.props");
-    XmlPoke(buildProp, "//Project/PropertyGroup/Version", versionInfo.SemVer);
-});
+Task("Restore").Does(() => DotNetRestore(solution.ToString()));
 
 Task("SonarStart")
-    .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
+    .WithCriteria(() => !string.IsNullOrEmpty(sonarToken))
     .Does(() => 
 {
     var xunitReportsPath = MakeAbsolute(new DirectoryPath(outputDir + "/Tests")) + "/**/*.xml";
@@ -90,11 +83,11 @@ Task("SonarStart")
     ProcessArgumentBuilder PrepareSonarArguments(ProcessArgumentBuilder args)
     {
         args.Append("begin");
-        args.Append("/key:{0}", "MvvmCross_MvvmCross");
-        args.Append("/o:{0}", "mvx");
+        args.Append("/key:{0}", sonarKey);
+        args.Append("/o:{0}", sonarOrg);
         args.Append("/d:sonar.host.url={0}", "https://sonarcloud.io");
         args.Append("/d:sonar.cs.xunit.reportsPaths={0}", xunitReportsPath);
-        args.AppendSecret("/d:sonar.token={0}", sonarKey);
+        args.AppendSecret("/d:sonar.token={0}", sonarToken);
 
         if (GitHubActions.Environment.PullRequest.IsPullRequest)
         {
@@ -115,14 +108,14 @@ Task("SonarStart")
 });
 
 Task("SonarEnd")
-    .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
+    .WithCriteria(() => !string.IsNullOrEmpty(sonarToken))
     .Does(() => 
 {
     var settings = new DotNetToolSettings
     {
         ArgumentCustomization = args => args
             .Append("end")
-            .AppendSecret("/d:sonar.token={0}", sonarKey)
+            .AppendSecret("/d:sonar.token={0}", sonarToken)
     };
 
     DotNetTool("sonarscanner", settings);
@@ -130,25 +123,10 @@ Task("SonarEnd")
 
 Task("Build")
     .IsDependentOn("Clean")
-    .IsDependentOn("PatchBuildProps")
     .IsDependentOn("Restore")
     .Does(() =>
 {
-
-    var msBuildSettings = new DotNetMSBuildSettings
-    {
-        Version = versionInfo.SemVer,
-        PackageVersion = versionInfo.SemVer,
-        InformationalVersion = versionInfo.InformationalVersion
-    };
-
-    var settings = new DotNetBuildSettings
-    {
-         Configuration = configuration,
-         MSBuildSettings = msBuildSettings,
-         Verbosity = verbosityDotNet
-    };
-
+    var settings = GetDefaultBuildSettings();
     DotNetBuild(solution.ToString(), settings);
 });
 
@@ -212,3 +190,35 @@ Task("Default")
     .IsDependentOn("CopyPackages");
 
 RunTarget(target);
+
+DotNetBuildSettings GetDefaultBuildSettings(DotNetMSBuildSettings? msBuildSettings = null)
+{
+    msBuildSettings ??= GetDefaultDotNetMSBuildSettings();
+
+    var settings = new DotNetBuildSettings
+    {
+        Configuration = configuration,
+        MSBuildSettings = msBuildSettings,
+        Verbosity = verbosityDotNet
+    };
+
+    return settings;
+}
+
+DotNetMSBuildSettings GetDefaultDotNetMSBuildSettings()
+{
+    var settings = new DotNetMSBuildSettings
+    {
+        Version = versionInfo.SemVer,
+        PackageVersion = versionInfo.SemVer,
+        InformationalVersion = versionInfo.InformationalVersion
+    };
+
+    if (!string.IsNullOrEmpty(javaSdkPath))
+    {
+        Information("Using Java at Path: {0} for MSBuild", javaSdkPath);
+        settings = settings.WithProperty("JavaSdkDirectory", javaSdkPath);
+    }
+
+    return settings;
+}
