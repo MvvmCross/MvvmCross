@@ -2,11 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Foundation;
 using MvvmCross.Core;
 using MvvmCross.ViewModels;
-using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Core
 {
@@ -15,19 +12,18 @@ namespace MvvmCross.Platforms.Tvos.Core
         /// <summary>
         /// UIApplicationDelegate.Window doesn't really exist / work. It was added by Xamarin.iOS templates 
         /// </summary>
-        public new virtual UIWindow Window { get; set; }
+        public virtual UIWindow MainWindow { get; set; }
 
-        public MvxApplicationDelegate() : base()
+        protected MvxApplicationDelegate()
         {
             RegisterSetup();
         }
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            if (Window == null)
-                Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            MainWindow ??= new UIWindow(UIScreen.MainScreen.Bounds);
 
-            MvxTvosSetupSingleton.EnsureSingletonAvailable(this, Window).EnsureInitialized();
+            MvxTvosSetupSingleton.EnsureSingletonAvailable(this, MainWindow).EnsureInitialized();
             RunAppStart(launchOptions);
 
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
@@ -40,7 +36,7 @@ namespace MvvmCross.Platforms.Tvos.Core
             {
                 startup.Start(GetAppStartHint(hint));
             }
-            Window.MakeKeyAndVisible();
+            MainWindow.MakeKeyAndVisible();
         }
 
         protected virtual object GetAppStartHint(object hint = null)

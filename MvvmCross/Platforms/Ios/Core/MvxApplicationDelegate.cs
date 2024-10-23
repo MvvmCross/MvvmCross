@@ -12,10 +12,7 @@ public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplic
 {
     public event EventHandler<MvxLifetimeEventArgs>? LifetimeChanged;
 
-    /// <summary>
-    /// UIApplicationDelegate.Window doesn't really exist / work. It was added by Xamarin.iOS templates 
-    /// </summary>
-    public new virtual UIWindow? Window { get; set; }
+    public virtual UIWindow? MainWindow { get; set; }
 
     protected MvxApplicationDelegate()
     {
@@ -39,9 +36,9 @@ public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplic
 
     public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
     {
-        Window ??= new UIWindow(UIScreen.MainScreen.Bounds);
+        MainWindow ??= new UIWindow(UIScreen.MainScreen.Bounds);
 
-        MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window).EnsureInitialized();
+        MvxIosSetupSingleton.EnsureSingletonAvailable(this, MainWindow).EnsureInitialized();
 
         RunAppStart(launchOptions);
 
@@ -56,7 +53,7 @@ public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplic
             startup.Start(GetAppStartHint(hint));
         }
 
-        Window?.MakeKeyAndVisible();
+        MainWindow?.MakeKeyAndVisible();
     }
 
     protected virtual object? GetAppStartHint(object? hint = null)

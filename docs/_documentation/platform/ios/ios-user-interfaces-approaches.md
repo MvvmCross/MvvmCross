@@ -27,7 +27,7 @@ XIB files are XML files that describe visual elements. You can edit them using t
 
 ### Storyboards
 
-Storyboards are XML files that can be visually edited using the Xamarin Designer or XCode Interface Builder. These files are very similar to XIB ones, but they normally contain more than a single user interface, alongisde some "segues" to navigate between them (although is not the recommended approach, you can use segues for navigation in MvvmCross).
+Storyboards are XML files that can be visually edited using the Xamarin Designer or XCode Interface Builder. These files are very similar to XIB ones, but they normally contain more than a single user interface, alongside some "segues" to navigate between them (although is not the recommended approach, you can use segues for navigation in MvvmCross).
 
 Storyboards are definitely a step forward when working with XIBs, but keep in mind that you still need to set up the Outlets (XCode IB) / Names (X Designer) to be able to bind your controls later. And since the generated XML code is not intended to be human readable, it is difficult to resolve conflicts for them in merge situations (you can have multiple storyboards to leverage this).
 
@@ -43,6 +43,11 @@ To use a view generated in a Storyboard, all you have to do is to add an `MvxFro
 
 **Note:** It is very important that you drag and drop the correct ViewController type (for example, if you want to add a TabBarController, you need to drag and drop a UITabBarViewController). Otherwise your app might not crash, but you might encounter some weird situations.
 
+#### Storyboard caveats
+
+- MvvmCross does not support defining main storyboard in Info.plist using the `UIMainStoryboardFile` key and this might be ignored
+- Remove `initiaViewController` attribute in the root `document` node to prevent issues with iOS instantiating ViewControllers twice
+- You can omit the name in the `MvxFromStoryboard` attribute, in such cases make sure that you ViewController and `storyboardIdentifier="{ViewName}"` have the same names otherwise you will get a crash 
 
 ## MvxBaseViewController
 
@@ -57,7 +62,6 @@ The feature requires there to be a UIScrollView in the view hierarchy in order t
 You can make use of this class using the following standard inheritance syntax:
 
 ```c#
-[Register("KeyboardHandlingView")]
 public class KeyboardHandlingView
     : MvxBaseViewController<KeyboardHandlingViewModel>
 {
@@ -94,4 +98,3 @@ public override bool HandlesKeyboardNotifications()
     return true;
 }
 ```
-
