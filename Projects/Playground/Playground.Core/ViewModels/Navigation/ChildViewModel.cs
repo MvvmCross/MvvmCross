@@ -8,11 +8,12 @@ using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
+using MvvmCross.ViewModels.Result;
 using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
-    public class ChildViewModel : MvxNavigationViewModel<SampleModel>
+    public class ChildViewModel : MvxNavigationResultSettingViewModel<SampleModel, SampleModel>
     {
         public string BrokenTextValue { get => _brokenTextValue; set => SetProperty(ref _brokenTextValue, value); }
         public string AnotherBrokenTextValue { get => _anotherBrokenTextValue; set => SetProperty(ref _anotherBrokenTextValue, value); }
@@ -24,7 +25,11 @@ namespace Playground.Core.ViewModels
         public ChildViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
-            CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(() => NavigationService.CloseSettingResult(this, new SampleModel
+            {
+                Message = "This returned correctly",
+                Value = 5.67m
+            }));
 
             ShowSecondChildCommand = new MvxAsyncCommand(() => NavigationService.Navigate<SecondChildViewModel>());
 
