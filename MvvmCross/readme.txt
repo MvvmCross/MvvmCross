@@ -43,7 +43,7 @@ However, any $rootnamespace$ instances will need to be changed to your project's
 Note: If you wish to use the AppCompat versions of Android classes, you can follow the above instructions with the following modifications
 4. Add the MvvmCross DroidX Material NuGet package (MvvmCross.DroidX.Material) to your Android platform-specific project.
 5. Add a new XML file that defines an AppCompat theme to the Resources/values folder called styles.xml. (See AndroidApp/Resources/styles.xml in the Starter sample files)
-6. Ensure the theme created in the previous step is referenced in the Attribute for the MainActivity class (Theme = "@style/MainTheme").
+6. Ensure the theme created in the previous step is referenced in the Attribute in each activity class (Theme = "@style/MainTheme") or in AndroidManifest.xml in the "application" section (<application android:label="@string/app_name" android:icon="@mipmap/Icon" android:theme="@style/MainTheme">)
 
 
 - iOS projects (ignore if not building for iOS) -
