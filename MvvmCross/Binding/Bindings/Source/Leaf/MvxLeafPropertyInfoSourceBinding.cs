@@ -83,7 +83,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
             }
             catch (Exception exception)
             {
-                MvxBindingLog.Instance?.LogError(exception, "SetValue failed with exception");
+                MvxBindingLog.Instance?.LogError(exception, "SetValue failed with exception. Property Name: {PropertyName}, Value: {Value}", PropertyName, value);
             }
         }
     }

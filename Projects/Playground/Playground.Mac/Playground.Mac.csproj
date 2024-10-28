@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-macos</TargetFramework>
+    <TargetFramework>net9.0-macos</TargetFramework>
     <AssemblyName>Playground.Mac</AssemblyName>
     <RootNamespace>Playground.Mac</RootNamespace>
     <SupportedOSPlatfromVersion>13.0</SupportedOSPlatfromVersion>
