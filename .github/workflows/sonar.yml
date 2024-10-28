@@ -7,6 +7,11 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened]
 
+env:
+  verbosity: 'minimal'
+  sonarKey: 'MvvmCross_MvvmCross'
+  sonarOrg: 'mvx'
+
 jobs:
   build:
     runs-on: windows-latest
@@ -18,10 +23,10 @@ jobs:
         fetch-depth: 0
         fetch-tags: true
 
-    - name: Install .NET 8.0.201
+    - name: Install .NET 9.0.100-rc.2.24474.11
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.201'
+        dotnet-version: '9.0.100-rc.2.24474.11'
 
     - name: Restore .NET tools
       run: dotnet tool restore
@@ -29,14 +34,7 @@ jobs:
     - name: Install .NET workloads
       run: dotnet workload install android ios tvos macos maccatalyst
 
-    - name: Setup Java JDK
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'microsoft'
-        java-version: '17'
-
     - name: Build
-      run: dotnet cake --verbosity=Normal --artifactsDir="output" --target=Sonar --sonarKey=$env:SONARY_KEY
+      run: dotnet cake --verbosity=${{ env.verbosity }} --artifactsDir="output" --target=Sonar --sonarToken=${{ secrets.SONAR_TOKEN }} --sonarKey=${{ env.sonarKey }} --sonarOrg=${{ env.sonarOrg }}
       env:
-        SONARY_KEY: ${{ secrets.SONAR_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
