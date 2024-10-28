@@ -111,7 +111,7 @@ public class MvxAndroidViewsContainer
 
         if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelLoader? viewModelLoader) == true && viewModelLoader != null)
         {
-            viewModelLoader.LoadViewModel(viewModelRequest, savedState);
+            return viewModelLoader.LoadViewModel(viewModelRequest, savedState);
         }
 
         return null;

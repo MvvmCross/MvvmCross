@@ -11,7 +11,7 @@ public class MvxIosTask
     {
         var sharedApp = UIApplication.SharedApplication;
         var options = new UIApplicationOpenUrlOptions { UniversalLinksOnly = false };
-        var tcs = new TaskCompletionSource<bool>();
+        var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
         if (sharedApp.CanOpenUrl(url))
         {
             sharedApp.OpenUrl(url, options, ok => tcs.TrySetResult(ok));
