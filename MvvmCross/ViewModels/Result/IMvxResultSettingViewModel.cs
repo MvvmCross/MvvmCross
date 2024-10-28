@@ -4,7 +4,7 @@
 
 namespace MvvmCross.ViewModels.Result;
 
-public interface IMvxResultSettingViewModel<in TResult> : IMvxViewModel
+public interface IMvxResultSettingViewModel<in TResult>
 {
     void SetResult(TResult result);
 }

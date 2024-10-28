@@ -54,9 +54,9 @@ public static class MvxNavigationExtensions
         IMvxResultAwaitingViewModel<TResult> fromViewModel,
         IMvxBundle? presentationBundle = null,
         CancellationToken cancellationToken = default)
-        where TViewModel : IMvxResultSettingViewModel<TResult>
+        where TViewModel : IMvxResultSettingViewModel<TResult>, IMvxViewModel
     {
-        bool navigated = await navigationService.Navigate(typeof(TViewModel), presentationBundle, cancellationToken);
+        bool navigated = await navigationService.Navigate<TViewModel>(presentationBundle, cancellationToken);
         if (navigated)
             fromViewModel.RegisterToResult();
         return navigated;
@@ -81,7 +81,7 @@ public static class MvxNavigationExtensions
         CancellationToken cancellationToken = default)
         where TViewModel : IMvxResultSettingViewModel<TResult>, IMvxViewModel<TParameter>
     {
-        bool navigated = await navigationService.Navigate(typeof(TViewModel), parameter, presentationBundle, cancellationToken);
+        bool navigated = await navigationService.Navigate<TViewModel, TParameter>(parameter, presentationBundle, cancellationToken);
         if (navigated)
             fromViewModel.RegisterToResult();
         return navigated;
@@ -102,7 +102,7 @@ public static class MvxNavigationExtensions
         TViewModel viewModel,
         TResult result,
         CancellationToken cancellationToken = default)
-        where TViewModel : IMvxResultSettingViewModel<TResult>
+        where TViewModel : IMvxResultSettingViewModel<TResult>, IMvxViewModel
     {
         bool closed = await navigationService.Close(viewModel, cancellationToken);
         if (closed)

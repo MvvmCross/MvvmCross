@@ -26,7 +26,11 @@ namespace MvvmCross.ViewModels.Result;
 /// </code>
 /// </summary>
 /// <typeparam name="TResult"></typeparam>
-public interface IMvxResultAwaitingViewModel<TResult> : IMvxViewModel
+public interface IMvxResultAwaitingViewModel<TResult> : IMvxBaseResultAwaitingViewModel
 {
     bool ResultSet(IMvxResultSettingViewModel<TResult> viewModel, TResult result);
+}
+
+public interface IMvxBaseResultAwaitingViewModel
+{
 }
