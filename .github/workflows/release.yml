@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -41,7 +42,7 @@ jobs:
     - name: Install SignTool tool
       run: dotnet tool install --tool-path . SignClient
 
-    - pwsh: |
+    - run: |
         .\SignClient "Sign" `
         --baseDirectory "${{ github.workspace }}/output" `
         --input "**/*.nupkg" `
