@@ -104,16 +104,10 @@ Task("SonarEnd")
     .WithCriteria(() => !string.IsNullOrEmpty(sonarToken))
     .Does(() => 
 {
-    var xunitReportsPath = MakeAbsolute(new DirectoryPath(outputDir + "/Tests")) + "/**/*.xml";
-    Information("XUnitReportsPath {0}", xunitReportsPath);
-
     var settings = new DotNetToolSettings
     {
         ArgumentCustomization = args => args
             .Append("end")
-            .Append("/d:sonar.sources={0}", "MvvmCross*/**")
-            .Append("/d:sonar.tests={0}", "UnitTests/**")
-            .Append("/d:sonar.cs.xunit.reportsPaths={0}", xunitReportsPath)
             .AppendSecret("/d:sonar.token={0}", sonarToken)
     };
 
