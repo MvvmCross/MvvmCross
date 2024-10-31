@@ -47,8 +47,8 @@ jobs:
         --baseDirectory "${{ github.workspace }}/output" `
         --input "**/*.nupkg" `
         --config "${{ github.workspace }}/signclient.json" `
-        --user "$(SIGNING_USER)" `
-        --secret "$(SIGNING_SECRET)" `
+        --user "${{ env.SIGNING_USER }}" `
+        --secret "${{ env.SIGNING_SECRET }}" `
         --name "MvvmCross" `
         --description "MvvmCross is a cross platform MVVM framework" `
         --descriptionUrl "https://mvvmcross.com"
