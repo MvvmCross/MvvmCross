@@ -52,7 +52,7 @@ jobs:
         --name "MvvmCross" `
         --description "MvvmCross is a cross platform MVVM framework" `
         --descriptionUrl "https://mvvmcross.com"
-      displayName: Authenticode Sign artifacts
+      name: Authenticode Sign artifacts
       env:
         SIGNING_USER: ${{ secrets.SIGNING_CLIENT_USER_ID }}
         SIGNING_SECRET: ${{ secrets.SIGNING_CLIENT_SECRET }}
