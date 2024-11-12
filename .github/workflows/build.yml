@@ -17,10 +17,10 @@ jobs:
         fetch-depth: 0
         fetch-tags: true
 
-    - name: Install .NET 9.0.100-rc.2.24474.11
+    - name: Install .NET 9.0.100
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.100-rc.2.24474.11'
+        dotnet-version: '9.0.100'
 
     - name: Restore .NET tools
       run: dotnet tool restore
