@@ -44,6 +44,7 @@ public static class MvxNavigationExtensions
     /// </summary>
     /// <param name="navigationService">Navigation service</param>
     /// <param name="fromViewModel">Result Awaiting ViewModel</param>
+    /// <param name="resultViewModelManager">Result ViewModel Manager</param>
     /// <param name="presentationBundle">(optional) presentation bundle</param>
     /// <param name="cancellationToken">(optional) CancellationToken to cancel the navigation</param>
     /// <typeparam name="TViewModel">Type of <see cref="IMvxResultSettingViewModel{TResult}"/></typeparam>
@@ -52,13 +53,14 @@ public static class MvxNavigationExtensions
     public static async Task<bool> NavigateRegisteringToResult<TViewModel, TResult>(
         this IMvxNavigationService navigationService,
         IMvxResultAwaitingViewModel<TResult> fromViewModel,
+        IMvxResultViewModelManager resultViewModelManager,
         IMvxBundle? presentationBundle = null,
         CancellationToken cancellationToken = default)
         where TViewModel : IMvxResultSettingViewModel<TResult>, IMvxViewModel
     {
         bool navigated = await navigationService.Navigate<TViewModel>(presentationBundle, cancellationToken);
         if (navigated)
-            fromViewModel.RegisterToResult();
+            fromViewModel.RegisterToResult(resultViewModelManager);
         return navigated;
     }
 
@@ -67,6 +69,7 @@ public static class MvxNavigationExtensions
     /// </summary>
     /// <param name="navigationService">Navigation service</param>
     /// <param name="fromViewModel">Result Awaiting ViewModel</param>
+    /// <param name="resultViewModelManager">Result ViewModel Manager</param>
     /// <param name="parameter">ViewModel parameter</param>
     /// <param name="presentationBundle">(optional) presentation bundle</param>
     /// <param name="cancellationToken">(optional) CancellationToken to cancel the navigation</param>
@@ -76,6 +79,7 @@ public static class MvxNavigationExtensions
     public static async Task<bool> NavigateRegisteringToResult<TViewModel, TParameter, TResult>(
         this IMvxNavigationService navigationService,
         IMvxResultAwaitingViewModel<TResult> fromViewModel,
+        IMvxResultViewModelManager resultViewModelManager,
         TParameter parameter,
         IMvxBundle? presentationBundle = null,
         CancellationToken cancellationToken = default)
@@ -83,7 +87,7 @@ public static class MvxNavigationExtensions
     {
         bool navigated = await navigationService.Navigate<TViewModel, TParameter>(parameter, presentationBundle, cancellationToken);
         if (navigated)
-            fromViewModel.RegisterToResult();
+            fromViewModel.RegisterToResult(resultViewModelManager);
         return navigated;
     }
 

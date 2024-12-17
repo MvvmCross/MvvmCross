@@ -8,47 +8,49 @@ public static class MvxResultViewModelExtensions
 {
     public const string BundleRegisterKey = "__mvxResultVMRegisterKey";
 
-    public static void ReloadAndRegisterToResult<TResult>(this IMvxResultAwaitingViewModel<TResult> viewModel, IMvxBundle savedStateBundle)
+    public static void ReloadAndRegisterToResult<TResult>(
+        this IMvxResultAwaitingViewModel<TResult> viewModel,
+        IMvxBundle savedStateBundle,
+        IMvxResultViewModelManager resultViewModelManager)
     {
-        if (Mvx.IoCProvider?.TryResolve<IMvxResultViewModelManager>(out var manager) == true &&
-            savedStateBundle?.Data?.TryGetValue(BundleRegisterKey, out string restoreRegisterStr) == true &&
+        if (savedStateBundle?.Data.TryGetValue(BundleRegisterKey, out string restoreRegisterStr) == true &&
             bool.TryParse(restoreRegisterStr, out bool restoreRegister) && restoreRegister)
         {
-            manager.RegisterToResult(viewModel);
+            resultViewModelManager.RegisterToResult(viewModel);
         }
     }
 
-    public static void SaveRegisterToResult<TResult>(this IMvxResultAwaitingViewModel<TResult> viewModel, IMvxBundle savedStateBundle)
+    public static void SaveRegisterToResult<TResult>(
+        this IMvxResultAwaitingViewModel<TResult> viewModel,
+        IMvxBundle savedStateBundle,
+        IMvxResultViewModelManager resultViewModelManager)
     {
-        if (Mvx.IoCProvider?.TryResolve<IMvxResultViewModelManager>(out var manager) == true &&
-            manager.IsRegistered(viewModel) &&
+        if (resultViewModelManager.IsRegistered(viewModel) &&
             savedStateBundle?.Data is { } data)
         {
             data[BundleRegisterKey] = true.ToString();
         }
     }
 
-    public static void RegisterToResult<TResult>(this IMvxResultAwaitingViewModel<TResult> viewModel)
+    public static void RegisterToResult<TResult>(
+        this IMvxResultAwaitingViewModel<TResult> viewModel,
+        IMvxResultViewModelManager resultViewModelManager)
     {
-        if (Mvx.IoCProvider?.TryResolve<IMvxResultViewModelManager>(out var manager) == true)
-        {
-            manager.RegisterToResult(viewModel);
-        }
+        resultViewModelManager.RegisterToResult(viewModel);
     }
 
-    public static void UnregisterToResult<TResult>(this IMvxResultAwaitingViewModel<TResult> viewModel)
+    public static void UnregisterToResult<TResult>(
+        this IMvxResultAwaitingViewModel<TResult> viewModel,
+        IMvxResultViewModelManager resultViewModelManager)
     {
-        if (Mvx.IoCProvider?.TryResolve<IMvxResultViewModelManager>(out var manager) == true)
-        {
-            manager.UnregisterToResult(viewModel);
-        }
+        resultViewModelManager.UnregisterToResult(viewModel);
     }
 
-    public static void SetResult<TResult>(this IMvxResultSettingViewModel<TResult> viewModel, TResult result)
+    public static void SetResult<TResult>(
+        this IMvxResultSettingViewModel<TResult> viewModel,
+        TResult result,
+        IMvxResultViewModelManager resultViewModelManager)
     {
-        if (Mvx.IoCProvider?.TryResolve<IMvxResultViewModelManager>(out var manager) == true)
-        {
-            manager.SetResult(viewModel, result);
-        }
+        resultViewModelManager.SetResult(viewModel, result);
     }
 }
