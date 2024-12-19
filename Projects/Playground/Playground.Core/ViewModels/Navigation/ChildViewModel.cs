@@ -8,11 +8,12 @@ using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
+using MvvmCross.ViewModels.Result;
 using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
-    public class ChildViewModel : MvxNavigationViewModel<SampleModel>
+    public class ChildViewModel : MvxNavigationResultSettingViewModel<SampleModel, SampleModel>
     {
         public string BrokenTextValue { get => _brokenTextValue; set => SetProperty(ref _brokenTextValue, value); }
         public string AnotherBrokenTextValue { get => _anotherBrokenTextValue; set => SetProperty(ref _anotherBrokenTextValue, value); }
@@ -21,16 +22,22 @@ namespace Playground.Core.ViewModels
         private string _brokenTextValue;
         private string _anotherBrokenTextValue;
 
-        public ChildViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
-            : base(logProvider, navigationService)
+        public ChildViewModel(
+            ILoggerFactory logProvider, IMvxNavigationService navigationService, IMvxResultViewModelManager resultViewModelManager)
+            : base(logProvider, navigationService, resultViewModelManager)
         {
-            CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(DoCloseCommand);
 
             ShowSecondChildCommand = new MvxAsyncCommand(() => NavigationService.Navigate<SecondChildViewModel>());
 
             ShowRootCommand = new MvxAsyncCommand(() => NavigationService.Navigate<RootViewModel>());
 
             PropertyChanged += ChildViewModel_PropertyChanged;
+        }
+
+        private Task DoCloseCommand()
+        {
+            return NavigationService.CloseSettingResult(this, new SampleModel { Message = "This returned correctly", Value = 5.67m });
         }
 
         private void ChildViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

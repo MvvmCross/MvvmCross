@@ -13,6 +13,7 @@ using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
+using MvvmCross.ViewModels.Result;
 using Playground.Core.Models;
 using Playground.Core.Services;
 using Playground.Core.ViewModels.Bindings;
@@ -21,7 +22,7 @@ using Playground.Core.ViewModels.Samples;
 
 namespace Playground.Core.ViewModels
 {
-    public class RootViewModel : MvxNavigationViewModel
+    public class RootViewModel : MvxNavigationResultAwaitingViewModel<SampleModel>
     {
         private readonly IMvxViewModelLoader _mvxViewModelLoader;
 
@@ -34,25 +35,16 @@ namespace Playground.Core.ViewModels
             get { return new MvxLanguageBinder("Playground.Core", "Text"); }
         }
 
-        public RootViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService, IMvxViewModelLoader mvxViewModelLoader)
-            : base(logProvider, navigationService)
+        public RootViewModel(
+                ILoggerFactory logProvider,
+                IMvxNavigationService navigationService,
+                IMvxViewModelLoader mvxViewModelLoader,
+                IMvxResultViewModelManager resultViewModelManager)
+            : base(logProvider, navigationService, resultViewModelManager)
         {
             _mvxViewModelLoader = mvxViewModelLoader;
-            try
-            {
-                var messenger = Mvx.IoCProvider.Resolve<IMvxMessenger>();
-                var str = messenger.ToString();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
 
-            ShowChildCommand = new MvxAsyncCommand(() => NavigationService.Navigate<ChildViewModel, SampleModel>(new SampleModel
-            {
-                Message = "Hey",
-                Value = 1.23m
-            }));
+            ShowChildCommand = new MvxAsyncCommand(DoShowChild);
 
             ShowModalCommand = new MvxAsyncCommand(Navigate);
 
@@ -101,6 +93,12 @@ namespace Playground.Core.ViewModels
                 new MvxCommand(() => IsVisible = !IsVisible);
 
             FragmentCloseCommand = new MvxAsyncCommand(() => NavigationService.Navigate<FragmentCloseViewModel>());
+        }
+
+        private Task DoShowChild()
+        {
+            return NavigationService.NavigateRegisteringToResult<ChildViewModel, SampleModel, SampleModel>(this,
+                ResultViewModelManager, new SampleModel { Message = "Hey", Value = 1.23m });
         }
 
         public MvxNotifyTask MyTask { get; set; }
@@ -290,6 +288,12 @@ namespace Playground.Core.ViewModels
             TimeToResolve = $"Time to resolve - NO reflection - {resolved}";
             TotalTime = $"Total time - NO reflection - {total}";
             await RaiseAllPropertiesChanged();
+        }
+
+        public override bool ResultSet(IMvxResultSettingViewModel<SampleModel> viewModel, SampleModel result)
+        {
+            Log.LogInformation("Got Result {@Result} from {ViewModel}", result, viewModel.GetType().Name);
+            return true;
         }
     }
 }

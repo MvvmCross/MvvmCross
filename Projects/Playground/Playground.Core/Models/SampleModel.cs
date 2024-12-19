@@ -9,5 +9,7 @@ namespace Playground.Core.Models
         public string Message { get; set; }
 
         public decimal Value { get; set; }
+
+        public override string ToString() => $"Message: {Message}, Value: {Value}";
     }
 }
