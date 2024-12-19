@@ -2,21 +2,19 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using MvvmCross.Binding.BindingContext;
 
-namespace MvvmCross.DroidX.RecyclerView
+namespace MvvmCross.DroidX.RecyclerView;
+
+public interface IMvxRecyclerViewHolder : IMvxBindingContextOwner
 {
-    public interface IMvxRecyclerViewHolder : IMvxBindingContextOwner
-    {
-        int Id { get; set; }
-        object DataContext { get; set; }
+    event EventHandler<EventArgs>? Click;
+    event EventHandler<EventArgs>? LongClick;
 
-        void OnAttachedToWindow();
-        void OnDetachedFromWindow();
-        void OnViewRecycled();
+    int Id { get; set; }
+    object? DataContext { get; set; }
 
-        event EventHandler<EventArgs> Click;
-        event EventHandler<EventArgs> LongClick;
-    }
+    void OnAttachedToWindow();
+    void OnDetachedFromWindow();
+    void OnViewRecycled();
 }

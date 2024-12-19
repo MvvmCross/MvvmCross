@@ -2,44 +2,36 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
 using System.Reflection;
-using Foundation;
-using MvvmCross.Platforms.Ios;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public class MvxUIDatePickerDateTargetBinding(UIDatePicker target, PropertyInfo targetPropertyInfo)
+    : MvxBaseUIDatePickerTargetBinding(target, targetPropertyInfo)
 {
-    public class MvxUIDatePickerDateTargetBinding : MvxBaseUIDatePickerTargetBinding
+    protected override object GetValueFrom(UIDatePicker view)
     {
-        public MvxUIDatePickerDateTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
-        {
-        }
+        // Convert from universal NSDate back to a local DateTime based on system timezone.
+        var valueUtc = view.Date.ToDateTimeUtc();
+        var valueLocal = ToLocalTime(valueUtc);
+        return valueLocal;
+    }
 
-        protected override object GetValueFrom(UIDatePicker view)
-        {
-            // Convert from universal NSDate back to a local DateTime based on system timezone.
-            var valueUtc = view.Date.ToDateTimeUtc();
-            var valueLocal = ToLocalTime(valueUtc);
-            return valueLocal;
-        }
+    public static DateTime DefaultDate { get; set; } = DateTime.Now;
 
-        public static DateTime DefaultDate { get; set; } = DateTime.Now;
+    protected override object MakeSafeValue(object? value)
+    {
+        // Convert from local DateTime (or default value) to universal NSDate based on system timezone.
+        var valueLocal = (DateTime)(value ?? DefaultDate);
+        var valueUtc = ToUtcTime(valueLocal);
+        var valueNSDate = valueUtc.ToNSDate();
 
-        protected override object MakeSafeValue(object value)
-        {
-            // Convert from local DateTime (or default value) to universal NSDate based on system timezone.
-            var valueLocal = (DateTime)(value ?? DefaultDate);
-            var valueUtc = ToUtcTime(valueLocal);
-            var valueNSDate = valueUtc.ToNSDate();
+        if (View?.MaximumDate != null && View.MaximumDate.Compare(valueNSDate) == NSComparisonResult.Ascending)
+            valueNSDate = View.MaximumDate;
+        else if (View?.MinimumDate != null && View.MinimumDate.Compare(valueNSDate) == NSComparisonResult.Descending)
+            valueNSDate = View.MinimumDate;
 
-            if (View.MaximumDate != null && View.MaximumDate.Compare(valueNSDate) == NSComparisonResult.Ascending)
-                valueNSDate = View.MaximumDate;
-            else if (View.MinimumDate != null && View.MinimumDate.Compare(valueNSDate) == NSComparisonResult.Descending)
-                valueNSDate = View.MinimumDate;
-
-            return valueNSDate;
-        }
+        return valueNSDate;
     }
 }

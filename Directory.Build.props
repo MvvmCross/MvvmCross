@@ -7,25 +7,35 @@
     <Authors>.NET Foundation and Contributors</Authors>
     <Owners>MvvmCross;slodge;cheesebaron</Owners>
     <PackageTags>mvvm;mvvmcross;xamarin;android;ios;mac</PackageTags>
-    <PackageReleaseNotes>https://github.com/MvvmCross/MvvmCross/blob/develop/CHANGELOG.md</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/MvvmCross/MvvmCross/releases</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryUrl>https://github.com/MvvmCross/MvvmCross</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <Version>8.1.0-net6.1</Version>
+  </PropertyGroup>
 
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <NuGetAudit>enable</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <!--<Nullable>enable</Nullable>-->
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>true</ImplicitUsings>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+
     <NoWarn>$(NoWarn);CS0109;CS0108;CS0618;CS0114;NU1603;CS1591</NoWarn>
 
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('MvvmCross'))</IsLibraryProject>
-
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 
     <_MvxTargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</_MvxTargetPlatformIdentifier>
     <_MvxTargetPlatformIsAndroid>false</_MvxTargetPlatformIsAndroid>
@@ -41,29 +51,32 @@
     <_MvxTargetPlatformIsWindows>false</_MvxTargetPlatformIsWindows>
     <_MvxTargetPlatformIsWindows Condition="$(_MvxTargetPlatformIdentifier.Contains('windows')) == 'True'">True</_MvxTargetPlatformIsWindows>
 
-    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsiOS)' == 'True' ">10.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIstvOS)' == 'True' ">10.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsMacCatalyst)' == 'True' ">13.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsiOS)' == 'True' ">12.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIstvOS)' == 'True' ">12.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsMacCatalyst)' == 'True' ">15.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsAndroid)' == 'True' ">23</SupportedOSPlatformVersion>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <StripSymbols>false</StripSymbols>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+  </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <IncludeSymbols>true</IncludeSymbols>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-
-    <DesignTimeBuild>false</DesignTimeBuild>
-    <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild Condition=" '$(IsTestProject)' != 'true'">true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(IsTestProject)' != 'true' and '$(TF_BUILD)' == 'true'">
+  <PropertyGroup Condition=" '$(TF_BUILD)' == 'true' OR '$(GITHUB_ACTIONS)' == 'true' ">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <Deterministic>true</Deterministic>
+
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <!--
@@ -77,6 +90,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsLibraryProject)' == 'true'">
+    <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="true" PackagePath="\" />
     <None Include="$(MSBuildThisFileDirectory)\LICENSE" Pack="true" PackagePath="\" />
     <None Include="$(MSBuildThisFileDirectory)\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>

@@ -174,20 +174,20 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
             return "\t" + toReturn + "  \r \n  \t ";
         }
 
-        private static void AssertIsSimplePropertyToken(MvxPropertyToken token, string text)
+        private static void AssertIsSimplePropertyToken(IMvxPropertyToken token, string text)
         {
             Assert.IsAssignableFrom<MvxPropertyNamePropertyToken>(token);
             Assert.Equal(text, ((MvxPropertyNamePropertyToken)token).PropertyName);
         }
 
-        private static void AssertIsIndexerPropertyToken<T, TSpecific>(MvxPropertyToken token, T value)
+        private static void AssertIsIndexerPropertyToken<T, TSpecific>(IMvxPropertyToken token, T value)
         {
             Assert.IsAssignableFrom<MvxIndexerPropertyToken<T>>(token);
             Assert.IsAssignableFrom<TSpecific>(token);
             Assert.Equal(value, ((MvxIndexerPropertyToken<T>)token).Key);
         }
 
-        private IList<MvxPropertyToken> Tokenise(string text)
+        private IList<IMvxPropertyToken> Tokenise(string text)
         {
             var tokeniser = new MvxSourcePropertyPathParser();
             return tokeniser.Parse(text);

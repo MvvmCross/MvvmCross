@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Target
 {
@@ -17,8 +17,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             var searchBar = View;
             if (searchBar == null)
             {
-                MvxBindingLog.Error(
-                                      "Error - UISearchBar is null in MvxUISearchBarTextTargetBinding");
+                MvxBindingLog.Instance?.LogError("UISearchBar is null in MvxUISearchBarTextTargetBinding");
             }
             else
             {

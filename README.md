@@ -18,7 +18,7 @@ MvvmCross
 
 👀 Check out [mvvmcross.com](https://www.mvvmcross.com) to get started with MvvmCross 👀
 
-MvvmCross is a cross-platform MVVM framework. It enables developers to create apps using the MVVM pattern on *Xamarin.iOS, Xamarin.Android, Xamarin.Mac, Xamarin.Forms, Universal Windows Platform (UWP) and Windows Presentation Framework (WPF)*. This allows for better code sharing by allowing you to share behavior and business logic between platforms.
+MvvmCross is a opinionated cross-platform MVVM framework. It enables developers to create apps using the MVVM pattern in the .NET ecosystem. We support Android, iOS, MacCatalyst, TvOS, macOS, WinUI, WPF. Using MvvmCross allows for better code sharing by allowing you to share behavior and business logic between platforms.
 
 Among the features MvvmCross provides are:
 
@@ -34,76 +34,6 @@ MvvmCross is extendable by you. We strive to let as much code be configurable an
   Check out the <a href="https://www.mvvmcross.com/documentation">MvvmCross docs</a>
 </h4>
 <hr />
-
-### Backers
-
-Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/mvvmcross#backer)]
-
-<a href="https://opencollective.com/mvvmcross/backer/0/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/0/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/1/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/1/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/2/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/2/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/3/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/3/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/4/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/4/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/5/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/5/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/6/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/6/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/7/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/7/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/8/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/8/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/9/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/9/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/10/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/10/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/11/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/11/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/12/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/12/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/13/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/13/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/14/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/14/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/15/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/15/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/16/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/16/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/17/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/17/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/18/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/18/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/19/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/19/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/20/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/20/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/21/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/21/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/22/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/22/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/23/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/23/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/24/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/24/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/25/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/25/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/26/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/26/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/27/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/27/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/28/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/28/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/backer/29/website" target="_blank"><img src="https://opencollective.com/mvvmcross/backer/29/avatar.svg"></a>
-
-### Sponsors
-
-Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/mvvmcross#sponsor)]
-
-<a href="https://opencollective.com/mvvmcross/sponsor/0/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/1/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/2/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/3/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/4/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/5/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/6/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/7/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/8/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/9/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/9/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/10/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/10/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/11/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/11/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/12/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/12/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/13/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/13/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/14/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/14/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/15/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/15/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/16/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/16/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/17/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/17/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/18/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/18/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/19/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/19/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/20/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/20/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/21/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/21/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/22/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/22/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/23/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/23/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/24/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/24/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/25/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/25/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/26/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/26/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/27/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/27/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/28/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/28/avatar.svg"></a>
-<a href="https://opencollective.com/mvvmcross/sponsor/29/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/29/avatar.svg"></a>
 
 ## Installation
 
@@ -130,49 +60,24 @@ Remember GitHub issues support [markdown](https://github.github.com/github-flavo
 
 ## Contributing code
 
-We are happy to receive Pull Requests adding new features and solving bugs. As for new features, please contact us before doing major work. To ensure you are not working on something that will be rejected due to not fitting into the roadmap or ideal of the framework.
-
-### Git setup
-
-Since Windows and UNIX-based systems differ in terms of line endings, it is a very good idea to configure git autocrlf settings.
-
-On *Windows* we recommend setting `core.autocrlf` to `true`.
-
-```
-git config --global core.autocrlf true
-```
-
-On *Mac* we recommend setting `core.autocrlf` to `input`.
-
-```
-git config --global core.autocrlf input
-```
-
-### Code style guidelines
-
-Please use 4 spaces for indentation.
-
-Otherwise default ReSharper C# code style applies.
-
-### Project Workflow
-
-Our workflow is loosely based on [Github Flow](http://scottchacon.com/2011/08/31/github-flow.html).
-We actively do development on the **develop** branch. This means that all pull requests by contributors need to be develop and requested against the develop branch.
-The master branch contains tags reflecting what is currently on NuGet.org.
-
-### Submitting Pull Requests
-
-Make sure you can build the code. Familiarize yourself with the project workflow and our coding conventions. If you don't know what a pull request is
-read this https://help.github.com/articles/using-pull-requests.
-
-Before submitting a feature or substantial code contribution please discuss it with the team and ensure it follows the MvvmCross roadmap.
-Note that code submissions will be reviewed and tested. Only code that meets quality and design/roadmap appropriateness will be merged into the source. [Don't "Push" Your Pull Requests](https://www.igvita.com/2011/12/19/dont-push-your-pull-requests/)
+We are happy to receive Pull Requests and code changes. Please read [CONTRIBUTING.md](https://github.com/MvvmCross/MvvmCross/blob/develop/CONTRIBUTING.md) for more information.
 
 ## Questions & support
 
 * [StackOverflow](https://stackoverflow.com/questions/tagged/mvvmcross)
-* [Xamarin forums](https://forums.xamarin.com)
 * [Discord](https://aka.ms/dotnet-discord) #mvvmcross channel
+
+### Backers
+
+Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/mvvmcross#backer)]
+
+[![Sponsors](https://opencollective.com/mvvmcross/sponsors.svg)](https://opencollective.com/mvvmcross)
+
+### Sponsors
+
+Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/mvvmcross#sponsor)]
+
+[![Backers](https://opencollective.com/mvvmcross/backers.svg)](https://opencollective.com/mvvmcross)
 
 ### Licensing
 
@@ -183,7 +88,6 @@ MvvmCross is licensed under the [MS-PL License](https://opensource.org/licenses/
 * Messenger ideas from [JonathanPeppers/XPlatUtils](https://github.com/jonathanpeppers/XPlatUtils) under Apache License Version 2.0, and from GrumpyDev/TinyMessenger under simple license of "THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY"
 * [Color codes](https://github.com/mono/sysdrawing-coregraphics) under MIT License
 * Some bits of [Mvvm.Async](https://github.com/StephenCleary/Mvvm.Async) are redistributed and modified under MIT License
-
 
 ### Acknowledgements
 

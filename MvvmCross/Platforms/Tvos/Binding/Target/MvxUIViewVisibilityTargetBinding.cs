@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.UI;
-using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Target
 {
@@ -38,7 +37,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
                     break;
 
                 default:
-                    MvxBindingLog.Warning("Visibility out of range {0}", value);
+                    MvxBindingLog.Instance?.LogWarning("Visibility out of range {Value}", value);
                     break;
             }
         }

@@ -86,7 +86,7 @@ namespace MvvmCross.Binding.Binders
                     if (pair.Type.ContainsGenericParameters) continue;
 
                     var converter = Activator.CreateInstance(pair.Type) as T;
-                    MvxBindingLog.Trace("Registering value converter {0}:{1}", pair.Name, pair.Type.Name);
+                    MvxBindingLog.Instance?.LogTrace("Registering value converter {Name}:{Type}", pair.Name, pair.Type.Name);
                     registry.AddOrOverwrite(pair.Name, converter);
                 }
                 catch (Exception ex)

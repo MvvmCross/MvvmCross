@@ -1,0 +1,43 @@
+name: Sonar
+
+on:
+  push:
+    branches: 
+    - develop
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+env:
+  verbosity: 'minimal'
+  sonarKey: 'MvvmCross_MvvmCross'
+  sonarOrg: 'mvx'
+  NET_VERSION: 9.0.101
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        fetch-tags: true
+
+    - name: Install .NET ${{ env.NET_VERSION }}
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.NET_VERSION }}
+
+    - name: Restore .NET tools
+      run: dotnet tool restore
+
+    - name: Install .NET workloads
+      run: |
+        dotnet --version
+        dotnet workload install android ios tvos macos maccatalyst --version ${{ env.NET_VERSION }}
+
+    - name: Build
+      run: dotnet cake --verbosity=${{ env.verbosity }} --artifactsDir="output" --target=Sonar --sonarToken=${{ secrets.SONAR_TOKEN }} --sonarKey=${{ env.sonarKey }} --sonarOrg=${{ env.sonarOrg }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

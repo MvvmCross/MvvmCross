@@ -184,7 +184,7 @@ public abstract class MvxAndroidSetup
             FillBindingNames, FillViewTypes, FillAxmlViewTypeResolver, FillNamespaceListViewTypeResolver);
     }
 
-    protected virtual void FillViewTypes(IMvxTypeCache<View> cache)
+    protected virtual void FillViewTypes(IMvxTypeCache cache)
     {
         ArgumentNullException.ThrowIfNull(cache);
 

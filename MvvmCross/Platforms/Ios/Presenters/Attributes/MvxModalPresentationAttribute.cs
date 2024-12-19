@@ -2,27 +2,25 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using CoreGraphics;
 using MvvmCross.Presenters.Attributes;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Presenters.Attributes
+namespace MvvmCross.Platforms.Ios.Presenters.Attributes;
+
+public class MvxModalPresentationAttribute : MvxBasePresentationAttribute
 {
-    public class MvxModalPresentationAttribute : MvxBasePresentationAttribute
-    {
-        public static bool DefaultWrapInNavigationController = false;
-        public bool WrapInNavigationController { get; set; } = DefaultWrapInNavigationController;
+    public static readonly bool DefaultWrapInNavigationController = false;
+    public static readonly UIModalPresentationStyle DefaultModalPresentationStyle = UIModalPresentationStyle.FullScreen;
+    public static readonly UIModalTransitionStyle DefaultModalTransitionStyle = UIModalTransitionStyle.CoverVertical;
+    public static readonly CGSize DefaultPreferredContentSize = CGSize.Empty;
+    public static readonly bool DefaultAnimated = true;
 
-        public static UIModalPresentationStyle DefaultModalPresentationStyle = UIModalPresentationStyle.FullScreen;
-        public UIModalPresentationStyle ModalPresentationStyle { get; set; } = DefaultModalPresentationStyle;
+    public bool WrapInNavigationController { get; set; } = DefaultWrapInNavigationController;
 
-        public static UIModalTransitionStyle DefaultModalTransitionStyle = UIModalTransitionStyle.CoverVertical;
-        public UIModalTransitionStyle ModalTransitionStyle { get; set; } = DefaultModalTransitionStyle;
+    public UIModalPresentationStyle ModalPresentationStyle { get; set; } = DefaultModalPresentationStyle;
 
-        public static CGSize DefaultPreferredContentSize = CGSize.Empty;
-        public CGSize PreferredContentSize { get; set; } = DefaultPreferredContentSize;
+    public UIModalTransitionStyle ModalTransitionStyle { get; set; } = DefaultModalTransitionStyle;
 
-        public static bool DefaultAnimated = true;
-        public bool Animated { get; set; } = DefaultAnimated;
-    }
+    public CGSize PreferredContentSize { get; set; } = DefaultPreferredContentSize;
+
+    public bool Animated { get; set; } = DefaultAnimated;
 }

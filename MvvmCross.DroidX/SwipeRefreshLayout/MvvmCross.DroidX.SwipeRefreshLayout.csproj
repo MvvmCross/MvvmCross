@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net7.0-android;net8.0-android</TargetFrameworks>
+    <TargetFrameworks>net8.0-android;net9.0-android</TargetFrameworks>
     <AssemblyName>MvvmCross.DroidX.SwipeRefreshLayout</AssemblyName>
     <RootNamespace>MvvmCross.DroidX.SwipeRefreshLayout</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.

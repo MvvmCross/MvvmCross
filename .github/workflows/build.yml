@@ -1,0 +1,51 @@
+name: Build
+
+on:
+  pull_request:
+    branches: 
+      - master
+      - develop
+
+env:
+  JAVA_DISTRIBUTION: 'microsoft'
+  JAVA_VERSION: 17
+  NET_VERSION: 9.0.101
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        fetch-tags: true
+
+    - name: Install .NET ${{ env.NET_VERSION }}
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.NET_VERSION }}
+
+    - name: Restore .NET tools
+      run: dotnet tool restore
+
+    - name: Install .NET workloads
+      run: |
+        dotnet --version
+        dotnet workload install android ios tvos macos maccatalyst --version ${{ env.NET_VERSION }}
+
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: ${{ env.JAVA_DISTRIBUTION }}
+        java-version: ${{ env.JAVA_VERSION }}
+
+    - name: Build
+      run: dotnet cake --verbosity=Minimal --artifactsDir="output"
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifacts
+        path: output

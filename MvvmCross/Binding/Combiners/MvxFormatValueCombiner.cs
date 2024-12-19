@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Converters;
 
@@ -15,7 +16,7 @@ namespace MvvmCross.Binding.Combiners
 
             if (list.Count < 1)
             {
-                MvxBindingLog.Warning("Format called with no parameters - will fail");
+                MvxBindingLog.Instance?.LogWarning("Format called with no parameters - will fail");
                 value = MvxBindingConstant.DoNothing;
                 return true;
             }

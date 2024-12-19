@@ -4,6 +4,7 @@
 
 using System;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Extensions;
 using MvvmCross.Converters;
 using MvvmCross.Exceptions;
@@ -33,7 +34,9 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
             if (!PropertyInfo.CanRead)
             {
-                MvxBindingLog.Error("GetValue ignored in binding - target property {0}.{1} is writeonly", PropertyInfo.DeclaringType?.Name, PropertyName);
+                MvxBindingLog.Instance?.LogError(
+                    "GetValue ignored in binding - target property {PropertyTypeName}.{PropertyName} is writeonly",
+                    PropertyInfo.DeclaringType?.Name, PropertyName);
                 return MvxBindingConstant.UnsetValue;
             }
 
@@ -55,13 +58,15 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
         {
             if (PropertyInfo == null)
             {
-                MvxBindingLog.Warning("SetValue ignored in binding - source property {0} is missing", PropertyName);
+                MvxBindingLog.Instance?.LogWarning("SetValue ignored in binding - source property {PropertyName} is missing", PropertyName);
                 return;
             }
 
             if (!PropertyInfo.CanWrite)
             {
-                MvxBindingLog.Warning("SetValue ignored in binding - target property {0}.{1} is readonly", PropertyInfo.DeclaringType?.Name, PropertyName);
+                MvxBindingLog.Instance?.LogWarning(
+                    "SetValue ignored in binding - target property {PropertyTypeName}.{PropertyName} is readonly",
+                    PropertyInfo.DeclaringType?.Name, PropertyName);
                 return;
             }
 
@@ -78,7 +83,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
             }
             catch (Exception exception)
             {
-                MvxBindingLog.Error("SetValue failed with exception - " + exception.ToLongString());
+                MvxBindingLog.Instance?.LogError(exception, "SetValue failed with exception. Property Name: {PropertyName}, Value: {Value}", PropertyName, value);
             }
         }
     }

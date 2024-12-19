@@ -5,10 +5,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin.FieldBinding
 {
@@ -16,8 +18,8 @@ namespace MvvmCross.Plugin.FieldBinding
     public class MvxFieldSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
-        public bool TryCreateBinding(object source, MvxPropertyToken currentToken,
-                                     List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+        public bool TryCreateBinding(object source, IMvxPropertyToken currentToken,
+                                     List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
             if (source == null)
             {
@@ -48,7 +50,7 @@ namespace MvvmCross.Plugin.FieldBinding
             return TryCreateFieldInfoBinding(source, remainingTokens, out result, fieldInfo);
         }
 
-        protected bool TryCreateFieldInfoBinding(object source, List<MvxPropertyToken> remainingTokens,
+        protected bool TryCreateFieldInfoBinding(object source, List<IMvxPropertyToken> remainingTokens,
                                                  out IMvxSourceBinding result, FieldInfo fieldInfo)
         {
             if (remainingTokens.Any())
@@ -62,14 +64,15 @@ namespace MvvmCross.Plugin.FieldBinding
             return true;
         }
 
-        protected bool TryCreateNotifyChangeBinding(object source, List<MvxPropertyToken> remainingTokens,
+        protected bool TryCreateNotifyChangeBinding(object source, List<IMvxPropertyToken> remainingTokens,
                                                     out IMvxSourceBinding result,
                                                     FieldInfo fieldInfo, MvxPropertyNamePropertyToken propertyNameToken)
         {
             var fieldValue = fieldInfo.GetValue(source) as INotifyChange;
             if (fieldValue == null)
             {
-                MvxBindingLog.Warning("INotifyChange is null for {0}", propertyNameToken.PropertyName);
+                MvxLogHost.GetLog("MvxBind")?.LogWarning("INotifyChange is null for {PropertyName}",
+                    propertyNameToken.PropertyName);
                 result = null;
                 return false;
             }

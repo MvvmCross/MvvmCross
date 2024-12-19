@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Binding.Bindings.Source
@@ -24,9 +25,8 @@ namespace MvvmCross.Binding.Bindings.Source
 
             if (Source == null)
             {
-                MvxBindingLog.Trace(
-                    "Unable to bind to source as it's null"
-                    , _propertyName);
+                MvxBindingLog.Instance?.LogTrace(
+                    "Unable to bind to source as it's null. PropertyName: {PropertyName}", _propertyName);
                 return;
             }
 

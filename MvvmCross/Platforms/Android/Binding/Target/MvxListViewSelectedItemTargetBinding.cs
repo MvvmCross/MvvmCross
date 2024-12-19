@@ -2,80 +2,78 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Android.Widget;
+#nullable enable
+using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.Platforms.Android.WeakSubscription;
 
-namespace MvvmCross.Platforms.Android.Binding.Target
+namespace MvvmCross.Platforms.Android.Binding.Target;
+
+public class MvxListViewSelectedItemTargetBinding(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+        MvxListView view)
+    : MvxAndroidTargetBinding(view)
 {
-    public class MvxListViewSelectedItemTargetBinding
-        : MvxAndroidTargetBinding
+    private object? _currentValue;
+    private MvxAndroidTargetEventSubscription<ListView, AdapterView.ItemClickEventArgs>? _subscription;
+
+    protected MvxListView? ListView => (MvxListView?)Target;
+
+    private void OnItemClick(object? sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
     {
-        protected MvxListView ListView => (MvxListView)Target;
+        var listView = ListView;
+        if (listView == null)
+            return;
 
-        private object _currentValue;
-        private IDisposable _subscription;
+        var newValue = listView.Adapter.GetRawItem(itemClickEventArgs.Position);
 
-        public MvxListViewSelectedItemTargetBinding(MvxListView view)
-            : base(view)
+        if (!newValue.Equals(_currentValue))
         {
+            _currentValue = newValue;
+            FireValueChanged(newValue);
         }
+    }
 
-        private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
+    protected override void SetValueImpl(object target, object? value)
+    {
+        if (value == null || value == _currentValue)
+            return;
+
+        var listView = (MvxListView)target;
+
+        var index = listView.Adapter.GetPosition(value);
+        if (index < 0)
         {
-            var listView = ListView;
-            if (listView == null)
-                return;
-
-            var newValue = listView.Adapter.GetRawItem(itemClickEventArgs.Position);
-
-            if (!newValue.Equals(_currentValue))
-            {
-                _currentValue = newValue;
-                FireValueChanged(newValue);
-            }
+            MvxBindingLog.Instance?.LogWarning("Value not found for spinner {Value}", value);
+            return;
         }
+        _currentValue = value;
+        listView.SetSelection(index);
+    }
 
-        protected override void SetValueImpl(object target, object value)
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+    public override void SubscribeToEvents()
+    {
+        var listView = (ListView?)ListView;
+        if (listView == null)
+            return;
+
+        _subscription =
+            listView.WeakSubscribe<ListView, AdapterView.ItemClickEventArgs>(nameof(listView.ItemClick), OnItemClick);
+    }
+
+    public override Type TargetValueType => typeof(object);
+
+    protected override void Dispose(bool isDisposing)
+    {
+        if (isDisposing)
         {
-            if (value == null || value == _currentValue)
-                return;
-
-            var listView = (MvxListView)target;
-
-            var index = listView.Adapter.GetPosition(value);
-            if (index < 0)
-            {
-                MvxBindingLog.Warning("Value not found for spinner {0}", value.ToString());
-                return;
-            }
-            _currentValue = value;
-            listView.SetSelection(index);
+            _subscription?.Dispose();
+            _subscription = null;
         }
-
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
-
-        public override void SubscribeToEvents()
-        {
-            var listView = (ListView)ListView;
-            if (listView == null)
-                return;
-
-            _subscription = listView.WeakSubscribe<ListView, AdapterView.ItemClickEventArgs>(nameof(listView.ItemClick), OnItemClick);
-        }
-
-        public override Type TargetValueType => typeof(object);
-
-        protected override void Dispose(bool isDisposing)
-        {
-            if (isDisposing)
-            {
-                _subscription?.Dispose();
-                _subscription = null;
-            }
-            base.Dispose(isDisposing);
-        }
+        base.Dispose(isDisposing);
     }
 }

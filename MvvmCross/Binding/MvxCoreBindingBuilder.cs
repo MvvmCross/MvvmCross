@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
@@ -163,10 +164,10 @@ namespace MvvmCross.Binding
         {
             if (iocProvider.CanResolve<IMvxBindingParser>())
             {
-                MvxBindingLog.Trace("Binding Parser already registered - so skipping Default parser");
+                MvxBindingLog.Instance?.LogTrace("Binding Parser already registered - so skipping Default parser");
                 return;
             }
-            MvxBindingLog.Trace("Registering Default Binding Parser");
+            MvxBindingLog.Instance?.LogTrace("Registering Default Binding Parser");
             iocProvider.RegisterSingleton(CreateBindingParser());
         }
 
@@ -179,10 +180,10 @@ namespace MvvmCross.Binding
         {
             if (iocProvider.CanResolve<IMvxLanguageBindingParser>())
             {
-                MvxBindingLog.Trace("Binding Parser already registered - so skipping Language parser");
+                MvxBindingLog.Instance?.LogTrace("Binding Parser already registered - so skipping Language parser");
                 return;
             }
-            MvxBindingLog.Trace("Registering Language Binding Parser");
+            MvxBindingLog.Instance?.LogTrace("Registering Language Binding Parser");
             iocProvider.RegisterSingleton(CreateLanguageBindingParser());
         }
 

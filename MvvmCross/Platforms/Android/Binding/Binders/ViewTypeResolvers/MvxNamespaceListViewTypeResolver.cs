@@ -11,7 +11,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
     {
         public IList<string> Namespaces { get; }
 
-        public MvxNamespaceListViewTypeResolver(IMvxTypeCache<View> typeCache)
+        public MvxNamespaceListViewTypeResolver(IMvxTypeCache typeCache)
             : base(typeCache)
         {
             Namespaces = new List<string>();

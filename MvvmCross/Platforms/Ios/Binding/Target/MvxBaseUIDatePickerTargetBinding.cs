@@ -2,81 +2,79 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+#nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using Foundation;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platforms.Ios;
 using MvvmCross.WeakSubscription;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Binding.Target
+namespace MvvmCross.Platforms.Ios.Binding.Target;
+
+public abstract class MvxBaseUIDatePickerTargetBinding(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+        UIDatePicker target,
+        PropertyInfo targetPropertyInfo)
+    : MvxPropertyInfoTargetBinding<UIDatePicker>(target, targetPropertyInfo)
 {
-    public abstract class MvxBaseUIDatePickerTargetBinding : MvxPropertyInfoTargetBinding<UIDatePicker>
+    private readonly NSTimeZone _systemTimeZone = NSTimeZone.SystemTimeZone;
+    private MvxWeakEventSubscription<UIDatePicker>? _subscription;
+
+    private void DatePickerOnValueChanged(object? sender, EventArgs args)
     {
-        private readonly NSTimeZone _systemTimeZone;
-        private MvxWeakEventSubscription<UIDatePicker> _subscription;
+        var view = View;
+        if (view == null) return;
 
-        protected MvxBaseUIDatePickerTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
+        FireValueChanged(GetValueFrom(view));
+    }
+
+    protected abstract object GetValueFrom(UIDatePicker view);
+
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+
+    public override void SubscribeToEvents()
+    {
+        var datePicker = View;
+        if (datePicker == null)
         {
-            _systemTimeZone = NSTimeZone.SystemTimeZone;
+            MvxBindingLog.Instance?.LogError("UIDatePicker is null in {TargetBindingType}",
+                nameof(MvxBaseUIDatePickerTargetBinding));
         }
-
-        private void DatePickerOnValueChanged(object sender, EventArgs args)
+        // Only listen for value changes if we are binding against one of the value-derived properties.
+        else if (TargetPropertyInfo.Name is nameof(UIDatePicker.Date) or nameof(UIDatePicker.CountDownDuration))
         {
-            var view = View;
-            if (view == null) return;
-
-            FireValueChanged(GetValueFrom(view));
+            _subscription = datePicker.WeakSubscribe(nameof(datePicker.ValueChanged), DatePickerOnValueChanged);
         }
+    }
 
-        protected abstract object GetValueFrom(UIDatePicker view);
+    protected override void Dispose(bool isDisposing)
+    {
+        base.Dispose(isDisposing);
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
+        if (!isDisposing) return;
 
-        public override void SubscribeToEvents()
-        {
-            var datePicker = View;
-            if (datePicker == null)
-            {
-                MvxBindingLog.Error("Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
-            }
-            // Only listen for value changes if we are binding against one of the value-derived properties.
-            else if (TargetPropertyInfo.Name == nameof(UIDatePicker.Date) || TargetPropertyInfo.Name == nameof(UIDatePicker.CountDownDuration))
-            {
-                _subscription = datePicker.WeakSubscribe(nameof(datePicker.ValueChanged), DatePickerOnValueChanged);
-            }
-        }
+        _subscription?.Dispose();
+        _subscription = null;
+    }
 
-        protected override void Dispose(bool isDisposing)
-        {
-            base.Dispose(isDisposing);
-
-            if (!isDisposing) return;
-
-            _subscription?.Dispose();
-        }
-
-        protected DateTime ToLocalTime(DateTime utc)
-        {
-            if (utc.Kind == DateTimeKind.Local)
-                return utc;
-
-            var local = utc.AddSeconds(_systemTimeZone.SecondsFromGMT(utc.ToNSDate())).WithKind(DateTimeKind.Local);
-
-            return local;
-        }
-
-        protected DateTime ToUtcTime(DateTime local)
-        {
-            if (local.Kind == DateTimeKind.Utc)
-                return local;
-
-            var utc = local.AddSeconds(-_systemTimeZone.SecondsFromGMT(local.ToNSDate())).WithKind(DateTimeKind.Utc);
-
+    protected DateTime ToLocalTime(DateTime utc)
+    {
+        if (utc.Kind == DateTimeKind.Local)
             return utc;
-        }
+
+        var local = utc.AddSeconds(_systemTimeZone.SecondsFromGMT(utc.ToNSDate())).WithKind(DateTimeKind.Local);
+
+        return local;
+    }
+
+    protected DateTime ToUtcTime(DateTime local)
+    {
+        if (local.Kind == DateTimeKind.Utc)
+            return local;
+
+        var utc = local.AddSeconds(-_systemTimeZone.SecondsFromGMT(local.ToNSDate())).WithKind(DateTimeKind.Utc);
+
+        return utc;
     }
 }

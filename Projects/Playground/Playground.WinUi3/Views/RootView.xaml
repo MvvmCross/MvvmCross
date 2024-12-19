@@ -16,11 +16,18 @@
                 Command="{Binding ShowSplitCommand}"
                 Margin="5"
                 Padding="5" />
-        <Button Content="Show Modaliew"
+        <Button Content="Show ModalView"
                 Command="{Binding ShowModalCommand}"
                 Margin="5"
                 Padding="5" />
-
+        <Button Content="Show RegionView"
+                Command="{Binding ShowRegionCommand}"
+                Margin="5"
+                Padding="5" />
+        <Button Content="Show new window"
+                Command="{Binding ShowNewWindowCommand}"
+                Margin="5"
+                Padding="5" />
         <Button Content="Register and Resolve With Reflection"
                 Command="{Binding RegisterAndResolveWithReflectionCommand}"
                 Margin="5"
@@ -32,5 +39,15 @@
         <TextBlock Text="{Binding TimeToRegister}" />
         <TextBlock Text="{Binding TimeToResolve}" />
         <TextBlock Text="{Binding TotalTime}" />
+        <Frame HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Visible" x:Name="PopupLocation">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition>
+                        <SuppressNavigationTransitionInfo></SuppressNavigationTransitionInfo>
+                    </NavigationThemeTransition>
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+        </Frame>
+
     </StackPanel>
 </app:RootViewPage>

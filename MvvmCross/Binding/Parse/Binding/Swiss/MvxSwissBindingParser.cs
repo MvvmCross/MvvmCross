@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Parse.Binding.Swiss
@@ -28,7 +29,7 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
             ParseEquals(block);
             var converter = ReadTargetPropertyName();
             if (!string.IsNullOrEmpty(description.Converter))
-                MvxBindingLog.Warning("Overwriting existing Converter with {0}", converter);
+                MvxBindingLog.Instance?.LogWarning("Overwriting existing Converter with {ConverterName}", converter);
             description.Converter = converter;
         }
 
@@ -36,7 +37,7 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
         {
             ParseEquals(block);
             if (description.ConverterParameter != null)
-                MvxBindingLog.Warning("Overwriting existing ConverterParameter");
+                MvxBindingLog.Instance?.LogWarning("Overwriting existing ConverterParameter");
             description.ConverterParameter = ReadValue();
         }
 
@@ -53,7 +54,7 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
             {
                 ParseEquals(block);
                 if (!string.IsNullOrEmpty(description.Converter))
-                    MvxBindingLog.Warning("Overwriting existing Converter with CommandParameter");
+                    MvxBindingLog.Instance?.LogWarning("Overwriting existing Converter with CommandParameter");
                 description.Converter = "CommandParameter";
                 description.ConverterParameter = ReadValue();
             }
@@ -63,7 +64,7 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
         {
             ParseEquals(block);
             if (description.FallbackValue != null)
-                MvxBindingLog.Warning("Overwriting existing FallbackValue");
+                MvxBindingLog.Instance?.LogWarning("Overwriting existing FallbackValue");
             description.FallbackValue = ReadValue();
         }
 

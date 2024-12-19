@@ -37,7 +37,7 @@ namespace MvvmCross.Base
             get
             {
                 CheckFullTextValid();
-                return FullText![CurrentIndex];
+                return FullText.AsSpan()[CurrentIndex];
             }
         }
 

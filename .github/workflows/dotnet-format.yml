@@ -1,17 +1,9 @@
 name: dotnet format
 
-on:
-  push:
-    branches: 
-      - develop
-      - master
-      - feature/**
-      - release/**
-      - hotfix/**
-  pull_request:
-    branches: 
-      - master
-      - develop
+on: [pull_request]
+
+env:
+  NET_VERSION: 9.0.101
 
 jobs:
   lint:
@@ -19,12 +11,12 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+    - name: Install .NET ${{ env.NET_VERSION }}
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 7.0.306
+        dotnet-version: ${{ env.NET_VERSION }}
 
     - name: Restore dependencies
       run: dotnet tool restore

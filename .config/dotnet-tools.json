@@ -3,22 +3,25 @@
   "isRoot": true,
   "tools": {
     "cake.tool": {
-      "version": "3.2.0",
+      "version": "4.0.0",
       "commands": [
         "dotnet-cake"
-      ]
+      ],
+      "rollForward": false
     },
     "dotnet-reportgenerator-globaltool": {
-      "version": "5.2.0",
+      "version": "5.2.2",
       "commands": [
         "reportgenerator"
-      ]
+      ],
+      "rollForward": false
     },
     "dotnet-sonarscanner": {
-      "version": "5.14.0",
+      "version": "9.0.0",
       "commands": [
         "dotnet-sonarscanner"
-      ]
+      ],
+      "rollForward": false
     }
   }
 }

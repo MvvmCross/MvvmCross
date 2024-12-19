@@ -1,53 +1,41 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
+#nullable enable
 
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Core;
 
-namespace MvvmCross.ViewModels
+namespace MvvmCross.ViewModels;
+
+public class MvxBundle(IDictionary<string, string>? data) : IMvxBundle
 {
-#nullable enable
-    public class MvxBundle
-        : IMvxBundle
+    public MvxBundle()
+        : this(new Dictionary<string, string>())
     {
-        public MvxBundle()
-            : this(new Dictionary<string, string>())
-        {
-        }
-
-        public MvxBundle(IDictionary<string, string>? data)
-        {
-            Data = data ?? new Dictionary<string, string>();
-        }
-
-        public IDictionary<string, string> Data { get; }
-
-        public void Write(object toStore)
-        {
-            if (toStore == null)
-                throw new ArgumentNullException(nameof(toStore));
-
-            Data.Write(toStore);
-        }
-
-        public T Read<T>()
-            where T : new()
-        {
-            return Data.Read<T>();
-        }
-
-        public object Read(Type type)
-        {
-            return Data.Read(type);
-        }
-
-        public IEnumerable<object> CreateArgumentList(IEnumerable<ParameterInfo> requiredParameters, string? debugText)
-        {
-            return Data.CreateArgumentList(requiredParameters, debugText);
-        }
     }
-#nullable restore
+
+    public IDictionary<string, string> Data { get; } = data ?? new Dictionary<string, string>();
+
+    public void Write(object toStore)
+    {
+        ArgumentNullException.ThrowIfNull(toStore);
+        Data.Write(toStore);
+    }
+
+    public T? Read<T>()
+        where T : new()
+    {
+        return Data.Read<T>();
+    }
+
+    public object? Read(Type type)
+    {
+        return Data.Read(type);
+    }
+
+    public IEnumerable<object> CreateArgumentList(IEnumerable<ParameterInfo> requiredParameters, string? debugText)
+    {
+        return Data.CreateArgumentList(requiredParameters, debugText);
+    }
 }

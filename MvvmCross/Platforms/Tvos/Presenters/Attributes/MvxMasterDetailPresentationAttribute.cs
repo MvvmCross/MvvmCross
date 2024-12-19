@@ -10,7 +10,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters.Attributes
     {
         public static bool DefaultWrapInNavigationController = true;
         public bool WrapInNavigationController { get; set; } = DefaultWrapInNavigationController;
-        public MasterDetailPosition Position { get; set; } = MasterDetailPosition.Detail;
+        public MasterDetailPosition Position { get; set; }
 
         public MvxMasterDetailPresentationAttribute(MasterDetailPosition position = MasterDetailPosition.Detail)
         {
