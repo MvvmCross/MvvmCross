@@ -1,0 +1,53 @@
+'t/docs':
+  - changed-files:
+      - any-glob-to-any-file: ['docs/**', '**/*.md']
+
+'t/feature':
+  - head-branch: ['^feature', 'feature']
+
+'t/bug':
+  - head-branch: ['^bug', 'bug']
+
+'p/ci':
+  - changed-files:
+      - any-glob-to-any-file: ['.github/workflows/*.yml', '.github/labeler.yml']
+
+'p/ios':
+  - changed-files:
+      - any-glob-to-any-file: ['**/Platforms/Ios/**']
+
+'p/android':
+  - changed-files:
+      - any-glob-to-any-file: ['**/Platforms/Android/**']
+
+'p/mac':
+  - changed-files:
+      - any-glob-to-any-file: [ '**/Platforms/Mac/**' ]
+
+'p/tvos':
+  - changed-files:
+      - any-glob-to-any-file: [ '**/Platforms/Tvos/**' ]
+
+'p/uwp':
+  - changed-files:
+      - any-glob-to-any-file: [ '**/Platforms/Uap/**' ]
+
+'p/winui':
+  - changed-files:
+      - any-glob-to-any-file: [ '**/Platforms/WunUI/**' ]
+
+'p/wpf':
+  - changed-files:
+      - any-glob-to-any-file: [ '**/Platforms/Wpf/**', 'MvvmCross.Wpf/**' ]
+
+'p/android-support':
+  - changed-files:
+      - any-glob-to-any-file: [ 'MvvmCross.DroidX/**' ]
+
+'p/plugins':
+  - changed-files:
+      - any-glob-to-any-file: [ 'MvvmCross.Plugins/**' ]
+
+'p/samples':
+  - changed-files:
+      - any-glob-to-any-file: [ 'Projects/**' ]
