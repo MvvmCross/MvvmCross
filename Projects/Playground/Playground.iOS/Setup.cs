@@ -20,6 +20,8 @@ namespace Playground.iOS
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
+                .WriteTo.Async(a => a.Trace())
+                .WriteTo.Async(a => a.NSLog())
                 .CreateLogger();
 
             return new SerilogLoggerFactory();

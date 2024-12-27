@@ -23,6 +23,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:text="Show VM With Result"
+                local:MvxBind="Click ShowViewModelWithResult;" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Show Modal"
                 local:MvxBind="Click ShowModalCommand;" />
             <Button

@@ -2,29 +2,25 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
-using MvvmCross.ViewModels.Result;
 using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
-    public class ChildViewModel : MvxNavigationResultSettingViewModel<SampleModel, SampleModel>
+    public class ChildViewModel : MvxNavigationViewModel<SampleModel>
     {
         public string BrokenTextValue { get => _brokenTextValue; set => SetProperty(ref _brokenTextValue, value); }
         public string AnotherBrokenTextValue { get => _anotherBrokenTextValue; set => SetProperty(ref _anotherBrokenTextValue, value); }
 
-        private SampleModel _parameter;
         private string _brokenTextValue;
         private string _anotherBrokenTextValue;
 
         public ChildViewModel(
-            ILoggerFactory logProvider, IMvxNavigationService navigationService, IMvxResultViewModelManager resultViewModelManager)
-            : base(logProvider, navigationService, resultViewModelManager)
+            ILoggerFactory logProvider, IMvxNavigationService navigationService)
+            : base(logProvider, navigationService)
         {
             CloseCommand = new MvxAsyncCommand(DoCloseCommand);
 
@@ -37,7 +33,7 @@ namespace Playground.Core.ViewModels
 
         private Task DoCloseCommand()
         {
-            return NavigationService.CloseSettingResult(this, new SampleModel { Message = "This returned correctly", Value = 5.67m });
+            return NavigationService.Close(this);
         }
 
         private void ChildViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -46,11 +42,6 @@ namespace Playground.Core.ViewModels
             // protect the app from crashing
             if (e.PropertyName == nameof(BrokenTextValue))
                 throw new System.NotImplementedException();
-        }
-
-        public override void Prepare(SampleModel parameter)
-        {
-            _parameter = parameter;
         }
 
         public override async System.Threading.Tasks.Task Initialize()
@@ -70,6 +61,10 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowSecondChildCommand { get; private set; }
 
         public IMvxAsyncCommand ShowRootCommand { get; private set; }
+
+        public override void Prepare(SampleModel parameter)
+        {
+        }
 
         public override void ViewAppeared()
         {

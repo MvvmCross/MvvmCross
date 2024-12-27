@@ -2,16 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Localization;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
-using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using MvvmCross.ViewModels.Result;
 using Playground.Core.Models;
@@ -44,7 +40,7 @@ namespace Playground.Core.ViewModels
         {
             _mvxViewModelLoader = mvxViewModelLoader;
 
-            ShowChildCommand = new MvxAsyncCommand(DoShowChild);
+            ShowChildCommand = new MvxAsyncCommand(() => NavigationService.Navigate<ChildViewModel>());
 
             ShowModalCommand = new MvxAsyncCommand(Navigate);
 
@@ -87,6 +83,8 @@ namespace Playground.Core.ViewModels
             RegisterAndResolveWithReflectionCommand = new MvxAsyncCommand(RegisterAndResolveWithReflection);
             RegisterAndResolveWithNoReflectionCommand = new MvxAsyncCommand(RegisterAndResolveWithNoReflection);
 
+            ShowViewModelWithResult = new MvxAsyncCommand(DoShowChildWithResult);
+
             _counter = 3;
 
             TriggerVisibilityCommand =
@@ -95,10 +93,10 @@ namespace Playground.Core.ViewModels
             FragmentCloseCommand = new MvxAsyncCommand(() => NavigationService.Navigate<FragmentCloseViewModel>());
         }
 
-        private Task DoShowChild()
+        private Task DoShowChildWithResult()
         {
-            return NavigationService.NavigateRegisteringToResult<ChildViewModel, SampleModel, SampleModel>(this,
-                ResultViewModelManager, new SampleModel { Message = "Hey", Value = 1.23m });
+            return NavigationService.NavigateRegisteringToResult<ChildWithResultViewModel, SampleModel, SampleModel>(this,
+                ResultViewModelManager, new SampleModel("Hello from Root!", 1.337m));
         }
 
         public MvxNotifyTask MyTask { get; set; }
@@ -167,6 +165,8 @@ namespace Playground.Core.ViewModels
         public IMvxCommand FragmentCloseCommand { get; }
         public IMvxAsyncCommand ShowLocationCommand { get; }
 
+        public MvxAsyncCommand ShowViewModelWithResult { get; set; }
+
         private bool _isVisible;
 
         public bool IsVisible
@@ -192,22 +192,11 @@ namespace Playground.Core.ViewModels
 
         public string TotalTime { get; set; }
 
-        public override async Task Initialize()
+        public override Task Initialize()
         {
             Log.LogWarning("Testing log");
 
-            await base.Initialize();
-
-            // Uncomment this to demonstrate use of StartAsync for async first navigation
-            // await Task.Delay(5000);
-
-            _mvxViewModelLoader.LoadViewModel(MvxViewModelRequest.GetDefaultRequest(typeof(ChildViewModel)),
-                new SampleModel
-                {
-                    Message = "From locator",
-                    Value = 2
-                },
-                null);
+            return base.Initialize();
         }
 
         public override void ViewAppearing()
@@ -239,15 +228,9 @@ namespace Playground.Core.ViewModels
             _counter = int.Parse(state.Data["MyKey"]);
         }
 
-        private async Task Navigate()
+        private Task Navigate()
         {
-            try
-            {
-                await NavigationService.Navigate<ModalViewModel>();
-            }
-            catch (Exception)
-            {
-            }
+            return NavigationService.Navigate<ModalViewModel>();
         }
 
         private async Task RegisterAndResolveWithReflection()

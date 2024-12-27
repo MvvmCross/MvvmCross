@@ -27,6 +27,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Essentials" />
     <PackageReference Include="Serilog.Extensions.Logging" />
+    <PackageReference Include="Serilog.Sinks.Async" />
+    <PackageReference Include="Serilog.Sinks.Trace" />
+    <PackageReference Include="Serilog.Sinks.Xamarin" />
     <PackageReference Include="Serilog" />
   </ItemGroup>
 
