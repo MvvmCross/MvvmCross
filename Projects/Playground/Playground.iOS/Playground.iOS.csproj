@@ -31,6 +31,8 @@
     <PackageReference Include="Serilog.Sinks.Trace" />
     <PackageReference Include="Serilog.Sinks.Xamarin" />
     <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Sinks.Async" />
+    <PackageReference Include="Serilog.Sinks.Trace" />
   </ItemGroup>
 
   <ItemGroup>

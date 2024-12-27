@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platforms.Ios.Core;
+using MvvmCross.Plugin;
 using Playground.Core;
 using Playground.iOS.Bindings;
 using Playground.iOS.Controls;
@@ -34,6 +35,12 @@ namespace Playground.iOS
                 (arg) => new BinaryEditTargetBinding(arg));
 
             base.FillTargetFactories(registry);
+        }
+
+        public override void LoadPlugins(IMvxPluginManager pluginManager)
+        {
+            base.LoadPlugins(pluginManager);
+            pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.Json.Plugin>();
         }
     }
 }

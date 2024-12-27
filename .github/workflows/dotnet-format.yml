@@ -2,6 +2,9 @@ name: dotnet format
 
 on: [pull_request]
 
+env:
+  NET_VERSION: 9.0.101
+
 jobs:
   lint:
 
@@ -10,10 +13,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install .NET 9.0.100-rc.2.24474.11
+    - name: Install .NET ${{ env.NET_VERSION }}
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.100-rc.2.24474.11'
+        dotnet-version: ${{ env.NET_VERSION }}
 
     - name: Restore dependencies
       run: dotnet tool restore

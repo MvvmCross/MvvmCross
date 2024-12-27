@@ -19,6 +19,11 @@ on:
   schedule:
     - cron: '41 5 * * 5'
 
+env:
+  JAVA_DISTRIBUTION: 'microsoft'
+  JAVA_VERSION: 17
+  NET_VERSION: 9.0.101
+
 jobs:
   analyze:
     name: Analyze
@@ -66,22 +71,24 @@ jobs:
         # queries: security-extended,security-and-quality
 
 
-    - name: Install .NET 9.0.100-rc.2.24474.11
+    - name: Install .NET ${{ env.NET_VERSION }}
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.100-rc.2.24474.11'
+        dotnet-version: ${{ env.NET_VERSION }}
 
     - name: Restore .NET tools
       run: dotnet tool restore
 
     - name: Install .NET workloads
-      run: dotnet workload install android ios tvos macos maccatalyst
+      run: |
+        dotnet --version
+        dotnet workload install android ios tvos macos maccatalyst --version ${{ env.NET_VERSION }}
 
-    - name: Setup Java JDK
+    - name: Set up JDK
       uses: actions/setup-java@v4
       with:
-        distribution: 'microsoft'
-        java-version: '17'
+        distribution: ${{ env.JAVA_DISTRIBUTION }}
+        java-version: ${{ env.JAVA_VERSION }}
 
     - name: Build
       run: dotnet cake --verbosity=Minimal
