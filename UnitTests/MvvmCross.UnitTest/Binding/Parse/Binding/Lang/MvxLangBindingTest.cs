@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections.Generic;
-using System.Linq;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Lang;
 using MvvmCross.Tests;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding.Lang
 {
