@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace Playground.Core.Models;
+namespace MvvmCross.ViewModels.Result;
 
-public record SampleModel(string Message, decimal Value)
+public interface IMvxResultSettingViewModel<in TResult>
 {
-    public override string ToString() => $"Message: {Message}, Value: {Value}";
+    void SetResult(TResult result);
 }

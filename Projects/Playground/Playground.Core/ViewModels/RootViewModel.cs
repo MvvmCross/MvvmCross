@@ -2,17 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Localization;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
-using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
+using MvvmCross.ViewModels.Result;
 using Playground.Core.Models;
 using Playground.Core.Services;
 using Playground.Core.ViewModels.Bindings;
@@ -21,7 +18,7 @@ using Playground.Core.ViewModels.Samples;
 
 namespace Playground.Core.ViewModels
 {
-    public class RootViewModel : MvxNavigationViewModel
+    public class RootViewModel : MvxNavigationResultAwaitingViewModel<SampleModel>
     {
         private readonly IMvxViewModelLoader _mvxViewModelLoader;
 
@@ -34,25 +31,16 @@ namespace Playground.Core.ViewModels
             get { return new MvxLanguageBinder("Playground.Core", "Text"); }
         }
 
-        public RootViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService, IMvxViewModelLoader mvxViewModelLoader)
-            : base(logProvider, navigationService)
+        public RootViewModel(
+                ILoggerFactory logProvider,
+                IMvxNavigationService navigationService,
+                IMvxViewModelLoader mvxViewModelLoader,
+                IMvxResultViewModelManager resultViewModelManager)
+            : base(logProvider, navigationService, resultViewModelManager)
         {
             _mvxViewModelLoader = mvxViewModelLoader;
-            try
-            {
-                var messenger = Mvx.IoCProvider.Resolve<IMvxMessenger>();
-                var str = messenger.ToString();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
 
-            ShowChildCommand = new MvxAsyncCommand(() => NavigationService.Navigate<ChildViewModel, SampleModel>(new SampleModel
-            {
-                Message = "Hey",
-                Value = 1.23m
-            }));
+            ShowChildCommand = new MvxAsyncCommand(() => NavigationService.Navigate<ChildViewModel>());
 
             ShowModalCommand = new MvxAsyncCommand(Navigate);
 
@@ -95,12 +83,20 @@ namespace Playground.Core.ViewModels
             RegisterAndResolveWithReflectionCommand = new MvxAsyncCommand(RegisterAndResolveWithReflection);
             RegisterAndResolveWithNoReflectionCommand = new MvxAsyncCommand(RegisterAndResolveWithNoReflection);
 
+            ShowViewModelWithResult = new MvxAsyncCommand(DoShowChildWithResult);
+
             _counter = 3;
 
             TriggerVisibilityCommand =
                 new MvxCommand(() => IsVisible = !IsVisible);
 
             FragmentCloseCommand = new MvxAsyncCommand(() => NavigationService.Navigate<FragmentCloseViewModel>());
+        }
+
+        private Task DoShowChildWithResult()
+        {
+            return NavigationService.NavigateRegisteringToResult<ChildWithResultViewModel, SampleModel, SampleModel>(this,
+                ResultViewModelManager, new SampleModel("Hello from Root!", 1.337m));
         }
 
         public MvxNotifyTask MyTask { get; set; }
@@ -169,6 +165,8 @@ namespace Playground.Core.ViewModels
         public IMvxCommand FragmentCloseCommand { get; }
         public IMvxAsyncCommand ShowLocationCommand { get; }
 
+        public MvxAsyncCommand ShowViewModelWithResult { get; set; }
+
         private bool _isVisible;
 
         public bool IsVisible
@@ -194,22 +192,11 @@ namespace Playground.Core.ViewModels
 
         public string TotalTime { get; set; }
 
-        public override async Task Initialize()
+        public override Task Initialize()
         {
             Log.LogWarning("Testing log");
 
-            await base.Initialize();
-
-            // Uncomment this to demonstrate use of StartAsync for async first navigation
-            // await Task.Delay(5000);
-
-            _mvxViewModelLoader.LoadViewModel(MvxViewModelRequest.GetDefaultRequest(typeof(ChildViewModel)),
-                new SampleModel
-                {
-                    Message = "From locator",
-                    Value = 2
-                },
-                null);
+            return base.Initialize();
         }
 
         public override void ViewAppearing()
@@ -241,15 +228,9 @@ namespace Playground.Core.ViewModels
             _counter = int.Parse(state.Data["MyKey"]);
         }
 
-        private async Task Navigate()
+        private Task Navigate()
         {
-            try
-            {
-                await NavigationService.Navigate<ModalViewModel>();
-            }
-            catch (Exception)
-            {
-            }
+            return NavigationService.Navigate<ModalViewModel>();
         }
 
         private async Task RegisterAndResolveWithReflection()
@@ -290,6 +271,12 @@ namespace Playground.Core.ViewModels
             TimeToResolve = $"Time to resolve - NO reflection - {resolved}";
             TotalTime = $"Total time - NO reflection - {total}";
             await RaiseAllPropertiesChanged();
+        }
+
+        public override bool ResultSet(IMvxResultSettingViewModel<SampleModel> viewModel, SampleModel result)
+        {
+            Log.LogInformation("Got Result {@Result} from {ViewModel}", result, viewModel.GetType().Name);
+            return true;
         }
     }
 }

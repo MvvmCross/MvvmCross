@@ -12,6 +12,7 @@ using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
+using MvvmCross.ViewModels.Result;
 using MvvmCross.Views;
 
 namespace MvvmCross.Core;
@@ -154,6 +155,8 @@ public abstract class MvxSetup : IMvxSetup
             var app = InitializeMvxApplication(_iocProvider);
             SetupLog?.Log(LogLevel.Trace, "Setup: NavigationService");
             InitializeNavigationService(_iocProvider);
+            SetupLog?.Log(LogLevel.Trace, "Setup: ResultViewModelManager");
+            InitializeResultViewModelManager(_iocProvider);
             SetupLog?.Log(LogLevel.Trace, "Setup: ViewModelTypeFinder start");
             InitializeViewModelTypeFinder(_iocProvider);
             SetupLog?.Log(LogLevel.Trace, "Setup: ViewsContainer start");
@@ -345,6 +348,7 @@ public abstract class MvxSetup : IMvxSetup
         iocProvider.LazyConstructAndRegisterSingleton<IMvxViewModelLoader, MvxViewModelLoader>();
         iocProvider.LazyConstructAndRegisterSingleton<IMvxNavigationService, IMvxViewModelLoader, IMvxViewDispatcher, IMvxIoCProvider>(
             (loader, dispatcher, p) => new MvxNavigationService(loader, dispatcher, p));
+        iocProvider.LazyConstructAndRegisterSingleton<IMvxResultViewModelManager, MvxResultViewModelManager>();
         iocProvider.RegisterSingleton(() => new MvxViewModelByNameLookup());
         iocProvider.LazyConstructAndRegisterSingleton<IMvxViewModelByNameLookup, MvxViewModelByNameLookup>(
             nameLookup => nameLookup);
@@ -575,6 +579,20 @@ public abstract class MvxSetup : IMvxSetup
     protected virtual IEnumerable<Assembly> GetBootstrapOwningAssemblies()
     {
         return GetViewAssemblies().Distinct();
+    }
+
+    protected virtual IMvxResultViewModelManager? InitializeResultViewModelManager(IMvxIoCProvider iocProvider)
+    {
+        ValidateArguments(iocProvider);
+
+        return CreateResultViewModelManager(iocProvider);
+    }
+
+    protected virtual IMvxResultViewModelManager? CreateResultViewModelManager(IMvxIoCProvider iocProvider)
+    {
+        ValidateArguments(iocProvider);
+
+        return iocProvider.Resolve<IMvxResultViewModelManager>();
     }
 
     protected abstract IMvxNameMapping CreateViewToViewModelNaming();
