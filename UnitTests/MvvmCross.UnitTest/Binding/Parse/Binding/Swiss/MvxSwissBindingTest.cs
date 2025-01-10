@@ -4,10 +4,8 @@
 
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Swiss;
-using MvvmCross.Logging;
 using MvvmCross.Tests;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
 {

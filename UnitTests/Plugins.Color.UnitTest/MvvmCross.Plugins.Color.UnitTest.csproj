@@ -5,11 +5,12 @@
     <AssemblyName>MvvmCross.Plugins.Color.UnitTest</AssemblyName>
     <RootNamespace>MvvmCross.Plugins.Color.UnitTest</RootNamespace>
     <RollForward>Major</RollForward>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Moq" />
-    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.v3" />
     <PackageReference Include="xunit.runner.visualstudio">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
