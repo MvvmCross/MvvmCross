@@ -117,6 +117,25 @@ public static class MvxNavigationExtensions
     public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null)
     public static Task Navigate<TResult>(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
     public static Task Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+
+    public static async Task<bool> NavigateRegisteringToResult<TViewModel, TResult>(
+        this IMvxNavigationService navigationService,
+        IMvxResultAwaitingViewModel<TResult> fromViewModel,
+        IMvxResultViewModelManager resultViewModelManager,
+        IMvxBundle? presentationBundle = null,
+        CancellationToken cancellationToken = default)
+    public static async Task<bool> NavigateRegisteringToResult<TViewModel, TParameter, TResult>(
+        this IMvxNavigationService navigationService,
+        IMvxResultAwaitingViewModel<TResult> fromViewModel,
+        IMvxResultViewModelManager resultViewModelManager,
+        TParameter parameter,
+        IMvxBundle? presentationBundle = null,
+        CancellationToken cancellationToken = default)
+    public static async Task<bool> CloseSettingResult<TViewModel, TResult>(
+        this IMvxNavigationService navigationService,
+        TViewModel viewModel,
+        TResult result,
+        CancellationToken cancellationToken = default)
 }
 ```
 
@@ -177,10 +196,11 @@ public class NextViewModel : MvxViewModel<MyObject>
 When you want to return a result to the place where you navigated from you can do:
 
 ```c#
-public class MyViewModel : MvxViewModel
+public class MyViewModel : MvxResultAwaitingViewModel<MyReturnObject>
 {
     private readonly IMvxNavigationService _navigationService;
-    public MyViewModel(IMvxNavigationService navigation)
+    public MyViewModel(IMvxNavigationService navigationService, IMvxResultViewModelManager resultViewModelManager)
+        : base(resultViewModelManager)
     {
         _navigationService = navigationService;
     }
@@ -199,18 +219,33 @@ public class MyViewModel : MvxViewModel
 
     public async Task SomeMethod()
     {
-        var result = await _navigationService.Navigate<NextViewModel, MyObject, MyReturnObject>(new MyObject());
-        //Do something with the result MyReturnObject that you get back
+        await _navigationService.NavigateRegisteringToResult<NextViewModel, MyObject, MyReturnObject>(new MyObject(), ResultViewModelManager);
+
+        // handle the result (if any) in ResultSet method
+    }
+
+    public override bool ResultSet(IMvxResultSettingViewModel<MyReturnObject> viewModel, MyReturnObject result)
+    {
+        if (IMvxResultSettingViewModel<MyReturnObject> is NextViewModel)
+        {
+            // do something with the result
+            Debug.WriteLine(result);
+
+            // we expected the result from NextViewModel, return true to mark it handled and unregister
+            return true;
+        }
+        return false;
     }
 }
 
-public class NextViewModel : MvxViewModel<MyObject, MyReturnObject>
+public class NextViewModel : MvxResultSettingViewModel<MyObject, MyReturnObject>
 {
     private readonly IMvxNavigationService _navigationService;
 
     private MyObject _myObject;
 
-    public MyViewModel(IMvxNavigationService navigation)
+    public NextViewModel(IMvxNavigationService navigationService, IMvxResultViewModelManager resultViewModelManager)
+        : base(resultViewModelManager)
     {
         _navigationService = navigationService;
     }
@@ -228,33 +263,75 @@ public class NextViewModel : MvxViewModel<MyObject, MyReturnObject>
     
     public override async Task Initialize()
     {
-        //Do heavy work and data loading here
+        // do the heavy work here
     }
     
     public async Task SomeMethodToClose()
     {
-        await _navigationService.Close(this, new MyReturnObject());
+        await _navigationService.CloseSettingResult(this, new MyReturnObject(), ResultViewModelManager);
+
+        // or to set the result without closing the ViewModel call
+        // SetResult(this, new MyReturnObject());
     }
 }
 ```
 
-You can provide a CancellationToken to abort waiting for a Result. This will close the ViewModel and cancel the Task. 
+Awaiting the result from the first caller ViewModel is considered a bad practice that can lead to undefined behaviour on some platforms (the most problematic here might be Android after tombstombing) that is why a contract between the caller and the callee ViewModels are required. The contract is implementing `IMvxResultAwaitingViewModel<TResult>` and `IMvxResultSettingViewModel<TResult>`.
 
-If you have a BaseViewModel you might not be able to inherit `MvxViewModel<TParameter>` or `MvxViewModel<TParameter, TResult>` because you already have the BaseViewModel as base class. In this case you can implement the following interface:
+If you have a BaseViewModel you might not be able to inherit `MvxViewModel<TParameter>`, `MvxResultAwaitingViewModel<TResult>` or `MvxResultSettingViewModel<TParameter, TResult>` because you already have the BaseViewModel as base class. In this case you can implement the following interface:
 
-`IMvxViewModel<TParameter>`, `IMvxViewModelResult<TResult>` or `IMvxViewModel<TParameter, TResult>`
+`IMvxViewModel<TParameter>`, `IMvxResultAwaitingViewModel<TResult>`, `IMvxResultSettingViewModel<TResult>`
 
-To implement returning your own result add the following to your (Base)ViewModel:
+To implement a parameter receiving (Base)ViewModel inherit from `IMvxViewModel<TParameter>` and add the following to your (Base)ViewModel:
 
 ```c#
-public override TaskCompletionSource<object> CloseCompletionSource { get; set; }
+public abstract void Prepare(TParameter parameter);
+```
 
-public override void ViewDestroy(bool viewFinishing = true)
+To implement awaiting your own result contract inherit from `IMvxResultAwaitingViewModel<TResult>` and add the following to your (Base)ViewModel:
+
+```c#
+protected IMvxResultViewModelManager ResultViewModelManager { get; }
+
+protected BaseViewModel(IMvxResultViewModelManager resultViewModelManager)
 {
-    if (viewFinishing && CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
-        CloseCompletionSource?.TrySetCanceled();
+    ResultViewModelManager = resultViewModelManager;
+}
 
-    base.ViewDestroy(viewFinishing);
+protected override void ReloadFromBundle(IMvxBundle state)
+{
+    base.ReloadFromBundle(state);
+    this.ReloadAndRegisterToResult<TResult>(state, ResultViewModelManager);
+}
+
+protected override void SaveStateToBundle(IMvxBundle bundle)
+{
+    base.SaveStateToBundle(bundle);
+    this.SaveRegisterToResult<TResult>(bundle, ResultViewModelManager);
+}
+
+public override ViewDestroy(bool viewFinishing = true)
+{
+    base.ViewDestroy();
+    if (viewFinishing)
+        this.UnregisterToResult<TResult>(ResultViewModelManager);
+}
+```
+
+To implement setting your own result contract inherit from `IMvxResultSettingViewModel<TResult>` and add the following to your (Base)ViewModel:
+
+```c#
+protected IMvxResultViewModelManager ResultViewModelManager { get; }
+
+protected BaseViewModel(IMvxResultViewModelManager resultViewModelManager)
+{
+    ResultViewModelManager = resultViewModelManager;
+}
+
+// call that method from anywhere to set the result
+public virtual void SetResult(TResult result)
+{
+    this.SetResult<TResult>(result, ResultViewModelManager);
 }
 ```
 

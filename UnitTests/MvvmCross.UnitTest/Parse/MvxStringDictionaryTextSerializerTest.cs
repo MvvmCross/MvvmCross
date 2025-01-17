@@ -19,17 +19,16 @@ namespace MvvmCross.UnitTest.Parse
         public MvxStringDictionaryTextSerializerTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
+            _fixture.ClearAll();
+
+            var viewModelNameLookup = new MvxViewModelByNameLookup();
+            viewModelNameLookup.AddAll(GetType().Assembly);
+            _fixture.Ioc.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelNameLookup);
         }
 
         [Fact]
         public void Test_Round_Trip_Works_For_Normal_ViewModel_Requests()
         {
-            _fixture.ClearAll();
-
-            var viewModelNameLookup = new MvxViewModelByNameLookup();
-            viewModelNameLookup.AddAll(GetType().Assembly);
-            Mvx.IoCProvider?.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelNameLookup);
-
             var parameterBundle = new MvxBundle(new Dictionary<string, string> { { "On'e", "1'\\" }, { "Two", "2" } });
             var presentationBundle =
                 new MvxBundle(new Dictionary<string, string> { { "Thre\"\'\\e", "3\"\'\\" }, { "Four", null } });
