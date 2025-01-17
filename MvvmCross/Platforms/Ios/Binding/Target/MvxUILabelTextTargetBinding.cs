@@ -20,9 +20,9 @@ public class MvxUILabelTextTargetBinding(UILabel target)
     protected override void SetValueImpl(object target, object? value)
     {
         var view = (UILabel?)target;
-        if (view == null || value == null)
+        if (view == null)
             return;
 
-        view.Text = (string)value;
+        view.Text = (string?)value;
     }
 }
