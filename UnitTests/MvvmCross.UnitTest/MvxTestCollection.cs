@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Moq;
 using MvvmCross.Navigation;
 using MvvmCross.Tests;
 using MvvmCross.ViewModels;
+using NSubstitute;
 using Xunit;
 
 namespace MvvmCross.UnitTest
@@ -22,8 +22,8 @@ namespace MvvmCross.UnitTest
     {
         protected override void AdditionalSetup()
         {
-            var navigationServiceMock = new Mock<IMvxNavigationService>();
-            Ioc.RegisterSingleton(navigationServiceMock.Object);
+            var navigationServiceMock = Substitute.For<IMvxNavigationService>();
+            Ioc.RegisterSingleton(navigationServiceMock);
             Ioc.RegisterSingleton(new MvxDefaultViewModelLocator());
         }
     }
