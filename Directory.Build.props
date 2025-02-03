@@ -1,39 +1,38 @@
 ﻿<Project>
   <PropertyGroup>
-    <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
-    <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/MvvmCross/MvvmCross</PackageProjectUrl>
-    <PackageIcon>icon.png</PackageIcon>
-    <Authors>.NET Foundation and Contributors</Authors>
-    <Owners>MvvmCross;slodge;cheesebaron</Owners>
-    <PackageTags>mvvm;mvvmcross;xamarin;android;ios;mac</PackageTags>
-    <PackageReleaseNotes>https://github.com/MvvmCross/MvvmCross/releases</PackageReleaseNotes>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>true</ImplicitUsings>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+
+    <StripSymbols>false</StripSymbols>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+
+    <NoWarn>$(NoWarn);CS0109;CS0108;CS0618;CS0114;NU1603;CS1591</NoWarn>
+
     <NeutralLanguage>en-US</NeutralLanguage>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <RepositoryUrl>https://github.com/MvvmCross/MvvmCross</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <Version>8.1.0-net6.1</Version>
-  </PropertyGroup>
+    <Version>9.3.1</Version>
 
-  <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <NuGetAudit>enable</NuGetAudit>
     <NuGetAuditMode>all</NuGetAuditMode>
   </PropertyGroup>
 
   <PropertyGroup>
-    <!--<Nullable>enable</Nullable>-->
-    <LangVersion>latest</LangVersion>
-    <ImplicitUsings>true</ImplicitUsings>
-    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
-    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+    <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
+    <PackageProjectUrl>https://github.com/MvvmCross/MvvmCross</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <Authors>.NET Foundation and Contributors</Authors>
+    <Owners>MvvmCross;slodge;cheesebaron</Owners>
+    <PackageTags>mvvm;mvvmcross;xamarin;android;ios;mac;wpf;uwp;winui;maccatalyst</PackageTags>
+    <PackageReleaseNotes>https://github.com/MvvmCross/MvvmCross/releases</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
 
-    <NoWarn>$(NoWarn);CS0109;CS0108;CS0618;CS0114;NU1603;CS1591</NoWarn>
-
+  <PropertyGroup>
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('MvvmCross'))</IsLibraryProject>
 
@@ -57,11 +56,6 @@
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsAndroid)' == 'True' ">23</SupportedOSPlatformVersion>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <StripSymbols>false</StripSymbols>
-    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
-  </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild Condition=" '$(IsTestProject)' != 'true'">true</GeneratePackageOnBuild>
@@ -72,6 +66,8 @@
     <Deterministic>true</Deterministic>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryUrl>https://github.com/MvvmCross/MvvmCross</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
 
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
