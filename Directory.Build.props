@@ -28,7 +28,6 @@
     <PackageTags>mvvm;mvvmcross;xamarin;android;ios;mac;wpf;uwp;winui;maccatalyst</PackageTags>
     <PackageReleaseNotes>https://github.com/MvvmCross/MvvmCross/releases</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
