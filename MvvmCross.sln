@@ -86,6 +86,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playground.WinUi3", "Projec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Mac", "Projects\Playground\Playground.Mac\Playground.Mac.csproj", "{1B6539CF-6CE4-4421-93AD-68452B070BC3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{D57DDCF0-42C3-4E99-8ECA-453DBD91C4AA}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\codeql.yml = .github\workflows\codeql.yml
+		.github\workflows\dotnet-format.yml = .github\workflows\dotnet-format.yml
+		.github\workflows\labeler-pr.yml = .github\workflows\labeler-pr.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+		.github\workflows\sonar.yml = .github\workflows\sonar.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
