@@ -40,11 +40,13 @@ public abstract class MvxSceneDelegate : UIResponder, IUIWindowSceneDelegate, IM
     [Export("sceneDidBecomeActive:")]
     public virtual void DidBecomeActive(UIScene scene)
     {
+        FireLifetimeChanged(MvxLifetimeEvent.ActivatedFromMemory);
     }
 
     [Export("sceneWillResignActive:")]
     public void WillResignActive(UIScene scene)
     {
+        FireLifetimeChanged(MvxLifetimeEvent.Deactivated);
     }
 
     [Export("sceneWillEnterForeground:")]
