@@ -2,16 +2,13 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace MvvmCross.Core
+namespace MvvmCross.Core;
+
+public enum MvxLifetimeEvent
 {
-#nullable enable
-    public enum MvxLifetimeEvent
-    {
-        Launching,
-        ActivatedFromMemory,
-        ActivatedFromDisk,
-        Deactivated,
-        Closing
-    }
-#nullable restore
+    Launching,
+    ActivatedFromMemory,
+    ActivatedFromDisk,
+    Deactivated,
+    Closing
 }
