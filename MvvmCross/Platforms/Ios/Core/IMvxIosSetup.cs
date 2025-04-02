@@ -4,13 +4,12 @@
 
 using MvvmCross.Core;
 using MvvmCross.Platforms.Ios.Presenters;
-using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Core
 {
     public interface IMvxIosSetup : IMvxSetup
     {
-        void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, UIWindow window);
-        void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter);
+        void PlatformInitialize(IMvxLifetime lifetimeInstance, UIWindow window);
+        void PlatformInitialize(IMvxLifetime lifetimeInstance, IMvxIosViewPresenter presenter);
     }
 }
