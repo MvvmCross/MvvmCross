@@ -25,20 +25,20 @@ namespace MvvmCross.Platforms.Ios.Core;
 public abstract class MvxIosSetup
     : MvxSetup, IMvxIosSetup
 {
-    protected IMvxApplicationDelegate? ApplicationDelegate { get; private set; }
+    protected IMvxLifetime? LifetimeInstance { get; private set; }
     protected UIWindow? Window { get; private set; }
 
     private IMvxIosViewPresenter? _presenter;
 
-    public virtual void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, UIWindow window)
+    public virtual void PlatformInitialize(IMvxLifetime lifetimeInstance, UIWindow window)
     {
         Window = window;
-        ApplicationDelegate = applicationDelegate;
+        LifetimeInstance = lifetimeInstance;
     }
 
-    public virtual void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
+    public virtual void PlatformInitialize(IMvxLifetime lifetimeInstance, IMvxIosViewPresenter presenter)
     {
-        ApplicationDelegate = applicationDelegate;
+        LifetimeInstance = lifetimeInstance;
         _presenter = presenter;
     }
 
@@ -92,7 +92,7 @@ public abstract class MvxIosSetup
     {
         ValidateArguments(iocProvider);
 
-        if (ApplicationDelegate == null)
+        if (LifetimeInstance == null)
         {
             SetupLog?.LogError(
                 "ApplicationDelegate is null in {MethodName}. Make sure to call {PlatformInitializeMethodName}",
@@ -100,7 +100,7 @@ public abstract class MvxIosSetup
             return;
         }
 
-        iocProvider.RegisterSingleton<IMvxLifetime>(ApplicationDelegate);
+        iocProvider.RegisterSingleton<IMvxLifetime>(LifetimeInstance);
     }
 
     protected IMvxIosViewPresenter? Presenter
@@ -114,14 +114,6 @@ public abstract class MvxIosSetup
 
     protected virtual IMvxIosViewPresenter? CreateViewPresenter()
     {
-        if (ApplicationDelegate == null)
-        {
-            SetupLog?.LogError(
-                "ApplicationDelegate is null in {MethodName}. Make sure to call {PlatformInitializeMethodName}",
-                nameof(CreateViewPresenter), nameof(PlatformInitialize));
-            return null;
-        }
-
         if (Window == null)
         {
             SetupLog?.LogError(
@@ -130,7 +122,7 @@ public abstract class MvxIosSetup
             return null;
         }
 
-        return new MvxIosViewPresenter(ApplicationDelegate, Window);
+        return new MvxIosViewPresenter(Window);
     }
 
     protected virtual void RegisterPresenter(IMvxIoCProvider iocProvider)
