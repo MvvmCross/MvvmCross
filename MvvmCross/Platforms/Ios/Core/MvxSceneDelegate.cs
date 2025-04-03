@@ -44,18 +44,18 @@ public abstract class MvxSceneDelegate : UIResponder, IUIWindowSceneDelegate, IM
     }
 
     [Export("sceneWillResignActive:")]
-    public void WillResignActive(UIScene scene)
+    public virtual void WillResignActive(UIScene scene)
     {
         FireLifetimeChanged(MvxLifetimeEvent.Deactivated);
     }
 
     [Export("sceneWillEnterForeground:")]
-    public void WillEnterForeground(UIScene scene)
+    public virtual void WillEnterForeground(UIScene scene)
     {
     }
 
     [Export("sceneDidEnterBackground:")]
-    public void DidEnterBackground(UIScene scene)
+    public virtual void DidEnterBackground(UIScene scene)
     {
     }
 
