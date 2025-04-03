@@ -13,6 +13,7 @@ var verbosityDotNet = DotNetVerbosity.Minimal;
 var sonarToken = Argument("sonarToken", "");
 var sonarKey = Argument("sonarKey", "");
 var sonarOrg = Argument("sonarOrg", "");
+var githubToken = Argument("githubToken", "");
 
 GitVersion versionInfo = null;
 
@@ -159,6 +160,32 @@ Task("UnitTest")
     }
 });
 
+Task("GenerateSBOM")
+    .IsDependentOn("Build")
+    .Does(() => 
+{
+    var sbomPath = MakeAbsolute(new DirectoryPath(outputDir + "/sbom/"));
+
+    ProcessArgumentBuilder PrepareSbomArguments(ProcessArgumentBuilder args)
+    {
+        args.Append("MvvmCross.sln");
+        args.Append("--output {0}", sbomPath);
+        args.Append("--json");
+        args.Append("--set-type Library");
+        args.Append("--set-version {0}", versionInfo.SemVer);
+        if (!string.IsNullOrEmpty(githubToken))
+            args.AppendSecret("--github-token {0}", githubToken);
+        return args;
+    }
+
+    var settings = new DotNetToolSettings
+    {
+        ArgumentCustomization = PrepareSbomArguments
+    };
+
+    DotNetTool("CycloneDX", settings);
+});
+
 Task("CopyPackages")
     .IsDependentOn("Build")
     .Does(() => 
@@ -180,6 +207,7 @@ Task("Default")
     .IsDependentOn("Clean")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
+    .IsDependentOn("GenerateSBOM")
     .IsDependentOn("CopyPackages");
 
 RunTarget(target);
