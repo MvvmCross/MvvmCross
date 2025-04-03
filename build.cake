@@ -13,7 +13,6 @@ var verbosityDotNet = DotNetVerbosity.Minimal;
 var sonarToken = Argument("sonarToken", "");
 var sonarKey = Argument("sonarKey", "");
 var sonarOrg = Argument("sonarOrg", "");
-var githubToken = Argument("githubToken", "");
 
 GitVersion versionInfo = null;
 
@@ -177,8 +176,6 @@ Task("GenerateSBOM")
         args.Append("--set-version {0}", versionInfo.SemVer);
         args.Append("--recursive");
         args.Append("--disable-package-restore");
-        if (!string.IsNullOrEmpty(githubToken))
-            args.AppendSecret("--github-token {0}", githubToken);
         return args;
     }
 
