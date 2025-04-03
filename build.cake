@@ -170,7 +170,9 @@ Task("GenerateSBOM")
     {
         args.Append("MvvmCross.sln");
         args.Append("--output {0}", sbomPath);
+        args.Append("--filename {0}", "MvvmCross.sbom.json");
         args.Append("--json");
+        args.Append("--set-name MvvmCross");
         args.Append("--set-type Library");
         args.Append("--set-version {0}", versionInfo.SemVer);
         if (!string.IsNullOrEmpty(githubToken))
