@@ -175,6 +175,8 @@ Task("GenerateSBOM")
         args.Append("--set-name MvvmCross");
         args.Append("--set-type Library");
         args.Append("--set-version {0}", versionInfo.SemVer);
+        args.Append("--recursive");
+        args.Append("--disable-package-restore");
         if (!string.IsNullOrEmpty(githubToken))
             args.AppendSecret("--github-token {0}", githubToken);
         return args;
