@@ -13,6 +13,10 @@ env:
 
 jobs:
   build:
+    permissions:
+      id-token: write
+      attestations: write
+
     runs-on: windows-latest
     
     steps:
