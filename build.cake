@@ -76,7 +76,7 @@ Task("SonarStart")
     .WithCriteria(() => !string.IsNullOrEmpty(sonarToken))
     .Does(() => 
 {
-    var xunitReportsPath = MakeAbsolute(new DirectoryPath(outputDir + "/Tests")) + "/**/*.xml";
+    var xunitReportsPath = MakeAbsolute(outputDir.Combine("Tests/")) + "/**/*.xml";
     Information("XUnitReportsPath {0}", xunitReportsPath);
 
     ProcessArgumentBuilder PrepareSonarArguments(ProcessArgumentBuilder args)
@@ -127,7 +127,7 @@ Task("UnitTest")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    EnsureDirectoryExists(outputDir + "/Tests/");
+    EnsureDirectoryExists(outputDir.Combine("Tests/"));
 
     var testPaths = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
     var settings = new DotNetTestSettings
@@ -163,7 +163,7 @@ Task("GenerateSBOM")
     .IsDependentOn("Build")
     .Does(() => 
 {
-    var sbomPath = MakeAbsolute(new DirectoryPath(outputDir + "/sbom/"));
+    var sbomPath = MakeAbsolute(outputDir.Combine("sbom/"));
 
     ProcessArgumentBuilder PrepareSbomArguments(ProcessArgumentBuilder args)
     {
@@ -191,10 +191,11 @@ Task("CopyPackages")
     .IsDependentOn("Build")
     .Does(() => 
 {
-    EnsureDirectoryExists(outputDir + "/NuGet/");
+    var packagesDir = outputDir.Combine("NuGet/");
+    EnsureDirectoryExists(packagesDir);
 
     var nugetFiles = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg");
-    CopyFiles(nugetFiles, new DirectoryPath(outputDir + "/NuGet/"));
+    CopyFiles(nugetFiles, packagesDir);
 });
 
 Task("Sonar")
