@@ -11,7 +11,7 @@ on:
 env:
   JAVA_DISTRIBUTION: 'microsoft'
   JAVA_VERSION: 17
-  NET_VERSION: 9.0.101
+  NET_VERSION: 9.0.202
 
 jobs:
   build:
@@ -55,9 +55,9 @@ jobs:
 
     - run: |
         .\SignClient "Sign" `
-        --baseDirectory "${{ github.workspace }}/output" `
+        --baseDirectory "${{ github.workspace }}\output" `
         --input "**/*.nupkg" `
-        --config "${{ github.workspace }}/signclient.json" `
+        --config "${{ github.workspace }}\signclient.json" `
         --user "${{ env.SIGNING_USER }}" `
         --secret "${{ env.SIGNING_SECRET }}" `
         --name "MvvmCross" `
@@ -71,8 +71,8 @@ jobs:
     - name: Attest NuGet packages
       uses: actions/attest-sbom@115c3be05ff3974bcbd596578934b3f9ce39bf68 # v2.2.0
       with:
-        subject-path: ${{ github.workspace }}/output/NuGet/*.nupkg
-        sbom-path: ${{ github.workspace }}/output/sbom/MvvmCross.sbom.json
+        subject-path: ${{ github.workspace }}\output\NuGet\*.nupkg
+        sbom-path: ${{ github.workspace }}\output\sbom\MvvmCross.sbom.json
         push-to-registry: true
 
     - name: Upload artifacts
@@ -86,11 +86,11 @@ jobs:
         NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
         SOURCE_URL: https://api.nuget.org/v3/index.json
       run: |
-        dotnet nuget push -s ${{ env.SOURCE_URL }} -k ${{ env.NUGET_AUTH_TOKEN }} ${{ github.workspace }}/output/NuGet/*.nupkg
+        dotnet nuget push -s ${{ env.SOURCE_URL }} -k ${{ env.NUGET_AUTH_TOKEN }} ${{ github.workspace }}\output\**\*.nupkg
 
     - name: GitHub Packages Push
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_API_KEY }}
         SOURCE_URL: https://nuget.pkg.github.com/mvvmcross/index.json
       run: |
-        dotnet nuget push -s ${{ env.SOURCE_URL }} -k ${{ env.NUGET_AUTH_TOKEN }} ${{ github.workspace }}/output/NuGet/*.nupkg           
+        dotnet nuget push -s ${{ env.SOURCE_URL }} -k ${{ env.NUGET_AUTH_TOKEN }} ${{ github.workspace }}\output\**\*.nupkg           
