@@ -51,8 +51,8 @@ jobs:
     - name: Attest NuGet packages
       uses: actions/attest-sbom@115c3be05ff3974bcbd596578934b3f9ce39bf68 # v2.2.0
       with:
-        subject-path: ${{ github.workspace }}/output/NuGet/*.nupkg
-        sbom-path: ${{ github.workspace }}/output/sbom/MvvmCross.sbom.json
+        subject-path: ${{ github.workspace }}\output\NuGet\*.nupkg
+        sbom-path: ${{ github.workspace }}\output\sbom\MvvmCross.sbom.json
         push-to-registry: true
 
     - name: Upload artifacts
