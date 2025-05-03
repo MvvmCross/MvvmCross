@@ -13,7 +13,7 @@ namespace MvvmCross.Platforms.Console.Views;
 public class MvxConsoleContainer
     : MvxBaseConsoleContainer
 {
-    private readonly object _lockObject = new();
+    private readonly Lock _lockObject = new();
     private readonly Stack<MvxViewModelRequest> _navigationStack = new();
 
     public override Task<bool> Show(MvxViewModelRequest request)

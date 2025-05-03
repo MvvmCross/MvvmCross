@@ -41,7 +41,7 @@ public class MvxMultiWindowViewPresenter
     private readonly WindowInformation _mainFrame;
     private readonly List<WindowInformation> _windowInformation = new();
 
-    private readonly object _windowInformationLock = new();
+    private readonly Lock _windowInformationLock = new();
 
     private IMvxViewModelLoader? _viewModelLoader;
 
@@ -131,7 +131,7 @@ public class MvxMultiWindowViewPresenter
     public void CloseAllWindows()
     {
         List<WindowInformation> windows;
-        lock (_windowInformation)
+        lock (_windowInformationLock)
         {
             windows = _windowInformation.ToList();
         }

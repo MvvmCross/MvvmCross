@@ -128,7 +128,7 @@ public sealed class MvxIoCContainer
 
     private sealed class ConstructingSingletonResolver : IResolver
     {
-        private readonly object _syncObject = new();
+        private readonly Lock _syncObject = new();
         private readonly Func<object> _constructor;
         private object? _theObject;
 

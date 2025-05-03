@@ -17,7 +17,7 @@ namespace MvvmCross.Plugin.Messenger
     {
         private readonly Dictionary<Type, MvxMessage> _messageDictionary = new Dictionary<Type, MvxMessage>();
 
-        private readonly object _locker = new object();
+        private readonly Lock _locker = new();
 
         private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions =
             new Dictionary<Type, Dictionary<Guid, BaseSubscription>>();

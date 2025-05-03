@@ -1,6 +1,7 @@
 <Project>
   <ItemGroup>
     <PackageVersion Include="AsyncFixer" Version="1.6.0" />
+    <PackageVersion Include="Backport.System.Threading.Lock" Version="3.1.4" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0-preview.24454.1" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />

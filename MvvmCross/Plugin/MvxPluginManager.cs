@@ -12,7 +12,7 @@ namespace MvvmCross.Plugin
     public class MvxPluginManager : IMvxPluginManager
     {
         private readonly IMvxIoCProvider _provider;
-        private readonly object _lockObject = new();
+        private readonly Lock _lockObject = new();
         private readonly HashSet<Type> _loadedPlugins = new();
 
         public Func<Type, IMvxPluginConfiguration?> ConfigurationSource { get; }

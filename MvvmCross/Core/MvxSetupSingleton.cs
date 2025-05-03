@@ -31,7 +31,7 @@ namespace MvvmCross.Core
     public abstract class MvxSetupSingleton
        : MvxSingleton<MvxSetupSingleton>
     {
-        private static readonly object LockObject = new();
+        private static readonly Lock LockObject = new();
         private IMvxSetup _setup;
 
         protected virtual IMvxSetup Setup => _setup;

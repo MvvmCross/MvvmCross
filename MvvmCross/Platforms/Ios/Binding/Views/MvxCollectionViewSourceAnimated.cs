@@ -18,7 +18,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 {
     public class MvxCollectionViewSourceAnimated : MvxCollectionViewSource
     {
-        private readonly object collectionChangedLock = new object();
+        private readonly Lock collectionChangedLock = new();
         private readonly ILogger<MvxCollectionViewSourceAnimated> _logger;
 
         private Task runningChangeTask = Task.FromResult(true);

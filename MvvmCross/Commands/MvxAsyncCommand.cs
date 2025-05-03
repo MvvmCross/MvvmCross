@@ -12,7 +12,7 @@ namespace MvvmCross.Commands
     public abstract class MvxAsyncCommandBase
         : MvxCommandBase
     {
-        private readonly object _syncRoot = new();
+        private readonly Lock _syncRoot = new();
         private readonly bool _allowConcurrentExecutions;
         private CancellationTokenSource? _cts;
         private int _concurrentExecutions;

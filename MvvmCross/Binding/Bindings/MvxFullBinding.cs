@@ -25,7 +25,7 @@ namespace MvvmCross.Binding.Bindings
         private readonly MvxBindingDescription _bindingDescription;
         private IMvxSourceStep _sourceStep;
         private IMvxTargetBinding _targetBinding;
-        private readonly object _targetLocker = new object();
+        private readonly Lock _targetLocker = new();
 
         private object _dataContext;
         private EventHandler _sourceBindingOnChanged;

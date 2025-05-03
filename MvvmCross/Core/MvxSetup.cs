@@ -21,7 +21,7 @@ public abstract class MvxSetup : IMvxSetup
 {
     public event EventHandler<MvxSetupStateEventArgs>? StateChanged;
 
-    private static readonly object Lock = new();
+    private static readonly Lock _lock = new();
     private MvxSetupState _state;
     private IMvxIoCProvider? _iocProvider;
 
@@ -49,7 +49,7 @@ public abstract class MvxSetup : IMvxSetup
         // SetupCreator is already created
         if (SetupCreator is null)
         {
-            lock (Lock)
+            lock (_lock)
             {
                 if (SetupCreator is null)
                 {

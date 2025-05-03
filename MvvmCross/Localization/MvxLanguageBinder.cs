@@ -10,7 +10,7 @@ namespace MvvmCross.Localization;
 public class MvxLanguageBinder(string? namespaceName = null, string? typeName = null)
     : IMvxLanguageBinder
 {
-    private readonly object _lockObject = new();
+    private readonly Lock _lockObject = new();
     private IMvxTextProvider? _cachedTextProvider;
 
     public MvxLanguageBinder(Type owningObject)

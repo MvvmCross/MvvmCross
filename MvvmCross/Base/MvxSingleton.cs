@@ -26,10 +26,11 @@ namespace MvvmCross.Base
         protected abstract void Dispose(bool isDisposing);
 
         private static readonly List<MvxSingleton> Singletons = new List<MvxSingleton>();
+        private static readonly Lock _syncLock = new();
 
         protected MvxSingleton()
         {
-            lock (Singletons)
+            lock (_syncLock)
             {
                 Singletons.Add(this);
             }
@@ -37,7 +38,7 @@ namespace MvvmCross.Base
 
         public static void ClearAllSingletons()
         {
-            lock (Singletons)
+            lock (_syncLock)
             {
                 foreach (var s in Singletons)
                 {

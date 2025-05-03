@@ -8,7 +8,7 @@ namespace MvvmCross.IoC
 {
     public class MvxLazySingletonCreator
     {
-        private readonly object _lockObject = new object();
+        private readonly Lock _lockObject = new();
         private readonly Type _type;
 
         private object _instance;

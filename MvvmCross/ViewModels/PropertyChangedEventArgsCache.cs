@@ -12,7 +12,7 @@ namespace MvvmCross.ViewModels;
 /// </summary>
 public sealed class PropertyChangedEventArgsCache
 {
-    private readonly object _lock = new();
+    private readonly Lock _lock = new();
 
     /// <summary>
     /// The underlying dictionary. This instance is its own mutex.

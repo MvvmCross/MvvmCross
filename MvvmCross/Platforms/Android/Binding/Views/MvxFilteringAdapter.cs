@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
     public class MvxFilteringAdapter
         : MvxAdapter, IFilterable
     {
-        private readonly object _syncLock = new object();
+        private readonly Lock _syncLock = new();
 
         private class MyFilter : Filter
         {
