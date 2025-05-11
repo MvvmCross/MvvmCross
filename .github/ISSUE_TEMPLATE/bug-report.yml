@@ -3,7 +3,7 @@ description: File a bug/issue report
 labels: ["t/bug"]
 assignees: []
 title: '[Bug]: <title>'
-type: bug
+type: Bug
 body:
   - type: markdown
     attributes:
