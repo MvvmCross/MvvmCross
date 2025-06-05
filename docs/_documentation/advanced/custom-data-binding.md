@@ -153,11 +153,11 @@ This class is a subclass of [`MvxConvertingTargetBinding`](#mvxconvertingtargetb
 To get some inspiration on how to create your own target bindings, you can take a look at the ones that come out of the box with MvvmCross.
 
 You can find them here:
-- [Android](https://github.com/MvvmCross/MvvmCross/tree/master/MvvmCross/Platforms/Android/Binding/Target)
-- [macOS](https://github.com/MvvmCross/MvvmCross/tree/master/MvvmCross/Platforms/Mac/Binding/Target)
-- [tvOS](https://github.com/MvvmCross/MvvmCross/tree/master/MvvmCross/Platforms/Tvos/Binding/Target)
-- [UWP](https://github.com/MvvmCross/MvvmCross/tree/master/MvvmCross/Platforms/Uap/Binding/MvxBinding/Target)
-- [WPF](https://github.com/MvvmCross/MvvmCross/tree/master/MvvmCross/Platforms/Wpf/Binding/MvxBinding/Target)
-- [iOS](https://github.com/MvvmCross/MvvmCross/tree/master/MvvmCross/Platforms/Ios/Binding/Target)
+- [Android](https://github.com/MvvmCross/MvvmCross/tree/main/MvvmCross/Platforms/Android/Binding/Target)
+- [macOS](https://github.com/MvvmCross/MvvmCross/tree/main/MvvmCross/Platforms/Mac/Binding/Target)
+- [tvOS](https://github.com/MvvmCross/MvvmCross/tree/main/MvvmCross/Platforms/Tvos/Binding/Target)
+- [UWP](https://github.com/MvvmCross/MvvmCross/tree/main/MvvmCross/Platforms/Uap/Binding/MvxBinding/Target)
+- [WPF](https://github.com/MvvmCross/MvvmCross/tree/main/MvvmCross/Platforms/Wpf/Binding/MvxBinding/Target)
+- [iOS](https://github.com/MvvmCross/MvvmCross/tree/main/MvvmCross/Platforms/Ios/Binding/Target)
 
 There are a lot of target bindings you can look at for different kinds of behavior and requirements.

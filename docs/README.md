@@ -14,4 +14,4 @@ Then run `bundle exec jekyll serve` and open your browser at `http://localhost:4
 
 ## License
 
-The theme is available as open source under the terms of the [Microsoft Public License](https://github.com/MvvmCross/MvvmCross/blob/master/LICENSE).
+The theme is available as open source under the terms of the [Microsoft Public License](https://github.com/MvvmCross/MvvmCross/blob/main/LICENSE).

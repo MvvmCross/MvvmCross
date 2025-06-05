@@ -12,7 +12,7 @@ When using MvvmCross, all you need to do is to install the MvvmCross support pac
 - AppCompatActivity -> MvxAppCompatActivity
 - Fragment -> MvxFragment
 
-We highly recommend you to take a look at some samples, like [StarWarsSample](https://github.com/MvvmCross/MvvmCross-Samples/tree/master/StarWarsSample) or the [Playground.Droid](https://github.com/MvvmCross/MvvmCross/tree/master/Projects/Playground/Playground.Droid) project, which is located in the main repository.
+We highly recommend you to take a look at some samples, like [StarWarsSample](https://github.com/MvvmCross/MvvmCross-Samples/tree/main/StarWarsSample) or the [Playground.Droid](https://github.com/MvvmCross/MvvmCross/tree/main/Projects/Playground/Playground.Droid) project, which is located in the main repository.
 
 
 To get bindings working when using the support libraries (for example if you want to use `MvxAutoCompleteTextView`) you should ensure your `Setup` class inherits from `MvxAppCompatSetup`:
