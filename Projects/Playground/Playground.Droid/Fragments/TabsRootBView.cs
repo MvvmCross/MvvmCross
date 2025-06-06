@@ -5,9 +5,11 @@
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using AndroidX.ViewPager.Widget;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views.Fragments;
+using MvvmCross.Platforms.Android.Views.ViewPager;
 using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Fragments
@@ -28,6 +30,10 @@ namespace Playground.Droid.Fragments
         public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
+
+            var viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager);
+            if (viewPager.Adapter is not MvxCachingFragmentStatePagerAdapter)
+                viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(ChildFragmentManager, new());
 
             if (savedInstanceState == null)
             {

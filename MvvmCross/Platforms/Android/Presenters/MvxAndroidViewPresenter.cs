@@ -780,7 +780,6 @@ namespace MvvmCross.Platforms.Android.Presenters
             else
             {
                 viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(
-                    CurrentActivity,
                     fragmentManager,
                     new List<MvxViewPagerFragmentInfo>
                     {
