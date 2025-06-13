@@ -19,7 +19,6 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
 {
     private readonly MvxIosMajorVersionChecker _iosVersion13Checker = new(13);
 
-    protected IUIApplicationDelegate ApplicationDelegate { get; }
     protected UIWindow Window { get; }
 
     public UINavigationController? MasterNavigationController { get; protected set; }
@@ -34,9 +33,8 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
 
     public IMvxSplitViewController? SplitViewController { get; protected set; }
 
-    public MvxIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
+    public MvxIosViewPresenter(UIWindow window)
     {
-        ApplicationDelegate = applicationDelegate;
         Window = window;
     }
 

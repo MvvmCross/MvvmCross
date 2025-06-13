@@ -11,21 +11,25 @@ on:
 env:
   JAVA_DISTRIBUTION: 'microsoft'
   JAVA_VERSION: 17
-  NET_VERSION: 9.0.101
+  NET_VERSION: 9.0.202
 
 jobs:
   build:
+    permissions:
+      id-token: write
+      attestations: write
+
     runs-on: windows-latest
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       with:
         fetch-depth: 0
         fetch-tags: true
 
     - name: Install .NET ${{ env.NET_VERSION }}
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
       with:
         dotnet-version: ${{ env.NET_VERSION }}
 
@@ -38,7 +42,7 @@ jobs:
         dotnet workload install android ios tvos macos maccatalyst --version ${{ env.NET_VERSION }}
 
     - name: Set up JDK
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c6aa5355ba6c12 #v4.7.0
       with:
         distribution: ${{ env.JAVA_DISTRIBUTION }}
         java-version: ${{ env.JAVA_VERSION }}
@@ -46,26 +50,38 @@ jobs:
     - name: Build
       run: dotnet cake --verbosity=Minimal --artifactsDir="output"
 
-    - name: Install SignTool tool
-      run: dotnet tool install --tool-path . SignClient
+    - name: Install sign tool
+      run: dotnet tool install --tool-path . sign --version 0.9.1-beta.25264.1
 
-    - run: |
-        .\SignClient "Sign" `
-        --baseDirectory "${{ github.workspace }}/output" `
-        --input "**/*.nupkg" `
-        --config "${{ github.workspace }}/signclient.json" `
-        --user "${{ env.SIGNING_USER }}" `
-        --secret "${{ env.SIGNING_SECRET }}" `
-        --name "MvvmCross" `
-        --description "MvvmCross is a cross platform MVVM framework" `
-        --descriptionUrl "https://mvvmcross.com"
-      name: Authenticode Sign artifacts
-      env:
-        SIGNING_USER: ${{ secrets.SIGN_CLIENT_USER_ID }}
-        SIGNING_SECRET: ${{ secrets.SIGN_CLIENT_SECRET }}
+    - name: 'Az CLI login'
+      uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 #v2.3.0
+      with:
+        client-id: ${{ secrets.SIGN_AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.SIGN_AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.SIGN_AZURE_SUBSCRIPTION_ID }}
+
+    - name: Sign artifacts
+      shell: pwsh
+      run: >
+        ./sign code azure-key-vault
+        **/*.nupkg
+        --base-directory "${{ github.workspace }}/output"
+        --publisher-name "MvvmCross"
+        --description "MvvmCross is a cross platform MVVM framework"
+        --description-url "https://mvvmcross.com"
+        --azure-key-vault-managed-identity true
+        --azure-key-vault-url "${{ secrets.SIGN_AZURE_VAULT_URL }}"
+        --azure-key-vault-certificate "${{ secrets.SIGN_AZURE_KEY_VAULT_CERTIFICATE_ID }}"
+
+    - name: Attest NuGet packages
+      uses: actions/attest-sbom@115c3be05ff3974bcbd596578934b3f9ce39bf68 # v2.2.0
+      with:
+        subject-path: ${{ github.workspace }}\output\NuGet\*.nupkg
+        sbom-path: ${{ github.workspace }}\output\sbom\MvvmCross.sbom.json
+        push-to-registry: true
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 #v4.6.2
       with:
         name: build-artifacts
         path: output
@@ -75,11 +91,11 @@ jobs:
         NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
         SOURCE_URL: https://api.nuget.org/v3/index.json
       run: |
-        dotnet nuget push -s ${{ env.SOURCE_URL }} -k ${{ env.NUGET_AUTH_TOKEN }} ${{ github.workspace }}/output/**/*.nupkg
+        dotnet nuget push -s ${{ env.SOURCE_URL }} -k ${{ env.NUGET_AUTH_TOKEN }} ${{ github.workspace }}\output\**\*.nupkg
 
     - name: GitHub Packages Push
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_API_KEY }}
         SOURCE_URL: https://nuget.pkg.github.com/mvvmcross/index.json
       run: |
-        dotnet nuget push -s ${{ env.SOURCE_URL }} -k ${{ env.NUGET_AUTH_TOKEN }} ${{ github.workspace }}/output/**/*.nupkg           
+        dotnet nuget push -s ${{ env.SOURCE_URL }} -k ${{ env.NUGET_AUTH_TOKEN }} ${{ github.workspace }}\output\**\*.nupkg           

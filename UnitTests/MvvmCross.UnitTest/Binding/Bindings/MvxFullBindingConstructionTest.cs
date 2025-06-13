@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Moq;
 using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
@@ -13,8 +11,8 @@ using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Converters;
-using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
+using NSubstitute;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Bindings
@@ -84,11 +82,11 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(new InlineMockMainThreadDispatcher());
 
-            var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
-            _fixture.Ioc.RegisterSingleton(mockSourceBindingFactory.Object);
+            var mockSourceBindingFactory = Substitute.For<IMvxSourceBindingFactory>();
+            _fixture.Ioc.RegisterSingleton(mockSourceBindingFactory);
 
-            var mockTargetBindingFactory = new Mock<IMvxTargetBindingFactory>();
-            _fixture.Ioc.RegisterSingleton(mockTargetBindingFactory.Object);
+            var mockTargetBindingFactory = Substitute.For<IMvxTargetBindingFactory>();
+            _fixture.Ioc.RegisterSingleton(mockTargetBindingFactory);
 
             var realSourceStepFactory = new MvxSourceStepFactory();
             realSourceStepFactory.AddOrOverwrite(typeof(MvxPathSourceStepDescription), new MvxPathSourceStepFactory());
@@ -100,12 +98,12 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             var target = new { Value = 2 };
             var converterParameter = new { Value = 3 };
             var fallbackValue = new { Value = 4 };
-            var converter = new Mock<IMvxValueConverter>();
+            var converter = Substitute.For<IMvxValueConverter>();
             var bindingDescription = new MvxBindingDescription
             {
                 Source = new MvxPathSourceStepDescription()
                 {
-                    Converter = converter.Object,
+                    Converter = converter,
                     ConverterParameter = converterParameter,
                     FallbackValue = fallbackValue,
                     SourcePropertyPath = sourceText,
@@ -114,31 +112,20 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                 TargetName = targetName
             };
 
-            var mockSourceBinding = new Mock<IMvxSourceBinding>();
-            var mockTargetBinding = new Mock<IMvxTargetBinding>();
+            var mockSourceBinding = Substitute.For<IMvxSourceBinding>();
+            var mockTargetBinding = Substitute.For<IMvxTargetBinding>();
 
-            mockSourceBindingFactory
-                .Setup(x => x.CreateBinding(It.Is<object>(s => s == source), It.Is<string>(s => s == sourceText)))
-                .Returns((object a, string b) => mockSourceBinding.Object);
-            mockTargetBindingFactory
-                .Setup(x => x.CreateBinding(It.Is<object>(s => s == target), It.Is<string>(s => s == targetName)))
-                .Returns((object a, string b) => mockTargetBinding.Object);
+            mockSourceBindingFactory.CreateBinding(Arg.Any<object>(), Arg.Any<string>()).Returns(mockSourceBinding);
+            mockTargetBindingFactory.CreateBinding(Arg.Any<object>(), Arg.Any<string>()).Returns(mockTargetBinding);
 
             var request = new MvxBindingRequest(source, target, bindingDescription);
-
             var toTest = new MvxFullBinding(request);
 
-            //var sourceBindingTimes = expectSourceBinding ? Times.Once() : Times.Never();
-            //mockSourceBinding.Verify(x => x.Changed += It.IsAny<EventHandler<MvxSourcePropertyBindingEventArgs>>(), sourceBindingTimes);
-            mockSourceBindingFactory
-                .Verify(x => x.CreateBinding(It.Is<object>(s => s == source), It.Is<string>(s => s == sourceText)),
-                        Times.Once());
+            mockSourceBindingFactory.Received()
+                .CreateBinding(Arg.Is<object>(s => s == source), Arg.Is<string>(s => s == sourceText));
 
-            //var targetBindingTimes = expectSourceBinding ? Times.Once() : Times.Never();
-            //mockTargetBinding.Verify(x => x.ValueChanged += It.IsAny<EventHandler<MvxTargetChangedEventArgs>>(), targetBindingTimes);
-            mockTargetBindingFactory
-                .Verify(x => x.CreateBinding(It.Is<object>(s => s == target), It.Is<string>(s => s == targetName)),
-                        Times.Once());
+            mockTargetBindingFactory.Received()
+                .CreateBinding(Arg.Is<object>(s => s == target), Arg.Is<string>(s => s == targetName));
         }
     }
 }

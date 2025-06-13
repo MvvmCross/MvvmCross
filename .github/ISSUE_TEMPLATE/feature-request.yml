@@ -2,6 +2,7 @@ name: Feature Request
 description: Suggest an idea for MvvmCross
 labels: ["t/enhancement"]
 assignees: []
+type: Feature
 body:
   - type: markdown
     attributes:

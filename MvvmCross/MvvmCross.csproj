@@ -22,8 +22,7 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
   
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
-    <Compile Include="Platforms\Netstandard\**\*.cs" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' Or '$(TargetFramework)' == 'net9.0' ">
     <Compile Include="Platforms\Console\**\*.cs" />
   </ItemGroup>
 

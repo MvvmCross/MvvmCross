@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+      "ms-dotnettools.csharp",
+      "ms-dotnettools.csdevkit",
+      "ms-dotnettools.dotnet-maui",
+      "github.vscode-github-actions",
+      "cake-build.cake-vscode"
+    ]
+}

@@ -76,7 +76,7 @@ Task("SonarStart")
     .WithCriteria(() => !string.IsNullOrEmpty(sonarToken))
     .Does(() => 
 {
-    var xunitReportsPath = MakeAbsolute(new DirectoryPath(outputDir + "/Tests")) + "/**/*.xml";
+    var xunitReportsPath = MakeAbsolute(outputDir.Combine("Tests/")) + "/**/*.xml";
     Information("XUnitReportsPath {0}", xunitReportsPath);
 
     ProcessArgumentBuilder PrepareSonarArguments(ProcessArgumentBuilder args)
@@ -127,7 +127,7 @@ Task("UnitTest")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    EnsureDirectoryExists(outputDir + "/Tests/");
+    EnsureDirectoryExists(outputDir.Combine("Tests/"));
 
     var testPaths = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
     var settings = new DotNetTestSettings
@@ -159,14 +159,43 @@ Task("UnitTest")
     }
 });
 
+Task("GenerateSBOM")
+    .IsDependentOn("Build")
+    .Does(() => 
+{
+    var sbomPath = MakeAbsolute(outputDir.Combine("sbom/"));
+
+    ProcessArgumentBuilder PrepareSbomArguments(ProcessArgumentBuilder args)
+    {
+        args.Append("MvvmCross.sln");
+        args.Append("--output {0}", sbomPath);
+        args.Append("--filename {0}", "MvvmCross.sbom.json");
+        args.Append("--json");
+        args.Append("--set-name MvvmCross");
+        args.Append("--set-type Library");
+        args.Append("--set-version {0}", versionInfo.SemVer);
+        args.Append("--recursive");
+        args.Append("--disable-package-restore");
+        return args;
+    }
+
+    var settings = new DotNetToolSettings
+    {
+        ArgumentCustomization = PrepareSbomArguments
+    };
+
+    DotNetTool("CycloneDX", settings);
+});
+
 Task("CopyPackages")
     .IsDependentOn("Build")
     .Does(() => 
 {
-    EnsureDirectoryExists(outputDir + "/NuGet/");
+    var packagesDir = outputDir.Combine("NuGet/");
+    EnsureDirectoryExists(packagesDir);
 
     var nugetFiles = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg");
-    CopyFiles(nugetFiles, new DirectoryPath(outputDir + "/NuGet/"));
+    CopyFiles(nugetFiles, packagesDir);
 });
 
 Task("Sonar")
@@ -180,6 +209,7 @@ Task("Default")
     .IsDependentOn("Clean")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
+    .IsDependentOn("GenerateSBOM")
     .IsDependentOn("CopyPackages");
 
 RunTarget(target);

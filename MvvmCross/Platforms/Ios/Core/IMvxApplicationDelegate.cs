@@ -3,11 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Core;
-using UIKit;
 
-namespace MvvmCross.Platforms.Ios.Core
-{
-    public interface IMvxApplicationDelegate : IUIApplicationDelegate, IMvxLifetime
-    {
-    }
-}
+namespace MvvmCross.Platforms.Ios.Core;
+
+public interface IMvxApplicationDelegate : IUIApplicationDelegate, IMvxLifetime;

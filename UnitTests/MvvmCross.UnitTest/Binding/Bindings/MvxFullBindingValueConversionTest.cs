@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Moq;
 using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
@@ -12,9 +10,9 @@ using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Converters;
-using MvvmCross.Tests;
 using MvvmCross.UnitTest.Binding.Mocks;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
+using NSubstitute;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Bindings
@@ -463,11 +461,11 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(new InlineMockMainThreadDispatcher());
 
-            var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
-            _fixture.Ioc.RegisterSingleton(mockSourceBindingFactory.Object);
+            var mockSourceBindingFactory = Substitute.For<IMvxSourceBindingFactory>();
+            _fixture.Ioc.RegisterSingleton(mockSourceBindingFactory);
 
-            var mockTargetBindingFactory = new Mock<IMvxTargetBindingFactory>();
-            _fixture.Ioc.RegisterSingleton(mockTargetBindingFactory.Object);
+            var mockTargetBindingFactory = Substitute.For<IMvxTargetBindingFactory>();
+            _fixture.Ioc.RegisterSingleton(mockTargetBindingFactory);
 
             var realSourceStepFactory = new MvxSourceStepFactory();
             realSourceStepFactory.AddOrOverwrite(typeof(MvxPathSourceStepDescription), new MvxPathSourceStepFactory());
@@ -496,12 +494,13 @@ namespace MvvmCross.UnitTest.Binding.Bindings
 
             var localSource = mockSource;
             mockSourceBindingFactory
-                .Setup(x => x.CreateBinding(It.IsAny<object>(), It.Is<string>(s => s == sourceText)))
-                .Returns((object a, string b) => localSource);
+                .CreateBinding(Arg.Any<object>(), Arg.Is<string>(s => s == sourceText))
+                .Returns(localSource);
+
             var localTarget = mockTarget;
             mockTargetBindingFactory
-                .Setup(x => x.CreateBinding(It.IsAny<object>(), It.Is<string>(s => s == targetName)))
-                .Returns((object a, string b) => localTarget);
+                .CreateBinding(Arg.Any<object>(), Arg.Is<string>(s => s == targetName))
+                .Returns(localTarget);
 
             mockSource.TryGetValueResult = true;
             mockSource.TryGetValueValue = "TryGetValueValue";
