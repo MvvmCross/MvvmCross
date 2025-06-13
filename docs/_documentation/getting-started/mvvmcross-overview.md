@@ -216,7 +216,7 @@ A final note: If your app uses Android Support packages, you should replace `Mvx
 
 #### WPF
 
-On WPF, a new project will contain a native `App.xaml.cs`. Before version 8, you should edit it to make it look like this:
+On WPF, a new project will contain a native `App.xaml.cs`. You should edit it to make it look like this:
 
 ```c#
 namespace MyAwesomeApp.Wpf
