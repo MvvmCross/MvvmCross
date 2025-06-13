@@ -230,6 +230,7 @@ namespace MyAwesomeApp.Wpf
     }
 }
 ```
+For more details on how the changes should look like starting with version 8, see the [Upgrade from 7 to 8][upgrade-to-mvvmcross-80]
 
 The code snippet assumes your MvvmCross App class is called `App`. If you want or need to use a custom Setup class, then you only need to modify the class constraint for `RegisterSetupType`.
 

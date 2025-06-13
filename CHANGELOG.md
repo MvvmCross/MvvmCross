@@ -1,5 +1,7 @@
 # Changelog
 
+Changelog entries have moved to [Releases on GitHub](https://github.com/MvvmCross/MvvmCross/releases).
+
 ## [9.1.0](https://github.com/MvvmCross/MvvmCross/tree/9.1.0) (2023-07-27)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/9.0.10...9.1.0)
