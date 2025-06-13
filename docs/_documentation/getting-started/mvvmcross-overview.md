@@ -216,7 +216,7 @@ A final note: If your app uses Android Support packages, you should replace `Mvx
 
 #### WPF
 
-On WPF, a new project will contain a native `App.xaml.cs`. You should edit it to make it look like this:
+On WPF, a new project will contain a native `App.xaml.cs`. Before version 8, you should edit it to make it look like this:
 
 ```c#
 namespace MyAwesomeApp.Wpf
@@ -230,6 +230,7 @@ namespace MyAwesomeApp.Wpf
     }
 }
 ```
+For more details on how the changes should look like starting with version 8, see the [Upgrade from 7 to 8][upgrade-to-mvvmcross-80]
 
 The code snippet assumes your MvvmCross App class is called `App`. If you want or need to use a custom Setup class, then you only need to modify the class constraint for `RegisterSetupType`.
 
