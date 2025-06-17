@@ -22,7 +22,7 @@ on:
 env:
   JAVA_DISTRIBUTION: 'microsoft'
   JAVA_VERSION: 17
-  NET_VERSION: 9.0.101
+  NET_VERSION: 9.0.301
 
 jobs:
   analyze:
