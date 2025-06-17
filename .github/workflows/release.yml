@@ -69,7 +69,6 @@ jobs:
         --publisher-name "MvvmCross"
         --description "MvvmCross is a cross platform MVVM framework"
         --description-url "https://mvvmcross.com"
-        --azure-key-vault-managed-identity true
         --azure-key-vault-url "${{ secrets.SIGN_AZURE_VAULT_URL }}"
         --azure-key-vault-certificate "${{ secrets.SIGN_AZURE_KEY_VAULT_CERTIFICATE_ID }}"
 
