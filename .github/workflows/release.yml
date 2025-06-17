@@ -51,7 +51,7 @@ jobs:
       run: dotnet cake --verbosity=Minimal --artifactsDir="output"
 
     - name: Install sign tool
-      run: dotnet tool install --tool-path . sign --version 0.9.1-beta.25264.1
+      run: dotnet tool install --tool-path . sign --version 0.9.1-beta.25278.1
 
     - name: 'Az CLI login'
       uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 #v2.3.0
