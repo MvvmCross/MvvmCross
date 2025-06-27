@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using AppKit;
 using CoreGraphics;
@@ -24,6 +25,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
         : MvxAttributeViewPresenter, IMvxMacViewPresenter, IMvxAttributeViewPresenter
     {
         private readonly INSApplicationDelegate _applicationDelegate;
+        protected readonly ConditionalWeakTable<NSWindow, NSWindowController> windowsToWindowControllers = new();
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
@@ -147,6 +149,10 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
             if (!Windows.Contains(window))
                 Windows.Add(window);
+
+            // ConditionalWeakTable automatically removes entries when the key (window) is garbage collected,
+            // so we don't need to manually remove items when windows are closed
+            windowsToWindowControllers.AddOrUpdate(window, windowController);
 
             window.Identifier = attribute.Identifier ?? viewController.GetType().Name;
 
