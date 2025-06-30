@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Mac.Binding
         public const string NSDatePicker_Time = "Time";
         public const string NSDatePicker_Date = "Date";
         public const string NSTextField_StringValue = "StringValue";
-        public const string NSTextView_StringValue = "StringValue";
+        public const string NSTextView_StringValue = "TextValueFakeInternalId";
         public const string NSButton_State = "State";
         public const string NSMenuItem_State = "State";
         public const string NSSearchField_Text = "Text";
