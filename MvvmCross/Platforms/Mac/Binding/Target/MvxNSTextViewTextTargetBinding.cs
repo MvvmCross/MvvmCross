@@ -2,25 +2,31 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Reflection;
+using System;
+using AppKit;
+using Foundation;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 
 namespace MvvmCross.Platforms.Mac.Binding.Target
 {
-    public class MvxNSTextViewTextTargetBinding : MvxPropertyInfoTargetBinding<NSTextView>
+    public class MvxNSTextViewTextTargetBinding : MvxTargetBinding<NSTextView, string>
     {
-        public MvxNSTextViewTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
+        public MvxNSTextViewTextTargetBinding(NSTextView target)
+            : base(target)
         {
-            var editText = View;
-            if (editText == null)
+            if (Target == null)
             {
                 MvxBindingLog.Instance?.LogError(
                                       "NSTextView is null in MvxNSTextViewTextTargetBinding");
             }
-            else
+        }
+
+        public override void SubscribeToEvents()
+        {
+            base.SubscribeToEvents();
+            if (Target is { } editText)
             {
                 // Todo: Perhaps we want to trigger on editing complete rather than didChange
                 editText.TextDidChange += EditTextDidChange;
@@ -29,10 +35,10 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
 
         private void EditTextDidChange(object sender, EventArgs eventArgs)
         {
-            var view = View;
+            var view = Target;
             if (view == null)
                 return;
-            FireValueChanged(view.TextStorage.ToString());
+            FireValueChanged(view.TextStorage.Value);
         }
 
         public override MvxBindingMode DefaultMode
@@ -40,9 +46,22 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValue(string value)
         {
-            base.SetValueImpl(target, value ?? "");
+            if (Target is not { } editView)
+                return;
+
+            // TextStorage.SetString will move caret to the end. To preserve the caret position, save and restore it later.
+            var selectedRange = editView.SelectedRange;
+
+            editView.TextStorage.SetString(new NSAttributedString(value ?? string.Empty));
+
+            var textLength = editView.TextStorage.Length;
+            if (selectedRange.Location <= textLength)
+            {
+                var length = Math.Min(selectedRange.Length, textLength - selectedRange.Location);
+                editView.SetSelectedRange(new NSRange(selectedRange.Location, length));
+            }
         }
 
         protected override void Dispose(bool isDisposing)
@@ -50,7 +69,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = View;
+                var editText = Target;
                 if (editText != null)
                 {
                     editText.TextDidChange -= EditTextDidChange;
