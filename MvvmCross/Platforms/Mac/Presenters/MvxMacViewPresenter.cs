@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using AppKit;
 using CoreGraphics;
@@ -24,6 +25,13 @@ namespace MvvmCross.Platforms.Mac.Presenters
         : MvxAttributeViewPresenter, IMvxMacViewPresenter, IMvxAttributeViewPresenter
     {
         private readonly INSApplicationDelegate _applicationDelegate;
+
+        /// <summary>
+        /// NSWindow keeps only the *weak* reference to its NSWindowController. So, the controller will be
+        /// prematurely disposed if no other references exist. This table keeps a strong reference to the
+        /// controller keeping it alive while the associated NSWindow is alive. Ref. issue #2198
+        /// </summary>
+        protected readonly ConditionalWeakTable<NSWindow, NSWindowController> _windowsToWindowControllers = new();
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
@@ -147,6 +155,10 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
             if (!Windows.Contains(window))
                 Windows.Add(window);
+
+            // ConditionalWeakTable automatically removes entries when the key (window) is garbage collected,
+            // so we don't need to manually remove items when windows are closed
+            _windowsToWindowControllers.AddOrUpdate(window, windowController);
 
             window.Identifier = attribute.Identifier ?? viewController.GetType().Name;
 
