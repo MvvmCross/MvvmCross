@@ -25,7 +25,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
         : MvxAttributeViewPresenter, IMvxMacViewPresenter, IMvxAttributeViewPresenter
     {
         private readonly INSApplicationDelegate _applicationDelegate;
-        
+
         /// <summary>
         /// NSWindow keeps only the *weak* reference to its NSWindowController. So, the controller will be
         /// prematurely disposed if no other references exist. This table keeps a strong reference to the
