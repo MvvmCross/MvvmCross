@@ -14,15 +14,15 @@ Use StackOverflow to find already asked questions, and post new questions with d
 
 Use Discord to get in touch with us directly, and ask quick questions. After joining the DotNetEvolution Discord, go to the MvvmCross channel to find all other MvvmCross users.
 
-**[Xamarin forums][xf]**
-
-Use the Xamarin Forums for specific questions where neither StackOverflow or Discord works for you.
-
 **[GitHub issues][gi]**
 
 Use only GitHub issues for actual bugs with the framework. We try to keep GitHub issues only for bugs, feature requests, roadmaps and the like.
 
+**[Expedited support][opencollective]**
+
+For expedited support, when you have urgent issues. Please use the Expedited Support Open Collective teir.
+
 [so]: https://stackoverflow.com/questions/tagged/mvvmcross "StackOverflow questions tagged MvvmCross"
 [discord]: https://aka.ms/dotnet-discord "Invite yourself to the DotNetEvolution Discord"
-[xf]: https://forums.xamarin.com "Xamarin Forums"
 [gi]: https://github.com/mvvmcross/mvvmcross "GitHub issues for MvvmCross"
+[opencollective]: https://opencollective.com/mvvmcross "MvvmCross open collective"
