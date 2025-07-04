@@ -209,7 +209,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             public string Tag { get; init; }
 
             [ExportField("CREATOR")]
-            public static ViewPagerFragmentInfoParcelableCreator InititalizeCreator()
+            public static ViewPagerFragmentInfoParcelableCreator InitializeCreator()
             {
                 return new ViewPagerFragmentInfoParcelableCreator();
             }
