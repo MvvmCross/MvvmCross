@@ -151,4 +151,4 @@ You can also define new attributes to satisfy your needs. The steps to do so are
 
 
 ## Sample please!
-You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/tree/master/Projects/Playground) (WPF project) to see this presenter in action.
+You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/tree/main/Projects/Playground) (WPF project) to see this presenter in action.

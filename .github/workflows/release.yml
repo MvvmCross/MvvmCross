@@ -4,14 +4,14 @@ on:
   push:
     branches: 
       - develop
-      - master
+      - main
       - release/**
       - hotfix/**
 
 env:
   JAVA_DISTRIBUTION: 'microsoft'
   JAVA_VERSION: 17
-  NET_VERSION: 9.0.202
+  NET_VERSION: 9.0.301
 
 jobs:
   build:
@@ -50,23 +50,27 @@ jobs:
     - name: Build
       run: dotnet cake --verbosity=Minimal --artifactsDir="output"
 
-    - name: Install SignTool tool
-      run: dotnet tool install --tool-path . SignClient
+    - name: Install sign tool
+      run: dotnet tool install --tool-path . sign --version 0.9.1-beta.25278.1
 
-    - run: |
-        .\SignClient "Sign" `
-        --baseDirectory "${{ github.workspace }}\output" `
-        --input "**/*.nupkg" `
-        --config "${{ github.workspace }}\signclient.json" `
-        --user "${{ env.SIGNING_USER }}" `
-        --secret "${{ env.SIGNING_SECRET }}" `
-        --name "MvvmCross" `
-        --description "MvvmCross is a cross platform MVVM framework" `
-        --descriptionUrl "https://mvvmcross.com"
-      name: Authenticode Sign artifacts
-      env:
-        SIGNING_USER: ${{ secrets.SIGN_CLIENT_USER_ID }}
-        SIGNING_SECRET: ${{ secrets.SIGN_CLIENT_SECRET }}
+    - name: 'Az CLI login'
+      uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 #v2.3.0
+      with:
+        client-id: ${{ secrets.SIGN_AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.SIGN_AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.SIGN_AZURE_SUBSCRIPTION_ID }}
+
+    - name: Sign artifacts
+      shell: pwsh
+      run: >
+        ./sign code azure-key-vault
+        **/*.nupkg
+        --base-directory "${{ github.workspace }}/output"
+        --publisher-name "MvvmCross"
+        --description "MvvmCross is a cross platform MVVM framework"
+        --description-url "https://mvvmcross.com"
+        --azure-key-vault-url "${{ secrets.SIGN_AZURE_VAULT_URL }}"
+        --azure-key-vault-certificate "${{ secrets.SIGN_AZURE_KEY_VAULT_CERTIFICATE_ID }}"
 
     - name: Attest NuGet packages
       uses: actions/attest-sbom@115c3be05ff3974bcbd596578934b3f9ce39bf68 # v2.2.0

@@ -5,11 +5,16 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Input;
 using AppKit;
 using Foundation;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Extensions;
@@ -143,15 +148,67 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
                 return;
 
             var row = _tableView.SelectedRow;
-            if (row < 0)
+
+            if (row < -1)
                 return;
 
-            var item = ItemsSource.ElementAt((int)row);
+            var item = row is not -1 ? ItemsSource.ElementAt((int)row) : null; //row==-1 => no selection.
 
             if (!command.CanExecute(item))
                 return;
 
+            DebugCheckCommandArgumentType();
             command.Execute(item);
+        }
+
+        /// <summary>
+        /// Debug-only method that validates the <see cref="SelectionChangedCommand"/> implementation to ensure it can
+        /// properly handle empty selections for value types.
+        /// For example, if <see cref="ItemsSource"/> is a collection of integers (or other value types) and the
+        /// <see cref="SelectionChangedCommand"/> is implemented with a signature <c>MvxCommand&lt;int&gt;</c>,
+        /// we cannot distinguish between an empty selection and when item <c>0</c> is selected
+        /// (because <c>null</c> becomes <c>default(int)==0</c> when passed into <c>MvxCommand&lt;int&gt;</c>).
+        /// To properly handle empty selections, provide a command with a nullable argument,
+        /// such as <c>MvxCommand&lt;Nullable&lt;int&gt;&gt;</c>.
+        /// </summary>
+        [Conditional("DEBUG")]
+        [SuppressMessage("ILLink", "IL2075", Justification = "Method is DEBUG-only and uses reflection for debug checks. Trimming is not expected/problematic for this specific debug-time code.")]
+        private void DebugCheckCommandArgumentType()
+        {
+            var command = SelectionChangedCommand;
+            if (command is null)
+                return;
+
+            var commandType = command.GetType();
+            var executeMethods = commandType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                .Where(m => m.Name == nameof(ICommand.Execute))
+                .ToList();
+
+            foreach (var method in executeMethods)
+            {
+                var parameters = method.GetParameters();
+                if (parameters.Length > 0)
+                {
+                    var parameterType = parameters[0].ParameterType;
+
+                    // Skip object parameter type (likely from ICommand interface)
+                    if (parameterType == typeof(object))
+                    {
+                        continue;
+                    }
+
+                    var isNullableType = Nullable.GetUnderlyingType(parameterType) != null;
+                    if (parameterType.IsValueType && !isNullableType)
+                    {
+                        MvxBindingLog.Instance?.LogError(
+                            "Warning: The command, assigned/binded to the {ClassName}.{CmdName} is implemented to receive " +
+                            "non-nullable value type argument ({TypeName}), but null may be passed when no item is selected " +
+                            "(and this will be treated as default({TypeName1}))",
+                            nameof(MvxTableViewSource), nameof(SelectionChangedCommand), parameterType.Name, parameterType.Name);
+                        return;
+                    }
+                }
+            }
         }
 
         protected bool TryDoAnimatedChange(NotifyCollectionChangedEventArgs args)

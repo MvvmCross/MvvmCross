@@ -90,7 +90,7 @@ This will hint that both the `TouchUpInside` event is used and that we also use 
 
 You will need to add sections to this file as needed.
 
-> You can find some good defaults in our [ContentFiles in our GitHub repository](https://github.com/MvvmCross/MvvmCross/tree/master/ContentFiles).
+> You can find some good defaults in our [ContentFiles in our GitHub repository](https://github.com/MvvmCross/MvvmCross/tree/main/ContentFiles).
 
 LinkerPleaseInclude files need to be added per platform and need to be compiled. However, these are never invoked, so don't worry if you write code that does not make sense in them. The code is just there to hint the linker.
 

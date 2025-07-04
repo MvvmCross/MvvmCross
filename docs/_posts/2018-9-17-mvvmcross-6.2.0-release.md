@@ -82,7 +82,7 @@ As part of a code improvement, `Mvx` methods have been marked as obsolete and wi
 ## iOS
  
 - When binding the ItemsSource property of `MvxExpandableTableViewSource`, a `AmbiguousMatchException` was thrown. Thanks to [@cheesebaron](https://github.com/cheesebaron) this has been [fixed](https://github.com/MvvmCross/MvvmCross/pull/3024).
-- We found out that our default LinkerPleaseInclude was missing some methods for `UITextField`. Please make sure to grab the latest version from [here](https://github.com/MvvmCross/MvvmCross/blob/master/ContentFiles/iOS/LinkerPleaseInclude.cs).
+- We found out that our default LinkerPleaseInclude was missing some methods for `UITextField`. Please make sure to grab the latest version from [here](https://github.com/MvvmCross/MvvmCross/blob/main/ContentFiles/iOS/LinkerPleaseInclude.cs).
 - You can now use extension methods in Fluent bindings to bind `Preference.PreferenceClick` and `UIBarButtonItem.Clicked`. Huge thanks to [@Plac3hold3r](https://github.com/Plac3hold3r).
 - `MvxIosViewPresenter` now supports `MvxPagePresentationHint`, which in other words means that you can now change the selected tab by using `navigationService.ChangePresentation`. This implementation was introduced by [@markuspalme](https://github.com/markuspalme).
 - `MvxTabBarViewController.SelectedViewController` now returns null instead of throwing a `NullReferenceException`. Kudos to [@andrechi1](https://github.com/andrechi1)!

@@ -74,7 +74,7 @@ The presenter uses a set of `PresentationAttributes` to define how a view will b
 - If a view class has no attribute over it, the presenter will assume _animated_ child presentation.
 
 ### Sample please!
-You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/tree/master/TestProjects/Playground) iOS project to see this presenter in action.
+You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/tree/main/TestProjects/Playground) iOS project to see this presenter in action.
 
 ## Improved navigation
 
