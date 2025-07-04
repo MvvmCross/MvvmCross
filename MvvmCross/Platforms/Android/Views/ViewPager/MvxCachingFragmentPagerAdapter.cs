@@ -25,11 +25,11 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
         private Fragment _currentPrimaryItem;
         private FragmentTransaction _curTransaction;
         private readonly FragmentManager _fragmentManager;
-        private readonly List<Fragment> _fragments = new List<Fragment>();
         private List<string> _savedFragmentTags = new List<string>();
         private readonly List<Fragment.SavedState> _savedState = new List<Fragment.SavedState>();
 
         protected FragmentFactory FragmentFactory => _fragmentManager.FragmentFactory;
+        protected List<Fragment> Fragments { get; private set; } = new List<Fragment>();
 
         protected MvxCachingFragmentPagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -70,7 +70,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 
             _savedState[position] = fragment.IsAdded ? _fragmentManager.SaveFragmentInstanceState(fragment) : null;
             _savedFragmentTags[position] = fragment.IsAdded ? fragment.Tag : null;
-            _fragments[position] = null;
+            Fragments[position] = null;
 
             _curTransaction.Remove(fragment);
         }
@@ -90,9 +90,9 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             // to do.  This can happen when we are restoring the entire pager
             // from its saved state, where the fragment manager has already
             // taken care of restoring the fragments we previously had instantiated.
-            if (_fragments.Count > position)
+            if (Fragments.Count > position)
             {
-                var existingFragment = _fragments.ElementAtOrDefault(position);
+                var existingFragment = Fragments.ElementAtOrDefault(position);
                 if (existingFragment != null)
                     return existingFragment;
             }
@@ -125,12 +125,12 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
                 "Adding item #{position}: f={fragment} t={tag}", position, fragment, fragmentTag);
 #endif
 
-            while (_fragments.Count <= position)
-                _fragments.Add(null);
+            while (Fragments.Count <= position)
+                Fragments.Add(null);
 
             fragment.SetMenuVisibility(false);
             fragment.UserVisibleHint = false;
-            _fragments[position] = fragment;
+            Fragments[position] = fragment;
             _curTransaction.Add(container.Id, fragment, fragmentTag);
 
             return fragment;
@@ -150,7 +150,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             bundle.SetClassLoader(loader);
             var fss = bundle.GetParcelableArray("states");
             _savedState.Clear();
-            _fragments.Clear();
+            Fragments.Clear();
 
             var tags = bundle.GetStringArrayList("tags");
             if (tags != null)
@@ -181,11 +181,11 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
                 var f = _fragmentManager.GetFragment(bundle, key);
                 if (f != null)
                 {
-                    while (_fragments.Count() <= index)
-                        _fragments.Add(null);
+                    while (Fragments.Count() <= index)
+                        Fragments.Add(null);
 
                     f.SetMenuVisibility(false);
-                    _fragments[index] = f;
+                    Fragments[index] = f;
                 }
             }
         }
@@ -206,9 +206,9 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
                 state.PutStringArrayList("tags", _savedFragmentTags);
             }
 
-            for (var i = 0; i < _fragments.Count; i++)
+            for (var i = 0; i < Fragments.Count; i++)
             {
-                var f = _fragments.ElementAtOrDefault(i);
+                var f = Fragments.ElementAtOrDefault(i);
                 if (f == null)
                     continue;
 
