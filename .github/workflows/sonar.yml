@@ -38,6 +38,6 @@ jobs:
         dotnet workload install android ios tvos macos maccatalyst --version ${{ env.NET_VERSION }}
 
     - name: Build
-      run: dotnet cake --verbosity=${{ env.verbosity }} --artifactsDir="output" --target=Sonar --sonarToken=${{ secrets.SONAR_TOKEN }} --sonarKey=${{ env.sonarKey }} --sonarOrg=${{ env.sonarOrg }}
+      run: dotnet run --project build/Build.csproj -- --verbosity=${{ env.verbosity }} --target=Sonar --sonarToken=${{ secrets.SONAR_TOKEN }} --sonarKey=${{ env.sonarKey }} --sonarOrg=${{ env.sonarOrg }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -48,7 +48,7 @@ jobs:
         java-version: ${{ env.JAVA_VERSION }}
 
     - name: Build
-      run: dotnet cake --verbosity=Minimal --artifactsDir="output"
+      run: dotnet run --project build/Build.csproj -- --verbosity=Minimal --artifactsDir="${{ github.workspace }}\output"
 
     - name: Install sign tool
       run: dotnet tool install --tool-path . sign --version 0.9.1-beta.25278.1
@@ -83,7 +83,7 @@ jobs:
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 #v4.6.2
       with:
         name: build-artifacts
-        path: output
+        path: ${{ github.workspace }}\output
 
     - name: NuGet Push
       env:
