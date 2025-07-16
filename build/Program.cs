@@ -79,7 +79,8 @@ public class BuildContext : FrostingContext
 
         context.Information("RefName: {0}", context.GitHubActions().Environment.Workflow.RefName);
 
-        VerbosityDotNet = context.Log.Verbosity switch {
+        VerbosityDotNet = context.Log.Verbosity switch
+        {
             Verbosity.Quiet => DotNetVerbosity.Quiet,
             Verbosity.Normal => DotNetVerbosity.Normal,
             Verbosity.Verbose => DotNetVerbosity.Detailed,
@@ -196,7 +197,7 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
             Verbosity = context.VerbosityDotNet
         };
 
-        foreach(var project in testPaths)
+        foreach (var project in testPaths)
         {
             var projectName = project.GetFilenameWithoutExtension();
             var testTrx = context.MakeAbsolute(new FilePath(context.OutputDir + "/Tests/" + projectName + ".trx"));
