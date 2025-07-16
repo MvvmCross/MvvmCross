@@ -2,13 +2,6 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "cake.tool": {
-      "version": "5.0.0",
-      "commands": [
-        "dotnet-cake"
-      ],
-      "rollForward": false
-    },
     "dotnet-reportgenerator-globaltool": {
       "version": "5.4.5",
       "commands": [
