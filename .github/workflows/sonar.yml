@@ -11,7 +11,7 @@ env:
   verbosity: 'minimal'
   sonarKey: 'MvvmCross_MvvmCross'
   sonarOrg: 'mvx'
-  NET_VERSION: 9.0.301
+  NET_VERSION: 9.0.302
 
 jobs:
   build:
