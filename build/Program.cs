@@ -277,7 +277,7 @@ public sealed class CopyPackagesTask : FrostingTask<BuildContext>
         var packagesDir = context.OutputDir.Combine("NuGet/");
         context.EnsureDirectoryExists(packagesDir);
 
-        var nugetFiles = context.GetFiles(context.SolutionName + "*/**/bin/" + context.BuildConfiguration + "/**/*.nupkg");
+        var nugetFiles = context.GetFiles($"{context.AppFileRoot}/{context.SolutionName}*/**/bin/{context.BuildConfiguration}/**/*.nupkg");
         context.CopyFiles(nugetFiles, packagesDir);
     }
 }
