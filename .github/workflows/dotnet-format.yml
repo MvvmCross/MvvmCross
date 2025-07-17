@@ -3,7 +3,7 @@ name: dotnet format
 on: [pull_request]
 
 env:
-  NET_VERSION: 9.0.101
+  NET_VERSION: 9.0.302
 
 jobs:
   lint:

@@ -4,7 +4,7 @@
     <TargetFramework>net9.0-macos</TargetFramework>
     <AssemblyName>Playground.Mac</AssemblyName>
     <RootNamespace>Playground.Mac</RootNamespace>
-    <SupportedOSPlatfromVersion>13.0</SupportedOSPlatfromVersion>
+    <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
     <Company>.NET Foundation and Contributors</Company>
     <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
     <FileVersion>7.0.0.0</FileVersion>

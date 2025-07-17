@@ -2,11 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.IO;
 using System.Reflection;
-using System.Threading.Tasks;
-using Moq;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Navigation;
@@ -17,6 +13,7 @@ using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.UnitTest.Mocks.ViewModels;
 using MvvmCross.UnitTest.Stubs;
 using MvvmCross.ViewModels;
+using NSubstitute;
 using Xunit;
 
 [assembly: MvxNavigation(typeof(ViewModelA), @"https?://mvvmcross.com/blog")]
@@ -29,7 +26,7 @@ namespace MvvmCross.UnitTest.Navigation
     [Collection("MvxTest")]
     public class RoutingServiceTests
     {
-        protected Mock<NavigationMockDispatcher> MockDispatcher;
+        protected NavigationMockDispatcher MockDispatcher;
         protected IMvxNavigationService RoutingService;
         private readonly NavigationTestFixture _fixture;
 
@@ -46,22 +43,30 @@ namespace MvvmCross.UnitTest.Navigation
 
         private void AdditionalSetup(MvxTestFixture fixture)
         {
-            var mockLocator = new Mock<IMvxViewModelLocator>();
-            mockLocator.Setup(
-                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>())).Returns(() => new ViewModelMock<SimpleTestViewModel>().Object);
-            mockLocator.Setup(
-                m => m.Reload(It.IsAny<IMvxViewModel>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>())).Returns(() => new ViewModelMock<SimpleTestViewModel>().Object);
+            var mockLocator = Substitute.For<IMvxViewModelLocator>();
+            mockLocator.Load(
+                    Arg.Any<Type>(),
+                    Arg.Any<IMvxBundle>(),
+                    Arg.Any<IMvxBundle>(),
+                    Arg.Any<IMvxNavigateEventArgs>())
+                .Returns(new ViewModelMock<SimpleTestViewModel>().Object);
+            mockLocator.Reload(
+                    Arg.Any<IMvxViewModel>(),
+                    Arg.Any<IMvxBundle>(),
+                    Arg.Any<IMvxBundle>(),
+                    Arg.Any<IMvxNavigateEventArgs>())
+                .Returns(new ViewModelMock<SimpleTestViewModel>().Object);
 
-            var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
-            mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
-                          .Returns(() => mockLocator.Object);
+            var mockCollection = Substitute.For<IMvxViewModelLocatorCollection>();
+            mockCollection.FindViewModelLocator(Arg.Any<MvxViewModelRequest>())
+                          .Returns(mockLocator);
 
-            fixture.Ioc.RegisterSingleton(mockLocator.Object);
+            fixture.Ioc.RegisterSingleton(mockLocator);
 
-            var loader = new MvxViewModelLoader(mockCollection.Object);
-            MockDispatcher = new Mock<NavigationMockDispatcher>(MockBehavior.Loose) { CallBase = true };
-            var navigationService = RoutingService = new MvxNavigationService(loader, MockDispatcher.Object, fixture.Ioc);
-            RoutingService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
+            var loader = new MvxViewModelLoader(mockCollection);
+            MockDispatcher = new NavigationMockDispatcher();
+            var navigationService = RoutingService = new MvxNavigationService(loader, MockDispatcher, fixture.Ioc);
+            RoutingService.LoadRoutes([typeof(RoutingServiceTests).Assembly]);
             fixture.Ioc.RegisterSingleton(navigationService);
             fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
         }
@@ -76,37 +81,37 @@ namespace MvvmCross.UnitTest.Navigation
 
             await Assert.ThrowsAsync<MvxException>(() => RoutingService.Navigate(url));
 
-            MockDispatcher.Verify(x => x.ShowViewModel(It.IsAny<MvxViewModelRequest>()), Times.Never);
+            Assert.Empty(MockDispatcher.Requests);
         }
 
         [Fact]
         public async Task TestDirectMatchRegexAsync()
         {
-            await RoutingService.Navigate("mvx://test/?id=" + Guid.Empty.ToString("N"));
+            await RoutingService.Navigate("mvx://test/?id=" + Guid.Empty.ToString("N"),
+                cancellationToken: TestContext.Current.CancellationToken);
 
-            MockDispatcher.Verify(
-                x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelB))),
-                Times.Once);
+            Assert.Single(MockDispatcher.Requests);
+            Assert.Equal(typeof(ViewModelB), MockDispatcher.Requests[0].ViewModelType);
         }
 
         [Fact]
         public async Task TestRegexWithParametersAsync()
         {
-            await RoutingService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N"));
+            await RoutingService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N"),
+                cancellationToken: TestContext.Current.CancellationToken);
 
-            MockDispatcher.Verify(
-                x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelC))),
-                Times.Once);
+            Assert.Single(MockDispatcher.Requests);
+            Assert.Equal(typeof(ViewModelC), MockDispatcher.Requests[0].ViewModelType);
         }
 
         [Fact]
         public async Task TestFacadeAsync()
         {
-            await RoutingService.Navigate("mvx://facade/?id=a");
+            await RoutingService.Navigate("mvx://facade/?id=a",
+                cancellationToken: TestContext.Current.CancellationToken);
 
-            MockDispatcher.Verify(
-                x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelA))),
-                Times.Once);
+            Assert.Single(MockDispatcher.Requests);
+            Assert.Equal(typeof(ViewModelA), MockDispatcher.Requests[0].ViewModelType);
         }
     }
 }

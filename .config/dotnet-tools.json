@@ -2,24 +2,24 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "cake.tool": {
-      "version": "4.0.0",
-      "commands": [
-        "dotnet-cake"
-      ],
-      "rollForward": false
-    },
     "dotnet-reportgenerator-globaltool": {
-      "version": "5.2.2",
+      "version": "5.4.5",
       "commands": [
         "reportgenerator"
       ],
       "rollForward": false
     },
     "dotnet-sonarscanner": {
-      "version": "9.0.0",
+      "version": "10.1.1",
       "commands": [
         "dotnet-sonarscanner"
+      ],
+      "rollForward": false
+    },
+    "cyclonedx": {
+      "version": "5.1.1",
+      "commands": [
+        "dotnet-CycloneDX"
       ],
       "rollForward": false
     }

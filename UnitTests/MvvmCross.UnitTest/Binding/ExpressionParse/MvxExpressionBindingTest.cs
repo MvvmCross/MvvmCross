@@ -2,12 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using Microsoft.Extensions.Logging;
-using Moq;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
@@ -15,7 +11,7 @@ using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.ExpressionParse;
 using MvvmCross.Converters;
-using MvvmCross.Tests;
+using NSubstitute;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.ExpressionParse
@@ -420,31 +416,31 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
 
             var dataContext = new TestDataContext();
 
-            var bindingContext = new Mock<IMvxBindingContext>();
-            bindingContext.Setup(x => x.RegisterBinding(It.IsAny<object>(), It.IsAny<IMvxUpdateableBinding>()));
-            bindingContext.SetupGet(x => x.DataContext).Returns(dataContext);
+            var bindingContext = Substitute.For<IMvxBindingContext>();
+            bindingContext.RegisterBinding(Arg.Any<object>(), Arg.Any<IMvxUpdateableBinding>());
+            bindingContext.DataContext.Returns(dataContext);
 
             var callbacksSeen = new List<Callback>();
 
-            var binder = new Mock<IMvxBinder>();
-            binder.Setup(
-                b => b.Bind(It.IsAny<object>(), It.IsAny<object>(), It.IsAny<IEnumerable<MvxBindingDescription>>()))
-                  .Callback((object source, object target, IEnumerable<MvxBindingDescription> descriptions) =>
-                      {
-                          if (descriptions.Count() != 1)
-                              throw new Exception("Unexpected description count");
+            var binder = Substitute.For<IMvxBinder>();
+            binder
+                .When(b => b.Bind(Arg.Any<object>(), Arg.Any<object>(), Arg.Any<IEnumerable<MvxBindingDescription>>()))
+                .Do(x =>
+                {
+                    if (x.ArgAt<IEnumerable<MvxBindingDescription>>(2).Count() != 1)
+                        throw new Exception("Unexpected description count");
 
-                          callbacksSeen.Add(new Callback
-                          {
-                              Source = source,
-                              Target = target,
-                              BindingDescription = descriptions.First()
-                          });
-                      });
-            _fixture.Ioc.RegisterSingleton(binder.Object);
+                    callbacksSeen.Add(new Callback
+                    {
+                        Source = x.ArgAt<object>(0),
+                        Target = x.ArgAt<object>(1),
+                        BindingDescription = x.ArgAt<IEnumerable<MvxBindingDescription>>(2).First()
+                    });
+                });
+            _fixture.Ioc.RegisterSingleton(binder);
 
-            var loggerFactory = new Mock<ILoggerFactory>();
-            _fixture.Ioc.RegisterSingleton<IMvxPropertyExpressionParser>(new MvxPropertyExpressionParser(loggerFactory.Object));
+            var loggerFactory = Substitute.For<ILoggerFactory>();
+            _fixture.Ioc.RegisterSingleton<IMvxPropertyExpressionParser>(new MvxPropertyExpressionParser(loggerFactory));
 
             var converterLookup = new MvxValueConverterRegistry();
             converterLookup.AddOrOverwrite("SampleConv", new SampleValueConverter());
@@ -453,7 +449,7 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
             var testTarget = new MockBindingContext
             {
                 Target = new TestTarget(),
-                BindingContext = bindingContext.Object
+                BindingContext = bindingContext
             };
 
             action(testTarget);
