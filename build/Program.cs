@@ -35,6 +35,7 @@ public class BuildContext : FrostingContext
     public string RepoName { get; set; } = "mvvmcross/mvvmcross";
     public string Target { get; set; }
     public string BuildConfiguration { get; set; }
+    public DirectoryPath CtrfDir { get; }
     public string ArtifactsDir { get; set; }
     public DirectoryPath OutputDir { get; set; }
     public string SonarToken { get; set; }
@@ -50,6 +51,8 @@ public class BuildContext : FrostingContext
         AppFileRoot = context.Argument("root", "..");
         Target = context.Argument("target", "Default");
         BuildConfiguration = context.Argument("configuration", "Release");
+        var ctrfDirArg = context.Argument("ctrfDir", $"{AppFileRoot}/ctrf");
+        CtrfDir = new DirectoryPath(ctrfDirArg);
         ArtifactsDir = context.Argument("artifactsDir", $"{AppFileRoot}/artifacts");
         OutputDir = new DirectoryPath(ArtifactsDir);
         SonarToken = context.Argument("sonarToken", "");
@@ -218,11 +221,13 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
             }
 
             var testTrxFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.trx");
-            var testCtrfFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.ctrf.json");
             var coverageFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.coverage");
             context.CopyFiles(testTrxFiles, testReportFolder);
-            context.CopyFiles(testCtrfFiles, testReportFolder);
             context.CopyFiles(coverageFiles, testReportFolder);
+
+            var testCtrfFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.ctrf.json");
+            context.EnsureDirectoryExists(context.CtrfDir);
+            context.CopyFiles(testCtrfFiles, context.CtrfDir);
         }
     }
 }

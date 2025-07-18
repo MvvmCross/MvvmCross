@@ -46,17 +46,17 @@ jobs:
         java-version: ${{ env.JAVA_VERSION }}
 
     - name: Build
-      run: dotnet run --project build/Build.csproj -- --verbosity=Minimal --artifactsDir="${{ github.workspace }}\output"
+      run: dotnet run --project build/Build.csproj -- --verbosity=Minimal --artifactsDir="${{ github.workspace }}\output" --ctrfDir="${{ github.workspace }}\ctrf"
 
     - name: Print ctrf files in output
       run: |
         echo "ctrf files in output:"
-        dir ${{ github.workspace }}\output\Tests\*.ctrf.json
+        dir ${{ github.workspace }}\ctrf
     
     - name: Publish Test Report
       uses: ctrf-io/github-test-reporter@073c73100796cafcbfdc4722c7fa11c29730439e #v1.0.18
       with:
-        report-path: ${{ github.workspace }}\output\Tests\
+        report-path: ${{ github.workspace }}/ctrf/*.ctrf.json
         summary-report: true
         github-report: true
         pull-request: true
