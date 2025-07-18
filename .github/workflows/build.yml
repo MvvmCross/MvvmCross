@@ -47,6 +47,15 @@ jobs:
 
     - name: Build
       run: dotnet run --project build/Build.csproj -- --verbosity=Minimal --artifactsDir="${{ github.workspace }}\output"
+    
+    - name: Publish Test Report
+      uses: ctrf-io/github-test-reporter@073c73100796cafcbfdc4722c7fa11c29730439e #v1.0.18
+      with:
+        report-path: '${{ github.workspace }}\output\Tests\*.ctrf'
+        github-report: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      if: always()
 
     - name: Upload artifacts
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 #v4.6.2
