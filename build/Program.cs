@@ -165,6 +165,7 @@ public sealed class SonarStartTask : FrostingTask<BuildContext>
                 .Append("/d:sonar.tests={0}", "UnitTests/**")
                 .Append("/d:sonar.cs.vstest.reportsPaths={0}", string.Join(",", xunitReportsPaths.Select(p => p.FullPath)))
                 .Append("/d:sonar.flex.cobertura.reportPaths={0}", string.Join(",", corverageReportsPaths.Select(p => p.FullPath)))
+                .Append("/d:sonar.scanner.skipJreProvisioning={0}", "true")
                 .AppendSecret("/d:sonar.token={0}", context.SonarToken)
         };
 
