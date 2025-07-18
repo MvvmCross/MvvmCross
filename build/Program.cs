@@ -204,7 +204,7 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
                 ArgumentCustomization = args => args
                     .Append("-- ")
                     .Append($"--report-xunit-trx --report-xunit-trx-filename {projectName}.trx")
-                    .Append($"--report-ctrf --report-ctrf-filename {projectName}.ctrf")
+                    .Append($"--report-ctrf --report-ctrf-filename {projectName}.ctrf.json")
                     .Append($"--coverage --coverage-output {projectName}.coverage --coverage-output-format cobertura")
             };
 
@@ -218,7 +218,7 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
             }
 
             var testTrxFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.trx");
-            var testCtrfFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.ctrf");
+            var testCtrfFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.ctrf.json");
             var coverageFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.coverage");
             context.CopyFiles(testTrxFiles, testReportFolder);
             context.CopyFiles(testCtrfFiles, testReportFolder);
