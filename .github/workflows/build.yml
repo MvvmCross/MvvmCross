@@ -9,7 +9,7 @@ on:
 env:
   JAVA_DISTRIBUTION: 'microsoft'
   JAVA_VERSION: 17
-  NET_VERSION: 9.0.302
+  NET_VERSION: 9.0.303
 
 jobs:
   build:
