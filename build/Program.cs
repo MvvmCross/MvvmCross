@@ -14,6 +14,7 @@ using Cake.Common.Tools.DotNet.MSBuild;
 using Cake.Common.Build;
 using Cake.Core.Diagnostics;
 using Cake.Common.Tools.DotNet.Tool;
+using Cake.Common.Tools.DotNet.Run;
 
 namespace Build;
 
@@ -150,8 +151,8 @@ public sealed class SonarStartTask : FrostingTask<BuildContext>
 
     public override void Run(BuildContext context)
     {
-        var xunitReportsPath = context.MakeAbsolute(context.OutputDir.Combine("Tests/")) + "/**/*.xml";
-        context.Information("XUnitReportsPath {0}", xunitReportsPath);
+        var xunitReportsPaths = context.GetFiles(context.MakeAbsolute(context.OutputDir.Combine("Tests/")) + "/**/*.trx");
+        var corverageReportsPaths = context.GetFiles(context.MakeAbsolute(context.OutputDir.Combine("Tests/")) + "/**/*.coverage");
 
         var settings = new DotNetToolSettings
         {
@@ -162,7 +163,8 @@ public sealed class SonarStartTask : FrostingTask<BuildContext>
                 .Append("/d:sonar.host.url={0}", "https://sonarcloud.io")
                 .Append("/d:sonar.sources={0}", "MvvmCross*/**")
                 .Append("/d:sonar.tests={0}", "UnitTests/**")
-                .Append("/d:sonar.cs.xunit.reportsPaths={0}", xunitReportsPath)
+                .Append("/d:sonar.cs.vstest.reportsPaths={0}", string.Join(",", xunitReportsPaths.Select(p => p.FullPath)))
+                .Append("/d:sonar.flex.cobertura.reportPaths={0}", string.Join(",", corverageReportsPaths.Select(p => p.FullPath)))
                 .AppendSecret("/d:sonar.token={0}", context.SonarToken)
         };
 
