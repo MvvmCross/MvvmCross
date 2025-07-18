@@ -187,35 +187,40 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
 {
     public override void Run(BuildContext context)
     {
-        context.EnsureDirectoryExists(context.OutputDir.Combine("Tests/"));
+        var testReportFolder = context.OutputDir.Combine("Tests/");
+        context.EnsureDirectoryExists(testReportFolder);
 
         var testPaths = context.GetFiles($"{context.AppFileRoot}/UnitTests/*.UnitTest/*.UnitTest.csproj");
-        var settings = new DotNetTestSettings
-        {
-            Configuration = context.BuildConfiguration,
-            NoBuild = true,
-            Verbosity = context.VerbosityDotNet
-        };
-
         foreach (var project in testPaths)
         {
             var projectName = project.GetFilenameWithoutExtension();
-            var testTrx = context.MakeAbsolute(new FilePath(context.OutputDir + "/Tests/" + projectName + ".trx"));
-            var testXml = context.MakeAbsolute(new FilePath(context.OutputDir + "/Tests/" + projectName + ".xml"));
-            settings.Loggers = new string[]
+            var runSettings = new DotNetRunSettings
             {
-                $"trx;LogFileName={testTrx.FullPath}",
-                $"xunit;LogFilePath={testXml.FullPath};Title={projectName}"
+                NoBuild = true,
+                Configuration = context.BuildConfiguration,
+                Verbosity = context.VerbosityDotNet,
+                ArgumentCustomization = args => args
+                    .Append("-- ")
+                    .Append($"--report-xunit-trx --report-xunit-trx-filename {projectName}.trx")
+                    .Append($"--report-ctrf --report-ctrf-filename {projectName}.ctrf")
+                    .Append($"--coverage --coverage-output {projectName}.coverage --coverage-output-format cobertura")
             };
 
             try
             {
-                context.DotNetTest(project.ToString(), settings);
+                context.DotNetRun(project.FullPath, runSettings);
             }
             catch
             {
                 // ignore
             }
+
+            var testTrxFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.trx");
+            var testCtrfFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.ctrf");
+            var coverageFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.coverage");
+            context.CopyFiles(testTrxFiles, testReportFolder);
+            context.CopyFiles(testCtrfFiles, testReportFolder);
+            context.CopyFiles(coverageFiles, testReportFolder);
         }
     }
 }
