@@ -16,6 +16,7 @@ jobs:
     permissions:
       id-token: write
       attestations: write
+      pull-requests: write
 
     runs-on: windows-latest
     
