@@ -47,6 +47,11 @@ jobs:
 
     - name: Build
       run: dotnet run --project build/Build.csproj -- --verbosity=Minimal --artifactsDir="${{ github.workspace }}\output"
+
+    - name: Print ctrf files in output
+      run: |
+        echo "ctrf files in output:"
+        dir ${{ github.workspace }}\output\Tests\*.ctrf.json
     
     - name: Publish Test Report
       uses: ctrf-io/github-test-reporter@073c73100796cafcbfdc4722c7fa11c29730439e #v1.0.18
