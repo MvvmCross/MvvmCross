@@ -20,7 +20,7 @@ on:
     - cron: '41 5 * * 5'
 
 env:
-  JAVA_DISTRIBUTION: 'microsoft'
+  JAVA_DISTRIBUTION: 'temurin'
   JAVA_VERSION: 17
   NET_VERSION: 9.0.302
 
