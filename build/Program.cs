@@ -14,6 +14,7 @@ using Cake.Common.Tools.DotNet.MSBuild;
 using Cake.Common.Build;
 using Cake.Core.Diagnostics;
 using Cake.Common.Tools.DotNet.Tool;
+using Cake.Common.Tools.DotNet.Run;
 
 namespace Build;
 
@@ -34,6 +35,7 @@ public class BuildContext : FrostingContext
     public string RepoName { get; set; } = "mvvmcross/mvvmcross";
     public string Target { get; set; }
     public string BuildConfiguration { get; set; }
+    public DirectoryPath CtrfDir { get; }
     public string ArtifactsDir { get; set; }
     public DirectoryPath OutputDir { get; set; }
     public string SonarToken { get; set; }
@@ -49,6 +51,8 @@ public class BuildContext : FrostingContext
         AppFileRoot = context.Argument("root", "..");
         Target = context.Argument("target", "Default");
         BuildConfiguration = context.Argument("configuration", "Release");
+        var ctrfDirArg = context.Argument("ctrfDir", $"{AppFileRoot}/ctrf");
+        CtrfDir = new DirectoryPath(ctrfDirArg);
         ArtifactsDir = context.Argument("artifactsDir", $"{AppFileRoot}/artifacts");
         OutputDir = new DirectoryPath(ArtifactsDir);
         SonarToken = context.Argument("sonarToken", "");
@@ -150,8 +154,8 @@ public sealed class SonarStartTask : FrostingTask<BuildContext>
 
     public override void Run(BuildContext context)
     {
-        var xunitReportsPath = context.MakeAbsolute(context.OutputDir.Combine("Tests/")) + "/**/*.xml";
-        context.Information("XUnitReportsPath {0}", xunitReportsPath);
+        var xunitReportsPaths = context.GetFiles(context.MakeAbsolute(context.OutputDir.Combine("Tests/")) + "/**/*.trx");
+        var corverageReportsPaths = context.GetFiles(context.MakeAbsolute(context.OutputDir.Combine("Tests/")) + "/**/*.coverage");
 
         var settings = new DotNetToolSettings
         {
@@ -160,9 +164,10 @@ public sealed class SonarStartTask : FrostingTask<BuildContext>
                 .Append("/key:{0}", context.SonarKey)
                 .Append("/o:{0}", context.SonarOrg)
                 .Append("/d:sonar.host.url={0}", "https://sonarcloud.io")
-                .Append("/d:sonar.sources={0}", "MvvmCross*/**")
-                .Append("/d:sonar.tests={0}", "UnitTests/**")
-                .Append("/d:sonar.cs.xunit.reportsPaths={0}", xunitReportsPath)
+                .Append("/d.sonar.exclusions={0}", "docs/**,Projects/**,vendor/**,ContentFiles/**")
+                .Append("/d:sonar.cs.vstest.reportsPaths={0}", string.Join(",", xunitReportsPaths.Select(p => p.FullPath)))
+                .Append("/d:sonar.flex.cobertura.reportPaths={0}", string.Join(",", corverageReportsPaths.Select(p => p.FullPath)))
+                .Append("/d:sonar.scanner.skipJreProvisioning={0}", "true")
                 .AppendSecret("/d:sonar.token={0}", context.SonarToken)
         };
 
@@ -187,35 +192,42 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
 {
     public override void Run(BuildContext context)
     {
-        context.EnsureDirectoryExists(context.OutputDir.Combine("Tests/"));
+        var testReportFolder = context.OutputDir.Combine("Tests/");
+        context.EnsureDirectoryExists(testReportFolder);
 
         var testPaths = context.GetFiles($"{context.AppFileRoot}/UnitTests/*.UnitTest/*.UnitTest.csproj");
-        var settings = new DotNetTestSettings
-        {
-            Configuration = context.BuildConfiguration,
-            NoBuild = true,
-            Verbosity = context.VerbosityDotNet
-        };
-
         foreach (var project in testPaths)
         {
             var projectName = project.GetFilenameWithoutExtension();
-            var testTrx = context.MakeAbsolute(new FilePath(context.OutputDir + "/Tests/" + projectName + ".trx"));
-            var testXml = context.MakeAbsolute(new FilePath(context.OutputDir + "/Tests/" + projectName + ".xml"));
-            settings.Loggers = new string[]
+            var runSettings = new DotNetRunSettings
             {
-                $"trx;LogFileName={testTrx.FullPath}",
-                $"xunit;LogFilePath={testXml.FullPath};Title={projectName}"
+                NoBuild = true,
+                Configuration = context.BuildConfiguration,
+                Verbosity = context.VerbosityDotNet,
+                ArgumentCustomization = args => args
+                    .Append("-- ")
+                    .Append($"--report-xunit-trx --report-xunit-trx-filename {projectName}.trx")
+                    .Append($"--report-ctrf --report-ctrf-filename {projectName}.ctrf.json")
+                    .Append($"--coverage --coverage-output {projectName}.coverage --coverage-output-format cobertura")
             };
 
             try
             {
-                context.DotNetTest(project.ToString(), settings);
+                context.DotNetRun(project.FullPath, runSettings);
             }
             catch
             {
                 // ignore
             }
+
+            var testTrxFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.trx");
+            var coverageFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.coverage");
+            context.CopyFiles(testTrxFiles, testReportFolder);
+            context.CopyFiles(coverageFiles, testReportFolder);
+
+            var testCtrfFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.ctrf.json");
+            context.EnsureDirectoryExists(context.CtrfDir);
+            context.CopyFiles(testCtrfFiles, context.CtrfDir);
         }
     }
 }
