@@ -10,8 +10,8 @@ We have a [dedicated repository](https://github.com/MvvmCross/MvvmCross-Samples)
 
 #### StarWars Sample
 
-Inside the samples repository you will find the [StarWars Sample](https://github.com/MvvmCross/MvvmCross-Samples/tree/master/StarWarsSample) app, which is fairly comprehensive app that showcases many MvvmCross features. It's available for iOS and Android at the moment.
+Inside the samples repository you will find the [StarWars Sample](https://github.com/MvvmCross/MvvmCross-Samples/tree/main/StarWarsSample) app, which is fairly comprehensive app that showcases many MvvmCross features. It's available for iOS and Android at the moment.
 
 #### Give me the latest and greatest please!
 
-Inside our main repository there is a sample app which contains lots of test scenarios and supports every platform. Check it out: [Playground](https://github.com/MvvmCross/MvvmCross/tree/master/Projects/Playground).
+Inside our main repository there is a sample app which contains lots of test scenarios and supports every platform. Check it out: [Playground](https://github.com/MvvmCross/MvvmCross/tree/main/Projects/Playground).
