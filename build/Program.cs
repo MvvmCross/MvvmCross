@@ -154,8 +154,9 @@ public sealed class SonarStartTask : FrostingTask<BuildContext>
 
     public override void Run(BuildContext context)
     {
-        var xunitReportsPaths = context.GetFiles(context.MakeAbsolute(context.OutputDir.Combine("Tests/")) + "/**/*.trx");
-        var corverageReportsPaths = context.GetFiles(context.MakeAbsolute(context.OutputDir.Combine("Tests/")) + "/**/*.coverage");
+        var testReportFolder = context.MakeAbsolute(context.OutputDir.Combine("Tests/"));
+        var xunitReportsPaths = testReportFolder + "/*.trx";
+        var corverageReportsPaths = testReportFolder + "/*.coverage";
 
         var settings = new DotNetToolSettings
         {
@@ -165,8 +166,8 @@ public sealed class SonarStartTask : FrostingTask<BuildContext>
                 .Append("/o:{0}", context.SonarOrg)
                 .Append("/d:sonar.host.url={0}", "https://sonarcloud.io")
                 .Append("/d.sonar.exclusions={0}", "docs/**,Projects/**,vendor/**,ContentFiles/**")
-                .Append("/d:sonar.cs.vstest.reportsPaths={0}", string.Join(",", xunitReportsPaths.Select(p => p.FullPath)))
-                .Append("/d:sonar.flex.cobertura.reportPaths={0}", string.Join(",", corverageReportsPaths.Select(p => p.FullPath)))
+                .Append("/d:sonar.cs.xunit.reportsPaths={0}", xunitReportsPaths)
+                .Append("/d:sonar.cs.cobertura.reportPaths={0}", corverageReportsPaths)
                 .Append("/d:sonar.scanner.skipJreProvisioning={0}", "true")
                 .AppendSecret("/d:sonar.token={0}", context.SonarToken)
         };
