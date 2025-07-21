@@ -165,10 +165,8 @@ public sealed class SonarStartTask : FrostingTask<BuildContext>
                 .Append("/key:{0}", context.SonarKey)
                 .Append("/o:{0}", context.SonarOrg)
                 .Append("/d:sonar.host.url={0}", "https://sonarcloud.io")
-                .Append("/d:sonar.exclusions=\"{0}\"", "docs/**,Projects/**,vendor/**,ContentFiles/**")
                 .Append("/d:sonar.cs.xunit.reportsPaths=\"{0}\"", xunitReportsPaths)
                 .Append("/d:sonar.cs.cobertura.reportPaths=\"{0}\"", corverageReportsPaths)
-                .Append("/d:sonar.scanner.skipJreProvisioning={0}", "true")
                 .AppendSecret("/d:sonar.token={0}", context.SonarToken)
         };
 
