@@ -3,7 +3,6 @@ using Cake.Common.Diagnostics;
 using Cake.Common.IO;
 using Cake.Common.Tools.DotNet;
 using Cake.Common.Tools.DotNet.Build;
-using Cake.Common.Tools.DotNet.Test;
 using Cake.GitVersioning;
 using Cake.Core;
 using Cake.Core.IO;
@@ -155,7 +154,7 @@ public sealed class SonarStartTask : FrostingTask<BuildContext>
     public override void Run(BuildContext context)
     {
         var testReportFolder = context.MakeAbsolute(context.OutputDir.Combine("Tests/"));
-        var xunitReportsPaths = testReportFolder + "/*.trx";
+        var xunitReportsPaths = testReportFolder + "/*.xunit.xml";
         var corverageReportsPaths = testReportFolder + "/*.coverage";
 
         var settings = new DotNetToolSettings
@@ -205,7 +204,7 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
                 Verbosity = context.VerbosityDotNet,
                 ArgumentCustomization = args => args
                     .Append("-- ")
-                    .Append($"--report-xunit-trx --report-xunit-trx-filename {projectName}.trx")
+                    .Append($"--report-xunit --report-xunit-filename {projectName}.xunit.xml")
                     .Append($"--report-ctrf --report-ctrf-filename {projectName}.ctrf.json")
                     .Append($"--coverage --coverage-output {projectName}.coverage --coverage-output-format cobertura")
             };
@@ -219,9 +218,9 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
                 // ignore
             }
 
-            var testTrxFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.trx");
+            var testXmlFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.xml");
             var coverageFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.coverage");
-            context.CopyFiles(testTrxFiles, testReportFolder);
+            context.CopyFiles(testXmlFiles, testReportFolder);
             context.CopyFiles(coverageFiles, testReportFolder);
 
             var testCtrfFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.ctrf.json");
