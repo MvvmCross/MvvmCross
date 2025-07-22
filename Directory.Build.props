@@ -4,6 +4,7 @@
     <ImplicitUsings>true</ImplicitUsings>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
 
     <StripSymbols>false</StripSymbols>
     <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
