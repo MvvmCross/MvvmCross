@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -12,16 +13,22 @@ namespace MvvmCross.Binding.BindingContext
     public class MvxBindingNameRegistry
         : IMvxBindingNameLookup, IMvxBindingNameRegistry
     {
-        private readonly Dictionary<Type, string> _lookup = new Dictionary<Type, string>();
+        private readonly Dictionary<Type, string> _lookup = [];
 
-        public string DefaultFor(Type type)
+        public string DefaultFor(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type)
         {
             string toReturn;
             TryDefaultFor(type, out toReturn, true);
             return toReturn;
         }
 
-        private bool TryDefaultFor(Type type, out string toReturn, bool includeInterfaces = true)
+        [UnconditionalSuppressMessage("Trimming", "IL2072:Target parameter argument does not satisfy 'DynamicallyAccessedMembersAttribute' requirements",
+            Justification = "The interface types returned by GetInterfaces() on a type with DynamicallyAccessedMemberTypes.Interfaces are safe to process")]
+        private bool TryDefaultFor(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type,
+            out string toReturn,
+            bool includeInterfaces = true)
         {
             if (type == typeof(object))
             {

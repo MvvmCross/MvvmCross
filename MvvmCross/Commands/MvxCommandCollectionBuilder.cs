@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.Commands;
@@ -57,7 +58,8 @@ public class MvxCommandCollectionBuilder
         collection.Add(command, commandName, helper.CanExecutePropertyName);
     }
 
-    protected virtual PropertyInfo? CanExecutePropertyInfo(Type type, MethodInfo commandMethod)
+    protected virtual PropertyInfo? CanExecutePropertyInfo(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type type, MethodInfo commandMethod)
     {
         var canExecuteName = CanExecuteProperyName(commandMethod);
         if (string.IsNullOrEmpty(canExecuteName))

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
@@ -132,6 +133,7 @@ public class MvxNavigationService : IMvxNavigationService
         return paramDict;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     protected virtual async Task<MvxViewModelInstanceRequest> NavigationRouteRequest(
         string path, IMvxBundle? presentationBundle = null)
     {
@@ -196,6 +198,7 @@ public class MvxNavigationService : IMvxNavigationService
         return request;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     protected async Task<MvxViewModelInstanceRequest> NavigationRouteRequest<TParameter>(
         string path, TParameter param, IMvxBundle? presentationBundle = null)
     {
@@ -293,6 +296,7 @@ public class MvxNavigationService : IMvxNavigationService
         return true;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     public virtual async Task<bool> Navigate(
         string path, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
@@ -306,6 +310,7 @@ public class MvxNavigationService : IMvxNavigationService
         return await Navigate(request, request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     public virtual async Task<bool> Navigate<TParameter>(
             string path,
             TParameter param,

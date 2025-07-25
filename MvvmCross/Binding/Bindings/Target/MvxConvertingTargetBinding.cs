@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Extensions;
 
@@ -100,7 +101,10 @@ public abstract class MvxConvertingTargetBinding(object target)
     }
 }
 
-public abstract class MvxConvertingTargetBinding<TTarget, TValue> : MvxTargetBinding<TTarget, TValue>
+public abstract class MvxConvertingTargetBinding<
+        TTarget,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TValue
+    > : MvxTargetBinding<TTarget, TValue>
     where TTarget : class
 {
     private bool _isUpdatingSource;

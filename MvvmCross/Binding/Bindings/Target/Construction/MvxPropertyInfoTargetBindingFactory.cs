@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 
@@ -14,10 +15,14 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
     {
         private readonly Func<object, PropertyInfo, IMvxTargetBinding> _bindingCreator;
         private readonly string _targetName;
+
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
         private readonly Type _targetType;
 
-        public MvxPropertyInfoTargetBindingFactory(Type targetType, string targetName,
-                                                   Func<object, PropertyInfo, IMvxTargetBinding> bindingCreator)
+        public MvxPropertyInfoTargetBindingFactory(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type targetType,
+            string targetName,
+            Func<object, PropertyInfo, IMvxTargetBinding> bindingCreator)
         {
             _targetType = targetType;
             _targetName = targetName;

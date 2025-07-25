@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 
@@ -99,7 +100,10 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             return (type.GetHashCode() * 9) ^ name.GetHashCode();
         }
 
-        private IMvxPluginTargetBindingFactory FindSpecificFactory(Type type, string name)
+        [UnconditionalSuppressMessage("Trimming", "IL2072:Target parameter argument does not satisfy 'DynamicallyAccessedMembersAttribute' requirements",
+            Justification = "The interface types returned by ImplementedInterfaces on a type with DynamicallyAccessedMemberTypes.Interfaces are safe to process")]
+        private IMvxPluginTargetBindingFactory FindSpecificFactory(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type, string name)
         {
             IMvxPluginTargetBindingFactory factory;
             var key = GenerateKey(type, name);

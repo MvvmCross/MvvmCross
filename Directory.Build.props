@@ -18,6 +18,10 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <NuGetAudit>enable</NuGetAudit>
     <NuGetAuditMode>all</NuGetAuditMode>
+
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
   <PropertyGroup>

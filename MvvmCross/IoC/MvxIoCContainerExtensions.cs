@@ -1,15 +1,15 @@
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.IoC
 {
     public static class MvxIoCContainerExtensions
     {
-        private static Func<TInterface> CreateResolver<TInterface, TParameter1>(
-            this IMvxIoCProvider ioc,
-                Func<TParameter1, TInterface> typedConstructor)
-                where TInterface : class
-                where TParameter1 : class
+        private static Func<TInterface> CreateResolver<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1>(
+                this IMvxIoCProvider ioc, Func<TParameter1, TInterface> typedConstructor)
+                    where TInterface : class
+                    where TParameter1 : class
         {
             return () =>
             {
@@ -18,12 +18,14 @@ namespace MvvmCross.IoC
             };
         }
 
-        private static Func<TInterface> CreateResolver<TInterface, TParameter1, TParameter2>(
-            this IMvxIoCProvider ioc,
-            Func<TParameter1, TParameter2, TInterface> typedConstructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
+        private static Func<TInterface> CreateResolver<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2>(
+                this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TInterface> typedConstructor)
+                    where TInterface : class
+                    where TParameter1 : class
+                    where TParameter2 : class
         {
             return () =>
             {
@@ -33,13 +35,17 @@ namespace MvvmCross.IoC
             };
         }
 
-        private static Func<TInterface> CreateResolver<TInterface, TParameter1, TParameter2, TParameter3>(
-            this IMvxIoCProvider ioc,
-            Func<TParameter1, TParameter2, TParameter3, TInterface> typedConstructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-            where TParameter3 : class
+        private static Func<TInterface> CreateResolver<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3>(
+                this IMvxIoCProvider ioc,
+                Func<TParameter1, TParameter2, TParameter3, TInterface> typedConstructor)
+                    where TInterface : class
+                    where TParameter1 : class
+                    where TParameter2 : class
+                    where TParameter3 : class
         {
             return () =>
             {
@@ -50,14 +56,19 @@ namespace MvvmCross.IoC
             };
         }
 
-        private static Func<TInterface> CreateResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(
-            this IMvxIoCProvider ioc,
-            Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> typedConstructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-            where TParameter3 : class
-            where TParameter4 : class
+        private static Func<TInterface> CreateResolver<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter4>(
+                this IMvxIoCProvider ioc,
+                Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> typedConstructor)
+                    where TInterface : class
+                    where TParameter1 : class
+                    where TParameter2 : class
+                    where TParameter3 : class
+                    where TParameter4 : class
         {
             return () =>
             {
@@ -69,15 +80,21 @@ namespace MvvmCross.IoC
             };
         }
 
-        private static Func<TInterface> CreateResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(
-            this IMvxIoCProvider ioc,
-            Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> typedConstructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-            where TParameter3 : class
-            where TParameter4 : class
-            where TParameter5 : class
+        private static Func<TInterface> CreateResolver<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter4,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter5>(
+                this IMvxIoCProvider ioc,
+                Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> typedConstructor)
+                    where TInterface : class
+                    where TParameter1 : class
+                    where TParameter2 : class
+                    where TParameter3 : class
+                    where TParameter4 : class
+                    where TParameter5 : class
         {
             return () =>
             {
@@ -90,194 +107,286 @@ namespace MvvmCross.IoC
             };
         }
 
-        public static TType ConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc)
-            where TInterface : class
-            where TType : class, TInterface
+        public static TType ConstructAndRegisterSingleton<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TType>(
+                this IMvxIoCProvider ioc)
+                    where TInterface : class
+                    where TType : class, TInterface
         {
             var instance = ioc.IoCConstruct<TType>();
             ioc.RegisterSingleton<TInterface>(instance);
             return instance;
         }
 
-        public static TType ConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc, IDictionary<string, object> arguments)
-            where TInterface : class
-            where TType : class, TInterface
+        public static TType ConstructAndRegisterSingleton<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TType>(
+                this IMvxIoCProvider ioc, IDictionary<string, object> arguments)
+                    where TInterface : class
+                    where TType : class, TInterface
         {
             var instance = ioc.IoCConstruct<TType>(arguments);
             ioc.RegisterSingleton<TInterface>(instance);
             return instance;
         }
 
-        public static TType ConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc, object arguments)
-            where TInterface : class
-            where TType : class, TInterface
+        public static TType ConstructAndRegisterSingleton<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TType>(
+                this IMvxIoCProvider ioc,
+                object arguments)
+                    where TInterface : class
+                    where TType : class, TInterface
         {
             var instance = ioc.IoCConstruct<TType>(arguments);
             ioc.RegisterSingleton<TInterface>(instance);
             return instance;
         }
 
-        public static TType ConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc, params object[] arguments)
-            where TInterface : class
-            where TType : class, TInterface
+        public static TType ConstructAndRegisterSingleton<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TType>(
+                this IMvxIoCProvider ioc, params object[] arguments)
+                    where TInterface : class
+                    where TType : class, TInterface
         {
             var instance = ioc.IoCConstruct<TType>(arguments);
             ioc.RegisterSingleton<TInterface>(instance);
             return instance;
         }
 
-        public static object ConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type)
+        public static object ConstructAndRegisterSingleton(
+            this IMvxIoCProvider ioc,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
         {
             var instance = ioc.IoCConstruct(type);
             ioc.RegisterSingleton(type, instance);
             return instance;
         }
 
-        public static object ConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type, IDictionary<string, object> arguments)
+        public static object ConstructAndRegisterSingleton(
+            this IMvxIoCProvider ioc,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type,
+            IDictionary<string, object> arguments)
         {
             var instance = ioc.IoCConstruct(type, arguments);
             ioc.RegisterSingleton(type, instance);
             return instance;
         }
 
-        public static object ConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type, object arguments)
+        public static object ConstructAndRegisterSingleton(
+            this IMvxIoCProvider ioc,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type,
+            object arguments)
         {
             var instance = ioc.IoCConstruct(type, arguments);
             ioc.RegisterSingleton(type, instance);
             return instance;
         }
 
-        public static object ConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type, params object[] arguments)
+        public static object ConstructAndRegisterSingleton(
+            this IMvxIoCProvider ioc,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type,
+            params object[] arguments)
         {
             var instance = ioc.IoCConstruct(type, arguments);
             ioc.RegisterSingleton(type, instance);
             return instance;
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc)
-            where TInterface : class
-            where TType : class, TInterface
+        public static void LazyConstructAndRegisterSingleton<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TType>(
+                this IMvxIoCProvider ioc)
+                    where TInterface : class
+                    where TType : class, TInterface
         {
             ioc.RegisterSingleton<TInterface>(() => ioc.IoCConstruct<TType>());
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface>(this IMvxIoCProvider ioc, Func<TInterface> constructor)
-            where TInterface : class
+        public static void LazyConstructAndRegisterSingleton<TInterface>(
+            this IMvxIoCProvider ioc,
+            Func<TInterface> constructor)
+                where TInterface : class
         {
-            ioc.RegisterSingleton<TInterface>(constructor);
+            ioc.RegisterSingleton(constructor);
         }
 
-        public static void LazyConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type, Func<object> constructor)
+        public static void LazyConstructAndRegisterSingleton(
+            this IMvxIoCProvider ioc,
+            Type type,
+            Func<object> constructor)
         {
             ioc.RegisterSingleton(type, constructor);
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1>(this IMvxIoCProvider ioc, Func<TParameter1, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
+        public static void LazyConstructAndRegisterSingleton<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1>(
+                this IMvxIoCProvider ioc,
+                Func<TParameter1, TInterface> constructor)
+                    where TInterface : class
+                    where TParameter1 : class
         {
             var resolver = ioc.CreateResolver(constructor);
             ioc.RegisterSingleton(resolver);
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
+        public static void LazyConstructAndRegisterSingleton<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2>(
+                this IMvxIoCProvider ioc,
+                Func<TParameter1, TParameter2, TInterface> constructor)
+                    where TInterface : class
+                    where TParameter1 : class
+                    where TParameter2 : class
         {
             var resolver = ioc.CreateResolver(constructor);
             ioc.RegisterSingleton(resolver);
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2, TParameter3>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-            where TParameter3 : class
+        public static void LazyConstructAndRegisterSingleton<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3>(
+                this IMvxIoCProvider ioc,
+                Func<TParameter1, TParameter2, TParameter3, TInterface> constructor)
+                    where TInterface : class
+                    where TParameter1 : class
+                    where TParameter2 : class
+                    where TParameter3 : class
         {
             var resolver = ioc.CreateResolver(constructor);
             ioc.RegisterSingleton(resolver);
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-            where TParameter3 : class
-            where TParameter4 : class
+        public static void LazyConstructAndRegisterSingleton<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter4>(
+                this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor)
+                    where TInterface : class
+                    where TParameter1 : class
+                    where TParameter2 : class
+                    where TParameter3 : class
+                    where TParameter4 : class
         {
             var resolver = ioc.CreateResolver(constructor);
             ioc.RegisterSingleton(resolver);
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-            where TParameter3 : class
-            where TParameter4 : class
-            where TParameter5 : class
+        public static void LazyConstructAndRegisterSingleton<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter4,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter5>(
+                this IMvxIoCProvider ioc,
+                Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor)
+                    where TInterface : class
+                    where TParameter1 : class
+                    where TParameter2 : class
+                    where TParameter3 : class
+                    where TParameter4 : class
+                    where TParameter5 : class
         {
             var resolver = ioc.CreateResolver(constructor);
             ioc.RegisterSingleton(resolver);
         }
 
-        public static void RegisterType<TType>(this IMvxIoCProvider ioc)
-            where TType : class
+        public static void RegisterType<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TType>(
+            this IMvxIoCProvider ioc)
+                where TType : class
         {
             ioc.RegisterType<TType, TType>();
         }
 
-        public static void RegisterType(this IMvxIoCProvider ioc, Type tType)
+        public static void RegisterType(
+            this IMvxIoCProvider ioc,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type tType)
         {
             ioc.RegisterType(tType, tType);
         }
 
-        public static void RegisterType<TInterface, TParameter1>(this IMvxIoCProvider ioc, Func<TParameter1, TInterface> constructor)
-           where TInterface : class
-           where TParameter1 : class
+        public static void RegisterType<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1>(
+                this IMvxIoCProvider ioc, Func<TParameter1, TInterface> constructor)
+                    where TInterface : class
+                    where TParameter1 : class
         {
             var resolver = ioc.CreateResolver(constructor);
             ioc.RegisterType(resolver);
         }
 
-        public static void RegisterType<TInterface, TParameter1, TParameter2>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
+        public static void RegisterType<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2>(
+                this IMvxIoCProvider ioc,
+                Func<TParameter1, TParameter2, TInterface> constructor)
+                    where TInterface : class
+                    where TParameter1 : class
+                    where TParameter2 : class
         {
             var resolver = ioc.CreateResolver(constructor);
             ioc.RegisterType(resolver);
         }
 
-        public static void RegisterType<TInterface, TParameter1, TParameter2, TParameter3>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-            where TParameter3 : class
+        public static void RegisterType<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3>(
+                this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TInterface> constructor)
+                    where TInterface : class
+                    where TParameter1 : class
+                    where TParameter2 : class
+                    where TParameter3 : class
         {
             var resolver = ioc.CreateResolver(constructor);
             ioc.RegisterType(resolver);
         }
 
-        public static void RegisterType<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-            where TParameter3 : class
-            where TParameter4 : class
+        public static void RegisterType<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter4>(
+                this IMvxIoCProvider ioc,
+                Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor)
+                    where TInterface : class
+                    where TParameter1 : class
+                    where TParameter2 : class
+                    where TParameter3 : class
+                    where TParameter4 : class
         {
             var resolver = ioc.CreateResolver(constructor);
             ioc.RegisterType(resolver);
         }
 
-        public static void RegisterType<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-            where TParameter3 : class
-            where TParameter4 : class
-            where TParameter5 : class
+        public static void RegisterType<
+            TInterface,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter4,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter5>(
+                this IMvxIoCProvider ioc,
+                Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor)
+                    where TInterface : class
+                    where TParameter1 : class
+                    where TParameter2 : class
+                    where TParameter3 : class
+                    where TParameter4 : class
+                    where TParameter5 : class
         {
             var resolver = ioc.CreateResolver(constructor);
             ioc.RegisterType(resolver);

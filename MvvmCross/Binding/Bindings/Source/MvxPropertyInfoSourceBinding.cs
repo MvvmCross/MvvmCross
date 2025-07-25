@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.WeakSubscription;
@@ -13,49 +11,45 @@ namespace MvvmCross.Binding.Bindings.Source
 {
     public abstract class MvxPropertyInfoSourceBinding : MvxSourceBinding
     {
-        private readonly PropertyInfo _propertyInfo;
-        private readonly string _propertyName;
         private IDisposable _subscription;
 
         protected MvxPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)
             : base(source)
         {
-            _propertyInfo = propertyInfo;
-            _propertyName = propertyInfo.Name;
+            PropertyInfo = propertyInfo;
+            PropertyName = propertyInfo.Name;
 
             if (Source == null)
             {
                 MvxBindingLog.Instance?.LogTrace(
-                    "Unable to bind to source as it's null. PropertyName: {PropertyName}", _propertyName);
+                    "Unable to bind to source as it's null. PropertyName: {PropertyName}", PropertyName);
                 return;
             }
 
-            var sourceNotify = Source as INotifyPropertyChanged;
-            if (sourceNotify != null)
+            if (Source is INotifyPropertyChanged sourceNotify)
                 _subscription = sourceNotify.WeakSubscribe(SourcePropertyChanged);
         }
 
-        protected string PropertyName => _propertyName;
+        protected string PropertyName { get; }
+        protected PropertyInfo PropertyInfo { get; }
 
         protected string PropertyNameForChangedEvent
         {
             get
             {
                 if (IsIndexedProperty)
-                    return _propertyName + "[]";
+                    return PropertyName + "[]";
                 else
-                    return _propertyName;
+                    return PropertyName;
             }
         }
-
-        protected PropertyInfo PropertyInfo => _propertyInfo;
 
         protected bool IsIndexedProperty
         {
             get
             {
-                var parameters = _propertyInfo.GetIndexParameters();
-                return parameters.Any();
+                var parameters = PropertyInfo.GetIndexParameters();
+                return parameters.Length != 0;
             }
         }
 
@@ -75,7 +69,9 @@ namespace MvvmCross.Binding.Bindings.Source
             // - fix for https://github.com/slodge/MvvmCross/issues/280
             if (string.IsNullOrEmpty(e.PropertyName)
                 || e.PropertyName == PropertyNameForChangedEvent)
+            {
                 OnBoundPropertyChanged();
+            }
         }
 
         protected abstract void OnBoundPropertyChanged();

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
@@ -40,13 +41,15 @@ public static class MvxSimplePropertyDictionaryExtensions
         }
     }
 
-    public static T? Read<T>(this IDictionary<string, string> data)
+    public static T? Read<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicProperties)] T>(this IDictionary<string, string> data)
         where T : new()
     {
         return (T?)data.Read(typeof(T));
     }
 
-    public static object? Read(this IDictionary<string, string> data, Type type)
+    public static object? Read(
+        this IDictionary<string, string> data,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicProperties)] Type type)
     {
         var t = Activator.CreateInstance(type);
 
@@ -120,7 +123,7 @@ public static class MvxSimplePropertyDictionaryExtensions
             select new
             {
                 CanSerialize =
-                    MvxSingletonCache.Instance?.Parser.TypeSupported(property.PropertyType) ?? false,
+                    MvxSingletonCache.Instance?.Parser?.TypeSupported(property.PropertyType) ?? false,
                 Property = property
             };
 

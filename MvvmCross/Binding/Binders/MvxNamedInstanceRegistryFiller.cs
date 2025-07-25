@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,9 @@ namespace MvvmCross.Binding.Binders
     public class MvxNamedInstanceRegistryFiller<T> : IMvxNamedInstanceRegistryFiller<T>
         where T : class
     {
-        protected virtual void FillFromInstance(IMvxNamedInstanceRegistry<T> registry, Type type)
+        protected virtual void FillFromInstance(
+            IMvxNamedInstanceRegistry<T> registry,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicFields)] Type type)
         {
             var instance = Activator.CreateInstance(type);
 
@@ -36,7 +39,9 @@ namespace MvvmCross.Binding.Binders
             }
         }
 
-        protected virtual void FillFromStatic(IMvxNamedInstanceRegistry<T> registry, Type type)
+        protected virtual void FillFromStatic(
+            IMvxNamedInstanceRegistry<T> registry,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] Type type)
         {
             var pairs = from field in type.GetFields()
                         where field.IsStatic
@@ -56,7 +61,9 @@ namespace MvvmCross.Binding.Binders
             }
         }
 
-        public virtual void FillFrom(IMvxNamedInstanceRegistry<T> registry, Type type)
+        public virtual void FillFrom(
+            IMvxNamedInstanceRegistry<T> registry,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicFields)] Type type)
         {
             if (type.GetTypeInfo().IsAbstract)
             {
@@ -68,6 +75,7 @@ namespace MvvmCross.Binding.Binders
             }
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to check for creatable types, which may not be preserved by trimming")]
         public virtual void FillFrom(IMvxNamedInstanceRegistry<T> registry, Assembly assembly)
         {
             var pairs = from type in assembly.ExceptionSafeGetTypes()

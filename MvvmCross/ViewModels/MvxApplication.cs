@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
@@ -69,8 +67,9 @@ namespace MvvmCross.ViewModels
             return DefaultLocator;
         }
 
-        protected void RegisterCustomAppStart<TMvxAppStart>()
-            where TMvxAppStart : class, IMvxAppStart
+        protected void RegisterCustomAppStart<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TMvxAppStart>()
+                where TMvxAppStart : class, IMvxAppStart
         {
             Mvx.IoCProvider?.ConstructAndRegisterSingleton<IMvxAppStart, TMvxAppStart>();
         }
@@ -92,11 +91,13 @@ namespace MvvmCross.ViewModels
             Mvx.IoCProvider?.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         protected IEnumerable<Type> CreatableTypes()
         {
             return CreatableTypes(GetType().GetTypeInfo().Assembly);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         protected IEnumerable<Type> CreatableTypes(Assembly assembly)
         {
             return assembly.CreatableTypes();

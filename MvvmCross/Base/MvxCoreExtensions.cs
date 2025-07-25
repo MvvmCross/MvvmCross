@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using MvvmCross.IoC;
@@ -22,8 +23,8 @@ namespace MvvmCross.Base
             if (s != null)
                 return !string.IsNullOrEmpty(s);
 
-            if (result is bool)
-                return (bool)result;
+            if (result is bool x)
+                return x;
 
             var resultType = result.GetType();
             if (resultType.GetTypeInfo().IsValueType)
@@ -36,7 +37,9 @@ namespace MvvmCross.Base
         }
 
         // core implementation of MakeSafeValue
-        public static object? MakeSafeValueCore(this Type propertyType, object? value)
+        public static object? MakeSafeValueCore(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] this Type propertyType,
+            object? value)
         {
             if (value == null)
             {

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -84,6 +85,7 @@ namespace MvvmCross.Core
             }
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         public virtual void EnsureInitialized()
         {
             lock (LockObject)
@@ -93,6 +95,7 @@ namespace MvvmCross.Core
             }
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         protected virtual void CreateSetup()
         {
             try

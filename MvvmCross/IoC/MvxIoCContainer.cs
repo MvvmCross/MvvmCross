@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
@@ -60,10 +61,13 @@ public sealed class MvxIoCContainer
 
     private sealed class ConstructingResolver : IResolver
     {
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private readonly Type _type;
         private readonly IMvxIoCProvider _parent;
 
-        public ConstructingResolver(Type type, IMvxIoCProvider parent)
+        public ConstructingResolver(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type,
+            IMvxIoCProvider parent)
         {
             _type = type;
             _parent = parent;
@@ -218,7 +222,7 @@ public sealed class MvxIoCContainer
         }
     }
 
-    public bool TryResolve<T>(out T? resolved)
+    public bool TryResolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>(out T? resolved)
         where T : class
     {
         try
@@ -234,7 +238,7 @@ public sealed class MvxIoCContainer
         }
     }
 
-    public bool TryResolve(Type type, out object? resolved)
+    public bool TryResolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type, out object? resolved)
     {
         lock (_lockObject)
         {
@@ -242,13 +246,13 @@ public sealed class MvxIoCContainer
         }
     }
 
-    public T? Resolve<T>()
+    public T? Resolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>()
         where T : class
     {
         return (T?)Resolve(typeof(T));
     }
 
-    public object? Resolve(Type type)
+    public object? Resolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type)
     {
         lock (_lockObject)
         {
@@ -260,13 +264,13 @@ public sealed class MvxIoCContainer
         }
     }
 
-    public T? GetSingleton<T>()
+    public T? GetSingleton<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>()
         where T : class
     {
         return (T?)GetSingleton(typeof(T));
     }
 
-    public object? GetSingleton(Type type)
+    public object? GetSingleton([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type)
     {
         lock (_lockObject)
         {
@@ -278,13 +282,13 @@ public sealed class MvxIoCContainer
         }
     }
 
-    public T? Create<T>()
+    public T? Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>()
         where T : class
     {
         return (T?)Create(typeof(T));
     }
 
-    public object? Create(Type type)
+    public object? Create([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type)
     {
         lock (_lockObject)
         {
@@ -296,7 +300,7 @@ public sealed class MvxIoCContainer
         }
     }
 
-    public void RegisterType<TInterface, TToConstruct>()
+    public void RegisterType<TInterface, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TToConstruct>()
         where TInterface : class
         where TToConstruct : class, TInterface
     {
@@ -327,7 +331,7 @@ public sealed class MvxIoCContainer
         InternalSetResolver(t, resolver);
     }
 
-    public void RegisterType(Type tFrom, Type tTo)
+    public void RegisterType(Type tFrom, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type tTo)
     {
         IResolver resolver;
         if (tFrom.GetTypeInfo().IsGenericTypeDefinition)
@@ -364,40 +368,41 @@ public sealed class MvxIoCContainer
         InternalSetResolver(tInterface, new ConstructingSingletonResolver(theConstructor));
     }
 
-    public object IoCConstruct(Type type)
+    public object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
     {
         return IoCConstruct(type, (IDictionary<string, object>?)null);
     }
 
-    public object IoCConstruct(Type type, object? arguments)
+    public object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, object? arguments)
     {
         return IoCConstruct(type, arguments?.ToPropertyDictionary());
     }
 
-    public T IoCConstruct<T>()
+    public T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
         where T : class
     {
         return (T)IoCConstruct(typeof(T), (IDictionary<string, object>?)null);
     }
 
-    public T IoCConstruct<T>(IDictionary<string, object>? arguments)
+    public T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(IDictionary<string, object>? arguments)
         where T : class
     {
         return (T)IoCConstruct(typeof(T), arguments);
     }
 
-    public T IoCConstruct<T>(object? arguments)
+    public T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(object? arguments)
         where T : class
     {
         return (T)IoCConstruct(typeof(T), arguments?.ToPropertyDictionary());
     }
 
-    public T IoCConstruct<T>(params object?[] arguments) where T : class
+    public T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(params object?[] arguments)
+        where T : class
     {
         return (T)IoCConstruct(typeof(T), arguments);
     }
 
-    public object IoCConstruct(Type type, params object?[] arguments)
+    public object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, params object?[] arguments)
     {
         var selectedConstructor = type.FindApplicableConstructor(arguments);
 
@@ -411,7 +416,7 @@ public sealed class MvxIoCContainer
         return IoCConstruct(type, selectedConstructor, parameters.ToArray());
     }
 
-    public object IoCConstruct(Type type, IDictionary<string, object>? arguments)
+    public object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, IDictionary<string, object>? arguments)
     {
         var selectedConstructor = type.FindApplicableConstructor(arguments);
 
@@ -482,12 +487,17 @@ public sealed class MvxIoCContainer
         return resolver.ResolveType == requiredResolverType.Value;
     }
 
-    private bool InternalTryResolve(Type type, out object? resolved)
+    private bool InternalTryResolve(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type,
+        out object? resolved)
     {
         return InternalTryResolve(type, ResolverTypeNoneSpecified, out resolved);
     }
 
-    private bool InternalTryResolve(Type type, ResolverType? requiredResolverType, out object? resolved)
+    private bool InternalTryResolve(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type,
+        ResolverType? requiredResolverType,
+        out object? resolved)
     {
         if (!TryGetResolver(type, out var resolver))
         {
@@ -509,7 +519,7 @@ public sealed class MvxIoCContainer
         return InternalTryResolve(type, resolver!, out resolved);
     }
 
-    private bool InternalTryResolve(Type type, IResolver resolver, out object? resolved)
+    private bool InternalTryResolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type, IResolver resolver, out object? resolved)
     {
         var detectingCircular = ShouldDetectCircularReferencesFor(resolver);
         if (detectingCircular)
@@ -518,12 +528,12 @@ public sealed class MvxIoCContainer
             {
                 _circularTypeDetection.Add(type, true);
             }
-            catch (ArgumentException)
+            catch (ArgumentException aex)
             {
                 // the item already exists in the lookup table
                 // - this is "game over" for the IoC lookup
                 // - see https://github.com/MvvmCross/MvvmCross/issues/553
-                MvxLogHost.Default?.Log(LogLevel.Error,
+                MvxLogHost.Default?.Log(LogLevel.Error, aex,
                     "IoC circular reference detected - cannot currently resolve {TypeName}", type.Name);
                 resolved = type.CreateDefault();
                 return false;
@@ -648,6 +658,8 @@ public sealed class MvxIoCContainer
         return parameters;
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2072:Target parameter argument does not satisfy 'DynamicallyAccessedMembersAttribute' requirements",
+        Justification = "The type parameter is guaranteed to have a public parameterless constructor, which is safe to process")]
     private bool TryResolveParameter(Type type, ParameterInfo parameterInfo, out object? parameterValue)
     {
         if (!TryResolve(parameterInfo.ParameterType, out parameterValue))

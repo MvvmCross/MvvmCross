@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 
@@ -12,10 +11,14 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
     public class MvxSimplePropertyInfoTargetBindingFactory
         : IMvxPluginTargetBindingFactory
     {
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private readonly Type _bindingType;
         private readonly MvxPropertyInfoTargetBindingFactory _innerFactory;
 
-        public MvxSimplePropertyInfoTargetBindingFactory(Type bindingType, Type targetType, string targetName)
+        public MvxSimplePropertyInfoTargetBindingFactory(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type bindingType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type targetType,
+            string targetName)
         {
             _bindingType = bindingType;
             _innerFactory = new MvxPropertyInfoTargetBindingFactory(targetType, targetName, CreateTargetBinding);

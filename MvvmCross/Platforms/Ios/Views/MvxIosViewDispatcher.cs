@@ -26,7 +26,7 @@ namespace MvvmCross.Platforms.Ios.Views
             Task action()
             {
                 MvxLogHost.GetLog<MvxIosViewDispatcher>()?.LogTrace(
-                    "Navigate requested to {viewModelType}", request?.ViewModelType);
+                    "Navigate requested to {ViewModelType}", request?.ViewModelType);
                 return _presenter.Show(request);
             }
             await ExecuteOnMainThreadAsync(action);

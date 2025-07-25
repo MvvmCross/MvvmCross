@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Navigation.EventArguments;
 using MvvmCross.ViewModels;
@@ -98,6 +99,7 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle"></param>
         /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns>Boolean indicating successful navigation</returns>
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         Task<bool> Navigate(
             string path, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default);
 
@@ -110,6 +112,7 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle"></param>
         /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns>Boolean indicating successful navigation</returns>
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         Task<bool> Navigate<TParameter>(string path, TParameter param,
             IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default);
 

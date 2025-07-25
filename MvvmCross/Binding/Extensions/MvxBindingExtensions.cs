@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using MvvmCross.Base;
 using MvvmCross.IoC;
@@ -49,7 +50,9 @@ public static class MvxBindingExtensions
         return result.ConvertToBooleanCore();
     }
 
-    public static object? MakeSafeValue(this Type propertyType, object? value)
+    public static object? MakeSafeValue(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] this Type propertyType,
+        object? value)
     {
         if (value == null)
         {

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
@@ -74,6 +75,7 @@ public abstract class MvxSetup : IMvxSetup
         MvxLogHost.Default?.LogInformation("Setup: RegisterSetupType already called");
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     public static IMvxSetup? Instance()
     {
         var instance = SetupCreator?.Invoke() ?? MvxSetupExtensions.CreateSetup<MvxSetup>();
@@ -127,6 +129,7 @@ public abstract class MvxSetup : IMvxSetup
         }
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     public virtual void InitializeSecondary()
     {
         if (State != MvxSetupState.InitializedPrimary)
@@ -291,6 +294,7 @@ public abstract class MvxSetup : IMvxSetup
         return iocProvider.Resolve<IMvxStringToTypeParser>() as IMvxFillableStringToTypeParser;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     protected virtual void PerformBootstrapActions()
     {
         var bootstrapRunner = new MvxBootstrapRunner();
@@ -417,6 +421,7 @@ public abstract class MvxSetup : IMvxSetup
         return iocProvider.Resolve<IMvxNavigationService>();
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     protected virtual IMvxPluginManager? InitializePluginFramework(IMvxIoCProvider iocProvider)
     {
         ValidateArguments(iocProvider);
@@ -439,6 +444,7 @@ public abstract class MvxSetup : IMvxSetup
         return null;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     public virtual IEnumerable<Assembly> GetPluginAssemblies()
     {
         var mvvmCrossAssemblyName = typeof(MvxPluginAttribute).Assembly.GetName().Name;
@@ -450,6 +456,7 @@ public abstract class MvxSetup : IMvxSetup
             .Where(assembly => AssemblyReferencesMvvmCross(assembly, mvvmCrossAssemblyName));
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     private static bool AssemblyReferencesMvvmCross(Assembly assembly, string? mvvmCrossAssemblyName)
     {
         if (string.IsNullOrEmpty(mvvmCrossAssemblyName))
@@ -467,6 +474,7 @@ public abstract class MvxSetup : IMvxSetup
         }
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     public virtual void LoadPlugins(IMvxPluginManager pluginManager)
     {
         if (pluginManager == null)
@@ -536,6 +544,7 @@ public abstract class MvxSetup : IMvxSetup
         iocProvider.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     protected virtual IMvxNavigationService? InitializeNavigationService(IMvxIoCProvider iocProvider)
     {
         ValidateArguments(iocProvider);
@@ -550,6 +559,7 @@ public abstract class MvxSetup : IMvxSetup
         return navigationService;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     protected virtual void LoadNavigationServiceRoutes(IMvxNavigationService navigationService, IMvxIoCProvider iocProvider)
     {
         if (navigationService == null)
@@ -560,6 +570,7 @@ public abstract class MvxSetup : IMvxSetup
         navigationService.LoadRoutes(GetViewModelAssemblies());
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     public virtual IEnumerable<Assembly> GetViewAssemblies()
     {
         if (ViewAssemblies.Count == 0)
@@ -568,6 +579,7 @@ public abstract class MvxSetup : IMvxSetup
         return ViewAssemblies;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     public virtual IEnumerable<Assembly> GetViewModelAssemblies()
     {
         var app = _iocProvider?.Resolve<IMvxApplication>();
@@ -576,6 +588,7 @@ public abstract class MvxSetup : IMvxSetup
         return [assembly];
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     protected virtual IEnumerable<Assembly> GetBootstrapOwningAssemblies()
     {
         return GetViewAssemblies().Distinct();
@@ -611,6 +624,7 @@ public abstract class MvxSetup : IMvxSetup
         return iocProvider.Resolve<IMvxViewModelByNameRegistry>();
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     protected virtual IMvxNameMapping InitializeViewModelTypeFinder(IMvxIoCProvider iocProvider)
     {
         ValidateArguments(iocProvider);
@@ -631,6 +645,7 @@ public abstract class MvxSetup : IMvxSetup
         return nameMappingStrategy;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     protected virtual IDictionary<Type, Type>? InitializeLookupDictionary(IMvxIoCProvider iocProvider)
     {
         ValidateArguments(iocProvider);
@@ -660,11 +675,13 @@ public abstract class MvxSetup : IMvxSetup
         // base class implementation is empty by default
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     public IEnumerable<Type> CreatableTypes()
     {
         return CreatableTypes(GetType().GetTypeInfo().Assembly);
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     public IEnumerable<Type> CreatableTypes(Assembly assembly)
     {
         return assembly.CreatableTypes();

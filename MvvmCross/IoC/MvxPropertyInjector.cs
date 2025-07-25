@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
@@ -16,7 +17,7 @@ namespace MvvmCross.IoC
     {
         public virtual void Inject(object target, IMvxPropertyInjectorOptions options = null)
         {
-            options = options ?? MvxPropertyInjectorOptions.All;
+            options ??= MvxPropertyInjectorOptions.All;
 
             if (options.InjectIntoProperties == MvxPropertyInjection.None)
                 return;
@@ -55,13 +56,14 @@ namespace MvvmCross.IoC
                 else
                 {
                     MvxLogHost.Default?.Log(LogLevel.Warning,
-                        "IoC property injection skipped for {propertyName} on {typeName}",
+                        "IoC property injection skipped for {PropertyName} on {TypeName}",
                         injectableProperty.Name, toReturn.GetType().Name);
                 }
             }
         }
 
-        protected virtual IEnumerable<PropertyInfo> FindInjectableProperties(Type type, IMvxPropertyInjectorOptions options)
+        protected virtual IEnumerable<PropertyInfo> FindInjectableProperties(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type type, IMvxPropertyInjectorOptions options)
         {
             var injectableProperties = type
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
@@ -81,7 +83,7 @@ namespace MvvmCross.IoC
 
                 case MvxPropertyInjection.None:
                     MvxLogHost.Default?.Log(LogLevel.Error, "Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
-                    injectableProperties = new PropertyInfo[0];
+                    injectableProperties = [];
                     break;
 
                 default:

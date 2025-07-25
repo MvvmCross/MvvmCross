@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Base;
 
 namespace MvvmCross.ViewModels
@@ -18,9 +19,10 @@ namespace MvvmCross.ViewModels
         public IMvxTextSerializer Serializer { get; }
     }
 
-    public class MvxNavigationSerializer<T>
-        : MvxNavigationSerializer
-        where T : class, IMvxTextSerializer
+    public class MvxNavigationSerializer<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>
+            : MvxNavigationSerializer
+                where T : class, IMvxTextSerializer
     {
         public MvxNavigationSerializer()
             : base(Mvx.IoCProvider.Resolve<T>())
