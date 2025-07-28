@@ -11,6 +11,12 @@ namespace MvvmCross.ViewModels
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType)
             : MvxViewModelRequest(viewModelType)
     {
+        public MvxViewModelInstanceRequest(IMvxViewModel viewModelInstance)
+            : this(viewModelInstance.GetType())
+        {
+            ViewModelInstance = viewModelInstance;
+        }
+
         public IMvxViewModel? ViewModelInstance { get; set; }
     }
 
