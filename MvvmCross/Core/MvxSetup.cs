@@ -665,6 +665,7 @@ public abstract class MvxSetup : IMvxSetup
         return container;
     }
 
+    [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
     protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
     {
     }

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Navigation.EventArguments;
 
 namespace MvvmCross.ViewModels;
@@ -21,7 +22,7 @@ public interface IMvxViewModelLocator
     /// <param name="navigationArgs">(Optional) Extra navigation arguments</param>
     /// <returns>Returns a ViewModel</returns>
     IMvxViewModel Load(
-        Type viewModelType,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
         IMvxBundle? parameterValues,
         IMvxBundle? savedState,
         IMvxNavigateEventArgs? navigationArgs = null);
@@ -37,11 +38,12 @@ public interface IMvxViewModelLocator
     /// <param name="navigationArgs">(Optional) Extra navigation arguments</param>
     /// <returns>Returns a ViewModel</returns>
     IMvxViewModel<TParameter> Load<TParameter>(
-        Type viewModelType,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
         TParameter param,
         IMvxBundle? parameterValues,
         IMvxBundle? savedState,
-        IMvxNavigateEventArgs? navigationArgs = null);
+        IMvxNavigateEventArgs? navigationArgs = null)
+        where TParameter : notnull;
 
     /// <summary>
     /// Reload ViewModel, runs start lifecycle in ViewModel.

@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -15,6 +17,7 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
     }
 
     public MvxFragmentPresentationAttribute(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         Type? activityHostViewModelType = null,
         int fragmentContentId = global::Android.Resource.Id.Content,
         bool addToBackStack = false,
@@ -48,6 +51,7 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
     }
 
     public MvxFragmentPresentationAttribute(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         Type? activityHostViewModelType = null,
         string? fragmentContentResourceName = null,
         bool addToBackStack = false,
@@ -107,6 +111,7 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
     /// <summary>
     /// Fragment parent activity ViewModel Type. This activity is shown if the current hosting activity viewmodel is different.
     /// </summary>
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
     public Type? ActivityHostViewModelType { get; set; }
 
     /// <summary>

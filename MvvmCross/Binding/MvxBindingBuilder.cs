@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Bindings.SourceSteps;
@@ -13,17 +14,20 @@ namespace MvvmCross.Binding
 {
     public class MvxBindingBuilder : MvxCoreBindingBuilder
     {
+        [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
         public override void DoRegistration(IMvxIoCProvider iocProvider)
         {
             base.DoRegistration(iocProvider);
             RegisterBindingFactories(iocProvider);
         }
 
+        [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
         protected virtual void RegisterBindingFactories(IMvxIoCProvider iocProvider)
         {
             RegisterMvxBindingFactories(iocProvider);
         }
 
+        [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
         protected virtual void RegisterMvxBindingFactories(IMvxIoCProvider iocProvider)
         {
             RegisterSourceStepFactory(iocProvider);
@@ -75,6 +79,7 @@ namespace MvvmCross.Binding
             return new MvxSourceBindingFactory();
         }
 
+        [RequiresUnreferencedCode("This method registers target bindings that may not be preserved by trimming")]
         protected virtual void RegisterTargetFactory(IMvxIoCProvider iocProvider)
         {
             var targetRegistry = CreateTargetBindingRegistry();
@@ -88,6 +93,7 @@ namespace MvvmCross.Binding
             return new MvxTargetBindingFactoryRegistry();
         }
 
+        [RequiresUnreferencedCode("This method registers target bindings that may not be preserved by trimming")]
         protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             // base class has nothing to register

@@ -6,7 +6,7 @@ namespace MvvmCross.IoC
     {
         private static Func<TInterface> CreateResolver<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1>(
                 this IMvxIoCProvider ioc, Func<TParameter1, TInterface> typedConstructor)
                     where TInterface : class
                     where TParameter1 : class
@@ -20,8 +20,8 @@ namespace MvvmCross.IoC
 
         private static Func<TInterface> CreateResolver<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter2>(
                 this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TInterface> typedConstructor)
                     where TInterface : class
                     where TParameter1 : class
@@ -37,9 +37,9 @@ namespace MvvmCross.IoC
 
         private static Func<TInterface> CreateResolver<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter3>(
                 this IMvxIoCProvider ioc,
                 Func<TParameter1, TParameter2, TParameter3, TInterface> typedConstructor)
                     where TInterface : class
@@ -58,10 +58,10 @@ namespace MvvmCross.IoC
 
         private static Func<TInterface> CreateResolver<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter4>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter3,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter4>(
                 this IMvxIoCProvider ioc,
                 Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> typedConstructor)
                     where TInterface : class
@@ -82,11 +82,11 @@ namespace MvvmCross.IoC
 
         private static Func<TInterface> CreateResolver<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter4,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter5>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter3,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter4,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter5>(
                 this IMvxIoCProvider ioc,
                 Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> typedConstructor)
                     where TInterface : class
@@ -223,7 +223,7 @@ namespace MvvmCross.IoC
 
         public static void LazyConstructAndRegisterSingleton<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1>(
                 this IMvxIoCProvider ioc,
                 Func<TParameter1, TInterface> constructor)
                     where TInterface : class
@@ -235,8 +235,8 @@ namespace MvvmCross.IoC
 
         public static void LazyConstructAndRegisterSingleton<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter2>(
                 this IMvxIoCProvider ioc,
                 Func<TParameter1, TParameter2, TInterface> constructor)
                     where TInterface : class
@@ -249,9 +249,9 @@ namespace MvvmCross.IoC
 
         public static void LazyConstructAndRegisterSingleton<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter3>(
                 this IMvxIoCProvider ioc,
                 Func<TParameter1, TParameter2, TParameter3, TInterface> constructor)
                     where TInterface : class
@@ -265,10 +265,10 @@ namespace MvvmCross.IoC
 
         public static void LazyConstructAndRegisterSingleton<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter4>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter3,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter4>(
                 this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor)
                     where TInterface : class
                     where TParameter1 : class
@@ -282,11 +282,11 @@ namespace MvvmCross.IoC
 
         public static void LazyConstructAndRegisterSingleton<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter4,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter5>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter3,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter4,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter5>(
                 this IMvxIoCProvider ioc,
                 Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor)
                     where TInterface : class
@@ -316,7 +316,7 @@ namespace MvvmCross.IoC
 
         public static void RegisterType<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1>(
                 this IMvxIoCProvider ioc, Func<TParameter1, TInterface> constructor)
                     where TInterface : class
                     where TParameter1 : class
@@ -327,8 +327,8 @@ namespace MvvmCross.IoC
 
         public static void RegisterType<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter2>(
                 this IMvxIoCProvider ioc,
                 Func<TParameter1, TParameter2, TInterface> constructor)
                     where TInterface : class
@@ -341,9 +341,9 @@ namespace MvvmCross.IoC
 
         public static void RegisterType<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter3>(
                 this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TInterface> constructor)
                     where TInterface : class
                     where TParameter1 : class
@@ -356,10 +356,10 @@ namespace MvvmCross.IoC
 
         public static void RegisterType<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter4>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter3,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter4>(
                 this IMvxIoCProvider ioc,
                 Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor)
                     where TInterface : class
@@ -374,11 +374,11 @@ namespace MvvmCross.IoC
 
         public static void RegisterType<
             TInterface,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter1,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter2,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter3,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter4,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TParameter5>(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter1,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter2,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter3,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter4,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TParameter5>(
                 this IMvxIoCProvider ioc,
                 Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor)
                     where TInterface : class

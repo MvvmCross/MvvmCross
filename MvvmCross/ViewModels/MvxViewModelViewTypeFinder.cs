@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.IoC;
@@ -16,7 +17,9 @@ public class MvxViewModelViewTypeFinder(
         IMvxNameMapping viewToViewModelNameMapping)
     : IMvxViewModelTypeFinder
 {
-    public virtual Type? FindTypeOrNull(Type candidateType)
+    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
+    public virtual Type? FindTypeOrNull(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type candidateType)
     {
         if (!CheckCandidateTypeIsAView(candidateType))
             return null;
@@ -40,6 +43,7 @@ public class MvxViewModelViewTypeFinder(
         return null;
     }
 
+    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
     protected virtual Type? LookupAttributedViewModelType(Type candidateType)
     {
         var attribute = candidateType
@@ -49,6 +53,7 @@ public class MvxViewModelViewTypeFinder(
         return attribute?.ViewModel;
     }
 
+    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
     protected virtual Type? LookupNamedViewModelType(Type candidateType)
     {
         var viewName = candidateType.Name;
@@ -58,7 +63,9 @@ public class MvxViewModelViewTypeFinder(
         return toReturn;
     }
 
-    protected virtual Type? LookupAssociatedConcreteViewModelType(Type candidateType)
+    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
+    protected virtual Type? LookupAssociatedConcreteViewModelType(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)] Type candidateType)
     {
         var viewModelPropertyInfo =
             Array.Find(candidateType.GetProperties(),

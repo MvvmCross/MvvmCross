@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {
@@ -16,6 +17,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
             _resolvers = new List<IMvxViewTypeResolver>(resolvers);
         }
 
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         public Type Resolve(string tagName)
         {
             foreach (var resolver in _resolvers)

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Android.Content;
 using Android.Views;
@@ -170,6 +171,7 @@ public abstract class MvxAndroidSetup
         base.InitializeLastChance(iocProvider);
     }
 
+    [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
     protected override void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
     {
         ValidateArguments(iocProvider);
@@ -178,12 +180,14 @@ public abstract class MvxAndroidSetup
         bindingBuilder.DoRegistration(iocProvider);
     }
 
+    [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
     protected virtual MvxBindingBuilder CreateBindingBuilder()
     {
         return new MvxAndroidBindingBuilder(FillValueConverters, FillValueCombiners, FillTargetFactories,
             FillBindingNames, FillViewTypes, FillAxmlViewTypeResolver, FillNamespaceListViewTypeResolver);
     }
 
+    [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
     protected virtual void FillViewTypes(IMvxTypeCache cache)
     {
         ArgumentNullException.ThrowIfNull(cache);
@@ -219,6 +223,7 @@ public abstract class MvxAndroidSetup
         }
     }
 
+    [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
     protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
     {
         ArgumentNullException.ThrowIfNull(registry);
@@ -236,6 +241,7 @@ public abstract class MvxAndroidSetup
 
     protected virtual IEnumerable<Assembly> ValueConverterAssemblies
     {
+        [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
         get
         {
             var toReturn = new List<Assembly>();
@@ -277,14 +283,15 @@ public abstract class MvxAndroidSetup
     }
 }
 
-public abstract class MvxAndroidSetup<TApplication> : MvxAndroidSetup
+public abstract class MvxAndroidSetup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TApplication> : MvxAndroidSetup
     where TApplication : class, IMvxApplication, new()
 {
     protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
         iocProvider.IoCConstruct<TApplication>();
 
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     public override IEnumerable<Assembly> GetViewModelAssemblies()
     {
-        return new[] { typeof(TApplication).GetTypeInfo().Assembly };
+        return [typeof(TApplication).GetTypeInfo().Assembly];
     }
 }
