@@ -151,7 +151,7 @@ namespace MvvmCross.Binding.BindingContext
                     Converter = inputs.Converter,
                     ConverterParameter = inputs.ConverterParameter,
                     FallbackValue = inputs.FallbackValue,
-                    InnerSteps = [ sourceStepDescription ]
+                    InnerSteps = [sourceStepDescription]
                 };
             }
         }

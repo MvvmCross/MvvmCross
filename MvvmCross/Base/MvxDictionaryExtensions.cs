@@ -6,7 +6,7 @@ namespace MvvmCross.Base;
 
 public static class MvxDictionaryExtensions
 {
-    public static IDictionary<string, object> ToPropertyDictionary<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]T>(this T? input) where T : class
+    public static IDictionary<string, object> ToPropertyDictionary<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(this T? input) where T : class
     {
         if (input == null)
             return new Dictionary<string, object>();

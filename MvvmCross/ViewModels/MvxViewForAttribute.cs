@@ -14,7 +14,7 @@ namespace MvvmCross.ViewModels
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
         public Type ViewModel { get; set; }
 
-        public MvxViewForAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]Type viewModel)
+        public MvxViewForAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)] Type viewModel)
         {
             ViewModel = viewModel;
         }
