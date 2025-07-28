@@ -18,6 +18,7 @@ namespace MvvmCross.Platforms.Ios.Views
 #nullable enable
     internal static class MvxSegueExtensions
     {
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         internal static Type? GetViewModelType<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TViewType>(
             this TViewType? view)
                 where TViewType : class, IMvxView
@@ -25,7 +26,7 @@ namespace MvvmCross.Platforms.Ios.Views
             if (view == null)
                 return null;
 
-            var props = typeof(TViewType).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var props = view.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
             var prop = Array.Find(props, p => p.Name == "ViewModel");
             return prop?.PropertyType;
         }

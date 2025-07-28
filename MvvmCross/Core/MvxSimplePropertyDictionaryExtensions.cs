@@ -118,7 +118,7 @@ public static class MvxSimplePropertyDictionaryExtensions
             return inputDict;
 
         var propertyInfos =
-            from property in typeof(TInput)
+            from property in input!.GetType()
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
             where property.CanRead
             select new

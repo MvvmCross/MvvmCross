@@ -15,7 +15,7 @@ namespace MvvmCross.ViewModels
             this T interaction, EventHandler<EventArgs> action)
                 where T : IMvxInteraction
         {
-            var eventInfo = typeof(T).GetEvent("Requested");
+            var eventInfo = interaction.GetType().GetEvent("Requested");
             return eventInfo?.WeakSubscribe(interaction, action);
         }
 
@@ -24,7 +24,7 @@ namespace MvvmCross.ViewModels
             EventHandler<MvxValueEventArgs<TValue>> action)
                 where TInteraction : IMvxInteraction<TValue>
         {
-            var eventInfo = typeof(TInteraction).GetEvent("Requested");
+            var eventInfo = interaction.GetType().GetEvent("Requested");
             return eventInfo?.WeakSubscribe(interaction, action);
         }
 

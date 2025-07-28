@@ -15,7 +15,7 @@ public static class MvxDictionaryExtensions
             return dict;
 
         var propertyInfos =
-            typeof(T).GetProperties(
+            input.GetType().GetProperties(
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
                 .Where(p => p.CanRead);
 

@@ -19,7 +19,7 @@ namespace MvvmCross.ViewModels
         {
             ArgumentNullException.ThrowIfNull(viewModel);
 
-            var methods = typeof(TViewModel)
+            var methods = viewModel.GetType()
                 .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
                 .Where(m => m.Name == methodName && !m.IsAbstract);
 
@@ -75,9 +75,10 @@ namespace MvvmCross.ViewModels
 
             var toReturn = new MvxBundle();
             var methods =
-                typeof(TViewModel)
-                .GetMethods()
-                .Where(m => m.Name == "SaveState" && m.ReturnType != typeof(void) && !m.GetParameters().Any());
+                viewModel
+                    .GetType()
+                    .GetMethods()
+                    .Where(m => m.Name == "SaveState" && m.ReturnType != typeof(void) && !m.GetParameters().Any());
 
             foreach (var methodInfo in methods)
             {

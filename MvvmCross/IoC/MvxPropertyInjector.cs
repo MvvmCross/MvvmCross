@@ -22,7 +22,7 @@ namespace MvvmCross.IoC
 
             ArgumentNullException.ThrowIfNull(target);
 
-            var injectableProperties = FindInjectableProperties(typeof(TTarget), options);
+            var injectableProperties = FindInjectableProperties(target.GetType(), options);
 
             foreach (var injectableProperty in injectableProperties)
             {
