@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Converters;
@@ -45,6 +46,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         //TODO: optim: dont recreate the source binding on each datacontext change, as SourcePropertyPath does not change.
         //TODO: optim: don't subscribe to the Changed event if the binding mode does not need it.
+        [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
         protected override void OnDataContextChanged()
         {
             ClearPathSourceBinding();

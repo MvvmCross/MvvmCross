@@ -3,12 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Binding.Bindings.Source
 {
+    [RequiresUnreferencedCode("This class may use types that are not preserved by trimming")]
     public abstract class MvxPropertyInfoSourceBinding : MvxSourceBinding
     {
         private IDisposable _subscription;

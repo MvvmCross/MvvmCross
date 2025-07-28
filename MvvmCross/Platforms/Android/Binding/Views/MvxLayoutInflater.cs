@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -219,6 +220,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         // mark the Factory/Factory2 setters as virtual.
         // See: https://bugzilla.xamarin.com/show_bug.cgi?id=30764
         [Export]
+        [RequiresUnreferencedCode("Export attribute is not trimming safe")]
         public void setFactory(IFactory factory)
         {
             // Wrap the incoming factory if we need to.
@@ -232,6 +234,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         }
 
         [Export]
+        [RequiresUnreferencedCode("Export attribute is not trimming safe")]
         public void setFactory2(IFactory2 factory2)
         {
             // Wrap the incoming factory if we need to.
@@ -379,7 +382,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     return null;
                 }
 
-                if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidViewFactory viewFactory) == true)
+                if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidViewFactory? viewFactory) == true)
                 {
                     _androidViewFactory = viewFactory;
                 }
@@ -402,7 +405,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     return null;
                 }
 
-                if (Mvx.IoCProvider?.TryResolve(out IMvxLayoutInflaterHolderFactoryFactory factoryFactory) == true)
+                if (Mvx.IoCProvider?.TryResolve(out IMvxLayoutInflaterHolderFactoryFactory? factoryFactory) == true)
                 {
                     _layoutInflaterHolderFactoryFactory = factoryFactory;
                 }

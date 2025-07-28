@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Core;
 using MvvmCross.ViewModels;
 
@@ -11,9 +10,10 @@ namespace MvvmCross.Platforms.Tvos.Views
 {
     public static class MvxCanCreateTvosViewExtensions
     {
-        public static IMvxTvosView CreateViewControllerFor<TTargetViewModel>(this IMvxCanCreateTvosView view,
-                                                                              object parameterObject)
-            where TTargetViewModel : class, IMvxViewModel
+        public static IMvxTvosView CreateViewControllerFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTargetViewModel>(
+            this IMvxCanCreateTvosView view,
+            object parameterObject)
+                where TTargetViewModel : class, IMvxViewModel
         {
             return
                 view.CreateViewControllerFor<TTargetViewModel>(parameterObject?.ToSimplePropertyDictionary());
@@ -21,10 +21,10 @@ namespace MvvmCross.Platforms.Tvos.Views
 
 #warning TODO - could this move down to IMvxView level?
 
-        public static IMvxTvosView CreateViewControllerFor<TTargetViewModel>(
+        public static IMvxTvosView CreateViewControllerFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTargetViewModel>(
             this IMvxCanCreateTvosView view,
             IDictionary<string, string> parameterValues = null)
-            where TTargetViewModel : class, IMvxViewModel
+                where TTargetViewModel : class, IMvxViewModel
         {
             var parameterBundle = new MvxBundle(parameterValues);
             var request = new MvxViewModelRequest<TTargetViewModel>(parameterBundle, null);
@@ -34,7 +34,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         public static IMvxTvosView CreateViewControllerFor<TTargetViewModel>(
             this IMvxCanCreateTvosView view,
             MvxViewModelRequest request)
-            where TTargetViewModel : class, IMvxViewModel
+                where TTargetViewModel : class, IMvxViewModel
         {
             return Mvx.IoCProvider.Resolve<IMvxTvosViewCreator>().CreateView(request);
         }

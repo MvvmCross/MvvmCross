@@ -18,6 +18,7 @@ public class MvxCommandCollectionBuilder
     public IEnumerable<string>? AdditionalCommandSuffixes { get; set; }
     public string CanExecutePrefix { get; set; } = DefaultCanExecutePrefix;
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     public virtual IMvxCommandCollection BuildCollectionFor(object owner)
     {
         var toReturn = new MvxCommandCollection(owner);
@@ -25,6 +26,7 @@ public class MvxCommandCollectionBuilder
         return toReturn;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     protected virtual void CreateCommands(object owner, MvxCommandCollection toReturn)
     {
         var commandMethods =
@@ -43,6 +45,7 @@ public class MvxCommandCollectionBuilder
         }
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     protected virtual void CreateCommand(
         object owner, MvxCommandCollection collection, MethodInfo commandMethod,
         string commandName, bool hasParameter)

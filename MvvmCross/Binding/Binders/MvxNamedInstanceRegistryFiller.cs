@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
@@ -115,14 +113,14 @@ namespace MvvmCross.Binding.Binders
         protected static string RemoveHead(string name, string word)
         {
             if (name.StartsWith(word))
-                name = name.Substring(word.Length);
+                name = name[word.Length..];
             return name;
         }
 
         protected static string RemoveTail(string name, string word)
         {
             if (name.EndsWith(word))
-                name = name.Substring(0, name.Length - word.Length);
+                name = name[..^word.Length];
             return name;
         }
     }

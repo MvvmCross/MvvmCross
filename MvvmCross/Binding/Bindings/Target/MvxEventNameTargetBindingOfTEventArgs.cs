@@ -8,8 +8,9 @@ using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Binding.Bindings.Target;
 
-public class MvxEventNameTargetBinding<TTarget, TEventArgs> : MvxTargetBinding
-    where TTarget : class
+public class MvxEventNameTargetBinding<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] TTarget, TEventArgs>
+    : MvxTargetBinding
+        where TTarget : class
 {
     private readonly bool _useEventArgsAsCommandParameter;
     private readonly IDisposable _eventSubscription;

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
@@ -36,13 +37,14 @@ public static class MvxViewExtensions
         // nothing needed currently
     }
 
-    public static Type? FindAssociatedViewModelTypeOrNull(this IMvxView view)
+    public static Type? FindAssociatedViewModelTypeOrNull<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)] TViewType>(
+        this TViewType view)
+            where TViewType : IMvxView
     {
-        if (view == null)
-            throw new ArgumentNullException(nameof(view));
+        ArgumentNullException.ThrowIfNull(view);
 
         if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelTypeFinder? associatedTypeFinder) == true)
-            return associatedTypeFinder?.FindTypeOrNull(view.GetType());
+            return associatedTypeFinder?.FindTypeOrNull(typeof(TViewType));
 
         MvxLogHost.Default?.Log(LogLevel.Trace,
             "No view model type finder available - assuming we are looking for a splash screen - returning null");
