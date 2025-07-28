@@ -1,33 +1,39 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
+#nullable enable
 
-using System;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Base;
 using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public static class MvxInteractionExtensions
     {
-        public static IDisposable WeakSubscribe(this IMvxInteraction interaction, EventHandler<EventArgs> action)
+        public static IDisposable? WeakSubscribe<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] T>(
+            this T interaction, EventHandler<EventArgs> action)
+                where T : IMvxInteraction
         {
-            var eventInfo = interaction.GetType().GetEvent("Requested");
-            return eventInfo.WeakSubscribe(interaction, action);
+            var eventInfo = typeof(T).GetEvent("Requested");
+            return eventInfo?.WeakSubscribe(interaction, action);
         }
 
-        public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction, EventHandler<MvxValueEventArgs<T>> action)
+        public static MvxValueEventSubscription<TValue>? WeakSubscribe<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] TInteraction, TValue>(
+            this TInteraction interaction,
+            EventHandler<MvxValueEventArgs<TValue>> action)
+                where TInteraction : IMvxInteraction<TValue>
         {
-            var eventInfo = interaction.GetType().GetEvent("Requested");
-            return eventInfo.WeakSubscribe<T>(interaction, action);
+            var eventInfo = typeof(TInteraction).GetEvent("Requested");
+            return eventInfo?.WeakSubscribe(interaction, action);
         }
 
-        public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction, Action<T> action)
+        public static MvxValueEventSubscription<TValue>? WeakSubscribe<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] TInteraction, TValue>(
+            this TInteraction interaction, Action<TValue> action)
+                where TInteraction : IMvxInteraction<TValue>
         {
-            EventHandler<MvxValueEventArgs<T>> wrappedAction = (sender, args) => action(args.Value);
+            EventHandler<MvxValueEventArgs<TValue>> wrappedAction = (sender, args) => action(args.Value);
             return interaction.WeakSubscribe(wrappedAction);
         }
     }
-#nullable restore
 }

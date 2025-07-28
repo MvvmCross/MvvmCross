@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Base;
@@ -12,13 +13,13 @@ namespace MvvmCross.ViewModels
 #nullable enable
     public static class MvxViewModelExtensions
     {
-        public static void CallBundleMethods(this IMvxViewModel viewModel, string methodName, IMvxBundle? bundle)
+        public static void CallBundleMethods<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TViewModel>(
+            this TViewModel viewModel, string methodName, IMvxBundle? bundle)
+                where TViewModel : IMvxViewModel
         {
-            if (viewModel == null)
-                throw new ArgumentNullException(nameof(viewModel));
+            ArgumentNullException.ThrowIfNull(viewModel);
 
-            var methods = viewModel
-                .GetType()
+            var methods = typeof(TViewModel)
                 .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
                 .Where(m => m.Name == methodName && !m.IsAbstract);
 
@@ -28,13 +29,14 @@ namespace MvvmCross.ViewModels
             }
         }
 
-        public static void CallBundleMethod(this IMvxViewModel viewModel, MethodInfo methodInfo, IMvxBundle? bundle)
+        [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "The parameter type is determined at runtime and may not have the required annotations")]
+        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Callers should guarantee the dynamically accessed members are preserved")]
+        public static void CallBundleMethod<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TViewModel>(
+            this TViewModel viewModel, MethodInfo methodInfo, IMvxBundle? bundle)
+                where TViewModel : IMvxViewModel
         {
-            if (viewModel == null)
-                throw new ArgumentNullException(nameof(viewModel));
-
-            if (methodInfo == null)
-                throw new ArgumentNullException(nameof(methodInfo));
+            ArgumentNullException.ThrowIfNull(viewModel);
+            ArgumentNullException.ThrowIfNull(methodInfo);
 
             var parameters = methodInfo.GetParameters().ToArray();
 
@@ -51,7 +53,7 @@ namespace MvvmCross.ViewModels
                     return;
                 }
 
-                if (MvxSingletonCache.Instance?.Parser.TypeSupported(parameters[0].ParameterType) == false)
+                if (MvxSingletonCache.Instance?.Parser?.TypeSupported(parameters[0].ParameterType) == false)
                 {
                     // call method using typed object
                     var value = bundle.Read(parameters[0].ParameterType);
@@ -66,20 +68,21 @@ namespace MvvmCross.ViewModels
             methodInfo.Invoke(viewModel, invokeWith);
         }
 
-        public static IMvxBundle SaveStateBundle(this IMvxViewModel viewModel)
+        public static IMvxBundle SaveStateBundle<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TViewModel>(this TViewModel viewModel)
+            where TViewModel : IMvxViewModel
         {
-            if (viewModel == null)
-                throw new ArgumentNullException(nameof(viewModel));
+            ArgumentNullException.ThrowIfNull(viewModel);
 
             var toReturn = new MvxBundle();
-            var methods = viewModel.GetType()
-                                   .GetMethods()
-                                   .Where(m => m.Name == "SaveState" && m.ReturnType != typeof(void) && !m.GetParameters().Any());
+            var methods =
+                typeof(TViewModel)
+                .GetMethods()
+                .Where(m => m.Name == "SaveState" && m.ReturnType != typeof(void) && !m.GetParameters().Any());
 
             foreach (var methodInfo in methods)
             {
                 // use methods like `public T SaveState()`
-                var stateObject = methodInfo.Invoke(viewModel, Array.Empty<object>());
+                var stateObject = methodInfo.Invoke(viewModel, []);
                 if (stateObject != null)
                 {
                     toReturn.Write(stateObject);

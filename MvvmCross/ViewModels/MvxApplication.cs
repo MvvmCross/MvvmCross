@@ -74,7 +74,7 @@ namespace MvvmCross.ViewModels
             Mvx.IoCProvider?.ConstructAndRegisterSingleton<IMvxAppStart, TMvxAppStart>();
         }
 
-        protected void RegisterAppStart<TViewModel>()
+        protected void RegisterAppStart<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>()
             where TViewModel : IMvxViewModel
         {
             Mvx.IoCProvider?.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel>>();
@@ -85,7 +85,7 @@ namespace MvvmCross.ViewModels
             Mvx.IoCProvider?.RegisterSingleton(appStart);
         }
 
-        protected virtual void RegisterAppStart<TViewModel, TParameter>()
+        protected virtual void RegisterAppStart<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel, TParameter>()
           where TViewModel : IMvxViewModel<TParameter> where TParameter : class
         {
             Mvx.IoCProvider?.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();

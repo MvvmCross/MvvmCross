@@ -120,6 +120,7 @@ public static class MvxTypeExtensions
     public class ServiceTypeAndImplementationTypePair
     {
         public List<Type> ServiceTypes { get; }
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         public Type ImplementationType { get; }
 
         public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes, Type implementationType)

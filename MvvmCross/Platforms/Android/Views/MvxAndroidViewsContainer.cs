@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
@@ -34,7 +35,10 @@ public class MvxAndroidViewsContainer
         return Load(intent, null, null);
     }
 
-    public virtual IMvxViewModel? Load(Intent? intent, IMvxBundle? savedState, Type? viewModelTypeHint)
+    public virtual IMvxViewModel? Load(
+        Intent? intent,
+        IMvxBundle? savedState,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelTypeHint)
     {
         if (intent == null)
         {
@@ -69,7 +73,9 @@ public class MvxAndroidViewsContainer
         return DirectLoad(savedState, viewModelTypeHint);
     }
 
-    protected virtual IMvxViewModel? DirectLoad(IMvxBundle? savedState, Type? viewModelTypeHint)
+    protected virtual IMvxViewModel? DirectLoad(
+        IMvxBundle? savedState,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelTypeHint)
     {
         if (viewModelTypeHint == null)
         {
@@ -172,9 +178,10 @@ public class MvxAndroidViewsContainer
         //                intent.AddFlags(ActivityFlags.ClearTop);
     }
 
-    public virtual (Intent intent, int key) GetIntentWithKeyFor(IMvxViewModel existingViewModelToUse, MvxViewModelRequest? request)
+    public virtual (Intent intent, int key) GetIntentWithKeyFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(TViewModel existingViewModelToUse, MvxViewModelRequest? request)
+        where TViewModel : IMvxViewModel
     {
-        request ??= MvxViewModelRequest.GetDefaultRequest(existingViewModelToUse.GetType());
+        request ??= MvxViewModelRequest.GetDefaultRequest(typeof(TViewModel));
         var intent = GetIntentFor(request);
 
         if (Mvx.IoCProvider?.TryResolve(out IMvxChildViewModelCache? viewModelCache) != true || viewModelCache == null)

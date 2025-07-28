@@ -108,16 +108,17 @@ public static class MvxSimplePropertyDictionaryExtensions
             parameterValue, requiredParameter.ParameterType, requiredParameter.Name);
     }
 
-    public static IDictionary<string, string> ToSimplePropertyDictionary(this object? input)
+    public static IDictionary<string, string> ToSimplePropertyDictionary<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TInput>(
+        this TInput? input)
     {
-        if (input == null)
+        if (EqualityComparer<TInput?>.Default.Equals(input, default))
             return new Dictionary<string, string>();
 
         if (input is IDictionary<string, string> inputDict)
             return inputDict;
 
         var propertyInfos =
-            from property in input.GetType()
+            from property in typeof(TInput)
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
             where property.CanRead
             select new
@@ -132,7 +133,7 @@ public static class MvxSimplePropertyDictionaryExtensions
         {
             if (propertyInfo.CanSerialize)
             {
-                dictionary[propertyInfo.Property.Name] = input.GetPropertyValueAsString(propertyInfo.Property);
+                dictionary[propertyInfo.Property.Name] = input!.GetPropertyValueAsString(propertyInfo.Property);
             }
             else
             {

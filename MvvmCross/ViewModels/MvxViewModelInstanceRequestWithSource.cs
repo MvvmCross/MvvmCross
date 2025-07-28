@@ -1,5 +1,7 @@
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace MvvmCross.ViewModels
 {
 
@@ -13,11 +15,23 @@ namespace MvvmCross.ViewModels
         /// </summary>
         /// <param name="viewModelType">The viewmodel type.</param>
         /// <param name="source">The instance of the viewmodel which is the source of the request.</param>
-        public MvxViewModelInstanceRequestWithSource(Type viewModelType, IMvxViewModel source) : base(viewModelType)
+        public MvxViewModelInstanceRequestWithSource(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
+            IMvxViewModel source)
+                : base(viewModelType)
         {
             this.Source = source;
         }
 
+        /// <summary>
+        ///     The instance of the viewmodel which is the source of the request.
+        /// </summary>
+        public IMvxViewModel Source { get; }
+    }
+
+    public class MvxViewModelInstanceRequestWithSource<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel> : MvxViewModelInstanceRequest<TViewModel>
+        where TViewModel : IMvxViewModel
+    {
         /// <summary>
         /// Initializes a new instance of <see cref="MvxViewModelInstanceRequestWithSource"/>
         /// </summary>
@@ -28,9 +42,6 @@ namespace MvvmCross.ViewModels
             this.Source = source;
         }
 
-        /// <summary>
-        ///     The instance of the viewmodel which is the source of the request.
-        /// </summary>
         public IMvxViewModel Source { get; }
     }
 }

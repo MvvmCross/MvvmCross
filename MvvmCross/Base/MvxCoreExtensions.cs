@@ -14,9 +14,11 @@ namespace MvvmCross.Base
     public static class MvxCoreExtensions
     {
         // core implementation of ConvertToBoolean
-        public static bool ConvertToBooleanCore(this object? result)
+        [UnconditionalSuppressMessage("Trimming", "IL2072:Target parameter argument does not satisfy 'DynamicallyAccessedMembersAttribute' requirements",
+            Justification = "The types returned by Nullable.GetUnderlyingType on a type with DynamicallyAccessedMemberTypes.PublicParameterlessConstructor are safe to process")]
+        public static bool ConvertToBooleanCore<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>(this T? result)
         {
-            if (result == null)
+            if (EqualityComparer<T?>.Default.Equals(result, default))
                 return false;
 
             var s = result as string;
@@ -26,7 +28,7 @@ namespace MvvmCross.Base
             if (result is bool x)
                 return x;
 
-            var resultType = result.GetType();
+            var resultType = result!.GetType();
             if (resultType.GetTypeInfo().IsValueType)
             {
                 var underlyingType = Nullable.GetUnderlyingType(resultType) ?? resultType;

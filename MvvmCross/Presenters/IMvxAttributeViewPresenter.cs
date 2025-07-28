@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
@@ -21,7 +22,9 @@ namespace MvvmCross.Presenters
         //TODO: Maybe move those to helper class
         MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request);
         MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType);
-        MvxBasePresentationAttribute? GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType);
+        MvxBasePresentationAttribute? GetOverridePresentationAttribute(
+            MvxViewModelRequest request,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType);
     }
 #nullable restore
 }

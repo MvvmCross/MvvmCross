@@ -19,7 +19,7 @@ public class MvxViewModelViewTypeFinder(
 {
     [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
     public virtual Type? FindTypeOrNull(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type candidateType)
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)] Type candidateType)
     {
         if (!CheckCandidateTypeIsAView(candidateType))
             return null;
