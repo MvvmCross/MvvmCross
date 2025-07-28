@@ -2,10 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
@@ -15,17 +12,17 @@ namespace MvvmCross.IoC
 {
     public class MvxPropertyInjector : IMvxPropertyInjector
     {
-        public virtual void Inject(object target, IMvxPropertyInjectorOptions options = null)
+        public virtual void Inject<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TTarget>(
+            TTarget target, IMvxPropertyInjectorOptions options = null)
         {
             options ??= MvxPropertyInjectorOptions.All;
 
             if (options.InjectIntoProperties == MvxPropertyInjection.None)
                 return;
 
-            if (target == null)
-                throw new ArgumentNullException(nameof(target));
+            ArgumentNullException.ThrowIfNull(target);
 
-            var injectableProperties = FindInjectableProperties(target.GetType(), options);
+            var injectableProperties = FindInjectableProperties(typeof(TTarget), options);
 
             foreach (var injectableProperty in injectableProperties)
             {
@@ -33,9 +30,11 @@ namespace MvvmCross.IoC
             }
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "The Inject method already has proper DynamicallyAccessedMembers annotations")]
         protected virtual void InjectProperty(object toReturn, PropertyInfo injectableProperty, IMvxPropertyInjectorOptions options)
         {
             object propertyValue;
+
             if (Mvx.IoCProvider?.TryResolve(injectableProperty.PropertyType, out propertyValue) == true)
             {
                 try
