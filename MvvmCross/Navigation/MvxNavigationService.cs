@@ -370,7 +370,7 @@ public class MvxNavigationService : IMvxNavigationService
     public virtual Task<bool> Navigate(
         IMvxViewModel viewModel, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
-        var request = new MvxViewModelInstanceRequest<IMvxViewModel>(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
+        var request = new MvxViewModelInstanceRequest(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
         ViewModelLoader.ReloadViewModel(viewModel, request, null);
         return Navigate(request, viewModel, presentationBundle, cancellationToken);
     }
@@ -378,7 +378,7 @@ public class MvxNavigationService : IMvxNavigationService
     public virtual Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
-        var request = new MvxViewModelInstanceRequest<IMvxViewModel<TParameter>>(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
+        var request = new MvxViewModelInstanceRequest(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
         ViewModelLoader.ReloadViewModel(viewModel, param, request, null);
         return Navigate(request, viewModel, presentationBundle, cancellationToken);
     }
@@ -557,7 +557,7 @@ public class MvxNavigationService : IMvxNavigationService
     public virtual Task<bool> Navigate(
         IMvxViewModel viewModel, IMvxViewModel source, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
-        var request = new MvxViewModelInstanceRequestWithSource<IMvxViewModel>(viewModel, source) { PresentationValues = presentationBundle?.SafeGetData() };
+        var request = new MvxViewModelInstanceRequestWithSource(viewModel.GetType(), source) { PresentationValues = presentationBundle?.SafeGetData() };
         ViewModelLoader.ReloadViewModel(viewModel, request, null);
         return NavigateAsync(request, viewModel, presentationBundle, cancellationToken);
     }
@@ -579,7 +579,7 @@ public class MvxNavigationService : IMvxNavigationService
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         where TParameter : notnull
     {
-        var request = new MvxViewModelInstanceRequestWithSource<IMvxViewModel<TParameter>>(viewModel, source) { PresentationValues = presentationBundle?.SafeGetData() };
+        var request = new MvxViewModelInstanceRequestWithSource(viewModel.GetType(), source) { PresentationValues = presentationBundle?.SafeGetData() };
         ViewModelLoader.ReloadViewModel(viewModel, param, request, null);
         return NavigateAsync(request, viewModel, presentationBundle, cancellationToken);
     }

@@ -19,21 +19,4 @@ namespace MvvmCross.ViewModels
 
         public IMvxViewModel? ViewModelInstance { get; set; }
     }
-
-    public class MvxViewModelInstanceRequest<
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>
-            : MvxViewModelInstanceRequest
-                where TViewModel : IMvxViewModel
-    {
-        public MvxViewModelInstanceRequest()
-            : base(typeof(TViewModel))
-        {
-        }
-
-        public MvxViewModelInstanceRequest(IMvxViewModel viewModelInstance)
-            : base(typeof(TViewModel))
-        {
-            ViewModelInstance = viewModelInstance;
-        }
-    }
 }

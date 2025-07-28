@@ -179,7 +179,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
     public override Task<bool> Close(IMvxViewModel viewModel)
     {
         return GetPresentationAttributeAction(
-                new MvxViewModelInstanceRequest<IMvxViewModel>(viewModel), out var attribute)
+                new MvxViewModelInstanceRequest(viewModel), out var attribute)
             .CloseAction?
             .Invoke(viewModel, attribute) ?? Task.FromResult(false);
     }
