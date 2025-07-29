@@ -21,7 +21,7 @@ namespace MvvmCross.IoC
         {
             get
             {
-                _mvxInjectProperties = _mvxInjectProperties ?? new MvxPropertyInjectorOptions()
+                _mvxInjectProperties ??= new MvxPropertyInjectorOptions()
                 {
                     InjectIntoProperties = MvxPropertyInjection.MvxInjectInterfaceProperties,
                     ThrowIfPropertyInjectionFails = false
@@ -36,7 +36,7 @@ namespace MvvmCross.IoC
         {
             get
             {
-                _allProperties = _allProperties ?? new MvxPropertyInjectorOptions()
+                _allProperties ??= new MvxPropertyInjectorOptions()
                 {
                     InjectIntoProperties = MvxPropertyInjection.AllInterfaceProperties,
                     ThrowIfPropertyInjectionFails = false

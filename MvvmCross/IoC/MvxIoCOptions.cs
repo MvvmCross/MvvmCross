@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.IoC
 {
@@ -20,6 +21,8 @@ namespace MvvmCross.IoC
         public bool TryToDetectSingletonCircularReferences { get; set; }
         public bool TryToDetectDynamicCircularReferences { get; set; }
         public bool CheckDisposeIfPropertyInjectionFails { get; set; }
+
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         public Type PropertyInjectorType { get; set; }
         public IMvxPropertyInjectorOptions PropertyInjectorOptions { get; set; }
     }

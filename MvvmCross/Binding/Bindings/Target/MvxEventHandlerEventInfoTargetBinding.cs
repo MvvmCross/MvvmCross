@@ -16,7 +16,6 @@ public class MvxEventHandlerEventInfoTargetBinding : MvxTargetBinding
     private readonly object _eventHandler;
 
     public MvxEventHandlerEventInfoTargetBinding(object target,
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
         EventInfo targetEventInfo)
         : base(target)
     {
@@ -34,6 +33,7 @@ public class MvxEventHandlerEventInfoTargetBinding : MvxTargetBinding
         addMethod?.Invoke(target, [_eventHandler]);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(ICommand);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;

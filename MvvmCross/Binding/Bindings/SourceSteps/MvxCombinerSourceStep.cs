@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Converters;
 using MvvmCross.Exceptions;
 
@@ -18,9 +16,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             : base(description)
         {
             var sourceStepFactory = MvxBindingSingletonCache.Instance.SourceStepFactory;
-            _subSteps = description.InnerSteps
-                                   .Select(d => sourceStepFactory.Create(d))
-                                   .ToList();
+            _subSteps = [.. description.InnerSteps.Select(d => sourceStepFactory.Create(d))];
         }
 
         protected override void Dispose(bool isDisposing)
@@ -106,6 +102,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             SendSourcePropertyChanged();
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
         protected override void OnDataContextChanged()
         {
             foreach (var step in _subSteps)

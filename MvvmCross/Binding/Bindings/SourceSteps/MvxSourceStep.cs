@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Converters;
-using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
@@ -38,12 +37,14 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         public virtual Type SourceType => typeof(object);
 
+
         public object DataContext
         {
             get
             {
                 return _dataContext;
             }
+            [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
             set
             {
                 if (_dataContext == value)
@@ -54,6 +55,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             }
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
         protected virtual void OnDataContextChanged()
         {
             // nothing to do in the base class

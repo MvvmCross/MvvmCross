@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Exceptions;
 using MvvmCross.IoC;
@@ -12,6 +13,7 @@ namespace MvvmCross.ViewModels;
 public class MvxViewModelViewLookupBuilder
     : IMvxTypeToTypeLookupBuilder
 {
+    [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     public virtual IDictionary<Type, Type> Build(IEnumerable<Assembly> sourceAssemblies)
     {
         var associatedTypeFinder = Mvx.IoCProvider?.Resolve<IMvxViewModelTypeFinder>();

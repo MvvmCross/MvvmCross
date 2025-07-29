@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Foundation;
 using MvvmCross.Core;
@@ -17,13 +18,15 @@ namespace MvvmCross.Platforms.Ios.Views
 #nullable enable
     internal static class MvxSegueExtensions
     {
-        internal static Type? GetViewModelType(this IMvxView? view)
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+        internal static Type? GetViewModelType<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TViewType>(
+            this TViewType? view)
+                where TViewType : class, IMvxView
         {
             if (view == null)
                 return null;
 
-            var viewType = view.GetType();
-            var props = viewType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var props = view.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
             var prop = Array.Find(props, p => p.Name == "ViewModel");
             return prop?.PropertyType;
         }

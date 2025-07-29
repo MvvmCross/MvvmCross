@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -62,7 +63,8 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         return new MvxChildPresentationAttribute { ViewType = viewType, ViewModelType = viewModelType };
     }
 
-    public override object? CreateOverridePresentationAttributeViewInstance(Type viewType)
+    public override object? CreateOverridePresentationAttributeViewInstance(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType)
     {
         ArgumentNullException.ThrowIfNull(viewType);
 

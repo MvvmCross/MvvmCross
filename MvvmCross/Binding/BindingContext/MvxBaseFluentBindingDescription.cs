@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using MvvmCross.Base;
 using MvvmCross.Binding.Binders;
@@ -16,7 +14,7 @@ using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.BindingContext
 {
-    public class MvxBaseFluentBindingDescription<TTarget>
+    public class MvxBaseFluentBindingDescription<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] TTarget>
         : MvxApplicableTo<TTarget>, IMvxBaseFluentBindingDescription
         where TTarget : class
     {
@@ -137,7 +135,7 @@ namespace MvvmCross.Binding.BindingContext
                     Converter = inputs.Converter,
                     ConverterParameter = inputs.ConverterParameter,
                     FallbackValue = inputs.FallbackValue,
-                    InnerSteps = innerSteps.ToList()
+                    InnerSteps = [.. innerSteps]
                 };
             }
         }
@@ -153,10 +151,7 @@ namespace MvvmCross.Binding.BindingContext
                     Converter = inputs.Converter,
                     ConverterParameter = inputs.ConverterParameter,
                     FallbackValue = inputs.FallbackValue,
-                    InnerSteps = new List<MvxSourceStepDescription>()
-                            {
-                                sourceStepDescription
-                            }
+                    InnerSteps = [sourceStepDescription]
                 };
             }
         }

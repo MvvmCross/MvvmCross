@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using MvvmCross.ViewModels;
 
@@ -12,5 +13,8 @@ public interface IMvxAndroidViewModelLoader
 {
     IMvxViewModel? Load(Intent? intent, IMvxBundle? savedState);
 
-    IMvxViewModel? Load(Intent? intent, IMvxBundle? savedState, Type? viewModelTypeHint);
+    IMvxViewModel? Load(
+        Intent? intent,
+        IMvxBundle? savedState,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelTypeHint);
 }

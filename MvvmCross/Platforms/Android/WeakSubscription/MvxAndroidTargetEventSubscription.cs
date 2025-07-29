@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Android.Runtime;
 using MvvmCross.WeakSubscription;
@@ -15,7 +16,7 @@ namespace MvvmCross.Platforms.Android.WeakSubscription
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     /// <typeparam name="TEventArgs"></typeparam>
-    public class MvxAndroidTargetEventSubscription<TSource, TEventArgs> : MvxWeakEventSubscription<TSource, TEventArgs>
+    public class MvxAndroidTargetEventSubscription<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] TSource, TEventArgs> : MvxWeakEventSubscription<TSource, TEventArgs>
         where TSource : class
     {
         public MvxAndroidTargetEventSubscription(TSource source, string sourceEventName, EventHandler<TEventArgs> targetEventHandler)
@@ -47,7 +48,7 @@ namespace MvvmCross.Platforms.Android.WeakSubscription
         }
     }
 
-    public class MvxJavaEventSubscription<TSource> : MvxWeakEventSubscription<TSource> where TSource : class
+    public class MvxJavaEventSubscription<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] TSource> : MvxWeakEventSubscription<TSource> where TSource : class
     {
         public MvxJavaEventSubscription(TSource source, string sourceEventName, EventHandler targetEventHandler)
             : base(source, sourceEventName, targetEventHandler)

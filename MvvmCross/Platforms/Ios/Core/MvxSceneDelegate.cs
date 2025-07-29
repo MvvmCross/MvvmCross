@@ -3,11 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Core;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Ios.Core;
 
+[RequiresUnreferencedCode("This class uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
 public abstract class MvxSceneDelegate : UIResponder, IUIWindowSceneDelegate, IMvxLifetime
 {
     public event EventHandler<MvxLifetimeEventArgs>? LifetimeChanged;
@@ -79,6 +81,7 @@ public abstract class MvxSceneDelegate : UIResponder, IUIWindowSceneDelegate, IM
     }
 }
 
+[RequiresUnreferencedCode("This class uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
 public abstract class MvxSceneDelegate<TMvxIosSetup, TApplication> : MvxSceneDelegate
     where TMvxIosSetup : MvxIosSetup<TApplication>, new()
     where TApplication : class, IMvxApplication, new()

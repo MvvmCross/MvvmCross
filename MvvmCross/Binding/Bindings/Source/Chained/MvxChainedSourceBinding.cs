@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Source.Construction;
@@ -12,6 +13,7 @@ using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.Bindings.Source.Chained
 {
+    [RequiresUnreferencedCode("This class may use types that are not preserved by trimming")]
     public abstract class MvxChainedSourceBinding
         : MvxPropertyInfoSourceBinding
     {
@@ -52,6 +54,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
             }
         }
 
+        [RequiresUnreferencedCode("This method may use types that are not preserved by trimming")]
         protected void UpdateChildBinding()
         {
             if (_currentChildBinding != null)
@@ -85,6 +88,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
             FireChanged();
         }
 
+        [RequiresUnreferencedCode("This method may use types that are not preserved by trimming")]
         protected override void OnBoundPropertyChanged()
         {
             UpdateChildBinding();

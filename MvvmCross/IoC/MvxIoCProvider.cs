@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Base;
 
 namespace MvvmCross.IoC;
@@ -47,51 +48,51 @@ public sealed class MvxIoCProvider
         return _provider.CanResolve(type);
     }
 
-    public bool TryResolve<T>(out T? resolved)
+    public bool TryResolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(out T? resolved)
         where T : class
     {
         return _provider.TryResolve(out resolved);
     }
 
-    public bool TryResolve(Type type, out object? resolved)
+    public bool TryResolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, out object? resolved)
     {
         return _provider.TryResolve(type, out resolved);
     }
 
-    public T? Resolve<T>()
+    public T? Resolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
         where T : class
     {
         return _provider.Resolve<T>();
     }
 
-    public object? Resolve(Type type)
+    public object? Resolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
     {
         return _provider.Resolve(type);
     }
 
-    public T? GetSingleton<T>()
+    public T? GetSingleton<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
         where T : class
     {
         return _provider.GetSingleton<T>();
     }
 
-    public object? GetSingleton(Type type)
+    public object? GetSingleton([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
     {
         return _provider.GetSingleton(type);
     }
 
-    public T? Create<T>()
+    public T? Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
         where T : class
     {
         return _provider.Create<T>();
     }
 
-    public object? Create(Type type)
+    public object? Create([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
     {
         return _provider.Create(type);
     }
 
-    public void RegisterType<TInterface, TToConstruct>()
+    public void RegisterType<TInterface, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TToConstruct>()
         where TInterface : class
         where TToConstruct : class, TInterface
     {
@@ -109,7 +110,7 @@ public sealed class MvxIoCProvider
         _provider.RegisterType(t, constructor);
     }
 
-    public void RegisterType(Type tFrom, Type tTo)
+    public void RegisterType(Type tFrom, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type tTo)
     {
         _provider.RegisterType(tFrom, tTo);
     }
@@ -136,42 +137,42 @@ public sealed class MvxIoCProvider
         _provider.RegisterSingleton(tInterface, theConstructor);
     }
 
-    public T IoCConstruct<T>() where T : class
+    public T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>() where T : class
     {
         return _provider.IoCConstruct<T>((IDictionary<string, object>?)null);
     }
 
-    public T IoCConstruct<T>(IDictionary<string, object>? arguments) where T : class
+    public T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(IDictionary<string, object>? arguments) where T : class
     {
         return _provider.IoCConstruct<T>(arguments);
     }
 
-    public T IoCConstruct<T>(params object?[] arguments) where T : class
+    public T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(params object?[] arguments) where T : class
     {
         return _provider.IoCConstruct<T>(arguments);
     }
 
-    public T IoCConstruct<T>(object? arguments) where T : class
+    public T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(object? arguments) where T : class
     {
         return _provider.IoCConstruct<T>(arguments);
     }
 
-    public object IoCConstruct(Type type)
+    public object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
     {
         return _provider.IoCConstruct(type, (IDictionary<string, object>?)null);
     }
 
-    public object IoCConstruct(Type type, IDictionary<string, object>? arguments)
+    public object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, IDictionary<string, object>? arguments)
     {
         return _provider.IoCConstruct(type, arguments);
     }
 
-    public object IoCConstruct(Type type, object? arguments)
+    public object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, object? arguments)
     {
         return _provider.IoCConstruct(type, arguments);
     }
 
-    public object IoCConstruct(Type type, params object?[] arguments)
+    public object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, params object?[] arguments)
     {
         return _provider.IoCConstruct(type, arguments);
     }

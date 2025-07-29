@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace MvvmCross.IoC;
 
 public interface IMvxIoCProvider
@@ -12,27 +14,27 @@ public interface IMvxIoCProvider
 
     bool CanResolve(Type type);
 
-    T? Resolve<T>()
+    T? Resolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
         where T : class;
 
-    object? Resolve(Type type);
+    object? Resolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type);
 
-    bool TryResolve<T>(out T? resolved)
+    bool TryResolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(out T? resolved)
         where T : class;
 
-    bool TryResolve(Type type, out object? resolved);
+    bool TryResolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, out object? resolved);
 
-    T? Create<T>()
+    T? Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
         where T : class;
 
-    object? Create(Type type);
+    object? Create([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type);
 
-    T? GetSingleton<T>()
+    T? GetSingleton<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
         where T : class;
 
-    object? GetSingleton(Type type);
+    object? GetSingleton([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type);
 
-    void RegisterType<TFrom, TTo>()
+    void RegisterType<TFrom, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTo>()
         where TFrom : class
         where TTo : class, TFrom;
 
@@ -41,7 +43,7 @@ public interface IMvxIoCProvider
 
     void RegisterType(Type t, Func<object> constructor);
 
-    void RegisterType(Type tFrom, Type tTo);
+    void RegisterType(Type tFrom, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type tTo);
 
     void RegisterSingleton<TInterface>(TInterface theObject)
         where TInterface : class;
@@ -53,25 +55,25 @@ public interface IMvxIoCProvider
 
     void RegisterSingleton(Type tInterface, Func<object> theConstructor);
 
-    T IoCConstruct<T>()
+    T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
         where T : class;
 
-    T IoCConstruct<T>(IDictionary<string, object>? arguments)
+    T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(IDictionary<string, object>? arguments)
         where T : class;
 
-    T IoCConstruct<T>(object? arguments)
+    T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(object? arguments)
         where T : class;
 
-    T IoCConstruct<T>(params object?[] arguments)
+    T IoCConstruct<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(params object?[] arguments)
         where T : class;
 
-    object IoCConstruct(Type type);
+    object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type);
 
-    object IoCConstruct(Type type, IDictionary<string, object>? arguments);
+    object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, IDictionary<string, object>? arguments);
 
-    object IoCConstruct(Type type, object? arguments);
+    object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, object? arguments);
 
-    object IoCConstruct(Type type, params object?[] arguments);
+    object IoCConstruct([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type, params object?[] arguments);
 
     IMvxIoCProvider CreateChildContainer();
 }

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
@@ -112,12 +113,14 @@ namespace MvvmCross.Platforms.Mac.Core
             iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
         protected override void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
             var bindingBuilder = CreateBindingBuilder();
             bindingBuilder.DoRegistration(iocProvider);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
             return new MvxMacBindingBuilder(FillTargetFactories, FillValueConverters, FillBindingNames,
@@ -129,6 +132,7 @@ namespace MvvmCross.Platforms.Mac.Core
             // this base class does nothing
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             registry.Fill(ValueConverterAssemblies);
@@ -142,6 +146,7 @@ namespace MvvmCross.Platforms.Mac.Core
 
         protected virtual List<Assembly> ValueConverterAssemblies
         {
+            [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
             get
             {
                 var toReturn = new List<Assembly>();
@@ -159,12 +164,13 @@ namespace MvvmCross.Platforms.Mac.Core
         }
     }
 
-    public abstract class MvxMacSetup<TApplication> : MvxMacSetup
+    public abstract class MvxMacSetup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TApplication> : MvxMacSetup
         where TApplication : class, IMvxApplication, new()
     {
         protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
             iocProvider.IoCConstruct<TApplication>();
 
+        [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };

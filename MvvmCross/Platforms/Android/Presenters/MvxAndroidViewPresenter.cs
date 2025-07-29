@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Android.Content;
 using Android.OS;
@@ -98,7 +99,8 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
         }
 
-        protected Type? GetAssociatedViewModelType(Type fromFragmentType)
+        protected Type? GetAssociatedViewModelType(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)] Type fromFragmentType)
         {
             var viewModelType = ViewModelTypeFinder?.FindTypeOrNull(fromFragmentType);
             return viewModelType ?? fromFragmentType.GetBasePresentationAttributes().First().ViewModelType;
@@ -299,6 +301,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             return viewPager;
         }
 
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         protected Type? GetCurrentActivityViewModelType()
         {
             Type? currentActivityType = null;

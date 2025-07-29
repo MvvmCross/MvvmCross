@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
@@ -132,6 +133,7 @@ public class MvxNavigationService : IMvxNavigationService
         return paramDict;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     protected virtual async Task<MvxViewModelInstanceRequest> NavigationRouteRequest(
         string path, IMvxBundle? presentationBundle = null)
     {
@@ -196,6 +198,7 @@ public class MvxNavigationService : IMvxNavigationService
         return request;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     protected async Task<MvxViewModelInstanceRequest> NavigationRouteRequest<TParameter>(
         string path, TParameter param, IMvxBundle? presentationBundle = null)
     {
@@ -293,6 +296,7 @@ public class MvxNavigationService : IMvxNavigationService
         return true;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     public virtual async Task<bool> Navigate(
         string path, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
@@ -306,6 +310,7 @@ public class MvxNavigationService : IMvxNavigationService
         return await Navigate(request, request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     public virtual async Task<bool> Navigate<TParameter>(
             string path,
             TParameter param,
@@ -321,7 +326,9 @@ public class MvxNavigationService : IMvxNavigationService
         return await Navigate(request, request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
     }
 
-    public virtual Task<bool> Navigate(Type viewModelType, IMvxBundle? presentationBundle = null,
+    public virtual Task<bool> Navigate(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
+        IMvxBundle? presentationBundle = null,
         CancellationToken cancellationToken = default)
     {
         var request = new MvxViewModelInstanceRequest(viewModelType)
@@ -332,8 +339,11 @@ public class MvxNavigationService : IMvxNavigationService
         return Navigate(request, request.ViewModelInstance, presentationBundle, cancellationToken);
     }
 
-    public virtual Task<bool> Navigate<TParameter>(Type viewModelType, TParameter param,
-        IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+    public virtual Task<bool> Navigate<TParameter>(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
+        TParameter param,
+        IMvxBundle? presentationBundle = null,
+        CancellationToken cancellationToken = default)
     {
         var request = new MvxViewModelInstanceRequest(viewModelType)
         {
@@ -343,14 +353,14 @@ public class MvxNavigationService : IMvxNavigationService
         return Navigate(request, request.ViewModelInstance, presentationBundle, cancellationToken);
     }
 
-    public virtual Task<bool> Navigate<TViewModel>(
+    public virtual Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         where TViewModel : IMvxViewModel
     {
         return Navigate(typeof(TViewModel), presentationBundle, cancellationToken);
     }
 
-    public virtual Task<bool> Navigate<TViewModel, TParameter>(
+    public virtual Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel, TParameter>(
         TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         where TViewModel : IMvxViewModel<TParameter>
     {
@@ -452,9 +462,11 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="presentationBundle">The presentation bungle.</param>
     /// <param name="cancellationToken">Any cancellation token.</param>
     /// <returns>True if navigation was successful.</returns>
-    public virtual Task<bool> Navigate<TViewModel, TParameter>(TParameter param, IMvxViewModel source, IMvxBundle? presentationBundle = null,
-        CancellationToken cancellationToken = default) where TViewModel : IMvxViewModel<TParameter>
-        where TParameter : notnull
+    public virtual Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel, TParameter>(
+        TParameter param, IMvxViewModel source, IMvxBundle? presentationBundle = null,
+        CancellationToken cancellationToken = default)
+            where TViewModel : IMvxViewModel<TParameter>
+            where TParameter : notnull
     {
         return Navigate(typeof(TViewModel), param, source, presentationBundle, cancellationToken);
     }
@@ -472,9 +484,13 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="presentationBundle">The presentation bungle.</param>
     /// <param name="cancellationToken">Any cancellation token.</param>
     /// <returns>True if navigation was successful.</returns>
-    public virtual Task<bool> Navigate<TParameter>(Type viewModelType, TParameter param, IMvxViewModel source, IMvxBundle? presentationBundle = null,
+    public virtual Task<bool> Navigate<TParameter>(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
+        TParameter param,
+        IMvxViewModel source,
+        IMvxBundle? presentationBundle = null,
         CancellationToken cancellationToken = default)
-        where TParameter : notnull
+            where TParameter : notnull
     {
         var mvxViewModelInstanceRequest = new MvxViewModelInstanceRequestWithSource(viewModelType, source)
         {
@@ -495,7 +511,10 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="presentationBundle">A presentation bundle.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
-    public virtual Task<bool> Navigate(Type viewModelType, IMvxViewModel source, IMvxBundle? presentationBundle = null,
+    public virtual Task<bool> Navigate(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
+        IMvxViewModel source,
+        IMvxBundle? presentationBundle = null,
         CancellationToken cancellationToken = default)
     {
         var request = new MvxViewModelInstanceRequestWithSource(viewModelType, source)
@@ -517,7 +536,7 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="presentationBundle">The presentation bundle.</param>
     /// <param name="cancellationToken">Any cancellation token.</param>
     /// <returns>True if successful, false otherwise.</returns>
-    public virtual Task<bool> Navigate<TViewModel>(IMvxViewModel source,
+    public virtual Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(IMvxViewModel source,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         where TViewModel : IMvxViewModel
     {
@@ -538,7 +557,7 @@ public class MvxNavigationService : IMvxNavigationService
     public virtual Task<bool> Navigate(
         IMvxViewModel viewModel, IMvxViewModel source, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
-        var request = new MvxViewModelInstanceRequestWithSource(viewModel, source) { PresentationValues = presentationBundle?.SafeGetData() };
+        var request = new MvxViewModelInstanceRequestWithSource(viewModel.GetType(), source) { PresentationValues = presentationBundle?.SafeGetData() };
         ViewModelLoader.ReloadViewModel(viewModel, request, null);
         return NavigateAsync(request, viewModel, presentationBundle, cancellationToken);
     }
@@ -560,7 +579,7 @@ public class MvxNavigationService : IMvxNavigationService
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         where TParameter : notnull
     {
-        var request = new MvxViewModelInstanceRequestWithSource(viewModel, source) { PresentationValues = presentationBundle?.SafeGetData() };
+        var request = new MvxViewModelInstanceRequestWithSource(viewModel.GetType(), source) { PresentationValues = presentationBundle?.SafeGetData() };
         ViewModelLoader.ReloadViewModel(viewModel, param, request, null);
         return NavigateAsync(request, viewModel, presentationBundle, cancellationToken);
     }
@@ -573,7 +592,7 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="presentationBundle">The presentation bundle.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>True is successful. False otherwise.</returns>
-    protected virtual async Task<bool> NavigateAsync(MvxViewModelInstanceRequestWithSource request, IMvxViewModel viewModel,
+    protected virtual async Task<bool> NavigateAsync(MvxViewModelRequest request, IMvxViewModel viewModel,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(request);

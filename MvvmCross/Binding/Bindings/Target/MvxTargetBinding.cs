@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Binding.Bindings.Target;
@@ -30,6 +31,7 @@ public abstract class MvxTargetBinding : MvxBinding, IMvxTargetBinding
         ValueChanged?.Invoke(this, new MvxTargetChangedEventArgs(newValue));
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public abstract Type TargetValueType { get; }
 
     public abstract void SetValue(object? value);
@@ -37,7 +39,10 @@ public abstract class MvxTargetBinding : MvxBinding, IMvxTargetBinding
     public abstract MvxBindingMode DefaultMode { get; }
 }
 
-public abstract class MvxTargetBinding<TTarget, TValue> : MvxBinding, IMvxTargetBinding
+public abstract class MvxTargetBinding<
+        TTarget,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TValue
+    > : MvxBinding, IMvxTargetBinding
     where TTarget : class
 {
     public event EventHandler<MvxTargetChangedEventArgs>? ValueChanged;
@@ -70,6 +75,7 @@ public abstract class MvxTargetBinding<TTarget, TValue> : MvxBinding, IMvxTarget
 
     public abstract MvxBindingMode DefaultMode { get; }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public Type TargetValueType => typeof(TValue);
 
     protected abstract void SetValue(TValue? value);

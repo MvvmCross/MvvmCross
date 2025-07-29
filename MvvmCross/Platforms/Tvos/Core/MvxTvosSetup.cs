@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
@@ -19,7 +18,6 @@ using MvvmCross.Platforms.Tvos.Views;
 using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Core
 {
@@ -126,12 +124,14 @@ namespace MvvmCross.Platforms.Tvos.Core
             iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         protected override void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
             var bindingBuilder = CreateBindingBuilder();
             bindingBuilder.DoRegistration(iocProvider);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
             return new MvxTvosBindingBuilder(FillTargetFactories, FillValueConverters, FillBindingNames,
@@ -143,6 +143,7 @@ namespace MvvmCross.Platforms.Tvos.Core
             // this base class does nothing
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             registry.Fill(ValueConverterAssemblies);
@@ -158,6 +159,7 @@ namespace MvvmCross.Platforms.Tvos.Core
 
         protected virtual IEnumerable<Assembly> ValueConverterAssemblies
         {
+            [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
             get
             {
                 var toReturn = new List<Assembly>();
@@ -178,12 +180,13 @@ namespace MvvmCross.Platforms.Tvos.Core
         }
     }
 
-    public abstract class MvxTvosSetup<TApplication> : MvxTvosSetup
+    public abstract class MvxTvosSetup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TApplication> : MvxTvosSetup
         where TApplication : class, IMvxApplication, new()
     {
         protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
             iocProvider.IoCConstruct<TApplication>();
 
+        [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };

@@ -27,6 +27,7 @@ public class MvxExpandableListViewSelectedItemTargetBinding(
 
     protected MvxExpandableListView? ListView => (MvxExpandableListView?)Target;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(object);
 
     protected override void SetValueImpl(object target, object? value)

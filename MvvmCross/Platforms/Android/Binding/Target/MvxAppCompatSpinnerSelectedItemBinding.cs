@@ -89,6 +89,7 @@ public class MvxAppCompatSpinnerSelectedItemBinding
             SpinnerItemSelected);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(object);
 
     protected override void Dispose(bool isDisposing)

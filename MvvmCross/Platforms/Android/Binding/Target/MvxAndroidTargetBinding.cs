@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Android.Runtime;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
@@ -34,7 +35,7 @@ public abstract class MvxAndroidTargetBinding
     }
 }
 
-public abstract class MvxAndroidTargetBinding<TTarget, TValue>
+public abstract class MvxAndroidTargetBinding<TTarget, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TValue>
     : MvxConvertingTargetBinding<TTarget, TValue>
     where TTarget : class
 {

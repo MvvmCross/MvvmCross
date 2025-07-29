@@ -17,7 +17,6 @@ public class MvxWithEventPropertyInfoTargetBinding
 
     public MvxWithEventPropertyInfoTargetBinding(
             object target,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
             PropertyInfo targetPropertyInfo)
         : base(target, targetPropertyInfo)
     {
@@ -92,7 +91,7 @@ public class MvxWithEventPropertyInfoTargetBinding
         if (eventInfo.EventHandlerType != typeof(EventHandler))
         {
             MvxBindingLog.Instance?.LogTrace(
-                "Diagnostic - cannot two-way bind to {ViewType}/{EventName} on type {ViewTypeName} because eventHandler is type {EventHandlerTypeName)}",
+                "Diagnostic - cannot two-way bind to {ViewType}/{EventName} on type {ViewTypeName} because eventHandler is type {EventHandlerTypeName}",
                 viewType,
                 eventName,
                 viewType.Name,
@@ -103,7 +102,8 @@ public class MvxWithEventPropertyInfoTargetBinding
         return eventInfo;
     }
 
-    private static EventInfo? GetPropertyChangedEvent(Type viewType)
+    private static EventInfo? GetPropertyChangedEvent(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] Type viewType)
     {
         const string eventName = "PropertyChanged";
         var eventInfo = viewType.GetEvent(eventName);

@@ -1,11 +1,12 @@
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.Base;
 
 public static class MvxDictionaryExtensions
 {
-    public static IDictionary<string, object> ToPropertyDictionary(this object? input)
+    public static IDictionary<string, object> ToPropertyDictionary<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(this T? input) where T : class
     {
         if (input == null)
             return new Dictionary<string, object>();

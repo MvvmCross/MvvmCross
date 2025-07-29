@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 
@@ -11,23 +10,21 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 {
     public class MvxTargetBindingFactoryRegistry : IMvxTargetBindingFactoryRegistry
     {
-        private readonly Dictionary<int, IMvxPluginTargetBindingFactory> _lookups =
-            new Dictionary<int, IMvxPluginTargetBindingFactory>();
+        private readonly Dictionary<int, IMvxPluginTargetBindingFactory> _lookups = [];
 
         public virtual IMvxTargetBinding CreateBinding(object target, string targetName)
         {
-            IMvxTargetBinding binding;
-            if (TryCreateSpecificFactoryBinding(target, targetName, out binding))
-                return binding;
+            if (TryCreateSpecificFactoryBinding(target, targetName, out IMvxTargetBinding first))
+                return first;
 
-            if (TryCreateReflectionBasedBinding(target, targetName, out binding))
-                return binding;
+            if (TryCreateReflectionBasedBinding(target, targetName, out IMvxTargetBinding second))
+                return second;
 
             return null;
         }
 
-        protected virtual bool TryCreateReflectionBasedBinding(object target, string targetName,
-                                                               out IMvxTargetBinding binding)
+        protected virtual bool TryCreateReflectionBasedBinding(
+            object target, string targetName, out IMvxTargetBinding binding)
         {
             if (string.IsNullOrEmpty(targetName))
             {
@@ -99,7 +96,10 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             return (type.GetHashCode() * 9) ^ name.GetHashCode();
         }
 
-        private IMvxPluginTargetBindingFactory FindSpecificFactory(Type type, string name)
+        [UnconditionalSuppressMessage("Trimming", "IL2072:Target parameter argument does not satisfy 'DynamicallyAccessedMembersAttribute' requirements",
+            Justification = "The interface types returned by ImplementedInterfaces on a type with DynamicallyAccessedMemberTypes.Interfaces are safe to process")]
+        private IMvxPluginTargetBindingFactory FindSpecificFactory(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type, string name)
         {
             IMvxPluginTargetBindingFactory factory;
             var key = GenerateKey(type, name);

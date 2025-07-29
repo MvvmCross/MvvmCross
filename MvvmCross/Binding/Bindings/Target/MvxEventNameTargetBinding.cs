@@ -2,12 +2,13 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Binding.Bindings.Target;
 
-public class MvxEventNameTargetBinding<TTarget> : MvxTargetBinding
+public class MvxEventNameTargetBinding<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] TTarget> : MvxTargetBinding
     where TTarget : class
 {
     private readonly bool _useEventArgsAsCommandParameter;
@@ -23,6 +24,7 @@ public class MvxEventNameTargetBinding<TTarget> : MvxTargetBinding
         _eventSubscription = target.WeakSubscribe(targetEventName, HandleEvent);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType { get; } = typeof(ICommand);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;

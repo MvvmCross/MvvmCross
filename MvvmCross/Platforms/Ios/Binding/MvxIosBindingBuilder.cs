@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
@@ -36,6 +37,7 @@ namespace MvvmCross.Platforms.Ios.Binding
             _unifiedValueTypesConverter = new MvxUnifiedTypesValueConverter();
         }
 
+        [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             base.FillTargetFactories(registry);

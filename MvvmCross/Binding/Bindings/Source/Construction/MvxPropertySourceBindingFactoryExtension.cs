@@ -4,6 +4,7 @@
 #nullable enable
 
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Source.Chained;
 using MvvmCross.Binding.Bindings.Source.Leaf;
@@ -20,6 +21,7 @@ public class MvxPropertySourceBindingFactoryExtension
 {
     private readonly ConcurrentDictionary<int, PropertyInfo> _propertyInfoCache = new();
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     public bool TryCreateBinding(
         object? source,
         IMvxPropertyToken propertyToken,
@@ -71,6 +73,7 @@ public class MvxPropertySourceBindingFactoryExtension
         }
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     protected virtual IMvxSourceBinding? CreateLeafBinding(object source, IMvxPropertyToken propertyToken)
     {
         if (propertyToken is MvxIndexerPropertyToken indexPropertyToken)

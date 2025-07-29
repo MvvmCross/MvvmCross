@@ -3,11 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 
 namespace MvvmCross.Binding.Bindings.Source.Chained
 {
+    [RequiresUnreferencedCode("This class may use types that are not preserved by trimming")]
     public class MvxIndexerChainedSourceBinding
         : MvxChainedSourceBinding
     {

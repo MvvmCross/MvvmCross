@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Core;
 
@@ -23,13 +24,13 @@ public class MvxBundle(IDictionary<string, string>? data) : IMvxBundle
         Data.Write(toStore);
     }
 
-    public T? Read<T>()
+    public T? Read<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicProperties)] T>()
         where T : new()
     {
         return Data.Read<T>();
     }
 
-    public object? Read(Type type)
+    public object? Read([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicProperties)] Type type)
     {
         return Data.Read(type);
     }

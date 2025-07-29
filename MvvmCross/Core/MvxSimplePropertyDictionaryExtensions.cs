@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
@@ -40,13 +41,15 @@ public static class MvxSimplePropertyDictionaryExtensions
         }
     }
 
-    public static T? Read<T>(this IDictionary<string, string> data)
+    public static T? Read<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicProperties)] T>(this IDictionary<string, string> data)
         where T : new()
     {
         return (T?)data.Read(typeof(T));
     }
 
-    public static object? Read(this IDictionary<string, string> data, Type type)
+    public static object? Read(
+        this IDictionary<string, string> data,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicProperties)] Type type)
     {
         var t = Activator.CreateInstance(type);
 
@@ -105,22 +108,23 @@ public static class MvxSimplePropertyDictionaryExtensions
             parameterValue, requiredParameter.ParameterType, requiredParameter.Name);
     }
 
-    public static IDictionary<string, string> ToSimplePropertyDictionary(this object? input)
+    public static IDictionary<string, string> ToSimplePropertyDictionary<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TInput>(
+        this TInput? input)
     {
-        if (input == null)
+        if (EqualityComparer<TInput?>.Default.Equals(input, default))
             return new Dictionary<string, string>();
 
         if (input is IDictionary<string, string> inputDict)
             return inputDict;
 
         var propertyInfos =
-            from property in input.GetType()
+            from property in input!.GetType()
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
             where property.CanRead
             select new
             {
                 CanSerialize =
-                    MvxSingletonCache.Instance?.Parser.TypeSupported(property.PropertyType) ?? false,
+                    MvxSingletonCache.Instance?.Parser?.TypeSupported(property.PropertyType) ?? false,
                 Property = property
             };
 
@@ -129,7 +133,7 @@ public static class MvxSimplePropertyDictionaryExtensions
         {
             if (propertyInfo.CanSerialize)
             {
-                dictionary[propertyInfo.Property.Name] = input.GetPropertyValueAsString(propertyInfo.Property);
+                dictionary[propertyInfo.Property.Name] = input!.GetPropertyValueAsString(propertyInfo.Property);
             }
             else
             {

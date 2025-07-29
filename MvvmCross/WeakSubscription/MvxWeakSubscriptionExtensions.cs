@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Windows.Input;
@@ -61,14 +62,16 @@ namespace MvvmCross.WeakSubscription
             return new MvxCanExecuteChangedEventSubscription(source, eventHandler);
         }
 
-        public static MvxWeakEventSubscription<TSource> WeakSubscribe<TSource>(this TSource source, string eventName, EventHandler eventHandler)
-            where TSource : class
+        public static MvxWeakEventSubscription<TSource> WeakSubscribe<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] TSource>(
+            this TSource source, string eventName, EventHandler eventHandler)
+                where TSource : class
         {
             return new MvxWeakEventSubscription<TSource>(source, eventName, eventHandler);
         }
 
-        public static MvxWeakEventSubscription<TSource, TEventArgs> WeakSubscribe<TSource, TEventArgs>(this TSource source, string eventName, EventHandler<TEventArgs> eventHandler)
-            where TSource : class
+        public static MvxWeakEventSubscription<TSource, TEventArgs> WeakSubscribe<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] TSource, TEventArgs>(
+            this TSource source, string eventName, EventHandler<TEventArgs> eventHandler)
+                where TSource : class
         {
             return new MvxWeakEventSubscription<TSource, TEventArgs>(source, eventName, eventHandler);
         }
