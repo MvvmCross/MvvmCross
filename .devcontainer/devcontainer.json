@@ -1,11 +1,12 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:9.0",
   "features": {
-    "ghcr.io/devcontainers/features/dotnet:1": {
-      "version": "latest"
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "latest",
+      "workloads": "android"
     },
     "ghcr.io/devcontainers/features/java:1": {
-      "version": "11"
+      "version": "17"
     },
     "ghcr.io/akhildevelops/devcontainer-features/android-cli:0": {}
   },
