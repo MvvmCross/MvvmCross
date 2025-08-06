@@ -1,0 +1,95 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="arm64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/AndroidX/">
+    <Project Path="MvvmCross.DroidX/Leanback/MvvmCross.DroidX.Leanback.csproj" />
+    <Project Path="MvvmCross.DroidX/Material/MvvmCross.DroidX.Material.csproj" />
+    <Project Path="MvvmCross.DroidX/RecyclerView/MvvmCross.DroidX.RecyclerView.csproj" />
+    <Project Path="MvvmCross.DroidX/SwipeRefreshLayout/MvvmCross.DroidX.SwipeRefreshLayout.csproj" />
+  </Folder>
+  <Folder Name="/Build/">
+    <File Path=".github/workflows/build.yml" />
+    <File Path=".github/workflows/codeql.yml" />
+    <File Path=".github/workflows/dotnet-format.yml" />
+    <File Path=".github/workflows/labeler-pr.yml" />
+    <File Path=".github/workflows/release.yml" />
+    <File Path=".github/workflows/sonar.yml" />
+    <Project Path="build/Build.csproj" />
+  </Folder>
+  <Folder Name="/Plugins/">
+    <Project Path="MvvmCross.Plugins/All/MvvmCross.Plugin.All.csproj" />
+    <Project Path="MvvmCross.Plugins/Color/MvvmCross.Plugin.Color.csproj" />
+    <Project Path="MvvmCross.Plugins/FieldBinding/MvvmCross.Plugin.FieldBinding.csproj" />
+    <Project Path="MvvmCross.Plugins/Json/MvvmCross.Plugin.Json.csproj" />
+    <Project Path="MvvmCross.Plugins/JsonLocalization/MvvmCross.Plugin.JsonLocalization.csproj" />
+    <Project Path="MvvmCross.Plugins/Messenger/MvvmCross.Plugin.Messenger.csproj" />
+    <Project Path="MvvmCross.Plugins/MethodBinding/MvvmCross.Plugin.MethodBinding.csproj" />
+    <Project Path="MvvmCross.Plugins/ResourceLoader/MvvmCross.Plugin.ResourceLoader.csproj" />
+    <Project Path="MvvmCross.Plugins/ResxLocalization/MvvmCross.Plugin.ResxLocalization.csproj" />
+    <Project Path="MvvmCross.Plugins/Visibility/MvvmCross.Plugin.Visibility.csproj" />
+  </Folder>
+  <Folder Name="/Projects/">
+    <File Path="Projects/Directory.Build.props" />
+    <File Path="Projects/Directory.Build.targets" />
+  </Folder>
+  <Folder Name="/Projects/Playground/">
+    <Project Path="Projects/Playground/Playground.Core/Playground.Core.csproj">
+      <Build Solution="Release|Any CPU" Project="false" />
+    </Project>
+    <Project Path="Projects/Playground/Playground.Droid/Playground.Droid.csproj">
+      <Build Solution="Release|Any CPU" Project="false" />
+      <Deploy Solution="*|arm64" />
+      <Deploy Solution="*|x64" />
+      <Deploy Solution="*|x86" />
+      <Deploy Solution="*|Any CPU" />
+    </Project>
+    <Project Path="Projects/Playground/Playground.iOS/Playground.iOS.csproj">
+      <Build Solution="Release|Any CPU" Project="false" />
+      <Deploy Solution="*|x86" />
+      <Deploy Solution="*|Any CPU" />
+      <Deploy Solution="*|x64" />
+    </Project>
+    <Project Path="Projects/Playground/Playground.Mac/Playground.Mac.csproj">
+      <Build Solution="Release|Any CPU" Project="false" />
+    </Project>
+    <Project Path="Projects/Playground/Playground.WinUi3/Playground.WinUi3.csproj">
+      <Platform Solution="*|Any CPU" Project="x64" />
+      <Platform Solution="*|arm64" Project="arm64" />
+      <Platform Solution="*|x64" Project="x64" />
+      <Platform Solution="*|x86" Project="x86" />
+      <Build Solution="Release|Any CPU" Project="false" />
+      <Deploy Solution="*|arm64" />
+      <Deploy Solution="*|x64" />
+      <Deploy Solution="*|x86" />
+      <Deploy Solution="Debug|Any CPU" />
+    </Project>
+    <Project Path="Projects/Playground/Playground.WpfCore/Playground.WpfCore.csproj">
+      <Build Solution="Release|Any CPU" Project="false" />
+      <Deploy Solution="Debug|Any CPU" />
+    </Project>
+  </Folder>
+  <Folder Name="/SolutionItems/">
+    <File Path=".editorconfig" />
+    <File Path="build.cake" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="LICENSE" />
+  </Folder>
+  <Folder Name="/UnitTests/">
+    <Project Path="UnitTests/MvvmCross.UnitTest/MvvmCross.UnitTest.csproj" />
+    <Project Path="UnitTests/Plugins.Color.UnitTest/MvvmCross.Plugins.Color.UnitTest.csproj" />
+    <Project Path="UnitTests/Plugins.JsonLocalization.UnitTest/MvvmCross.Plugins.JsonLocalization.UnitTest.csproj" />
+    <Project Path="UnitTests/Plugins.Messenger.UnitTest/MvvmCross.Plugins.Messenger.UnitTest.csproj" />
+    <Project Path="UnitTests/Plugins.ResourceLoader.UnitTest/MvvmCross.Plugins.ResourceLoader.UnitTest.csproj" />
+    <Project Path="UnitTests/Plugins.ResxLocalization.UnitTest/MvvmCross.Plugins.ResxLocalization.UnitTest.csproj" />
+    <Project Path="UnitTests/Plugins.Visibility.UnitTest/MvvmCross.Plugins.Visibility.UnitTest.csproj" />
+  </Folder>
+  <Project Path="MvvmCross.Tests/MvvmCross.Tests.csproj" />
+  <Project Path="MvvmCross.Wpf/MvvmCross.Platforms.Wpf.csproj" />
+  <Project Path="MvvmCross/MvvmCross.csproj" />
+</Solution>

@@ -1,6 +1,6 @@
 {
   "solution": {
-    "path": "MvvmCross.sln",
+    "path": "MvvmCross.slnx",
     "projects": [
       "MvvmCross.DroidX\\Leanback\\MvvmCross.DroidX.Leanback.csproj",
       "MvvmCross.DroidX\\Material\\MvvmCross.DroidX.Material.csproj",

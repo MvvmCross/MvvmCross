@@ -60,7 +60,7 @@ public class BuildContext : FrostingContext
 
         var slnPath = context.IsRunningOnMacOs() ?
             $"{AppFileRoot}/MvvmCross-macos.slnf" :
-            $"{AppFileRoot}/MvvmCross.sln";
+            $"{AppFileRoot}/MvvmCross.slnx";
         Solution = new FilePath(slnPath);
 
         VersionInfo = context.GitVersioningGetVersion();
@@ -258,7 +258,7 @@ public sealed class GenerateSbomTask : FrostingTask<BuildContext>
     public override void Run(BuildContext context)
     {
         var sbomPath = context.MakeAbsolute(context.OutputDir.Combine("sbom/"));
-        var slnPath = context.MakeAbsolute(new DirectoryPath($"{context.AppFileRoot}/MvvmCross.sln")).ToString();
+        var slnPath = context.MakeAbsolute(context.Solution).ToString();
 
         var settings = new DotNetToolSettings
         {
