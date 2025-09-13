@@ -85,9 +85,15 @@ jobs:
         name: build-artifacts
         path: ${{ github.workspace }}\output
 
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: ${{ secrets.NUGET_USER }}
+
     - name: NuGet Push
       env:
-        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
+        NUGET_AUTH_TOKEN: ${{ steps.login.outputs.NUGET_API_KEY }}
         SOURCE_URL: https://api.nuget.org/v3/index.json
       run: |
         dotnet nuget push -s ${{ env.SOURCE_URL }} -k ${{ env.NUGET_AUTH_TOKEN }} ${{ github.workspace }}\output\**\*.nupkg
