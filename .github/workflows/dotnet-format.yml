@@ -3,7 +3,7 @@ name: dotnet format
 on: [pull_request]
 
 env:
-  NET_VERSION: 9.0.303
+  NET_VERSION: 9.0.304
 
 jobs:
   lint:
@@ -11,10 +11,10 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
     - name: Install .NET ${{ env.NET_VERSION }}
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@d4c94342e560b34958eacfc5d055d21461ed1c5d # v5.0.0
       with:
         dotnet-version: ${{ env.NET_VERSION }}
 
