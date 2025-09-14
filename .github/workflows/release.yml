@@ -28,6 +28,12 @@ jobs:
         fetch-depth: 0
         fetch-tags: true
 
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: ${{ secrets.NUGET_USER }}
+
     - name: Install .NET ${{ env.NET_VERSION }}
       uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
       with:
@@ -84,12 +90,6 @@ jobs:
       with:
         name: build-artifacts
         path: ${{ github.workspace }}\output
-
-    - name: NuGet login (OIDC → temp API key)
-      uses: NuGet/login@v1
-      id: login
-      with:
-        user: ${{ secrets.NUGET_USER }}
 
     - name: NuGet Push
       env:
