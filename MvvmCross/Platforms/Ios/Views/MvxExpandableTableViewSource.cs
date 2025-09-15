@@ -97,16 +97,16 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        private void ScrollToSection(UITableView tableView, nint atIndex)
+        private void ScrollToSection(UITableView tableView, nint sectionIndex)
         {
-            if (tableView.NumberOfRowsInSection(section) > 0)
+            if (tableView.NumberOfRowsInSection(sectionIndex) > 0)
             {
-                var firstRow = NSIndexPath.FromRowSection(0, section);
+                var firstRow = NSIndexPath.FromRowSection(0, sectionIndex);
                 tableView.ScrollToRow(firstRow, UITableViewScrollPosition.Top, true);
             }
             else
             {
-                var headerRect = tableView.RectForHeaderInSection(section);
+                var headerRect = tableView.RectForHeaderInSection(sectionIndex);
                 tableView.ScrollRectToVisible(headerRect, true);
             }
         }
