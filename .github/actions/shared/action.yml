@@ -1,0 +1,38 @@
+name: "Shared Steps"
+description: Shared steps for .NET and Java setup
+inputs:
+  dotnet-version:
+    description: 'The .NET version to install'
+    required: false
+    default: '9.0.304'
+  java-version:
+    description: 'The Java version to install'
+    required: false
+    default: '17'
+  java-distribution:
+    description: 'The Java distribution to install'
+    required: false
+    default: 'temurin'
+runs:
+  using: "composite"
+  steps:
+    - name: Install .NET ${{ inputs.dotnet-version }}
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: ${{ inputs.dotnet-version }}
+
+    - name: Restore .NET tools
+      shell: pwsh
+      run: dotnet tool restore
+
+    - name: Install .NET workloads
+      shell: pwsh
+      run: |
+        dotnet --version
+        dotnet workload install android ios tvos macos maccatalyst --version ${{ inputs.dotnet-version }}
+
+    - name: Set up JDK
+      uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 #v5.0.0
+      with:
+        distribution: ${{ inputs.java-distribution }}
+        java-version: ${{ inputs.java-version }}

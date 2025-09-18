@@ -12,7 +12,6 @@ env:
   verbosity: 'minimal'
   sonarKey: 'MvvmCross_MvvmCross'
   sonarOrg: 'mvx'
-  NET_VERSION: 9.0.304
 
 jobs:
   build:
@@ -23,20 +22,9 @@ jobs:
       uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       with:
         fetch-depth: 0
-        fetch-tags: true
+        fetch-tags: true  
 
-    - name: Install .NET ${{ env.NET_VERSION }}
-      uses: actions/setup-dotnet@d4c94342e560b34958eacfc5d055d21461ed1c5d # v5.0.0
-      with:
-        dotnet-version: ${{ env.NET_VERSION }}
-
-    - name: Restore .NET tools
-      run: dotnet tool restore
-
-    - name: Install .NET workloads
-      run: |
-        dotnet --version
-        dotnet workload install android ios tvos macos maccatalyst --version ${{ env.NET_VERSION }}
+    - uses: ./.github/actions/shared
 
     - name: Build
       run: dotnet run --project build/Build.csproj -- --verbosity=${{ env.verbosity }} --target=Sonar --sonarToken=${{ secrets.SONAR_TOKEN }} --sonarKey=${{ env.sonarKey }} --sonarOrg=${{ env.sonarOrg }}
