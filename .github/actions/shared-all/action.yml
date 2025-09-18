@@ -1,4 +1,5 @@
 name: "Shared Steps"
+description: Shared steps for .NET and Java setup
 inputs:
   dotnet-version:
     description: 'The .NET version to install'
