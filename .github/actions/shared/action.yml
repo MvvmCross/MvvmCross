@@ -22,9 +22,20 @@ runs:
         fetch-depth: 0
         fetch-tags: true
 
-    - uses: ./.github/actions/shared-net
+    - name: Install .NET ${{ inputs.dotnet-version }}
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: ${{ inputs.dotnet-version }}
+
+    - name: Restore .NET tools
+      shell: pwsh
+      run: dotnet tool restore
+
+    - name: Install .NET workloads
+      shell: pwsh
+      run: |
+        dotnet --version
+        dotnet workload install android ios tvos macos maccatalyst --version ${{ inputs.dotnet-version }}
 
     - name: Set up JDK
       uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 #v5.0.0

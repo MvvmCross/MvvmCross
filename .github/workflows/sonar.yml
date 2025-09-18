@@ -18,7 +18,7 @@ jobs:
     runs-on: windows-latest
     
     steps:
-    - uses: ./.github/actions/shared-all
+    - uses: ./.github/actions/shared
 
     - name: Build
       run: dotnet run --project build/Build.csproj -- --verbosity=${{ env.verbosity }} --target=Sonar --sonarToken=${{ secrets.SONAR_TOKEN }} --sonarKey=${{ env.sonarKey }} --sonarOrg=${{ env.sonarOrg }}
