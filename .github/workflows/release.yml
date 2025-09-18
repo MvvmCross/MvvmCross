@@ -52,7 +52,7 @@ jobs:
         --azure-key-vault-certificate "${{ secrets.SIGN_AZURE_KEY_VAULT_CERTIFICATE_ID }}"
 
     - name: Attest NuGet packages
-      uses: actions/attest-sbom@115c3be05ff3974bcbd596578934b3f9ce39bf68 # v2.2.0
+      uses: actions/attest-sbom@4651f806c01d8637787e274ac3bdf724ef169f34 # v3.0.0
       with:
         subject-path: ${{ github.workspace }}\output\NuGet\*.nupkg
         sbom-path: ${{ github.workspace }}\output\sbom\MvvmCross.sbom.json
