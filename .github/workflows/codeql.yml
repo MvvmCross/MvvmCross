@@ -19,11 +19,6 @@ on:
   schedule:
     - cron: '41 5 * * 5'
 
-env:
-  JAVA_DISTRIBUTION: 'temurin'
-  JAVA_VERSION: 17
-  NET_VERSION: 9.0.304
-
 jobs:
   analyze:
     name: Analyze
@@ -52,11 +47,7 @@ jobs:
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      with:
-        fetch-depth: 0
-        fetch-tags: true
+    - uses: ./github/actions/shared-all
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
@@ -69,26 +60,6 @@ jobs:
 
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
-
-
-    - name: Install .NET ${{ env.NET_VERSION }}
-      uses: actions/setup-dotnet@d4c94342e560b34958eacfc5d055d21461ed1c5d # v5.0.0
-      with:
-        dotnet-version: ${{ env.NET_VERSION }}
-
-    - name: Restore .NET tools
-      run: dotnet tool restore
-
-    - name: Install .NET workloads
-      run: |
-        dotnet --version
-        dotnet workload install android ios tvos macos maccatalyst --version ${{ env.NET_VERSION }}
-
-    - name: Set up JDK
-      uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 #v5.0.0
-      with:
-        distribution: ${{ env.JAVA_DISTRIBUTION }}
-        java-version: ${{ env.JAVA_VERSION }}
 
     - name: Build
       run: dotnet run --project build/Build.csproj -- --verbosity=Minimal

@@ -1,0 +1,32 @@
+name: "Shared Steps"
+inputs:
+  dotnet-version:
+    description: 'The .NET version to install'
+    required: false
+    default: '9.0.304'
+  java-version:
+    description: 'The Java version to install'
+    required: false
+    default: '17'
+  java-distribution:
+    description: 'The Java distribution to install'
+    required: false
+    default: 'temurin'
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      with:
+        fetch-depth: 0
+        fetch-tags: true
+
+    - uses: ./github/actions/shared-net
+      with:
+        dotnet-version: ${{ inputs.dotnet-version }}
+
+    - name: Set up JDK
+      uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 #v5.0.0
+      with:
+        distribution: ${{ inputs.java-distribution }}
+        java-version: ${{ inputs.java-version }}
