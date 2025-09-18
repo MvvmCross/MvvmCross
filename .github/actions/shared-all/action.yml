@@ -22,7 +22,7 @@ runs:
         fetch-depth: 0
         fetch-tags: true
 
-    - uses: ./github/actions/shared-net
+    - uses: ./.github/actions/shared-net
       with:
         dotnet-version: ${{ inputs.dotnet-version }}
 
