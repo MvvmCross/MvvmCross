@@ -16,13 +16,31 @@ updates:
         - "XunitXml.*"
         - "Microsoft.NET.Test*"
         - "dotnet-reportgenerator-globaltool"
+        - "Microsoft.Testing.Extensions.*"
+        - "NSubstitute"
+        - "NSubstitute.*"
     analyzers:
       patterns:
         - "AsyncFixer"
         - "*Analyzer*"
+        - "Roslynator.*"
+        - "SonarAnalyzer.*"
     logging:
       patterns:
         - "*.Extensions.Logging.*"
         - "Serilog.*"
         - "Serilog"
-    
+    build-tools:
+      patterns:
+        - "Cake.*"
+        - "Microsoft.Windows.SDK.BuildTools"
+        - "Microsoft.WindowsAppSDK"
+
+# GitHub Actions workflow updates
+- package-ecosystem: github-actions
+  directory: "/"
+  labels:
+    - "p/ci"
+  schedule:
+    interval: weekly
+  open-pull-requests-limit: 10
