@@ -12,18 +12,23 @@ MvvmCross is a cross-platform MVVM framework for .NET supporting Android, iOS, M
 
 **Required**
 - .NET 9.0.304 SDK (used in CI/CD, see .github/actions/shared/action.yml)
+- JDK 17 (required for Android development)
 - Git with proper autocrlf configuration
 
 **Windows (Full Development)**
 - All workloads: `dotnet workload install android ios tvos macos maccatalyst maui-ios maui-android`
+- Android SDK with platform-tools and SDK 35 (API Level 35)
 - Use solution file: `MvvmCross.slnx`
 
 **macOS (Full Development)** 
 - All workloads: `dotnet workload install android ios tvos macos maccatalyst maui-ios maui-android`
+- Android SDK with platform-tools and SDK 35 (API Level 35) 
+- Xcode 16.4 (required for iOS development)
 - Use solution filter: `MvvmCross-macos.slnf`
 
 **Linux (Limited Development)**
 - Android workload only: `dotnet workload install android`
+- Android SDK with platform-tools and SDK 35 (API Level 35)
 - Individual project builds fail due to iOS dependencies
 - Format checking and some tools work on individual projects
 
@@ -36,6 +41,11 @@ Always run these commands after cloning:
 ```bash
 # Install .NET 9.0.304 (used in CI/CD)
 curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 9.0.304
+
+# Install JDK 17 (required for Android development)
+# Windows: Download from https://adoptium.net/temurin/releases/ or use winget install EclipseAdoptium.Temurin.17.JDK
+# macOS: brew install openjdk@17
+# Linux: sudo apt-get install openjdk-17-jdk (Ubuntu/Debian)
 
 # Restore .NET tools (includes SonarScanner, ReportGenerator, CycloneDX)
 dotnet tool restore
@@ -53,6 +63,15 @@ dotnet workload install android
 # CRITICAL: Ensure full git history for version calculations
 git fetch --unshallow
 ```
+
+**Additional Requirements for Android Development:**
+- Install Android SDK with platform-tools and SDK 35 (API Level 35)
+- Android SDK can be installed via Android Studio or command line tools
+- Set ANDROID_HOME environment variable to point to your Android SDK installation
+
+**Additional Requirements for iOS Development (macOS only):**
+- Install Xcode 16.4 from the Mac App Store or Apple Developer portal
+- Accept Xcode license: `sudo xcodebuild -license accept`
 
 ### Build and Test Commands
 
