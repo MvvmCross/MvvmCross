@@ -43,9 +43,10 @@ Always run these commands after cloning:
 curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 9.0.304
 
 # Install JDK 17 (required for Android development)
+# Use Eclipse Temurin distribution consistently across all platforms:
 # Windows: Download from https://adoptium.net/temurin/releases/ or use winget install EclipseAdoptium.Temurin.17.JDK
-# macOS: brew install openjdk@17
-# Linux: sudo apt-get install openjdk-17-jdk (Ubuntu/Debian)
+# macOS: brew install --cask temurin17
+# Linux: Install via Adoptium APT repository or download from https://adoptium.net/temurin/releases/
 
 # Restore .NET tools (includes SonarScanner, ReportGenerator, CycloneDX)
 dotnet tool restore
