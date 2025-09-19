@@ -11,7 +11,7 @@ MvvmCross is a cross-platform MVVM framework for .NET supporting Android, iOS, M
 ### System Requirements
 
 **Required**
-- .NET 9.0.100 SDK (specified in global.json)
+- .NET 9.0.304 SDK (used in CI/CD, see .github/actions/shared/action.yml)
 - Git with proper autocrlf configuration
 
 **Windows (Full Development)**
@@ -34,8 +34,8 @@ MvvmCross is a cross-platform MVVM framework for .NET supporting Android, iOS, M
 Always run these commands after cloning:
 
 ```bash
-# Install .NET 9.0.100 (required by global.json)
-curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 9.0.100
+# Install .NET 9.0.304 (used in CI/CD)
+curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 9.0.304
 
 # Restore .NET tools (includes SonarScanner, ReportGenerator, CycloneDX)
 dotnet tool restore
