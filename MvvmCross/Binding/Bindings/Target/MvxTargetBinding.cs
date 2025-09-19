@@ -34,6 +34,7 @@ public abstract class MvxTargetBinding : MvxBinding, IMvxTargetBinding
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public abstract Type TargetValueType { get; }
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     public abstract void SetValue(object? value);
 
     public abstract MvxBindingMode DefaultMode { get; }
@@ -78,8 +79,10 @@ public abstract class MvxTargetBinding<
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public Type TargetValueType => typeof(TValue);
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     protected abstract void SetValue(TValue? value);
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     public void SetValue(object? value)
     {
         if (value != null && value is not TValue)

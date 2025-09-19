@@ -19,6 +19,7 @@ public abstract class MvxConvertingTargetBinding(object target)
 
     protected abstract void SetValueImpl(object target, object? value);
 
+    [RequiresUnreferencedCode("This method performs type conversions which may not be preserved by trimming")]
     public override void SetValue(object? value)
     {
         MvxBindingLog.Instance?.LogTrace("Receiving SetValue to {Value}", value);
@@ -73,6 +74,7 @@ public abstract class MvxConvertingTargetBinding(object target)
         return false;
     }
 
+    [RequiresUnreferencedCode("This method uses type conversion methods which may not be preserved by trimming")]
     protected virtual object? MakeSafeValue(object? value)
     {
         var safeValue = TargetValueType.MakeSafeValue(value);
@@ -120,6 +122,7 @@ public abstract class MvxConvertingTargetBinding<
 
     protected abstract void SetValueImpl(TTarget target, TValue? value);
 
+    [RequiresUnreferencedCode("This method performs type conversions which may not be preserved by trimming")]
     protected override void SetValue(TValue? value)
     {
         var target = Target;
@@ -164,6 +167,7 @@ public abstract class MvxConvertingTargetBinding<
         return false;
     }
 
+    [RequiresUnreferencedCode("This method uses type conversion methods which may not be preserved by trimming")]
     protected virtual TValue? MakeSafeValue(TValue? value)
     {
         var safeValue = (TValue?)TargetValueType.MakeSafeValue(value);

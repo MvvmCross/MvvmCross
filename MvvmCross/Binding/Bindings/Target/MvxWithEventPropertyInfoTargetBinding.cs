@@ -22,7 +22,7 @@ public class MvxWithEventPropertyInfoTargetBinding
     {
     }
 
-    // Note - this is public because we use it in weak referenced situations
+    [RequiresUnreferencedCode("This method uses reflection to access property getter methods which may not be preserved by trimming")]
     public void OnValueChanged(object? sender, EventArgs eventArgs)
     {
         var target = Target;
@@ -37,7 +37,7 @@ public class MvxWithEventPropertyInfoTargetBinding
         FireValueChanged(value);
     }
 
-    // Note - this is public because we use it in weak referenced situations
+    [RequiresUnreferencedCode("This method uses reflection to access property getter methods which may not be preserved by trimming")]
     public void OnPropertyChanged(object? sender, PropertyChangedEventArgs eventArgs)
     {
         var target = Target;
@@ -57,6 +57,7 @@ public class MvxWithEventPropertyInfoTargetBinding
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method uses reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var target = Target;
@@ -80,6 +81,7 @@ public class MvxWithEventPropertyInfoTargetBinding
         // No suitable event found on target; this will be a one way binding.
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to get events which may not be preserved by trimming")]
     private static EventInfo? GetNamedPropertyChangedEvent(Type viewType, string propertyName)
     {
         var eventName = propertyName + "Changed";

@@ -21,7 +21,7 @@ public class MvxPropertySourceBindingFactoryExtension
 {
     private readonly ConcurrentDictionary<int, PropertyInfo> _propertyInfoCache = new();
 
-    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
+    [RequiresUnreferencedCode("This method creates source bindings which use reflection and may not be preserved by trimming")]
     public bool TryCreateBinding(
         object? source,
         IMvxPropertyToken propertyToken,
@@ -41,6 +41,7 @@ public class MvxPropertySourceBindingFactoryExtension
         return result != null;
     }
 
+    [RequiresUnreferencedCode("This method creates chained source bindings which use reflection and may not be preserved by trimming")]
     protected virtual MvxChainedSourceBinding? CreateChainedBinding(
         object source,
         IMvxPropertyToken propertyToken,

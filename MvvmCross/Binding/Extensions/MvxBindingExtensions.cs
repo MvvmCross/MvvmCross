@@ -11,6 +11,7 @@ namespace MvvmCross.Binding.Extensions;
 
 public static class MvxBindingExtensions
 {
+    [RequiresUnreferencedCode("This method uses reflection to get type information and perform conversions which may not be preserved by trimming")]
     public static bool ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(
         this IMvxEditableTextView mvxEditableTextView, object target, object? value)
     {
@@ -50,6 +51,7 @@ public static class MvxBindingExtensions
         return result.ConvertToBooleanCore();
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to perform type conversions which may not be preserved by trimming")]
     public static object? MakeSafeValue(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] this Type propertyType,
         object? value)

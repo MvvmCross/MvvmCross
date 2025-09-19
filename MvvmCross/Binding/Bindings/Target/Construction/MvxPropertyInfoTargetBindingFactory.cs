@@ -36,6 +36,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             new MvxTypeAndNamePair { Name = _targetName, Type = _targetType }
         };
 
+        [RequiresUnreferencedCode("This method uses reflection to get properties which may not be preserved by trimming")]
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
             var targetPropertyInfo = target.GetType().GetProperty(targetName);

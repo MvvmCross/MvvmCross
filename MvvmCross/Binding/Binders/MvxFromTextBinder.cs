@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using MvvmCross.Binding.Bindings;
 
@@ -12,12 +13,14 @@ namespace MvvmCross.Binding.Binders
     public class MvxFromTextBinder
         : IMvxBinder
     {
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText)
         {
             var bindingDescriptions = MvxBindingSingletonCache.Instance.BindingDescriptionParser.Parse(bindingText);
             return Bind(source, target, bindingDescriptions);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
                                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
@@ -28,6 +31,7 @@ namespace MvvmCross.Binding.Binders
                 bindingDescriptions.Select(description => BindSingle(new MvxBindingRequest(source, target, description)));
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public IEnumerable<IMvxUpdateableBinding> LanguageBind(object source, object target, string bindingText)
         {
             var bindingDescriptions =
@@ -35,6 +39,7 @@ namespace MvvmCross.Binding.Binders
             return Bind(source, target, bindingDescriptions);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName,
                                                 string partialBindingDescription)
         {
@@ -48,6 +53,7 @@ namespace MvvmCross.Binding.Binders
             return BindSingle(request);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public IMvxUpdateableBinding BindSingle(MvxBindingRequest bindingRequest)
         {
             return new MvxFullBinding(bindingRequest);

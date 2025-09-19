@@ -3,10 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Binding.Bindings.Source.Leaf
 {
+    [RequiresUnreferencedCode("This class uses GetType() on source objects which may not be preserved by trimming")]
     public class MvxDirectToSourceBinding : MvxSourceBinding
     {
         public MvxDirectToSourceBinding(object source)
