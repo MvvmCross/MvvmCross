@@ -58,9 +58,12 @@ public class BuildContext : FrostingContext
         SonarKey = context.Argument("sonarKey", "");
         SonarOrg = context.Argument("sonarOrg", "");
 
-        var slnPath = context.IsRunningOnMacOs() ?
-            $"{AppFileRoot}/MvvmCross-macos.slnf" :
-            $"{AppFileRoot}/MvvmCross.slnx";
+        var slnPath = (context.IsRunningOnMacOs(), context.IsRunningOnLinux()) switch
+        {
+            (true, _) => $"{AppFileRoot}/MvvmCross-macos.slnf",
+            (_, true) => $"{AppFileRoot}/MvvmCross-linux.slnf",
+            _ => $"{AppFileRoot}/MvvmCross.slnx"
+        };
         Solution = new FilePath(slnPath);
 
         VersionInfo = context.GitVersioningGetVersion();
