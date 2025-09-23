@@ -14,11 +14,6 @@
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <Version>9.3.1</Version>
 
-    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <NuGetAudit>enable</NuGetAudit>
-    <NuGetAuditMode>all</NuGetAuditMode>
-
     <TrimmerSingleWarn>false</TrimmerSingleWarn>
     <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
