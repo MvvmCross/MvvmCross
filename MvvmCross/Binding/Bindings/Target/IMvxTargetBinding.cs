@@ -17,5 +17,6 @@ public interface IMvxTargetBinding : IMvxBinding
     [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     void SetValue(object? value);
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     void SubscribeToEvents();
 }

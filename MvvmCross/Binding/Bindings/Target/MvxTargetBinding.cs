@@ -21,6 +21,7 @@ public abstract class MvxTargetBinding : MvxBinding, IMvxTargetBinding
 
     protected object? Target => _target.Target;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public virtual void SubscribeToEvents()
     {
         // do nothing by default

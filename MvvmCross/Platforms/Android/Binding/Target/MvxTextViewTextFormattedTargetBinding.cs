@@ -11,9 +11,7 @@ using MvvmCross.Platforms.Android.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target;
 
-public class MvxTextViewTextFormattedTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        TextView target)
+public class MvxTextViewTextFormattedTargetBinding(TextView target)
     : MvxAndroidTargetBinding(target), IMvxEditableTextView
 {
     private readonly bool _isEditTextBinding = target is EditText;
@@ -21,6 +19,7 @@ public class MvxTextViewTextFormattedTargetBinding(
 
     protected TextView? TextView => Target as TextView;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(ISpanned);
 
     protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object? value)

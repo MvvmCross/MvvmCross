@@ -17,13 +17,12 @@ public class MvxTextViewFocusTargetBinding
 
     protected EditText? TextField => Target as EditText;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
-    public MvxTextViewFocusTargetBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            object target)
+    public MvxTextViewFocusTargetBinding(object target)
         : base(target)
     {
     }

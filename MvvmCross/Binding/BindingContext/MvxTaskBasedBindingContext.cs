@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 
@@ -40,6 +41,7 @@ namespace MvvmCross.Binding.BindingContext
             return this;
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         private void AddDelayedAction(object key, string value)
         {
             _delayedActions.Add(() =>
@@ -50,6 +52,7 @@ namespace MvvmCross.Binding.BindingContext
             });
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         private void AddDelayedAction(object key, IEnumerable<MvxBindingDescription> value)
         {
             _delayedActions.Add(() =>
