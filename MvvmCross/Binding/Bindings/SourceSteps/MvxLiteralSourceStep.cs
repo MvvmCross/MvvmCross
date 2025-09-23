@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
+    [RequiresUnreferencedCode("This class uses GetType() for type inspection which may not be preserved by trimming")]
     public class MvxLiteralSourceStep : MvxSourceStep<MvxLiteralSourceStepDescription>
     {
         public MvxLiteralSourceStep(MvxLiteralSourceStepDescription description)

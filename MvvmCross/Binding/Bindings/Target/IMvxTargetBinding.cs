@@ -14,6 +14,7 @@ public interface IMvxTargetBinding : IMvxBinding
     Type TargetValueType { get; }
     MvxBindingMode DefaultMode { get; }
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     void SetValue(object? value);
 
     void SubscribeToEvents();

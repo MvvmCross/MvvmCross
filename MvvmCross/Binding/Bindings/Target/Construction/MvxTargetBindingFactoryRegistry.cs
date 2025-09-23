@@ -12,6 +12,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
     {
         private readonly Dictionary<int, IMvxPluginTargetBindingFactory> _lookups = [];
 
+        [RequiresUnreferencedCode("This method creates bindings using reflection which may not be preserved by trimming")]
         public virtual IMvxTargetBinding CreateBinding(object target, string targetName)
         {
             if (TryCreateSpecificFactoryBinding(target, targetName, out IMvxTargetBinding first))
@@ -23,6 +24,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             return null;
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to access properties and events which may not be preserved by trimming")]
         protected virtual bool TryCreateReflectionBasedBinding(
             object target, string targetName, out IMvxTargetBinding binding)
         {
