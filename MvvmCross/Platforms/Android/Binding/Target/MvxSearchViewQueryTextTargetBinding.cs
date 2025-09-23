@@ -14,13 +14,12 @@ public class MvxSearchViewQueryTextTargetBinding
 {
     private MvxAndroidTargetEventSubscription<SearchView, SearchView.QueryTextChangeEventArgs>? _subscription;
 
-    public MvxSearchViewQueryTextTargetBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            object target)
+    public MvxSearchViewQueryTextTargetBinding(object target)
         : base(target)
     {
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;

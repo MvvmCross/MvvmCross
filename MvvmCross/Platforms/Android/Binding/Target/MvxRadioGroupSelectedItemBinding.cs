@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.Binding.Views;
@@ -105,6 +106,7 @@ public class MvxRadioGroupSelectedItemBinding
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(object);
 
     protected override void Dispose(bool isDisposing)

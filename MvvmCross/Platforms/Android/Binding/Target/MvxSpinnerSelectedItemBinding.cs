@@ -19,9 +19,7 @@ public class MvxSpinnerSelectedItemBinding
     private object? _currentValue;
     private MvxAndroidTargetEventSubscription<AdapterView, AdapterView.ItemSelectedEventArgs>? _subscription;
 
-    public MvxSpinnerSelectedItemBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            MvxSpinner spinner)
+    public MvxSpinnerSelectedItemBinding(MvxSpinner spinner)
         : base(spinner)
     {
     }
@@ -89,6 +87,7 @@ public class MvxSpinnerSelectedItemBinding
             SpinnerItemSelected);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(object);
 
     protected override void Dispose(bool isDisposing)

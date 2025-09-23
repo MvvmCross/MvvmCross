@@ -17,9 +17,7 @@ public class MvxSeekBarProgressTargetBinding
 {
     private MvxWeakEventSubscription<SeekBar, SeekBar.ProgressChangedEventArgs>? _subscription;
 
-    public MvxSeekBarProgressTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.PublicProperties)]
-        object target, PropertyInfo targetPropertyInfo)
+    public MvxSeekBarProgressTargetBinding(object target, PropertyInfo targetPropertyInfo)
         : base(target, targetPropertyInfo)
     {
     }

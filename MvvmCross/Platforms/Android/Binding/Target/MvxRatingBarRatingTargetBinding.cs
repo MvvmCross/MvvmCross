@@ -16,9 +16,7 @@ public class MvxRatingBarRatingTargetBinding
 
     protected RatingBar? RatingBar => (RatingBar?)Target;
 
-    public MvxRatingBarRatingTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        RatingBar target)
+    public MvxRatingBarRatingTargetBinding(RatingBar target)
         : base(target)
     {
     }
@@ -46,6 +44,7 @@ public class MvxRatingBarRatingTargetBinding
             ratingBar.Rating = (float)value;
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(float);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
