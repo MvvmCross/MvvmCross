@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <TargetFrameworks>netstandard2.0;net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>$(_MvxCommonTargets)</TargetFrameworks>
     <AssemblyName>MvvmCross.UnitTest.Common</AssemblyName>
     <RootNamespace>MvvmCross.UnitTest.Common</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.v3" />
   </ItemGroup>
 
   <ItemGroup>
