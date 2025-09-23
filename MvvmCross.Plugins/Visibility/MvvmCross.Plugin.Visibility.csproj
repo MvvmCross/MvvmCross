@@ -1,7 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net9.0;net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net8.0-windows10.0.19041.0;net9.0-windows10.0.19041.0;$(TargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>$(_MvxCommonTargets)</TargetFrameworks>
+    <!-- Windows-specific targets -->
+    <TargetFrameworks Condition=" $([MSBuild]::IsOSPlatform('windows')) ">$(_MvxAndroidTargets);$(_MvxiOSTargets);$(_MvxWindowsTargets);$(TargetFrameworks)</TargetFrameworks>
+    <!-- Linux-specific targets -->
+    <TargetFrameworks Condition=" $([MSBuild]::IsOSPlatform('linux')) ">$(_MvxAndroidTargets);$(TargetFrameworks)</TargetFrameworks>
+    <!-- Mac-specific targets -->
+    <TargetFrameworks Condition=" $([MSBuild]::IsOSPlatform('osx')) ">$(_MvxAndroidTargets);$(_MvxiOSTargets);$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>

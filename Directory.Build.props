@@ -63,7 +63,7 @@
     <_MvxMacOSTargets>net9.0-macos</_MvxMacOSTargets>
     <_MvxTvOSTargets>net9.0-tvos</_MvxTvOSTargets>
     <_MvxWindowsTargets>net8.0-windows10.0.19041.0;net9.0-windows10.0.19041.0</_MvxWindowsTargets>
-    <_MvxAllTargets>$(_MvxCommonTargets);$(_MvxAndroidTargets);$(_MvxiOSTargets);$(_MvxMacOSTargets);$(_MvxTvOSTargets);$(_MvxWindowsTargets)</_MvxAllTargets>
+    <_MvxWpfTargets>net8.0-windows;net9.0-windows</_MvxWpfTargets>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

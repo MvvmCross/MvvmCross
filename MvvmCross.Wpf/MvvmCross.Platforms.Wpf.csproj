@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0-windows;net9.0-windows</TargetFrameworks>
+    <TargetFrameworks>$(_MvxWpfTargets)</TargetFrameworks>
     <AssemblyName>MvvmCross.Platforms.Wpf</AssemblyName>
     <RootNamespace>MvvmCross.Platforms.Wpf</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
@@ -10,11 +10,11 @@ This package contains the 'MvvmCross.Platforms.Wpf' libraries for MvvmCross</Des
     <EnableDefaultItems>false</EnableDefaultItems>
   </PropertyGroup>
   
-  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
+  <PropertyGroup Condition=" $([MSBuild]::IsOSPlatform('windows')) ">
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
+  <ItemGroup Condition=" $([MSBuild]::IsOSPlatform('windows')) ">
     <Compile Include="..\MvvmCross\Platforms\Wpf\**\*.cs" />
     <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
     <None Include="..\MvvmCross\readme.txt" pack="true" PackagePath="." />
