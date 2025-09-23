@@ -56,6 +56,16 @@
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsAndroid)' == 'True' ">23</SupportedOSPlatformVersion>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <_MvxCommonTargets>net8.0;net9.0</_MvxCommonTargets>
+    <_MvxAndroidTargets>net9.0-android</_MvxAndroidTargets>
+    <_MvxiOSTargets>net9.0-ios;net9.0-maccatalyst</_MvxiOSTargets>
+    <_MvxMacOSTargets>net9.0-macos</_MvxMacOSTargets>
+    <_MvxTvOSTargets>net9.0-tvos</_MvxTvOSTargets>
+    <_MvxWindowsTargets>net8.0-windows10.0.19041.0;net9.0-windows10.0.19041.0</_MvxWindowsTargets>
+    <_MvxAllTargets>$(_MvxCommonTargets);$(_MvxAndroidTargets);$(_MvxiOSTargets);$(_MvxMacOSTargets);$(_MvxTvOSTargets);$(_MvxWindowsTargets)</_MvxAllTargets>
+  </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild Condition=" '$(IsTestProject)' != 'true'">true</GeneratePackageOnBuild>
