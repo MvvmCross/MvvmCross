@@ -57,13 +57,13 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <_MvxCommonTargets>net8.0;net9.0</_MvxCommonTargets>
-    <_MvxAndroidTargets>net9.0-android</_MvxAndroidTargets>
-    <_MvxiOSTargets>net9.0-ios;net9.0-maccatalyst</_MvxiOSTargets>
-    <_MvxMacOSTargets>net9.0-macos</_MvxMacOSTargets>
-    <_MvxTvOSTargets>net9.0-tvos</_MvxTvOSTargets>
-    <_MvxWindowsTargets>net8.0-windows10.0.19041.0;net9.0-windows10.0.19041.0</_MvxWindowsTargets>
-    <_MvxWpfTargets>net8.0-windows;net9.0-windows</_MvxWpfTargets>
+    <_MvxCommonTargets>net8.0;net9.0;net10.0</_MvxCommonTargets>
+    <_MvxAndroidTargets>net9.0-android;net10.0-android</_MvxAndroidTargets>
+    <_MvxiOSTargets>net9.0-ios;net9.0-maccatalyst;net10.0-ios;net10.0-maccatalyst</_MvxiOSTargets>
+    <_MvxMacOSTargets>net9.0-macos;net10.0-macos</_MvxMacOSTargets>
+    <_MvxTvOSTargets>net9.0-tvos;net10.0-tvos</_MvxTvOSTargets>
+    <_MvxWindowsTargets>net8.0-windows10.0.19041.0;net9.0-windows10.0.19041.0;net10.0-windows10.0.19041.0</_MvxWindowsTargets>
+    <_MvxWpfTargets>net8.0-windows;net9.0-windows;net10.0-windows</_MvxWpfTargets>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
