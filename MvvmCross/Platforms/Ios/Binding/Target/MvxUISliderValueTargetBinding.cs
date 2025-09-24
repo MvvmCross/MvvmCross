@@ -13,7 +13,6 @@ using MvvmCross.WeakSubscription;
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
 public class MvxUISliderValueTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
         UISlider target,
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UISlider>(target, targetPropertyInfo)

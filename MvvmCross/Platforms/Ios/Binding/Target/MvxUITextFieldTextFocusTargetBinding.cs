@@ -10,15 +10,14 @@ using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
-public class MvxUITextFieldTextFocusTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        UITextField target)
+public class MvxUITextFieldTextFocusTargetBinding(UITextField target)
     : MvxTargetBinding(target)
 {
     private MvxWeakEventSubscription<UITextField>? _subscription;
 
     protected UITextField? TextField => Target as UITextField;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;

@@ -15,6 +15,7 @@ public class MvxUIButtonTitleTargetBinding(UIButton button, UIControlState state
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     protected override void SetValueImpl(object target, object? value)

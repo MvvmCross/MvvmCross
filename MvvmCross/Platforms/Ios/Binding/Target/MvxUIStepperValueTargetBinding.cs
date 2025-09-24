@@ -13,7 +13,6 @@ using MvvmCross.WeakSubscription;
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
 public class MvxUIStepperValueTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
         UIStepper target,
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UIStepper>(target, targetPropertyInfo)

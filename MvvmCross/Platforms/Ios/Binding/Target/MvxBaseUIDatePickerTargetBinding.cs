@@ -13,7 +13,6 @@ using MvvmCross.WeakSubscription;
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
 public abstract class MvxBaseUIDatePickerTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
         UIDatePicker target,
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UIDatePicker>(target, targetPropertyInfo)

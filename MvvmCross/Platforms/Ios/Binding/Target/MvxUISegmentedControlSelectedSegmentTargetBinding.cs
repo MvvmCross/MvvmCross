@@ -13,7 +13,6 @@ using MvvmCross.WeakSubscription;
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
 public class MvxUISegmentedControlSelectedSegmentTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
         UISegmentedControl target,
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UISegmentedControl>(target, targetPropertyInfo)

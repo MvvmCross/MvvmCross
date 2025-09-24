@@ -23,9 +23,7 @@ public class MvxUIControlTargetBinding : MvxConvertingTargetBinding
 
     protected UIControl? Control => Target as UIControl;
 
-    public MvxUIControlTargetBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            UIControl control, string controlEvent)
+    public MvxUIControlTargetBinding(UIControl control, string controlEvent)
         : base(control)
     {
         _controlEvent = controlEvent;

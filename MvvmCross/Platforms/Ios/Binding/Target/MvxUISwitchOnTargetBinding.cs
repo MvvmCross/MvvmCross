@@ -11,9 +11,7 @@ using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
-public class MvxUISwitchOnTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        UISwitch target)
+public class MvxUISwitchOnTargetBinding(UISwitch target)
     : MvxTargetBinding<UISwitch, bool>(target)
 {
     private MvxWeakEventSubscription<UISwitch>? _subscription;

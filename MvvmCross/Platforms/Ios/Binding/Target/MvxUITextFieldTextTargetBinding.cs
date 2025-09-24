@@ -12,9 +12,7 @@ using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
-public class MvxUITextFieldTextTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        UITextField target)
+public class MvxUITextFieldTextTargetBinding(UITextField target)
     : MvxConvertingTargetBinding(target), IMvxEditableTextView
 {
     private MvxWeakEventSubscription<UITextField>? _subscriptionChanged;
@@ -46,6 +44,7 @@ public class MvxUITextFieldTextTargetBinding(
         _subscriptionEndEditing = view.WeakSubscribe(nameof(target.EditingDidEnd), HandleEditTextValueChanged);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object? value)

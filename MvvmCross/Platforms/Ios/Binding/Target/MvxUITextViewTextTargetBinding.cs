@@ -11,9 +11,7 @@ using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
-public class MvxUITextViewTextTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        UITextView target)
+public class MvxUITextViewTextTargetBinding(UITextView target)
     : MvxConvertingTargetBinding(target)
 {
     private MvxWeakEventSubscription<NSTextStorage, NSTextStorageEventArgs>? _subscription;
