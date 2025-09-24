@@ -4,11 +4,11 @@ inputs:
   dotnet-version:
     description: 'The .NET version to install'
     required: false
-    default: '9.0.304'
+    default: '10.0.100-rc.1.25451.107'
   java-version:
     description: 'The Java version to install'
     required: false
-    default: '17'
+    default: '21'
   java-distribution:
     description: 'The Java distribution to install'
     required: false
