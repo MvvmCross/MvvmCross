@@ -11,7 +11,7 @@ on:
 
 jobs:
   copilot-setup-steps:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
@@ -21,7 +21,14 @@ jobs:
         fetch-depth: 0
         fetch-tags: true  
 
-    - uses: ./.github/actions/shared
+    - name: Install .NET 9.0.304
+      uses: actions/setup-dotnet@d4c94342e560b34958eacfc5d055d21461ed1c5d # v5.0.0
+      with:
+        dotnet-version: 9.0.304
+
+    - name: Restore .NET tools
+      shell: pwsh
+      run: dotnet tool restore
 
     - name: Add the local .NET to the envvars (PATH, DOTNET_ROOT)
       shell: bash
@@ -37,6 +44,10 @@ jobs:
         dotnet --version
         dotnet --info
         dotnet workload --info
+
+    - name: Install .NET workloads
+      shell: pwsh
+      run: dotnet workload install android --version 9.0.304
 
     - name: Reset tracked files to clean workspace
       shell: bash
