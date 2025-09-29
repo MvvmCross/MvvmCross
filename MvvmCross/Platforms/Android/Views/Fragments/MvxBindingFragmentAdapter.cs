@@ -111,6 +111,17 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             object? sender, MvxValueEventArgs<MvxCreateViewParameters> e) =>
             FragmentView?.EnsureBindingContextIsSet(e.Value.Inflater);
 
+        protected override void HandleResumeCalled(object? sender, EventArgs e)
+        {
+            IMvxMultipleViewModelCache? cache = null;
+            if (Mvx.IoCProvider?.TryResolve(out cache) == true && FragmentView?.ViewModel != null)
+            {
+                // clear cache if still there
+                cache!.GetAndClear(FragmentView.ViewModel.GetType(), FragmentView.UniqueImmutableCacheTag);
+                return;
+            }
+        }
+
         protected override void HandleSaveInstanceStateCalled(object? sender, MvxValueEventArgs<Bundle> e)
         {
             // it is guaranteed that SaveInstanceState call will be executed before OnStop (thus before Fragment detach)
