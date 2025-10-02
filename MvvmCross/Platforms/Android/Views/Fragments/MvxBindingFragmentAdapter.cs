@@ -113,12 +113,10 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
 
         protected override void HandleResumeCalled(object? sender, EventArgs e)
         {
-            IMvxMultipleViewModelCache? cache = null;
-            if (Mvx.IoCProvider?.TryResolve(out cache) == true && FragmentView?.ViewModel != null)
+            if (Mvx.IoCProvider?.TryResolve(out IMvxMultipleViewModelCache? cache) == true && cache != null && FragmentView?.ViewModel != null)
             {
                 // clear cache if still there
-                cache!.GetAndClear(FragmentView.ViewModel.GetType(), FragmentView.UniqueImmutableCacheTag);
-                return;
+                cache.GetAndClear(FragmentView.ViewModel.GetType(), FragmentView.UniqueImmutableCacheTag);
             }
         }
 
