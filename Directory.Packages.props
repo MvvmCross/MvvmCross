@@ -43,7 +43,7 @@
     <PackageVersion Include="xunit.v3" Version="3.0.0" />
     <PackageVersion Include="XunitXml.TestLogger" Version="6.1.0" />
 
-    <PackageVersion Include="Cake.Frosting" Version="5.0.0" />
+    <PackageVersion Include="Cake.Frosting" Version="5.1.0" />
     <PackageVersion Include="Cake.GitVersioning" Version="3.8.118" />
   </ItemGroup>
   
