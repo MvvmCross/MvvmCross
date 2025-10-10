@@ -73,6 +73,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
             _tableView.ReloadData();
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         protected virtual NSView GetOrCreateViewFor(NSTableView tableView, NSTableColumn tableColumn)
         {
             var view = tableView.MakeView(tableColumn.Identifier, this);
@@ -90,6 +91,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
             return view;
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "This method creates bindings which are designed to be reflection-safe. The base NSTableViewSource.GetViewForItem cannot have RequiresUnreferencedCode annotation.")]
         public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
         {
             if (ItemsSource == null)
