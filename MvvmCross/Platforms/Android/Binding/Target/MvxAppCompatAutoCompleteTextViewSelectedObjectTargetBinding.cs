@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
@@ -32,8 +32,9 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             FireValueChanged(View.SelectedObject);
         }
 
-        public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+        [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
         public override void SubscribeToEvents()
         {
             var autoComplete = this.View;

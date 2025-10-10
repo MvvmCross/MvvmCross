@@ -21,6 +21,7 @@ public class MvxRatingBarRatingTargetBinding
     {
     }
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         _subscription = RatingBar?.WeakSubscribe<RatingBar, RatingBar.RatingBarChangeEventArgs>(

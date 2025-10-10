@@ -65,6 +65,7 @@ public abstract class MvxTargetBinding<
         }
     }
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public virtual void SubscribeToEvents()
     {
         // do nothing by default

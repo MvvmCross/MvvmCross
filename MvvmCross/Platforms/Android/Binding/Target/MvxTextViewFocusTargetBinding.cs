@@ -35,6 +35,7 @@ public class MvxTextViewFocusTargetBinding
         TextField.Text = value.ToString();
     }
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         if (TextField == null) return;

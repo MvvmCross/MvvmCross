@@ -34,8 +34,9 @@ public class MvxAutoCompleteTextViewSelectedObjectTargetBinding
         FireValueChanged(View?.SelectedObject);
     }
 
-    public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var autoComplete = View;

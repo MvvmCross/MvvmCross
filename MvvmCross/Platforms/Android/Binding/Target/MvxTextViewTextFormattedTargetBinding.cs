@@ -37,6 +37,7 @@ public class MvxTextViewTextFormattedTargetBinding(TextView target)
 
     public override MvxBindingMode DefaultMode => _isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var view = TextView;

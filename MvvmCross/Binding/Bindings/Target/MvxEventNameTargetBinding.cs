@@ -44,5 +44,6 @@ public class MvxEventNameTargetBinding<[DynamicallyAccessedMembers(DynamicallyAc
             _currentCommand.Execute(commandParameter);
     }
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     public override void SetValue(object? value) => _currentCommand = value as ICommand;
 }

@@ -13,6 +13,7 @@ public class MvxNumberPickerDisplayedValuesTargetBinding(NumberPicker target)
 {
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     protected override void SetValue(IEnumerable<string>? value)
     {
         if (Target == null)
