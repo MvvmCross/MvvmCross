@@ -23,6 +23,7 @@ namespace MvvmCross.Binding.BindingContext
 
         public event EventHandler DataContextChanged;
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public IMvxBindingContext Init(object dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue)
         {
             AddDelayedAction(firstBindingKey, firstBindingValue);
@@ -32,6 +33,7 @@ namespace MvvmCross.Binding.BindingContext
             return this;
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public IMvxBindingContext Init(object dataContext, object firstBindingKey, string firstBindingValue)
         {
             AddDelayedAction(firstBindingKey, firstBindingValue);
