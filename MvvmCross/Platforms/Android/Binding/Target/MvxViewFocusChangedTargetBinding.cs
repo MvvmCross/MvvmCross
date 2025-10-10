@@ -40,6 +40,7 @@ public class MvxViewFocusChangedTargetBinding : MvxAndroidTargetBinding
         _command = value as ICommand;
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

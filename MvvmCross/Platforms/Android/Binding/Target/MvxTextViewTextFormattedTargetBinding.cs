@@ -54,6 +54,7 @@ public class MvxTextViewTextFormattedTargetBinding(TextView target)
         FireValueChanged(TextView?.TextFormatted);
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

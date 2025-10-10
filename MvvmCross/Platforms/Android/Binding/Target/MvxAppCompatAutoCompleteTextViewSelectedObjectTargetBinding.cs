@@ -47,6 +47,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
                 AutoCompleteOnSelectedObjectChanged);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
