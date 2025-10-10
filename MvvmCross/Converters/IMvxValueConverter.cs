@@ -12,13 +12,13 @@ public interface IMvxValueConverter
 {
     object Convert(
         object value,
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? targetType,
+        Type? targetType,
         object? parameter,
         CultureInfo? culture);
 
     object ConvertBack(
         object value,
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? targetType,
+        Type? targetType,
         object? parameter,
         CultureInfo? culture);
 }

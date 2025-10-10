@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.Binding.Target;
@@ -22,6 +23,7 @@ namespace MvvmCross.Plugin.Color.Platforms.Android.BindingTargets
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(global::Android.Graphics.Color);
     }
 }

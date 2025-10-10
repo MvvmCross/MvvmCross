@@ -199,6 +199,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             return attribute;
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2062", Justification = "ViewModel types passed to presentation attributes are preserved by the navigation infrastructure.")]
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type? viewModelType, Type? viewType)
         {
             if (viewType == null)

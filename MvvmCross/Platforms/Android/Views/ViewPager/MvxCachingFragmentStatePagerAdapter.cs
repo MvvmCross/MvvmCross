@@ -223,6 +223,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             {
             }
 
+            [UnconditionalSuppressMessage("Trimming", "IL2057", Justification = "Type names are serialized/deserialized for Android Parcelable implementation. Types are preserved through view model registration.")]
             public ViewPagerFragmentInfoParcelable(Parcel source)
             {
                 string fragmentType = source.ReadString();

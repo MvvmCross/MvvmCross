@@ -34,7 +34,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.ValueConverters
 
         public override object Convert(
             object value,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type targetType,
+            Type targetType,
             object parameter,
             CultureInfo culture)
         {
@@ -55,7 +55,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.ValueConverters
             return nativeValue;
         }
 
-        public override object ConvertBack(object value, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type targetType, object parameter, CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             //unified types already implement proper conversion with IConvertible interface support
             return System.Convert.ChangeType(value, targetType, culture);

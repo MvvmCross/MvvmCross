@@ -33,6 +33,7 @@ public static class MvxActivityViewExtensions
         }
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     public static void OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
     {
         androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity, bundle));
@@ -142,6 +143,7 @@ public static class MvxActivityViewExtensions
     }
 
     [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Activity types are preserved by the Android presenter infrastructure.")]
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     private static IMvxViewModel? LoadViewModel(this IMvxAndroidView androidView, IMvxBundle? savedState)
     {
         var activity = androidView.ToActivity();
