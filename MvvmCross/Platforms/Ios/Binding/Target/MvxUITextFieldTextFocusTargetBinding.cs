@@ -22,6 +22,7 @@ public class MvxUITextFieldTextFocusTargetBinding(UITextField target)
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     public override void SetValue(object? value)
     {
         if (TextField == null) return;
@@ -30,6 +31,7 @@ public class MvxUITextFieldTextFocusTargetBinding(UITextField target)
         TextField.Text = value.ToString();
     }
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var textField = TextField;

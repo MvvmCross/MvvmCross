@@ -16,11 +16,13 @@ public class MvxUISwitchOnTargetBinding(UISwitch target)
 {
     private MvxWeakEventSubscription<UISwitch>? _subscription;
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     protected override void SetValue(bool value)
     {
         Target?.SetState(value, true);
     }
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var uiSwitch = Target;

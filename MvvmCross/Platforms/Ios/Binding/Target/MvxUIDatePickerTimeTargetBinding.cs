@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
@@ -18,6 +19,7 @@ public class MvxUIDatePickerTimeTargetBinding(UIDatePicker target, PropertyInfo 
         return valueLocal.TimeOfDay;
     }
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     protected override object MakeSafeValue(object? value)
     {
         value ??= TimeSpan.FromSeconds(0);
