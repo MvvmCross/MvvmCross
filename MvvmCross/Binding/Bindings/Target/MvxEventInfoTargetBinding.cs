@@ -33,6 +33,7 @@ public class MvxEventInfoTargetBinding<T> : MvxTargetBinding
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

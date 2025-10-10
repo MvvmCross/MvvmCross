@@ -17,6 +17,7 @@ namespace MvvmCross.Binding.BindingContext
             return new MvxInlineBindingTarget<TViewModel>(bindingContextOwner);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<T, TViewModel>(this T element, MvxInlineBindingTarget<TViewModel> target,
                                             string descriptionText)
         {
@@ -24,6 +25,7 @@ namespace MvvmCross.Binding.BindingContext
             return element;
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
                                             Expression<Func<TViewModel, object>> sourcePropertyPath,
@@ -35,6 +37,7 @@ namespace MvvmCross.Binding.BindingContext
             return element.Bind(target, null, sourcePropertyPath, converterName, converterParameter, fallbackValue, mode);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
                                             Expression<Func<TViewModel, object>> sourcePropertyPath,
@@ -46,6 +49,7 @@ namespace MvvmCross.Binding.BindingContext
             return element.Bind(target, null, sourcePropertyPath, converter, converterParameter, fallbackValue, mode);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
                                             Expression<Func<T, object>> targetPropertyPath,
@@ -60,6 +64,7 @@ namespace MvvmCross.Binding.BindingContext
                                 fallbackValue, mode);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
                                             Expression<Func<T, object>> targetPropertyPath,
@@ -75,6 +80,7 @@ namespace MvvmCross.Binding.BindingContext
             return element.Bind(target, targetPath, sourcePath, converter, converterParameter, fallbackValue, mode);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
                                             string targetPath,
@@ -100,12 +106,14 @@ namespace MvvmCross.Binding.BindingContext
             return element;
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<T>(this T element, IMvxBindingContextOwner bindingContextOwner, string descriptionText)
         {
             bindingContextOwner.AddBindings(element, descriptionText);
             return element;
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<T>(this T element, IMvxBindingContextOwner bindingContextOwner,
                                 IEnumerable<MvxBindingDescription> descriptions)
         {

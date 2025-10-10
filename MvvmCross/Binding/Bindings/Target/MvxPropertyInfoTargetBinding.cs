@@ -11,6 +11,7 @@ namespace MvvmCross.Binding.Bindings.Target;
 public abstract class MvxPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
     : MvxConvertingTargetBinding(target)
 {
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

@@ -127,6 +127,7 @@ public class MvxWithEventPropertyInfoTargetBinding
         return eventInfo;
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

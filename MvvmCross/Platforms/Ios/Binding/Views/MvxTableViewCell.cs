@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using CoreGraphics;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
@@ -18,50 +19,59 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
     {
         public IMvxBindingContext BindingContext { get; set; }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxTableViewCell()
             : this(string.Empty)
         {
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxTableViewCell(string bindingText)
         {
             this.CreateBindingContext(bindingText);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             this.CreateBindingContext(bindingDescriptions);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxTableViewCell(string bindingText, CGRect frame)
             : base(frame)
         {
             this.CreateBindingContext(bindingText);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, CGRect frame)
             : base(frame)
         {
             this.CreateBindingContext(bindingDescriptions);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxTableViewCell(NativeHandle handle)
             : this(string.Empty, handle)
         {
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxTableViewCell(string bindingText, NativeHandle handle)
             : base(handle)
         {
             this.CreateBindingContext(bindingText);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, NativeHandle handle)
             : base(handle)
         {
             this.CreateBindingContext(bindingDescriptions);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                 UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
@@ -70,6 +80,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             this.CreateBindingContext(bindingText);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
                                 UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                 UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)

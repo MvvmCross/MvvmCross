@@ -63,6 +63,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             return false;
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected virtual bool TryCreateSpecificFactoryBinding(object target, string targetName,
                                                                out IMvxTargetBinding binding)
         {
