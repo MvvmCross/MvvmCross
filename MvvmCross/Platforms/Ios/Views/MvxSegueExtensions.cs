@@ -19,6 +19,8 @@ namespace MvvmCross.Platforms.Ios.Views
     internal static class MvxSegueExtensions
     {
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+        [UnconditionalSuppressMessage("Trimming", "IL2073", Justification = "PropertyInfo.PropertyType doesn't preserve DynamicallyAccessedMembers annotations, but the ViewModel property type is expected to be a properly constructed ViewModel")]
+        [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Runtime type inspection is necessary for segue-based navigation")]
         internal static Type? GetViewModelType<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TViewType>(
             this TViewType? view)
                 where TViewType : class, IMvxView
