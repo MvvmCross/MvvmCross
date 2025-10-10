@@ -63,6 +63,7 @@ public class MvxUITextViewTextTargetBinding(UITextView target)
         view.Text = (string?)value;
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         base.Dispose(isDisposing);

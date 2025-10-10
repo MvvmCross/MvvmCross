@@ -48,6 +48,7 @@ public class MvxUIPageControlCurrentPageTargetBinding(UIPageControl target, Prop
         _subscription = pageControl.WeakSubscribe(nameof(pageControl.ValueChanged), HandleValueChanged);
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         base.Dispose(isDisposing);

@@ -43,6 +43,7 @@ public class MvxUISegmentedControlSelectedSegmentTargetBinding(
         view.SelectedSegment = (nint)value;
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         base.Dispose(isDisposing);

@@ -64,11 +64,18 @@ public class MvxUITextFieldTextTargetBinding(UITextField target)
         base.Dispose(isDisposing);
         if (!isDisposing) return;
 
-        _subscriptionChanged?.Dispose();
-        _subscriptionChanged = null;
+                _subscription = textField.WeakSubscribe(EditingChangedEvent, HandleEditingChanged);
+    }
 
-        _subscriptionEndEditing?.Dispose();
-        _subscriptionEndEditing = null;
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
+    protected override void Dispose(bool isDisposing)
+    {
+        base.Dispose(isDisposing);
+        if (!isDisposing) return;
+
+        _subscription?.Dispose();
+        _subscription = null;
+    }
     }
 
     public string? CurrentText

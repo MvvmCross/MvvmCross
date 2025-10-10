@@ -49,6 +49,7 @@ public class MvxUITextFieldTextFocusTargetBinding(UITextField target)
         FireValueChanged(textField.Text);
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         base.Dispose(isDisposing);
