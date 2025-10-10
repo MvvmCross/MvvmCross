@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Foundation;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings;
@@ -15,12 +16,14 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 {
     public class MvxActionBasedTableViewSource : MvxStandardTableViewSource
     {
-        protected MvxActionBasedTableViewSource(UITableView tableView)
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
+        public MvxActionBasedTableViewSource(UITableView tableView)
             : base(tableView)
         {
             Initialize();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxActionBasedTableViewSource(NativeHandle handle)
             : base(handle)
         {
@@ -29,6 +32,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             Initialize();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxActionBasedTableViewSource(
             UITableView tableView,
             UITableViewCellStyle style,
@@ -40,6 +44,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             Initialize();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxActionBasedTableViewSource(
             UITableView tableView,
             UITableViewCellStyle style,
@@ -51,6 +56,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             Initialize();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         private void Initialize()
         {
             CellCreator = CreateDefaultBindableCell;
@@ -72,6 +78,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
             var reuse = tableView.DequeueReusableCell(CellIdentifier);
