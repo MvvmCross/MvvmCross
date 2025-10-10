@@ -69,6 +69,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             view.SelectedTabViewItemIndex = (int)value;
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);

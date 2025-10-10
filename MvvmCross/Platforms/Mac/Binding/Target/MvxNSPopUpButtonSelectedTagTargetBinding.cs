@@ -56,6 +56,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             view.SelectItemWithTag((int)value);
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);

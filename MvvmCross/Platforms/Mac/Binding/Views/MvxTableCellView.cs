@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
 using ObjCRuntime;
@@ -12,6 +13,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
     public class MvxTableCellView : NSTableCellView, IMvxBindingContextOwner, IMvxDataConsumer
     {
         // Called when created from unmanaged code
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableCellView(NativeHandle handle) : base(handle)
         {
             this.Initialize(string.Empty);
@@ -19,11 +21,13 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
 
         // Called when created directly from a XIB file
         [Export("initWithCoder:")]
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableCellView(NSCoder coder) : base(coder)
         {
             this.Initialize(string.Empty);
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableCellView(string bindingText)
         {
             this.Frame = new CGRect(0, 0, 100, 17);
