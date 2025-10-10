@@ -17,6 +17,7 @@ namespace MvvmCross.Platforms.Android.Views
     public static class MvxFragmentExtensions
     {
         [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Fragment types are preserved by the Android presenter infrastructure and their associated attributes.")]
+        [UnconditionalSuppressMessage("Trimming", "IL2073", Justification = "ViewModel types from FindAssociatedViewModelTypeOrNull and presentation attributes are preserved by the navigation infrastructure.")]
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         public static Type FindAssociatedViewModelType(this IMvxFragmentView fragmentView, Type fragmentActivityParentType)
         {

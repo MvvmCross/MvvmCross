@@ -102,6 +102,7 @@ public abstract class MvxAndroidSetup
         return new MvxAndroidLifetimeMonitor();
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     protected virtual void InitializeSavedStateConverter(IMvxIoCProvider iocProvider)
     {
         ValidateArguments(iocProvider);
@@ -110,6 +111,7 @@ public abstract class MvxAndroidSetup
         iocProvider.RegisterSingleton(converter);
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     protected virtual IMvxSavedStateConverter CreateSavedStateConverter()
     {
         return new MvxSavedStateConverter();
@@ -163,6 +165,7 @@ public abstract class MvxAndroidSetup
         iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
     }
 
+    [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
     protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
     {
         ValidateArguments(iocProvider);
