@@ -59,23 +59,17 @@ public class MvxUITextFieldTextTargetBinding(UITextField target)
         view.Text = (string?)value;
     }
 
-    protected override void Dispose(bool isDisposing)
-    {
-        base.Dispose(isDisposing);
-        if (!isDisposing) return;
-
-                _subscription = textField.WeakSubscribe(EditingChangedEvent, HandleEditingChanged);
-    }
-
     [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
+        if (isDisposing)
+        {
+            _subscriptionChanged?.Dispose();
+            _subscriptionChanged = null;
+            _subscriptionEndEditing?.Dispose();
+            _subscriptionEndEditing = null;
+        }
         base.Dispose(isDisposing);
-        if (!isDisposing) return;
-
-        _subscription?.Dispose();
-        _subscription = null;
-    }
     }
 
     public string? CurrentText

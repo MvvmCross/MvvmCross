@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 using MvvmCross.Binding.Bindings;
 using ObjCRuntime;
@@ -11,27 +12,32 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
     public class MvxStandardTableViewCell
         : MvxTableViewCell
     {
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxStandardTableViewCell(NativeHandle handle)
             : this("TitleText" /* default binding is ToString() on the passed in item */, handle)
         {
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxStandardTableViewCell(string bindingText, NativeHandle handle)
             : base(bindingText, handle)
         {
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, NativeHandle handle)
             : base(bindingDescriptions, handle)
         {
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxStandardTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
                                         UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)

@@ -84,21 +84,20 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             RefreshEnabledState();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
             {
-                var view = Control;
-                if (view != null)
+                var control = Control;
+                if (control != null)
                 {
-                    view.PrimaryActionTriggered -= ControlOnTouchUpInside;
+                    control.PrimaryActionTriggered -= ControlOnTouchUpInside;
                 }
-                if (_canExecuteSubscription != null)
-                {
-                    _canExecuteSubscription.Dispose();
-                    _canExecuteSubscription = null;
-                }
+                _canExecuteSubscription?.Dispose();
+                _canExecuteSubscription = null;
             }
+
             base.Dispose(isDisposing);
         }
     }

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
@@ -32,9 +33,9 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
                 var searchBar = View;
@@ -43,6 +44,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
                     searchBar.TextChanged -= HandleSearchBarValueChanged;
                 }
             }
+            base.Dispose(isDisposing);
         }
     }
 }

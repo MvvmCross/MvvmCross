@@ -57,18 +57,21 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             view.Text = (string)value;
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = View;
-                if (editText != null && _subscribed)
+                if (_subscribed)
                 {
-                    editText.Changed -= EditTextOnChanged;
-                    _subscribed = false;
+                    var target = View;
+                    if (target != null)
+                    {
+                        target.Changed -= EditTextOnChanged;
+                    }
                 }
             }
+            base.Dispose(isDisposing);
         }
     }
 }

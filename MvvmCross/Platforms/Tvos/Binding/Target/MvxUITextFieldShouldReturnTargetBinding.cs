@@ -50,17 +50,16 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(ICommand);
 
-        protected override void Dispose(bool isDisposing)
-        {
-            base.Dispose(isDisposing);
-            if (isDisposing)
-            {
-                var editText = View;
-                if (editText != null)
-                {
-                    editText.ShouldReturn = null;
-                }
-            }
-        }
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
+    protected override void Dispose(bool isDisposing)
+    {
+        base.Dispose(isDisposing);
+        if (!isDisposing) return;
+
+        var editText = View;
+        if (editText == null) return;
+
+        editText.ShouldReturn = null;
+    }
     }
 }

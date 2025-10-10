@@ -51,16 +51,21 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             FireValueChanged(TextField.Text);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
-            if (!isDisposing) return;
-
-            if (TextField != null && _subscribed)
+            if (isDisposing)
             {
-                TextField.EditingDidEnd -= HandleLostFocus;
-                _subscribed = false;
+                if (_subscribed)
+                {
+                    var textField = TextField;
+                    if (textField != null)
+                    {
+                        textField.EditingDidEnd -= HandleLostFocus;
+                    }
+                }
             }
+            base.Dispose(isDisposing);
         }
     }
 }
