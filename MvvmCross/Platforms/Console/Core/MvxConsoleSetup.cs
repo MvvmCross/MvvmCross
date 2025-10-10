@@ -62,6 +62,7 @@ public abstract class MvxConsoleSetup<TApplication> : MvxConsoleSetup
     protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>
         iocProvider.IoCConstruct<TApplication>()!;
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method returns assemblies that may contain types not preserved by trimming")]
     public override IEnumerable<Assembly> GetViewModelAssemblies()
     {
         return new[] { typeof(TApplication).GetTypeInfo().Assembly };

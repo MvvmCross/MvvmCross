@@ -28,6 +28,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
         public override void SubscribeToEvents()
         {
             var segmentedControl = View;

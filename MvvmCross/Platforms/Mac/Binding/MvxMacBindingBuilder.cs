@@ -40,6 +40,7 @@ namespace MvvmCross.Platforms.Mac.Binding
             return registry;
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method registers target bindings that may not be preserved by trimming")]
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             base.FillTargetFactories(registry);

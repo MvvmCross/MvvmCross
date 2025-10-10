@@ -24,6 +24,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         {
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
         public override void SetValue(object value)
         {
             if (TextField == null) return;
@@ -32,6 +33,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             TextField.Text = value.ToString();
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
         public override void SubscribeToEvents()
         {
             if (TextField == null) return;
