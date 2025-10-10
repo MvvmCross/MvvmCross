@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
@@ -14,10 +15,11 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin.FieldBinding
 {
-    [Preserve(AllMembers = true)]
+    [RequiresUnreferencedCode("This class uses reflection to bind to fields which may not be preserved by trimming.")]
     public class MvxFieldSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
+        [RequiresUnreferencedCode("This method uses reflection to bind to fields which may not be preserved by trimming.")]
         public bool TryCreateBinding(object source, IMvxPropertyToken currentToken,
                                      List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
@@ -88,6 +90,7 @@ namespace MvvmCross.Plugin.FieldBinding
             return true;
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Field binding plugin intentionally uses reflection to bind to fields at runtime.")]
         protected FieldInfo FindFieldInfo(object source, string name)
         {
             var fieldInfo = source.GetType()

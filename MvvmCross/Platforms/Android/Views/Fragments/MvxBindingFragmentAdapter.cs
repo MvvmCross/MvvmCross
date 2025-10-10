@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Logging;
@@ -13,6 +14,7 @@ using Fragment = AndroidX.Fragment.App.Fragment;
 
 namespace MvvmCross.Platforms.Android.Views.Fragments
 {
+    [RequiresUnreferencedCode("This class uses reflection which may not be preserved during trimming.")]
     public class MvxBindingFragmentAdapter
         : MvxBaseFragmentAdapter
     {
@@ -25,6 +27,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
                 throw new ArgumentException("eventSource must be an IMvxFragmentView", nameof(eventSource));
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
         protected override void HandleCreateCalled(object? sender, MvxValueEventArgs<Bundle>? e)
         {
             // Create is called after Fragment is attached to Activity
@@ -57,6 +60,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
                 FragmentView?.OnCreate(mvxBundle, request);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
         private (Bundle? bundle, MvxViewModelRequest? request) GetAndroidBundleAndRequest(MvxValueEventArgs<Bundle>? bundleArgs)
         {
             Bundle? bundle = null;
@@ -79,11 +83,12 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             return (bundle, request);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
         private static MvxViewModelRequest? ReadRequest(MvxViewModelRequest? request, string json)
         {
-            if (Mvx.IoCProvider?.TryResolve(out IMvxNavigationSerializer serializer) == true)
+            if (Mvx.IoCProvider?.TryResolve(out IMvxNavigationSerializer? serializer) == true)
             {
-                request = serializer.Serializer.DeserializeObject<MvxViewModelRequest>(json);
+                request = serializer?.Serializer.DeserializeObject<MvxViewModelRequest>(json);
             }
             else
             {
@@ -96,9 +101,9 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
 
         private static IMvxBundle ReadAndroidBundle(Bundle? bundle)
         {
-            if (Mvx.IoCProvider?.TryResolve(out IMvxSavedStateConverter converter) == true && bundle != null)
+            if (Mvx.IoCProvider?.TryResolve(out IMvxSavedStateConverter? converter) == true && bundle != null)
             {
-                return converter.Read(bundle) ?? new MvxBundle();
+                return converter?.Read(bundle) ?? new MvxBundle();
             }
 
             MvxLogHost.GetLog<MvxBindingFragmentAdapter>()?.Log(LogLevel.Warning,
@@ -128,22 +133,22 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             var mvxBundle = FragmentView?.CreateSaveStateBundle();
             if (mvxBundle != null)
             {
-                if (Mvx.IoCProvider?.TryResolve(out IMvxSavedStateConverter converter) != true)
+                if (Mvx.IoCProvider?.TryResolve(out IMvxSavedStateConverter? converter) != true)
                 {
                     MvxLogHost.GetLog<MvxBindingFragmentAdapter>()?.Log(LogLevel.Warning,
                         "Saved state converter not available - saving state will be hard");
                 }
                 else
                 {
-                    converter.Write(e.Value, mvxBundle);
+                    converter?.Write(e.Value, mvxBundle);
                 }
             }
 
             if (FragmentView == null)
                 return;
 
-            if (Mvx.IoCProvider?.TryResolve(out IMvxMultipleViewModelCache cache) == true)
-                cache.Cache(FragmentView.ViewModel, FragmentView.UniqueImmutableCacheTag);
+            if (Mvx.IoCProvider?.TryResolve(out IMvxMultipleViewModelCache? cache) == true)
+                cache?.Cache(FragmentView.ViewModel, FragmentView.UniqueImmutableCacheTag);
         }
 
         protected override void HandleDestroyViewCalled(object? sender, EventArgs e)

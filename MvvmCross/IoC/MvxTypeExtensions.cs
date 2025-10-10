@@ -123,13 +123,15 @@ public static class MvxTypeExtensions
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         public Type ImplementationType { get; }
 
-        public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes, Type implementationType)
+        public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type implementationType)
         {
             ImplementationType = implementationType;
             ServiceTypes = serviceTypes;
         }
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = "Types passed to AsTypes are preserved by IoC registration infrastructure.")]
     public static IEnumerable<ServiceTypeAndImplementationTypePair> AsTypes(this IEnumerable<Type> types)
     {
         return types.Select(t => new ServiceTypeAndImplementationTypePair([t], t));

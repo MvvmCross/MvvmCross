@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
@@ -23,6 +24,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(ICommand);
 
         protected override void SetValueImpl(object target, object value)

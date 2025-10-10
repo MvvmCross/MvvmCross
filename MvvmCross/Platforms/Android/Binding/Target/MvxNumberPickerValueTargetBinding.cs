@@ -13,9 +13,6 @@ using MvvmCross.Platforms.Android.WeakSubscription;
 namespace MvvmCross.Platforms.Android.Binding.Target;
 
 public class MvxNumberPickerValueTargetBinding(
-    [DynamicallyAccessedMembers(
-        DynamicallyAccessedMemberTypes.PublicEvents |
-                    DynamicallyAccessedMemberTypes.PublicProperties)]
         object target,
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<NumberPicker>(target, targetPropertyInfo)
@@ -41,6 +38,7 @@ public class MvxNumberPickerValueTargetBinding(
             FireValueChanged(e.NewVal);
     }
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var numberPicker = View;
@@ -55,6 +53,7 @@ public class MvxNumberPickerValueTargetBinding(
             NumberPickerValueChanged);
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

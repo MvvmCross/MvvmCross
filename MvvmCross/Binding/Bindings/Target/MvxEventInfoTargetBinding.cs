@@ -33,6 +33,7 @@ public class MvxEventInfoTargetBinding<T> : MvxTargetBinding
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)
@@ -52,6 +53,7 @@ public class MvxEventInfoTargetBinding<T> : MvxTargetBinding
         _currentCommand?.Execute(null);
     }
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     public override void SetValue(object? value)
     {
         var command = value as ICommand;

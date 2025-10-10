@@ -13,6 +13,7 @@ public sealed class MvxNullTargetBinding() : MvxTargetBinding(null)
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(object);
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     public override void SetValue(object? value)
     {
         // ignored

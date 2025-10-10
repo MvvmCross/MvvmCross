@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
@@ -32,6 +33,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
         public override void SubscribeToEvents()
         {
             var target = View;
@@ -45,9 +47,11 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             _subscribed = true;
         }
 
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(string);
 
-        protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
+        [RequiresUnreferencedCode("This method uses reflection to get type information and perform conversions which may not be preserved by trimming.")]
+        protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object? value)
         {
             return this.ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(target, value);
         }
@@ -61,18 +65,21 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             view.Text = (string)value;
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = View;
-                if (editText != null && _subscribed)
+                if (_subscribed)
                 {
-                    editText.EditingChanged -= HandleEditTextValueChanged;
-                    _subscribed = false;
+                    var target = View;
+                    if (target != null)
+                    {
+                        target.EditingChanged -= HandleEditTextValueChanged;
+                    }
                 }
             }
+            base.Dispose(isDisposing);
         }
 
         public string CurrentText

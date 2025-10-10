@@ -10,19 +10,19 @@ using MvvmCross.Platforms.Android.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target;
 
-public class MvxPreferenceValueTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        Preference preference)
+public class MvxPreferenceValueTargetBinding(Preference preference)
     : MvxAndroidTargetBinding(preference)
 {
     private MvxAndroidTargetEventSubscription<Preference, Preference.PreferenceChangeEventArgs>? _subscription;
 
     public Preference? Preference => Target as Preference;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(Preference);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         _subscription = Preference?.WeakSubscribe<Preference, Preference.PreferenceChangeEventArgs>(
@@ -39,6 +39,7 @@ public class MvxPreferenceValueTargetBinding(
         e.Handled = true;
     }
 
+    [RequiresUnreferencedCode("This method calls SubscribeToEvents which may use reflection to subscribe to events which may not be preserved by trimming")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

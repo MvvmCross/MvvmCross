@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using CoreGraphics;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings;
@@ -17,44 +18,52 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
     {
         public IMvxBindingContext BindingContext { get; set; }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxCollectionViewCell()
             : this(string.Empty)
         {
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxCollectionViewCell(string bindingText)
         {
             this.CreateBindingContext(bindingText);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             this.CreateBindingContext(bindingDescriptions);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxCollectionViewCell(string bindingText, CGRect frame)
             : base(frame)
         {
             this.CreateBindingContext(bindingText);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, CGRect frame)
             : base(frame)
         {
             this.CreateBindingContext(bindingDescriptions);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxCollectionViewCell(NativeHandle handle)
             : this(string.Empty, handle)
         {
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxCollectionViewCell(string bindingText, NativeHandle handle)
             : base(handle)
         {
             this.CreateBindingContext(bindingText);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxCollectionViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, NativeHandle handle)
             : base(handle)
         {

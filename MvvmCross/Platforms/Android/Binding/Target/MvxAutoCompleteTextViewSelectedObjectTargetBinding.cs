@@ -17,7 +17,6 @@ public class MvxAutoCompleteTextViewSelectedObjectTargetBinding
     private MvxJavaEventSubscription<MvxAutoCompleteTextView>? _subscription;
 
     public MvxAutoCompleteTextViewSelectedObjectTargetBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
             MvxAutoCompleteTextView target,
             PropertyInfo targetPropertyInfo)
         : base(target, targetPropertyInfo)
@@ -35,8 +34,9 @@ public class MvxAutoCompleteTextViewSelectedObjectTargetBinding
         FireValueChanged(View?.SelectedObject);
     }
 
-    public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var autoComplete = View;
@@ -48,6 +48,7 @@ public class MvxAutoCompleteTextViewSelectedObjectTargetBinding
             AutoCompleteOnSelectedObjectChanged);
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

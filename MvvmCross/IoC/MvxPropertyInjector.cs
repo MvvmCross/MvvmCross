@@ -12,6 +12,7 @@ namespace MvvmCross.IoC
 {
     public class MvxPropertyInjector : IMvxPropertyInjector
     {
+        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Runtime property inspection for generic type parameter with PublicProperties annotation")]
         public virtual void Inject<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TTarget>(
             TTarget target, IMvxPropertyInjectorOptions options = null)
         {

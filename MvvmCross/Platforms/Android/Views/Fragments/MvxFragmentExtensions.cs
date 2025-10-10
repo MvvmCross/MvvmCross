@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
@@ -15,6 +16,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments;
 
 public static class MvxFragmentExtensions
 {
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     public static void AddEventListeners(this IMvxEventSourceFragment fragment)
     {
         if (fragment is IMvxFragmentView)
@@ -131,10 +133,10 @@ public static class MvxFragmentExtensions
 
     public static void LoadViewModelFrom(this IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle? savedState = null)
     {
-        if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelLoader loader) != true)
+        if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelLoader? loader) != true)
             return;
 
-        var viewModel = loader.LoadViewModel(request, savedState);
+        var viewModel = loader?.LoadViewModel(request, savedState);
         if (viewModel == null)
         {
             MvxLogHost.Default?.Log(LogLevel.Warning, "ViewModel not loaded for {ViewModelType}",

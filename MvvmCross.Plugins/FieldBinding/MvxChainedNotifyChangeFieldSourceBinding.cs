@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
@@ -13,7 +14,7 @@ using MvvmCross.Converters;
 
 namespace MvvmCross.Plugin.FieldBinding
 {
-    [Preserve(AllMembers = true)]
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     public class MvxChainedNotifyChangeFieldSourceBinding
         : MvxNotifyChangeFieldSourceBinding
     {
@@ -122,6 +123,7 @@ namespace MvvmCross.Plugin.FieldBinding
             _currentChildBinding.SetValue(value);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)

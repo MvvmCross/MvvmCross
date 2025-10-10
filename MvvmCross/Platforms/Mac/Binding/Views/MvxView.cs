@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using MvvmCross.Binding.BindingContext;
 using ObjCRuntime;
@@ -14,23 +15,27 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
     {
         public IMvxBindingContext BindingContext { get; set; }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxView()
         {
             this.CreateBindingContext();
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxView(NativeHandle handle)
             : base(handle)
         {
             this.CreateBindingContext();
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxView(NSCoder coder)
             : base(coder)
         {
             this.CreateBindingContext();
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxView(RectangleF frame)
             : base(frame)
         {

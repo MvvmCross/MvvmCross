@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Android.Content.Res;
 using Android.Views;
 using MvvmCross.Binding;
@@ -19,6 +20,7 @@ public class MvxViewMarginTargetBinding : MvxAndroidTargetBinding
         _whichMargin = whichMargin;
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(float);
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 

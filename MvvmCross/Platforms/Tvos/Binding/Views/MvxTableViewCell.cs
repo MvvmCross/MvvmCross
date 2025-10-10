@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings;
 using ObjCRuntime;
@@ -13,50 +14,59 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
     {
         public IMvxBindingContext BindingContext { get; set; }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableViewCell()
             : this(string.Empty)
         {
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableViewCell(string bindingText)
         {
             this.CreateBindingContext(bindingText);
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             this.CreateBindingContext(bindingDescriptions);
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableViewCell(string bindingText, CGRect frame)
             : base(frame)
         {
             this.CreateBindingContext(bindingText);
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, CGRect frame)
             : base(frame)
         {
             this.CreateBindingContext(bindingDescriptions);
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableViewCell(NativeHandle handle)
             : this(string.Empty, handle)
         {
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableViewCell(string bindingText, NativeHandle handle)
             : base(handle)
         {
             this.CreateBindingContext(bindingText);
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, NativeHandle handle)
             : base(handle)
         {
             this.CreateBindingContext(bindingDescriptions);
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                 UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
@@ -65,6 +75,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             this.CreateBindingContext(bindingText);
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
                                 UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                 UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)

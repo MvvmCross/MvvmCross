@@ -11,8 +11,10 @@ namespace MvvmCross.Platforms.Android.Views;
 
 public interface IMvxAndroidViewModelLoader
 {
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     IMvxViewModel? Load(Intent? intent, IMvxBundle? savedState);
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     IMvxViewModel? Load(
         Intent? intent,
         IMvxBundle? savedState,

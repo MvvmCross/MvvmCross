@@ -17,7 +17,6 @@ public class MvxAutoCompleteTextViewPartialTextTargetBinding
     private MvxJavaEventSubscription<MvxAutoCompleteTextView>? _subscription;
 
     public MvxAutoCompleteTextViewPartialTextTargetBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
             object target,
             PropertyInfo targetPropertyInfo)
         : base(target, targetPropertyInfo)
@@ -33,8 +32,9 @@ public class MvxAutoCompleteTextViewPartialTextTargetBinding
     private void AutoCompleteOnPartialTextChanged(object? sender, EventArgs eventArgs) =>
         FireValueChanged(View?.PartialText);
 
-    public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var autoComplete = View;
@@ -46,6 +46,7 @@ public class MvxAutoCompleteTextViewPartialTextTargetBinding
             AutoCompleteOnPartialTextChanged);
     }
 
+    [RequiresUnreferencedCode("This method calls SubscribeToEvents which may use reflection to subscribe to events which may not be preserved by trimming")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

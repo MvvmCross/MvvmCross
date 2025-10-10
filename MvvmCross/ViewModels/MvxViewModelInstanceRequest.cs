@@ -11,6 +11,7 @@ namespace MvvmCross.ViewModels
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType)
             : MvxViewModelRequest(viewModelType)
     {
+        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Runtime type of ViewModel instance is expected to have public constructors")]
         public MvxViewModelInstanceRequest(IMvxViewModel viewModelInstance)
             : this(viewModelInstance.GetType())
         {

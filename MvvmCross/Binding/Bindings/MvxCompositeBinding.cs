@@ -21,6 +21,7 @@ namespace MvvmCross.Binding.Bindings
             _bindings.AddRange(args);
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)

@@ -3,11 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding.Extensions;
 
 namespace MvvmCross.Plugin.FieldBinding
 {
-    [Preserve(AllMembers = true)]
+    [RequiresUnreferencedCode("This class uses reflection to bind to fields which may not be preserved by trimming.")]
     public class MvxLeafNotifyChangeFieldSourceBinding
         : MvxNotifyChangeFieldSourceBinding
     {

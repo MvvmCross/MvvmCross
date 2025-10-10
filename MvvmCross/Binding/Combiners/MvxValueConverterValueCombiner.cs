@@ -32,8 +32,9 @@ namespace MvvmCross.Binding.Combiners
                 // null value converter always fails
                 return;
             }
+
             var converted = _valueConverter.ConvertBack(value, sourceStep.SourceType, parameter,
-                                                        CultureInfo.CurrentUICulture);
+                CultureInfo.CurrentUICulture);
             sourceStep.SetValue(converted);
         }
 

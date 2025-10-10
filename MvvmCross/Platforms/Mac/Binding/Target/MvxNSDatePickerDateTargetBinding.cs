@@ -26,6 +26,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             datePicker.DateValue = (NSDate)((DateTime)value);
         }
 
+        [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType
         {
             get { return typeof(DateTime); }
@@ -36,6 +37,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             return this.GetLocalTime(view);
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
         protected override object MakeSafeValue(object value)
         {
             if (value == null)

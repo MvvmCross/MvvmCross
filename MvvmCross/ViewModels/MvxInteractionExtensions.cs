@@ -11,6 +11,7 @@ namespace MvvmCross.ViewModels
 {
     public static class MvxInteractionExtensions
     {
+        [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Runtime event inspection for generic type parameter with PublicEvents annotation")]
         public static IDisposable? WeakSubscribe<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] T>(
             this T interaction, EventHandler<EventArgs> action)
                 where T : IMvxInteraction
@@ -19,6 +20,7 @@ namespace MvvmCross.ViewModels
             return eventInfo?.WeakSubscribe(interaction, action);
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Runtime event inspection for generic type parameter with PublicEvents annotation")]
         public static MvxValueEventSubscription<TValue>? WeakSubscribe<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] TInteraction, TValue>(
             this TInteraction interaction,
             EventHandler<MvxValueEventArgs<TValue>> action)

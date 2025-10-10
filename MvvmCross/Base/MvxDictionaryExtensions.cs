@@ -6,6 +6,7 @@ namespace MvvmCross.Base;
 
 public static class MvxDictionaryExtensions
 {
+    [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Runtime property inspection for generic type parameter with PublicProperties annotation")]
     public static IDictionary<string, object> ToPropertyDictionary<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(this T? input) where T : class
     {
         if (input == null)

@@ -33,6 +33,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             FireValueChanged(view.State == NSCellStateValue.On);
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
         protected override object MakeSafeValue(object value)
         {
             if (value is bool)
@@ -54,6 +55,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);

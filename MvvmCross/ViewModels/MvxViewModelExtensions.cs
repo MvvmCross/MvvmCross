@@ -13,6 +13,7 @@ namespace MvvmCross.ViewModels
 #nullable enable
     public static class MvxViewModelExtensions
     {
+        [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Runtime method inspection for generic type parameter with PublicMethods annotation")]
         public static void CallBundleMethods<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TViewModel>(
             this TViewModel viewModel, string methodName, IMvxBundle? bundle)
                 where TViewModel : IMvxViewModel
@@ -68,6 +69,7 @@ namespace MvvmCross.ViewModels
             methodInfo.Invoke(viewModel, invokeWith);
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Runtime method inspection for generic type parameter with PublicMethods annotation")]
         public static IMvxBundle SaveStateBundle<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TViewModel>(this TViewModel viewModel)
             where TViewModel : IMvxViewModel
         {

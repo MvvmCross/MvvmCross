@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Android.App;
 using Android.Content;
@@ -34,12 +35,14 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 
         public override int Count => FragmentsInfo?.Count ?? 0;
 
+        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Activity types are preserved by the Android presenter infrastructure.")]
         protected MvxCachingFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
             _activityType = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType();
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Activity types are preserved by the Android presenter infrastructure.")]
         public MvxCachingFragmentStatePagerAdapter(FragmentManager fragmentManager,
             List<MvxViewPagerFragmentInfo> fragmentsInfo) : base(fragmentManager)
         {
@@ -47,6 +50,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             _activityType = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType();
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Fragment types are preserved by the Android presenter infrastructure.")]
         public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
         {
             var fragmentInfo = FragmentsInfo[position];
@@ -204,6 +208,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
         private sealed class ViewPagerFragmentInfoParcelable : JavaObject, IParcelable
         {
             public Type FragmentType { get; init; }
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             public Type ViewModelType { get; init; }
             public string Title { get; init; }
             public string Tag { get; init; }
@@ -218,6 +223,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             {
             }
 
+            [UnconditionalSuppressMessage("Trimming", "IL2057", Justification = "Type names are serialized/deserialized for Android Parcelable implementation. Types are preserved through view model registration.")]
             public ViewPagerFragmentInfoParcelable(Parcel source)
             {
                 string fragmentType = source.ReadString();

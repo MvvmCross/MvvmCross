@@ -12,6 +12,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
     {
         private readonly List<IMvxSourceStep> _subSteps;
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxCombinerSourceStep(MvxCombinerSourceStepDescription description)
             : base(description)
         {

@@ -4,12 +4,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Base
 {
 #nullable enable
     public static class MvxApplicableExtensions
     {
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static void Apply(this IEnumerable<IMvxApplicable> toApply)
         {
             if (toApply == null)
@@ -19,6 +21,7 @@ namespace MvvmCross.Base
                 applicable.Apply();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static void ApplyTo(this IEnumerable<IMvxApplicableTo> toApply, object what)
         {
             if (toApply == null)
@@ -28,6 +31,7 @@ namespace MvvmCross.Base
                 applicable.ApplyTo(what);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static void ApplyTo<T>(this IEnumerable<IMvxApplicableTo<T>> toApply, T what)
             where T : notnull
         {

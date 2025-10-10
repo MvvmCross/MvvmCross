@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
@@ -43,7 +44,7 @@ namespace MvvmCross.Platforms.Mac.Views
             return viewModel;
         }
 
-        public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(this IMvxMacView view,
+        public static IMvxMacView CreateViewControllerFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTargetViewModel>(this IMvxMacView view,
                                                                             object parameterObject)
             where TTargetViewModel : class, IMvxViewModel
         {
@@ -55,7 +56,7 @@ namespace MvvmCross.Platforms.Mac.Views
 
 #warning TODO - could this move down to IMvxView level?
 
-        public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(
+        public static IMvxMacView CreateViewControllerFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTargetViewModel>(
             this IMvxMacView view,
             IDictionary<string, string> parameterValues = null)
             where TTargetViewModel : class, IMvxViewModel
@@ -81,7 +82,7 @@ namespace MvvmCross.Platforms.Mac.Views
         }
 
         public static IMvxMacView CreateViewControllerFor(
-            this IMvxCanCreateMacView view, Type viewType,
+            this IMvxCanCreateMacView view, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType,
             MvxViewModelRequest request)
         {
             return Mvx.IoCProvider.Resolve<IMvxMacViewCreator>().CreateViewOfType(viewType, request);

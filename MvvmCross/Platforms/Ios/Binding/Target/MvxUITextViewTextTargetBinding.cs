@@ -11,9 +11,7 @@ using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
-public class MvxUITextViewTextTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        UITextView target)
+public class MvxUITextViewTextTargetBinding(UITextView target)
     : MvxConvertingTargetBinding(target)
 {
     private MvxWeakEventSubscription<NSTextStorage, NSTextStorageEventArgs>? _subscription;
@@ -30,6 +28,7 @@ public class MvxUITextViewTextTargetBinding(
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var view = View;
@@ -53,6 +52,7 @@ public class MvxUITextViewTextTargetBinding(
                 EditTextOnChanged);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     protected override void SetValueImpl(object target, object? value)
@@ -63,6 +63,7 @@ public class MvxUITextViewTextTargetBinding(
         view.Text = (string?)value;
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         base.Dispose(isDisposing);

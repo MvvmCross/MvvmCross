@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Bindings.SourceSteps
@@ -18,6 +19,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             _subFactories[type] = factory;
         }
 
+        [RequiresUnreferencedCode("This method creates source steps that may use type inspection which may not be preserved by trimming")]
         public IMvxSourceStep Create(MvxSourceStepDescription description)
         {
             IMvxSourceStepFactory subFactory;

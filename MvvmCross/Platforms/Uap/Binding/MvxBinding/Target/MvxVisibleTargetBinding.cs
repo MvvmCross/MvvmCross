@@ -17,6 +17,7 @@ namespace MvvmCross.Platforms.Uap.Binding.MvxBinding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(bool);
 
         public override void SetValue(object value)

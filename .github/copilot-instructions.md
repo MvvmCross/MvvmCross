@@ -11,7 +11,7 @@ MvvmCross is a cross-platform MVVM framework for .NET supporting Android, iOS, M
 ### System Requirements
 
 **Required**
-- .NET 9.0.304 SDK (used in CI/CD, see .github/actions/shared/action.yml)
+- .NET 9.0.304 SDK or newer (used in CI/CD, see .github/actions/shared/action.yml)
 - JDK 17 (required for Android development)
 - Git with proper autocrlf configuration
 
@@ -29,7 +29,7 @@ MvvmCross is a cross-platform MVVM framework for .NET supporting Android, iOS, M
 **Linux (Limited Development)**
 - Android workload only: `dotnet workload install android`
 - Android SDK with platform-tools and SDK 35 (API Level 35)
-- Individual project builds fail due to iOS dependencies
+- Use solution filter: `MvvmCross-linux.slnf`
 - Format checking and some tools work on individual projects
 
 ## Working Effectively

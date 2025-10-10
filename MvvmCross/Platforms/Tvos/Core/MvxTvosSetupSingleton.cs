@@ -2,12 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Core;
 using MvvmCross.Platforms.Tvos.Presenters;
 using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Core
 {
+    [RequiresUnreferencedCode("This class may use reflection which may not be preserved by trimming.")]
     public class MvxTvosSetupSingleton
         : MvxSetupSingleton
     {

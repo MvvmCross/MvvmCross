@@ -15,6 +15,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         private readonly Type _bindingType;
         private readonly MvxPropertyInfoTargetBindingFactory _innerFactory;
 
+        [RequiresUnreferencedCode("This constructor creates bindings using reflection which may not be preserved by trimming")]
         public MvxSimplePropertyInfoTargetBindingFactory(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type bindingType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type targetType,
@@ -28,6 +29,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         public IEnumerable<MvxTypeAndNamePair> SupportedTypes => _innerFactory.SupportedTypes;
 
+        [RequiresUnreferencedCode("This method creates target bindings using reflection-based binding creation which may not be preserved by trimming")]
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
             return _innerFactory.CreateBinding(target, targetName);
@@ -35,6 +37,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         #endregion IMvxPluginTargetBindingFactory Members
 
+        [RequiresUnreferencedCode("This method uses Activator.CreateInstance to create binding instances, which may not be preserved by trimming")]
         private IMvxTargetBinding CreateTargetBinding(object target, PropertyInfo targetPropertyInfo)
         {
             var targetBindingCandidate = Activator.CreateInstance(_bindingType, target, targetPropertyInfo);

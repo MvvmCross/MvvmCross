@@ -22,9 +22,7 @@ public class MvxPreferenceClickTargetBinding
 
     protected Preference? Preference => (Preference?)Target;
 
-    public MvxPreferenceClickTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        Preference view)
+    public MvxPreferenceClickTargetBinding(Preference view)
         : base(view)
     {
         _canExecuteEventHandler = OnCanExecuteChanged;
@@ -73,8 +71,10 @@ public class MvxPreferenceClickTargetBinding
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(ICommand);
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

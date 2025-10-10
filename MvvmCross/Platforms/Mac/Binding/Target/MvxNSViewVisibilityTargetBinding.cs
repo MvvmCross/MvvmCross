@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.UI;
@@ -25,6 +26,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             get { return MvxBindingMode.OneWay; }
         }
 
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType
         {
             get { return typeof(MvxVisibility); }

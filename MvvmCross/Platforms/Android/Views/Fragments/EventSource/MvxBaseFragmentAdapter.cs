@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using MvvmCross.Base;
 using Fragment = AndroidX.Fragment.App.Fragment;
@@ -14,6 +15,7 @@ public class MvxBaseFragmentAdapter
 
     protected Fragment? Fragment => _eventSource as Fragment;
 
+    [RequiresUnreferencedCode("This class uses reflection which may not be preserved during trimming.")]
     protected MvxBaseFragmentAdapter(IMvxEventSourceFragment eventSource)
     {
         if (eventSource is null)
@@ -60,6 +62,7 @@ public class MvxBaseFragmentAdapter
     {
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     protected virtual void HandleCreateCalled(object? sender, MvxValueEventArgs<Bundle> e)
     {
     }

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
@@ -28,6 +29,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
         public override void SubscribeToEvents()
         {
             var segmentedControl = View;
@@ -51,18 +53,21 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             view.SelectedSegment = (nint)value;
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var view = View;
-                if (view != null && _subscribed)
+                if (_subscribed)
                 {
-                    view.ValueChanged -= HandleValueChanged;
-                    _subscribed = false;
+                    var segmentedControl = View;
+                    if (segmentedControl != null)
+                    {
+                        segmentedControl.ValueChanged -= HandleValueChanged;
+                    }
                 }
             }
+            base.Dispose(isDisposing);
         }
     }
 }

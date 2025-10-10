@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.Content.Res;
 using Android.Util;
@@ -53,6 +55,7 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
             return string.Empty;
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2057", Justification = "Template selector type names are provided by user in XML attributes. Types must be preserved through linker configuration.")]
         public static IMvxTemplateSelector? BuildItemTemplateSelector(Context context, IAttributeSet attrs, int itemTemplateId)
         {
             var templateSelectorClassName = ReadRecyclerViewItemTemplateSelectorClassName(context, attrs);

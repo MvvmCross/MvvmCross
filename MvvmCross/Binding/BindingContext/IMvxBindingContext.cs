@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Base;
 using MvvmCross.Binding.Bindings;
 
@@ -14,8 +15,10 @@ namespace MvvmCross.Binding.BindingContext
     {
         event EventHandler DataContextChanged;
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         IMvxBindingContext Init(object dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue);
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         IMvxBindingContext Init(object dataContext, object firstBindingKey, string firstBindingValue);
 
         void RegisterBinding(object target, IMvxUpdateableBinding binding);

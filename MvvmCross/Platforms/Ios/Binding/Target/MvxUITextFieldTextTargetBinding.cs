@@ -12,9 +12,7 @@ using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
-public class MvxUITextFieldTextTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        UITextField target)
+public class MvxUITextFieldTextTargetBinding(UITextField target)
     : MvxConvertingTargetBinding(target), IMvxEditableTextView
 {
     private MvxWeakEventSubscription<UITextField>? _subscriptionChanged;
@@ -32,6 +30,7 @@ public class MvxUITextFieldTextTargetBinding(
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var view = View;
@@ -46,8 +45,10 @@ public class MvxUITextFieldTextTargetBinding(
         _subscriptionEndEditing = view.WeakSubscribe(nameof(target.EditingDidEnd), HandleEditTextValueChanged);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
+    [RequiresUnreferencedCode("This method uses reflection to get type information and perform conversions which may not be preserved by trimming.")]
     protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object? value)
         => this.ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(target, value);
 
@@ -59,16 +60,17 @@ public class MvxUITextFieldTextTargetBinding(
         view.Text = (string?)value;
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
+        if (isDisposing)
+        {
+            _subscriptionChanged?.Dispose();
+            _subscriptionChanged = null;
+            _subscriptionEndEditing?.Dispose();
+            _subscriptionEndEditing = null;
+        }
         base.Dispose(isDisposing);
-        if (!isDisposing) return;
-
-        _subscriptionChanged?.Dispose();
-        _subscriptionChanged = null;
-
-        _subscriptionEndEditing?.Dispose();
-        _subscriptionEndEditing = null;
     }
 
     public string? CurrentText

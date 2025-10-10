@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Exceptions;
@@ -32,6 +33,7 @@ public static class MvxActivityViewExtensions
         }
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     public static void OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
     {
         androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity, bundle));
@@ -140,6 +142,8 @@ public static class MvxActivityViewExtensions
         return activity;
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Activity types are preserved by the Android presenter infrastructure.")]
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     private static IMvxViewModel? LoadViewModel(this IMvxAndroidView androidView, IMvxBundle? savedState)
     {
         var activity = androidView.ToActivity();

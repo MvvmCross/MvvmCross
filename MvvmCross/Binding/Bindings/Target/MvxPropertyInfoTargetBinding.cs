@@ -11,6 +11,7 @@ namespace MvvmCross.Binding.Bindings.Target;
 public abstract class MvxPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
     : MvxConvertingTargetBinding(target)
 {
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)
@@ -28,6 +29,7 @@ public abstract class MvxPropertyInfoTargetBinding(object target, PropertyInfo t
     }
 
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+    [UnconditionalSuppressMessage("Trimming", "IL2073", Justification = "PropertyInfo.PropertyType doesn't preserve DynamicallyAccessedMembers annotations, but the property was obtained from a properly annotated source")]
     public override Type TargetValueType => TargetPropertyInfo.PropertyType;
 
     protected PropertyInfo TargetPropertyInfo { get; } = targetPropertyInfo;

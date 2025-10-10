@@ -22,6 +22,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 
         public IDictionary<string, string> ViewNamespaceAbbreviations { get; }
 
+        [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors)]
         public override Type Resolve(string tagName)
         {
             var unabbreviatedTagName = UnabbreviateTagName(tagName);

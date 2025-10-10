@@ -18,6 +18,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             registry.RegisterFactory(new MvxCustomBindingFactory<TView>(customName, creator));
         }
 
+        [RequiresUnreferencedCode("This method creates bindings using reflection which may not be preserved by trimming")]
         public static void RegisterPropertyInfoBindingFactory(
             this IMvxTargetBindingFactoryRegistry registry,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type bindingType,

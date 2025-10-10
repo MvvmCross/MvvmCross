@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
@@ -20,6 +21,7 @@ public class MvxUIDatePickerDateTargetBinding(UIDatePicker target, PropertyInfo 
 
     public static DateTime DefaultDate { get; set; } = DateTime.Now;
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     protected override object MakeSafeValue(object? value)
     {
         // Convert from local DateTime (or default value) to universal NSDate based on system timezone.

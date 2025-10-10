@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 
@@ -15,6 +16,7 @@ public class MvxUIButtonTitleTargetBinding(UIButton button, UIControlState state
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     protected override void SetValueImpl(object target, object? value)

@@ -554,6 +554,7 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="presentationBundle">The presentation bundle.</param>
     /// <param name="cancellationToken">Any cancellation token.</param>
     /// <returns>True if successful, false otherwise.</returns>
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "ViewModel types are preserved by the navigation infrastructure and GetType() is safe here.")]
     public virtual Task<bool> Navigate(
         IMvxViewModel viewModel, IMvxViewModel source, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
@@ -575,6 +576,7 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="presentationBundle">The presentation bundle.</param>
     /// <param name="cancellationToken">Any cancellation token.</param>
     /// <returns>True if successful, false otherwise.</returns>
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "ViewModel types are preserved by the navigation infrastructure and GetType() is safe here.")]
     public virtual Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxViewModel source,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         where TParameter : notnull

@@ -11,9 +11,7 @@ using MvvmCross.Platforms.Android.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target;
 
-public class MvxTextViewTextFormattedTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        TextView target)
+public class MvxTextViewTextFormattedTargetBinding(TextView target)
     : MvxAndroidTargetBinding(target), IMvxEditableTextView
 {
     private readonly bool _isEditTextBinding = target is EditText;
@@ -21,8 +19,10 @@ public class MvxTextViewTextFormattedTargetBinding(
 
     protected TextView? TextView => Target as TextView;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(ISpanned);
 
+    [RequiresUnreferencedCode("This method uses reflection to get type information and perform conversions which may not be preserved by trimming.")]
     protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object? value)
     {
         if (!_isEditTextBinding)
@@ -38,6 +38,7 @@ public class MvxTextViewTextFormattedTargetBinding(
 
     public override MvxBindingMode DefaultMode => _isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var view = TextView;
@@ -54,6 +55,7 @@ public class MvxTextViewTextFormattedTargetBinding(
         FireValueChanged(TextView?.TextFormatted);
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

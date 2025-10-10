@@ -29,6 +29,7 @@ public class MvxEventNameTargetBinding<[DynamicallyAccessedMembers(DynamicallyAc
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)
@@ -44,5 +45,6 @@ public class MvxEventNameTargetBinding<[DynamicallyAccessedMembers(DynamicallyAc
             _currentCommand.Execute(commandParameter);
     }
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     public override void SetValue(object? value) => _currentCommand = value as ICommand;
 }

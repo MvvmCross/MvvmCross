@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.WeakSubscription;
@@ -32,6 +33,7 @@ namespace MvvmCross.Plugin.FieldBinding
 
         protected abstract void NotifyChangeOnChanged(object sender, EventArgs eventArgs);
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)

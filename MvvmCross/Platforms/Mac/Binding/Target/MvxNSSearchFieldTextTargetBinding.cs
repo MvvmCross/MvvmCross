@@ -42,6 +42,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);

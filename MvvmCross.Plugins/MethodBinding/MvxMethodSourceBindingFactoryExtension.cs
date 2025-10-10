@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
@@ -16,6 +17,7 @@ namespace MvvmCross.Plugin.MethodBinding
     public class MvxMethodSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
+        [RequiresUnreferencedCode("This method uses reflection to bind to methods which may not be preserved by trimming.")]
         public bool TryCreateBinding(object source, IMvxPropertyToken currentToken, List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
             if (source == null)
@@ -56,6 +58,7 @@ namespace MvvmCross.Plugin.MethodBinding
             return true;
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Method binding plugin intentionally uses reflection to bind to methods at runtime.")]
         protected MethodInfo FindMethodInfo(object source, string name)
         {
             var methodInfo = source.GetType().GetMethod(name);

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using AppKit;
 using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
@@ -40,6 +41,7 @@ namespace MvvmCross.Platforms.Mac.Binding
             return registry;
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method registers target bindings that may not be preserved by trimming")]
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             base.FillTargetFactories(registry);
@@ -117,8 +119,11 @@ namespace MvvmCross.Platforms.Mac.Binding
             _fillRegistryAction?.Invoke(registry);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings using reflection which may not be preserved by trimming.")]
         protected virtual void RegisterPropertyInfoBindingFactory(IMvxTargetBindingFactoryRegistry registry,
-                                                                  Type bindingType, Type targetType, string targetName)
+                                                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type bindingType,
+                                                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type targetType,
+                                                                  string targetName)
         {
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(bindingType, targetType, targetName));
         }

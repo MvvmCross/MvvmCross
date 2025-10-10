@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
@@ -44,6 +45,8 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(ICommand);
 
         protected override void SetValueImpl(object target, object value)
@@ -75,6 +78,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             RefreshEnabledState();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)

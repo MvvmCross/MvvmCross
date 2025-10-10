@@ -108,6 +108,7 @@ public static class MvxSimplePropertyDictionaryExtensions
             parameterValue, requiredParameter.ParameterType, requiredParameter.Name);
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Runtime property inspection for generic type parameter with PublicProperties annotation")]
     public static IDictionary<string, string> ToSimplePropertyDictionary<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TInput>(
         this TInput? input)
     {

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Android.OS;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
@@ -12,6 +13,7 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views
 {
+    [RequiresUnreferencedCode("This class uses reflection which may not be preserved during trimming.")]
     public class MvxSavedStateConverter : IMvxSavedStateConverter
     {
         private const string ExtrasKey = "MvxSaved";
@@ -31,7 +33,7 @@ namespace MvvmCross.Platforms.Android.Views
             catch (Exception ex)
             {
                 MvxLogHost.Default?.Log(LogLevel.Error, ex,
-                    "Problem getting the saved state - will return null - from {extras}", extras);
+                    "Problem getting the saved state - will return null - from {Extras}", extras);
                 return null;
             }
         }

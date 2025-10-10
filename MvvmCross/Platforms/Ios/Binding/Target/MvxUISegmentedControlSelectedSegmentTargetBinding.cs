@@ -13,7 +13,6 @@ using MvvmCross.WeakSubscription;
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
 public class MvxUISegmentedControlSelectedSegmentTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
         UISegmentedControl target,
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UISegmentedControl>(target, targetPropertyInfo)
@@ -22,6 +21,7 @@ public class MvxUISegmentedControlSelectedSegmentTargetBinding(
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var segmentedControl = View;
@@ -43,6 +43,7 @@ public class MvxUISegmentedControlSelectedSegmentTargetBinding(
         view.SelectedSegment = (nint)value;
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         base.Dispose(isDisposing);

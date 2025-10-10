@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
@@ -39,25 +40,26 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
         public override void SetValue(object value)
         {
             var command = value as ICommand;
             _command = command;
         }
 
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(ICommand);
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
-            if (isDisposing)
-            {
-                var editText = View;
-                if (editText != null)
-                {
-                    editText.ShouldReturn = null;
-                }
-            }
+            if (!isDisposing) return;
+
+            var editText = View;
+            if (editText == null) return;
+
+            editText.ShouldReturn = null;
         }
     }
 }

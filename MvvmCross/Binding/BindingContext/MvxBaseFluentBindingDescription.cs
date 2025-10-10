@@ -266,6 +266,7 @@ namespace MvvmCross.Binding.BindingContext
             return toReturn;
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public override void Apply()
         {
             var bindingDescription = CreateBindingDescription();
@@ -273,6 +274,7 @@ namespace MvvmCross.Binding.BindingContext
             base.Apply();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public override void ApplyTo(TTarget what)
         {
             var bindingDescription = CreateBindingDescription();

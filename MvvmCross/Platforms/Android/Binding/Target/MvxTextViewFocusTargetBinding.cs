@@ -17,13 +17,12 @@ public class MvxTextViewFocusTargetBinding
 
     protected EditText? TextField => Target as EditText;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
-    public MvxTextViewFocusTargetBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            object target)
+    public MvxTextViewFocusTargetBinding(object target)
         : base(target)
     {
     }
@@ -36,6 +35,7 @@ public class MvxTextViewFocusTargetBinding
         TextField.Text = value.ToString();
     }
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         if (TextField == null) return;
@@ -53,6 +53,7 @@ public class MvxTextViewFocusTargetBinding
             FireValueChanged(TextField.Text);
     }
 
+    [RequiresUnreferencedCode("This method calls SubscribeToEvents which may use reflection to subscribe to events which may not be preserved by trimming")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

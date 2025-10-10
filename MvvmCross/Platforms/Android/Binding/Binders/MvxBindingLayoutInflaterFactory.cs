@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.Util;
 using Android.Views;
@@ -11,6 +12,7 @@ using MvvmCross.Binding.Bindings;
 namespace MvvmCross.Platforms.Android.Binding.Binders
 {
 #nullable enable
+    [RequiresUnreferencedCode("This class creates bindings which use reflection and may not be preserved by trimming.")]
     public class MvxBindingLayoutInflaterFactory
         : IMvxLayoutInflaterHolderFactory
     {

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Android.Content;
 using Android.Content.Res;
@@ -36,6 +37,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
 
         public IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings => _viewBindings;
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         public virtual void BindView(View view, Context context, IAttributeSet attrs)
         {
             using (
@@ -60,6 +62,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             }
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         private void ApplyBindingsFromAttribute(View view, TypedArray typedArray, int attributeId)
         {
             try
@@ -82,6 +85,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             }
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         private void ApplyLanguageBindingsFromAttribute(View view, TypedArray typedArray, int attributeId)
         {
             try

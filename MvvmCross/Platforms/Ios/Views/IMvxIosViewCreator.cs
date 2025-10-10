@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Ios.Views
@@ -13,6 +14,6 @@ namespace MvvmCross.Platforms.Ios.Views
 
         IMvxIosView CreateView(IMvxViewModel viewModel);
 
-        IMvxIosView CreateViewOfType(Type viewType);
+        IMvxIosView CreateViewOfType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType);
     }
 }

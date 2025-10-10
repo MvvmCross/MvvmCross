@@ -670,6 +670,7 @@ public abstract class MvxSetup : IMvxSetup
     {
     }
 
+    [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
     protected virtual void InitializeLastChance(IMvxIoCProvider iocProvider)
     {
         // always the very last thing to get initialized

@@ -64,6 +64,7 @@ namespace MvvmCross.Binding.BindingContext
             return toReturn;
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public override void Apply()
         {
             foreach (var applicable in _applicables)
@@ -71,6 +72,7 @@ namespace MvvmCross.Binding.BindingContext
             base.Apply();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public void ApplyWithClearBindingKey(object clearBindingKey)
         {
             foreach (var applicable in _applicables)
@@ -93,12 +95,14 @@ namespace MvvmCross.Binding.BindingContext
             base.Apply();
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Bindings inherently use reflection. This is by design and callers are warned through usage of binding methods.")]
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

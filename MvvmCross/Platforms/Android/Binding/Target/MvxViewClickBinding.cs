@@ -22,9 +22,7 @@ public class MvxViewClickBinding
 
     protected View? View => (View?)Target;
 
-    public MvxViewClickBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            View view)
+    public MvxViewClickBinding(View view)
         : base(view)
     {
         _canExecuteEventHandler = OnCanExecuteChanged;
@@ -76,8 +74,10 @@ public class MvxViewClickBinding
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(ICommand);
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

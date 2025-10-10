@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {
@@ -17,6 +18,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
             _resolver = resolver;
         }
 
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         public Type Resolve(string tagName)
         {
             Type toReturn;

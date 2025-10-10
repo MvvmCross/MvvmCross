@@ -14,19 +14,19 @@ public class MvxSearchViewQueryTextTargetBinding
 {
     private MvxAndroidTargetEventSubscription<SearchView, SearchView.QueryTextChangeEventArgs>? _subscription;
 
-    public MvxSearchViewQueryTextTargetBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            object target)
+    public MvxSearchViewQueryTextTargetBinding(object target)
         : base(target)
     {
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
     protected SearchView? SearchView => (SearchView?)Target;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         _subscription = SearchView?.WeakSubscribe<SearchView, SearchView.QueryTextChangeEventArgs>(
@@ -37,6 +37,7 @@ public class MvxSearchViewQueryTextTargetBinding
     protected override void SetValueImpl(object target, object? value) =>
         ((SearchView)target).SetQuery((string?)value, true);
 
+    [RequiresUnreferencedCode("This method calls SubscribeToEvents which may use reflection to subscribe to events which may not be preserved by trimming")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

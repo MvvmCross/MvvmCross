@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Mac.Views
@@ -13,6 +14,6 @@ namespace MvvmCross.Platforms.Mac.Views
 
         IMvxMacView CreateView(IMvxViewModel viewModel);
 
-        IMvxMacView CreateViewOfType(Type viewType, MvxViewModelRequest request);
+        IMvxMacView CreateViewOfType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType, MvxViewModelRequest request);
     }
 }
