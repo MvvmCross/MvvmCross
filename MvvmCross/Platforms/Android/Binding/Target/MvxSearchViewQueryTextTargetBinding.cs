@@ -37,6 +37,7 @@ public class MvxSearchViewQueryTextTargetBinding
     protected override void SetValueImpl(object target, object? value) =>
         ((SearchView)target).SetQuery((string?)value, true);
 
+    [RequiresUnreferencedCode("This method calls SubscribeToEvents which may use reflection to subscribe to events which may not be preserved by trimming")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

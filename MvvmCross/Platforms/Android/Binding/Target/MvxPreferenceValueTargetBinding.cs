@@ -39,6 +39,7 @@ public class MvxPreferenceValueTargetBinding(Preference preference)
         e.Handled = true;
     }
 
+    [RequiresUnreferencedCode("This method calls SubscribeToEvents which may use reflection to subscribe to events which may not be preserved by trimming")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)
