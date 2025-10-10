@@ -44,7 +44,7 @@ namespace MvvmCross.Platforms.Mac.Views
             return viewModel;
         }
 
-        public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(this IMvxMacView view,
+        public static IMvxMacView CreateViewControllerFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTargetViewModel>(this IMvxMacView view,
                                                                             object parameterObject)
             where TTargetViewModel : class, IMvxViewModel
         {
@@ -56,7 +56,7 @@ namespace MvvmCross.Platforms.Mac.Views
 
 #warning TODO - could this move down to IMvxView level?
 
-        public static IMvxMacView CreateViewControllerFor<TTargetViewModel>(
+        public static IMvxMacView CreateViewControllerFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTargetViewModel>(
             this IMvxMacView view,
             IDictionary<string, string> parameterValues = null)
             where TTargetViewModel : class, IMvxViewModel

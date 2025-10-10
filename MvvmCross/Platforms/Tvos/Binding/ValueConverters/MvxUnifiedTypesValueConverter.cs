@@ -13,6 +13,7 @@ using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Binding.ValueConverters
 {
+    [RequiresUnreferencedCode("This class uses reflection which may not be preserved during trimming.")]
     internal class MvxUnifiedTypesValueConverter
         : MvxValueConverter
     {
@@ -31,7 +32,6 @@ namespace MvvmCross.Platforms.Tvos.Binding.ValueConverters
             UnifiedTypeConversions = new ReadOnlyDictionary<Type, Type>(initDictionary);
         }
 
-        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Value types used in unified type conversion are preserved by the converter registry.")]
         public override object Convert(
             object value,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type targetType,
@@ -55,7 +55,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.ValueConverters
             return nativeValue;
         }
 
-        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ConvertBack(object value, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type targetType, object parameter, CultureInfo culture)
         {
             //unified types already implement proper conversion with IConvertible interface support
             return System.Convert.ChangeType(value, targetType, culture);

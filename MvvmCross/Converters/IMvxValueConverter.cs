@@ -3,13 +3,22 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace MvvmCross.Converters;
 
 public interface IMvxValueConverter
 {
-    object Convert(object value, Type? targetType, object? parameter, CultureInfo? culture);
+    object Convert(
+        object value,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? targetType,
+        object? parameter,
+        CultureInfo? culture);
 
-    object ConvertBack(object value, Type? targetType, object? parameter, CultureInfo? culture);
+    object ConvertBack(
+        object value,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? targetType,
+        object? parameter,
+        CultureInfo? culture);
 }

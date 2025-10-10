@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using MvvmCross.Converters;
 using MvvmCross.UI;
@@ -14,7 +15,7 @@ public abstract class MvxColorValueConverter : MvxValueConverter
 
     protected abstract System.Drawing.Color Convert(object value, object? parameter, CultureInfo? culture);
 
-    public sealed override object Convert(object value, Type? targetType, object? parameter,
+    public sealed override object Convert(object value, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? targetType, object? parameter,
         CultureInfo? culture)
     {
         return _nativeColor.Value?.ToNative(Convert(value, parameter, culture)) ?? MvxBindingConstant.UnsetValue;

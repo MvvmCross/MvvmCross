@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Core;
 using MvvmCross.IoC;
@@ -50,13 +51,14 @@ public abstract class MvxConsoleSetup
         return new MvxConsoleContainer();
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
     {
         InitializeMessagePump(iocProvider);
     }
 }
 
-public abstract class MvxConsoleSetup<TApplication> : MvxConsoleSetup
+public abstract class MvxConsoleSetup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TApplication> : MvxConsoleSetup
     where TApplication : class, IMvxApplication, new()
 {
     protected override IMvxApplication CreateApp(IMvxIoCProvider iocProvider) =>

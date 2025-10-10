@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using MvvmCross.Converters;
 using MvvmCross.UI;
@@ -28,13 +29,13 @@ namespace MvvmCross.Plugin.Visibility
 
         protected abstract MvxVisibility Convert(object value, object parameter, CultureInfo culture);
 
-        public sealed override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public sealed override object Convert(object value, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type targetType, object parameter, CultureInfo culture)
         {
             var mvx = Convert(value, parameter, culture);
             return NativeVisibility.ToNative(mvx);
         }
 
-        public sealed override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public sealed override object ConvertBack(object value, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type targetType, object parameter, CultureInfo culture)
         {
             return base.ConvertBack(value, targetType, parameter, culture);
         }

@@ -124,6 +124,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     (viewModel, attribute) => Close(viewModel));
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
         protected virtual Task<bool> ShowWindowViewController(
             NSViewController viewController,
             MvxWindowPresentationAttribute attribute,
@@ -207,6 +208,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             return window;
         }
 
+        [RequiresUnreferencedCode("This method creates instances which use reflection and may not be preserved by trimming")]
         protected virtual MvxWindowController CreateWindowController(MvxWindowPresentationAttribute attribute)
         {
             MvxWindowController windowController;

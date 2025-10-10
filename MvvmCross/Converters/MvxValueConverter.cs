@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
@@ -12,12 +13,12 @@ namespace MvvmCross.Converters;
 public abstract class MvxValueConverter
     : IMvxValueConverter
 {
-    public virtual object Convert(object value, Type? targetType, object? parameter, CultureInfo? culture)
+    public virtual object Convert(object value, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]Type? targetType, object? parameter, CultureInfo? culture)
     {
         return MvxBindingConstant.UnsetValue;
     }
 
-    public virtual object ConvertBack(object value, Type? targetType, object? parameter, CultureInfo? culture)
+    public virtual object ConvertBack(object value, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? targetType, object? parameter, CultureInfo? culture)
     {
         return MvxBindingConstant.UnsetValue;
     }
@@ -26,7 +27,7 @@ public abstract class MvxValueConverter
 public abstract class MvxValueConverter<TFrom, TTo>
     : IMvxValueConverter
 {
-    public object Convert(object value, Type? targetType, object? parameter, CultureInfo? culture)
+    public object Convert(object value, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? targetType, object? parameter, CultureInfo? culture)
     {
         try
         {
@@ -44,7 +45,7 @@ public abstract class MvxValueConverter<TFrom, TTo>
         throw new NotImplementedException();
     }
 
-    public object ConvertBack(object value, Type? targetType, object? parameter, CultureInfo? culture)
+    public object ConvertBack(object value, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? targetType, object? parameter, CultureInfo? culture)
     {
         try
         {
@@ -68,7 +69,7 @@ public abstract class MvxValueConverter<TFrom, TTo>
 public abstract class MvxValueConverter<TFrom>
     : IMvxValueConverter
 {
-    public object Convert(object value, Type? targetType, object? parameter, CultureInfo? culture)
+    public object Convert(object value, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? targetType, object? parameter, CultureInfo? culture)
     {
         try
         {
@@ -86,7 +87,7 @@ public abstract class MvxValueConverter<TFrom>
         throw new NotImplementedException();
     }
 
-    public object ConvertBack(object value, Type? targetType, object? parameter, CultureInfo? culture)
+    public object ConvertBack(object value, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? targetType, object? parameter, CultureInfo? culture)
     {
         try
         {
