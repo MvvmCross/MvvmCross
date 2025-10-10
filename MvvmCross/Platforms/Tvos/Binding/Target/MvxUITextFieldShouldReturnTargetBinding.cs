@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Diagnostics.CodeAnalysis;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
@@ -51,15 +51,15 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         public override Type TargetValueType => typeof(ICommand);
 
         [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
-    protected override void Dispose(bool isDisposing)
-    {
-        base.Dispose(isDisposing);
-        if (!isDisposing) return;
+        protected override void Dispose(bool isDisposing)
+        {
+            base.Dispose(isDisposing);
+            if (!isDisposing) return;
 
-        var editText = View;
-        if (editText == null) return;
+            var editText = View;
+            if (editText == null) return;
 
-        editText.ShouldReturn = null;
-    }
+            editText.ShouldReturn = null;
+        }
     }
 }

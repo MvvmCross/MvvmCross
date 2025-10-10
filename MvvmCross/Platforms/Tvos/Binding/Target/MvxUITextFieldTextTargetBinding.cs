@@ -48,10 +48,10 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-    public override Type TargetValueType => typeof(string);
+        public override Type TargetValueType => typeof(string);
 
-    [RequiresUnreferencedCode("This method uses reflection to get type information and perform conversions which may not be preserved by trimming.")]
-    protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object? value)
+        [RequiresUnreferencedCode("This method uses reflection to get type information and perform conversions which may not be preserved by trimming.")]
+        protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object? value)
         {
             return this.ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(target, value);
         }

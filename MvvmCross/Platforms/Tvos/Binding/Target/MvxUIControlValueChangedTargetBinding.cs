@@ -45,7 +45,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
-        
+
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(ICommand);
 
