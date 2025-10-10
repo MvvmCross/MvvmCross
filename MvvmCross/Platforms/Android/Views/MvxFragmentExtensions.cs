@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -15,6 +16,8 @@ namespace MvvmCross.Platforms.Android.Views
 {
     public static class MvxFragmentExtensions
     {
+        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Fragment types are preserved by the Android presenter infrastructure and their associated attributes.")]
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         public static Type FindAssociatedViewModelType(this IMvxFragmentView fragmentView, Type fragmentActivityParentType)
         {
             var viewModelType = fragmentView.FindAssociatedViewModelTypeOrNull();
@@ -67,6 +70,7 @@ namespace MvvmCross.Platforms.Android.Views
             return viewModel;
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "ViewModel types are preserved by the navigation infrastructure.")]
         public static void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle savedState,
             MvxViewModelRequest request)
         {

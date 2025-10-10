@@ -69,6 +69,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
         }
 
         // Shared initialization code
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         private void Initialize(string bindingText)
         {
             this.CreateBindingContext(bindingText);

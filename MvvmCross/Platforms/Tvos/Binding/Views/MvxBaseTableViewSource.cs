@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
@@ -60,6 +61,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             }
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
 
         protected abstract object GetItemAt(NSIndexPath indexPath);
@@ -114,6 +116,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 
         public event EventHandler SelectedItemChanged;
 
+        [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "This method creates bindings which are designed to be reflection-safe. The base UITableViewSource.GetCell cannot have RequiresUnreferencedCode annotation.")]
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
             var item = GetItemAt(indexPath);

@@ -188,6 +188,7 @@ public sealed class MvxIoCContainer
             _genericTypeParameters = genericTypeParameters;
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2055", Justification = "IoC container dynamically constructs types based on registration. Types registered in IoC are preserved.")]
         public object Resolve()
         {
             if (_genericTypeParameters == null)

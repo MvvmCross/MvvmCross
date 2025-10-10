@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.Util;
 using Android.Views;
@@ -12,6 +13,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
 {
     public interface IMvxAndroidViewBinder
     {
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         void BindView(View view, Context context, IAttributeSet attrs);
 
         IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings { get; }

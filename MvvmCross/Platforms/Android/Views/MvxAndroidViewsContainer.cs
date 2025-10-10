@@ -94,6 +94,7 @@ public class MvxAndroidViewsContainer
         return viewModel;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     protected virtual IMvxViewModel? CreateViewModelFromIntent(Intent intent, IMvxBundle? savedState)
     {
         var extraData = intent.Extras?.GetString(ExtrasKey);

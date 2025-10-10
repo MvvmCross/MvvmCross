@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Platforms.Console.Core;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
@@ -40,6 +41,8 @@ public class MvxConsoleMessagePump : IMvxConsoleCurrentView, IMvxMessagePump
         }
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "View types are preserved and their ViewModel properties are accessed through reflection for console platform compatibility.")]
+    [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "View types are preserved and their ViewModel properties are accessed through reflection for console platform compatibility.")]
     private static IMvxViewModel? ReflectionGetViewModel(IMvxView? view)
     {
         var propertyInfo = view?.GetType().GetProperty("ViewModel");

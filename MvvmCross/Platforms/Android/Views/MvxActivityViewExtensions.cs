@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Exceptions;
@@ -140,6 +141,7 @@ public static class MvxActivityViewExtensions
         return activity;
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Activity types are preserved by the Android presenter infrastructure.")]
     private static IMvxViewModel? LoadViewModel(this IMvxAndroidView androidView, IMvxBundle? savedState)
     {
         var activity = androidView.ToActivity();

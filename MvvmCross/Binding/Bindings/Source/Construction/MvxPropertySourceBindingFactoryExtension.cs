@@ -101,9 +101,14 @@ public class MvxPropertySourceBindingFactoryExtension
         throw new MvxException("Unexpected property source - seen token type {0}", propertyToken.GetType().FullName);
     }
 
-    protected PropertyInfo? FindPropertyInfo(object source, string propertyName = "Item")
+    [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Property reflection is core to binding functionality. Properties accessed through bindings are preserved by [DynamicallyAccessedMembers] on binding-related types.")]
+    protected PropertyInfo? FindPropertyInfo<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(T? source, string propertyName = "Item")
     {
-        var sourceType = source.GetType();
+        var sourceType = source?.GetType();
+        if (sourceType == null)
+            return null;
+
         var key = (sourceType.FullName + "." + propertyName).GetHashCode();
 
         if (_propertyInfoCache.TryGetValue(key, out PropertyInfo? pi))

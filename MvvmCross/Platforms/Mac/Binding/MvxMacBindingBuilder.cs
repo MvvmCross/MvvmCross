@@ -119,6 +119,7 @@ namespace MvvmCross.Platforms.Mac.Binding
             _fillRegistryAction?.Invoke(registry);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings using reflection which may not be preserved by trimming.")]
         protected virtual void RegisterPropertyInfoBindingFactory(IMvxTargetBindingFactoryRegistry registry,
                                                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type bindingType,
                                                                   [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type targetType,

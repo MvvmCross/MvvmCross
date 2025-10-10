@@ -64,6 +64,7 @@ public abstract class MvxConvertingTargetBinding(object target)
         }
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to get type information and perform conversions which may not be preserved by trimming.")]
     protected virtual bool ShouldSkipSetValueForViewSpecificReasons(object target, object? value)
     {
         return false;
