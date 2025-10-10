@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
@@ -15,5 +16,6 @@ public class MvxUIDatePickerCountDownDurationTargetBinding(UIDatePicker target, 
         return view.CountDownDuration;
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(double);
 }

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using MvvmCross.IoC;
 
@@ -15,6 +16,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
         {
         }
 
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         protected Type ResolveLowerCaseTypeName(string longLowerCaseName)
         {
             Type toReturn;

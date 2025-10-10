@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding.Bindings.Target;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
@@ -10,6 +11,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target;
 public class MvxUIViewLayerBorderWidthTargetBinding(UIView target)
     : MvxConvertingTargetBinding(target)
 {
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(float);
 
     protected override void SetValueImpl(object target, object? value)

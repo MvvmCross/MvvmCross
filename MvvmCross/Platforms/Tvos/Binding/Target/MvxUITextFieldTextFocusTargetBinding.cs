@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
@@ -15,6 +16,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
 
         protected UITextField TextField => Target as UITextField;
 
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(string);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;

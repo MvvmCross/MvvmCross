@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Android.Graphics.Drawables;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
@@ -15,6 +16,7 @@ public class MvxImageViewDrawableTargetBinding(ImageView imageView)
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(int);
 
     protected override void SetValueImpl(object target, object? value)

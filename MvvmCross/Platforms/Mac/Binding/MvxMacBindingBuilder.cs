@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using AppKit;
 using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
@@ -119,7 +120,9 @@ namespace MvvmCross.Platforms.Mac.Binding
         }
 
         protected virtual void RegisterPropertyInfoBindingFactory(IMvxTargetBindingFactoryRegistry registry,
-                                                                  Type bindingType, Type targetType, string targetName)
+                                                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type bindingType,
+                                                                  [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type targetType,
+                                                                  string targetName)
         {
             registry.RegisterFactory(new MvxSimplePropertyInfoTargetBindingFactory(bindingType, targetType, targetName));
         }

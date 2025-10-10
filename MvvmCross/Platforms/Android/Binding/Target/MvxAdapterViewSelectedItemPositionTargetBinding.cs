@@ -40,6 +40,7 @@ public class MvxAdapterViewSelectedItemPositionTargetBinding(AdapterView adapter
             nameof(adapterView.ItemSelected), AdapterViewOnItemSelected);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(int);
 
     protected override void Dispose(bool isDisposing)

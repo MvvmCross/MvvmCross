@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace MvvmCross.Platforms.Android.Presenters.Attributes;
 
 #nullable enable
@@ -14,7 +16,7 @@ public class MvxDialogFragmentPresentationAttribute : MvxFragmentPresentationAtt
 
     public MvxDialogFragmentPresentationAttribute(
         bool cancelable = true,
-        Type? activityHostViewModelType = null,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? activityHostViewModelType = null,
         bool addToBackStack = false,
         int enterAnimation = int.MinValue,
         int exitAnimation = int.MinValue,
@@ -39,7 +41,7 @@ public class MvxDialogFragmentPresentationAttribute : MvxFragmentPresentationAtt
 
     public MvxDialogFragmentPresentationAttribute(
         bool cancelable = true,
-        Type? activityHostViewModelType = null,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? activityHostViewModelType = null,
         bool addToBackStack = false,
         string? enterAnimation = null,
         string? exitAnimation = null,

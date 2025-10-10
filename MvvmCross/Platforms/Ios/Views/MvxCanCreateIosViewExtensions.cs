@@ -36,7 +36,7 @@ public static class MvxCanCreateIosViewExtensions
     }
 
     public static IMvxIosView? CreateViewControllerFor(
-        this IMvxCanCreateIosView view, Type viewType)
+        this IMvxCanCreateIosView view, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType)
     {
         return Mvx.IoCProvider?.Resolve<IMvxIosViewCreator>()?.CreateViewOfType(viewType);
     }

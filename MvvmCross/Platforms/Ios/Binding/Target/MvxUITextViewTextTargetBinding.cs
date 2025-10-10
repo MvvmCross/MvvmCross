@@ -52,6 +52,7 @@ public class MvxUITextViewTextTargetBinding(UITextView target)
                 EditTextOnChanged);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     protected override void SetValueImpl(object target, object? value)

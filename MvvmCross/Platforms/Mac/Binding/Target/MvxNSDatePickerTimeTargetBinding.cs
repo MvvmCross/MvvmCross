@@ -43,6 +43,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             //            return new TimeSpan((int)components.Hour, (int)components.Minute, (int)components.Second);
         }
 
+        [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType
         {
             get { return typeof(TimeSpan); }

@@ -46,6 +46,7 @@ public class MvxUITextFieldShouldReturnTargetBinding
         _command = command;
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(ICommand);
 
     protected override void Dispose(bool isDisposing)

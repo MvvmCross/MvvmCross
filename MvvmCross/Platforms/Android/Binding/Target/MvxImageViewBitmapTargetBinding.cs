@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Android.Graphics;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
@@ -11,6 +12,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 public class MvxImageViewBitmapTargetBinding(ImageView imageView)
     : MvxBaseImageViewTargetBinding(imageView)
 {
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(Bitmap);
 
     protected override bool GetBitmap(object? value, out Bitmap? bitmap)

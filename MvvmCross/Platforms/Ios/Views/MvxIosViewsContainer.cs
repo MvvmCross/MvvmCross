@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Exceptions;
 using MvvmCross.ViewModels;
@@ -42,7 +43,7 @@ namespace MvvmCross.Platforms.Ios.Views
             return view;
         }
 
-        public virtual IMvxIosView CreateViewOfType(Type viewType)
+        public virtual IMvxIosView CreateViewOfType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType)
         {
             var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
             if (storyboardAttribute != null)

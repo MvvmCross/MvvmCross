@@ -48,7 +48,7 @@ namespace MvvmCross.Platforms.Tvos.Views
 
         public static IMvxTvosView CreateViewControllerFor(
             this IMvxCanCreateTvosView view,
-            Type viewtype,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewtype,
             MvxViewModelRequest request)
         {
             return Mvx.IoCProvider.Resolve<IMvxTvosViewCreator>().CreateViewOfType(viewtype, request);

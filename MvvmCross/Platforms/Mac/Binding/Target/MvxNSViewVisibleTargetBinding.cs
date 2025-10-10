@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using AppKit;
 using MvvmCross.Binding;
 
@@ -25,6 +26,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             get { return MvxBindingMode.OneWay; }
         }
 
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType
         {
             get { return typeof(bool); }
