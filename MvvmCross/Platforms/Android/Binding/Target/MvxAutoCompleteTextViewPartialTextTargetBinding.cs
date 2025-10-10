@@ -17,7 +17,6 @@ public class MvxAutoCompleteTextViewPartialTextTargetBinding
     private MvxJavaEventSubscription<MvxAutoCompleteTextView>? _subscription;
 
     public MvxAutoCompleteTextViewPartialTextTargetBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
             object target,
             PropertyInfo targetPropertyInfo)
         : base(target, targetPropertyInfo)

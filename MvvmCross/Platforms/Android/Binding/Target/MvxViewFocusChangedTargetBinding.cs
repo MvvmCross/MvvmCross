@@ -13,9 +13,7 @@ public class MvxViewFocusChangedTargetBinding : MvxAndroidTargetBinding
     private ICommand? _command;
     private MvxWeakEventSubscription<View, FocusChangeEventArgs>? _focusChangeSubscription;
 
-    public MvxViewFocusChangedTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        View target) : base(target)
+    public MvxViewFocusChangedTargetBinding(View target) : base(target)
     {
         _focusChangeSubscription = target.WeakSubscribe<View, FocusChangeEventArgs>(
             nameof(target.FocusChange), ViewOnFocusChange);
@@ -32,6 +30,7 @@ public class MvxViewFocusChangedTargetBinding : MvxAndroidTargetBinding
         _command.Execute(e.HasFocus);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(ICommand);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;

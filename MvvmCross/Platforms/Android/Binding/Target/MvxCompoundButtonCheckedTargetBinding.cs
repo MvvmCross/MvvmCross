@@ -12,7 +12,6 @@ using MvvmCross.Platforms.Android.WeakSubscription;
 namespace MvvmCross.Platforms.Android.Binding.Target;
 
 public class MvxCompoundButtonCheckedTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
         object target,
         PropertyInfo targetPropertyInfo)
     : MvxAndroidPropertyInfoTargetBinding<CompoundButton>(target, targetPropertyInfo)

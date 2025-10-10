@@ -20,14 +20,13 @@ public class MvxTextViewTextTargetBinding
 
     protected TextView? TextView => Target as TextView;
 
-    public MvxTextViewTextTargetBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            TextView target)
+    public MvxTextViewTextTargetBinding(TextView target)
         : base(target)
     {
         _isEditTextBinding = target is EditText;
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object? value)

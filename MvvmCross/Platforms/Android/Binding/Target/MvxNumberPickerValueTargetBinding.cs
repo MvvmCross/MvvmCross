@@ -13,9 +13,6 @@ using MvvmCross.Platforms.Android.WeakSubscription;
 namespace MvvmCross.Platforms.Android.Binding.Target;
 
 public class MvxNumberPickerValueTargetBinding(
-    [DynamicallyAccessedMembers(
-        DynamicallyAccessedMemberTypes.PublicEvents |
-                    DynamicallyAccessedMemberTypes.PublicProperties)]
         object target,
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<NumberPicker>(target, targetPropertyInfo)

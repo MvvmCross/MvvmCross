@@ -12,15 +12,14 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 public class MvxAppCompatSearchViewQueryTextTargetBinding
     : MvxAndroidTargetBinding
 {
-    private MvxAndroidTargetEventSubscription<SearchView, SearchView.QueryTextChangeEventArgs>? _subscription;
+    private IDisposable? _subscription;
 
-    public MvxAppCompatSearchViewQueryTextTargetBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            SearchView target)
+    public MvxAppCompatSearchViewQueryTextTargetBinding(SearchView target)
         : base(target)
     {
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;

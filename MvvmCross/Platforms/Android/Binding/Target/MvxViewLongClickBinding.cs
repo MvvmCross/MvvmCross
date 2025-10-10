@@ -19,9 +19,7 @@ public class MvxViewLongClickBinding
 
     protected View? View => (View?)Target;
 
-    public MvxViewLongClickBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            View view)
+    public MvxViewLongClickBinding(View view)
         : base(view)
     {
         _subscription = view.WeakSubscribe<View, View.LongClickEventArgs>(nameof(view.LongClick), ViewOnLongClick);
@@ -43,8 +41,9 @@ public class MvxViewLongClickBinding
         _command = value as ICommand;
     }
 
-    public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
+    public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(ICommand);
 
     protected override void Dispose(bool isDisposing)

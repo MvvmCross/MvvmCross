@@ -16,9 +16,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 //  2. SetValueImpl typically compares value with null and _currentValue, returing
 //     if null or equal respectively.  This class foregoes this so that if the bound value of
 //     SelectedItem is set to null we can "override" _currentValue.
-public class MvxExpandableListViewSelectedItemTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        MvxExpandableListView target)
+public class MvxExpandableListViewSelectedItemTargetBinding(MvxExpandableListView target)
     : MvxAndroidTargetBinding(target)
 {
     private object? _currentValue;

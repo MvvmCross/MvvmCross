@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -11,9 +12,12 @@ using MvvmCross.Binding;
 
 namespace MvvmCross.Platforms.Android.Binding.Target;
 
-public class MvxImageViewImageTargetBinding(ImageView imageView)
-    : MvxBaseImageViewTargetBinding(imageView)
+public class MvxImageViewImageTargetBinding
+    : MvxBaseImageViewTargetBinding
 {
+    public MvxImageViewImageTargetBinding(ImageView imageView) : base(imageView) { }
+
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     protected override bool GetBitmap(object? value, out Bitmap? bitmap)

@@ -18,9 +18,7 @@ public class MvxAppCompatSpinnerSelectedItemBinding
 
     protected MvxAppCompatSpinner? Spinner => (MvxAppCompatSpinner?)Target;
 
-    public MvxAppCompatSpinnerSelectedItemBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            MvxAppCompatSpinner spinner)
+    public MvxAppCompatSpinnerSelectedItemBinding(MvxAppCompatSpinner spinner)
         : base(spinner)
     {
     }
