@@ -36,6 +36,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             FireValueChanged(view.State == NSCellStateValue.On);
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
         protected override object MakeSafeValue(object value)
         {
             if (value is bool)
