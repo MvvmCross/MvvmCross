@@ -24,7 +24,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Essentials" />
     <PackageReference Include="Serilog.Extensions.Logging" />
   </ItemGroup>
 
