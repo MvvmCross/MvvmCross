@@ -15,7 +15,6 @@
     <PackageReference Include="Serilog.Sinks.Xamarin" />
     <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Xamarin.Android.Glide" />
-    <PackageReference Include="Microsoft.Maui.Essentials" />
   </ItemGroup>
 
   <ItemGroup>
