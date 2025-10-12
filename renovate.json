@@ -64,6 +64,16 @@
       "addLabels": [
         "Testing"
       ]
+    },
+    {
+      "matchPackagePatterns": [
+        "Microsoft.Windows.SDK.BuildTools",
+        "Microsoft.WindowsAppSDK"
+      ],
+      "groupName": "Windows App SDK",
+      "addLabels": [
+        "p/winui"
+      ]
     }
   ]
 }
