@@ -3,7 +3,8 @@
   "extends": [
     "config:recommended",
     ":separateMajorReleases",
-    ":combinePatchMinorReleases"
+    ":combinePatchMinorReleases",
+    ":disableDependencyDashboard"
   ],
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
