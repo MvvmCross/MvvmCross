@@ -3,7 +3,8 @@
   "extends": [
     "config:recommended",
     ":separateMajorReleases",
-    ":combinePatchMinorReleases"
+    ":combinePatchMinorReleases",
+    ":disableDependencyDashboard"
   ],
   "prHourlyLimit": 0,
   "prConcurrentLimit": 0,
@@ -63,6 +64,16 @@
       "groupName": "Testing",
       "addLabels": [
         "Testing"
+      ]
+    },
+    {
+      "matchPackagePatterns": [
+        "Microsoft.Windows.SDK.BuildTools",
+        "Microsoft.WindowsAppSDK"
+      ],
+      "groupName": "Windows App SDK",
+      "addLabels": [
+        "p/winui"
       ]
     }
   ]
