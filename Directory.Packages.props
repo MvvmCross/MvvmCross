@@ -36,8 +36,8 @@
     <PackageVersion Include="Xamarin.AndroidX.ViewPager" Version="1.1.0.4" />
     <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.12.0.5" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="121.3.0.7" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.2" />
-    <PackageVersion Include="xunit.v3" Version="3.0.0" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageVersion Include="xunit.v3" Version="3.1.0" />
     <PackageVersion Include="XunitXml.TestLogger" Version="7.0.2" />
     <PackageVersion Include="Cake.Frosting" Version="5.1.0" />
     <PackageVersion Include="Cake.GitVersioning" Version="3.8.118" />
