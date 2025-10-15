@@ -4,7 +4,7 @@ inputs:
   dotnet-version:
     description: 'The .NET version to install'
     required: false
-    default: '10.0.100-rc.1.25451.107'
+    default: '10.0.100-rc.2.25502.107'
   dotnet-workload-version:
     description: 'The .NET workload version to install'
     required: false
@@ -33,7 +33,7 @@ runs:
       shell: pwsh
       run: |
         dotnet --version
-        dotnet workload install android ios tvos macos maccatalyst --version ${{ inputs.dotnet-workload-version }}
+        dotnet workload install android ios tvos macos maccatalyst
 
     - name: Set up JDK
       uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 #v5.0.0
