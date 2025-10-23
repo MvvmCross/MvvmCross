@@ -8,6 +8,9 @@ on:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 env:
   verbosity: 'minimal'
   sonarKey: 'MvvmCross_MvvmCross'

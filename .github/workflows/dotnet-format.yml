@@ -2,6 +2,9 @@ name: dotnet format
 
 on: [pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     runs-on: windows-latest
