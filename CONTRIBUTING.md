@@ -72,6 +72,8 @@ Note that code submissions will be reviewed and tested. Only code that meets qua
 
 Before submitting a Pull Request, make sure that the entire project builds and tests are passing using `dotnet run --project build/Build.csproj`.
 
+You can also run the Unit Tests separately with `dotnet run --project build/Build.csproj --target=UnitTest` or through your IDE.
+
 ## Finding an issue to work on
 
 We have issue labeled with [`up-for-grabs`](https://github.com/MvvmCross/MvvmCross/labels/up-for-grabs) or [`first-timers-only`](https://github.com/MvvmCross/MvvmCross/labels/first-timers-only) to get you started on easy work.
