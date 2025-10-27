@@ -8,7 +8,9 @@
     <StripSymbols>false</StripSymbols>
     <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
 
-    <NoWarn>$(NoWarn);CS0109;CS0108;CS0618;CS0114;NU1603;CS1591</NoWarn>
+    <NoWarn>$(NoWarn);CS0109;CS0108;CS0618;CS0114;CS1591</NoWarn>
+
+    <WarningsAsErrors>$(WarningsAsErrors);NU1608</WarningsAsErrors>
 
     <NeutralLanguage>en-US</NeutralLanguage>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
