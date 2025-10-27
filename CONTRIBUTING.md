@@ -4,13 +4,34 @@ We are happy to receive Pull Requests adding new features and solving bugs. As f
 
 ## Installation
 
-To develop on MvvmCross you will need to install the [.NET SDK](https://dotnet.microsoft.com/en-us/download) (the latest version is usually OK) and the following workloads:
+To develop on MvvmCross you will need to install the [.NET 10 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0).
 
+On Windows and macOS install the following workloads:
 ```bash
-dotnet workload install android ios tvos macos maccatalyst maui-ios maui-android
+dotnet workload install android ios tvos macos maccatalyst
 ```
 
-On Windows you can open the `MvvmCross.sln` file, if you are developing on macOS, use the filter `MvvmCross-macos.slnf` instead.
+On Linux install the following workload:
+
+```bash
+dotnet workload install android
+```
+
+## IDE
+
+It is up to you which IDE you use, the solution should work well regardless if whether you are using Visual Studio, Visual Studio Code or Rider.
+
+For Visual Studio Code, make sure to install [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) and [.NET MAUI](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-maui) extensions. When opening the project in Visual Studio Code, it should suggest which extensions to install which are defined in the [.vscode/extensions.json](https://github.com/MvvmCross/MvvmCross/blob/develop/.vscode/extensions.json) file.
+
+On Windows you can open the `MvvmCross.slnx` file. If you are developing on macOS, use the solution filter `MvvmCross-macos.slnf`. For Linux you can use the `MvvmCross-linux.slnf`, this will only build the Android targets which are the only workloads supported on Linux.
+
+## Building
+
+If you just want to build the project you can run the Cake Frosting build script using
+
+```bash
+dotnet run --project build/Build.csproj
+```
 
 ## Git setup
 
@@ -48,6 +69,8 @@ read this https://help.github.com/articles/using-pull-requests.
 
 Before submitting a feature or substantial code contribution please discuss it with the team and ensure it follows the MvvmCross roadmap.
 Note that code submissions will be reviewed and tested. Only code that meets quality and design/roadmap appropriateness will be merged into the source. [Don't "Push" Your Pull Requests](https://www.igvita.com/2011/12/19/dont-push-your-pull-requests/)
+
+Before submitting a Pull Request, make sure that the entire project builds and tests are passing using `dotnet run --project build/Build.csproj`.
 
 ## Finding an issue to work on
 
