@@ -11,13 +11,20 @@ namespace Playground.Core.ViewModels
 {
     public class ModalViewModel : MvxNavigationViewModel
     {
+        private int _count;
+
         public ModalViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             ShowTabsCommand = new MvxAsyncCommand(() => NavigationService.Navigate<TabsRootViewModel>());
 
             CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
 
-            ShowNestedModalCommand = new MvxAsyncCommand(() => NavigationService.Navigate<NestedModalViewModel>());
+            ShowNestedModalCommand = new MvxAsyncCommand(async () =>
+            {
+                await NavigationService.Navigate<ModalViewModel>();
+                Count++;
+            });
+            ShowWindowCommand = new MvxAsyncCommand(() => NavigationService.Navigate<WindowViewModel>());
         }
 
         public IMvxAsyncCommand ShowTabsCommand { get; }
@@ -25,5 +32,12 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand CloseCommand { get; }
 
         public IMvxAsyncCommand ShowNestedModalCommand { get; }
+        public IMvxAsyncCommand ShowWindowCommand { get; }
+
+        public int Count
+        {
+            get => _count;
+            set => SetProperty(ref _count, value);
+        }
     }
 }

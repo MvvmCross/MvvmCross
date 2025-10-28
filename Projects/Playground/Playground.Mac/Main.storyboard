@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -657,35 +656,35 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button identifier="btnChild" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A7y-RT-j0l">
-                                <rect key="frame" x="199" y="211" width="82" height="25"/>
+                                <rect key="frame" x="198" y="213" width="84" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Show Child" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="y7p-kR-fhH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pp2-5e-UKm">
-                                <rect key="frame" x="196" y="167" width="88" height="25"/>
+                                <rect key="frame" x="195" y="171" width="90" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Show Modal" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ohg-1D-Bzx">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KoN-aA-DJE">
-                                <rect key="frame" x="197" y="122" width="86" height="25"/>
+                                <rect key="frame" x="196" y="128" width="88" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Show Sheet" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Si5-fQ-NyB">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FRn-TF-Pqx">
-                                <rect key="frame" x="190" y="70" width="100" height="25"/>
+                                <rect key="frame" x="189" y="78" width="102" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Show Window" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vp8-Is-gGN">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iQr-KL-QsX">
-                                <rect key="frame" x="200" y="29" width="80" height="25"/>
+                                <rect key="frame" x="199" y="39" width="82" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Show Tabs" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tSM-km-uN4">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -726,7 +725,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PE1-AF-hal">
-                                <rect key="frame" x="186" y="240" width="79" height="25"/>
+                                <rect key="frame" x="185" y="242" width="81" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Show Root" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="D4g-8l-1Jo">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -755,12 +754,29 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PaN-q6-rvY">
-                                <rect key="frame" x="201" y="237" width="49" height="25"/>
+                                <rect key="frame" x="200" y="239" width="51" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Close" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5Hz-nO-LI3">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u4K-tR-XhC">
+                                <rect key="frame" x="133" y="211" width="184" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="roundTextured" title="Show nested modal view" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zD1-sK-Dvl">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rug-nY-90c">
+                                <rect key="frame" x="207" y="189" width="37" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="IfL-a5-Bi4">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="PaN-q6-rvY" firstAttribute="centerX" secondItem="Aog-BB-PLY" secondAttribute="centerX" id="Qam-tn-E9k"/>
@@ -769,6 +785,8 @@
                     </view>
                     <connections>
                         <outlet property="btnClose" destination="5Hz-nO-LI3" id="9UD-fV-5Dz"/>
+                        <outlet property="btnShowModal" destination="u4K-tR-XhC" id="jrC-F7-gwC"/>
+                        <outlet property="lblCount" destination="rug-nY-90c" id="EkO-9T-FNT"/>
                     </connections>
                 </viewController>
                 <customObject id="rc2-zc-6u6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -784,7 +802,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IAs-Fj-mjz">
-                                <rect key="frame" x="151" y="102" width="49" height="25"/>
+                                <rect key="frame" x="150" y="104" width="51" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Close" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ODC-74-gSj">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -813,7 +831,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xgj-jA-EPB">
-                                <rect key="frame" x="201" y="239" width="49" height="25"/>
+                                <rect key="frame" x="200" y="241" width="51" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Close" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NjJ-xC-hcH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -842,7 +860,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Ic-19-5Df">
-                                <rect key="frame" x="207" y="239" width="36" height="17"/>
+                                <rect key="frame" x="207" y="240" width="36" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tab 1" id="nCp-Jv-1wh">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -850,7 +868,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RVn-Dz-MJJ">
-                                <rect key="frame" x="201" y="190" width="49" height="25"/>
+                                <rect key="frame" x="200" y="193" width="51" height="23"/>
                                 <buttonCell key="cell" type="roundTextured" title="Close" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Fgb-JU-YUB">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -876,12 +894,12 @@
         <scene sceneID="T7X-NF-hJh">
             <objects>
                 <windowController storyboardIdentifier="ToolbarWindow" id="VBd-kr-Qq4" userLabel="Toolbar Window" customClass="ToolbarWindow" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="jcZ-bg-Chx">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="jcZ-bg-Chx">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" texturedBackground="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="1685" y="527" width="300" height="300"/>
                         <rect key="screenRect" x="1440" y="226" width="1680" height="1027"/>
-                        <toolbar key="toolbar" implicitIdentifier="54147DE5-A6E4-4161-9637-CEDE9E3B8824" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="Z27-JP-bBi">
+                        <toolbar key="toolbar" implicitIdentifier="54147DE5-A6E4-4161-9637-CEDE9E3B8824" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="regular" id="Z27-JP-bBi">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="V11-Z1-YtT"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="a0v-0X-HyC"/>
@@ -897,12 +915,12 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" bezelStyle="round" id="TOT-sG-WKE">
                                             <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="815C7135-B362-45B7-92FA-0D86A805F646" label="Pulldown" paletteLabel="Pulldown" id="6ML-Um-2OT">
+                                <toolbarItem implicitItemIdentifier="815C7135-B362-45B7-92FA-0D86A805F646" label="Pulldown" paletteLabel="Pulldown" title="Settings" id="6ML-Um-2OT">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="100" height="28"/>
                                     <size key="maxSize" width="100" height="28"/>
@@ -921,7 +939,7 @@
                                         </popUpButtonCell>
                                     </popUpButton>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="98E5F37E-CA5A-4A58-A927-28DADD0D36E2" label="Popup" paletteLabel="Popup" id="6i0-qi-OoC">
+                                <toolbarItem implicitItemIdentifier="98E5F37E-CA5A-4A58-A927-28DADD0D36E2" label="Popup" paletteLabel="Popup" title="Red" id="6i0-qi-OoC">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="100" height="28"/>
                                     <size key="maxSize" width="100" height="28"/>
@@ -953,6 +971,9 @@
                                 <toolbarItem reference="Sq9-6o-ZDm"/>
                             </defaultToolbarItems>
                         </toolbar>
+                        <connections>
+                            <outlet property="delegate" destination="VBd-kr-Qq4" id="sy3-bX-zUT"/>
+                        </connections>
                     </window>
                     <connections>
                         <outlet property="menuItem1" destination="gsR-CX-7Ga" id="Srs-fE-LRv"/>
@@ -965,6 +986,7 @@
                 </windowController>
                 <customObject id="U41-pH-aT0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-118" y="-426"/>
         </scene>
     </scenes>
 </document>

@@ -3,6 +3,7 @@
 using System;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
+using MvvmCross.ViewModels;
 using ObjCRuntime;
 using Playground.Core.ViewModels;
 
