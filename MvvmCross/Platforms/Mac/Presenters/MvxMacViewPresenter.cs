@@ -221,7 +221,12 @@ namespace MvvmCross.Platforms.Mac.Presenters
             else
             {
                 // Instantiate using Reflection - failure is possible if blank constructor is missing
-                windowController = (MvxWindowController)Activator.CreateInstance(Type.GetType(attribute.WindowControllerName));
+                var controllerType = attribute.WindowControllerType ?? Type.GetType(attribute.WindowControllerName)
+                    ?? throw new MvxException($"Could not determine window controller type for the {attribute.ViewModelType?.Name ?? "<unknown vm>"} view model. " +
+                                              $"Please specify either in the {nameof(MvxWindowPresentationAttribute.WindowControllerType)} or " +
+                                              $"{nameof(MvxWindowPresentationAttribute.WindowControllerName)} property of the {nameof(MvxWindowPresentationAttribute)} " +
+                                              $"for the corresponding view model.");
+                windowController = (MvxWindowController)Activator.CreateInstance(controllerType);
             }
             windowController.ShouldCascadeWindows = attribute.ShouldCascadeWindows;
             return windowController;
