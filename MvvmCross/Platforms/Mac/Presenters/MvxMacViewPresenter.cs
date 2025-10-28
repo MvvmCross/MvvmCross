@@ -34,6 +34,8 @@ namespace MvvmCross.Platforms.Mac.Presenters
         /// </summary>
         protected readonly ConditionalWeakTable<NSWindow, NSWindowController> _windowsToWindowControllers = new();
 
+        protected readonly Stack<(NSViewController ViewController, TaskCompletionSource<bool> TaskCompletionSource)> _modalViewControllers = new();
+
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. Assuming new window presentation", viewType.Name);
@@ -254,8 +256,10 @@ namespace MvvmCross.Platforms.Mac.Presenters
         {
             var window = FindPresentingWindow(attribute.WindowIdentifier, viewController);
 
+            var tcs = new TaskCompletionSource<bool>();
+            _modalViewControllers.Push(ValueTuple.Create(viewController, tcs));
             window.ContentViewController.PresentViewControllerAsModalWindow(viewController);
-            return Task.FromResult(true);
+            return tcs.Task;
         }
 
         protected virtual Task<bool> ShowSheetViewController(
@@ -319,6 +323,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
                 if (presentedController != null)
                 {
                     controller.DismissViewController(presentedController);
+                    OnModalViewClose(presentedController);
                     return Task.FromResult(true);
                 }
 
@@ -337,8 +342,23 @@ namespace MvvmCross.Platforms.Mac.Presenters
         protected void OnWindowWillCloseNotification(object sender, NSNotificationEventArgs e)
         {
             var window = e.Notification.Object as NSWindow;
+            OnModalViewClose(window?.ContentViewController);
             if (Windows.Contains(window))
                 Windows.Remove(window);
+        }
+
+        private void OnModalViewClose(NSViewController viewController)
+        {
+            if (_modalViewControllers.Count == 0)
+            {
+                return;
+            }
+
+            if (ReferenceEquals(viewController, _modalViewControllers.Peek().ViewController))
+            {
+                var tcs = _modalViewControllers.Pop().TaskCompletionSource;
+                tcs.SetResult(true);
+            }
         }
     }
 }
