@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Localization;
-using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using MvvmCross.ViewModels.Result;
@@ -61,7 +60,7 @@ namespace Playground.Core.ViewModels
 
             ShowSheetCommand = new MvxAsyncCommand(() => NavigationService.Navigate<SheetViewModel>());
 
-            ShowWindowCommand = new MvxAsyncCommand(Execute);
+            ShowWindowCommand = new MvxAsyncCommand(() => NavigationService.Navigate<WindowViewModel>());
 
             ShowMixedNavigationCommand =
                 new MvxAsyncCommand(() => NavigationService.Navigate<MixedNavFirstViewModel>());
@@ -92,12 +91,6 @@ namespace Playground.Core.ViewModels
                 new MvxCommand(() => IsVisible = !IsVisible);
 
             FragmentCloseCommand = new MvxAsyncCommand(() => NavigationService.Navigate<FragmentCloseViewModel>());
-        }
-
-        private async Task Execute()
-        {
-            await NavigationService.Navigate<WindowViewModel>();
-            int a = 55;
         }
 
         private Task DoShowChildWithResult()
@@ -235,10 +228,9 @@ namespace Playground.Core.ViewModels
             _counter = int.Parse(state.Data["MyKey"]);
         }
 
-        private async Task Navigate()
+        private Task Navigate()
         {
-            await NavigationService.Navigate<ModalViewModel>();
-            var i = 6;
+            return NavigationService.Navigate<ModalViewModel>();
         }
 
         private async Task RegisterAndResolveWithReflection()
