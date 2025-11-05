@@ -49,7 +49,7 @@ Properties introduced inside the attribute will override the storyboard properti
 ```
 will set the CustomWindow Width to 800.
 
-*Note*: when storyboard name is set, the WindowControllerType is ignored.
+> Note: when storyboard name is set, the WindowControllerType is ignored.
 
 To use a custom window controller without storyboard, you can specify either the _WindowControllerType_ or the _WindowControllerName_ (specify the full type name, including the assembly name) property while *not* specifying the _StoryboardName_. The _WindowControllerType_ property takes precedence over the _WindowControllerName_ property.
 
