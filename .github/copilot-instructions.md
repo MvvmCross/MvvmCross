@@ -39,13 +39,13 @@ MvvmCross is a cross-platform MVVM framework for .NET supporting Android, iOS, M
 Always run these commands after cloning:
 
 ```bash
-# Install .NET 9.0.304 (used in CI/CD)
-curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 9.0.304
+# Install .NET 10.0.100 (used in CI/CD)
+curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 10.0.100
 
-# Install JDK 17 (required for Android development)
+# Install JDK 21 (required for Android development)
 # Use Eclipse Temurin distribution consistently across all platforms:
-# Windows: Download from https://adoptium.net/temurin/releases/ or use winget install EclipseAdoptium.Temurin.17.JDK
-# macOS: brew install --cask temurin17
+# Windows: Download from https://adoptium.net/temurin/releases/ or use winget install EclipseAdoptium.Temurin.21.JDK
+# macOS: brew install --cask temurin@21
 # Linux: Install via Adoptium APT repository or download from https://adoptium.net/temurin/releases/
 
 # Restore .NET tools (includes SonarScanner, ReportGenerator, CycloneDX)
