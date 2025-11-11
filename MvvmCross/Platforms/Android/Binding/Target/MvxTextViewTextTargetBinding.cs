@@ -20,16 +20,16 @@ public class MvxTextViewTextTargetBinding
 
     protected TextView? TextView => Target as TextView;
 
-    public MvxTextViewTextTargetBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            TextView target)
+    public MvxTextViewTextTargetBinding(TextView target)
         : base(target)
     {
         _isEditTextBinding = target is EditText;
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
+    [RequiresUnreferencedCode("This method uses reflection to get type information and perform conversions which may not be preserved by trimming.")]
     protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object? value)
     {
         if (!_isEditTextBinding)
@@ -45,6 +45,7 @@ public class MvxTextViewTextTargetBinding
 
     public override MvxBindingMode DefaultMode => _isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         if (_isEditTextBinding)
@@ -64,6 +65,7 @@ public class MvxTextViewTextTargetBinding
         FireValueChanged(TextView?.Text);
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

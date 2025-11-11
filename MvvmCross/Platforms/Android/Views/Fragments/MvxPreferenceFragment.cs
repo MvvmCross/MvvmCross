@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
@@ -14,6 +15,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
     [Register("mvvmcross.platforms.android.views.fragments.MvxPreferenceFragment")]
     public abstract class MvxPreferenceFragment : MvxEventSourcePreferenceFragment, IMvxFragmentView
     {
+        [RequiresUnreferencedCode("This constructor uses reflection which may not be preserved during trimming.")]
         protected MvxPreferenceFragment()
         {
             this.AddEventListeners();
@@ -101,6 +103,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
     public abstract class MvxPreferenceFragment<TViewModel> : MvxPreferenceFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
+        [RequiresUnreferencedCode("This constructor uses reflection which may not be preserved during trimming.")]
         protected MvxPreferenceFragment()
         {
         }

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Exceptions;
 using MvvmCross.IoC;
@@ -11,7 +12,7 @@ namespace MvvmCross.Core;
 
 public static class MvxSetupExtensions
 {
-    public static void RegisterSetupType<TMvxSetup>(this object platformApplication, params Assembly[]? assemblies)
+    public static void RegisterSetupType<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TMvxSetup>(this object platformApplication, params Assembly[]? assemblies)
         where TMvxSetup : MvxSetup, new()
     {
         if (platformApplication == null)
@@ -21,7 +22,8 @@ public static class MvxSetupExtensions
             new[] { platformApplication.GetType().Assembly }.Union(assemblies ?? []).ToArray());
     }
 
-    public static TSetup? CreateSetup<TSetup>(Assembly assembly, params object[] parameters) where TSetup : MvxSetup
+    [RequiresUnreferencedCode("This method uses reflection to find types, which may not be preserved in trimmed applications")]
+    public static TSetup? CreateSetup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TSetup>(Assembly assembly, params object[] parameters) where TSetup : MvxSetup
     {
         var setupType = FindSetupType<TSetup>(assembly);
         if (setupType == null)
@@ -39,7 +41,8 @@ public static class MvxSetupExtensions
         }
     }
 
-    public static TSetup? CreateSetup<TSetup>() where TSetup : MvxSetup
+    [RequiresUnreferencedCode("This method uses reflection to find types, which may not be preserved in trimmed applications")]
+    public static TSetup? CreateSetup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TSetup>() where TSetup : MvxSetup
     {
         var setupType = FindSetupType<TSetup>();
         if (setupType == null)
@@ -57,7 +60,8 @@ public static class MvxSetupExtensions
         }
     }
 
-    public static Type? FindSetupType<TSetup>(Assembly assembly)
+    [RequiresUnreferencedCode("This method uses reflection to find types, which may not be preserved in trimmed applications")]
+    public static Type? FindSetupType<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TSetup>(Assembly assembly)
     {
         var query = from type in assembly.ExceptionSafeGetTypes()
                     where type.Name == "Setup"
@@ -67,6 +71,7 @@ public static class MvxSetupExtensions
         return query.FirstOrDefault();
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to find types, which may not be preserved in trimmed applications")]
     public static Type? FindSetupType<TSetup>()
     {
         var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()

@@ -13,7 +13,6 @@ using MvvmCross.WeakSubscription;
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
 public class MvxUISliderValueTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
         UISlider target,
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UISlider>(target, targetPropertyInfo)
@@ -38,6 +37,7 @@ public class MvxUISliderValueTargetBinding(
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var slider = View;
@@ -50,6 +50,7 @@ public class MvxUISliderValueTargetBinding(
         _subscription = slider.WeakSubscribe(nameof(slider.ValueChanged), HandleSliderValueChanged);
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         base.Dispose(isDisposing);

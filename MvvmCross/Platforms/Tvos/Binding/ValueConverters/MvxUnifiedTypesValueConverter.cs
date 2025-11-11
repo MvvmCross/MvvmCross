@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using MvvmCross.Converters;
 using MvvmCross.IoC;
@@ -12,6 +13,7 @@ using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Binding.ValueConverters
 {
+    [RequiresUnreferencedCode("This class uses reflection which may not be preserved during trimming.")]
     internal class MvxUnifiedTypesValueConverter
         : MvxValueConverter
     {
@@ -30,7 +32,11 @@ namespace MvvmCross.Platforms.Tvos.Binding.ValueConverters
             UnifiedTypeConversions = new ReadOnlyDictionary<Type, Type>(initDictionary);
         }
 
-        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture)
         {
             //actually value cannot be null if converter is being used by auto converter registry and was
             //registered with proper source/target types for unified (value types which are non nullable)

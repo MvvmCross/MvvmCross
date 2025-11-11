@@ -17,9 +17,7 @@ public class MvxAppCompatRadioGroupSelectedItemBinding
     private object? _currentValue;
     private MvxWeakEventSubscription<RadioGroup, RadioGroup.CheckedChangeEventArgs>? _subscription;
 
-    public MvxAppCompatRadioGroupSelectedItemBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            MvxAppCompatRadioGroup radioGroup)
+    public MvxAppCompatRadioGroupSelectedItemBinding(MvxAppCompatRadioGroup radioGroup)
         : base(radioGroup)
     {
         _subscription = radioGroup.WeakSubscribe<RadioGroup, RadioGroup.CheckedChangeEventArgs>(
@@ -110,8 +108,10 @@ public class MvxAppCompatRadioGroupSelectedItemBinding
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(object);
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

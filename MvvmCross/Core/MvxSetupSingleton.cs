@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Runtime.ExceptionServices;
-using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.ViewModels;
 
 namespace MvvmCross.Core
 {
@@ -63,6 +60,7 @@ namespace MvvmCross.Core
         /// </summary>
         /// <typeparam name="TMvxSetupSingleton">The platform specific setup singleton type</typeparam>
         /// <returns>A platform specific setup singleton</returns>
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         protected static TMvxSetupSingleton EnsureSingletonAvailable<TMvxSetupSingleton>()
            where TMvxSetupSingleton : MvxSetupSingleton, new()
         {
@@ -84,6 +82,7 @@ namespace MvvmCross.Core
             }
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         public virtual void EnsureInitialized()
         {
             lock (LockObject)
@@ -93,6 +92,7 @@ namespace MvvmCross.Core
             }
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         protected virtual void CreateSetup()
         {
             try

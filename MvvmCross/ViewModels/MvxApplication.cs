@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
@@ -69,13 +67,14 @@ namespace MvvmCross.ViewModels
             return DefaultLocator;
         }
 
-        protected void RegisterCustomAppStart<TMvxAppStart>()
-            where TMvxAppStart : class, IMvxAppStart
+        protected void RegisterCustomAppStart<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TMvxAppStart>()
+                where TMvxAppStart : class, IMvxAppStart
         {
             Mvx.IoCProvider?.ConstructAndRegisterSingleton<IMvxAppStart, TMvxAppStart>();
         }
 
-        protected void RegisterAppStart<TViewModel>()
+        protected void RegisterAppStart<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>()
             where TViewModel : IMvxViewModel
         {
             Mvx.IoCProvider?.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel>>();
@@ -86,17 +85,19 @@ namespace MvvmCross.ViewModels
             Mvx.IoCProvider?.RegisterSingleton(appStart);
         }
 
-        protected virtual void RegisterAppStart<TViewModel, TParameter>()
+        protected virtual void RegisterAppStart<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel, TParameter>()
           where TViewModel : IMvxViewModel<TParameter> where TParameter : class
         {
             Mvx.IoCProvider?.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         protected IEnumerable<Type> CreatableTypes()
         {
             return CreatableTypes(GetType().GetTypeInfo().Assembly);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         protected IEnumerable<Type> CreatableTypes(Assembly assembly)
         {
             return assembly.CreatableTypes();

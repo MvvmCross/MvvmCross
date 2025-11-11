@@ -74,7 +74,8 @@ public class MvxViewModelLoader
         }
     }
 
-    public IMvxViewModel LoadViewModel<TParameter>(MvxViewModelRequest request, TParameter param, IMvxBundle? savedState, IMvxNavigateEventArgs? navigationArgs = null)
+    public IMvxViewModel LoadViewModel<TParameter>(
+        MvxViewModelRequest request, TParameter param, IMvxBundle? savedState, IMvxNavigateEventArgs? navigationArgs = null)
     {
         if (request.ViewModelType == typeof(MvxNullViewModel))
         {

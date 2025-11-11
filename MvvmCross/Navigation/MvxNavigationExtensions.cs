@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.ViewModels;
 using MvvmCross.ViewModels.Result;
 
@@ -29,11 +30,13 @@ public static class MvxNavigationExtensions
     /// <param name="presentationBundle"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>A task to await upon</returns>
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     public static Task Navigate(this IMvxNavigationService navigationService, Uri path, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
         return navigationService.Navigate(path.ToString(), presentationBundle, cancellationToken);
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
         return navigationService.Navigate(path.ToString(), param, presentationBundle, cancellationToken);
@@ -50,7 +53,7 @@ public static class MvxNavigationExtensions
     /// <typeparam name="TViewModel">Type of <see cref="IMvxResultSettingViewModel{TResult}"/></typeparam>
     /// <typeparam name="TResult">Result awaited by Result Awaiting ViewModel and set by Result Setting ViewModel</typeparam>
     /// <returns>Boolean indicating successful navigation</returns>
-    public static async Task<bool> NavigateRegisteringToResult<TViewModel, TResult>(
+    public static async Task<bool> NavigateRegisteringToResult<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel, TResult>(
         this IMvxNavigationService navigationService,
         IMvxResultAwaitingViewModel<TResult> fromViewModel,
         IMvxResultViewModelManager resultViewModelManager,
@@ -76,7 +79,7 @@ public static class MvxNavigationExtensions
     /// <typeparam name="TViewModel">Type of <see cref="IMvxResultSettingViewModel{TResult}"/> and <see cref="IMvxViewModel{TParameter}"/></typeparam>
     /// <typeparam name="TResult">Result awaited by Result Awaiting ViewModel and set by Result Setting ViewModel</typeparam>
     /// <returns>Boolean indicating successful navigation</returns>
-    public static async Task<bool> NavigateRegisteringToResult<TViewModel, TParameter, TResult>(
+    public static async Task<bool> NavigateRegisteringToResult<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel, TParameter, TResult>(
         this IMvxNavigationService navigationService,
         IMvxResultAwaitingViewModel<TResult> fromViewModel,
         IMvxResultViewModelManager resultViewModelManager,

@@ -2,11 +2,13 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Core;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Tvos.Core
 {
+    [RequiresUnreferencedCode("RegisterSetup may register types that are not preserved by default in the application")]
     public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {
         /// <summary>
@@ -72,6 +74,7 @@ namespace MvvmCross.Platforms.Tvos.Core
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 
+    [RequiresUnreferencedCode("RegisterSetup may register types that are not preserved by default in the application")]
     public abstract class MvxApplicationDelegate<TMvxTvosSetup, TApplication> : MvxApplicationDelegate
        where TMvxTvosSetup : MvxTvosSetup<TApplication>, new()
        where TApplication : class, IMvxApplication, new()

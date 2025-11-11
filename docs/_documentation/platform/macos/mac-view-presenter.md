@@ -49,6 +49,12 @@ Properties introduced inside the attribute will override the storyboard properti
 ```
 will set the CustomWindow Width to 800.
 
+To use a custom window controller without storyboard, you can specify either the _WindowControllerType_ or the _WindowControllerName_ property, while *not* specifying the _StoryboardName_.
+When using _WindowControllerName_, specify the full type name including the assembly name.
+The _WindowControllerType_ property takes precedence over the _WindowControllerName_ property.
+
+> Note: when storyboard name is set, the WindowControllerType is ignored.
+
 ### MvxContentPresentationAttribute
 
 Used to set a view as content of a _Window_. Please notice that changing the content of a window does not automatically generate a navigation stack as it would be on iOS. Changing the content of a window dismisses the old content.

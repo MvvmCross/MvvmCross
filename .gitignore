@@ -263,3 +263,4 @@ artifacts/
 .AssemblyAttributes
 
 *.GeneratedMSBuildEditorConfig.editorconfig
+*.ctrf.json

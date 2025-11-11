@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Android.Views;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
@@ -17,6 +16,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
             TypeCache = typeCache;
         }
 
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         public abstract Type Resolve(string tagName);
 
         protected static bool IsFullyQualified(string tagName)

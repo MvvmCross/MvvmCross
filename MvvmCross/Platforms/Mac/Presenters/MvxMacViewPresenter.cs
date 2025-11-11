@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             return new MvxWindowPresentationAttribute { ViewModelType = viewModelType, ViewType = viewType };
         }
 
-        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
+        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
@@ -123,6 +124,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     (viewModel, attribute) => Close(viewModel));
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
         protected virtual Task<bool> ShowWindowViewController(
             NSViewController viewController,
             MvxWindowPresentationAttribute attribute,
@@ -206,6 +208,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             return window;
         }
 
+        [RequiresUnreferencedCode("This method creates instances which use reflection and may not be preserved by trimming")]
         protected virtual MvxWindowController CreateWindowController(MvxWindowPresentationAttribute attribute)
         {
             MvxWindowController windowController;
@@ -217,8 +220,17 @@ namespace MvvmCross.Platforms.Mac.Presenters
             }
             else
             {
+                var controllerType = attribute.WindowControllerType ?? Type.GetType(attribute.WindowControllerName);
+                if (controllerType is null)
+                {
+                    throw new MvxException(
+                        $"Could not determine window controller type for the {attribute.ViewModelType?.Name ?? "<unknown vm>"} view model. " +
+                        $"Please specify either the {nameof(MvxWindowPresentationAttribute.WindowControllerType)} or " +
+                        $"{nameof(MvxWindowPresentationAttribute.WindowControllerName)} property of the {nameof(MvxWindowPresentationAttribute)} " +
+                        $"for the corresponding view model.");
+                }
                 // Instantiate using Reflection - failure is possible if blank constructor is missing
-                windowController = (MvxWindowController)Activator.CreateInstance(Type.GetType(attribute.WindowControllerName));
+                windowController = (MvxWindowController)Activator.CreateInstance(controllerType);
             }
             windowController.ShouldCascadeWindows = attribute.ShouldCascadeWindows;
             return windowController;

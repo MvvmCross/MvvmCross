@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.ViewModels
@@ -14,6 +15,7 @@ namespace MvvmCross.ViewModels
 
         void Add<TViewModel>() where TViewModel : IMvxViewModel;
 
+        [RequiresUnreferencedCode("This method registers view models that may not be preserved by trimming")]
         void AddAll(Assembly assembly);
     }
 #nullable restore

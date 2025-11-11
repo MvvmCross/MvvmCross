@@ -2,11 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CoreGraphics;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -15,7 +11,6 @@ using MvvmCross.Platforms.Tvos.Views;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
-using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Presenters
 {
@@ -54,7 +49,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                (TabBarViewController == null || !TabBarViewController.CanShowChildView()))
             {
                 _logger?.LogTrace(
-                    "PresentationAttribute nor MasterNavigationController found for {viewTypeName}. Assuming Root presentation",
+                    "PresentationAttribute nor MasterNavigationController found for {ViewTypeName}. Assuming Root presentation",
                     viewType.Name);
                 return new MvxRootPresentationAttribute()
                 {
@@ -65,7 +60,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             }
 
             _logger?.LogTrace(
-                    "PresentationAttribute not found for {viewTypeName}. Assuming Root presentation",
+                    "PresentationAttribute not found for {ViewTypeName}. Assuming Root presentation",
                     viewType.Name);
             return new MvxChildPresentationAttribute()
             {
@@ -74,7 +69,9 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             };
         }
 
-        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
+        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(
+            MvxViewModelRequest request,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
@@ -157,7 +154,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         protected virtual Task<bool> CloseRootViewController(IMvxViewModel viewModel,
                                      MvxRootPresentationAttribute attribute)
         {
-            _logger?.LogWarning("Ignored attempt to close the window root (ViewModel type: {viewModelName}",
+            _logger?.LogWarning("Ignored attempt to close the window root (ViewModel type: {ViewModelName}",
                 viewModel.GetType().Name);
             return Task.FromResult(false);
         }

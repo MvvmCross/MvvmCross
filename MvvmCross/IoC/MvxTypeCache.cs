@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
@@ -16,6 +17,7 @@ public class MvxTypeCache<TType> : IMvxTypeCache
     public Dictionary<string, Type> NameCache { get; } = new();
     public Dictionary<Assembly, bool> CachedAssemblies { get; } = new();
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved in trimming scenarios")]
     public void AddAssembly(Assembly assembly)
     {
         try

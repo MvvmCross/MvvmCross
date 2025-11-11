@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
@@ -24,6 +25,7 @@ public class MvxUIDatePickerMinMaxTargetBinding
         throw new NotImplementedException();
     }
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     protected override object MakeSafeValue(object? value)
     {
         if (value == null)

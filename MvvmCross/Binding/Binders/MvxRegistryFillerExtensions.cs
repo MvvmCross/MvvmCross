@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Base;
 
@@ -11,6 +12,7 @@ namespace MvvmCross.Binding.Binders
 {
     public static class MvxRegistryFillerExtensions
     {
+        [RequiresUnreferencedCode("This method uses reflection to check for creatable types, which may not be preserved by trimming")]
         public static void Fill<T>(
             this IMvxNamedInstanceRegistry<T> registry, IEnumerable<Assembly> assemblies, IEnumerable<Type> types)
             where T : notnull
@@ -20,6 +22,7 @@ namespace MvvmCross.Binding.Binders
             registry.Fill(filler, types);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to check for creatable types, which may not be preserved by trimming")]
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IEnumerable<Assembly> assemblies)
             where T : notnull
         {
@@ -30,6 +33,7 @@ namespace MvvmCross.Binding.Binders
             registry.Fill(filler, assemblies);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to check for creatable types, which may not be preserved by trimming")]
         public static void Fill<T>(
             this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
             IEnumerable<Assembly> assemblies)
@@ -44,6 +48,7 @@ namespace MvvmCross.Binding.Binders
             }
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to check for creatable types, which may not be preserved by trimming")]
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, Assembly assembly)
             where T : notnull
         {
@@ -51,6 +56,7 @@ namespace MvvmCross.Binding.Binders
             registry.Fill(filler, assembly);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to check for creatable types, which may not be preserved by trimming")]
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
                                 Assembly assembly)
             where T : notnull
@@ -58,6 +64,7 @@ namespace MvvmCross.Binding.Binders
             filler.FillFrom(registry, assembly);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to check for creatable types, which may not be preserved by trimming")]
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IEnumerable<Type> types)
             where T : notnull
         {
@@ -68,8 +75,11 @@ namespace MvvmCross.Binding.Binders
             registry.Fill(filler, types);
         }
 
-        public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
-                                IEnumerable<Type> types)
+        [RequiresUnreferencedCode("This method uses reflection to check for creatable types, which may not be preserved by trimming")]
+        public static void Fill<T>(
+            this IMvxNamedInstanceRegistry<T> registry,
+            IMvxNamedInstanceRegistryFiller<T> filler,
+            IEnumerable<Type> types)
         {
             if (types == null)
                 return;
@@ -81,13 +91,16 @@ namespace MvvmCross.Binding.Binders
         }
 
         public static void Fill<T>(
-            this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler, Type type)
+            this IMvxNamedInstanceRegistry<T> registry, IMvxNamedInstanceRegistryFiller<T> filler,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicFields)] Type type)
             where T : notnull
         {
             filler.FillFrom(registry, type);
         }
 
-        public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, Type type)
+        public static void Fill<T>(
+            this IMvxNamedInstanceRegistry<T> registry,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicFields)] Type type)
             where T : notnull
         {
             var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();

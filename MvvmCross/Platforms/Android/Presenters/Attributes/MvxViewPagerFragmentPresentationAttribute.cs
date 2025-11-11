@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace MvvmCross.Platforms.Android.Presenters.Attributes;
 
 #nullable enable
@@ -15,6 +17,7 @@ public class MvxViewPagerFragmentPresentationAttribute : MvxFragmentPresentation
     public MvxViewPagerFragmentPresentationAttribute(
         string title,
         int viewPagerResourceId,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         Type? activityHostViewModelType = null,
         bool addToBackStack = false,
         Type? fragmentHostViewType = null,
@@ -40,6 +43,7 @@ public class MvxViewPagerFragmentPresentationAttribute : MvxFragmentPresentation
     public MvxViewPagerFragmentPresentationAttribute(
         string title,
         string viewPagerResourceName,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         Type? activityHostViewModelType = null,
         bool addToBackStack = false,
         Type? fragmentHostViewType = null,

@@ -3,9 +3,13 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace MvvmCross.ViewModels;
 
 public interface IMvxTypeFinder
 {
-    Type? FindTypeOrNull(Type candidateType);
+    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
+    Type? FindTypeOrNull(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)] Type candidateType);
 }

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
@@ -20,6 +21,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         {
         }
 
+        [RequiresUnreferencedCode("This constructor uses reflection which may not be preserved during trimming.")]
         protected MvxDialogFragment()
         {
             this.AddEventListeners();
@@ -62,9 +64,9 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
 
         public string UniqueImmutableCacheTag => Tag;
 
-        public override void OnCreate(Bundle bundle)
+        public override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(bundle);
+            base.OnCreate(savedInstanceState);
             ViewModel?.ViewCreated();
         }
 
@@ -102,6 +104,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
     public abstract class MvxDialogFragment<TViewModel> : MvxDialogFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
+        [RequiresUnreferencedCode("This constructor uses reflection which may not be preserved during trimming.")]
         protected MvxDialogFragment()
         {
         }

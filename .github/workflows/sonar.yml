@@ -6,36 +6,33 @@ on:
     - develop
   pull_request_target:
     types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 env:
   verbosity: 'minimal'
   sonarKey: 'MvvmCross_MvvmCross'
   sonarOrg: 'mvx'
-  NET_VERSION: 9.0.302
 
 jobs:
   build:
     runs-on: windows-latest
     
     steps:
+    - name: Harden the runner (Audit all outbound calls)
+      uses: step-security/harden-runner@95d9a5deda9de15063e7595e9719c11c38c90ae2 # v2.13.2
+      with:
+        egress-policy: audit
+
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       with:
         fetch-depth: 0
-        fetch-tags: true
+        fetch-tags: true  
 
-    - name: Install .NET ${{ env.NET_VERSION }}
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: ${{ env.NET_VERSION }}
-
-    - name: Restore .NET tools
-      run: dotnet tool restore
-
-    - name: Install .NET workloads
-      run: |
-        dotnet --version
-        dotnet workload install android ios tvos macos maccatalyst --version ${{ env.NET_VERSION }}
+    - uses: ./.github/actions/shared
 
     - name: Build
       run: dotnet run --project build/Build.csproj -- --verbosity=${{ env.verbosity }} --target=Sonar --sonarToken=${{ secrets.SONAR_TOKEN }} --sonarKey=${{ env.sonarKey }} --sonarOrg=${{ env.sonarOrg }}

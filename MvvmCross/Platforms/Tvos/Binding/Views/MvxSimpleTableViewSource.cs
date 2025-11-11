@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using ObjCRuntime;
@@ -45,6 +46,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             tableView.RegisterClassForCellReuse(cellType, _cellIdentifier);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
             if (_iosVersion6Checker.IsVersionOrHigher)

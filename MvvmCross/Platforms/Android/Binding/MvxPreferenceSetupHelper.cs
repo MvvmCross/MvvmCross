@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using AndroidX.Preference;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platforms.Android.Binding.Target;
@@ -6,6 +7,7 @@ namespace MvvmCross.Platforms.Android.Binding
 {
     public static class MvxPreferenceSetupHelper
     {
+        [RequiresUnreferencedCode("This method may use types that are not preserved by trimming")]
         public static void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             registry.RegisterCustomBindingFactory<Preference>(

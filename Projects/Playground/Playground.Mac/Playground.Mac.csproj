@@ -45,9 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties" />
-  </ItemGroup>
-  <ItemGroup>
     <ImageAsset Update="Assets.xcassets\AppIcon.appiconset\AppIcon-512%402x.png">
       <Link>Assets.xcassets\AppIcon.appiconset\AppIcon-512%402x.png</Link>
     </ImageAsset>

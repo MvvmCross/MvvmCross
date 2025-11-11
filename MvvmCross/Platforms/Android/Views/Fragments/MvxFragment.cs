@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Views.Fragments.EventSource;
@@ -19,6 +20,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         /// </summary>
         /// <param name="bundle">Usually this would be MvxViewModelRequest serialized</param>
         /// <returns>Returns an instance of a MvxFragment</returns>
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
         public static MvxFragment NewInstance(Bundle bundle)
         {
             // Setting Arguments needs to happen before Fragment is attached
@@ -33,6 +35,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         {
         }
 
+        [RequiresUnreferencedCode("This constructor uses reflection which may not be preserved during trimming.")]
         protected MvxFragment()
         {
             this.AddEventListeners();
@@ -115,6 +118,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
     public abstract class MvxFragment<TViewModel> : MvxFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
+        [RequiresUnreferencedCode("This constructor uses reflection which may not be preserved during trimming.")]
         protected MvxFragment()
         {
         }

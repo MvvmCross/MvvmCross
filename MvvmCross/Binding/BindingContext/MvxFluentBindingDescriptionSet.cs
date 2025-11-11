@@ -2,19 +2,19 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Binding.BindingContext
 {
-    public class MvxFluentBindingDescriptionSet<TOwningTarget, TSource>
-        : MvxApplicable, IDisposable
-        where TOwningTarget : class, IMvxBindingContextOwner
+    public class MvxFluentBindingDescriptionSet<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] TOwningTarget, TSource>
+            : MvxApplicable, IDisposable
+                where TOwningTarget : class, IMvxBindingContextOwner
     {
-        private readonly List<IMvxApplicable> _applicables = new List<IMvxApplicable>();
+        private readonly List<IMvxApplicable> _applicables = [];
         private readonly TOwningTarget _bindingContextOwner;
         private readonly string _clearBindingKey;
 
@@ -28,38 +28,43 @@ namespace MvvmCross.Binding.BindingContext
         }
         public MvxFluentBindingDescription<TOwningTarget, TSource> Bind()
         {
-            var toReturn = new MvxFluentBindingDescription<TOwningTarget, TSource>(_bindingContextOwner,
-                                                                                   _bindingContextOwner);
+            var toReturn = new MvxFluentBindingDescription<TOwningTarget, TSource>(
+                _bindingContextOwner, _bindingContextOwner);
             _applicables.Add(toReturn);
             return toReturn;
         }
 
-        public MvxFluentBindingDescription<TChildTarget, TSource> Bind<TChildTarget>(TChildTarget childTarget)
-            where TChildTarget : class
+        public MvxFluentBindingDescription<TChildTarget, TSource> Bind<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] TChildTarget>(TChildTarget childTarget)
+                where TChildTarget : class
         {
             var toReturn = new MvxFluentBindingDescription<TChildTarget, TSource>(_bindingContextOwner, childTarget);
             _applicables.Add(toReturn);
             return toReturn;
         }
 
-        public MvxFluentBindingDescription<TChildTarget, TSource> Bind<TChildTarget>(TChildTarget childTarget,
-                                                                                     string bindingDescription)
-            where TChildTarget : class
+        public MvxFluentBindingDescription<TChildTarget, TSource> Bind<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] TChildTarget>(
+                TChildTarget childTarget,
+                string bindingDescription)
+                    where TChildTarget : class
         {
             var toReturn = Bind(childTarget);
             toReturn.FullyDescribed(bindingDescription);
             return toReturn;
         }
 
-        public MvxFluentBindingDescription<TChildTarget, TSource> Bind<TChildTarget>(TChildTarget childTarget,
-                                                                                     MvxBindingDescription bindingDescription)
-            where TChildTarget : class
+        public MvxFluentBindingDescription<TChildTarget, TSource> Bind<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] TChildTarget>(
+                TChildTarget childTarget, MvxBindingDescription bindingDescription)
+                    where TChildTarget : class
         {
             var toReturn = Bind(childTarget);
             toReturn.FullyDescribed(bindingDescription);
             return toReturn;
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public override void Apply()
         {
             foreach (var applicable in _applicables)
@@ -67,6 +72,7 @@ namespace MvvmCross.Binding.BindingContext
             base.Apply();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public void ApplyWithClearBindingKey(object clearBindingKey)
         {
             foreach (var applicable in _applicables)
@@ -89,12 +95,14 @@ namespace MvvmCross.Binding.BindingContext
             base.Apply();
         }
 
+        [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Bindings inherently use reflection. This is by design and callers are warned through usage of binding methods.")]
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

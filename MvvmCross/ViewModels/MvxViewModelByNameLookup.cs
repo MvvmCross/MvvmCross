@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.IoC;
 
@@ -40,6 +41,7 @@ namespace MvvmCross.ViewModels
             Add(typeof(TViewModel));
         }
 
+        [RequiresUnreferencedCode("This method registers view models that may not be preserved by trimming")]
         public void AddAll(Assembly assembly)
         {
             var viewModelTypes = from type in assembly.ExceptionSafeGetTypes()

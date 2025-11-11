@@ -19,10 +19,8 @@ on:
   schedule:
     - cron: '41 5 * * 5'
 
-env:
-  JAVA_DISTRIBUTION: 'microsoft'
-  JAVA_VERSION: 17
-  NET_VERSION: 9.0.302
+permissions:
+  contents: read
 
 jobs:
   analyze:
@@ -52,15 +50,22 @@ jobs:
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - name: Harden the runner (Audit all outbound calls)
+      uses: step-security/harden-runner@95d9a5deda9de15063e7595e9719c11c38c90ae2 # v2.13.2
+      with:
+        egress-policy: audit
+
+    - name: Checkout
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       with:
         fetch-depth: 0
         fetch-tags: true
 
+    - uses: ./.github/actions/shared
+
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
+      uses: github/codeql-action/init@16140ae1a102900babc80a33c44059580f687047 # v4.30.9
       with:
         languages: ${{ matrix.language }}
         # If you wish to specify custom queries, you can do so here or in a config file.
@@ -70,30 +75,10 @@ jobs:
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-
-    - name: Install .NET ${{ env.NET_VERSION }}
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: ${{ env.NET_VERSION }}
-
-    - name: Restore .NET tools
-      run: dotnet tool restore
-
-    - name: Install .NET workloads
-      run: |
-        dotnet --version
-        dotnet workload install android ios tvos macos maccatalyst --version ${{ env.NET_VERSION }}
-
-    - name: Set up JDK
-      uses: actions/setup-java@v4
-      with:
-        distribution: ${{ env.JAVA_DISTRIBUTION }}
-        java-version: ${{ env.JAVA_VERSION }}
-
     - name: Build
       run: dotnet run --project build/Build.csproj -- --verbosity=Minimal
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
+      uses: github/codeql-action/analyze@16140ae1a102900babc80a33c44059580f687047 # v4.30.9
       with:
         category: "/language:${{matrix.language}}"

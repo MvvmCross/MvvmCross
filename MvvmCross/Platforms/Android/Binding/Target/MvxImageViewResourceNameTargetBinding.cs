@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding;
 
 namespace MvvmCross.Platforms.Android.Binding.Target;
@@ -12,6 +13,7 @@ public class MvxImageViewResourceNameTargetBinding(ImageView imageView)
 {
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     protected override void SetImage(ImageView view, int id)

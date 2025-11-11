@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.WeakSubscription;
@@ -16,7 +17,7 @@ public class MvxGeneralEventSubscription(
     protected override Delegate CreateEventHandler() => new EventHandler(OnSourceEvent);
 }
 
-public class MvxGeneralEventSubscription<TSource, TEventArgs>
+public class MvxGeneralEventSubscription<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] TSource, TEventArgs>
     : MvxWeakEventSubscription<TSource, TEventArgs>
     where TSource : class
     where TEventArgs : EventArgs

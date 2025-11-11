@@ -17,9 +17,7 @@ public class MvxSeekBarProgressTargetBinding
 {
     private MvxWeakEventSubscription<SeekBar, SeekBar.ProgressChangedEventArgs>? _subscription;
 
-    public MvxSeekBarProgressTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.PublicProperties)]
-        object target, PropertyInfo targetPropertyInfo)
+    public MvxSeekBarProgressTargetBinding(object target, PropertyInfo targetPropertyInfo)
         : base(target, targetPropertyInfo)
     {
     }
@@ -41,6 +39,7 @@ public class MvxSeekBarProgressTargetBinding
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var seekBar = View;
@@ -55,6 +54,7 @@ public class MvxSeekBarProgressTargetBinding
             SeekBarProgressChanged);
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

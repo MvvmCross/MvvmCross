@@ -4,6 +4,7 @@
 #nullable enable
 
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
@@ -12,6 +13,7 @@ namespace MvvmCross.IoC;
 
 public static class MvxTypeExtensions
 {
+    [RequiresUnreferencedCode("This method uses reflection to get types, which may not be preserved in trimmed applications")]
     public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
     {
         try
@@ -36,6 +38,7 @@ public static class MvxTypeExtensions
         }
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to get types, which may not be preserved in trimmed applications")]
     public static IEnumerable<Type> CreatableTypes(this Assembly assembly)
     {
         return assembly
@@ -117,23 +120,28 @@ public static class MvxTypeExtensions
     public class ServiceTypeAndImplementationTypePair
     {
         public List<Type> ServiceTypes { get; }
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         public Type ImplementationType { get; }
 
-        public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes, Type implementationType)
+        public ServiceTypeAndImplementationTypePair(List<Type> serviceTypes,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type implementationType)
         {
             ImplementationType = implementationType;
             ServiceTypes = serviceTypes;
         }
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = "Types passed to AsTypes are preserved by IoC registration infrastructure.")]
     public static IEnumerable<ServiceTypeAndImplementationTypePair> AsTypes(this IEnumerable<Type> types)
     {
         return types.Select(t => new ServiceTypeAndImplementationTypePair([t], t));
     }
 
+    [RequiresUnreferencedCode("This method uses reflection to get interfaces, which may not be preserved in trimmed applications")]
     public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types) =>
         types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
 
+    [RequiresUnreferencedCode("This method uses reflection to get interfaces, which may not be preserved in trimmed applications")]
     public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types, params Type[] interfaces)
     {
         // optimisation - if we have 3 or more interfaces, then use a dictionary
@@ -210,7 +218,8 @@ public static class MvxTypeExtensions
         }
     }
 
-    public static object? CreateDefault(this Type? type)
+    public static object? CreateDefault(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] this Type? type)
     {
         if (type == null)
             return null;
@@ -226,7 +235,9 @@ public static class MvxTypeExtensions
         return Activator.CreateInstance(type);
     }
 
-    public static ConstructorInfo? FindApplicableConstructor(this Type type, IDictionary<string, object>? arguments)
+    public static ConstructorInfo? FindApplicableConstructor(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] this Type type,
+        IDictionary<string, object>? arguments)
     {
         var constructors = type.GetConstructors();
         if (arguments == null || arguments.Count == 0)
@@ -248,7 +259,9 @@ public static class MvxTypeExtensions
         return null;
     }
 
-    public static ConstructorInfo? FindApplicableConstructor(this Type type, object?[] arguments)
+    public static ConstructorInfo? FindApplicableConstructor(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] this Type type,
+        object?[] arguments)
     {
         var constructors = type.GetConstructors();
         if (arguments.Length == 0)

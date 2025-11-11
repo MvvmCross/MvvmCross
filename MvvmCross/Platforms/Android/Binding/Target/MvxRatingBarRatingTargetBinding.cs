@@ -16,13 +16,12 @@ public class MvxRatingBarRatingTargetBinding
 
     protected RatingBar? RatingBar => (RatingBar?)Target;
 
-    public MvxRatingBarRatingTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        RatingBar target)
+    public MvxRatingBarRatingTargetBinding(RatingBar target)
         : base(target)
     {
     }
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         _subscription = RatingBar?.WeakSubscribe<RatingBar, RatingBar.RatingBarChangeEventArgs>(
@@ -46,10 +45,12 @@ public class MvxRatingBarRatingTargetBinding
             ratingBar.Rating = (float)value;
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(float);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

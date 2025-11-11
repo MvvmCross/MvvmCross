@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Extensions;
@@ -11,6 +12,7 @@ using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Bindings.Source.Leaf
 {
+    [RequiresUnreferencedCode("This method accesses the PropertyInfo which may not be preserved by trimming")]
     public abstract class MvxLeafPropertyInfoSourceBinding : MvxPropertyInfoSourceBinding
     {
         protected MvxLeafPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)

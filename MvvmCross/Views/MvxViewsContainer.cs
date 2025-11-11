@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Views
@@ -41,6 +42,7 @@ namespace MvvmCross.Views
             Add(typeof(TViewModel), typeof(TView));
         }
 
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.Interfaces)]
         public Type GetViewType(Type? viewModelType)
         {
             Type? binding;

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace MvvmCross.Commands;
@@ -17,6 +18,7 @@ public class MvxCommandCollectionBuilder
     public IEnumerable<string>? AdditionalCommandSuffixes { get; set; }
     public string CanExecutePrefix { get; set; } = DefaultCanExecutePrefix;
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     public virtual IMvxCommandCollection BuildCollectionFor(object owner)
     {
         var toReturn = new MvxCommandCollection(owner);
@@ -24,6 +26,7 @@ public class MvxCommandCollectionBuilder
         return toReturn;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     protected virtual void CreateCommands(object owner, MvxCommandCollection toReturn)
     {
         var commandMethods =
@@ -42,6 +45,7 @@ public class MvxCommandCollectionBuilder
         }
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     protected virtual void CreateCommand(
         object owner, MvxCommandCollection collection, MethodInfo commandMethod,
         string commandName, bool hasParameter)
@@ -57,7 +61,8 @@ public class MvxCommandCollectionBuilder
         collection.Add(command, commandName, helper.CanExecutePropertyName);
     }
 
-    protected virtual PropertyInfo? CanExecutePropertyInfo(Type type, MethodInfo commandMethod)
+    protected virtual PropertyInfo? CanExecutePropertyInfo(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type type, MethodInfo commandMethod)
     {
         var canExecuteName = CanExecuteProperyName(commandMethod);
         if (string.IsNullOrEmpty(canExecuteName))

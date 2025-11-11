@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.ViewModels;
@@ -32,11 +33,13 @@ public class MvxViewModelRequestCustomTextSerializer
         throw new MvxException("This serializer only knows about MvxViewModelRequest and IDictionary<string,string>");
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     public T DeserializeObject<T>(string inputText)
     {
         return (T)DeserializeObject(typeof(T), inputText);
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     public object DeserializeObject(Type type, string inputText)
     {
         if (type == typeof(MvxViewModelRequest))
@@ -54,6 +57,7 @@ public class MvxViewModelRequestCustomTextSerializer
         return dictionary;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     protected virtual MvxViewModelRequest DeserializeViewModelRequest(string inputText)
     {
         var dictionary = _stringDictionaryParser.Value.Parse(inputText);

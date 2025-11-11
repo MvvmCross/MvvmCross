@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
@@ -15,7 +16,8 @@ namespace MvvmCross.Binding.BindingContext
     {
         // note that we don't add more default parameters here
         // - otherwise this overrides the other existing methods
-        public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
+        public static void BindLanguage<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] TTarget>(this IMvxBindingContextOwner owner
                                                  , TTarget target
                                                  , string sourceKey)
         {
@@ -23,7 +25,8 @@ namespace MvvmCross.Binding.BindingContext
             owner.BindLanguage(target, targetPath, sourceKey);
         }
 
-        public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
+        public static void BindLanguage<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] TTarget>(this IMvxBindingContextOwner owner
                                                  , TTarget target
                                                  , string sourceKey
                                                  , MvxBindingMode bindingMode)
@@ -32,7 +35,8 @@ namespace MvvmCross.Binding.BindingContext
             owner.BindLanguage(target, targetPath, sourceKey, bindingMode: bindingMode);
         }
 
-        public static void BindLanguage<TTarget, TViewModel>(this IMvxBindingContextOwner owner
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
+        public static void BindLanguage<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] TTarget, TViewModel>(this IMvxBindingContextOwner owner
                                                              , TTarget target
                                                              , string sourceKey
                                                              , Expression<Func<TViewModel, IMvxTextProvider>> textProvider
@@ -44,6 +48,7 @@ namespace MvvmCross.Binding.BindingContext
             owner.BindLanguage(target, targetPath, sourceKey, sourcePath, bindingMode: bindingMode);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
                                                  , TTarget target
                                                  , Expression<Func<TTarget, object>> targetPropertyExpression
@@ -59,6 +64,7 @@ namespace MvvmCross.Binding.BindingContext
             owner.BindLanguage(target, parsedTargetPathText, sourceKey, sourcePropertyName, fallbackValue, converterName, bindingMode);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static void BindLanguage<TTarget, TViewModel>(this IMvxBindingContextOwner owner
                                                              , TTarget target
                                                              ,
@@ -78,6 +84,7 @@ namespace MvvmCross.Binding.BindingContext
             owner.BindLanguage(target, parsedTargetPathText, sourceKey, sourcePropertyName, fallbackValue, converterName, bindingMode);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static void BindLanguage(this IMvxBindingContextOwner owner
                                         , string targetPropertyName
                                         , string sourceKey
@@ -89,6 +96,7 @@ namespace MvvmCross.Binding.BindingContext
             owner.BindLanguage(owner, targetPropertyName, sourceKey, sourcePropertyName, fallbackValue, converterName, bindingMode);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static void BindLanguage(this IMvxBindingContextOwner owner
                                         , object target
                                         , string targetPropertyName
@@ -118,12 +126,14 @@ namespace MvvmCross.Binding.BindingContext
             owner.AddBinding(target, bindingDescription);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static void AddLangBindings(this IMvxBindingContextOwner view, object target, string bindingText)
         {
             var bindings = Binder.LanguageBind(view.BindingContext.DataContext, target, bindingText);
             view.AddBindings(target, bindings);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static void AddLangBindings(this IMvxBindingContextOwner view, IDictionary<object, string> lookup)
         {
             foreach (var kvp in lookup)

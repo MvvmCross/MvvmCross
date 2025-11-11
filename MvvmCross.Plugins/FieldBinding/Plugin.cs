@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.IoC;
 
@@ -17,6 +18,7 @@ namespace MvvmCross.Plugin.FieldBinding
                 OnHostRegistered(host);
         }
 
+        [RequiresUnreferencedCode("Calls MvvmCross.Plugin.FieldBinding.MvxFieldSourceBindingFactoryExtension.MvxFieldSourceBindingFactoryExtension()")]
         private void OnHostRegistered(IMvxSourceBindingFactoryExtensionHost host)
         {
             host.Extensions.Add(new MvxFieldSourceBindingFactoryExtension());

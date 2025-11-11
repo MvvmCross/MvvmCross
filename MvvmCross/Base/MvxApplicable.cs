@@ -32,6 +32,7 @@ namespace MvvmCross.Base
 #pragma warning restore CA1816 // Dispose methods should call SuppressFinalize
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public virtual void Apply()
         {
             SuppressFinalizer();

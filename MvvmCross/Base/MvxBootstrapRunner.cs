@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.IoC;
@@ -11,6 +12,7 @@ namespace MvvmCross.Base
 {
     public class MvxBootstrapRunner
     {
+        [RequiresUnreferencedCode("This method uses reflection to check for creatable types, which may not be preserved by trimming")]
         public virtual void Run(Assembly assembly)
         {
             var types = assembly.CreatableTypes()
@@ -22,7 +24,7 @@ namespace MvvmCross.Base
             }
         }
 
-        protected virtual void Run(Type type)
+        protected virtual void Run([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type type)
         {
             ArgumentNullException.ThrowIfNull(type);
 

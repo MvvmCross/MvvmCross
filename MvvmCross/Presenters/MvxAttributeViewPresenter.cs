@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Presenters.Attributes;
@@ -43,7 +44,8 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
 
     public abstract MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType);
 
-    public virtual object? CreateOverridePresentationAttributeViewInstance(Type viewType)
+    public virtual object? CreateOverridePresentationAttributeViewInstance(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType)
     {
         if (viewType == null)
             throw new ArgumentNullException(nameof(viewType));
@@ -52,7 +54,8 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
     }
 
     public virtual MvxBasePresentationAttribute? GetOverridePresentationAttribute(
-        MvxViewModelRequest request, Type viewType)
+        MvxViewModelRequest request,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
     {
         if (request == null)
             throw new ArgumentNullException(nameof(request));

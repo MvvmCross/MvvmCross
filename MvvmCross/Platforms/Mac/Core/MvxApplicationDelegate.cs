@@ -3,15 +3,17 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using AppKit;
 using MvvmCross.Core;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Mac.Core
 {
+    [RequiresUnreferencedCode("This class may use types that are not preserved by trimming")]
     public abstract class MvxApplicationDelegate : NSApplicationDelegate, IMvxApplicationDelegate
     {
-        public MvxApplicationDelegate() : base()
+        protected MvxApplicationDelegate() : base()
         {
             RegisterSetup();
         }
@@ -64,6 +66,7 @@ namespace MvvmCross.Platforms.Mac.Core
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 
+    [RequiresUnreferencedCode("This class may use types that are not preserved by trimming")]
     public class MvxApplicationDelegate<TMvxMacSetup, TApplication> : MvxApplicationDelegate
         where TMvxMacSetup : MvxMacSetup<TApplication>, new()
         where TApplication : class, IMvxApplication, new()

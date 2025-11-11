@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Binding.Bindings.Target;
@@ -20,6 +21,7 @@ public abstract class MvxTargetBinding : MvxBinding, IMvxTargetBinding
 
     protected object? Target => _target.Target;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public virtual void SubscribeToEvents()
     {
         // do nothing by default
@@ -30,14 +32,19 @@ public abstract class MvxTargetBinding : MvxBinding, IMvxTargetBinding
         ValueChanged?.Invoke(this, new MvxTargetChangedEventArgs(newValue));
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public abstract Type TargetValueType { get; }
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     public abstract void SetValue(object? value);
 
     public abstract MvxBindingMode DefaultMode { get; }
 }
 
-public abstract class MvxTargetBinding<TTarget, TValue> : MvxBinding, IMvxTargetBinding
+public abstract class MvxTargetBinding<
+        TTarget,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TValue
+    > : MvxBinding, IMvxTargetBinding
     where TTarget : class
 {
     public event EventHandler<MvxTargetChangedEventArgs>? ValueChanged;
@@ -58,6 +65,7 @@ public abstract class MvxTargetBinding<TTarget, TValue> : MvxBinding, IMvxTarget
         }
     }
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public virtual void SubscribeToEvents()
     {
         // do nothing by default
@@ -70,10 +78,13 @@ public abstract class MvxTargetBinding<TTarget, TValue> : MvxBinding, IMvxTarget
 
     public abstract MvxBindingMode DefaultMode { get; }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public Type TargetValueType => typeof(TValue);
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     protected abstract void SetValue(TValue? value);
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     public void SetValue(object? value)
     {
         if (value != null && value is not TValue)

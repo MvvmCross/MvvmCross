@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Input;
 using Foundation;
 using MvvmCross.Binding.Bindings;
@@ -15,27 +16,32 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
     public class MvxStandardTableViewCell
         : MvxTableViewCell
     {
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxStandardTableViewCell(NativeHandle handle)
             : this("TitleText" /* default binding is ToString() on the passed in item */, handle)
         {
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxStandardTableViewCell(string bindingText, NativeHandle handle)
             : base(bindingText, handle)
         {
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, NativeHandle handle)
             : base(bindingDescriptions, handle)
         {
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxStandardTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
                                         UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)

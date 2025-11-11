@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Foundation;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Binders;
@@ -93,6 +94,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             return Mvx.IoCProvider.Resolve<IMvxBindingDescriptionParser>().Parse(bindingText);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
             var reuse = tableView.DequeueReusableCell(CellIdentifier);
@@ -102,6 +104,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             return CreateDefaultBindableCell(tableView, indexPath, item);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         protected virtual MvxStandardTableViewCell CreateDefaultBindableCell(UITableView tableView,
                                                                              NSIndexPath indexPath, object item)
         {

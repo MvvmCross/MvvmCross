@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
@@ -97,11 +96,18 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        private void ScrollToSection(UITableView tableView, nint atIndex)
+        private void ScrollToSection(UITableView tableView, nint sectionIndex)
         {
-            var sectionRect = tableView.RectForSection(atIndex);
-            sectionRect.Height = tableView.Frame.Height;
-            tableView.ScrollRectToVisible(sectionRect, true);
+            if (tableView.NumberOfRowsInSection(sectionIndex) > 0)
+            {
+                var firstRow = NSIndexPath.FromRowSection(0, sectionIndex);
+                tableView.ScrollToRow(firstRow, UITableViewScrollPosition.Top, true);
+            }
+            else
+            {
+                var headerRect = tableView.RectForHeaderInSection(sectionIndex);
+                tableView.ScrollRectToVisible(headerRect, true);
+            }
         }
 
         protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
@@ -161,9 +167,8 @@ namespace MvvmCross.Platforms.Ios.Views
 
             foreach (var view in header.Subviews)
             {
-                if (view is HiddenHeaderButton)
+                if (view is HiddenHeaderButton hiddenbutton)
                 {
-                    var hiddenbutton = view as HiddenHeaderButton;
                     hiddenbutton.Tag = section;
                     hasHiddenButton = true;
                 }
@@ -216,11 +221,6 @@ namespace MvvmCross.Platforms.Ios.Views
             return 44; // Default value.
         }
 
-        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-        {
-            return base.GetCell(tableView, indexPath);
-        }
-
         /// <summary>
         /// Gets the cell used for the header
         /// </summary>
@@ -228,8 +228,6 @@ namespace MvvmCross.Platforms.Ios.Views
         /// <param name="section"></param>
         /// <returns></returns>
         protected abstract UITableViewCell GetOrCreateHeaderCellFor(UITableView tableView, nint section);
-
-        protected abstract override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
 
         private bool isAccordionExpandCollapseEnabled;
         public bool IsAccordionExpandCollapseEnabled

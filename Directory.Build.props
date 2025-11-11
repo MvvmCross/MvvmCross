@@ -8,16 +8,17 @@
     <StripSymbols>false</StripSymbols>
     <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
 
-    <NoWarn>$(NoWarn);CS0109;CS0108;CS0618;CS0114;NU1603;CS1591</NoWarn>
+    <NoWarn>$(NoWarn);CS0109;CS0108;CS0618;CS0114;CS1591</NoWarn>
+
+    <WarningsAsErrors>$(WarningsAsErrors);NU1608</WarningsAsErrors>
 
     <NeutralLanguage>en-US</NeutralLanguage>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <Version>9.3.1</Version>
 
-    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <NuGetAudit>enable</NuGetAudit>
-    <NuGetAuditMode>all</NuGetAuditMode>
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -55,6 +56,16 @@
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIstvOS)' == 'True' ">12.2</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsMacCatalyst)' == 'True' ">15.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsAndroid)' == 'True' ">23</SupportedOSPlatformVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <_MvxCommonTargets>net8.0;net9.0;net10.0</_MvxCommonTargets>
+    <_MvxAndroidTargets>net9.0-android;net10.0-android</_MvxAndroidTargets>
+    <_MvxiOSTargets>net9.0-ios;net9.0-maccatalyst;net10.0-ios;net10.0-maccatalyst</_MvxiOSTargets>
+    <_MvxMacOSTargets>net9.0-macos;net10.0-macos</_MvxMacOSTargets>
+    <_MvxTvOSTargets>net9.0-tvos;net10.0-tvos</_MvxTvOSTargets>
+    <_MvxWindowsTargets>net8.0-windows10.0.19041.0;net9.0-windows10.0.19041.0;net10.0-windows10.0.19041.0</_MvxWindowsTargets>
+    <_MvxWpfTargets>net8.0-windows;net9.0-windows;net10.0-windows</_MvxWpfTargets>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using AppKit;
 using MvvmCross.Core;
 using MvvmCross.Platforms.Mac.Presenters;
@@ -11,6 +12,7 @@ namespace MvvmCross.Platforms.Mac.Core
     public class MvxMacSetupSingleton
         : MvxSetupSingleton
     {
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
         public static MvxMacSetupSingleton EnsureSingletonAvailable(IMvxApplicationDelegate applicationDelegate)
         {
             var instance = EnsureSingletonAvailable<MvxMacSetupSingleton>();
@@ -18,6 +20,7 @@ namespace MvvmCross.Platforms.Mac.Core
             return instance;
         }
 
+        [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
         public static MvxMacSetupSingleton EnsureSingletonAvailable(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
         {
             var instance = EnsureSingletonAvailable<MvxMacSetupSingleton>();

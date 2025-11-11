@@ -3,12 +3,13 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Exceptions;
 
 namespace MvvmCross.WeakSubscription;
 
-public class MvxWeakEventSubscription<TSource, TEventArgs> : IDisposable
+public class MvxWeakEventSubscription<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] TSource, TEventArgs> : IDisposable
     where TSource : class
 {
     private readonly WeakReference _targetReference;
@@ -135,7 +136,7 @@ public class MvxWeakEventSubscription<TSource, TEventArgs> : IDisposable
     }
 }
 
-public class MvxWeakEventSubscription<TSource> : IDisposable
+public class MvxWeakEventSubscription<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] TSource> : IDisposable
     where TSource : class
 {
     private readonly WeakReference _targetReference;

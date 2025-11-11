@@ -1,4 +1,5 @@
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Android.Webkit;
 using MvvmCross.Binding;
 
@@ -7,6 +8,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target;
 public class MvxWebViewHtmlTargetBinding(object target)
     : MvxAndroidTargetBinding(target)
 {
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 

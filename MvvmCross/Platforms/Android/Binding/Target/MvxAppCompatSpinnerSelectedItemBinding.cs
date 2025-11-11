@@ -18,9 +18,7 @@ public class MvxAppCompatSpinnerSelectedItemBinding
 
     protected MvxAppCompatSpinner? Spinner => (MvxAppCompatSpinner?)Target;
 
-    public MvxAppCompatSpinnerSelectedItemBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            MvxAppCompatSpinner spinner)
+    public MvxAppCompatSpinnerSelectedItemBinding(MvxAppCompatSpinner spinner)
         : base(spinner)
     {
     }
@@ -78,6 +76,7 @@ public class MvxAppCompatSpinnerSelectedItemBinding
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var spinner = Spinner;
@@ -89,8 +88,10 @@ public class MvxAppCompatSpinnerSelectedItemBinding
             SpinnerItemSelected);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(object);
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

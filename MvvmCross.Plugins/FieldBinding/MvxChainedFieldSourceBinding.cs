@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
@@ -27,6 +28,7 @@ namespace MvvmCross.Plugin.FieldBinding
             UpdateChildBinding();
         }
 
+        [RequiresUnreferencedCode("Calls MvvmCross.Binding.Bindings.Source.Construction.IMvxSourceBindingFactory.CreateBinding(Object, IList<IMvxPropertyToken>)")]
         private void UpdateChildBinding()
         {
             if (_currentChildBinding != null)

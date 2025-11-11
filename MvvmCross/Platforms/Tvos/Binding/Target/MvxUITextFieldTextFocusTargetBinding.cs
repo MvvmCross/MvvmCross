@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using UIKit;
@@ -15,6 +16,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
 
         protected UITextField TextField => Target as UITextField;
 
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(string);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
@@ -24,6 +26,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         {
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
         public override void SetValue(object value)
         {
             if (TextField == null) return;
@@ -32,6 +35,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             TextField.Text = value.ToString();
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
         public override void SubscribeToEvents()
         {
             if (TextField == null) return;
@@ -47,16 +51,21 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             FireValueChanged(TextField.Text);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
-            base.Dispose(isDisposing);
-            if (!isDisposing) return;
-
-            if (TextField != null && _subscribed)
+            if (isDisposing)
             {
-                TextField.EditingDidEnd -= HandleLostFocus;
-                _subscribed = false;
+                if (_subscribed)
+                {
+                    var textField = TextField;
+                    if (textField != null)
+                    {
+                        textField.EditingDidEnd -= HandleLostFocus;
+                    }
+                }
             }
+            base.Dispose(isDisposing);
         }
     }
 }

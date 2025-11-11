@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
@@ -29,30 +30,26 @@ public class MvxAndroidViewsContainer
 
     #region Implementation of IMvxAndroidViewModelRequestTranslator
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     public virtual IMvxViewModel? Load(Intent? intent, IMvxBundle? savedState)
     {
         return Load(intent, null, null);
     }
 
-    public virtual IMvxViewModel? Load(Intent? intent, IMvxBundle? savedState, Type? viewModelTypeHint)
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
+    public virtual IMvxViewModel? Load(Intent? intent, IMvxBundle? savedState,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelTypeHint)
     {
-        if (intent == null)
-        {
-            _logger?.Log(LogLevel.Error, "Null Intent seen when creating ViewModel");
-            return null;
-        }
+        return CreateViewModel(intent!, savedState, viewModelTypeHint);
+    }
 
-        if (intent.Action == Intent.ActionMain)
-        {
-            _logger?.Log(LogLevel.Trace, "Creating ViewModel for ActionMain");
-            return DirectLoad(savedState, viewModelTypeHint);
-        }
-
-        if (intent.Extras == null)
-        {
-            _logger?.Log(LogLevel.Trace, "Null Extras seen on Intent when creating ViewModel - have you tried to navigate to an MvvmCross View directly? Will try direct load");
-            return DirectLoad(savedState, viewModelTypeHint);
-        }
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
+    protected virtual IMvxViewModel? CreateViewModel(
+        Intent intent,
+        IMvxBundle? savedState,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelTypeHint)
+    {
+        ArgumentNullException.ThrowIfNull(intent);
 
         if (TryGetEmbeddedViewModel(intent, out var mvxViewModel))
         {
@@ -69,7 +66,9 @@ public class MvxAndroidViewsContainer
         return DirectLoad(savedState, viewModelTypeHint);
     }
 
-    protected virtual IMvxViewModel? DirectLoad(IMvxBundle? savedState, Type? viewModelTypeHint)
+    protected virtual IMvxViewModel? DirectLoad(
+        IMvxBundle? savedState,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelTypeHint)
     {
         if (viewModelTypeHint == null)
         {
@@ -88,6 +87,7 @@ public class MvxAndroidViewsContainer
         return viewModel;
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
     protected virtual IMvxViewModel? CreateViewModelFromIntent(Intent intent, IMvxBundle? savedState)
     {
         var extraData = intent.Extras?.GetString(ExtrasKey);
@@ -172,9 +172,10 @@ public class MvxAndroidViewsContainer
         //                intent.AddFlags(ActivityFlags.ClearTop);
     }
 
-    public virtual (Intent intent, int key) GetIntentWithKeyFor(IMvxViewModel existingViewModelToUse, MvxViewModelRequest? request)
+    public virtual (Intent intent, int key) GetIntentWithKeyFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(TViewModel existingViewModelToUse, MvxViewModelRequest? request)
+        where TViewModel : IMvxViewModel
     {
-        request ??= MvxViewModelRequest.GetDefaultRequest(existingViewModelToUse.GetType());
+        request ??= MvxViewModelRequest.GetDefaultRequest(typeof(TViewModel));
         var intent = GetIntentFor(request);
 
         if (Mvx.IoCProvider?.TryResolve(out IMvxChildViewModelCache? viewModelCache) != true || viewModelCache == null)

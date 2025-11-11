@@ -9,19 +9,19 @@ using MvvmCross.Base;
 namespace MvvmCross.WeakSubscription
 {
 #nullable enable
-    public class MvxValueEventSubscription<T>
-        : MvxWeakEventSubscription<object, MvxValueEventArgs<T>>
+    public class MvxValueEventSubscription<TEventArgs>
+        : MvxWeakEventSubscription<object, MvxValueEventArgs<TEventArgs>>
     {
         public MvxValueEventSubscription(object source,
                                          EventInfo eventInfo,
-                                         EventHandler<MvxValueEventArgs<T>> eventHandler)
+                                         EventHandler<MvxValueEventArgs<TEventArgs>> eventHandler)
             : base(source, eventInfo, eventHandler)
         {
         }
 
         protected override Delegate CreateEventHandler()
         {
-            return new EventHandler<MvxValueEventArgs<T>>(OnSourceEvent);
+            return new EventHandler<MvxValueEventArgs<TEventArgs>>(OnSourceEvent);
         }
     }
 #nullable restore

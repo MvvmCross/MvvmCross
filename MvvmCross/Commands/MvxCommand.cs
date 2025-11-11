@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Base;
 
 namespace MvvmCross.Commands
@@ -171,7 +172,7 @@ namespace MvvmCross.Commands
             => Execute(null);
     }
 
-    public class MvxCommand<T>
+    public class MvxCommand<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>
         : MvxCommandBase
         , IMvxCommand, IMvxCommand<T>
     {

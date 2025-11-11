@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
@@ -17,12 +16,14 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
     {
         private IMvxSourcePropertyPathParser _propertyPathParser;
 
-        protected IMvxSourcePropertyPathParser SourcePropertyPathParser => _propertyPathParser ?? (_propertyPathParser = Mvx.IoCProvider.Resolve<IMvxSourcePropertyPathParser>());
+        protected IMvxSourcePropertyPathParser SourcePropertyPathParser => _propertyPathParser ??= Mvx.IoCProvider.Resolve<IMvxSourcePropertyPathParser>();
 
-        private readonly List<IMvxSourceBindingFactoryExtension> _extensions = new List<IMvxSourceBindingFactoryExtension>();
+        private readonly List<IMvxSourceBindingFactoryExtension> _extensions = [];
 
-        protected bool TryCreateBindingFromExtensions(object source, IMvxPropertyToken propertyToken,
-                                            List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+        [RequiresUnreferencedCode("This method uses reflection to create bindings, which may not be preserved in trimming scenarios")]
+        protected bool TryCreateBindingFromExtensions(
+            object source, IMvxPropertyToken propertyToken,
+            List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
             foreach (var extension in _extensions)
             {
@@ -36,12 +37,14 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             return false;
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to create bindings, which may not be preserved in trimming scenarios")]
         public IMvxSourceBinding CreateBinding(object source, string combinedPropertyName)
         {
             var tokens = SourcePropertyPathParser.Parse(combinedPropertyName);
             return CreateBinding(source, tokens);
         }
 
+        [RequiresUnreferencedCode("This method uses reflection to create bindings, which may not be preserved in trimming scenarios")]
         public IMvxSourceBinding CreateBinding(object source, IList<IMvxPropertyToken> tokens)
         {
             if (tokens == null || tokens.Count == 0)

@@ -29,8 +29,7 @@ namespace MvvmCross.Platforms.Android.Views
             var type = toCache.GetType();
 
             var cachedViewModelType = new CachedViewModelType(type, viewModelTag);
-            if (!CurrentViewModels.ContainsKey(cachedViewModelType))
-                CurrentViewModels.TryAdd(cachedViewModelType, toCache);
+            CurrentViewModels.AddOrUpdate(cachedViewModelType, toCache, (_, _) => toCache);
         }
 
         public IMvxViewModel GetAndClear(Type viewModelType, string viewModelTag = "singleInstanceCache")

@@ -4,6 +4,7 @@
 #nullable enable
 
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Source.Chained;
 using MvvmCross.Binding.Bindings.Source.Leaf;
@@ -20,6 +21,7 @@ public class MvxPropertySourceBindingFactoryExtension
 {
     private readonly ConcurrentDictionary<int, PropertyInfo> _propertyInfoCache = new();
 
+    [RequiresUnreferencedCode("This method creates source bindings which use reflection and may not be preserved by trimming")]
     public bool TryCreateBinding(
         object? source,
         IMvxPropertyToken propertyToken,
@@ -39,6 +41,7 @@ public class MvxPropertySourceBindingFactoryExtension
         return result != null;
     }
 
+    [RequiresUnreferencedCode("This method creates chained source bindings which use reflection and may not be preserved by trimming")]
     protected virtual MvxChainedSourceBinding? CreateChainedBinding(
         object source,
         IMvxPropertyToken propertyToken,
@@ -71,6 +74,7 @@ public class MvxPropertySourceBindingFactoryExtension
         }
     }
 
+    [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     protected virtual IMvxSourceBinding? CreateLeafBinding(object source, IMvxPropertyToken propertyToken)
     {
         if (propertyToken is MvxIndexerPropertyToken indexPropertyToken)
@@ -97,9 +101,14 @@ public class MvxPropertySourceBindingFactoryExtension
         throw new MvxException("Unexpected property source - seen token type {0}", propertyToken.GetType().FullName);
     }
 
-    protected PropertyInfo? FindPropertyInfo(object source, string propertyName = "Item")
+    [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Property reflection is core to binding functionality. Properties accessed through bindings are preserved by [DynamicallyAccessedMembers] on binding-related types.")]
+    protected PropertyInfo? FindPropertyInfo<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(T? source, string propertyName = "Item")
     {
-        var sourceType = source.GetType();
+        var sourceType = source?.GetType();
+        if (sourceType == null)
+            return null;
+
         var key = (sourceType.FullName + "." + propertyName).GetHashCode();
 
         if (_propertyInfoCache.TryGetValue(key, out PropertyInfo? pi))

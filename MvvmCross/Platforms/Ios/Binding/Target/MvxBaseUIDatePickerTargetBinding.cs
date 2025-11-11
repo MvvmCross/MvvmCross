@@ -13,7 +13,6 @@ using MvvmCross.WeakSubscription;
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
 public abstract class MvxBaseUIDatePickerTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
         UIDatePicker target,
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UIDatePicker>(target, targetPropertyInfo)
@@ -33,6 +32,7 @@ public abstract class MvxBaseUIDatePickerTargetBinding(
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var datePicker = View;
@@ -48,6 +48,7 @@ public abstract class MvxBaseUIDatePickerTargetBinding(
         }
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         base.Dispose(isDisposing);

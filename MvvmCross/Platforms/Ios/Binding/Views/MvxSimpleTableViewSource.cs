@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Foundation;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
@@ -47,6 +48,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             tableView.RegisterClassForCellReuse(cellType, _cellIdentifier);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
             if (_iosVersion6Checker.IsVersionOrHigher)

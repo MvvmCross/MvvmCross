@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Logging;
@@ -205,12 +206,12 @@ namespace MvvmCross.Commands
             return _execute(CancelToken);
         }
 
-        public static MvxAsyncCommand<T?> CreateCommand<T>(Func<T?, Task> execute, Func<T?, bool>? canExecute = null, bool allowConcurrentExecutions = false)
+        public static MvxAsyncCommand<T?> CreateCommand<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>(Func<T?, Task> execute, Func<T?, bool>? canExecute = null, bool allowConcurrentExecutions = false)
         {
             return new MvxAsyncCommand<T?>(execute, canExecute, allowConcurrentExecutions);
         }
 
-        public static MvxAsyncCommand<T?> CreateCommand<T>(Func<T?, CancellationToken, Task> execute, Func<T?, bool>? canExecute = null, bool allowConcurrentExecutions = false)
+        public static MvxAsyncCommand<T?> CreateCommand<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>(Func<T?, CancellationToken, Task> execute, Func<T?, bool>? canExecute = null, bool allowConcurrentExecutions = false)
         {
             return new MvxAsyncCommand<T?>(execute, canExecute, allowConcurrentExecutions);
         }
@@ -221,7 +222,7 @@ namespace MvvmCross.Commands
         }
     }
 
-    public class MvxAsyncCommand<T>
+    public class MvxAsyncCommand<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>
         : MvxAsyncCommandBase, IMvxCommand, IMvxAsyncCommand<T>
     {
         private readonly Func<T?, CancellationToken, Task> _execute;

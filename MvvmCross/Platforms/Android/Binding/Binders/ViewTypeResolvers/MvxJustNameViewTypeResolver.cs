@@ -14,6 +14,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
         {
         }
 
+        [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors)]
         public override Type Resolve(string tagName)
         {
             // this resolver can't handle fully qualified tag names

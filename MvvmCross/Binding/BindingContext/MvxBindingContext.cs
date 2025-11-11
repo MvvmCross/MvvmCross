@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 
@@ -29,26 +30,31 @@ namespace MvvmCross.Binding.BindingContext
             _dataContext = dataContext;
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming")]
         public MvxBindingContext(IDictionary<object, string> firstBindings)
         {
             Init(null, firstBindings);
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming")]
         public MvxBindingContext(object dataContext, IDictionary<object, string> firstBindings)
         {
             Init(dataContext, firstBindings);
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming")]
         public MvxBindingContext(IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
         {
             Init(null, firstBindings);
         }
 
+        [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming")]
         public MvxBindingContext(object dataContext, IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
         {
             Init(dataContext, firstBindings);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public MvxBindingContext Init(object dataContext, IDictionary<object, IEnumerable<MvxBindingDescription>> firstBindings)
         {
             foreach (var kvp in firstBindings)
@@ -61,6 +67,7 @@ namespace MvvmCross.Binding.BindingContext
             return this;
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public MvxBindingContext Init(object dataContext, IDictionary<object, string> firstBindings)
         {
             foreach (var kvp in firstBindings)
@@ -73,6 +80,7 @@ namespace MvvmCross.Binding.BindingContext
             return this;
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public IMvxBindingContext Init(object dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue)
         {
             AddDelayedAction(firstBindingKey, firstBindingValue);
@@ -82,6 +90,7 @@ namespace MvvmCross.Binding.BindingContext
             return this;
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public IMvxBindingContext Init(object dataContext, object firstBindingKey, string firstBindingValue)
         {
             AddDelayedAction(firstBindingKey, firstBindingValue);
@@ -91,6 +100,7 @@ namespace MvvmCross.Binding.BindingContext
             return this;
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         private void AddDelayedAction(object key, string value)
         {
             _delayedActions.Add(() =>
@@ -101,6 +111,7 @@ namespace MvvmCross.Binding.BindingContext
             });
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         private void AddDelayedAction(object key, IEnumerable<MvxBindingDescription> value)
         {
             _delayedActions.Add(() =>
@@ -111,6 +122,7 @@ namespace MvvmCross.Binding.BindingContext
             });
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         private void AddDelayedAction(KeyValuePair<object, string> kvp)
         {
             _delayedActions.Add(() =>
@@ -121,6 +133,7 @@ namespace MvvmCross.Binding.BindingContext
             });
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         private void AddDelayedAction(KeyValuePair<object, IEnumerable<MvxBindingDescription>> kvp)
         {
             _delayedActions.Add(() =>

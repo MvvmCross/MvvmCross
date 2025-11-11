@@ -23,9 +23,7 @@ public class MvxUIControlTargetBinding : MvxConvertingTargetBinding
 
     protected UIControl? Control => Target as UIControl;
 
-    public MvxUIControlTargetBinding(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            UIControl control, string controlEvent)
+    public MvxUIControlTargetBinding(UIControl control, string controlEvent)
         : base(control)
     {
         _controlEvent = controlEvent;
@@ -46,6 +44,7 @@ public class MvxUIControlTargetBinding : MvxConvertingTargetBinding
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(ICommand);
 
     protected override void SetValueImpl(object target, object? value)
@@ -62,6 +61,7 @@ public class MvxUIControlTargetBinding : MvxConvertingTargetBinding
         RefreshEnabledState();
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

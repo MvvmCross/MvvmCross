@@ -11,9 +11,7 @@ using MvvmCross.Platforms.Android.WeakSubscription;
 
 namespace MvvmCross.Platforms.Android.Binding.Target;
 
-public class MvxListViewSelectedItemTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        MvxListView view)
+public class MvxListViewSelectedItemTargetBinding(MvxListView view)
     : MvxAndroidTargetBinding(view)
 {
     private object? _currentValue;
@@ -55,6 +53,7 @@ public class MvxListViewSelectedItemTargetBinding(
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var listView = (ListView?)ListView;
@@ -65,8 +64,10 @@ public class MvxListViewSelectedItemTargetBinding(
             listView.WeakSubscribe<ListView, AdapterView.ItemClickEventArgs>(nameof(listView.ItemClick), OnItemClick);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(object);
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

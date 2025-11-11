@@ -11,18 +11,18 @@ using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
-public class MvxUISwitchOnTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        UISwitch target)
+public class MvxUISwitchOnTargetBinding(UISwitch target)
     : MvxTargetBinding<UISwitch, bool>(target)
 {
     private MvxWeakEventSubscription<UISwitch>? _subscription;
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     protected override void SetValue(bool value)
     {
         Target?.SetState(value, true);
     }
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var uiSwitch = Target;
@@ -37,6 +37,7 @@ public class MvxUISwitchOnTargetBinding(
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         base.Dispose(isDisposing);

@@ -16,7 +16,6 @@ public class MvxEventHandlerEventInfoTargetBinding : MvxTargetBinding
     private readonly object _eventHandler;
 
     public MvxEventHandlerEventInfoTargetBinding(object target,
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
         EventInfo targetEventInfo)
         : base(target)
     {
@@ -34,10 +33,12 @@ public class MvxEventHandlerEventInfoTargetBinding : MvxTargetBinding
         addMethod?.Invoke(target, [_eventHandler]);
     }
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(ICommand);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)
@@ -56,6 +57,7 @@ public class MvxEventHandlerEventInfoTargetBinding : MvxTargetBinding
     private void HandleEvent(object? sender, EventArgs args) =>
         _currentCommand?.Execute(null);
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     public override void SetValue(object? value) =>
         _currentCommand = value as ICommand;
 }

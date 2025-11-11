@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using Android.Webkit;
 using AndroidX.Preference;
@@ -63,6 +64,7 @@ namespace MvvmCross.Platforms.Android.Binding
             _fillValueCombiners?.Invoke(registry);
         }
 
+        [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
         public override void DoRegistration(IMvxIoCProvider iocProvider)
         {
             InitializeAppResourceTypeFinder(iocProvider);
@@ -120,6 +122,7 @@ namespace MvvmCross.Platforms.Android.Binding
             return new MvxAppResourceTypeFinder();
         }
 
+        [RequiresUnreferencedCode("This method registers target bindings that may not be preserved by trimming")]
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             base.FillTargetFactories(registry);

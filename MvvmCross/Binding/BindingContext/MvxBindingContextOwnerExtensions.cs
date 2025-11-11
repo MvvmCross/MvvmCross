@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Binding.BindingContext
@@ -15,11 +16,13 @@ namespace MvvmCross.Binding.BindingContext
             view.BindingContext = Mvx.IoCProvider.Resolve<IMvxBindingContext>();
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public static void CreateBindingContext(this IMvxBindingContextOwner view, string bindingText)
         {
             view.BindingContext = Mvx.IoCProvider.Resolve<IMvxBindingContext>().Init(null, view, bindingText);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public static void CreateBindingContext(this IMvxBindingContextOwner view,
                                                 IEnumerable<MvxBindingDescription> bindings)
         {
@@ -53,6 +56,7 @@ namespace MvvmCross.Binding.BindingContext
             }
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static void AddBinding(this IMvxBindingContextOwner view, object target,
                                       MvxBindingDescription bindingDescription, object clearKey = null)
         {
@@ -69,12 +73,14 @@ namespace MvvmCross.Binding.BindingContext
                 view.AddBinding(target, binding, clearKey);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public static void AddBindings(this IMvxBindingContextOwner view, object target, string bindingText, object clearKey = null)
         {
             var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingText);
             view.AddBindings(target, bindings, clearKey);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public static void AddBindings(this IMvxBindingContextOwner view, object target,
                                        IEnumerable<MvxBindingDescription> bindingDescriptions, object clearKey = null)
         {
@@ -82,6 +88,7 @@ namespace MvvmCross.Binding.BindingContext
             view.AddBindings(target, bindings, clearKey);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static void AddBindings(this IMvxBindingContextOwner view,
                                        IDictionary<object, string> bindingMap,
                                        object clearKey = null)
@@ -95,6 +102,7 @@ namespace MvvmCross.Binding.BindingContext
             }
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static void AddBindings(this IMvxBindingContextOwner view,
                                        IDictionary<object, IEnumerable<MvxBindingDescription>> bindingMap,
                                        object clearKey = null)

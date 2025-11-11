@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using AppKit;
 using MvvmCross.Exceptions;
@@ -35,7 +36,7 @@ namespace MvvmCross.Platforms.Mac.Views
             }
         }
 
-        public virtual IMvxMacView CreateViewOfType(Type viewType, MvxViewModelRequest request)
+        public virtual IMvxMacView CreateViewOfType([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType, MvxViewModelRequest request)
         {
             var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
             if (storyboardAttribute != null)

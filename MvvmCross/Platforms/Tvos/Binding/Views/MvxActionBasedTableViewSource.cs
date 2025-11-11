@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Logging;
@@ -11,12 +12,14 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
     public class MvxActionBasedTableViewSource : MvxStandardTableViewSource
     {
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected MvxActionBasedTableViewSource(UITableView tableView)
             : base(tableView)
         {
             Initialize();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxActionBasedTableViewSource(NativeHandle handle)
             : base(handle)
         {
@@ -25,6 +28,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             Initialize();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxActionBasedTableViewSource(UITableView tableView,
                                              UITableViewCellStyle style,
                                              NSString cellIdentifier,
@@ -35,6 +39,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             Initialize();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxActionBasedTableViewSource(UITableView tableView,
                                              UITableViewCellStyle style,
                                              NSString cellIdentifier,
@@ -45,6 +50,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             Initialize();
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         private void Initialize()
         {
             CellCreator = CreateDefaultBindableCell;
@@ -66,6 +72,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             }
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
             var reuse = tableView.DequeueReusableCell(CellIdentifier);

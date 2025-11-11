@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
+#nullable enable
 
-using System.Threading;
-using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -11,7 +11,6 @@ using MvvmCross.Navigation;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public abstract class MvxAppStart : IMvxAppStart
     {
         protected readonly IMvxNavigationService NavigationService;
@@ -67,10 +66,12 @@ namespace MvvmCross.ViewModels
         }
     }
 
-    public class MvxAppStart<TViewModel> : MvxAppStart
-        where TViewModel : IMvxViewModel
+    public class MvxAppStart<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>
+        : MvxAppStart
+            where TViewModel : IMvxViewModel
     {
-        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application, navigationService)
+        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService)
+            : base(application, navigationService)
         {
         }
 
@@ -87,11 +88,13 @@ namespace MvvmCross.ViewModels
         }
     }
 
-    public class MvxAppStart<TViewModel, TParameter> : MvxAppStart<TViewModel>
-        where TViewModel : IMvxViewModel<TParameter>
-        where TParameter : notnull
+    public class MvxAppStart<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel, TParameter>
+        : MvxAppStart<TViewModel>
+            where TViewModel : IMvxViewModel<TParameter>
+            where TParameter : notnull
     {
-        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application, navigationService)
+        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService)
+            : base(application, navigationService)
         {
         }
 
@@ -112,7 +115,10 @@ namespace MvvmCross.ViewModels
                     NavigationService.Navigate<TViewModel, TParameter>(parameter).GetAwaiter().GetResult();
                 else
                 {
-                    MvxLogHost.Default?.Log(LogLevel.Trace, "Hint is not matching type of {parameterName}. Doing navigation without typed parameter instead.", nameof(TParameter));
+                    MvxLogHost.Default?.Log(
+                        LogLevel.Information,
+                        "Hint is not matching type of {ParameterName}. Doing navigation without typed parameter instead",
+                        nameof(TParameter));
                     await base.NavigateToFirstViewModel(hint);
                 }
             }
@@ -122,5 +128,4 @@ namespace MvvmCross.ViewModels
             }
         }
     }
-#nullable restore
 }

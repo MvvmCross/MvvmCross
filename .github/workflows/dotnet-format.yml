@@ -2,25 +2,24 @@ name: dotnet format
 
 on: [pull_request]
 
-env:
-  NET_VERSION: 9.0.302
+permissions:
+  contents: read
 
 jobs:
   lint:
-
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
-
-    - name: Install .NET ${{ env.NET_VERSION }}
-      uses: actions/setup-dotnet@v4
+    - name: Harden the runner (Audit all outbound calls)
+      uses: step-security/harden-runner@95d9a5deda9de15063e7595e9719c11c38c90ae2 # v2.13.2
       with:
-        dotnet-version: ${{ env.NET_VERSION }}
+        egress-policy: audit
 
-    - name: Restore dependencies
-      run: dotnet tool restore
+    - name: Checkout
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+    - uses: ./.github/actions/shared
 
     - name: Run dotnet format
       run: |
-        dotnet format whitespace --no-restore --verify-no-changes MvvmCross.sln
+        dotnet format whitespace --no-restore --verify-no-changes MvvmCross.slnx

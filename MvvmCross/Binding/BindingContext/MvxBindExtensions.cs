@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Converters;
@@ -18,6 +17,7 @@ namespace MvvmCross.Binding.BindingContext
             return new MvxInlineBindingTarget<TViewModel>(bindingContextOwner);
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<T, TViewModel>(this T element, MvxInlineBindingTarget<TViewModel> target,
                                             string descriptionText)
         {
@@ -25,7 +25,8 @@ namespace MvvmCross.Binding.BindingContext
             return element;
         }
 
-        public static T Bind<T, TViewModel>(this T element,
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
+        public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
                                             Expression<Func<TViewModel, object>> sourcePropertyPath,
                                             string converterName = null,
@@ -36,7 +37,8 @@ namespace MvvmCross.Binding.BindingContext
             return element.Bind(target, null, sourcePropertyPath, converterName, converterParameter, fallbackValue, mode);
         }
 
-        public static T Bind<T, TViewModel>(this T element,
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
+        public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
                                             Expression<Func<TViewModel, object>> sourcePropertyPath,
                                             IMvxValueConverter converter,
@@ -47,7 +49,8 @@ namespace MvvmCross.Binding.BindingContext
             return element.Bind(target, null, sourcePropertyPath, converter, converterParameter, fallbackValue, mode);
         }
 
-        public static T Bind<T, TViewModel>(this T element,
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
+        public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
                                             Expression<Func<T, object>> targetPropertyPath,
                                             Expression<Func<TViewModel, object>> sourcePropertyPath,
@@ -61,7 +64,8 @@ namespace MvvmCross.Binding.BindingContext
                                 fallbackValue, mode);
         }
 
-        public static T Bind<T, TViewModel>(this T element,
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
+        public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
                                             Expression<Func<T, object>> targetPropertyPath,
                                             Expression<Func<TViewModel, object>> sourcePropertyPath,
@@ -76,7 +80,8 @@ namespace MvvmCross.Binding.BindingContext
             return element.Bind(target, targetPath, sourcePath, converter, converterParameter, fallbackValue, mode);
         }
 
-        public static T Bind<T, TViewModel>(this T element,
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
+        public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
                                             string targetPath,
                                             string sourcePath,
@@ -101,12 +106,14 @@ namespace MvvmCross.Binding.BindingContext
             return element;
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<T>(this T element, IMvxBindingContextOwner bindingContextOwner, string descriptionText)
         {
             bindingContextOwner.AddBindings(element, descriptionText);
             return element;
         }
 
+        [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<T>(this T element, IMvxBindingContextOwner bindingContextOwner,
                                 IEnumerable<MvxBindingDescription> descriptions)
         {

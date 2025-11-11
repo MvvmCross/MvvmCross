@@ -12,7 +12,6 @@ using MvvmCross.Platforms.Android.WeakSubscription;
 namespace MvvmCross.Platforms.Android.Binding.Target;
 
 public class MvxCompoundButtonCheckedTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
         object target,
         PropertyInfo targetPropertyInfo)
     : MvxAndroidPropertyInfoTargetBinding<CompoundButton>(target, targetPropertyInfo)
@@ -21,6 +20,7 @@ public class MvxCompoundButtonCheckedTargetBinding(
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var compoundButton = View;
@@ -41,6 +41,7 @@ public class MvxCompoundButtonCheckedTargetBinding(
         FireValueChanged(View?.Checked);
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         if (isDisposing)

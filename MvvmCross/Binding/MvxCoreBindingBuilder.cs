@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Binding.Binders;
@@ -21,6 +22,7 @@ namespace MvvmCross.Binding
 {
     public class MvxCoreBindingBuilder
     {
+        [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
         public virtual void DoRegistration(IMvxIoCProvider iocProvider)
         {
             CreateSingleton();

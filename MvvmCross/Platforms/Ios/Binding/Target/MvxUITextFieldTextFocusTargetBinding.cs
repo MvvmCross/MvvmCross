@@ -10,19 +10,19 @@ using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
-public class MvxUITextFieldTextFocusTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-        UITextField target)
+public class MvxUITextFieldTextFocusTargetBinding(UITextField target)
     : MvxTargetBinding(target)
 {
     private MvxWeakEventSubscription<UITextField>? _subscription;
 
     protected UITextField? TextField => Target as UITextField;
 
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
     public override Type TargetValueType => typeof(string);
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
     public override void SetValue(object? value)
     {
         if (TextField == null) return;
@@ -31,6 +31,7 @@ public class MvxUITextFieldTextFocusTargetBinding(
         TextField.Text = value.ToString();
     }
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var textField = TextField;
@@ -48,6 +49,7 @@ public class MvxUITextFieldTextFocusTargetBinding(
         FireValueChanged(textField.Text);
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         base.Dispose(isDisposing);

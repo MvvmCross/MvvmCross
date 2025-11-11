@@ -7,25 +7,11 @@
     <OutputType>Exe</OutputType>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
-    <Platforms>AnyCPU;iPhone;iPhoneSimulator</Platforms>
     <EnableAssemblyILStripping>false</EnableAssemblyILStripping>
     <MtouchLink>None</MtouchLink>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
-    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
-    <RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Any CPU' ">
-    <RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
-  </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Essentials" />
     <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Serilog.Sinks.Xamarin" />
     <PackageReference Include="Serilog" />

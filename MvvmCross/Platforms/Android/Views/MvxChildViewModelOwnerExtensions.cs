@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using MvvmCross.Core;
 using MvvmCross.ViewModels;
@@ -11,15 +12,16 @@ namespace MvvmCross.Platforms.Android.Views
 {
     public static class MvxChildViewModelOwnerExtensions
     {
-        public static Intent CreateIntentFor<TTargetViewModel>(this IMvxAndroidView view, object parameterObject)
+        public static Intent CreateIntentFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTargetViewModel>(this IMvxAndroidView view, object parameterObject)
             where TTargetViewModel : class, IMvxViewModel
         {
             return view.CreateIntentFor<TTargetViewModel>(parameterObject.ToSimplePropertyDictionary());
         }
 
-        public static Intent CreateIntentFor<TTargetViewModel>(this IMvxAndroidView view,
-                                                               IDictionary<string, string> parameterValues = null)
-            where TTargetViewModel : class, IMvxViewModel
+        public static Intent CreateIntentFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTargetViewModel>(
+        this IMvxAndroidView view,
+        IDictionary<string, string> parameterValues = null)
+        where TTargetViewModel : class, IMvxViewModel
         {
             var parameterBundle = new MvxBundle(parameterValues);
             var request = new MvxViewModelRequest<TTargetViewModel>(parameterBundle, null);

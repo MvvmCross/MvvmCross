@@ -1,0 +1,80 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":separateMajorReleases",
+    ":combinePatchMinorReleases",
+    ":disableDependencyDashboard"
+  ],
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
+  "labels": [
+    "dependencies"
+  ],
+  "rebaseWhen": "conflicted",
+  "packageRules": [
+    {
+      "matchPackagePatterns": [
+        "Cake.*",
+        "dotnet-sonarscanner",
+        "dotnet-reportgenerator-globaltool"
+      ],
+      "groupName": "CI",
+      "addLabels": [
+        "p/ci"
+      ]
+    },
+    {
+      "matchPackagePatterns": [
+        "Xamarin.GooglePlayServices.*",
+        "Xamarin.Google.Android.Play.*",
+        "Xamarin.Android.*"
+      ],
+      "groupName": "AndroidX",
+      "addLabels": [
+        "p/android"
+      ]
+    },
+    {
+      "matchPackagePatterns": [
+        "Microsoft.Maui.*"
+      ],
+      "groupName": "MAUI"
+    },
+    {
+      "matchPackagePatterns": [
+        "Serilog",
+        "Serilog.*"
+      ],
+      "groupName": "Serilog",
+      "addLabels": [
+        "Serilog"
+      ]
+    },
+    {
+      "matchPackagePatterns": [
+        "xunit.*",
+        "xunit",
+        "XunitXml.TestLogger",
+        "Microsoft.Testing.*",
+        "Microsoft.NET.Test.Sdk",
+        "NSubstitute",
+        "NSubstitute.*"
+      ],
+      "groupName": "Testing",
+      "addLabels": [
+        "Testing"
+      ]
+    },
+    {
+      "matchPackagePatterns": [
+        "Microsoft.Windows.SDK.BuildTools",
+        "Microsoft.WindowsAppSDK"
+      ],
+      "groupName": "Windows App SDK",
+      "addLabels": [
+        "p/winui"
+      ]
+    }
+  ]
+}

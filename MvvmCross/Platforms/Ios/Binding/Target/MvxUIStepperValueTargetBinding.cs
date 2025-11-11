@@ -13,7 +13,6 @@ using MvvmCross.WeakSubscription;
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
 public class MvxUIStepperValueTargetBinding(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
         UIStepper target,
         PropertyInfo targetPropertyInfo)
     : MvxPropertyInfoTargetBinding<UIStepper>(target, targetPropertyInfo)
@@ -38,6 +37,7 @@ public class MvxUIStepperValueTargetBinding(
 
     public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+    [RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
     public override void SubscribeToEvents()
     {
         var stepper = View;
@@ -50,6 +50,7 @@ public class MvxUIStepperValueTargetBinding(
         _subscription = stepper.WeakSubscribe(nameof(stepper.ValueChanged), HandleValueChanged);
     }
 
+    [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
     protected override void Dispose(bool isDisposing)
     {
         base.Dispose(isDisposing);

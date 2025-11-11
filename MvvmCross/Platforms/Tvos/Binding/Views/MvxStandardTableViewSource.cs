@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
@@ -89,6 +90,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             return Mvx.IoCProvider.Resolve<IMvxBindingDescriptionParser>().Parse(bindingText);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
             var reuse = tableView.DequeueReusableCell(CellIdentifier);
@@ -98,6 +100,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             return CreateDefaultBindableCell(tableView, indexPath, item);
         }
 
+        [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         protected virtual MvxStandardTableViewCell CreateDefaultBindableCell(UITableView tableView,
                                                                              NSIndexPath indexPath, object item)
         {
