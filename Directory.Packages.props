@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <PackageVersion Include="AsyncFixer" Version="1.6.0" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.10" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.100" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.1.0" />
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.6901" />
