@@ -73,7 +73,7 @@ public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplic
 }
 
 [RequiresUnreferencedCode("This class uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
-public abstract class MvxApplicationDelegate<TMvxIosSetup, TApplication> : MvxApplicationDelegate
+public abstract class MvxApplicationDelegate<TMvxIosSetup, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TApplication> : MvxApplicationDelegate
     where TMvxIosSetup : MvxIosSetup<TApplication>, new()
     where TApplication : class, IMvxApplication, new()
 {
