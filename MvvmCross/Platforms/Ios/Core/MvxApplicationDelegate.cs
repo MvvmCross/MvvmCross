@@ -36,7 +36,7 @@ public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplic
         FireLifetimeChanged(MvxLifetimeEvent.Closing);
     }
 
-    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    public override bool FinishedLaunching(UIApplication application, NSDictionary? launchOptions)
     {
         MainWindow ??= new UIWindow(UIScreen.MainScreen.Bounds);
 
