@@ -82,7 +82,7 @@ public abstract class MvxSceneDelegate : UIResponder, IUIWindowSceneDelegate, IM
 }
 
 [RequiresUnreferencedCode("This class uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
-public abstract class MvxSceneDelegate<TMvxIosSetup,[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TApplication> : MvxSceneDelegate
+public abstract class MvxSceneDelegate<TMvxIosSetup, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TApplication> : MvxSceneDelegate
     where TMvxIosSetup : MvxIosSetup<TApplication>, new()
     where TApplication : class, IMvxApplication, new()
 {
