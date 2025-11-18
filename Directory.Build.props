@@ -6,7 +6,6 @@
     <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
 
     <StripSymbols>false</StripSymbols>
-    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
 
     <NoWarn>$(NoWarn);CS0109;CS0108;CS0618;CS0114;CS1591</NoWarn>
 
