@@ -31,7 +31,9 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         string? tag = null,
         string popBackStackImmediateName = "",
         MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive,
-        bool addFragment = false
+        bool addFragment = false,
+        bool allowReordering = false,
+        bool setAdPrimaryFragment = false
     )
     {
         ActivityHostViewModelType = activityHostViewModelType;
@@ -48,6 +50,8 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         PopBackStackImmediateName = popBackStackImmediateName;
         PopBackStackImmediateFlag = popBackStackImmediateFlag;
         AddFragment = addFragment;
+        AllowReordering = allowReordering;
+        SetAsPrimaryFragment = setAdPrimaryFragment;
     }
 
     public MvxFragmentPresentationAttribute(
@@ -65,7 +69,9 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         string? tag = null,
         string popBackStackImmediateName = "",
         MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive,
-        bool addFragment = false
+        bool addFragment = false,
+        bool allowReordering = false,
+        bool setAdPrimaryFragment = false
     )
     {
         if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidGlobals globals) == true &&
@@ -106,6 +112,8 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         PopBackStackImmediateName = popBackStackImmediateName;
         PopBackStackImmediateFlag = popBackStackImmediateFlag;
         AddFragment = addFragment;
+        AllowReordering = allowReordering;
+        SetAsPrimaryFragment = setAdPrimaryFragment;
     }
 
     /// <summary>
@@ -186,4 +194,14 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
     /// Setting this to true, will use Add instead of Replace on the Fragment transaction
     /// </summary>
     public bool AddFragment { get; set; }
+
+    /// <summary>
+    /// Setting this to true, will use SetReorderingAllowed on the Fragment transaction
+    /// </summary>
+    public bool AllowReordering { get; set; }
+
+    /// <summary>
+    /// Setting this to true, will use SetPrimaryNavigationFragment on the Fragment transaction
+    /// </summary>
+    public bool SetAsPrimaryFragment { get; set; }
 }

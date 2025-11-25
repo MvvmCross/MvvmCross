@@ -590,6 +590,9 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             OnBeforeFragmentChanging(ft, fragment, attribute, request);
 
+            if (attribute.AllowReordering)
+	            ft.SetReorderingAllowed(true);
+
             if (attribute.AddToBackStack)
                 ft.AddToBackStack(fragmentName);
 
@@ -607,6 +610,9 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 ft.Replace(attribute.FragmentContentId, fragment, fragmentName);
             }
+
+            if (attribute.SetAsPrimaryFragment)
+	            ft.SetPrimaryNavigationFragment(fragment);
 
             ft.CommitAllowingStateLoss();
 
@@ -710,10 +716,16 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             OnBeforeFragmentChanging(ft, dialog, attribute, request);
 
+            if (attribute.AllowReordering)
+	            ft.SetReorderingAllowed(true);
+
             if (attribute.AddToBackStack)
                 ft.AddToBackStack(fragmentName);
 
             OnFragmentChanging(ft, dialog, attribute, request);
+
+            if (attribute.SetAsPrimaryFragment)
+	            ft.SetPrimaryNavigationFragment(dialog);
 
             dialog.Show(ft, fragmentName);
 
