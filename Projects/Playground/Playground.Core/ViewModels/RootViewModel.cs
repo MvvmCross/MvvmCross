@@ -91,6 +91,9 @@ namespace Playground.Core.ViewModels
                 new MvxCommand(() => IsVisible = !IsVisible);
 
             FragmentCloseCommand = new MvxAsyncCommand(() => NavigationService.Navigate<FragmentCloseViewModel>());
+
+            ShowBottomNavigationCommand = new MvxAsyncCommand(async () =>
+	            await NavigationService.Navigate<MultiBackStackViewModel>());
         }
 
         private Task DoShowChildWithResult()
@@ -166,6 +169,8 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowLocationCommand { get; }
 
         public MvxAsyncCommand ShowViewModelWithResult { get; set; }
+
+        public IMvxCommand ShowBottomNavigationCommand { get; }
 
         private bool _isVisible;
 
