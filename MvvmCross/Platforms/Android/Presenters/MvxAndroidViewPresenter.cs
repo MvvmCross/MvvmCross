@@ -590,8 +590,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             OnBeforeFragmentChanging(ft, fragment, attribute, request);
 
-            if (attribute.AllowReordering)
-	            ft.SetReorderingAllowed(true);
+            ft.SetReorderingAllowed(attribute.AllowReordering);
 
             if (attribute.AddToBackStack)
                 ft.AddToBackStack(fragmentName);
@@ -716,8 +715,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             OnBeforeFragmentChanging(ft, dialog, attribute, request);
 
-            if (attribute.AllowReordering)
-	            ft.SetReorderingAllowed(true);
+            ft.SetReorderingAllowed(attribute.AllowReordering);
 
             if (attribute.AddToBackStack)
                 ft.AddToBackStack(fragmentName);

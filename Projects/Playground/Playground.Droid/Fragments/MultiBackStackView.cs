@@ -31,7 +31,7 @@ public class MultiBackStackView : MvxFragment<MultiBackStackViewModel>
     {
 	    base.OnCreateView(inflater, container, savedInstanceState);
 
-	    var view = this.BindingInflate(Resource.Layout.MultiBackStackView, null);
+	    var view = this.BindingInflate(Resource.Layout.MultiBackStackView, container, false);
 	    
 	    _navigationView = view.FindViewById<NavigationBarView>(Resource.Id.navigationview);
 	    _navigationView.ItemSelected += NavigationViewOnItemSelected;
@@ -80,7 +80,7 @@ public class MultiBackStackTab1View : MvxFragment<MultiBackStackTab1ViewModel>
     {
 	    base.OnCreateView(inflater, container, savedInstanceState);
 
-	    var view = this.BindingInflate(Resource.Layout.MultiBackStackTab1View, null);
+	    var view = this.BindingInflate(Resource.Layout.MultiBackStackTab1View, container, false);
 
 	    return view;
     }
@@ -97,23 +97,19 @@ public class MultiBackStackTab2View : MvxFragment<MultiBackStackTab2ViewModel>
     {
 	    base.OnCreateView(inflater, container, savedInstanceState);
 
-	    var view = this.BindingInflate(Resource.Layout.MultiBackStackTab2View, null);
+	    var view = this.BindingInflate(Resource.Layout.MultiBackStackTab2View, container, false);
 
 	    return view;
     }
 }
 
-[MvxFragmentPresentation(typeof(RootViewModel), Resource.Id.content_frame, true,
-    FragmentHostViewType = typeof(MultiBackStackView),
-    AllowReordering = true,
-    ViewModelType = typeof(MultiBackStackInnerViewModel))]
 public class MultiBackStackInnerView : MvxFragment<MultiBackStackInnerViewModel>, IMvxOverridePresentationAttribute
 {
     public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
 	    base.OnCreateView(inflater, container, savedInstanceState);
 
-	    var view = this.BindingInflate(Resource.Layout.MultiBackStackInnerView, null);
+	    var view = this.BindingInflate(Resource.Layout.MultiBackStackInnerView, container, false);
 
 	    var f = ParentFragmentManager.PrimaryNavigationFragment;
 	    return view;

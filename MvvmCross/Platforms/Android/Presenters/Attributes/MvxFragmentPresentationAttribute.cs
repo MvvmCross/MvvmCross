@@ -33,7 +33,7 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive,
         bool addFragment = false,
         bool allowReordering = false,
-        bool setAdPrimaryFragment = false
+        bool setAsPrimaryFragment = false
     )
     {
         ActivityHostViewModelType = activityHostViewModelType;
@@ -51,7 +51,7 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         PopBackStackImmediateFlag = popBackStackImmediateFlag;
         AddFragment = addFragment;
         AllowReordering = allowReordering;
-        SetAsPrimaryFragment = setAdPrimaryFragment;
+        SetAsPrimaryFragment = setAsPrimaryFragment;
     }
 
     public MvxFragmentPresentationAttribute(
@@ -71,7 +71,7 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive,
         bool addFragment = false,
         bool allowReordering = false,
-        bool setAdPrimaryFragment = false
+        bool setAsPrimaryFragment = false
     )
     {
         if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidGlobals globals) == true &&
@@ -113,7 +113,7 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         PopBackStackImmediateFlag = popBackStackImmediateFlag;
         AddFragment = addFragment;
         AllowReordering = allowReordering;
-        SetAsPrimaryFragment = setAdPrimaryFragment;
+        SetAsPrimaryFragment = setAsPrimaryFragment;
     }
 
     /// <summary>

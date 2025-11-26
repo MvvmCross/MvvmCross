@@ -14,7 +14,6 @@ public class MultiBackStackViewModel(ILoggerFactory logFactory, IMvxNavigationSe
 		if (_initialNavigationDone)
 			return;
 		_initialNavigationDone = true;
-		var viewModelTypes = new[] { typeof(MultiBackStackTab1ViewModel), typeof(MultiBackStackTab2ViewModel) };
 		await NavigationService.Navigate<MultiBackStackTab1ViewModel>();
 	}
 
