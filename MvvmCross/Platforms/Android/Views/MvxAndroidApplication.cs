@@ -48,8 +48,8 @@ public abstract class MvxAndroidApplication : Application, IMvxAndroidApplicatio
 
 [RequiresUnreferencedCode("This class may use types that are not preserved by trimming")]
 public abstract class MvxAndroidApplication<TMvxAndroidSetup, TApplication> : MvxAndroidApplication
-  where TMvxAndroidSetup : MvxAndroidSetup<TApplication>, new()
-  where TApplication : class, IMvxApplication, new()
+    where TMvxAndroidSetup : MvxAndroidSetup<TApplication>, new()
+    where TApplication : class, IMvxApplication, new()
 {
     protected MvxAndroidApplication() : base()
     {

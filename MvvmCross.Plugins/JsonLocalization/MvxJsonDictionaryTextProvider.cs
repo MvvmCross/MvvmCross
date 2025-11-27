@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.JsonLocalization
@@ -26,8 +26,10 @@ namespace MvvmCross.Plugin.JsonLocalization
             }
         }
 
+        [RequiresUnreferencedCode("MvxJsonConverter requires unreferenced code")]
         public abstract void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath);
 
+        [RequiresUnreferencedCode("MvxJsonConverter requires unreferenced code")]
         public virtual void LoadJsonFromText(string namespaceKey, string typeKey, string rawJson)
         {
             var entries = JsonConvert.DeserializeObject<Dictionary<string, string>>(rawJson);

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.ViewModels;
@@ -9,6 +10,7 @@ using MvvmCross.ViewModels;
 namespace MvvmCross.Platforms.Android.Views;
 
 [Register("mvvmcross.platforms.android.views.MvxStartActivity")]
+[RequiresUnreferencedCode("MvxBindings require unreferenced code")]
 public abstract class MvxStartActivity
     : MvxActivity
 {

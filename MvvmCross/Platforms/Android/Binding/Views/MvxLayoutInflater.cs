@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
+#nullable enable
 using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.OS;
@@ -21,11 +21,12 @@ using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platforms.Android.Binding.Views
 {
-#nullable enable
     /// <summary>
+    /// <para>
     /// Custom LayoutInflater responsible for inflating views and hooking up bindings
     /// Typically this is attached to MvxActivity and co via our MvxContextWrapper.
-    ///
+    /// </para>
+    /// <para>
     /// Potential order of view creation is the following (HC+):
     ///   1. IFactory2.OnCreateView
     ///   2. IFactory.OnCreateView
@@ -33,14 +34,18 @@ namespace MvvmCross.Platforms.Android.Binding.Views
     ///   4. OnCreateView(parent, name, attrs)
     ///   5. OnCreateView(name, attrs)
     ///   6. CreateView (sadly final)
-    ///
+    /// </para>
+    /// <para>
     /// We intercept these calls and wrap any IFactory/IFactory2 with our own factory
     /// that binds when the view is returned.
-    ///
+    /// </para>
+    /// <para>
     /// Heavily based on Calligraphy's CalligraphyLayoutInflater
     /// See: https://github.com/chrisjenx/Calligraphy/blob/master/calligraphy/src/main/java/uk/co/chrisjenx/calligraphy/CalligraphyLayoutInflater.java" />
+    /// </para>
     /// </summary>
     [Register("mvvmcross.platforms.android.binding.views.MvxLayoutInflater")]
+    [RequiresUnreferencedCode("MvvmCross binding requires unreferenced code")]
     public class MvxLayoutInflater : LayoutInflater
     {
         public class MvxBindingVisitor
@@ -414,6 +419,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
+        [RequiresUnreferencedCode("MvvmCross binding requires unreferenced code")]
         private sealed class DelegateFactory2 : IMvxLayoutInflaterFactory
         {
             private const string DelegateFactory2Tag = "DelegateFactory2";
@@ -438,6 +444,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
+        [RequiresUnreferencedCode("MvvmCross binding requires unreferenced code")]
         private sealed class DelegateFactory1 : IMvxLayoutInflaterFactory
         {
             private const string DelegateFactory1Tag = "DelegateFactory1";
@@ -462,6 +469,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
+        [RequiresUnreferencedCode("MvvmCross binding requires unreferenced code")]
         private sealed class PrivateFactoryWrapper2 : Object, IFactory2
         {
             private const string PrivateFactoryWrapper2Tag = "PrivateFactoryWrapper2";
@@ -512,5 +520,4 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
     }
-#nullable restore
 }

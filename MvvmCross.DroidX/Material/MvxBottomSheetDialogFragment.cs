@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
-using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.DroidX.Material.EventSource;
@@ -15,6 +14,7 @@ using MvvmCross.ViewModels;
 namespace MvvmCross.DroidX.Material
 {
     [Register("mvvmcross.droidx.material.MvxBottomSheetDialogFragment")]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public abstract class MvxBottomSheetDialogFragment
         : MvxEventSourceBottomSheetDialogFragment, IMvxFragmentView
     {
@@ -119,10 +119,11 @@ namespace MvvmCross.DroidX.Material
         }
     }
 
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public abstract class MvxBottomSheetDialogFragment<TViewModel> : MvxBottomSheetDialogFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
-        public MvxBottomSheetDialogFragment()
+        protected MvxBottomSheetDialogFragment()
         {
         }
 

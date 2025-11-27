@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.IoC;
@@ -10,6 +11,7 @@ namespace MvvmCross.Plugin.Json
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]
+    [RequiresUnreferencedCode("MvxJsonConverter requires unreferenced code")]
     public class Plugin : IMvxConfigurablePlugin
     {
         private MvxJsonConfiguration _configuration;

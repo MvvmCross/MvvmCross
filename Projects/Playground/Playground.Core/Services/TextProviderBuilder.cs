@@ -2,14 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using MvvmCross.IoC;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Plugin.JsonLocalization;
 
 namespace Playground.Core.Services
 {
+    [RequiresUnreferencedCode("MvxTextProvider requires unreferenced code")]
     public class TextProviderBuilder : MvxTextProviderBuilder
     {
         public TextProviderBuilder() : base("Playground.Core", "Resources", new MvxEmbeddedJsonDictionaryTextProvider(false))
@@ -20,11 +18,10 @@ namespace Playground.Core.Services
         {
             get
             {
-                var dictionary = new Dictionary<string, string>();
-
-                dictionary.Add("Text", "Text");
-
-                return dictionary;
+                return new Dictionary<string, string>
+                {
+                    { "Text", "Text" }
+                };
             }
         }
     }

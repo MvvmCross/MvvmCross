@@ -17,6 +17,7 @@ namespace MvvmCross.Platforms.Android.Views;
 
 public static class MvxActivityViewExtensions
 {
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public static void AddEventListeners(this IMvxEventSourceActivity activity)
     {
         if (activity is IMvxAndroidView)

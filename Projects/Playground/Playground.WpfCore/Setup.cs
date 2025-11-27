@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.Plugin;
@@ -6,6 +7,7 @@ using Serilog.Extensions.Logging;
 
 namespace Playground.WpfCore
 {
+    [RequiresUnreferencedCode("MvxSetup requires unreferenced code")]
     public class Setup : MvxWpfSetup<Core.App>
     {
         protected override ILoggerProvider CreateLogProvider()
