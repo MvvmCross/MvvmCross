@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -15,6 +16,7 @@ namespace Playground.Droid.Fragments
 {
     [MvxDialogFragmentPresentation]
     [Register(nameof(SheetView))]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public class SheetView : MvxBottomSheetDialogFragment<SheetViewModel>
     {
         public SheetView()

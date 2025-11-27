@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
@@ -14,6 +15,7 @@ using MvvmCross.ViewModels;
 namespace MvvmCross.DroidX.Leanback.Fragments
 {
     [Register("mvvmcross.droidx.leanback.fragments.MvxGuidedStepSupportFragment")]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public class MvxGuidedStepSupportFragment
         : MvxEventSourceGuidedStepSupportFragment, IMvxFragmentView
     {
@@ -79,6 +81,7 @@ namespace MvvmCross.DroidX.Leanback.Fragments
         public string UniqueImmutableCacheTag => Tag;
     }
 
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public abstract class MvxGuidedStepSupportFragment<TViewModel> : MvxGuidedStepSupportFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {

@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross;
 using MvvmCross.IoC;
 using MvvmCross.Localization;
@@ -12,6 +12,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Core
 {
+    [RequiresUnreferencedCode("MvxApplication requires unreferenced code")]
     public class App : MvxApplication
     {
         /// <summary>

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
@@ -13,7 +14,7 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views
 {
-    [Register("mvvmcross.platforms.android.views.MvxActivity")]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public abstract class MvxActivity
         : MvxEventSourceActivity
         , IMvxAndroidView
@@ -124,6 +125,7 @@ namespace MvvmCross.Platforms.Android.Views
         }
     }
 
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public abstract class MvxActivity<TViewModel> : MvxActivity, IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {

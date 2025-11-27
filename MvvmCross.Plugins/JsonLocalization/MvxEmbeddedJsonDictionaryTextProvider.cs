@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using MvvmCross.Exceptions;
@@ -18,6 +19,7 @@ namespace MvvmCross.Plugin.JsonLocalization
         {
         }
 
+        [RequiresUnreferencedCode("MvxJsonConverter requires unreferenced code")]
         public override void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath)
         {
             var json = GetTextFromEmbeddedResource(namespaceKey, resourcePath);
