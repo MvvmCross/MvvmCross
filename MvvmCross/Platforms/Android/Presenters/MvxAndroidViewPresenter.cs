@@ -611,7 +611,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
 
             if (attribute.SetAsPrimaryFragment)
-	            ft.SetPrimaryNavigationFragment(fragment);
+                ft.SetPrimaryNavigationFragment(fragment);
 
             ft.CommitAllowingStateLoss();
 
@@ -723,7 +723,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             OnFragmentChanging(ft, dialog, attribute, request);
 
             if (attribute.SetAsPrimaryFragment)
-	            ft.SetPrimaryNavigationFragment(dialog);
+                ft.SetPrimaryNavigationFragment(dialog);
 
             dialog.Show(ft, fragmentName);
 

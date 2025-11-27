@@ -93,7 +93,7 @@ namespace Playground.Core.ViewModels
             FragmentCloseCommand = new MvxAsyncCommand(() => NavigationService.Navigate<FragmentCloseViewModel>());
 
             ShowBottomNavigationCommand = new MvxAsyncCommand(async () =>
-	            await NavigationService.Navigate<MultiBackStackViewModel>());
+                await NavigationService.Navigate<MultiBackStackViewModel>());
         }
 
         private Task DoShowChildWithResult()
