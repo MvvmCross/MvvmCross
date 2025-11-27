@@ -55,7 +55,7 @@ namespace Playground.Droid.Fragments
             return view;
         }
 
-        [RequiresUnreferencedCode("Calls MvvmCross.Binding.BindingContext.MvxFluentBindingDescriptionSet<TOwningTarget, TSource>.ApplyWithClearBindingKey(Object)")]
+        [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
         void BindTextInput()
         {
             var bindingSet = CreateBindingSet();
