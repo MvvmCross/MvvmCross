@@ -540,7 +540,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                 {
                     while (keepRunning)
                     {
-                        var mode = binding.ActualBindingMode;
+                        _ = binding.ActualBindingMode;
                         await Task.Delay(1, TestContext.Current.CancellationToken);
                     }
                 }
@@ -665,7 +665,10 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                             await Task.Delay(1, TestContext.Current.CancellationToken);
                         }
                     }
-                    catch (Exception ex) { exceptions.Add(ex); }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
                 }, TestContext.Current.CancellationToken),
 
                 // Target changes
@@ -679,7 +682,10 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                             await Task.Delay(1, TestContext.Current.CancellationToken);
                         }
                     }
-                    catch (Exception ex) { exceptions.Add(ex); }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
                 }, TestContext.Current.CancellationToken),
 
                 // DataContext changes
@@ -693,7 +699,10 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                             await Task.Delay(5, TestContext.Current.CancellationToken);
                         }
                     }
-                    catch (Exception ex) { exceptions.Add(ex); }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
                 }, TestContext.Current.CancellationToken),
 
                 // Read ActualBindingMode
@@ -703,7 +712,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                     {
                         for (int i = 0; i < 1000 && keepRunning; i++)
                         {
-                            var mode = binding.ActualBindingMode;
+                            _ = binding.ActualBindingMode;
                             await Task.Delay(1, TestContext.Current.CancellationToken);
                         }
                     }
@@ -711,7 +720,10 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                     {
                         // intentionally empty
                     }
-                    catch (Exception ex) { exceptions.Add(ex); }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
                 }, TestContext.Current.CancellationToken)
             ];
 
