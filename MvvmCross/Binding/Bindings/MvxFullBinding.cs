@@ -239,7 +239,7 @@ namespace MvvmCross.Binding.Bindings
             }
         }
 
-        internal protected MvxBindingMode ActualBindingMode
+        protected internal MvxBindingMode ActualBindingMode
         {
             get
             {
