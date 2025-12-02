@@ -553,7 +553,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                     // But null reference exceptions are NOT acceptable
                     exceptions.Add(ex);
                 }
-            });
+            }, TestContext.Current.CancellationToken);
 
             await Task.Delay(50, TestContext.Current.CancellationToken);
             binding.Dispose();
