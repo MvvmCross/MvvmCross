@@ -18,7 +18,11 @@ namespace MvvmCross.Binding.Bindings
     public class MvxFullBinding
         : MvxBinding, IMvxUpdateableBinding
     {
+#if NET9_0_OR_GREATER
         private readonly Lock _lock = new();
+#else
+        private readonly object _lock = new();
+#endif
         private readonly MvxBindingDescription _bindingDescription;
         private readonly object _defaultTargetValue;
 
