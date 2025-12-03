@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   add_label:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       contents: read
       pull-requests: write
