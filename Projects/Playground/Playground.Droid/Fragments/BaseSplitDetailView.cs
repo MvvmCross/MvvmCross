@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.Content.Res;
 using Android.OS;
@@ -16,6 +17,7 @@ using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace Playground.Droid.Fragments
 {
+    [RequiresUnreferencedCode("Uses MvxBindings which require unreferenced code")]
     public abstract class BaseSplitDetailView<TViewModel> : MvxFragment<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected SplitRootView BaseActivity => (SplitRootView)Activity;

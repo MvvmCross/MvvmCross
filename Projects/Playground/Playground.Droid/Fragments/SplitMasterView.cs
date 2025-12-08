@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using Google.Android.Material.Navigation;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -13,6 +14,7 @@ using Playground.Droid.Activities;
 namespace Playground.Droid.Fragments
 {
     [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_navigation_frame)]
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class SplitMasterView : MvxFragment<SplitMasterViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
         private IMenuItem previousMenuItem;

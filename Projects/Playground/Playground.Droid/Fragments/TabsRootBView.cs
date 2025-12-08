@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using AndroidX.ViewPager.Widget;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -13,6 +14,7 @@ using Playground.Core.ViewModels;
 namespace Playground.Droid.Fragments
 {
     [MvxFragmentPresentation(fragmentHostViewType: typeof(SplitDetailView), fragmentContentId: Resource.Id.tabs_frame, addToBackStack: true)]
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class TabsRootBView : MvxFragment<TabsRootBViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

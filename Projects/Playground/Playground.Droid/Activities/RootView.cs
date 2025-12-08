@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using AndroidX.Core.View;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -13,7 +14,8 @@ namespace Playground.Droid.Activities
     [MvxActivityPresentation]
     [Activity(Theme = "@style/AppTheme",
         WindowSoftInputMode = SoftInput.AdjustPan)]
-    public class RootView : MvxActivity<RootViewModel>, IOnApplyWindowInsetsListener
+    [RequiresUnreferencedCode("Uses MvxBindings which require unreferenced code")]
+    public sealed class RootView : MvxActivity<RootViewModel>, IOnApplyWindowInsetsListener
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
