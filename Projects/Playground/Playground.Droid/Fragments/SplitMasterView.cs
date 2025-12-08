@@ -2,10 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Threading.Tasks;
-using Android.OS;
-using Android.Runtime;
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using Google.Android.Material.Navigation;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -17,7 +14,7 @@ using Playground.Droid.Activities;
 namespace Playground.Droid.Fragments
 {
     [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_navigation_frame)]
-    [Register(nameof(SplitMasterView))]
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class SplitMasterView : MvxFragment<SplitMasterViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
         private IMenuItem previousMenuItem;
@@ -26,19 +23,19 @@ namespace Playground.Droid.Fragments
         {
             var ignore = base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.SplitMasterView, null);
+            var view = this.BindingInflate(Resource.Layout.SplitMasterView, container, false);
 
             return view;
         }
 
-        public bool OnNavigationItemSelected(IMenuItem item)
+        public bool OnNavigationItemSelected(IMenuItem menuItem)
         {
-            item.SetCheckable(true);
-            item.SetChecked(true);
+            menuItem.SetCheckable(true);
+            menuItem.SetChecked(true);
             previousMenuItem?.SetChecked(false);
-            previousMenuItem = item;
+            previousMenuItem = menuItem;
 
-            Navigate(item.ItemId);
+            Navigate(menuItem.ItemId);
 
             return true;
         }

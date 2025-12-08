@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.OS;
-using Android.Runtime;
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using AndroidX.ViewPager.Widget;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -15,14 +14,14 @@ using Playground.Core.ViewModels;
 namespace Playground.Droid.Fragments
 {
     [MvxFragmentPresentation(fragmentHostViewType: typeof(SplitDetailView), fragmentContentId: Resource.Id.tabs_frame, addToBackStack: true)]
-    [Register(nameof(TabsRootBView))]
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class TabsRootBView : MvxFragment<TabsRootBViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.TabsRootBView, null);
+            var view = this.BindingInflate(Resource.Layout.TabsRootBView, container, false);
 
             return view;
         }
@@ -33,7 +32,7 @@ namespace Playground.Droid.Fragments
 
             var viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager);
             if (viewPager.Adapter is not MvxCachingFragmentStatePagerAdapter)
-                viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(ChildFragmentManager, new());
+                viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(ChildFragmentManager, []);
 
             if (savedInstanceState == null)
             {

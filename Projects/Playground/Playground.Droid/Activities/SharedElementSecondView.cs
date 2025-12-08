@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.App;
-using Android.OS;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
 using Playground.Core.ViewModels;
@@ -12,11 +11,12 @@ namespace Playground.Droid.Activities
 {
     [MvxActivityPresentation]
     [Activity(Theme = "@style/AppTheme")]
-    public class SharedElementSecondView : MvxActivity<SharedElementSecondViewModel>
+    [RequiresUnreferencedCode("Uses MvxBindings which require unreferenced code")]
+    public sealed class SharedElementSecondView : MvxActivity<SharedElementSecondViewModel>
     {
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(bundle);
+            base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.SharedElementSecondView);
 

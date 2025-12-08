@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.OS;
-using Android.Runtime;
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -14,7 +13,7 @@ namespace Playground.Droid.Fragments
 {
     [MvxTabLayoutPresentation(TabLayoutResourceId = Resource.Id.tabs, ViewPagerResourceId = Resource.Id.viewpager, Title = "Tab 1", ActivityHostViewModelType = typeof(TabsRootViewModel))]
     [MvxTabLayoutPresentation(TabLayoutResourceId = Resource.Id.tabs, ViewPagerResourceId = Resource.Id.viewpager, Title = "Tab 1", FragmentHostViewType = typeof(TabsRootBView))]
-    [Register(nameof(Tab1View))]
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class Tab1View : MvxFragment<Tab1ViewModel>
     {
         public override void OnCreate(Bundle savedInstanceState)
@@ -28,7 +27,7 @@ namespace Playground.Droid.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.Tab1View, null);
+            var view = this.BindingInflate(Resource.Layout.Tab1View, container, false);
 
             return view;
         }

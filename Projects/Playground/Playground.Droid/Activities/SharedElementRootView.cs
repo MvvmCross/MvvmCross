@@ -2,11 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections.Generic;
-using Android.App;
-using Android.OS;
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
-using Android.Widget;
 using MvvmCross.DroidX.RecyclerView;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
@@ -18,7 +15,8 @@ namespace Playground.Droid.Activities
 {
     [MvxActivityPresentation]
     [Activity(Theme = "@style/AppTheme")]
-    public class SharedElementRootView : MvxActivity<SharedElementRootViewModel>, IMvxAndroidSharedElements
+    [RequiresUnreferencedCode("Uses MvxBindings which require unreferenced code")]
+    public sealed class SharedElementRootView : MvxActivity<SharedElementRootViewModel>, IMvxAndroidSharedElements
     {
         public int SelectedListItem { get; set; }
 
@@ -38,9 +36,9 @@ namespace Playground.Droid.Activities
             return sharedElements;
         }
 
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(bundle);
+            base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.SharedElementRootView);
         }

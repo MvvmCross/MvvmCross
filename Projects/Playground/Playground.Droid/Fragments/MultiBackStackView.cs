@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using Google.Android.Material.Navigation;
 using MvvmCross;
@@ -22,7 +23,8 @@ namespace Playground.Droid.Fragments;
     AllowReordering = true,
     ViewModelType = typeof(MultiBackStackViewModel),
     SetAsPrimaryFragment = true)]
-public class MultiBackStackView : MvxFragment<MultiBackStackViewModel>
+[RequiresUnreferencedCode("Uses MvxBindings which require unreferenced code")]
+public sealed class MultiBackStackView : MvxFragment<MultiBackStackViewModel>
 {
     private NavigationBarView _navigationView;
     private bool _navigatedToTab2;
@@ -77,7 +79,8 @@ public class MultiBackStackView : MvxFragment<MultiBackStackViewModel>
     FragmentHostViewType = typeof(MultiBackStackView),
     AllowReordering = true,
     ViewModelType = typeof(MultiBackStackTab1ViewModel))]
-public class MultiBackStackTab1View : MvxFragment<MultiBackStackTab1ViewModel>
+[RequiresUnreferencedCode("Uses MvxBindings which require unreferenced code")]
+public sealed class MultiBackStackTab1View : MvxFragment<MultiBackStackTab1ViewModel>
 {
     public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -94,7 +97,8 @@ public class MultiBackStackTab1View : MvxFragment<MultiBackStackTab1ViewModel>
     FragmentHostViewType = typeof(MultiBackStackView),
     AllowReordering = true,
     ViewModelType = typeof(MultiBackStackTab2ViewModel))]
-public class MultiBackStackTab2View : MvxFragment<MultiBackStackTab2ViewModel>
+[RequiresUnreferencedCode("Uses MvxBindings which require unreferenced code")]
+public sealed class MultiBackStackTab2View : MvxFragment<MultiBackStackTab2ViewModel>
 {
     public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -106,7 +110,8 @@ public class MultiBackStackTab2View : MvxFragment<MultiBackStackTab2ViewModel>
     }
 }
 
-public class MultiBackStackInnerView : MvxFragment<MultiBackStackInnerViewModel>, IMvxOverridePresentationAttribute
+[RequiresUnreferencedCode("Uses MvxBindings which require unreferenced code")]
+public sealed class MultiBackStackInnerView : MvxFragment<MultiBackStackInnerViewModel>, IMvxOverridePresentationAttribute
 {
     public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {

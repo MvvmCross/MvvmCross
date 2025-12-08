@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.OS;
-using Android.Runtime;
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -14,14 +13,14 @@ namespace Playground.Droid.Fragments
 {
     [MvxFragmentPresentation(typeof(RootViewModel), Resource.Id.content_frame, true)]
     [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame)]
-    [Register(nameof(SecondChildView))]
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class SecondChildView : MvxFragment<SecondChildViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.SecondChildView, null);
+            var view = this.BindingInflate(Resource.Layout.SecondChildView, container, false);
 
             return view;
         }

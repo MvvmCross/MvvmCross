@@ -2,15 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Runtime;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
-using Playground.Droid.Activities;
 
 namespace Playground.Droid.Fragments
 {
     [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame)]
-    [Register(nameof(SplitDetailView))]
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class SplitDetailView : BaseSplitDetailView<SplitDetailViewModel>
     {
         protected override int FragmentLayoutId => Resource.Layout.SplitDetailView;

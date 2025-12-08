@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Android.OS;
 using Android.Transitions;
 using Android.Views;
@@ -14,6 +15,7 @@ using Playground.Core.ViewModels;
 namespace Playground.Droid.Fragments
 {
     [MvxFragmentPresentation(typeof(SharedElementRootViewModel), Resource.Id.shared_content_frame, true)]
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class SharedElementSecondChildView : MvxFragment<SharedElementSecondChildViewModel>
     {
         public override void OnCreate(Bundle savedInstanceState)
