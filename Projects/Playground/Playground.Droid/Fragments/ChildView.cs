@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.OS;
-using Android.Runtime;
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -20,7 +19,7 @@ namespace Playground.Droid.Fragments
     [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame)]
     [MvxFragmentPresentation(typeof(TabsRootViewModel), Resource.Id.content_frame)]
     [MvxFragmentPresentation(fragmentHostViewType: typeof(ModalNavView), fragmentContentId: Resource.Id.dialog_content_frame)]
-    [Register(nameof(ChildView))]
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class ChildView : MvxFragment<ChildViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

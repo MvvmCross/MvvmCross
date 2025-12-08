@@ -9,7 +9,6 @@ using Playground.Core.ViewModels;
 namespace Playground.Droid.Fragments
 {
     [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame, AddToBackStack = true)]
-    [Register(nameof(SplitDetailNavView))]
     public class SplitDetailNavView : BaseSplitDetailView<SplitDetailNavViewModel>
     {
         protected override int FragmentLayoutId => Resource.Layout.SplitDetailNavView;

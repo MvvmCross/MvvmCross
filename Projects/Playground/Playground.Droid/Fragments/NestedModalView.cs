@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Android.OS;
+using System.Diagnostics.CodeAnalysis;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -14,7 +13,7 @@ using Playground.Core.ViewModels;
 namespace Playground.Droid.Fragments
 {
     [MvxDialogFragmentPresentation]
-    [Register(nameof(NestedModalView))]
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class NestedModalView : MvxDialogFragment<NestedModalViewModel>
     {
         public NestedModalView()

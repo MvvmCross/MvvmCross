@@ -5,7 +5,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -20,7 +19,6 @@ namespace Playground.Droid.Fragments
                          Resource.Animation.abc_fade_out,
                          Resource.Animation.abc_fade_in,
                          Resource.Animation.abc_fade_out)]
-    [Register(nameof(DictionaryBindingView))]
     [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class DictionaryBindingView : MvxFragment<DictionaryBindingViewModel>
     {
