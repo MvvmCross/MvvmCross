@@ -37,14 +37,16 @@ public static class MvxViewExtensions
         // nothing needed currently
     }
 
-    public static Type? FindAssociatedViewModelTypeOrNull<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)] TViewType>(
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "The generic constraint ensures TViewType has the required members")]
+    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
+    public static Type? FindAssociatedViewModelTypeOrNull<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)] TViewType>(
         this TViewType view)
-            where TViewType : IMvxView
     {
         ArgumentNullException.ThrowIfNull(view);
 
         if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelTypeFinder? associatedTypeFinder) == true)
-            return associatedTypeFinder?.FindTypeOrNull(typeof(TViewType));
+            return associatedTypeFinder?.FindTypeOrNull(view.GetType());
 
         MvxLogHost.Default?.Log(LogLevel.Trace,
             "No view model type finder available - assuming we are looking for a splash screen - returning null");
