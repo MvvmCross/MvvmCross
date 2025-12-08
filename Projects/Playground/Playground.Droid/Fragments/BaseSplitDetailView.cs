@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Android.Content;
 using Android.Content.Res;
 using Android.OS;
 using Android.Views;
@@ -27,7 +28,7 @@ namespace Playground.Droid.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(FragmentLayoutId, null);
+            var view = this.BindingInflate(FragmentLayoutId, container, false);
 
             _toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
             if (_toolbar != null)
@@ -56,9 +57,9 @@ namespace Playground.Droid.Fragments
                 _drawerToggle.OnConfigurationChanged(newConfig);
         }
 
-        public override void OnActivityCreated(Bundle savedInstanceState)
+        public override void OnAttach(Context context)
         {
-            base.OnActivityCreated(savedInstanceState);
+            base.OnAttach(context);
             if (_toolbar != null)
                 _drawerToggle.SyncState();
         }

@@ -31,7 +31,7 @@ namespace Playground.Droid.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.SheetView, null);
+            var view = this.BindingInflate(Resource.Layout.SheetView, container, false);
 
             return view;
         }

@@ -26,7 +26,7 @@ namespace Playground.Droid.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.dictionary_view, null);
+            var view = this.BindingInflate(Resource.Layout.dictionary_view, container, false);
             var background = view.FindViewById<LinearLayout>(Resource.Id.container);
             var descriptionLabel = view.FindViewById<TextView>(Resource.Id.txt_description);
 

@@ -21,19 +21,19 @@ namespace Playground.Droid.Fragments
         {
             var ignore = base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.SplitMasterView, null);
+            var view = this.BindingInflate(Resource.Layout.SplitMasterView, container, false);
 
             return view;
         }
 
-        public bool OnNavigationItemSelected(IMenuItem item)
+        public bool OnNavigationItemSelected(IMenuItem menuItem)
         {
-            item.SetCheckable(true);
-            item.SetChecked(true);
+            menuItem.SetCheckable(true);
+            menuItem.SetChecked(true);
             previousMenuItem?.SetChecked(false);
-            previousMenuItem = item;
+            previousMenuItem = menuItem;
 
-            Navigate(item.ItemId);
+            Navigate(menuItem.ItemId);
 
             return true;
         }

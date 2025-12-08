@@ -31,7 +31,7 @@ namespace Playground.Droid.Fragments
         {
             var ignore = base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.ChildView, null);
+            var view = this.BindingInflate(Resource.Layout.ChildView, container, false);
 
             return view;
         }

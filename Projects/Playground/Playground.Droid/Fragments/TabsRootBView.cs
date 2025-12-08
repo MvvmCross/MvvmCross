@@ -19,7 +19,7 @@ namespace Playground.Droid.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.TabsRootBView, null);
+            var view = this.BindingInflate(Resource.Layout.TabsRootBView, container, false);
 
             return view;
         }
@@ -30,7 +30,7 @@ namespace Playground.Droid.Fragments
 
             var viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager);
             if (viewPager.Adapter is not MvxCachingFragmentStatePagerAdapter)
-                viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(ChildFragmentManager, new());
+                viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(ChildFragmentManager, []);
 
             if (savedInstanceState == null)
             {

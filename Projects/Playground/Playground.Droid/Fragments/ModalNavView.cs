@@ -29,7 +29,7 @@ namespace Playground.Droid.Fragments
         {
             var ignore = base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.ModalNavView, null);
+            var view = this.BindingInflate(Resource.Layout.ModalNavView, container, false);
 
             return view;
         }

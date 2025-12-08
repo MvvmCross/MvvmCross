@@ -20,7 +20,7 @@ namespace Playground.Droid.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.SecondChildView, null);
+            var view = this.BindingInflate(Resource.Layout.SecondChildView, container, false);
 
             return view;
         }

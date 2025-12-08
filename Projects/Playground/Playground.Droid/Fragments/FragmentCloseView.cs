@@ -15,7 +15,7 @@ namespace Playground.Droid.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            return this.BindingInflate(Resource.Layout.FragmnetCloseView, null);
+            return this.BindingInflate(Resource.Layout.FragmnetCloseView, container, false);
         }
     }
 }
