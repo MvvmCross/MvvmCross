@@ -39,9 +39,9 @@ public static class MvxViewExtensions
 
     [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "The generic constraint ensures TViewType has the required members")]
     [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
-    public static Type? FindAssociatedViewModelTypeOrNull<
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)] TViewType>(
-        this TViewType view)
+    public static Type? FindAssociatedViewModelTypeOrNull<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)] TViewType>(
+            this TViewType view)
+        where TViewType : IMvxView
     {
         ArgumentNullException.ThrowIfNull(view);
 
