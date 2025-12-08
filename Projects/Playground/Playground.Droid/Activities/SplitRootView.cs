@@ -42,7 +42,7 @@ namespace Playground.Droid.Activities
 
         private void BackPressed()
         {
-            if (DrawerLayout?.IsDrawerOpen(GravityCompat.Start) == true)
+            if (DrawerLayout?.IsDrawerOpen(GravityCompat.Start) is true)
                 DrawerLayout.CloseDrawers();
             else
                 Finish();
