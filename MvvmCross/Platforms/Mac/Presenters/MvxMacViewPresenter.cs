@@ -34,13 +34,17 @@ namespace MvvmCross.Platforms.Mac.Presenters
         /// </summary>
         protected readonly ConditionalWeakTable<NSWindow, NSWindowController> _windowsToWindowControllers = new();
 
-        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        public override MvxBasePresentationAttribute CreatePresentationAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewType)
         {
             MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. Assuming new window presentation", viewType.Name);
             return new MvxWindowPresentationAttribute { ViewModelType = viewModelType, ViewType = viewType };
         }
 
-        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
+        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(
+            MvxViewModelRequest request,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {

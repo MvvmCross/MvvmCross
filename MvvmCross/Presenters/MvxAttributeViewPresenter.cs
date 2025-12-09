@@ -42,10 +42,12 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
 
     public abstract void RegisterAttributeTypes();
 
-    public abstract MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType);
+    public abstract MvxBasePresentationAttribute CreatePresentationAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewType);
 
     public virtual object? CreateOverridePresentationAttributeViewInstance(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType)
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewType)
     {
         if (viewType == null)
             throw new ArgumentNullException(nameof(viewType));
@@ -55,7 +57,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
 
     public virtual MvxBasePresentationAttribute? GetOverridePresentationAttribute(
         MvxViewModelRequest request,
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
     {
         if (request == null)
             throw new ArgumentNullException(nameof(request));
