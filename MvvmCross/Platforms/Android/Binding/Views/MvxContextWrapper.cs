@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.Runtime;
 using Android.Views;
@@ -12,6 +13,7 @@ using Object = Java.Lang.Object;
 namespace MvvmCross.Platforms.Android.Binding.Views
 {
     [Register("mvvmcross.platforms.android.binding.views.MvxContextWrapper")]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public class MvxContextWrapper : ContextWrapper
     {
         private LayoutInflater _inflater;

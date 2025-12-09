@@ -2,13 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
-using Android.Widget;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -22,14 +19,14 @@ namespace Playground.Droid.Fragments
                          Resource.Animation.abc_fade_out,
                          Resource.Animation.abc_fade_in,
                          Resource.Animation.abc_fade_out)]
-    [Register(nameof(DictionaryBindingView))]
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class DictionaryBindingView : MvxFragment<DictionaryBindingViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.dictionary_view, null);
+            var view = this.BindingInflate(Resource.Layout.dictionary_view, container, false);
             var background = view.FindViewById<LinearLayout>(Resource.Id.container);
             var descriptionLabel = view.FindViewById<TextView>(Resource.Id.txt_description);
 

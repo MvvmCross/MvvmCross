@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using CoreGraphics;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
@@ -15,6 +16,7 @@ namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
     [MvxPagePresentation(WrapInNavigationController = false)]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public partial class Page1View : MvxViewController<Page1ViewModel>
     {
         private UITableView _tableView;
@@ -56,7 +58,8 @@ namespace Playground.iOS.Views
             set.Apply();
         }
 
-        private class HeaderCell : MvxTableViewCell, IExpandableHeaderCell
+        [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
+        private sealed class HeaderCell : MvxTableViewCell, IExpandableHeaderCell
         {
             public static NSString Identifier = new NSString(nameof(HeaderCell));
             private static UIImage _arrowImage;
@@ -131,7 +134,8 @@ namespace Playground.iOS.Views
             }
         }
 
-        private class ItemCell : MvxTableViewCell
+        [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
+        private sealed class ItemCell : MvxTableViewCell
         {
             public static NSString Identifier = new NSString(nameof(ItemCell));
             private UILabel _title;
@@ -165,7 +169,8 @@ namespace Playground.iOS.Views
             }
         }
 
-        private class TableSource : MvxExpandableTableViewSource<Page1ViewModel.SectionViewModel, Page1ViewModel.SectionItemViewModel>
+        [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
+        private sealed class TableSource : MvxExpandableTableViewSource<Page1ViewModel.SectionViewModel, Page1ViewModel.SectionItemViewModel>
         {
             public TableSource(UITableView tableView) : base(tableView)
             {

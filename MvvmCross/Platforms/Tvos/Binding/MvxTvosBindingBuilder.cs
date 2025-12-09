@@ -15,6 +15,7 @@ using MvvmCross.Platforms.Tvos.Binding.Views;
 
 namespace MvvmCross.Platforms.Tvos.Binding
 {
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public class MvxTvosBindingBuilder
         : MvxBindingBuilder
     {

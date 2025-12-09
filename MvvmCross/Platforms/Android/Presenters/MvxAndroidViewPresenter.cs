@@ -199,8 +199,9 @@ namespace MvvmCross.Platforms.Android.Presenters
             return attribute;
         }
 
-        [UnconditionalSuppressMessage("Trimming", "IL2062", Justification = "ViewModel types passed to presentation attributes are preserved by the navigation infrastructure.")]
-        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type? viewModelType, Type? viewType)
+        public override MvxBasePresentationAttribute CreatePresentationAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewType)
         {
             if (viewType == null)
                 throw new ArgumentNullException(nameof(viewType));
@@ -590,6 +591,8 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             OnBeforeFragmentChanging(ft, fragment, attribute, request);
 
+            ft.SetReorderingAllowed(attribute.AllowReordering);
+
             if (attribute.AddToBackStack)
                 ft.AddToBackStack(fragmentName);
 
@@ -607,6 +610,9 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 ft.Replace(attribute.FragmentContentId, fragment, fragmentName);
             }
+
+            if (attribute.SetAsPrimaryFragment)
+                ft.SetPrimaryNavigationFragment(fragment);
 
             ft.CommitAllowingStateLoss();
 
@@ -710,10 +716,15 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             OnBeforeFragmentChanging(ft, dialog, attribute, request);
 
+            ft.SetReorderingAllowed(attribute.AllowReordering);
+
             if (attribute.AddToBackStack)
                 ft.AddToBackStack(fragmentName);
 
             OnFragmentChanging(ft, dialog, attribute, request);
+
+            if (attribute.SetAsPrimaryFragment)
+                ft.SetPrimaryNavigationFragment(dialog);
 
             dialog.Show(ft, fragmentName);
 

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Views;
@@ -7,6 +8,7 @@ using Playground.Core.ViewModels;
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public partial class SecondChildView : MvxViewController<SecondChildViewModel>
     {
         public SecondChildView(NativeHandle handle) : base(handle)

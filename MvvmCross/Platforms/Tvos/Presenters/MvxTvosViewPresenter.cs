@@ -43,7 +43,9 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             _logger = MvxLogHost.GetLog<MvxTvosViewPresenter>();
         }
 
-        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        public override MvxBasePresentationAttribute CreatePresentationAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewType)
         {
             if (MasterNavigationController == null &&
                (TabBarViewController == null || !TabBarViewController.CanShowChildView()))
@@ -71,7 +73,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
         public override MvxBasePresentationAttribute GetOverridePresentationAttribute(
             MvxViewModelRequest request,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {

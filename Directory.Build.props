@@ -6,7 +6,6 @@
     <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
 
     <StripSymbols>false</StripSymbols>
-    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
 
     <NoWarn>$(NoWarn);CS0109;CS0108;CS0618;CS0114;CS1591</NoWarn>
 
@@ -52,8 +51,8 @@
     <_MvxTargetPlatformIsWindows>false</_MvxTargetPlatformIsWindows>
     <_MvxTargetPlatformIsWindows Condition="$(_MvxTargetPlatformIdentifier.Contains('windows')) == 'True'">True</_MvxTargetPlatformIsWindows>
 
-    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsiOS)' == 'True' ">12.2</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIstvOS)' == 'True' ">12.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsiOS)' == 'True' ">13.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIstvOS)' == 'True' ">13.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsMacCatalyst)' == 'True' ">15.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition=" '$(_MvxTargetPlatformIsAndroid)' == 'True' ">23</SupportedOSPlatformVersion>
   </PropertyGroup>

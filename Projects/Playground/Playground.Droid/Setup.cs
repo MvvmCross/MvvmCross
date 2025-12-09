@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Target.Construction;
@@ -16,7 +17,10 @@ using Serilog.Extensions.Logging;
 
 namespace Playground.Droid
 {
+    [RequiresUnreferencedCode("Uses MvvmCross reflection based plugin loading")]
+#pragma warning disable IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
     public class Setup : MvxAndroidSetup<App>
+#pragma warning restore IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
     {
         protected override IEnumerable<Assembly> AndroidViewAssemblies =>
             new List<Assembly>(base.AndroidViewAssemblies)

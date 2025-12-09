@@ -9,7 +9,7 @@ namespace MvvmCross.Views
 {
     public interface IMvxViewFinder
     {
-        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.Interfaces)]
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)]
         Type? GetViewType(Type? viewModelType);
     }
 }

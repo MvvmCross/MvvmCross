@@ -2,12 +2,16 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace MvvmCross.Plugin.JsonLocalization
 {
     public interface IMvxJsonDictionaryTextLoader
     {
+        [RequiresUnreferencedCode("MvxJsonConverter requires unreferenced code")]
         void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath);
 
+        [RequiresUnreferencedCode("MvxJsonConverter requires unreferenced code")]
         void LoadJsonFromText(string namespaceKey, string typeKey, string rawJson);
     }
 }

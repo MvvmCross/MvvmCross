@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -18,6 +19,7 @@ using Object = Java.Lang.Object;
 namespace MvvmCross.Platforms.Android.Views
 {
     [Register("mvvmcross.platforms.android.views.MvxTabsFragmentActivity")]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public abstract class MvxTabsFragmentActivity
         : MvxActivity, TabHost.IOnTabChangeListener
     {

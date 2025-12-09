@@ -9,7 +9,7 @@ namespace MvvmCross.Tests
     {
         public event EventHandler CanExecuteChanged;
 
-        private Dictionary<object, int> items = new Dictionary<object, int>();
+        private readonly Dictionary<object, int> items = new Dictionary<object, int>();
 
         public void WillCallRaisePropertyChangedFor(object item)
         {

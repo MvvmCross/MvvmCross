@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
-using Android.OS;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Logging;
@@ -14,6 +13,7 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.Android.Views
 {
+    [RequiresUnreferencedCode("Loading ViewModels requires unreferenced code")]
     public class MvxActivityAdapter : MvxBaseActivityAdapter
     {
         protected IMvxAndroidView AndroidView => Activity as IMvxAndroidView;

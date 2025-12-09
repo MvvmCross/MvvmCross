@@ -10,6 +10,7 @@ namespace MvvmCross.Plugin.FieldBinding
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public class Plugin : IMvxPlugin
     {
         public void Load(IMvxIoCProvider provider)

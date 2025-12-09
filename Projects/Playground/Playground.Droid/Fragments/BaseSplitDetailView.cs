@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
+using Android.Content;
 using Android.Content.Res;
 using Android.OS;
 using Android.Views;
@@ -15,6 +17,7 @@ using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace Playground.Droid.Fragments
 {
+    [RequiresUnreferencedCode("Uses MvxBindings which require unreferenced code")]
     public abstract class BaseSplitDetailView<TViewModel> : MvxFragment<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected SplitRootView BaseActivity => (SplitRootView)Activity;
@@ -27,7 +30,7 @@ namespace Playground.Droid.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(FragmentLayoutId, null);
+            var view = this.BindingInflate(FragmentLayoutId, container, false);
 
             _toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
             if (_toolbar != null)
@@ -56,9 +59,9 @@ namespace Playground.Droid.Fragments
                 _drawerToggle.OnConfigurationChanged(newConfig);
         }
 
-        public override void OnActivityCreated(Bundle savedInstanceState)
+        public override void OnAttach(Context context)
         {
-            base.OnActivityCreated(savedInstanceState);
+            base.OnAttach(context);
             if (_toolbar != null)
                 _drawerToggle.SyncState();
         }

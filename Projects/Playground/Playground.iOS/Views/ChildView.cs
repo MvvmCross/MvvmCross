@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using ObjCRuntime;
@@ -9,6 +10,7 @@ namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
     [MvxChildPresentation]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public partial class ChildView : MvxViewController<ChildViewModel>
     {
         public ChildView(NativeHandle handle) : base(handle)

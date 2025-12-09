@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using ObjCRuntime;
@@ -9,6 +10,7 @@ namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
     [MvxModalPresentation(WrapInNavigationController = true)]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public partial class NestedModalView : MvxViewController<NestedModalViewModel>
     {
         public NestedModalView(NativeHandle handle) : base(handle)

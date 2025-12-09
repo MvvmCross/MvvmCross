@@ -2,14 +2,13 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
-using MvvmCross.Exceptions;
 using MvvmCross.Localization;
 
 namespace MvvmCross.Plugin.JsonLocalization
 {
+    [RequiresUnreferencedCode("MvxJsonConverter requires unreferenced code")]
     public abstract class MvxTextProviderBuilder
         : IMvxTextProviderBuilder
     {

@@ -8,22 +8,22 @@
 
   <ItemGroup>
     <PackageVersion Include="AsyncFixer" Version="1.6.0" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.10" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.100" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.1.0" />
-    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.6901" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.8.251003001" />
+    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.7175" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
     <PackageVersion Include="NSubstitute.Analyzers.CSharp" Version="1.0.17" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
     <PackageVersion Include="Roslynator.Analyzers" Version="4.14.1" />
-    <PackageVersion Include="Serilog.Extensions.Logging" Version="9.0.2" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="10.0.0" />
     <PackageVersion Include="Serilog.Sinks.Async" Version="2.1.0" />
     <PackageVersion Include="Serilog.Sinks.Debug" Version="3.0.0" />
     <PackageVersion Include="Serilog.Sinks.Trace" Version="4.0.0" />
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
     <PackageVersion Include="Serilog" Version="4.3.0" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.15.0.120848" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.16.1.129956" />
     <PackageVersion Include="Xamarin.Android.Glide" Version="5.0.5" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.7.1.1" />
     <PackageVersion Include="Xamarin.AndroidX.CardView" Version="1.0.0.36" />
@@ -39,8 +39,8 @@
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
     <PackageVersion Include="xunit.v3.mtp-v2" Version="3.2.0" />
     <PackageVersion Include="XunitXml.TestLogger" Version="7.0.2" />
-    <PackageVersion Include="Cake.Frosting" Version="5.1.0" />
-    <PackageVersion Include="Cake.GitVersioning" Version="3.8.118" />
+    <PackageVersion Include="Cake.Frosting" Version="6.0.0" />
+    <PackageVersion Include="Cake.GitVersioning" Version="3.9.50" />
   </ItemGroup>
 
   <!-- Pinned transitive packages -->
