@@ -9,7 +9,7 @@ namespace MvvmCross.Views
 {
     public interface IMvxViewsContainer : IMvxViewFinder
     {
-        void AddAll<TKey, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] TViewType>(IDictionary<TKey, TViewType> viewModelViewLookup);
+        void AddAll(IDictionary<Type, Type> viewModelViewLookup);
 
         void Add(Type viewModelType, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType);
 

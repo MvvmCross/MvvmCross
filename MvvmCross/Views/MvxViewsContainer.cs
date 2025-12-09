@@ -22,11 +22,11 @@ namespace MvvmCross.Views
 
         [UnconditionalSuppressMessage("Trimming", "IL2072:UnrecognizedReflectionPattern",
             Justification = "Type annotations already guarantee that types have public constructors")]
-        public void AddAll<TKey, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] TViewType>(IDictionary<TKey, TViewType> viewModelViewLookup)
+        public void AddAll(IDictionary<Type, Type> viewModelViewLookup)
         {
             foreach (var pair in viewModelViewLookup)
             {
-                Add(pair.Key!.GetType(), pair.Value!.GetType());
+                Add(pair.Key, pair.Value);
             }
         }
 
