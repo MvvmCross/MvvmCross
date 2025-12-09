@@ -172,10 +172,13 @@ public class MvxAndroidViewsContainer
         //                intent.AddFlags(ActivityFlags.ClearTop);
     }
 
-    public virtual (Intent intent, int key) GetIntentWithKeyFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(TViewModel existingViewModelToUse, MvxViewModelRequest? request)
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "The generic constraint ensures TViewModel has the required members")]
+    public virtual (Intent intent, int key) GetIntentWithKeyFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(
+            TViewModel existingViewModelToUse,
+            MvxViewModelRequest? request)
         where TViewModel : IMvxViewModel
     {
-        request ??= MvxViewModelRequest.GetDefaultRequest(typeof(TViewModel));
+        request ??= MvxViewModelRequest.GetDefaultRequest(existingViewModelToUse.GetType());
         var intent = GetIntentFor(request);
 
         if (Mvx.IoCProvider?.TryResolve(out IMvxChildViewModelCache? viewModelCache) != true || viewModelCache == null)

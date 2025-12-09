@@ -1,21 +1,19 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using System;
-using System.Collections.Generic;
+#nullable enable
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Views
 {
-#nullable enable
     public interface IMvxViewsContainer : IMvxViewFinder
     {
-        void AddAll(IDictionary<Type, Type> viewModelViewLookup);
+        void AddAll<TKey, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] TViewType>(IDictionary<TKey, TViewType> viewModelViewLookup);
 
-        void Add(Type viewModelType, Type viewType);
+        void Add(Type viewModelType, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType);
 
-        void Add<TViewModel, TView>()
+        void Add<TViewModel, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] TView>()
             where TViewModel : IMvxViewModel
             where TView : IMvxView;
 
@@ -23,5 +21,4 @@ namespace MvvmCross.Views
 
         void SetLastResort(IMvxViewFinder finder);
     }
-#nullable restore
 }

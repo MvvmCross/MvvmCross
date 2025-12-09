@@ -39,7 +39,9 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         Window = window;
     }
 
-    public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+    public override MvxBasePresentationAttribute CreatePresentationAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewType)
     {
         ValidateArguments(viewModelType, viewType);
 
@@ -48,7 +50,7 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         {
             MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogTrace(
                 "PresentationAttribute nor MasterNavigationController found for {ViewTypeName}. Assuming Root presentation",
-                viewType.Name);
+                viewType?.Name);
             return new MvxRootPresentationAttribute
             {
                 WrapInNavigationController = true,
@@ -58,13 +60,13 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         }
 
         MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogTrace(
-            "PresentationAttribute not found for {ViewTypeName}. Assuming animated Child presentation", viewType.Name);
+            "PresentationAttribute not found for {ViewTypeName}. Assuming animated Child presentation", viewType?.Name);
 
         return new MvxChildPresentationAttribute { ViewType = viewType, ViewModelType = viewModelType };
     }
 
     public override object? CreateOverridePresentationAttributeViewInstance(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType)
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewType)
     {
         ArgumentNullException.ThrowIfNull(viewType);
 
@@ -881,7 +883,7 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         PopoverViewController = null;
     }
 
-    private static void ValidateArguments(Type viewModelType, Type viewType)
+    private static void ValidateArguments(Type? viewModelType, Type? viewType)
     {
         ArgumentNullException.ThrowIfNull(viewModelType);
         ArgumentNullException.ThrowIfNull(viewType);

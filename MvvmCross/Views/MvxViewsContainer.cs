@@ -2,18 +2,16 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Collections.Generic;
+#nullable enable
 using System.Diagnostics.CodeAnalysis;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Views
 {
-#nullable enable
     public abstract class MvxViewsContainer
         : IMvxViewsContainer
     {
-        private readonly Dictionary<Type, Type> _bindingMap = new Dictionary<Type, Type>();
+        private readonly Dictionary<Type, Type> _bindingMap = [];
         private readonly List<IMvxViewFinder> _secondaryViewFinders;
         private IMvxViewFinder? _lastResortViewFinder;
 
@@ -22,27 +20,29 @@ namespace MvvmCross.Views
             _secondaryViewFinders = new List<IMvxViewFinder>();
         }
 
-        public void AddAll(IDictionary<Type, Type> viewModelViewLookup)
+        [UnconditionalSuppressMessage("Trimming", "IL2072:UnrecognizedReflectionPattern",
+            Justification = "Type annotations already guarantee that types have public constructors")]
+        public void AddAll<TKey, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] TViewType>(IDictionary<TKey, TViewType> viewModelViewLookup)
         {
             foreach (var pair in viewModelViewLookup)
             {
-                Add(pair.Key, pair.Value);
+                Add(pair.Key!.GetType(), pair.Value!.GetType());
             }
         }
 
-        public void Add(Type viewModelType, Type viewType)
+        public void Add(Type viewModelType, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
         {
             _bindingMap[viewModelType] = viewType;
         }
 
-        public void Add<TViewModel, TView>()
+        public void Add<TViewModel, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] TView>()
             where TViewModel : IMvxViewModel
             where TView : IMvxView
         {
             Add(typeof(TViewModel), typeof(TView));
         }
 
-        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.Interfaces)]
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)]
         public Type GetViewType(Type? viewModelType)
         {
             Type? binding;
@@ -82,5 +82,4 @@ namespace MvvmCross.Views
             _lastResortViewFinder = finder;
         }
     }
-#nullable restore
 }
