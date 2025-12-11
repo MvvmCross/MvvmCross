@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.ViewModels
 {
-    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
     public interface IMvxViewModel
     {
         void ViewCreated();
@@ -37,7 +36,6 @@ namespace MvvmCross.ViewModels
         MvxNotifyTask? InitializeTask { get; set; }
     }
 
-    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
     public interface IMvxViewModel<in TParameter>
         : IMvxViewModel
     {
