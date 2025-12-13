@@ -43,6 +43,10 @@ namespace MvvmCross.Platforms.Ios.Binding
             base.FillTargetFactories(registry);
 
             registry.RegisterCustomBindingFactory<UIControl>(
+	            MvxIosPropertyBinding.UIControl_Selected,
+	            view => new MvxUIControlSelectedTargetBinding(view));
+
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_TouchDown,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDown));
 

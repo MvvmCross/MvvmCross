@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
@@ -25,6 +26,8 @@ namespace Playground.Core.ViewModels
             CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
 
             OpenTab2Command = new MvxAsyncCommand(() => NavigationService.ChangePresentation(new MvxPagePresentationHint(typeof(Tab2ViewModel))));
+
+            SetStarCommand = new MvxCommand(() => IsSelected = true);
         }
 
         public override Task Initialize()
@@ -47,5 +50,16 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand OpenTab2Command { get; }
 
         public IMvxAsyncCommand CloseCommand { get; }
+
+        public IMvxCommand SetStarCommand { get; }
+        
+
+        private bool _isSelected;
+
+        public bool IsSelected
+        {
+	        get => _isSelected;
+	        set => SetProperty(ref _isSelected, value, () => { Debug.WriteLine($"{nameof(IsSelected)}: {value}"); });
+        }
     }
 }
