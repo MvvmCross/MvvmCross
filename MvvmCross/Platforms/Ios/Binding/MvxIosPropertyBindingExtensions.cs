@@ -8,8 +8,8 @@ namespace MvvmCross.Platforms.Ios.Binding
 {
     public static class MvxIosPropertyBindingExtensions
     {
-	    public static string BindSelected(this UIControl uiControl)
-		    => MvxIosPropertyBinding.UIControl_Selected;
+        public static string BindSelected(this UIControl uiControl)
+            => MvxIosPropertyBinding.UIControl_Selected;
 
         public static string BindTouchUpInside(this UIControl uiControl)
             => MvxIosPropertyBinding.UIControl_TouchUpInside;

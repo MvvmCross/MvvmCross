@@ -12,7 +12,7 @@ using MvvmCross.WeakSubscription;
 namespace MvvmCross.Platforms.Ios.Binding.Target;
 
 public class MvxUIControlSelectedTargetBinding(UIControl target)
-	: MvxTargetBinding<UIControl, bool>(target)
+    : MvxTargetBinding<UIControl, bool>(target)
 {
     private MvxWeakEventSubscription<UIControl>? _subscription;
 

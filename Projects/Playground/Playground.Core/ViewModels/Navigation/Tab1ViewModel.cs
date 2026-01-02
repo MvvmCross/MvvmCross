@@ -52,14 +52,14 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand CloseCommand { get; }
 
         public IMvxCommand SetStarCommand { get; }
-        
+
 
         private bool _isSelected;
 
         public bool IsSelected
         {
-	        get => _isSelected;
-	        set => SetProperty(ref _isSelected, value, () => { Debug.WriteLine($"{nameof(IsSelected)}: {value}"); });
+            get => _isSelected;
+            set => SetProperty(ref _isSelected, value, () => { Debug.WriteLine($"{nameof(IsSelected)}: {value}"); });
         }
     }
 }
