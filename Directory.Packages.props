@@ -7,7 +7,7 @@
   </PropertyGroup>  
 
   <ItemGroup>
-    <PackageVersion Include="AsyncFixer" Version="2.0.0" />
+    <PackageVersion Include="AsyncFixer" Version="2.1.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.100" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
