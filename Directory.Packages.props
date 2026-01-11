@@ -24,18 +24,18 @@
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
     <PackageVersion Include="Serilog" Version="4.3.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.17.0.131074" />
-    <PackageVersion Include="Xamarin.Android.Glide" Version="5.0.5" />
-    <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.7.1.1" />
-    <PackageVersion Include="Xamarin.AndroidX.CardView" Version="1.0.0.36" />
-    <PackageVersion Include="Xamarin.AndroidX.Fragment" Version="1.8.9" />
-    <PackageVersion Include="Xamarin.AndroidX.Leanback" Version="1.2.0.1" />
-    <PackageVersion Include="Xamarin.AndroidX.MediaRouter" Version="1.8.1.1" />
-    <PackageVersion Include="Xamarin.AndroidX.Preference" Version="1.2.1.15" />
-    <PackageVersion Include="Xamarin.AndroidX.RecyclerView" Version="1.4.0.3" />
-    <PackageVersion Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.2.0" />
-    <PackageVersion Include="Xamarin.AndroidX.ViewPager" Version="1.1.0.4" />
+    <PackageVersion Include="Xamarin.Android.Glide" Version="5.0.5.1" />
+    <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.7.1.2" />
+    <PackageVersion Include="Xamarin.AndroidX.CardView" Version="1.0.0.37" />
+    <PackageVersion Include="Xamarin.AndroidX.Fragment" Version="1.8.9.1" />
+    <PackageVersion Include="Xamarin.AndroidX.Leanback" Version="1.2.0.2" />
+    <PackageVersion Include="Xamarin.AndroidX.MediaRouter" Version="1.8.1.2" />
+    <PackageVersion Include="Xamarin.AndroidX.Preference" Version="1.2.1.16" />
+    <PackageVersion Include="Xamarin.AndroidX.RecyclerView" Version="1.4.0.4" />
+    <PackageVersion Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.2.0.1" />
+    <PackageVersion Include="Xamarin.AndroidX.ViewPager" Version="1.1.0.5" />
     <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.12.0.5" />
-    <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="121.3.0.7" />
+    <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="121.3.0.8" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
     <PackageVersion Include="xunit.v3.mtp-v2" Version="3.2.0" />
     <PackageVersion Include="XunitXml.TestLogger" Version="7.0.2" />
@@ -45,6 +45,6 @@
 
   <!-- Pinned transitive packages -->
   <ItemGroup>
-    <PackageVersion Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.8.9" />
+    <PackageVersion Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.8.9.1" />
   </ItemGroup>
 </Project>
