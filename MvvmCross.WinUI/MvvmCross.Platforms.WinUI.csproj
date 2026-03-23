@@ -21,7 +21,6 @@ This package contains the 'MvvmCross.Platforms.WinUI' libraries for MvvmCross</D
   <ItemGroup>
     <None Include="..\MvvmCross\readme.txt" pack="true" PackagePath="." />
 
-    <Compile Include="..\MvvmCross\Platforms\Windows\**\*.cs" />
     <Compile Include="..\MvvmCross\Platforms\WinUi\**\*.cs" />
     <Page Include="..\MvvmCross\Platforms\WinUi\**\*.xaml" SubType="Designer" Generator="MSBuild:Compile" />
     <None Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
