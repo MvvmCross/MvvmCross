@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>$(_MvxWindowsTargets)</TargetFrameworks>
-    <AssemblyName>MvvmCross.Platforms.WinUI</AssemblyName>
-    <RootNamespace>MvvmCross.Platforms.WinUI</RootNamespace>
+    <AssemblyName>MvvmCross.Platforms.WinUi</AssemblyName>
+    <RootNamespace>MvvmCross.Platforms.WinUi</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains the 'MvvmCross.Platforms.WinUI' libraries for MvvmCross</Description>
