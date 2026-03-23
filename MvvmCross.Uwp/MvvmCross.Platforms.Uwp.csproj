@@ -26,7 +26,6 @@ This package contains the 'MvvmCross.Platforms.UWP' libraries for MvvmCross</Des
     <None Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
     <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
 
-    <PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
 
     <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
