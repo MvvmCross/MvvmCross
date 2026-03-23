@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MvvmCross.WinUI\MvvmCross.WinUI.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.WinUI\MvvmCross.Platforms.WinUI.csproj" />
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
   </ItemGroup>
 
