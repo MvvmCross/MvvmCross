@@ -54,7 +54,7 @@ This package contains the 'Visibility' plugin for MvvmCross</Description>
     <PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" />
 
-    <ProjectReference Include="..\..\MvvmCross.WinUI\MvvmCross.WinUI.csproj" />
+    <ProjectReference Include="..\..\MvvmCross.WinUI\MvvmCross.Platforms.WinUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
