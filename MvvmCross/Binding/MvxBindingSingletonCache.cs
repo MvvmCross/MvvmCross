@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Base;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
@@ -11,23 +12,20 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.ExpressionParse;
 using MvvmCross.Binding.Parse.Binding.Lang;
-using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Binding
 {
     // this class is not perfect OO and it gets in the way of testing
-    // however, it is here for speed - to help avoid obscene numbers of Mvx.IoCProvider.Resolve<T> calls during binding
-    public class MvxBindingSingletonCache
-        : MvxSingleton<IMvxBindingSingletonCache>, IMvxBindingSingletonCache
+    // however, it is here for speed - to help avoid obscene numbers of service location calls during binding
+    public class MvxBindingSingletonCache : IMvxBindingSingletonCache
     {
-        public static IMvxBindingSingletonCache Initialize()
-        {
-            if (Instance != null)
-                throw new MvxException("You should only initialize MvxBindingSingletonCache once");
-
-            var instance = new MvxBindingSingletonCache();
-            return instance;
-        }
+        /// <summary>
+        /// Resolves the registered <see cref="IMvxBindingSingletonCache"/> from the ambient host.
+        /// Returns <c>null</c> if the host has not been started yet.
+        /// </summary>
+        public static IMvxBindingSingletonCache Instance =>
+            MvxHost.Current?.Services.GetService<IMvxBindingSingletonCache>();
 
         private IMvxAutoValueConverters _autoValueConverters;
         private IMvxBindingDescriptionParser _bindingDescriptionParser;
@@ -46,7 +44,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _autoValueConverters = _autoValueConverters ?? Mvx.IoCProvider.Resolve<IMvxAutoValueConverters>();
+                _autoValueConverters ??= MvxHost.Current?.Services.GetService<IMvxAutoValueConverters>();
                 return _autoValueConverters;
             }
         }
@@ -55,7 +53,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _bindingDescriptionParser = _bindingDescriptionParser ?? Mvx.IoCProvider.Resolve<IMvxBindingDescriptionParser>();
+                _bindingDescriptionParser ??= MvxHost.Current?.Services.GetService<IMvxBindingDescriptionParser>();
                 return _bindingDescriptionParser;
             }
         }
@@ -64,7 +62,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _languageParser = _languageParser ?? Mvx.IoCProvider.Resolve<IMvxLanguageBindingParser>();
+                _languageParser ??= MvxHost.Current?.Services.GetService<IMvxLanguageBindingParser>();
                 return _languageParser;
             }
         }
@@ -73,7 +71,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _propertyExpressionParser = _propertyExpressionParser ?? Mvx.IoCProvider.Resolve<IMvxPropertyExpressionParser>();
+                _propertyExpressionParser ??= MvxHost.Current?.Services.GetService<IMvxPropertyExpressionParser>();
                 return _propertyExpressionParser;
             }
         }
@@ -82,7 +80,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _valueConverterLookup = _valueConverterLookup ?? Mvx.IoCProvider.Resolve<IMvxValueConverterLookup>();
+                _valueConverterLookup ??= MvxHost.Current?.Services.GetService<IMvxValueConverterLookup>();
                 return _valueConverterLookup;
             }
         }
@@ -91,7 +89,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _valueCombinerLookup = _valueCombinerLookup ?? Mvx.IoCProvider.Resolve<IMvxValueCombinerLookup>();
+                _valueCombinerLookup ??= MvxHost.Current?.Services.GetService<IMvxValueCombinerLookup>();
                 return _valueCombinerLookup;
             }
         }
@@ -100,7 +98,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _defaultBindingName = _defaultBindingName ?? Mvx.IoCProvider.Resolve<IMvxBindingNameLookup>();
+                _defaultBindingName ??= MvxHost.Current?.Services.GetService<IMvxBindingNameLookup>();
                 return _defaultBindingName;
             }
         }
@@ -109,7 +107,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _binder = _binder ?? Mvx.IoCProvider.Resolve<IMvxBinder>();
+                _binder ??= MvxHost.Current?.Services.GetService<IMvxBinder>();
                 return _binder;
             }
         }
@@ -118,7 +116,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _sourceBindingFactory = _sourceBindingFactory ?? Mvx.IoCProvider.Resolve<IMvxSourceBindingFactory>();
+                _sourceBindingFactory ??= MvxHost.Current?.Services.GetService<IMvxSourceBindingFactory>();
                 return _sourceBindingFactory;
             }
         }
@@ -127,7 +125,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _targetBindingFactory = _targetBindingFactory ?? Mvx.IoCProvider.Resolve<IMvxTargetBindingFactory>();
+                _targetBindingFactory ??= MvxHost.Current?.Services.GetService<IMvxTargetBindingFactory>();
                 return _targetBindingFactory;
             }
         }
@@ -136,7 +134,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _sourceStepFactory = _sourceStepFactory ?? Mvx.IoCProvider.Resolve<IMvxSourceStepFactory>();
+                _sourceStepFactory ??= MvxHost.Current?.Services.GetService<IMvxSourceStepFactory>();
                 return _sourceStepFactory;
             }
         }
@@ -145,7 +143,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _mainThreadDispatcher = _mainThreadDispatcher ?? Mvx.IoCProvider.Resolve<IMvxMainThreadAsyncDispatcher>();
+                _mainThreadDispatcher ??= MvxHost.Current?.Services.GetService<IMvxMainThreadAsyncDispatcher>();
                 return _mainThreadDispatcher;
             }
         }

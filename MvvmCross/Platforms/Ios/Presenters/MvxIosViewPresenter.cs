@@ -4,8 +4,10 @@
 #nullable enable
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
@@ -508,7 +510,7 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         if (presentationController != null)
         {
             presentationController.PermittedArrowDirections = attribute.PermittedArrowDirections;
-            var sourceProvider = Mvx.IoCProvider?.Resolve<IMvxPopoverPresentationSourceProvider>();
+            var sourceProvider = MvxHost.Current?.Services.GetService<IMvxPopoverPresentationSourceProvider>();
             sourceProvider?.SetSource(presentationController);
             presentationController.Delegate = new MvxPopoverPresentationControllerDelegate(this);
         }

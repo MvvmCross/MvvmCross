@@ -3,15 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
-using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
-using MvvmCross.IoC;
 using MvvmCross.Platforms.WinUi.Binding.MvxBinding;
 using MvvmCross.Platforms.WinUi.Binding.MvxBinding.Target;
 
@@ -45,13 +44,13 @@ namespace MvvmCross.Platforms.WinUi.Binding
             _bindingType = bindingType;
         }
 
-        public override void DoRegistration(IMvxIoCProvider iocProvider)
+        public override void DoRegistration(IServiceCollection services)
         {
-            base.DoRegistration(iocProvider);
-            InitializeBindingCreator();
+            base.DoRegistration(services);
+            RegisterBindingCreator(services);
         }
 
-        protected override void RegisterBindingFactories(IMvxIoCProvider iocProvider)
+        protected override void RegisterBindingFactories(IServiceCollection services)
         {
             switch (_bindingType)
             {
@@ -60,12 +59,18 @@ namespace MvvmCross.Platforms.WinUi.Binding
                     break;
 
                 case BindingType.MvvmCross:
-                    base.RegisterBindingFactories(iocProvider);
+                    base.RegisterBindingFactories(services);
                     break;
 
                 default:
                     throw new InvalidOperationException($"Unable to register binding factories for BindingType: {_bindingType}");
             }
+        }
+
+        private void RegisterBindingCreator(IServiceCollection services)
+        {
+            var creator = CreateBindingCreator();
+            services.TryAddSingleton<IMvxBindingCreator>(_ => creator);
         }
 
         protected override IMvxTargetBindingFactoryRegistry CreateTargetBindingRegistry()
@@ -81,12 +86,6 @@ namespace MvvmCross.Platforms.WinUi.Binding
                 default:
                     throw new InvalidOperationException($"Unable to create target binding registry for BindingType: {_bindingType}");
             }
-        }
-
-        private void InitializeBindingCreator()
-        {
-            var creator = CreateBindingCreator();
-            Mvx.IoCProvider.RegisterSingleton(creator);
         }
 
         protected virtual IMvxBindingCreator CreateBindingCreator()
@@ -114,9 +113,9 @@ namespace MvvmCross.Platforms.WinUi.Binding
         {
             base.FillValueConverters(registry);
 
-            if (MvxSingleton<IMvxWindowsAssemblyCache>.Instance != null)
+            if (MvxWindowsAssemblyCache.Instance != null)
             {
-                foreach (var assembly in MvxSingleton<IMvxWindowsAssemblyCache>.Instance.Assemblies)
+                foreach (var assembly in MvxWindowsAssemblyCache.Instance.Assemblies)
                 {
                     registry.Fill(assembly);
                 }
@@ -129,9 +128,9 @@ namespace MvvmCross.Platforms.WinUi.Binding
         {
             base.FillValueCombiners(registry);
 
-            if (MvxSingleton<IMvxWindowsAssemblyCache>.Instance != null)
+            if (MvxWindowsAssemblyCache.Instance != null)
             {
-                foreach (var assembly in MvxSingleton<IMvxWindowsAssemblyCache>.Instance.Assemblies)
+                foreach (var assembly in MvxWindowsAssemblyCache.Instance.Assemblies)
                 {
                     registry.Fill(assembly);
                 }

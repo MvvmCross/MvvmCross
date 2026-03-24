@@ -10,8 +10,10 @@ using Android.Util;
 using AndroidX.ViewPager.Widget;
 using Google.Android.Material.Tabs;
 using Java.Lang;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -37,13 +39,13 @@ namespace MvvmCross.Platforms.Android.Presenters
         public const string SharedElementsBundleKey = "__sharedElementsKey";
 
         private readonly Lazy<IMvxAndroidCurrentTopActivity?> _androidCurrentTopActivity =
-            new(() => Mvx.IoCProvider?.Resolve<IMvxAndroidCurrentTopActivity>());
+            new(() => MvxHost.Current?.Services.GetService<IMvxAndroidCurrentTopActivity>());
 
         private readonly Lazy<IMvxAndroidActivityLifetimeListener?> _activityLifetimeListener =
-            new(() => Mvx.IoCProvider?.Resolve<IMvxAndroidActivityLifetimeListener>());
+            new(() => MvxHost.Current?.Services.GetService<IMvxAndroidActivityLifetimeListener>());
 
         private readonly Lazy<IMvxNavigationSerializer?> _navigationSerializer =
-            new(() => Mvx.IoCProvider?.Resolve<IMvxNavigationSerializer>());
+            new(() => MvxHost.Current?.Services.GetService<IMvxNavigationSerializer>());
 
         private readonly Lazy<ILogger?> _logger = new(() => MvxLogHost.GetLog<MvxAndroidViewPresenter>());
 
@@ -419,7 +421,8 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual Intent? CreateIntentForRequest(MvxViewModelRequest? request)
         {
-            if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidViewModelRequestTranslator? requestTranslator) != true || requestTranslator == null)
+            IMvxAndroidViewModelRequestTranslator? requestTranslator;
+            if ((requestTranslator = MvxHost.Current?.Services.GetService<IMvxAndroidViewModelRequestTranslator>()) == null)
                 return null;
 
             if (request is MvxViewModelInstanceRequest viewModelInstanceRequest)

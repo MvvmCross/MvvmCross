@@ -5,6 +5,8 @@
 using System;
 using System.IO;
 using Android.Content.Res;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Android;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platforms.Android
@@ -27,6 +29,6 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Android
 
         #endregion
 
-        private AssetManager Assets => _assets ?? (_assets = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext.Assets);
+        private AssetManager Assets => _assets ?? (_assets = MvxHost.Current!.Services.GetRequiredService<IMvxAndroidGlobals>().ApplicationContext.Assets);
     }
 }

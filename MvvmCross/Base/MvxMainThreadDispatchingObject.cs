@@ -2,14 +2,15 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Base
 {
     public abstract class MvxMainThreadDispatchingObject
     {
-        protected IMvxMainThreadAsyncDispatcher AsyncDispatcher => MvxMainThreadDispatcher.Instance as IMvxMainThreadAsyncDispatcher;
+        protected IMvxMainThreadAsyncDispatcher? AsyncDispatcher =>
+            MvxHost.Current?.Services.GetService<IMvxMainThreadAsyncDispatcher>();
 
         protected void InvokeOnMainThread(Action action, bool maskExceptions = true)
         {
@@ -18,10 +19,10 @@ namespace MvvmCross.Base
 
         protected Task InvokeOnMainThreadAsync(Action action, bool maskExceptions = true)
         {
-            // this corner case should only happen when there is no IoC
-            // i.e. when running in a UnitTest environment, falling back
-            // to just executing action
-            if (AsyncDispatcher == null)
+            var dispatcher = AsyncDispatcher;
+
+            // Fall back to direct execution when no host is running (e.g. unit tests).
+            if (dispatcher == null)
             {
                 try
                 {
@@ -36,7 +37,7 @@ namespace MvvmCross.Base
                 return Task.CompletedTask;
             }
 
-            return AsyncDispatcher.ExecuteOnMainThreadAsync(action, maskExceptions);
+            return dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions);
         }
     }
 }

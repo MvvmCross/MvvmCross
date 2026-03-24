@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Base;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.Parse.Binding;
-using MvvmCross.IoC;
+using MvvmCross.Hosting;
 using Windows.ApplicationModel;
 
 namespace MvvmCross.Platforms.Uap.Binding
@@ -23,16 +23,10 @@ namespace MvvmCross.Platforms.Uap.Binding
             if (!DesignMode.DesignModeEnabled)
                 return;
 
-            if (MvxSingleton<IMvxIoCProvider>.Instance == null)
+            if (MvxHost.Current?.Services.GetService<IMvxBindingParser>() == null)
             {
-                var iocProvider = MvxIoCProvider.Initialize();
-                Mvx.IoCProvider.RegisterSingleton(iocProvider);
-            }
-
-            if (!Mvx.IoCProvider.CanResolve<IMvxBindingParser>())
-            {
-                var builder = new MvxWindowsBindingBuilder(MvxWindowsBindingBuilder.BindingType.MvvmCross);
-                builder.DoRegistration(Mvx.IoCProvider);
+                // Design-time: binding setup is a no-op with the host builder pattern.
+                // Configure the host builder at startup; this path is design-time only.
             }
         }
     }

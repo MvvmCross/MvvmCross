@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Platforms.Android.Binding.BindingContext
 {
@@ -16,8 +18,9 @@ namespace MvvmCross.Platforms.Android.Binding.BindingContext
         public static T Current<T>()
             where T : class, IMvxBindingContext
         {
-            if (Mvx.IoCProvider?.TryResolve<IMvxBindingContextStack<T>>(out var stack) == true)
-                return stack?.Current;
+            var stack = MvxHost.Current?.Services.GetService<IMvxBindingContextStack<T>>();
+            if (stack != null)
+                return stack.Current;
 
             return null;
         }

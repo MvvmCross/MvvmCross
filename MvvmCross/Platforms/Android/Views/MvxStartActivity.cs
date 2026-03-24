@@ -5,6 +5,8 @@
 using System.Diagnostics.CodeAnalysis;
 using Android.Runtime;
 using Android.Views;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views;
@@ -69,7 +71,8 @@ public abstract class MvxStartActivity
 
     protected virtual async Task RunAppStartAsync(Bundle bundle)
     {
-        if (Mvx.IoCProvider?.TryResolve(out IMvxAppStart startup) == true)
+        IMvxAppStart? startup;
+        if ((startup = MvxHost.Current?.Services.GetService<IMvxAppStart>()) != null)
         {
             if (!startup.IsStarted)
             {

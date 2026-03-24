@@ -11,7 +11,9 @@ using Android.Views;
 using Java.Interop;
 using Java.Lang;
 using Java.Lang.Reflect;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.Binders;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -380,14 +382,15 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 if (_androidViewFactory != null)
                     return _androidViewFactory;
 
-                if (Mvx.IoCProvider == null)
+                if (MvxHost.Current == null)
                 {
-                    // if IoCProvider is null, Log instance will probably be null too
-                    MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... AndroidViewFactory IoCProvider is null!", Tag);
+                    // if MvxHost.Current is null, Log instance will probably be null too
+                    MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Trace, "{Tag} - ... AndroidViewFactory MvxHost.Current is null!", Tag);
                     return null;
                 }
 
-                if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidViewFactory? viewFactory) == true)
+                var viewFactory = MvxHost.Current?.Services.GetService<IMvxAndroidViewFactory>();
+                if (viewFactory != null)
                 {
                     _androidViewFactory = viewFactory;
                 }
@@ -403,14 +406,15 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 if (_layoutInflaterHolderFactoryFactory != null)
                     return _layoutInflaterHolderFactoryFactory;
 
-                if (Mvx.IoCProvider == null)
+                if (MvxHost.Current == null)
                 {
-                    // if IoCProvider is null, Log instance will probably be null too
-                    MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Error, "{Tag} - ... FactoryFactory IoCProvider is null!", Tag);
+                    // if MvxHost.Current is null, Log instance will probably be null too
+                    MvxLogHost.GetLog<MvxLayoutInflater>()?.Log(LogLevel.Error, "{Tag} - ... FactoryFactory MvxHost.Current is null!", Tag);
                     return null;
                 }
 
-                if (Mvx.IoCProvider?.TryResolve(out IMvxLayoutInflaterHolderFactoryFactory? factoryFactory) == true)
+                var factoryFactory = MvxHost.Current?.Services.GetService<IMvxLayoutInflaterHolderFactoryFactory>();
+                if (factoryFactory != null)
                 {
                     _layoutInflaterHolderFactoryFactory = factoryFactory;
                 }

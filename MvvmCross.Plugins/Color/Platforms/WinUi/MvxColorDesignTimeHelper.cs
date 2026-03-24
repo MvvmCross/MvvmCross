@@ -12,14 +12,8 @@ namespace MvvmCross.Plugin.Color.Platforms.WinUi
     {
         public MvxColorDesignTimeHelper()
         {
-            if (!IsInDesignTool)
-                return;
-
-            if (Mvx.IoCProvider?.CanResolve<IMvxNativeColor>() == true)
-                return;
-
-            var forceLoaded = new Plugin();
-            forceLoaded.Load(Mvx.IoCProvider);
+            // Design-time plugin loading is no longer needed.
+            // Register IMvxNativeColor at startup with services.AddMvvmCrossColor().
         }
     }
 }

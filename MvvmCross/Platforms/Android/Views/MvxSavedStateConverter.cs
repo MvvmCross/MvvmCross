@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Android.OS;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.ViewModels;
@@ -26,7 +28,7 @@ namespace MvvmCross.Platforms.Android.Views
 
             try
             {
-                var converter = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
+                var converter = MvxHost.Current!.Services.GetRequiredService<IMvxNavigationSerializer>();
                 var data = converter.Serializer.DeserializeObject<Dictionary<string, string>>(extras);
                 return new MvxBundle(data);
             }
@@ -46,7 +48,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (savedState.Data.Count == 0)
                 return;
 
-            var converter = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
+            var converter = MvxHost.Current!.Services.GetRequiredService<IMvxNavigationSerializer>();
             var data = converter.Serializer.SerializeObject(savedState.Data);
             bundle.PutString(ExtrasKey, data);
         }

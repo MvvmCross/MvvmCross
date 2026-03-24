@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Foundation;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.ViewModels;
@@ -78,8 +80,8 @@ namespace MvvmCross.Platforms.Ios.Views
 
             if (IsMovingFromParentViewController)
             {
-                if (Mvx.IoCProvider?.TryResolve(out IMvxIosViewPresenter iPresenter) == true
-                    && iPresenter is MvxIosViewPresenter mvxIosViewPresenter)
+                var iPresenter = MvxHost.Current?.Services.GetService<IMvxIosViewPresenter>();
+                if (iPresenter is MvxIosViewPresenter mvxIosViewPresenter)
                 {
                     mvxIosViewPresenter.CloseTabBarViewController();
                 }

@@ -5,13 +5,15 @@
 using System;
 using Android.Content;
 using Android.Util;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 
 namespace MvvmCross.Platforms.Android.Binding.Views
 {
     public static class MvxAttributeHelpers
     {
-        private static readonly Lazy<IMvxAndroidBindingResource> mvxAndroidBindingResource = new Lazy<IMvxAndroidBindingResource>(() => Mvx.IoCProvider.GetSingleton<IMvxAndroidBindingResource>());
+        private static readonly Lazy<IMvxAndroidBindingResource> mvxAndroidBindingResource = new Lazy<IMvxAndroidBindingResource>(() => MvxHost.Current!.Services.GetRequiredService<IMvxAndroidBindingResource>());
 
         public static int ReadDropDownListItemTemplateId(Context context, IAttributeSet attrs)
         {

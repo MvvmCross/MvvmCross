@@ -6,10 +6,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
-using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Navigation.EventArguments;
 using MvvmCross.Presenters.Hints;
@@ -21,7 +21,7 @@ namespace MvvmCross.Navigation;
 /// <inheritdoc cref="IMvxNavigationService"/>
 public class MvxNavigationService : IMvxNavigationService
 {
-    private readonly IMvxIoCProvider _iocProvider;
+    private readonly IServiceProvider _serviceProvider;
 
     private readonly Lazy<ILogger?> _log = new(() =>
         MvxLogHost.GetLog<MvxNavigationService>());
@@ -49,13 +49,13 @@ public class MvxNavigationService : IMvxNavigationService
     public MvxNavigationService(
         IMvxViewModelLoader viewModelLoader,
         IMvxViewDispatcher viewDispatcher,
-        IMvxIoCProvider iocProvider)
+        IServiceProvider serviceProvider)
     {
-        _iocProvider = iocProvider;
+        _serviceProvider = serviceProvider;
 
         ViewModelLoader = viewModelLoader;
         ViewDispatcher = viewDispatcher;
-        ViewsContainer = new Lazy<IMvxViewsContainer?>(() => _iocProvider.Resolve<IMvxViewsContainer>());
+        ViewsContainer = new Lazy<IMvxViewsContainer?>(() => _serviceProvider.GetService<IMvxViewsContainer>());
     }
 
     public void LoadRoutes(IEnumerable<Assembly> assemblies)
@@ -159,7 +159,7 @@ public class MvxNavigationService : IMvxNavigationService
 
         if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
         {
-            var facade = (IMvxNavigationFacade)_iocProvider.IoCConstruct(viewModelType);
+            var facade = (IMvxNavigationFacade)ActivatorUtilities.CreateInstance(_serviceProvider, viewModelType);
 
             try
             {
@@ -225,7 +225,7 @@ public class MvxNavigationService : IMvxNavigationService
 
         if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
         {
-            var facade = (IMvxNavigationFacade)_iocProvider.IoCConstruct(viewModelType);
+            var facade = (IMvxNavigationFacade)ActivatorUtilities.CreateInstance(_serviceProvider, viewModelType);
 
             try
             {

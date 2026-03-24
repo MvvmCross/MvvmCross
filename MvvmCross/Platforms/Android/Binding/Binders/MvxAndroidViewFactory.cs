@@ -5,8 +5,10 @@
 using Android.Content;
 using Android.Util;
 using Android.Views;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders
@@ -17,7 +19,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
     {
         private IMvxViewTypeResolver? _viewTypeResolver;
 
-        protected IMvxViewTypeResolver? ViewTypeResolver => _viewTypeResolver ??= Mvx.IoCProvider?.Resolve<IMvxViewTypeResolver>();
+        protected IMvxViewTypeResolver? ViewTypeResolver => _viewTypeResolver ??= MvxHost.Current?.Services.GetService<IMvxViewTypeResolver>();
 
         public virtual View? CreateView(View? parent, string name, Context context, IAttributeSet attrs)
         {

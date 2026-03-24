@@ -2,8 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
@@ -26,12 +28,14 @@ public class MvxConsoleContainer
                 throw new MvxException("View Type not found for " + request.ViewModelType);
             }
             var view = Activator.CreateInstance(viewType) as IMvxConsoleView;
-            if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelLoader? viewModelLoader) == true)
+            var viewModelLoader = MvxHost.Current?.Services.GetService<IMvxViewModelLoader>();
+            if (viewModelLoader != null)
             {
                 IMvxBundle? savedState = null;
-                var viewModel = viewModelLoader?.LoadViewModel(request, savedState);
+                var viewModel = viewModelLoader.LoadViewModel(request, savedState);
                 view?.HackSetViewModel(viewModel);
-                if (Mvx.IoCProvider.TryResolve(out IMvxConsoleCurrentView? currentView) && currentView != null)
+                var currentView = MvxHost.Current?.Services.GetService<IMvxConsoleCurrentView>();
+                if (currentView != null)
                     currentView.CurrentView = view;
 
                 _navigationStack.Push(request);
@@ -56,13 +60,14 @@ public class MvxConsoleContainer
 
     public override Task<bool> Close(IMvxViewModel viewModel)
     {
-        if (Mvx.IoCProvider?.TryResolve(out IMvxConsoleCurrentView? currentView) != true)
+        var currentView = MvxHost.Current?.Services.GetService<IMvxConsoleCurrentView>();
+        if (currentView == null)
         {
             MvxLogHost.GetLog<MvxConsoleContainer>()?.Log(LogLevel.Warning, "No current view set. Cannot close it");
             return Task.FromResult(false);
         }
 
-        if (currentView?.CurrentView == null)
+        if (currentView.CurrentView == null)
         {
             MvxLogHost.GetLog<MvxConsoleContainer>()?.Log(LogLevel.Warning, "Ignoring close for viewmodel - root frame has no current page");
             return Task.FromResult(true);

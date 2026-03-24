@@ -6,11 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using MvvmCross.Base;
-using MvvmCross.Core;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
-using Microsoft.UI.Xaml;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Platforms.WinUi.Binding
 {
@@ -49,7 +49,7 @@ namespace MvvmCross.Platforms.WinUi.Binding
         {
             get
             {
-                _bindingCreator = _bindingCreator ?? Mvx.IoCProvider.Resolve<IMvxBindingCreator>();
+                _bindingCreator = _bindingCreator ?? MvxHost.Current?.Services.GetService<IMvxBindingCreator>();
                 return _bindingCreator;
             }
         }
@@ -68,10 +68,11 @@ namespace MvvmCross.Platforms.WinUi.Binding
 
         private static IEnumerable<MvxBindingDescription> ParseBindingDescriptions(string languageText)
         {
-            if (MvxSingleton<IMvxBindingSingletonCache>.Instance == null)
+            var cache = MvxHost.Current?.Services.GetService<IMvxBindingSingletonCache>();
+            if (cache == null)
                 return null;
 
-            return MvxSingleton<IMvxBindingSingletonCache>.Instance.BindingDescriptionParser.LanguageParse(languageText);
+            return cache.BindingDescriptionParser.LanguageParse(languageText);
         }
     }
 }

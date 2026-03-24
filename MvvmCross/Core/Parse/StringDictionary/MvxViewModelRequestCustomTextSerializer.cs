@@ -4,7 +4,8 @@
 #nullable enable
 
 using System.Diagnostics.CodeAnalysis;
-using MvvmCross.Base;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.Exceptions;
 using MvvmCross.ViewModels;
 
@@ -14,7 +15,7 @@ public class MvxViewModelRequestCustomTextSerializer
     : IMvxTextSerializer
 {
     protected Lazy<IMvxViewModelByNameLookup?> ByNameLookup { get; } =
-        new(() => Mvx.IoCProvider?.Resolve<IMvxViewModelByNameLookup>());
+        new(() => MvxHost.Current?.Services.GetService<IMvxViewModelByNameLookup>());
 
     private readonly Lazy<MvxStringDictionaryWriter> _stringDictionaryWriter =
         new(() => new MvxStringDictionaryWriter());

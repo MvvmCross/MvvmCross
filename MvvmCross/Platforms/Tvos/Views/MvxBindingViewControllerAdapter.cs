@@ -3,8 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Tvos.Views.Base;
 
@@ -20,7 +22,7 @@ namespace MvvmCross.Platforms.Tvos.Views
             if (!(eventSource is IMvxTvosView))
                 throw new ArgumentException(nameof(eventSource), $"{nameof(eventSource)} should be a {nameof(IMvxTvosView)}");
 
-            TvosView.BindingContext = Mvx.IoCProvider.Resolve<IMvxBindingContext>();
+            TvosView.BindingContext = MvxHost.Current!.Services.GetRequiredService<IMvxBindingContext>();
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)

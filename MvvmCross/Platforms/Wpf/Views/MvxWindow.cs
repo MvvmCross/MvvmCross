@@ -5,6 +5,7 @@
 using System;
 using System.Windows;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Hosting;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Wpf.Views
@@ -35,7 +36,7 @@ namespace MvvmCross.Platforms.Wpf.Views
                 if (_bindingContext != null)
                     return _bindingContext;
 
-                if (Mvx.IoCProvider != null)
+                if (MvxHost.Current != null)
                     this.CreateBindingContext();
 
                 return _bindingContext;

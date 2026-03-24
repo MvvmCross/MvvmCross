@@ -3,7 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
-using MvvmCross.Base;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Plugin.JsonLocalization
 {
@@ -21,7 +22,7 @@ namespace MvvmCross.Plugin.JsonLocalization
         {
             get
             {
-                _jsonConvert = _jsonConvert ?? Mvx.IoCProvider.Resolve<IMvxJsonConverter>();
+                _jsonConvert = _jsonConvert ?? MvxHost.Current!.Services.GetRequiredService<IMvxJsonConverter>();
                 return _jsonConvert;
             }
         }

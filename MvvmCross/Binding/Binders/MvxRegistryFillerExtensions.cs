@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Base;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Binding.Binders
 {
@@ -17,7 +19,7 @@ namespace MvvmCross.Binding.Binders
             this IMvxNamedInstanceRegistry<T> registry, IEnumerable<Assembly> assemblies, IEnumerable<Type> types)
             where T : notnull
         {
-            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = MvxHost.Current!.Services.GetRequiredService<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, assemblies);
             registry.Fill(filler, types);
         }
@@ -29,7 +31,7 @@ namespace MvvmCross.Binding.Binders
             if (assemblies == null)
                 return;
 
-            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = MvxHost.Current!.Services.GetRequiredService<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, assemblies);
         }
 
@@ -52,7 +54,7 @@ namespace MvvmCross.Binding.Binders
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, Assembly assembly)
             where T : notnull
         {
-            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = MvxHost.Current!.Services.GetRequiredService<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, assembly);
         }
 
@@ -71,7 +73,7 @@ namespace MvvmCross.Binding.Binders
             if (types == null)
                 return;
 
-            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = MvxHost.Current!.Services.GetRequiredService<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, types);
         }
 
@@ -103,7 +105,7 @@ namespace MvvmCross.Binding.Binders
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.PublicFields)] Type type)
             where T : notnull
         {
-            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = MvxHost.Current!.Services.GetRequiredService<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, type);
         }
     }

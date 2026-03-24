@@ -5,6 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Uap.Views.Suspension;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
@@ -99,7 +101,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
             if (_reqData != string.Empty)
             {
-                var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelLoader>();
+                var viewModelLoader = MvxHost.Current!.Services.GetRequiredService<IMvxWindowsViewModelLoader>();
                 ViewModel = viewModelLoader.Load(e.Parameter.ToString(), LoadStateBundle(e));
                 ViewModel?.ViewCreated();
             }
@@ -115,7 +117,7 @@ namespace MvvmCross.Platforms.Uap.Views
             var bundle = this.CreateSaveStateBundle();
             SaveStateBundle(e, bundle);
 
-            var translator = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelRequestTranslator>();
+            var translator = MvxHost.Current!.Services.GetRequiredService<IMvxWindowsViewModelRequestTranslator>();
 
             if (e.NavigationMode == NavigationMode.Back)
             {
@@ -147,7 +149,7 @@ namespace MvvmCross.Platforms.Uap.Views
         {
             get
             {
-                _suspensionManager = _suspensionManager ?? Mvx.IoCProvider.Resolve<IMvxSuspensionManager>();
+                _suspensionManager = _suspensionManager ?? MvxHost.Current!.Services.GetRequiredService<IMvxSuspensionManager>();
                 return _suspensionManager;
             }
         }

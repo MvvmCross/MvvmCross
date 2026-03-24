@@ -4,7 +4,9 @@
 #nullable enable
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.Presenters.Hints;
@@ -16,10 +18,10 @@ namespace MvvmCross.Presenters;
 public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttributeViewPresenter
 {
     private readonly Lazy<IMvxViewModelTypeFinder?> _viewModelTypeFinder =
-        new(() => Mvx.IoCProvider?.Resolve<IMvxViewModelTypeFinder>());
+        new(() => MvxHost.Current?.Services.GetService<IMvxViewModelTypeFinder>());
 
     private readonly Lazy<IMvxViewsContainer?> _viewsContainer =
-        new(() => Mvx.IoCProvider?.Resolve<IMvxViewsContainer>());
+        new(() => MvxHost.Current?.Services.GetService<IMvxViewsContainer>());
 
     private IDictionary<Type, MvxPresentationAttributeAction>? _attributeTypesActionsDictionary;
 

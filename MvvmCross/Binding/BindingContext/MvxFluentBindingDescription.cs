@@ -6,12 +6,14 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.ValueConverters;
 using MvvmCross.Converters;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Binding.BindingContext
 {
@@ -96,7 +98,7 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget, TSource> ByCombining<TValueCombiner>(params Expression<Func<TSource, object>>[] properties)
             where TValueCombiner : IMvxValueCombiner
         {
-            var filler = Mvx.IoCProvider.Resolve<IMvxValueCombinerRegistryFiller>();
+            var filler = MvxHost.Current!.Services.GetRequiredService<IMvxValueCombinerRegistryFiller>();
             var combinerName = filler.FindName(typeof(TValueCombiner));
 
             return ByCombining(combinerName, properties);
@@ -105,7 +107,7 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget, TSource> ByCombining<TValueCombiner>(params string[] properties)
             where TValueCombiner : IMvxValueCombiner
         {
-            var filler = Mvx.IoCProvider.Resolve<IMvxValueCombinerRegistryFiller>();
+            var filler = MvxHost.Current!.Services.GetRequiredService<IMvxValueCombinerRegistryFiller>();
             var combinerName = filler.FindName(typeof(TValueCombiner));
 
             return ByCombining(combinerName, properties);
@@ -134,7 +136,7 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion<TValueConverter>(object converterParameter = null)
             where TValueConverter : IMvxValueConverter
         {
-            var filler = Mvx.IoCProvider.Resolve<IMvxValueConverterRegistryFiller>();
+            var filler = MvxHost.Current!.Services.GetRequiredService<IMvxValueConverterRegistryFiller>();
             var converterName = filler.FindName(typeof(TValueConverter));
 
             return WithConversion(converterName, converterParameter);
@@ -269,7 +271,7 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget> WithConversion<TValueConverter>(object converterParameter = null)
             where TValueConverter : IMvxValueConverter
         {
-            var filler = Mvx.IoCProvider.Resolve<IMvxValueConverterRegistryFiller>();
+            var filler = MvxHost.Current!.Services.GetRequiredService<IMvxValueConverterRegistryFiller>();
             var converterName = filler.FindName(typeof(TValueConverter));
 
             return WithConversion(converterName, converterParameter);

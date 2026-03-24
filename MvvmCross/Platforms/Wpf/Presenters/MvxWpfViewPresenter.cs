@@ -8,7 +8,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Wpf.Presenters.Attributes;
 using MvvmCross.Platforms.Wpf.Views;
@@ -27,7 +29,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             get
             {
                 if (_wpfViewLoader == null)
-                    _wpfViewLoader = Mvx.IoCProvider.Resolve<IMvxWpfViewLoader>();
+                    _wpfViewLoader = MvxHost.Current?.Services.GetRequiredService<IMvxWpfViewLoader>();
                 return _wpfViewLoader;
             }
         }

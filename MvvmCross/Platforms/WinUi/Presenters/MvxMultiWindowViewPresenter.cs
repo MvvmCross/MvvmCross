@@ -1,12 +1,13 @@
 #nullable enable
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
-using MvvmCross.Base;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Localization;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -71,7 +72,7 @@ public class MvxMultiWindowViewPresenter
     /// </summary>
     public IMvxViewModelLoader? ViewModelLoader
     {
-        get => _viewModelLoader ??= Mvx.IoCProvider?.Resolve<IMvxViewModelLoader>();
+        get => _viewModelLoader ??= MvxHost.Current?.Services.GetService<IMvxViewModelLoader>();
         set => _viewModelLoader = value;
     }
 
@@ -206,7 +207,7 @@ public class MvxMultiWindowViewPresenter
             return;
         }
 
-        var navigationService = Mvx.IoCProvider?.Resolve<IMvxNavigationService>();
+        var navigationService = MvxHost.Current?.Services.GetService<IMvxNavigationService>();
         if (navigationService != null && currentView.ViewModel != null)
         {
             backRequestedEventArgs.Handled = await navigationService.Close(currentView.ViewModel);
@@ -290,7 +291,7 @@ public class MvxMultiWindowViewPresenter
     protected virtual Task<bool> CloseRegionView(IMvxViewModel viewModel, MvxRegionPresentationAttribute attribute)
     {
         var windowInformation = GetWindowInformation(viewModel);
-        var viewFinder = Mvx.IoCProvider?.Resolve<IMvxViewsContainer>();
+        var viewFinder = MvxHost.Current?.Services.GetService<IMvxViewsContainer>();
         if (viewFinder == null)
         {
             return Task.FromResult(false);
@@ -352,7 +353,7 @@ public class MvxMultiWindowViewPresenter
     /// <returns>A text representation of the request.</returns>
     protected virtual string GetRequestText(MvxViewModelRequest request)
     {
-        var requestTranslator = Mvx.IoCProvider?.Resolve<IMvxWindowsViewModelRequestTranslator>();
+        var requestTranslator = MvxHost.Current?.Services.GetService<IMvxWindowsViewModelRequestTranslator>();
         if (requestTranslator == null)
         {
             return "Request translator is not found";
@@ -651,7 +652,7 @@ public class MvxMultiWindowViewPresenter
     protected virtual async Task<bool> ShowNewWindowAsync(MvxViewModelRequest request, MvxNewWindowPresentationAttribute attribute)
     {
         var newWindow = new Window();
-        var viewsContainer = Mvx.IoCProvider!.Resolve<IMvxViewsContainer>();
+        var viewsContainer = MvxHost.Current!.Services.GetRequiredService<IMvxViewsContainer>();
         var viewType = viewsContainer?.GetViewType(request.ViewModelType);
         if (viewType == null)
         {

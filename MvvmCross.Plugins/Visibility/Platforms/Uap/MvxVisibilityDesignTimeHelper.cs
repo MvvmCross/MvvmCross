@@ -12,14 +12,8 @@ namespace MvvmCross.Plugin.Visibility.Platforms.Uap
     {
         public MvxVisibilityDesignTimeHelper()
         {
-            if (!IsInDesignTool)
-                return;
-
-            if (Mvx.IoCProvider.CanResolve<IMvxNativeVisibility>())
-                return;
-
-            var forceVisibilityLoaded = new Plugin();
-            forceVisibilityLoaded.Load();
+            // Design-time plugin loading is no longer needed.
+            // Register IMvxNativeVisibility at startup with services.AddMvvmCrossVisibility().
         }
     }
 }

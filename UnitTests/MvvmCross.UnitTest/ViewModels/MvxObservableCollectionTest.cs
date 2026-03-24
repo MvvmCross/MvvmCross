@@ -24,7 +24,7 @@ namespace MvvmCross.UnitTest.ViewModels
             _fixture.Ioc.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(new DummyDispatcher());
         }
 
-        public class DummyDispatcher : MvxSingleton<IMvxMainThreadAsyncDispatcher>, IMvxMainThreadAsyncDispatcher
+        public class DummyDispatcher : IMvxMainThreadAsyncDispatcher
         {
             public bool IsOnMainThread => true;
 

@@ -4,7 +4,8 @@
 
 using System.Collections.Generic;
 using System.IO;
-using MvvmCross.Base;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Plugin.ResourceLoader
 {
@@ -35,7 +36,7 @@ namespace MvvmCross.Plugin.ResourceLoader
         public TResource Load(string namespaceKey, string typeKey, string entryKey)
         {
             var streamLocation = GetStreamLocation(namespaceKey, typeKey, entryKey);
-            var resourceLoader = Mvx.IoCProvider.Resolve<IMvxResourceLoader>();
+            var resourceLoader = MvxHost.Current!.Services.GetRequiredService<IMvxResourceLoader>();
             TResource resource = default(TResource);
             resourceLoader.GetResourceStream(streamLocation, (stream) =>
                 {
