@@ -109,11 +109,6 @@ namespace $YourNameSpace$
             command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
         }
 
-        public void Include(MvvmCross.IoC.MvxPropertyInjector injector)
-        {
-            injector = new MvvmCross.IoC.MvxPropertyInjector();
-        }
-
         public void Include(System.ComponentModel.INotifyPropertyChanged changed)
         {
             changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
