@@ -2,21 +2,48 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Diagnostics.CodeAnalysis;
 using Android.Runtime;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.DependencyInjection;
+using MvvmCross.Platforms.Android.Hosting;
 using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Plugin.Color.Platforms.Android;
+using MvvmCross.Plugin.Json;
+using MvvmCross.Plugin.Visibility.Platforms.Android;
 using Playground.Core;
+using Serilog;
+using Serilog.Extensions.Logging;
 
 namespace Playground.Droid
 {
     [Application]
-    [RequiresUnreferencedCode("Uses MvvmCross reflection based plugin loading")]
-#pragma warning disable IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
-    public class MainApplication : MvxAndroidApplication<Setup, App>
-#pragma warning restore IL2026 // Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code
+    public class MainApplication : MvxAndroidApplication
     {
-        public MainApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        public MainApplication(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer) { }
+
+        public override void OnCreate()
         {
+            base.OnCreate();
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .WriteTo.Async(a => a.AndroidLog())
+                .WriteTo.Async(a => a.Trace())
+                .CreateLogger();
+
+            MvxAndroidHostBuilder.CreateBuilder(this)
+                .ConfigureServices(services =>
+                {
+                    services.AddLogging(l => l.AddSerilog());
+                    services.AddMvvmCross<PlaygroundStartup>(opts =>
+                        opts.StartWith<Playground.Core.ViewModels.RootViewModel>());
+                    services.AddMvvmCrossVisibility();
+                    services.AddMvvmCrossColor();
+                    services.AddMvvmCrossJson();
+                })
+                .Build()
+                .Start();
         }
     }
 }
