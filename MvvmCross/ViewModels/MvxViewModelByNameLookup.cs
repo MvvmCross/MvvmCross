@@ -4,7 +4,6 @@
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using MvvmCross.IoC;
 
 namespace MvvmCross.ViewModels
 {

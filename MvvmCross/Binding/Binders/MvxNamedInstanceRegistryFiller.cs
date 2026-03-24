@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Binding.Binders
 {

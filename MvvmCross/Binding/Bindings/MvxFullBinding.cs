@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Converters;
-using MvvmCross.IoC;
 
 [assembly: InternalsVisibleTo("MvvmCross.UnitTest")]
 

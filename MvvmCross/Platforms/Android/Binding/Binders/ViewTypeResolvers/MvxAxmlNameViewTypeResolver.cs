@@ -8,7 +8,6 @@ using System.Text;
 using Android.Views;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {

@@ -4,7 +4,6 @@
 
 using System;
 using Android.Views;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {

@@ -5,7 +5,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Android.Views;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {

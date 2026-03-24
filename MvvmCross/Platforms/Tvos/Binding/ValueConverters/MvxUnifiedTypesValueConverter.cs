@@ -8,7 +8,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using MvvmCross.Converters;
-using MvvmCross.IoC;
 using ObjCRuntime;
 
 namespace MvvmCross.Platforms.Tvos.Binding.ValueConverters
