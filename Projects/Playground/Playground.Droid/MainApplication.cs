@@ -5,6 +5,7 @@
 using System.Reflection;
 using Android.Runtime;
 using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.DependencyInjection;
 using MvvmCross.Platforms.Android.Hosting;
 using MvvmCross.Platforms.Android.Views;
@@ -12,6 +13,8 @@ using MvvmCross.Plugin.Color.Platforms.Android;
 using MvvmCross.Plugin.Json;
 using MvvmCross.Plugin.Visibility.Platforms.Android;
 using Playground.Core;
+using Playground.Droid.Bindings;
+using Playground.Droid.Controls;
 using Serilog;
 using Serilog.Extensions.Logging;
 
@@ -34,6 +37,10 @@ namespace Playground.Droid
                 .CreateLogger();
 
             MvxAndroidHostBuilder.CreateBuilder(this)
+                .ConfigureTargetBindings(registry =>
+                    registry.RegisterCustomBindingFactory<BinaryEdit>(
+                        "MyCount",
+                        view => new BinaryEditTargetBinding(view)))
                 .ConfigureServices(services =>
                 {
                     services.AddLogging(l => l.AddSerilog());

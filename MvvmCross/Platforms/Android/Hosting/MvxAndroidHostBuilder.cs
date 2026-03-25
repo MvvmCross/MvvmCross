@@ -8,6 +8,7 @@ using Android.App;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MvvmCross.Base;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
@@ -29,6 +30,14 @@ namespace MvvmCross.Platforms.Android.Hosting;
 /// </summary>
 public class MvxAndroidHostBuilder : MvxHostBuilder
 {
+    private Action<IMvxValueConverterRegistry> _fillValueConverters = _ => { };
+    private Action<IMvxValueCombinerRegistry> _fillValueCombiners = _ => { };
+    private Action<IMvxTargetBindingFactoryRegistry> _fillTargetFactories = _ => { };
+    private Action<IMvxBindingNameRegistry> _fillBindingNames = _ => { };
+    private Action<IMvxViewTypeRegistry> _fillViewTypes = _ => { };
+    private Action<IMvxAxmlNameViewTypeResolver> _fillAxmlViewTypeResolver = _ => { };
+    private Action<IMvxNamespaceListViewTypeResolver> _fillNamespaceListViewTypeResolver = _ => { };
+
     /// <summary>
     /// Creates an <see cref="MvxAndroidHostBuilder"/> for the given Android <see cref="Application"/>.
     /// The application instance is registered as a singleton so it can be resolved by services that
@@ -38,6 +47,61 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
     {
         ArgumentNullException.ThrowIfNull(application);
         return new MvxAndroidHostBuilder(application);
+    }
+
+    /// <summary>
+    /// Registers custom target binding factories (equivalent to overriding
+    /// <c>FillTargetFactories</c> in the old <c>MvxAndroidSetup</c>).
+    /// </summary>
+    public MvxAndroidHostBuilder ConfigureTargetBindings(Action<IMvxTargetBindingFactoryRegistry> configure)
+    {
+        var previous = _fillTargetFactories;
+        _fillTargetFactories = registry => { previous(registry); configure(registry); };
+        return this;
+    }
+
+    /// <summary>
+    /// Registers additional value converters (equivalent to overriding
+    /// <c>FillValueConverters</c> in the old <c>MvxAndroidSetup</c>).
+    /// </summary>
+    public MvxAndroidHostBuilder ConfigureValueConverters(Action<IMvxValueConverterRegistry> configure)
+    {
+        var previous = _fillValueConverters;
+        _fillValueConverters = registry => { previous(registry); configure(registry); };
+        return this;
+    }
+
+    /// <summary>
+    /// Registers additional value combiners (equivalent to overriding
+    /// <c>FillValueCombiners</c> in the old <c>MvxAndroidSetup</c>).
+    /// </summary>
+    public MvxAndroidHostBuilder ConfigureValueCombiners(Action<IMvxValueCombinerRegistry> configure)
+    {
+        var previous = _fillValueCombiners;
+        _fillValueCombiners = registry => { previous(registry); configure(registry); };
+        return this;
+    }
+
+    /// <summary>
+    /// Registers additional default binding names (equivalent to overriding
+    /// <c>FillDefaultBindingNames</c> in the old <c>MvxAndroidSetup</c>).
+    /// </summary>
+    public MvxAndroidHostBuilder ConfigureBindingNames(Action<IMvxBindingNameRegistry> configure)
+    {
+        var previous = _fillBindingNames;
+        _fillBindingNames = registry => { previous(registry); configure(registry); };
+        return this;
+    }
+
+    /// <summary>
+    /// Registers additional Android view types for the XML inflater
+    /// (equivalent to overriding <c>FillViewTypes</c> in the old <c>MvxAndroidSetup</c>).
+    /// </summary>
+    public MvxAndroidHostBuilder ConfigureViewTypes(Action<IMvxViewTypeRegistry> configure)
+    {
+        var previous = _fillViewTypes;
+        _fillViewTypes = registry => { previous(registry); configure(registry); };
+        return this;
     }
 
     private MvxAndroidHostBuilder(Application application)
@@ -116,19 +180,24 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
             sp => sp.GetRequiredService<MvxAndroidViewsContainer>());
         Services.TryAddSingleton<IMvxAndroidViewModelLoader>(
             sp => sp.GetRequiredService<MvxAndroidViewsContainer>());
+    }
 
-        // Register all binding services (value converters, binders, context stack, view type resolvers, etc.)
-        // This is equivalent to what MvxAndroidSetup used to call via MvxAndroidBindingBuilder.
+    /// <inheritdoc/>
+    public override MvxHost Build()
+    {
+        // Binding registrations are deferred to Build() so that Configure* calls made between
+        // CreateBuilder() and Build() are included (e.g. ConfigureTargetBindings).
         var bindingBuilder = new MvxAndroidBindingBuilder(
-            fillValueConverters: _ => { },
-            fillValueCombiners: _ => { },
-            fillTargetFactories: _ => { },
-            fillBindingNames: _ => { },
-            fillViewTypes: _ => { },
-            fillAxmlViewTypeResolver: _ => { },
-            fillNamespaceListViewTypeResolver: _ => { });
+            fillValueConverters: _fillValueConverters,
+            fillValueCombiners: _fillValueCombiners,
+            fillTargetFactories: _fillTargetFactories,
+            fillBindingNames: _fillBindingNames,
+            fillViewTypes: _fillViewTypes,
+            fillAxmlViewTypeResolver: _fillAxmlViewTypeResolver,
+            fillNamespaceListViewTypeResolver: _fillNamespaceListViewTypeResolver);
 #pragma warning disable IL2026 // assembly-scanning trimming warning — acceptable at setup time
         bindingBuilder.DoRegistration(Services);
 #pragma warning restore IL2026
+        return base.Build();
     }
 }
