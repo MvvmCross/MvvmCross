@@ -4,6 +4,7 @@
 
 using System;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Hosting;
 using MvvmCross.ViewModels;
@@ -56,7 +57,9 @@ namespace MvvmCross.Platforms.Wpf.Views
         {
             if (this == Application.Current.MainWindow)
             {
-                (Application.Current as MvxApplication).ApplicationInitialized();
+                var appStart = MvxHost.Current?.Services.GetService<IMvxAppStart>();
+                if (appStart != null && !appStart.IsStarted)
+                    appStart.Start();
             }
         }
 

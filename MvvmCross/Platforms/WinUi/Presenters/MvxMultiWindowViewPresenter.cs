@@ -6,6 +6,7 @@ using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
+using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Hosting;
 using MvvmCross.Localization;

@@ -4,6 +4,7 @@
 
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.UI.Xaml;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
