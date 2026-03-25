@@ -90,6 +90,12 @@ public class MvxHost
     }
 
     /// <summary>
+    /// Sets this instance as <see cref="Current"/>. Called by <see cref="Start"/>; exposed
+    /// as a protected helper for platform-specific subclasses that override <see cref="Start"/>.
+    /// </summary>
+    protected void SetAsCurrent() => _current = this;
+
+    /// <summary>
     /// Sets a pre-built service provider as the current host. For use in unit tests only.
     /// </summary>
     public static void InitializeForTesting(IServiceProvider serviceProvider)

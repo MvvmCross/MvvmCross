@@ -10,6 +10,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
+using MvvmCross.DependencyInjection;
 using MvvmCross.Hosting;
 using MvvmCross.Platforms.Ios.Binding;
 using MvvmCross.Platforms.Ios.Presenters;
@@ -133,6 +134,35 @@ public class MvxIosHostBuilder : MvxHostBuilder
         bindingBuilder.DoRegistration(Services);
 #pragma warning restore IL2026
         return base.Build();
+    }
+
+    /// <inheritdoc/>
+    protected override MvxHost CreateHost(IServiceProvider serviceProvider)
+        => new MvxIosHost(serviceProvider);
+
+    /// <summary>
+    /// iOS-specific host that triggers first ViewModel navigation from <see cref="Start"/>
+    /// since there is no platform start screen equivalent (unlike Android's MvxStartActivity).
+    /// </summary>
+    private sealed class MvxIosHost : MvxHost
+    {
+        internal MvxIosHost(IServiceProvider services) : base(services) { }
+
+        public override async Task Start()
+        {
+            // Set Current first, then run OnStartup for service configuration.
+            // Unlike Android (which defers navigation to MvxStartActivity), iOS triggers
+            // first navigation here where the UIWindow and UIScene are already available.
+            SetAsCurrent();
+
+            var startup = Services.GetService<IMvxStartup>();
+            if (startup is not null)
+                await startup.OnStartup(Services).ConfigureAwait(false);
+
+            var appStart = Services.GetService<IMvxAppStart>();
+            if (appStart is not null && !appStart.IsStarted)
+                await appStart.StartAsync(null).ConfigureAwait(false);
+        }
     }
 }
 
