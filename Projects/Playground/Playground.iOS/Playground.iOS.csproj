@@ -28,4 +28,9 @@
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
   </ItemGroup>
+
+  <PropertyGroup Condition=" $(Configuration) == 'Debug' ">
+    <!-- needed otherwise debugger detaches immediately on launch -->
+    <UseInterpreter>true</UseInterpreter>
+  </PropertyGroup>
 </Project>
