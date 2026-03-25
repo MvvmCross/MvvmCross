@@ -6,10 +6,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MvvmCross.Base;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.Combiners;
-using MvvmCross.Converters;
 using MvvmCross.DependencyInjection;
 using MvvmCross.Hosting;
 using MvvmCross.Platforms.Ios.Binding;
@@ -23,15 +19,10 @@ using UIKit;
 namespace MvvmCross.Platforms.Ios.Hosting;
 
 /// <summary>
-/// MvvmCross host builder for iOS/tvOS/MacCatalyst.
+/// MvvmCross host builder for iOS/MacCatalyst.
 /// </summary>
 public class MvxIosHostBuilder : MvxHostBuilder
 {
-    private Action<IMvxTargetBindingFactoryRegistry> _fillTargetFactories = _ => { };
-    private Action<IMvxValueConverterRegistry> _fillValueConverters = _ => { };
-    private Action<IMvxValueCombinerRegistry> _fillValueCombiners = _ => { };
-    private Action<IMvxBindingNameRegistry> _fillBindingNames = _ => { };
-
     /// <summary>
     /// Creates an <see cref="MvxIosHostBuilder"/> with the given <see cref="UIWindow"/>.
     /// The window is registered as a singleton so the view presenter can resolve it.
@@ -40,47 +31,6 @@ public class MvxIosHostBuilder : MvxHostBuilder
     {
         ArgumentNullException.ThrowIfNull(window);
         return new MvxIosHostBuilder(window);
-    }
-
-    /// <summary>
-    /// Registers custom target binding factories (equivalent to overriding
-    /// <c>FillTargetFactories</c> in the old <c>MvxIosSetup</c>).
-    /// </summary>
-    public MvxIosHostBuilder ConfigureTargetBindings(Action<IMvxTargetBindingFactoryRegistry> configure)
-    {
-        var previous = _fillTargetFactories;
-        _fillTargetFactories = registry => { previous(registry); configure(registry); };
-        return this;
-    }
-
-    /// <summary>
-    /// Registers additional value converters.
-    /// </summary>
-    public MvxIosHostBuilder ConfigureValueConverters(Action<IMvxValueConverterRegistry> configure)
-    {
-        var previous = _fillValueConverters;
-        _fillValueConverters = registry => { previous(registry); configure(registry); };
-        return this;
-    }
-
-    /// <summary>
-    /// Registers additional value combiners.
-    /// </summary>
-    public MvxIosHostBuilder ConfigureValueCombiners(Action<IMvxValueCombinerRegistry> configure)
-    {
-        var previous = _fillValueCombiners;
-        _fillValueCombiners = registry => { previous(registry); configure(registry); };
-        return this;
-    }
-
-    /// <summary>
-    /// Registers additional default binding names.
-    /// </summary>
-    public MvxIosHostBuilder ConfigureBindingNames(Action<IMvxBindingNameRegistry> configure)
-    {
-        var previous = _fillBindingNames;
-        _fillBindingNames = registry => { previous(registry); configure(registry); };
-        return this;
     }
 
     private MvxIosHostBuilder(UIWindow window)
@@ -126,10 +76,10 @@ public class MvxIosHostBuilder : MvxHostBuilder
     {
         // Binding registrations are deferred to Build() so that Configure* calls are included.
         var bindingBuilder = new MvxIosBindingBuilder(
-            fillRegistryAction: _fillTargetFactories,
-            fillValueConvertersAction: _fillValueConverters,
-            fillValueCombinersAction: _fillValueCombiners,
-            fillBindingNamesAction: _fillBindingNames);
+            fillRegistryAction: FillTargetFactories,
+            fillValueConvertersAction: FillValueConverters,
+            fillValueCombinersAction: FillValueCombiners,
+            fillBindingNamesAction: FillBindingNames);
 #pragma warning disable IL2026
         bindingBuilder.DoRegistration(Services);
 #pragma warning restore IL2026
@@ -165,4 +115,3 @@ public class MvxIosHostBuilder : MvxHostBuilder
         }
     }
 }
-

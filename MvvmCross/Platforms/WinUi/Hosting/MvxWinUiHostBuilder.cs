@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.UI.Xaml;
 using MvvmCross.Hosting;
+using MvvmCross.Platforms.WinUi.Binding;
 
 namespace MvvmCross.Platforms.WinUi.Hosting;
 
@@ -27,5 +28,19 @@ public class MvxWinUiHostBuilder : MvxHostBuilder
     private MvxWinUiHostBuilder(Window window)
     {
         Services.TryAddSingleton(window);
+    }
+
+    /// <inheritdoc/>
+    public override MvxHost Build()
+    {
+        var bindingBuilder = new MvxWindowsBindingBuilder(
+            fillTargetFactories: FillTargetFactories,
+            fillBindingNames: FillBindingNames,
+            fillValueConverters: FillValueConverters,
+            fillValueCombiners: FillValueCombiners);
+#pragma warning disable IL2026
+        bindingBuilder.DoRegistration(Services);
+#pragma warning restore IL2026
+        return base.Build();
     }
 }

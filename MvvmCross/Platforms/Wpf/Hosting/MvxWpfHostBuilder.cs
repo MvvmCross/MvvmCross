@@ -6,6 +6,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MvvmCross.Hosting;
+using MvvmCross.Platforms.Wpf.Binding;
 using System.Windows;
 
 namespace MvvmCross.Platforms.Wpf.Hosting;
@@ -28,5 +29,19 @@ public class MvxWpfHostBuilder : MvxHostBuilder
     private MvxWpfHostBuilder(Window mainWindow)
     {
         Services.TryAddSingleton(mainWindow);
+    }
+
+    /// <inheritdoc/>
+    public override MvxHost Build()
+    {
+        var bindingBuilder = new MvxWindowsBindingBuilder(
+            fillTargetFactories: FillTargetFactories,
+            fillBindingNames: FillBindingNames,
+            fillValueConverters: FillValueConverters,
+            fillValueCombiners: FillValueCombiners);
+#pragma warning disable IL2026
+        bindingBuilder.DoRegistration(Services);
+#pragma warning restore IL2026
+        return base.Build();
     }
 }

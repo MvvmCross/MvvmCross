@@ -4,6 +4,10 @@
 #nullable enable
 
 using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Converters;
 using MvvmCross.DependencyInjection;
 
 namespace MvvmCross.Hosting;
@@ -22,6 +26,12 @@ public abstract class MvxHostBuilder
     /// </summary>
     public IServiceCollection Services { get; } = new ServiceCollection();
 
+    // Binding fill callbacks — populated by Configure* methods, consumed in Build().
+    protected Action<IMvxTargetBindingFactoryRegistry> FillTargetFactories { get; private set; } = _ => { };
+    protected Action<IMvxValueConverterRegistry> FillValueConverters { get; private set; } = _ => { };
+    protected Action<IMvxValueCombinerRegistry> FillValueCombiners { get; private set; } = _ => { };
+    protected Action<IMvxBindingNameRegistry> FillBindingNames { get; private set; } = _ => { };
+
     /// <summary>
     /// Adds services to the container using the provided callback.
     /// </summary>
@@ -29,6 +39,54 @@ public abstract class MvxHostBuilder
     {
         ArgumentNullException.ThrowIfNull(configure);
         configure(Services);
+        return this;
+    }
+
+    /// <summary>
+    /// Registers custom target binding factories
+    /// (equivalent to overriding <c>FillTargetFactories</c> in the old setup classes).
+    /// </summary>
+    public MvxHostBuilder ConfigureTargetBindings(Action<IMvxTargetBindingFactoryRegistry> configure)
+    {
+        ArgumentNullException.ThrowIfNull(configure);
+        var previous = FillTargetFactories;
+        FillTargetFactories = registry => { previous(registry); configure(registry); };
+        return this;
+    }
+
+    /// <summary>
+    /// Registers additional value converters
+    /// (equivalent to overriding <c>FillValueConverters</c> in the old setup classes).
+    /// </summary>
+    public MvxHostBuilder ConfigureValueConverters(Action<IMvxValueConverterRegistry> configure)
+    {
+        ArgumentNullException.ThrowIfNull(configure);
+        var previous = FillValueConverters;
+        FillValueConverters = registry => { previous(registry); configure(registry); };
+        return this;
+    }
+
+    /// <summary>
+    /// Registers additional value combiners
+    /// (equivalent to overriding <c>FillValueCombiners</c> in the old setup classes).
+    /// </summary>
+    public MvxHostBuilder ConfigureValueCombiners(Action<IMvxValueCombinerRegistry> configure)
+    {
+        ArgumentNullException.ThrowIfNull(configure);
+        var previous = FillValueCombiners;
+        FillValueCombiners = registry => { previous(registry); configure(registry); };
+        return this;
+    }
+
+    /// <summary>
+    /// Registers additional default binding names
+    /// (equivalent to overriding <c>FillDefaultBindingNames</c> in the old setup classes).
+    /// </summary>
+    public MvxHostBuilder ConfigureBindingNames(Action<IMvxBindingNameRegistry> configure)
+    {
+        ArgumentNullException.ThrowIfNull(configure);
+        var previous = FillBindingNames;
+        FillBindingNames = registry => { previous(registry); configure(registry); };
         return this;
     }
 
@@ -49,3 +107,4 @@ public abstract class MvxHostBuilder
     protected virtual MvxHost CreateHost(IServiceProvider serviceProvider)
         => new MvxHost(serviceProvider);
 }
+

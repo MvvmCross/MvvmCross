@@ -8,10 +8,6 @@ using Android.App;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MvvmCross.Base;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.Combiners;
-using MvvmCross.Converters;
 using MvvmCross.Hosting;
 using MvvmCross.Platforms.Android.Binding;
 using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
@@ -30,10 +26,7 @@ namespace MvvmCross.Platforms.Android.Hosting;
 /// </summary>
 public class MvxAndroidHostBuilder : MvxHostBuilder
 {
-    private Action<IMvxValueConverterRegistry> _fillValueConverters = _ => { };
-    private Action<IMvxValueCombinerRegistry> _fillValueCombiners = _ => { };
-    private Action<IMvxTargetBindingFactoryRegistry> _fillTargetFactories = _ => { };
-    private Action<IMvxBindingNameRegistry> _fillBindingNames = _ => { };
+    // Android-specific fill callbacks (base class owns the common ones)
     private Action<IMvxViewTypeRegistry> _fillViewTypes = _ => { };
     private Action<IMvxAxmlNameViewTypeResolver> _fillAxmlViewTypeResolver = _ => { };
     private Action<IMvxNamespaceListViewTypeResolver> _fillNamespaceListViewTypeResolver = _ => { };
@@ -50,55 +43,12 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
     }
 
     /// <summary>
-    /// Registers custom target binding factories (equivalent to overriding
-    /// <c>FillTargetFactories</c> in the old <c>MvxAndroidSetup</c>).
-    /// </summary>
-    public MvxAndroidHostBuilder ConfigureTargetBindings(Action<IMvxTargetBindingFactoryRegistry> configure)
-    {
-        var previous = _fillTargetFactories;
-        _fillTargetFactories = registry => { previous(registry); configure(registry); };
-        return this;
-    }
-
-    /// <summary>
-    /// Registers additional value converters (equivalent to overriding
-    /// <c>FillValueConverters</c> in the old <c>MvxAndroidSetup</c>).
-    /// </summary>
-    public MvxAndroidHostBuilder ConfigureValueConverters(Action<IMvxValueConverterRegistry> configure)
-    {
-        var previous = _fillValueConverters;
-        _fillValueConverters = registry => { previous(registry); configure(registry); };
-        return this;
-    }
-
-    /// <summary>
-    /// Registers additional value combiners (equivalent to overriding
-    /// <c>FillValueCombiners</c> in the old <c>MvxAndroidSetup</c>).
-    /// </summary>
-    public MvxAndroidHostBuilder ConfigureValueCombiners(Action<IMvxValueCombinerRegistry> configure)
-    {
-        var previous = _fillValueCombiners;
-        _fillValueCombiners = registry => { previous(registry); configure(registry); };
-        return this;
-    }
-
-    /// <summary>
-    /// Registers additional default binding names (equivalent to overriding
-    /// <c>FillDefaultBindingNames</c> in the old <c>MvxAndroidSetup</c>).
-    /// </summary>
-    public MvxAndroidHostBuilder ConfigureBindingNames(Action<IMvxBindingNameRegistry> configure)
-    {
-        var previous = _fillBindingNames;
-        _fillBindingNames = registry => { previous(registry); configure(registry); };
-        return this;
-    }
-
-    /// <summary>
     /// Registers additional Android view types for the XML inflater
     /// (equivalent to overriding <c>FillViewTypes</c> in the old <c>MvxAndroidSetup</c>).
     /// </summary>
     public MvxAndroidHostBuilder ConfigureViewTypes(Action<IMvxViewTypeRegistry> configure)
     {
+        ArgumentNullException.ThrowIfNull(configure);
         var previous = _fillViewTypes;
         _fillViewTypes = registry => { previous(registry); configure(registry); };
         return this;
@@ -188,10 +138,10 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
         // Binding registrations are deferred to Build() so that Configure* calls made between
         // CreateBuilder() and Build() are included (e.g. ConfigureTargetBindings).
         var bindingBuilder = new MvxAndroidBindingBuilder(
-            fillValueConverters: _fillValueConverters,
-            fillValueCombiners: _fillValueCombiners,
-            fillTargetFactories: _fillTargetFactories,
-            fillBindingNames: _fillBindingNames,
+            fillValueConverters: FillValueConverters,
+            fillValueCombiners: FillValueCombiners,
+            fillTargetFactories: FillTargetFactories,
+            fillBindingNames: FillBindingNames,
             fillViewTypes: _fillViewTypes,
             fillAxmlViewTypeResolver: _fillAxmlViewTypeResolver,
             fillNamespaceListViewTypeResolver: _fillNamespaceListViewTypeResolver);

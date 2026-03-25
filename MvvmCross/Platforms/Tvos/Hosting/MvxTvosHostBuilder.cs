@@ -6,6 +6,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MvvmCross.Hosting;
+using MvvmCross.Platforms.Tvos.Binding;
 using UIKit;
 
 namespace MvvmCross.Platforms.Tvos.Hosting;
@@ -27,5 +28,19 @@ public class MvxTvosHostBuilder : MvxHostBuilder
     private MvxTvosHostBuilder(UIWindow window)
     {
         Services.TryAddSingleton(window);
+    }
+
+    /// <inheritdoc/>
+    public override MvxHost Build()
+    {
+        var bindingBuilder = new MvxTvosBindingBuilder(
+            fillRegistryAction: FillTargetFactories,
+            fillValueConvertersAction: FillValueConverters,
+            fillBindingNamesAction: FillBindingNames,
+            fillValueCombinersAction: FillValueCombiners);
+#pragma warning disable IL2026
+        bindingBuilder.DoRegistration(Services);
+#pragma warning restore IL2026
+        return base.Build();
     }
 }
