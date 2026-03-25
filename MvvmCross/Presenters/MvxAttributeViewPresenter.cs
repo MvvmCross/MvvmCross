@@ -29,6 +29,8 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
 
     public virtual IMvxViewsContainer? ViewsContainer => _viewsContainer.Value;
 
+    [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("Trimming", "IL2026",
+        Justification = "RegisterAttributeTypes is called lazily at first access; implementors are responsible for ensuring type safety.")]
     public virtual IDictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
     {
         get
@@ -42,8 +44,10 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
         }
     }
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public abstract void RegisterAttributeTypes();
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
     public abstract MvxBasePresentationAttribute CreatePresentationAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewType);
@@ -97,6 +101,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
         }
     }
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute uses type hierarchy checks and may call CreatePresentationAttribute which requires unreferenced code.")]
     public virtual MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
     {
         if (request == null)
@@ -134,6 +139,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
         return CreatePresentationAttribute(request.ViewModelType, viewType);
     }
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     protected virtual MvxPresentationAttributeAction GetPresentationAttributeAction(
         MvxViewModelRequest request, out MvxBasePresentationAttribute attribute)
     {
@@ -166,6 +172,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
         throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
     }
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
     {
         if (await HandlePresentationChange(hint).ConfigureAwait(true))
@@ -180,6 +187,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
         return false;
     }
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override Task<bool> Close(IMvxViewModel viewModel)
     {
         return GetPresentationAttributeAction(
@@ -188,6 +196,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
             .Invoke(viewModel, attribute) ?? Task.FromResult(false);
     }
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override Task<bool> Show(MvxViewModelRequest request)
     {
         var attributeAction = GetPresentationAttributeAction(request, out var attribute);

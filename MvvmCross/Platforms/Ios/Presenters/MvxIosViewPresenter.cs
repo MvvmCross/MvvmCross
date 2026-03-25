@@ -41,6 +41,7 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         Window = window;
     }
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
     public override MvxBasePresentationAttribute CreatePresentationAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewType)
@@ -75,10 +76,8 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         return this.CreateViewControllerFor(viewType);
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override void RegisterAttributeTypes()
-    {
-        if (AttributeTypesToActionsDictionary == null)
-            throw new InvalidOperationException("Cannot register attribute types on null dictionary");
 
         AttributeTypesToActionsDictionary.Register<MvxRootPresentationAttribute>(
             (_, attribute, request) =>
@@ -278,6 +277,7 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         return true;
     }
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override Task<bool> ChangePresentation(MvxPresentationHint hint)
     {
         return hint switch

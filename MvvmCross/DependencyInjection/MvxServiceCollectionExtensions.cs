@@ -26,6 +26,7 @@ public static class MvxServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The service collection to add MvvmCross services to.</param>
     /// <param name="configure">Optional callback to customise framework options.</param>
+    [RequiresUnreferencedCode("Configuring MvvmCross via StartWith<TViewModel>() or UseAppStart<TAppStart>() stores types that are registered via reflection. Use explicit type parameters for trim-compatible setup.")]
     public static IServiceCollection AddMvvmCross(
         this IServiceCollection services,
         Action<MvxOptions>? configure = null)
@@ -43,6 +44,7 @@ public static class MvxServiceCollectionExtensions
     /// Registers all core MvvmCross framework services and registers a user-defined
     /// <see cref="IMvxStartup"/> implementation.
     /// </summary>
+    [RequiresUnreferencedCode("Configuring MvvmCross via StartWith<TViewModel>() or UseAppStart<TAppStart>() stores types that are registered via reflection.")]
     public static IServiceCollection AddMvvmCross<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TStartup>(
         this IServiceCollection services,
         Action<MvxOptions>? configure = null)
@@ -69,6 +71,7 @@ public static class MvxServiceCollectionExtensions
         return services;
     }
 
+    [RequiresUnreferencedCode("Registering ViewModel lookup factory uses reflection via IMvxViewModelRegistration.Apply which may scan assemblies.")]
     private static void RegisterCoreServices(IServiceCollection services)
     {
         // Settings
@@ -124,6 +127,7 @@ public static class MvxServiceCollectionExtensions
         services.TryAddSingleton<IMvxViewModelLocatorCollection, MvxViewModelLocatorCollection>();
     }
 
+    [RequiresUnreferencedCode("Registering IMvxAppStart via Type may use reflection. Use UseAppStart<TAppStart>() with a concrete type for trim-compatible registration.")]
     private static void RegisterAppStart(IServiceCollection services, MvxOptions options)
     {
         if (options.AppStartType != null)
@@ -142,6 +146,7 @@ public static class MvxServiceCollectionExtensions
 /// <summary>Marker interface for deferred ViewModel name registry population.</summary>
 internal interface IMvxViewModelRegistration
 {
+    [RequiresUnreferencedCode("Applying ViewModel registrations may use reflection for assembly scanning.")]
     void Apply(IMvxViewModelByNameRegistry registry);
 }
 

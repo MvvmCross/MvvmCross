@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -57,6 +58,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             FrameworkElementsDictionary.Add(contentControl, new Stack<FrameworkElement>());
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Register<MvxWindowPresentationAttribute>(
@@ -76,6 +78,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
                     (viewModel, _) => CloseContentView(viewModel));
         }
 
+        [RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             if (viewType.IsSubclassOf(typeof(Window)))
@@ -179,6 +182,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             return Task.FromResult(true);
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public override async Task<bool> Close(IMvxViewModel viewModel)
         {
             // toClose is window

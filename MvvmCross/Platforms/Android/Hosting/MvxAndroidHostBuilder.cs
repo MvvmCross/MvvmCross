@@ -36,6 +36,7 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
     /// The application instance is registered as a singleton so it can be resolved by services that
     /// need the Android context.
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Building an Android MvvmCross host registers services that may use reflection for view and ViewModel assembly scanning.")]
     public static MvxAndroidHostBuilder CreateBuilder(Application application)
     {
         ArgumentNullException.ThrowIfNull(application);
@@ -54,6 +55,7 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
         return this;
     }
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Registering Android view container factory uses reflection via IMvxAndroidViewRegistration.Apply which may scan assemblies.")]
     private MvxAndroidHostBuilder(Application application)
     {
         // Android application context

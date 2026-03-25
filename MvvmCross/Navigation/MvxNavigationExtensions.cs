@@ -104,6 +104,7 @@ public static class MvxNavigationExtensions
     /// <typeparam name="TViewModel">Type of <see cref="IMvxResultSettingViewModel{TResult}"/></typeparam>
     /// <typeparam name="TResult">Result set by Result Setting ViewModel</typeparam>
     /// <returns></returns>
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public static async Task<bool> CloseSettingResult<TViewModel, TResult>(
         this IMvxNavigationService navigationService,
         TViewModel viewModel,

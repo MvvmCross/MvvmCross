@@ -43,6 +43,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             _logger = MvxLogHost.GetLog<MvxTvosViewPresenter>();
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
         public override MvxBasePresentationAttribute CreatePresentationAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewType)
@@ -102,6 +103,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             return null;
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Register<MvxRootPresentationAttribute>(

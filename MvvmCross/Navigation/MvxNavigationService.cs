@@ -273,6 +273,7 @@ public class MvxNavigationService : IMvxNavigationService
         return Task.FromResult(ViewsContainer.Value?.GetViewType(viewModelType) != null);
     }
 
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     protected virtual async Task<bool> Navigate(MvxViewModelRequest request, IMvxViewModel viewModel,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
@@ -326,6 +327,7 @@ public class MvxNavigationService : IMvxNavigationService
         return await Navigate(request, request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
     }
 
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
         IMvxBundle? presentationBundle = null,
@@ -339,6 +341,7 @@ public class MvxNavigationService : IMvxNavigationService
         return Navigate(request, request.ViewModelInstance, presentationBundle, cancellationToken);
     }
 
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate<TParameter>(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
         TParameter param,
@@ -353,6 +356,7 @@ public class MvxNavigationService : IMvxNavigationService
         return Navigate(request, request.ViewModelInstance, presentationBundle, cancellationToken);
     }
 
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         where TViewModel : IMvxViewModel
@@ -360,6 +364,7 @@ public class MvxNavigationService : IMvxNavigationService
         return Navigate(typeof(TViewModel), presentationBundle, cancellationToken);
     }
 
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel, TParameter>(
         TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         where TViewModel : IMvxViewModel<TParameter>
@@ -367,6 +372,7 @@ public class MvxNavigationService : IMvxNavigationService
         return Navigate(typeof(TViewModel), param, presentationBundle, cancellationToken);
     }
 
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate(
         IMvxViewModel viewModel, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
@@ -375,6 +381,7 @@ public class MvxNavigationService : IMvxNavigationService
         return Navigate(request, viewModel, presentationBundle, cancellationToken);
     }
 
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
@@ -383,6 +390,7 @@ public class MvxNavigationService : IMvxNavigationService
         return Navigate(request, viewModel, presentationBundle, cancellationToken);
     }
 
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual async Task<bool> ChangePresentation(
         MvxPresentationHint hint, CancellationToken cancellationToken = default)
     {
@@ -403,6 +411,7 @@ public class MvxNavigationService : IMvxNavigationService
         return result;
     }
 
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual async Task<bool> Close(IMvxViewModel viewModel, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(viewModel);
@@ -462,6 +471,7 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="presentationBundle">The presentation bungle.</param>
     /// <param name="cancellationToken">Any cancellation token.</param>
     /// <returns>True if navigation was successful.</returns>
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel, TParameter>(
         TParameter param, IMvxViewModel source, IMvxBundle? presentationBundle = null,
         CancellationToken cancellationToken = default)
@@ -484,6 +494,7 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="presentationBundle">The presentation bungle.</param>
     /// <param name="cancellationToken">Any cancellation token.</param>
     /// <returns>True if navigation was successful.</returns>
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate<TParameter>(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
         TParameter param,
@@ -511,6 +522,7 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="presentationBundle">A presentation bundle.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns></returns>
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
         IMvxViewModel source,
@@ -536,6 +548,7 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="presentationBundle">The presentation bundle.</param>
     /// <param name="cancellationToken">Any cancellation token.</param>
     /// <returns>True if successful, false otherwise.</returns>
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(IMvxViewModel source,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         where TViewModel : IMvxViewModel
@@ -555,6 +568,7 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="cancellationToken">Any cancellation token.</param>
     /// <returns>True if successful, false otherwise.</returns>
     [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "ViewModel types are preserved by the navigation infrastructure and GetType() is safe here.")]
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate(
         IMvxViewModel viewModel, IMvxViewModel source, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {
@@ -577,6 +591,7 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="cancellationToken">Any cancellation token.</param>
     /// <returns>True if successful, false otherwise.</returns>
     [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "ViewModel types are preserved by the navigation infrastructure and GetType() is safe here.")]
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxViewModel source,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         where TParameter : notnull
@@ -594,6 +609,7 @@ public class MvxNavigationService : IMvxNavigationService
     /// <param name="presentationBundle">The presentation bundle.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>True is successful. False otherwise.</returns>
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     protected virtual async Task<bool> NavigateAsync(MvxViewModelRequest request, IMvxViewModel viewModel,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
     {

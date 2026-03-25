@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
@@ -18,6 +19,7 @@ public class MvxConsoleContainer
     private readonly object _lockObject = new();
     private readonly Stack<MvxViewModelRequest> _navigationStack = new();
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override Task<bool> Show(MvxViewModelRequest request)
     {
         lock (_lockObject)
@@ -45,6 +47,7 @@ public class MvxConsoleContainer
         return Task.FromResult(true);
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
     {
         if (await HandlePresentationChange(hint).ConfigureAwait(true)) return true;
@@ -58,6 +61,7 @@ public class MvxConsoleContainer
         return false;
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override Task<bool> Close(IMvxViewModel viewModel)
     {
         var currentView = MvxHost.Current?.Services.GetService<IMvxConsoleCurrentView>();

@@ -13,7 +13,10 @@ namespace MvvmCross.DependencyInjection;
 /// </summary>
 public sealed class MvxOptions
 {
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
     private Type? _appStartType;
+
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
     private Type? _appStartViewModelType;
 
     /// <summary>

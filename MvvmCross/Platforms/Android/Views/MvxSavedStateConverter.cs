@@ -15,7 +15,7 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views
 {
-    [RequiresUnreferencedCode("This class uses reflection which may not be preserved during trimming.")]
+    [RequiresUnreferencedCode("Uses IMvxTextSerializer which may use reflection-based serialization not preserved during trimming.")]
     public class MvxSavedStateConverter : IMvxSavedStateConverter
     {
         private const string ExtrasKey = "MvxSaved";

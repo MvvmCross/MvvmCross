@@ -120,6 +120,8 @@ namespace MvvmCross.Base
         /// Enumerates the types defined in <paramref name="assembly"/>, silently swallowing
         /// <see cref="ReflectionTypeLoadException"/> and logging partial failures at Warning level.
         /// </summary>
+        [RequiresUnreferencedCode("Calls Assembly.GetTypes() which may not preserve all types during trimming. " +
+            "Use explicit type registration instead of assembly scanning for trim-compatible code.")]
         public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
         {
             try

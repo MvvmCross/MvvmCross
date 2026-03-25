@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using MvvmCross.ViewModels;
 
@@ -39,10 +40,13 @@ namespace MvvmCross.Presenters
             return Task.FromResult(false);
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public abstract Task<bool> Show(MvxViewModelRequest request);
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public abstract Task<bool> ChangePresentation(MvxPresentationHint hint);
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public abstract Task<bool> Close(IMvxViewModel viewModel);
     }
 #nullable restore

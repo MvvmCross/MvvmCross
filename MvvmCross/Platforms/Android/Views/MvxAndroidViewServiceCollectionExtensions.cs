@@ -54,12 +54,16 @@ public static class MvxAndroidViewServiceCollectionExtensions
 /// </summary>
 internal interface IMvxAndroidViewRegistration
 {
+    [RequiresUnreferencedCode("Applying Android view registrations may use reflection for assembly scanning.")]
     void Apply(IMvxViewsContainer container, IMvxViewModelTypeFinder? typeFinder);
 }
 
-internal sealed class MvxExplicitAndroidViewRegistration(Type viewModelType, Type viewType)
+internal sealed class MvxExplicitAndroidViewRegistration(
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
     : IMvxAndroidViewRegistration
 {
+    [RequiresUnreferencedCode("Applying explicit Android view registrations uses reflection via IMvxViewsContainer.Add.")]
     public void Apply(IMvxViewsContainer container, IMvxViewModelTypeFinder? _)
         => container.Add(viewModelType, viewType);
 }

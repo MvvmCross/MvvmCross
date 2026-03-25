@@ -1,5 +1,6 @@
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Dispatching;
@@ -83,6 +84,7 @@ public class MvxMultiWindowViewPresenter
     /// <param name="viewModelType"></param>
     /// <param name="viewType"></param>
     /// <returns></returns>
+    [RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
     public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
     {
         _logger?.LogInformation("PresentationAttribute not found for {ViewTypeName}. Assuming new page presentation",
@@ -93,6 +95,7 @@ public class MvxMultiWindowViewPresenter
     /// <summary>
     ///     Registers default attribute types.
     /// </summary>
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override void RegisterAttributeTypes()
     {
         AttributeTypesToActionsDictionary.Register<MvxPagePresentationAttribute>(ShowPage,
