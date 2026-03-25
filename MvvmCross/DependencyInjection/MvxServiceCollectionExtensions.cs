@@ -4,6 +4,7 @@
 #nullable enable
 
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MvvmCross.Commands;
@@ -52,6 +53,22 @@ public static class MvxServiceCollectionExtensions
         return services;
     }
 
+    /// <summary>
+    /// Scans the given assembly for <see cref="IMvxViewModel"/> implementations and registers
+    /// them by name so they can be looked up by <see cref="IMvxViewModelByNameLookup"/>.
+    /// Call this for each assembly that contains ViewModels (typically your Core assembly).
+    /// </summary>
+    [RequiresUnreferencedCode("Assembly scanning for ViewModels uses reflection which may not be preserved during trimming. Register ViewModels explicitly with IMvxViewModelByNameRegistry.Add<T>() for trim-compatible registration.")]
+    public static IServiceCollection AddMvvmCrossViewModels(
+        this IServiceCollection services,
+        Assembly viewModelAssembly)
+    {
+        ArgumentNullException.ThrowIfNull(viewModelAssembly);
+        services.AddSingleton<IMvxViewModelRegistration>(
+            new MvxAssemblyViewModelRegistration(viewModelAssembly));
+        return services;
+    }
+
     private static void RegisterCoreServices(IServiceCollection services)
     {
         // Settings
@@ -66,13 +83,22 @@ public static class MvxServiceCollectionExtensions
         services.TryAddSingleton<IMvxNavigationSerializer, MvxStringDictionaryNavigationSerializer>();
 
         // ViewModel name lookup (shared instance registered under two interfaces)
-        services.TryAddSingleton<MvxViewModelByNameLookup>();
+        // Factory applies all IMvxViewModelRegistration entries added via AddMvvmCrossViewModels().
+        services.TryAddSingleton<MvxViewModelByNameLookup>(sp =>
+        {
+            var lookup = new MvxViewModelByNameLookup();
+            foreach (var reg in sp.GetServices<IMvxViewModelRegistration>())
+                reg.Apply(lookup);
+            return lookup;
+        });
         services.TryAddSingleton<IMvxViewModelByNameLookup>(
             sp => sp.GetRequiredService<MvxViewModelByNameLookup>());
         services.TryAddSingleton<IMvxViewModelByNameRegistry>(
             sp => sp.GetRequiredService<MvxViewModelByNameLookup>());
 
         // ViewModel type finding
+        services.TryAddSingleton<IMvxNameMapping>(
+            _ => new MvxPostfixAwareViewToViewModelNameMapping("View", "Activity", "Fragment", "Page", "Controller"));
         services.TryAddSingleton<IMvxViewModelTypeFinder, MvxViewModelViewTypeFinder>();
         services.TryAddSingleton<IMvxTypeToTypeLookupBuilder, MvxViewModelViewLookupBuilder>();
 
@@ -111,4 +137,17 @@ public static class MvxServiceCollectionExtensions
             services.TryAddSingleton(typeof(IMvxAppStart), appStartType);
         }
     }
+}
+
+/// <summary>Marker interface for deferred ViewModel name registry population.</summary>
+internal interface IMvxViewModelRegistration
+{
+    void Apply(IMvxViewModelByNameRegistry registry);
+}
+
+internal sealed class MvxAssemblyViewModelRegistration(System.Reflection.Assembly assembly)
+    : IMvxViewModelRegistration
+{
+    [RequiresUnreferencedCode("Assembly scanning uses reflection")]
+    public void Apply(IMvxViewModelByNameRegistry registry) => registry.AddAll(assembly);
 }

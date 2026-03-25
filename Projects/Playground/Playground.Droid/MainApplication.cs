@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Reflection;
 using Android.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.DependencyInjection;
@@ -41,6 +42,10 @@ namespace Playground.Droid
                     services.AddMvvmCrossVisibility();
                     services.AddMvvmCrossColor();
                     services.AddMvvmCrossJson();
+                    // Register ViewModels from the Core assembly for name-based lookup.
+                    services.AddMvvmCrossViewModels(typeof(PlaygroundStartup).Assembly);
+                    // Register all MvvmCross views (Activities and Fragments) in this assembly.
+                    services.AddMvvmCrossAndroidViews(typeof(MainApplication).Assembly);
                 })
                 .Build()
                 .Start();

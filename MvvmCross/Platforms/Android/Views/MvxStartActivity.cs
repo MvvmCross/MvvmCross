@@ -6,7 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 using Android.Runtime;
 using Android.Views;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Hosting;
+using MvvmCross.Logging;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views;
@@ -65,7 +67,16 @@ public abstract class MvxStartActivity
     protected override async void OnResume()
     {
         base.OnResume();
-        await RunAppStartAsync(_bundle);
+        try
+        {
+            await RunAppStartAsync(_bundle);
+        }
+        catch (Exception ex)
+        {
+            MvxLogHost.Default?.Log(LogLevel.Critical,
+                ex, "Unhandled exception during MvvmCross app startup");
+            throw;
+        }
     }
 #pragma warning restore AsyncFixer01, AsyncFixer03
 

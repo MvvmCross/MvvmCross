@@ -7,6 +7,7 @@ using Android.App;
 using Android.Content;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Base;
 using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Views.Base;

@@ -5,6 +5,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platforms.WinUi;
 

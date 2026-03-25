@@ -23,9 +23,6 @@ public class MvxViewModelViewTypeFinder(
         if (!CheckCandidateTypeIsAView(candidateType))
             return null;
 
-        if (!candidateType.IsConventional())
-            return null;
-
         var typeByAttribute = LookupAttributedViewModelType(candidateType);
         if (typeByAttribute != null)
             return typeByAttribute;

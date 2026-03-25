@@ -21,10 +21,9 @@ namespace Playground.Core
 
         public async Task OnStartup(IServiceProvider services)
         {
-            // Delegate first navigation to IMvxAppStart (registered via opts.StartWith<RootViewModel>())
-            var appStart = services.GetService<IMvxAppStart>();
-            if (appStart is { IsStarted: false })
-                await appStart.Start(null).ConfigureAwait(false);
+            // Navigation is triggered by the platform's start activity (e.g. MvxStartActivity on Android).
+            // Do not call IMvxAppStart here — it requires a live Activity context on Android.
+            await Task.CompletedTask;
         }
     }
 }

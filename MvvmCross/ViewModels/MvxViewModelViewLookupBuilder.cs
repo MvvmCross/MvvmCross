@@ -6,6 +6,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Hosting;
 

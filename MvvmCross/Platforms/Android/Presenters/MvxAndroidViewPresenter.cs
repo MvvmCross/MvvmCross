@@ -41,9 +41,6 @@ namespace MvvmCross.Platforms.Android.Presenters
         private readonly Lazy<IMvxAndroidCurrentTopActivity?> _androidCurrentTopActivity =
             new(() => MvxHost.Current?.Services.GetService<IMvxAndroidCurrentTopActivity>());
 
-        private readonly Lazy<IMvxAndroidActivityLifetimeListener?> _activityLifetimeListener =
-            new(() => MvxHost.Current?.Services.GetService<IMvxAndroidActivityLifetimeListener>());
-
         private readonly Lazy<IMvxNavigationSerializer?> _navigationSerializer =
             new(() => MvxHost.Current?.Services.GetService<IMvxNavigationSerializer>());
 
@@ -67,15 +64,17 @@ namespace MvvmCross.Platforms.Android.Presenters
         protected virtual Activity? CurrentActivity =>
             _androidCurrentTopActivity.Value?.Activity as Activity;
 
-        protected IMvxAndroidActivityLifetimeListener? ActivityLifetimeListener =>
-            _activityLifetimeListener.Value;
+        protected IMvxAndroidActivityLifetimeListener? ActivityLifetimeListener { get; }
 
         protected IMvxNavigationSerializer? NavigationSerializer =>
             _navigationSerializer.Value;
 
-        public MvxAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies)
+        public MvxAndroidViewPresenter(
+            IEnumerable<Assembly> androidViewAssemblies,
+            IMvxAndroidActivityLifetimeListener? activityLifetimeListener = null)
         {
             AndroidViewAssemblies = androidViewAssemblies;
+            ActivityLifetimeListener = activityLifetimeListener;
             if (ActivityLifetimeListener != null)
                 ActivityLifetimeListener.ActivityChanged += ActivityLifetimeListenerOnActivityChanged;
         }

@@ -5,6 +5,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using MvvmCross.Binding;
 using MvvmCross.Converters;
 
 namespace MvvmCross.Plugin.Visibility;

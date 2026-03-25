@@ -24,7 +24,21 @@ public class MvxHost
     /// <summary>
     /// The currently running host. Set by <see cref="Start"/>. Null before the host is started.
     /// </summary>
-    public static MvxHost? Current => _current;
+    public static MvxHost? Current => _current ?? TryBuildFromTestAccessor();
+
+    /// <summary>
+    /// When set, provides a fallback <see cref="IServiceProvider"/> for test environments where
+    /// <see cref="InitializeForTesting"/> has not yet been called. The accessor may lazily build
+    /// the provider on first call. For use by test infrastructure only.
+    /// </summary>
+    public static Func<IServiceProvider?>? TestServiceProviderAccessor { get; set; }
+
+    private static MvxHost? TryBuildFromTestAccessor()
+    {
+        if (TestServiceProviderAccessor == null) return null;
+        var provider = TestServiceProviderAccessor();
+        return provider != null ? new MvxHost(provider) : null;
+    }
 
     /// <summary>
     /// The built service provider. Use this for service location when constructor injection
@@ -38,8 +52,12 @@ public class MvxHost
     }
 
     /// <summary>
-    /// Sets this host as the current ambient host, then triggers <see cref="IMvxStartup.OnStartup"/>
-    /// (if registered) on the calling (UI) thread.
+    /// <summary>
+    /// Sets this host as the current ambient host, then invokes <see cref="IMvxStartup.OnStartup"/>
+    /// for service configuration. On platforms with a dedicated start screen (e.g. Android's
+    /// <c>MvxStartActivity</c>) navigation to the first ViewModel is handled there; on headless
+    /// or desktop platforms (WPF, console) <see cref="IMvxAppStart"/> is triggered here as a
+    /// fallback when no <see cref="IMvxStartup"/> is registered.
     /// </summary>
     public virtual async Task Start()
     {
@@ -48,15 +66,18 @@ public class MvxHost
         var startup = Services.GetService<IMvxStartup>();
         if (startup is not null)
         {
+            // OnStartup is for service-level initialisation (registering extra services, etc.).
+            // Do NOT navigate here — platform start activities handle first navigation.
             await startup.OnStartup(Services).ConfigureAwait(false);
             return;
         }
 
-        // Fall back to IMvxAppStart if no IMvxStartup was registered.
+        // Fallback for platforms without a dedicated start screen (WPF, console, etc.):
+        // trigger the first navigation directly from here.
         var appStart = Services.GetService<IMvxAppStart>();
         if (appStart is not null)
         {
-            await appStart.Start(null).ConfigureAwait(false);
+            await appStart.StartAsync(null).ConfigureAwait(false);
         }
         else
         {
@@ -71,16 +92,18 @@ public class MvxHost
     /// <summary>
     /// Sets a pre-built service provider as the current host. For use in unit tests only.
     /// </summary>
-    internal static void InitializeForTesting(IServiceProvider serviceProvider)
+    public static void InitializeForTesting(IServiceProvider serviceProvider)
     {
         _current = new MvxHost(serviceProvider);
     }
 
     /// <summary>
-    /// Clears the static <see cref="Current"/> property. For use in unit tests only.
+    /// Clears the static <see cref="Current"/> property and <see cref="TestServiceProviderAccessor"/>.
+    /// For use in unit tests only.
     /// </summary>
-    internal static void ResetForTesting()
+    public static void ResetForTesting()
     {
         _current = null;
+        TestServiceProviderAccessor = null;
     }
 }

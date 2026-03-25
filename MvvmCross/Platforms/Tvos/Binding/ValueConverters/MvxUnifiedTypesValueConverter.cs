@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using MvvmCross.Base;
 using MvvmCross.Converters;
 using ObjCRuntime;
 

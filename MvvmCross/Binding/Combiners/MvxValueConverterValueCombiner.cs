@@ -11,7 +11,6 @@ using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.Combiners
 {
-    [MvxUnconventional]
     public class MvxValueConverterValueCombiner : MvxValueCombiner
     {
         private readonly IMvxValueConverter _valueConverter;

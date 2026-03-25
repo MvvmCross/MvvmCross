@@ -81,7 +81,6 @@ namespace MvvmCross.Binding.Binders
                         where typeof(T).IsAssignableFrom(type)
                         let name = FindName(type)
                         where !string.IsNullOrEmpty(name)
-                        where type.IsConventional()
                         select new { Name = name, Type = type };
 
             foreach (var pair in pairs)

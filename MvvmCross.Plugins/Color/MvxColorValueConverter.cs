@@ -25,15 +25,6 @@ public abstract class MvxColorValueConverter : MvxValueConverter
     }
 }
 
-    protected abstract System.Drawing.Color Convert(object value, object? parameter, CultureInfo? culture);
-
-    public sealed override object Convert(object value, Type? targetType, object? parameter,
-        CultureInfo? culture)
-    {
-        return _nativeColor.Value?.ToNative(Convert(value, parameter, culture)) ?? MvxBindingConstant.UnsetValue;
-    }
-}
-
 public abstract class MvxColorValueConverter<T> : MvxColorValueConverter
 {
     protected sealed override System.Drawing.Color Convert(object value, object? parameter, CultureInfo? culture)

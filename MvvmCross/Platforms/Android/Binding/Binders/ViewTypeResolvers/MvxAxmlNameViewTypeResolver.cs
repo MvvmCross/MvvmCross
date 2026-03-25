@@ -13,8 +13,8 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {
     public class MvxAxmlNameViewTypeResolver : MvxLongLowerCaseViewTypeResolver, IMvxAxmlNameViewTypeResolver
     {
-        public MvxAxmlNameViewTypeResolver(IMvxTypeCache typeCache)
-            : base(typeCache)
+        public MvxAxmlNameViewTypeResolver(IMvxViewTypeRegistry registry)
+            : base(registry)
         {
             ViewNamespaceAbbreviations = new Dictionary<string, string>();
         }

@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Webkit;
 using AndroidX.Preference;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
@@ -30,7 +31,7 @@ namespace MvvmCross.Platforms.Android.Binding
         private readonly Action<IMvxValueCombinerRegistry> _fillValueCombiners;
         private readonly Action<IMvxTargetBindingFactoryRegistry> _fillTargetFactories;
         private readonly Action<IMvxBindingNameRegistry> _fillBindingNames;
-        private readonly Action<IMvxTypeCache> _fillViewTypes;
+        private readonly Action<IMvxViewTypeRegistry> _fillViewTypes;
         private readonly Action<IMvxAxmlNameViewTypeResolver> _fillAxmlViewTypeResolver;
         private readonly Action<IMvxNamespaceListViewTypeResolver> _fillNamespaceListViewTypeResolver;
 
@@ -39,7 +40,7 @@ namespace MvvmCross.Platforms.Android.Binding
             Action<IMvxValueCombinerRegistry> fillValueCombiners,
             Action<IMvxTargetBindingFactoryRegistry> fillTargetFactories,
             Action<IMvxBindingNameRegistry> fillBindingNames,
-            Action<IMvxTypeCache> fillViewTypes,
+            Action<IMvxViewTypeRegistry> fillViewTypes,
             Action<IMvxAxmlNameViewTypeResolver> fillAxmlViewTypeResolver,
             Action<IMvxNamespaceListViewTypeResolver> fillNamespaceListViewTypeResolver)
         {
@@ -360,27 +361,42 @@ namespace MvvmCross.Platforms.Android.Binding
 
         protected virtual void InitializeViewTypeResolver(IServiceCollection services)
         {
-            var typeCache = CreateViewTypeCache();
-            services.TryAddSingleton<IMvxTypeCache>(_ => typeCache);
+            // Registry is built lazily when first resolved; all IMvxViewTypeRegistration
+            // descriptors (added via services.AddMvvmCrossAndroidViewType<TView>()) are applied at that point.
+            services.TryAddSingleton<IMvxViewTypeRegistry>(sp =>
+            {
+                var registry = new MvxViewTypeRegistry();
+                foreach (var reg in sp.GetServices<IMvxViewTypeRegistration>())
+                    reg.Apply(registry);
+                _fillViewTypes?.Invoke(registry);
+                return registry;
+            });
 
-            var fullNameViewTypeResolver = new MvxAxmlNameViewTypeResolver(typeCache);
-            services.TryAddSingleton<IMvxAxmlNameViewTypeResolver>(_ => fullNameViewTypeResolver);
-            var listViewTypeResolver = new MvxNamespaceListViewTypeResolver(typeCache);
-            services.TryAddSingleton<IMvxNamespaceListViewTypeResolver>(_ => listViewTypeResolver);
-            var justNameTypeResolver = new MvxJustNameViewTypeResolver(typeCache);
+            services.TryAddSingleton<IMvxAxmlNameViewTypeResolver>(sp =>
+            {
+                var registry = sp.GetRequiredService<IMvxViewTypeRegistry>();
+                var resolver = new MvxAxmlNameViewTypeResolver(registry);
+                _fillAxmlViewTypeResolver?.Invoke(resolver);
+                return resolver;
+            });
 
-            var composite = new MvxCompositeViewTypeResolver(fullNameViewTypeResolver, listViewTypeResolver, justNameTypeResolver);
-            var cached = new MvxCachedViewTypeResolver(composite);
-            services.TryAddSingleton<IMvxViewTypeResolver>(_ => cached);
+            services.TryAddSingleton<IMvxNamespaceListViewTypeResolver>(sp =>
+            {
+                var registry = sp.GetRequiredService<IMvxViewTypeRegistry>();
+                var resolver = new MvxNamespaceListViewTypeResolver(registry);
+                _fillNamespaceListViewTypeResolver?.Invoke(resolver);
+                return resolver;
+            });
 
-            _fillViewTypes?.Invoke(typeCache);
-            _fillAxmlViewTypeResolver?.Invoke(fullNameViewTypeResolver);
-            _fillNamespaceListViewTypeResolver?.Invoke(listViewTypeResolver);
-        }
-
-        protected virtual IMvxTypeCache CreateViewTypeCache()
-        {
-            return new MvxTypeCache<View>();
+            services.TryAddSingleton<IMvxViewTypeResolver>(sp =>
+            {
+                var fullNameResolver = sp.GetRequiredService<IMvxAxmlNameViewTypeResolver>();
+                var listResolver = sp.GetRequiredService<IMvxNamespaceListViewTypeResolver>();
+                var registry = sp.GetRequiredService<IMvxViewTypeRegistry>();
+                var justNameResolver = new MvxJustNameViewTypeResolver(registry);
+                var composite = new MvxCompositeViewTypeResolver(fullNameResolver, listResolver, justNameResolver);
+                return new MvxCachedViewTypeResolver(composite);
+            });
         }
     }
 }

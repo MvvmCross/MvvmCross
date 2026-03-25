@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Exceptions;
 using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;

@@ -5,6 +5,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Base;
 using MvvmCross.Hosting;
 
 namespace MvvmCross.Plugin.JsonLocalization

@@ -8,11 +8,11 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {
     public abstract class MvxReflectionViewTypeResolver : IMvxViewTypeResolver
     {
-        protected IMvxTypeCache TypeCache { get; }
+        protected IMvxViewTypeRegistry Registry { get; }
 
-        protected MvxReflectionViewTypeResolver(IMvxTypeCache typeCache)
+        protected MvxReflectionViewTypeResolver(IMvxViewTypeRegistry registry)
         {
-            TypeCache = typeCache;
+            Registry = registry;
         }
 
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]

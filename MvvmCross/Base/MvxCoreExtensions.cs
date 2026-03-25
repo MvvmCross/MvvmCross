@@ -3,9 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Base
 {
@@ -90,6 +93,55 @@ namespace MvvmCross.Base
             {
                 // pokemon - mask the error
                 return value;
+            }
+        }
+
+        /// <summary>
+        /// Returns the default value for <paramref name="type"/>:
+        /// <c>null</c> for reference types and nullable value types,
+        /// or a new zero-initialised instance for non-nullable value types.
+        /// </summary>
+        public static object? CreateDefault(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] this Type? type)
+        {
+            if (type == null)
+                return null;
+
+            if (!type.GetTypeInfo().IsValueType)
+                return null;
+
+            if (Nullable.GetUnderlyingType(type) != null)
+                return null;
+
+            return Activator.CreateInstance(type);
+        }
+
+        /// <summary>
+        /// Enumerates the types defined in <paramref name="assembly"/>, silently swallowing
+        /// <see cref="ReflectionTypeLoadException"/> and logging partial failures at Warning level.
+        /// </summary>
+        public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
+        {
+            try
+            {
+                return assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException e)
+            {
+                var logger = MvvmCross.Logging.MvxLogHost.Default;
+                logger?.LogWarning(e,
+                    "ReflectionTypeLoadException masked during loading of {AssemblyName}", assembly.FullName);
+
+                foreach (var loaderException in e.LoaderExceptions ?? Array.Empty<Exception?>())
+                {
+                    if (loaderException != null)
+                        logger?.LogWarning(loaderException, "Failed to load type");
+                }
+
+                if (System.Diagnostics.Debugger.IsAttached)
+                    System.Diagnostics.Debugger.Break();
+
+                return Enumerable.Empty<Type>();
             }
         }
     }

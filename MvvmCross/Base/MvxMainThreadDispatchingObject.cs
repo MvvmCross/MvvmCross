@@ -10,7 +10,8 @@ namespace MvvmCross.Base
     public abstract class MvxMainThreadDispatchingObject
     {
         protected IMvxMainThreadAsyncDispatcher? AsyncDispatcher =>
-            MvxHost.Current?.Services.GetService<IMvxMainThreadAsyncDispatcher>();
+            MvxHost.Current?.Services.GetService<IMvxMainThreadAsyncDispatcher>()
+            ?? MvxHost.Current?.Services.GetService<IMvxMainThreadDispatcher>() as IMvxMainThreadAsyncDispatcher;
 
         protected void InvokeOnMainThread(Action action, bool maskExceptions = true)
         {

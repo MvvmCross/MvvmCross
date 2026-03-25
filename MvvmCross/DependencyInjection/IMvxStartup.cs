@@ -20,7 +20,13 @@ public interface IMvxStartup
     void ConfigureServices(IServiceCollection services);
 
     /// <summary>
-    /// Called on the UI thread after the host is started. Use this to trigger first navigation.
+    /// Called on the UI thread after the host is started.
+    /// Use this for service-level initialisation (registering additional services, etc.).
+    /// <para>
+    /// On Android, do NOT trigger navigation here — the platform's <c>MvxStartActivity</c>
+    /// handles first navigation via <c>IMvxAppStart</c>. On WPF/Console platforms without a
+    /// dedicated start screen you may navigate here.
+    /// </para>
     /// </summary>
     Task OnStartup(IServiceProvider services);
 }

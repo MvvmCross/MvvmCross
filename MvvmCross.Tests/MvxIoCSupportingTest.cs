@@ -5,6 +5,7 @@
 using System.Globalization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using MvvmCross.Binding;
 using MvvmCross.Core;
 using MvvmCross.Hosting;
 
@@ -55,6 +56,9 @@ namespace MvvmCross.Tests
             _serviceCollection = new ServiceCollection();
             Ioc = new MvxTestServiceLocator(this);
             MvxHost.ResetForTesting();
+            // Expose a lazy service provider accessor so framework code (e.g. MvxBindingSingletonCache)
+            // can resolve services even when BuildServices() hasn't been called explicitly yet.
+            MvxHost.TestServiceProviderAccessor = () => Services;
         }
 
         public virtual void ClearAll()
@@ -74,9 +78,24 @@ namespace MvvmCross.Tests
             MvxHost.InitializeForTesting(_serviceProvider);
         }
 
+        /// <summary>
+        /// Invalidates the built service provider so it will be rebuilt on next <see cref="Services"/> access.
+        /// Called by <see cref="MvxTestServiceLocator"/> when new registrations are added after build.
+        /// </summary>
+        internal void InvalidateServiceProvider()
+        {
+            if (_serviceProvider == null) return;
+            (_serviceProvider as IDisposable)?.Dispose();
+            _serviceProvider = null;
+            MvxHost.ResetForTesting();
+            MvxHost.TestServiceProviderAccessor = () => Services;
+        }
+
         protected virtual void InitializeMvxSettings()
         {
             _serviceCollection.TryAddSingleton<IMvxSettings, MvxSettings>();
+            // Register binding singleton cache so binding tests work without calling BuildServices() first.
+            _serviceCollection.TryAddSingleton<IMvxBindingSingletonCache, MvxBindingSingletonCache>();
         }
 
         protected virtual void AdditionalSetup()
@@ -96,7 +115,7 @@ namespace MvvmCross.Tests
     /// into <see cref="IServiceCollection"/> registrations.
     /// This allows existing tests to migrate incrementally.
     /// </summary>
-    public sealed class MvxTestServiceLocator
+    public sealed class MvxTestServiceLocator : IServiceProvider
     {
         private readonly MvxIoCSupportingTest _host;
 
@@ -105,10 +124,14 @@ namespace MvvmCross.Tests
             _host = host;
         }
 
+        /// <inheritdoc/>
+        public object? GetService(Type serviceType) => _host.Services.GetService(serviceType);
+
         /// <summary>Registers a singleton instance.</summary>
         public void RegisterSingleton<TInterface>(TInterface instance)
             where TInterface : class
         {
+            _host.InvalidateServiceProvider();
             _host.ServiceCollection.AddSingleton(instance);
         }
 
@@ -116,6 +139,7 @@ namespace MvvmCross.Tests
         public void RegisterSingleton<TInterface>(Func<TInterface> factory)
             where TInterface : class
         {
+            _host.InvalidateServiceProvider();
             _host.ServiceCollection.AddSingleton<TInterface>(_ => factory());
         }
 
@@ -124,6 +148,7 @@ namespace MvvmCross.Tests
             where TInterface : class
             where TImpl : class, TInterface
         {
+            _host.InvalidateServiceProvider();
             _host.ServiceCollection.AddTransient<TInterface, TImpl>();
         }
 

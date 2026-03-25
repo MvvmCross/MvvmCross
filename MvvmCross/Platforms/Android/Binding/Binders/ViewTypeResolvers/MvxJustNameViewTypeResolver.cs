@@ -9,7 +9,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {
     public class MvxJustNameViewTypeResolver : MvxReflectionViewTypeResolver
     {
-        public MvxJustNameViewTypeResolver(IMvxTypeCache typeCache) : base(typeCache)
+        public MvxJustNameViewTypeResolver(IMvxViewTypeRegistry registry) : base(registry)
         {
         }
 
@@ -20,9 +20,8 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
             if (IsFullyQualified(tagName))
                 return null;
 
-            Type toReturn;
-            TypeCache.NameCache.TryGetValue(tagName, out toReturn);
-            return toReturn;
+            Registry.TryResolve(tagName, out var type);
+            return type;
         }
     }
 }
