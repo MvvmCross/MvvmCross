@@ -65,7 +65,7 @@ public static class MvxFragmentExtensions
 
         if (fragment.BindingContext == null)
         {
-            fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Activity,
+            fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Activity!,
                 new MvxSimpleLayoutInflaterHolder(inflater),
                 fragment.DataContext);
         }
@@ -83,7 +83,7 @@ public static class MvxFragmentExtensions
 
         if (fragment.BindingContext == null)
         {
-            fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Context,
+            fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Context!,
                 new MvxSimpleLayoutInflaterHolder(
                     actualFragment.LayoutInflater),
                 fragment.DataContext);

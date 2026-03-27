@@ -22,11 +22,13 @@ namespace MvvmCross.ViewModels
             NavigationService = navigationService;
         }
 
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         public void Start(object? hint = null)
         {
             StartAsync(hint).GetAwaiter().GetResult();
         }
 
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         public async Task StartAsync(object? hint = null)
         {
             // Check whether Start has commenced, and return if it has
@@ -42,6 +44,7 @@ namespace MvvmCross.ViewModels
             await NavigateToFirstViewModel(applicationHint);
         }
 
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         protected abstract Task NavigateToFirstViewModel(object? hint = null);
 
         protected virtual Task<object?> ApplicationStartup(object? hint = null)
@@ -72,6 +75,7 @@ namespace MvvmCross.ViewModels
         {
         }
 
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         protected override async Task NavigateToFirstViewModel(object? hint = null)
         {
             try
@@ -100,6 +104,7 @@ namespace MvvmCross.ViewModels
             return await base.ApplicationStartup(hint);
         }
 
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         protected override async Task NavigateToFirstViewModel(object? hint = null)
         {
             try

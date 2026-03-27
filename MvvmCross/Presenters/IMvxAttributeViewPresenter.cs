@@ -14,7 +14,10 @@ namespace MvvmCross.Presenters
     {
         IMvxViewModelTypeFinder? ViewModelTypeFinder { get; }
         IMvxViewsContainer? ViewsContainer { get; }
-        IDictionary<Type, MvxPresentationAttributeAction>? AttributeTypesToActionsDictionary { get; }
+        IDictionary<Type, MvxPresentationAttributeAction>? AttributeTypesToActionsDictionary {
+            [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
+            get;
+        }
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         void RegisterAttributeTypes();
 

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using MvvmCross.DependencyInjection;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Hosting;
 
@@ -52,13 +53,13 @@ public class MvxHost
     }
 
     /// <summary>
-    /// <summary>
     /// Sets this host as the current ambient host, then invokes <see cref="IMvxStartup.OnStartup"/>
     /// for service configuration. On platforms with a dedicated start screen (e.g. Android's
     /// <c>MvxStartActivity</c>) navigation to the first ViewModel is handled there; on headless
     /// or desktop platforms (WPF, console) <see cref="IMvxAppStart"/> is triggered here as a
     /// fallback when no <see cref="IMvxStartup"/> is registered.
     /// </summary>
+    [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual async Task Start()
     {
         _current = this;

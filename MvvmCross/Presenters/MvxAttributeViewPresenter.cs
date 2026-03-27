@@ -29,10 +29,9 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
 
     public virtual IMvxViewsContainer? ViewsContainer => _viewsContainer.Value;
 
-    [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("Trimming", "IL2026",
-        Justification = "RegisterAttributeTypes is called lazily at first access; implementors are responsible for ensuring type safety.")]
     public virtual IDictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
     {
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         get
         {
             if (_attributeTypesActionsDictionary == null)

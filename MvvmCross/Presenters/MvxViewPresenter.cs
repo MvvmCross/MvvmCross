@@ -32,7 +32,7 @@ namespace MvvmCross.Presenters
 
             if (_presentationHintHandlers.TryGetValue(
                 hint.GetType(),
-                out Func<MvxPresentationHint, Task<bool>> handler))
+                out Func<MvxPresentationHint, Task<bool>>? handler))
             {
                 return handler(hint);
             }

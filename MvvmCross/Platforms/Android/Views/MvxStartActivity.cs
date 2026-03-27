@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+#nullable enable
+
 using System.Diagnostics.CodeAnalysis;
 using Android.Runtime;
 using Android.Views;
@@ -22,9 +24,9 @@ public abstract class MvxStartActivity
 
     private readonly int _resourceId;
 
-    private Bundle _bundle;
+    private Bundle? _bundle;
 
-    public new MvxNullViewModel ViewModel
+    public new MvxNullViewModel? ViewModel
     {
         get { return base.ViewModel as MvxNullViewModel; }
         set { base.ViewModel = value; }
@@ -46,7 +48,7 @@ public abstract class MvxStartActivity
         RequestWindowFeature(WindowFeatures.NoTitle);
     }
 
-    protected override void OnCreate(Bundle savedInstanceState)
+    protected override void OnCreate(Bundle? savedInstanceState)
     {
         RequestWindowFeatures();
 
@@ -80,7 +82,7 @@ public abstract class MvxStartActivity
     }
 #pragma warning restore AsyncFixer01, AsyncFixer03
 
-    protected virtual async Task RunAppStartAsync(Bundle bundle)
+    protected virtual async Task RunAppStartAsync(Bundle? bundle)
     {
         IMvxAppStart? startup;
         if ((startup = MvxHost.Current?.Services.GetService<IMvxAppStart>()) != null)
@@ -96,7 +98,7 @@ public abstract class MvxStartActivity
         }
     }
 
-    protected virtual object GetAppStartHint(object hint = null)
+    protected virtual object? GetAppStartHint(object? hint = null)
     {
         return hint;
     }
