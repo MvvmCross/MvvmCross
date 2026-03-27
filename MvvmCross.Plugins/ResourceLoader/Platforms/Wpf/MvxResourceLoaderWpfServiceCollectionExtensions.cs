@@ -11,7 +11,7 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Wpf;
 
 public static class MvxResourceLoaderWpfServiceCollectionExtensions
 {
-    public static IServiceCollection AddMvvmCrossResourceLoader(this IServiceCollection services)
+    public static IServiceCollection AddMvxResourceLoader(this IServiceCollection services)
     {
         services.TryAddTransient<IMvxResourceLoader, MvxWpfResourceLoader>();
         return services;

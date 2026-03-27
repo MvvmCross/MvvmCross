@@ -38,12 +38,12 @@ public class SceneDelegate : MvxSceneDelegate
             {
                 services.AddLogging(l => l.AddSerilog());
                 services.AddMvvmCross<PlaygroundStartup>(opts => opts.StartWith<RootViewModel>());
-                services.AddMvvmCrossMessenger();
-                services.AddMvvmCrossVisibility();
-                services.AddMvvmCrossColor();
-                services.AddMvvmCrossJson();
-                services.AddMvvmCrossViewModels(typeof(PlaygroundStartup).Assembly);
-                services.AddMvvmCrossIosViews(typeof(SceneDelegate).Assembly);
+                services.AddMvxMessenger();
+                services.AddMvxVisibility();
+                services.AddMvxColor();
+                services.AddMvxJson();
+                services.AddMvxViewModels(typeof(PlaygroundStartup).Assembly);
+                services.AddMvxIosViews(typeof(SceneDelegate).Assembly);
             })
             .Build()
             .Start()

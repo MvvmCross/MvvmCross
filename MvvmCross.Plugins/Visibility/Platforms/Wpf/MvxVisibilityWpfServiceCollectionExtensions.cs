@@ -11,10 +11,10 @@ namespace MvvmCross.Plugin.Visibility.Platforms.Wpf;
 
 public static class MvxVisibilityWpfServiceCollectionExtensions
 {
-    public static IServiceCollection AddMvvmCrossVisibility(this IServiceCollection services)
+    public static IServiceCollection AddMvxVisibility(this IServiceCollection services)
     {
         services.TryAddSingleton<IMvxNativeVisibility, MvxWpfVisibility>();
-        services.AddMvvmCrossVisibilityConverters();
+        services.AddMvxVisibilityConverters();
         return services;
     }
 }

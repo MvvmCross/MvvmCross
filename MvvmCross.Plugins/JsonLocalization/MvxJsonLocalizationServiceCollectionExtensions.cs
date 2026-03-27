@@ -17,12 +17,12 @@ public static class MvxJsonLocalizationServiceCollectionExtensions
     /// <summary>
     /// Registers <see cref="MvxJsonDictionaryTextProvider"/> services for JSON-based localisation.
     /// Users typically subclass <see cref="MvxTextProviderBuilder"/> and call
-    /// <see cref="AddMvvmCrossJsonLocalization{TBuilder}"/> to register their builder.
+    /// <see cref="AddMvxJsonLocalization{TBuilder}"/> to register their builder.
     /// </summary>
     /// <typeparam name="TBuilder">
     /// A concrete subclass of <see cref="MvxTextProviderBuilder"/> that loads JSON resources.
     /// </typeparam>
-    public static IServiceCollection AddMvvmCrossJsonLocalization<TBuilder>(
+    public static IServiceCollection AddMvxJsonLocalization<TBuilder>(
         this IServiceCollection services)
         where TBuilder : MvxTextProviderBuilder
     {

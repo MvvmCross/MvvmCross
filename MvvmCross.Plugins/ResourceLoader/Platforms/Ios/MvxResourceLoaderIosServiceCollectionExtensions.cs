@@ -11,7 +11,7 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Ios;
 
 public static class MvxResourceLoaderIosServiceCollectionExtensions
 {
-    public static IServiceCollection AddMvvmCrossResourceLoader(this IServiceCollection services)
+    public static IServiceCollection AddMvxResourceLoader(this IServiceCollection services)
     {
         services.TryAddTransient<IMvxResourceLoader, MvxIosResourceLoader>();
         return services;

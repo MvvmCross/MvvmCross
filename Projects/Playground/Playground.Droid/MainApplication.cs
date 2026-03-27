@@ -46,13 +46,13 @@ namespace Playground.Droid
                     services.AddLogging(l => l.AddSerilog());
                     services.AddMvvmCross<PlaygroundStartup>(opts =>
                         opts.StartWith<Playground.Core.ViewModels.RootViewModel>());
-                    services.AddMvvmCrossVisibility();
-                    services.AddMvvmCrossColor();
-                    services.AddMvvmCrossJson();
+                    services.AddMvxVisibility();
+                    services.AddMvxColor();
+                    services.AddMvxJson();
                     // Register ViewModels from the Core assembly for name-based lookup.
-                    services.AddMvvmCrossViewModels(typeof(PlaygroundStartup).Assembly);
+                    services.AddMvxViewModels(typeof(PlaygroundStartup).Assembly);
                     // Register all MvvmCross views (Activities and Fragments) in this assembly.
-                    services.AddMvvmCrossAndroidViews(typeof(MainApplication).Assembly);
+                    services.AddMvxAndroidViews(typeof(MainApplication).Assembly);
                 })
                 .Build()
                 .Start();

@@ -35,9 +35,9 @@ namespace Playground.WinUi
                     services.AddMvvmCross<PlaygroundStartup>(opts =>
                         opts.StartWith<RootViewModel>()
                             .AddViewAssembly(typeof(App).Assembly));
-                    services.AddMvvmCrossVisibility();
-                    services.AddMvvmCrossColor();
-                    services.AddMvvmCrossJson();
+                    services.AddMvxVisibility();
+                    services.AddMvxColor();
+                    services.AddMvxJson();
                 })
                 .Build()
                 .Start();

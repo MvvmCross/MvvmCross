@@ -23,7 +23,7 @@ public static class MvxAndroidBindingServiceCollectionExtensions
     /// This replaces the old assembly-scanning behaviour. Call this for every custom view type
     /// that you reference by short name in MvvmCross binding XML (e.g. <c>MvxLinearLayout</c>).
     /// </remarks>
-    public static IServiceCollection AddMvvmCrossAndroidViewType<TView>(
+    public static IServiceCollection AddMvxAndroidViewType<TView>(
         this IServiceCollection services)
         where TView : View
     {

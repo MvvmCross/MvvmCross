@@ -11,7 +11,7 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Android;
 
 public static class MvxResourceLoaderAndroidServiceCollectionExtensions
 {
-    public static IServiceCollection AddMvvmCrossResourceLoader(this IServiceCollection services)
+    public static IServiceCollection AddMvxResourceLoader(this IServiceCollection services)
     {
         services.TryAddTransient<IMvxResourceLoader, MvxAndroidResourceLoader>();
         return services;

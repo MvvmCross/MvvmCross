@@ -13,17 +13,17 @@ namespace MvvmCross.Plugin.Color;
 /// <summary>
 /// Extension methods for registering the MvvmCross Color plugin — platform-neutral services.
 /// For the platform-specific <c>IMvxNativeColor</c> registration, call the platform extension
-/// (e.g. <c>AddMvvmCrossColor()</c> from the platform-specific package).
+/// (e.g. <c>AddMvxColor()</c> from the platform-specific package).
 /// </summary>
 public static class MvxColorServiceCollectionExtensions
 {
     /// <summary>
     /// Registers the common Color plugin value converters (ARGB, RGBA, RGB, NativeColor, etc.)
     /// into <see cref="IMvxValueConverterRegistry"/>.
-    /// Call this from your platform-specific <c>AddMvvmCrossColor()</c> extension or directly
+    /// Call this from your platform-specific <c>AddMvxColor()</c> extension or directly
     /// before calling the platform overload.
     /// </summary>
-    public static IServiceCollection AddMvvmCrossColorConverters(this IServiceCollection services)
+    public static IServiceCollection AddMvxColorConverters(this IServiceCollection services)
     {
         services.AddSingleton<IConfigureMvxValueConverters, MvxColorValueConverterRegistration>();
         return services;

@@ -15,7 +15,7 @@ namespace MvvmCross.Plugin.Visibility.Platforms.WinUi
         public MvxVisibilityDesignTimeHelper()
         {
             // Design-time plugin loading is no longer needed.
-            // Register IMvxNativeVisibility at startup with services.AddMvvmCrossVisibility().
+            // Register IMvxNativeVisibility at startup with services.AddMvxVisibility().
         }
     }
 }

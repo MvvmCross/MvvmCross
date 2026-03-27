@@ -61,7 +61,7 @@ public static class MvxServiceCollectionExtensions
     /// Call this for each assembly that contains ViewModels (typically your Core assembly).
     /// </summary>
     [RequiresUnreferencedCode("Assembly scanning for ViewModels uses reflection which may not be preserved during trimming. Register ViewModels explicitly with IMvxViewModelByNameRegistry.Add<T>() for trim-compatible registration.")]
-    public static IServiceCollection AddMvvmCrossViewModels(
+    public static IServiceCollection AddMvxViewModels(
         this IServiceCollection services,
         Assembly viewModelAssembly)
     {
@@ -86,7 +86,7 @@ public static class MvxServiceCollectionExtensions
         services.TryAddSingleton<IMvxNavigationSerializer, MvxStringDictionaryNavigationSerializer>();
 
         // ViewModel name lookup (shared instance registered under two interfaces)
-        // Factory applies all IMvxViewModelRegistration entries added via AddMvvmCrossViewModels().
+        // Factory applies all IMvxViewModelRegistration entries added via AddMvxViewModels().
         services.TryAddSingleton<MvxViewModelByNameLookup>(sp =>
         {
             var lookup = new MvxViewModelByNameLookup();

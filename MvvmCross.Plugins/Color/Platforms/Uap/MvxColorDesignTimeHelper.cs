@@ -13,7 +13,7 @@ namespace MvvmCross.Plugin.Color.Platforms.Uap
         public MvxColorDesignTimeHelper()
         {
             // Design-time plugin loading is no longer needed.
-            // Register IMvxNativeColor at startup with services.AddMvvmCrossColor().
+            // Register IMvxNativeColor at startup with services.AddMvxColor().
         }
     }
 }

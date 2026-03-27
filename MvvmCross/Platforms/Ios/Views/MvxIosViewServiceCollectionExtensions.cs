@@ -20,7 +20,7 @@ public static class MvxIosViewServiceCollectionExtensions
     /// <summary>
     /// Registers a single explicit View → ViewModel mapping.
     /// </summary>
-    public static IServiceCollection AddMvvmCrossIosView<
+    public static IServiceCollection AddMvxIosView<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] TView>(
         this IServiceCollection services)
@@ -36,8 +36,8 @@ public static class MvxIosViewServiceCollectionExtensions
     /// Scans the given assembly for types that implement <see cref="IMvxView"/> and registers
     /// their ViewModel associations. Call this once per view assembly during startup.
     /// </summary>
-    [RequiresUnreferencedCode("Assembly scanning for views uses reflection which may not be preserved during trimming. Use AddMvvmCrossIosView<TViewModel, TView>() for trim-compatible registration.")]
-    public static IServiceCollection AddMvvmCrossIosViews(
+    [RequiresUnreferencedCode("Assembly scanning for views uses reflection which may not be preserved during trimming. Use AddMvxIosView<TViewModel, TView>() for trim-compatible registration.")]
+    public static IServiceCollection AddMvxIosViews(
         this IServiceCollection services,
         Assembly viewAssembly)
     {

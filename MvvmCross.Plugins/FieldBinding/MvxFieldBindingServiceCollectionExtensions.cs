@@ -19,7 +19,7 @@ public static class MvxFieldBindingServiceCollectionExtensions
     /// to <see cref="IMvxSourceBindingFactoryExtensionHost"/> when the binding system initialises.
     /// </summary>
     [RequiresUnreferencedCode("MvxFieldBinding requires unreferenced code")]
-    public static IServiceCollection AddMvvmCrossFieldBinding(this IServiceCollection services)
+    public static IServiceCollection AddMvxFieldBinding(this IServiceCollection services)
     {
         services.AddSingleton<IMvxSourceBindingFactoryExtension, MvxFieldSourceBindingFactoryExtension>();
         return services;

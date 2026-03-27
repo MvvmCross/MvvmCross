@@ -18,10 +18,10 @@ public static class MvxColorIosServiceCollectionExtensions
     /// Registers <see cref="MvxIosColor"/> as <see cref="IMvxNativeColor"/> and
     /// adds the common Color value converters.
     /// </summary>
-    public static IServiceCollection AddMvvmCrossColor(this IServiceCollection services)
+    public static IServiceCollection AddMvxColor(this IServiceCollection services)
     {
         services.TryAddSingleton<IMvxNativeColor, MvxIosColor>();
-        services.AddMvvmCrossColorConverters();
+        services.AddMvxColorConverters();
         return services;
     }
 }

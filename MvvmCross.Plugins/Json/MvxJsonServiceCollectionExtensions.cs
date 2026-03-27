@@ -24,7 +24,7 @@ public static class MvxJsonServiceCollectionExtensions
     /// When <c>true</c>, also registers <see cref="MvxJsonConverter"/> as <see cref="IMvxTextSerializer"/>.
     /// </param>
     [RequiresUnreferencedCode("MvxJsonConverter requires unreferenced code")]
-    public static IServiceCollection AddMvvmCrossJson(
+    public static IServiceCollection AddMvxJson(
         this IServiceCollection services,
         bool registerAsTextSerializer = false)
     {

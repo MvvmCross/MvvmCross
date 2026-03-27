@@ -11,10 +11,10 @@ namespace MvvmCross.Plugin.Visibility.Platforms.Ios;
 
 public static class MvxVisibilityIosServiceCollectionExtensions
 {
-    public static IServiceCollection AddMvvmCrossVisibility(this IServiceCollection services)
+    public static IServiceCollection AddMvxVisibility(this IServiceCollection services)
     {
         services.TryAddSingleton<IMvxNativeVisibility, MvxIosVisibility>();
-        services.AddMvvmCrossVisibilityConverters();
+        services.AddMvxVisibilityConverters();
         return services;
     }
 }

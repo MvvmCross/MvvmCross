@@ -16,7 +16,7 @@ public static class MvxMessengerServiceCollectionExtensions
     /// <summary>
     /// Registers <see cref="IMvxMessenger"/> as a singleton using <see cref="MvxMessengerHub"/>.
     /// </summary>
-    public static IServiceCollection AddMvvmCrossMessenger(this IServiceCollection services)
+    public static IServiceCollection AddMvxMessenger(this IServiceCollection services)
     {
         services.TryAddSingleton<IMvxMessenger, MvxMessengerHub>();
         return services;

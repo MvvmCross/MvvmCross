@@ -18,7 +18,7 @@ public static class MvxVisibilityServiceCollectionExtensions
     /// <summary>
     /// Registers common Visibility value converters into <see cref="IMvxValueConverterRegistry"/>.
     /// </summary>
-    public static IServiceCollection AddMvvmCrossVisibilityConverters(this IServiceCollection services)
+    public static IServiceCollection AddMvxVisibilityConverters(this IServiceCollection services)
     {
         services.AddSingleton<IConfigureMvxValueConverters, MvxVisibilityValueConverterRegistration>();
         return services;

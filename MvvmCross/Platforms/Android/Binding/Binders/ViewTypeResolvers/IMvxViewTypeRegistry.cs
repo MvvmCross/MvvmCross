@@ -13,7 +13,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
 /// </summary>
 /// <remarks>
 /// Register custom or framework view types via the
-/// <c>services.AddMvvmCrossAndroidViewType&lt;TView&gt;()</c> extension method on
+/// <c>services.AddMvxAndroidViewType&lt;TView&gt;()</c> extension method on
 /// <see cref="Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
 /// </remarks>
 public interface IMvxViewTypeRegistry

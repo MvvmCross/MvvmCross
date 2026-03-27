@@ -11,10 +11,10 @@ namespace MvvmCross.Plugin.Visibility.Platforms.Android;
 
 public static class MvxVisibilityAndroidServiceCollectionExtensions
 {
-    public static IServiceCollection AddMvvmCrossVisibility(this IServiceCollection services)
+    public static IServiceCollection AddMvxVisibility(this IServiceCollection services)
     {
         services.TryAddSingleton<IMvxNativeVisibility, MvxDroidVisibility>();
-        services.AddMvvmCrossVisibilityConverters();
+        services.AddMvxVisibilityConverters();
         return services;
     }
 }

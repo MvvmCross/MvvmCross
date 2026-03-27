@@ -98,7 +98,7 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
         Services.TryAddSingleton<IMvxAndroidGlobals>(new MvxAndroidGlobals(application));
 
         // View presenter — uses an empty assembly list since view type registration
-        // is handled explicitly via AddMvvmCrossAndroidView(s).
+        // is handled explicitly via AddMvxAndroidView(s).
         // The activity lifetime listener is injected so PendingRequest handling works.
         Services.TryAddSingleton<IMvxAndroidViewPresenter>(sp =>
             new MvxAndroidViewPresenter(
@@ -113,7 +113,7 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
         Services.TryAddSingleton<IMvxViewDispatcher, MvxAndroidViewDispatcher>();
 
         // Views container (maps ViewModel types to Android Activity/Fragment types).
-        // Factory applies all IMvxAndroidViewRegistration entries added via AddMvvmCrossAndroidView(s).
+        // Factory applies all IMvxAndroidViewRegistration entries added via AddMvxAndroidView(s).
         Services.TryAddSingleton<MvxAndroidViewsContainer>(sp =>
         {
             var container = new MvxAndroidViewsContainer(

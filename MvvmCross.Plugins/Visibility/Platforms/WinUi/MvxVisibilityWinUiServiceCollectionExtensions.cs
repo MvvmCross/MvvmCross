@@ -11,10 +11,10 @@ namespace MvvmCross.Plugin.Visibility.Platforms.WinUi;
 
 public static class MvxVisibilityWinUiServiceCollectionExtensions
 {
-    public static IServiceCollection AddMvvmCrossVisibility(this IServiceCollection services)
+    public static IServiceCollection AddMvxVisibility(this IServiceCollection services)
     {
         services.TryAddSingleton<IMvxNativeVisibility, MvxWinRTVisibility>();
-        services.AddMvvmCrossVisibilityConverters();
+        services.AddMvxVisibilityConverters();
         return services;
     }
 }

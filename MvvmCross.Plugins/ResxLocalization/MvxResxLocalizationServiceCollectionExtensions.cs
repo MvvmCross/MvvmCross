@@ -19,7 +19,7 @@ public static class MvxResxLocalizationServiceCollectionExtensions
     /// Registers <see cref="MvxResxTextProvider"/> as <see cref="IMvxTextProvider"/> using the
     /// supplied <paramref name="resourceManager"/>.
     /// </summary>
-    public static IServiceCollection AddMvvmCrossResxLocalization(
+    public static IServiceCollection AddMvxResxLocalization(
         this IServiceCollection services,
         ResourceManager resourceManager)
     {
@@ -32,7 +32,7 @@ public static class MvxResxLocalizationServiceCollectionExtensions
     /// Registers <see cref="MvxResxTextProvider"/> as <see cref="IMvxTextProvider"/> using the
     /// supplied list of <paramref name="resourceManagers"/>.
     /// </summary>
-    public static IServiceCollection AddMvvmCrossResxLocalization(
+    public static IServiceCollection AddMvxResxLocalization(
         this IServiceCollection services,
         IList<ResourceManager> resourceManagers)
     {

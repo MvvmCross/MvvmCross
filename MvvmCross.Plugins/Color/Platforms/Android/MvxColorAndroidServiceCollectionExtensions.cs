@@ -18,10 +18,10 @@ public static class MvxColorAndroidServiceCollectionExtensions
     /// Registers <see cref="MvxAndroidColor"/> as <see cref="IMvxNativeColor"/> and
     /// adds the common Color value converters.
     /// </summary>
-    public static IServiceCollection AddMvvmCrossColor(this IServiceCollection services)
+    public static IServiceCollection AddMvxColor(this IServiceCollection services)
     {
         services.TryAddSingleton<IMvxNativeColor, MvxAndroidColor>();
-        services.AddMvvmCrossColorConverters();
+        services.AddMvxColorConverters();
         return services;
     }
 }

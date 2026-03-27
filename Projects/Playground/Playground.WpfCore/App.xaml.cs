@@ -24,10 +24,10 @@ namespace Playground.WpfCore
                     services.AddMvvmCross<PlaygroundStartup>(opts =>
                         opts.StartWith<RootViewModel>()
                             .AddViewAssembly(typeof(App).Assembly));
-                    services.AddMvvmCrossVisibility();
-                    services.AddMvvmCrossColor();
-                    services.AddMvvmCrossMessenger();
-                    services.AddMvvmCrossJson();
+                    services.AddMvxVisibility();
+                    services.AddMvxColor();
+                    services.AddMvxMessenger();
+                    services.AddMvxJson();
                 })
                 .Build()
                 .Start()

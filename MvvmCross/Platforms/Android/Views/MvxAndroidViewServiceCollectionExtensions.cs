@@ -20,7 +20,7 @@ public static class MvxAndroidViewServiceCollectionExtensions
     /// <summary>
     /// Registers a single explicit View → ViewModel mapping.
     /// </summary>
-    public static IServiceCollection AddMvvmCrossAndroidView<
+    public static IServiceCollection AddMvxAndroidView<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] TView>(
         this IServiceCollection services)
@@ -37,8 +37,8 @@ public static class MvxAndroidViewServiceCollectionExtensions
     /// their ViewModel associations using <see cref="IMvxViewModelTypeFinder"/> conventions
     /// (attribute-based or name-based mapping). Call this once per view assembly during startup.
     /// </summary>
-    [RequiresUnreferencedCode("Assembly scanning for views uses reflection which may not be preserved during trimming. Use AddMvvmCrossAndroidView<TViewModel, TView>() for trim-compatible registration.")]
-    public static IServiceCollection AddMvvmCrossAndroidViews(
+    [RequiresUnreferencedCode("Assembly scanning for views uses reflection which may not be preserved during trimming. Use AddMvxAndroidView<TViewModel, TView>() for trim-compatible registration.")]
+    public static IServiceCollection AddMvxAndroidViews(
         this IServiceCollection services,
         Assembly viewAssembly)
     {

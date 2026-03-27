@@ -362,7 +362,7 @@ namespace MvvmCross.Platforms.Android.Binding
         protected virtual void InitializeViewTypeResolver(IServiceCollection services)
         {
             // Registry is built lazily when first resolved; all IMvxViewTypeRegistration
-            // descriptors (added via services.AddMvvmCrossAndroidViewType<TView>()) are applied at that point.
+            // descriptors (added via services.AddMvxAndroidViewType<TView>()) are applied at that point.
             services.TryAddSingleton<IMvxViewTypeRegistry>(sp =>
             {
                 var registry = new MvxViewTypeRegistry();

@@ -32,7 +32,7 @@ namespace Playground.Mac
                 .ConfigureServices(services =>
                 {
                     services.AddMvvmCross<PlaygroundStartup>(opts => opts.StartWith<RootViewModel>());
-                    services.AddMvvmCrossJson();
+                    services.AddMvxJson();
                 })
                 .Build()
                 .Start()

@@ -11,7 +11,7 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.WinUi;
 
 public static class MvxResourceLoaderWinUiServiceCollectionExtensions
 {
-    public static IServiceCollection AddMvvmCrossResourceLoader(this IServiceCollection services)
+    public static IServiceCollection AddMvxResourceLoader(this IServiceCollection services)
     {
         services.TryAddTransient<IMvxResourceLoader, MvxStoreResourceLoader>();
         return services;

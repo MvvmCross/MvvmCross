@@ -16,7 +16,7 @@ public static class MvxMethodBindingServiceCollectionExtensions
     /// <summary>
     /// Registers <see cref="MvxMethodSourceBindingFactoryExtension"/> into the binding system.
     /// </summary>
-    public static IServiceCollection AddMvvmCrossMethodBinding(this IServiceCollection services)
+    public static IServiceCollection AddMvxMethodBinding(this IServiceCollection services)
     {
         services.AddSingleton<IMvxSourceBindingFactoryExtension, MvxMethodSourceBindingFactoryExtension>();
         return services;
