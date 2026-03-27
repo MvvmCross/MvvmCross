@@ -15,17 +15,17 @@ namespace MvvmCross.Presenters
         IMvxViewModelTypeFinder? ViewModelTypeFinder { get; }
         IMvxViewsContainer? ViewsContainer { get; }
         IDictionary<Type, MvxPresentationAttributeAction>? AttributeTypesToActionsDictionary {
-            [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
+            [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
             get;
         }
-        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         void RegisterAttributeTypes();
 
         //TODO: Maybe move those to helper class
-        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute uses type hierarchy checks and may call CreatePresentationAttribute which requires unreferenced code.")]
+        [RequiresUnreferencedCode("Getting presentation attribute uses type hierarchy checks and may call CreatePresentationAttribute which requires unreferenced code.")]
         MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request);
 
-        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
+        [RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
         MvxBasePresentationAttribute CreatePresentationAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewType);
