@@ -25,7 +25,7 @@ public class MvxViewModelViewLookupBuilder
                 (assembly, candidateViewType) => new { assembly, candidateViewType })
             .Select(t => new { t, viewModelType = associatedTypeFinder?.FindTypeOrNull(t.candidateViewType) })
             .Where(t => t.viewModelType != null)
-            .Select(t => (t.viewModelType, t.t.candidateViewType));
+            .Select(t => (t.viewModelType!, t.t.candidateViewType));
 
         var filteredViews = FilterViews(views);
 

@@ -201,6 +201,7 @@ public class MvxNavigationService : IMvxNavigationService
     [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
     protected async Task<MvxViewModelInstanceRequest> NavigationRouteRequest<TParameter>(
         string path, TParameter param, IMvxBundle? presentationBundle = null)
+        where TParameter : notnull
     {
         ArgumentNullException.ThrowIfNull(path);
         ArgumentNullException.ThrowIfNull(param);
@@ -317,6 +318,7 @@ public class MvxNavigationService : IMvxNavigationService
             TParameter param,
             IMvxBundle? presentationBundle = null,
             CancellationToken cancellationToken = default)
+        where TParameter : notnull
     {
         var request = await NavigationRouteRequest(path, param, presentationBundle).ConfigureAwait(false);
         if (request.ViewModelInstance == null)
@@ -347,6 +349,7 @@ public class MvxNavigationService : IMvxNavigationService
         TParameter param,
         IMvxBundle? presentationBundle = null,
         CancellationToken cancellationToken = default)
+        where TParameter : notnull
     {
         var request = new MvxViewModelInstanceRequest(viewModelType)
         {
@@ -368,6 +371,7 @@ public class MvxNavigationService : IMvxNavigationService
     public virtual Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel, TParameter>(
         TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
         where TViewModel : IMvxViewModel<TParameter>
+        where TParameter : notnull
     {
         return Navigate(typeof(TViewModel), param, presentationBundle, cancellationToken);
     }
@@ -384,6 +388,7 @@ public class MvxNavigationService : IMvxNavigationService
     [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param,
         IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+        where TParameter : notnull
     {
         var request = new MvxViewModelInstanceRequest(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
         ViewModelLoader.ReloadViewModel(viewModel, param, request, null);

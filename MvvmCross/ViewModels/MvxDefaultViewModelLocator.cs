@@ -48,6 +48,7 @@ namespace MvvmCross.ViewModels
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
             IMvxNavigateEventArgs? navigationArgs = null)
+            where TParameter : notnull
         {
             if (viewModelType == null)
                 throw new ArgumentNullException(nameof(viewModelType));
