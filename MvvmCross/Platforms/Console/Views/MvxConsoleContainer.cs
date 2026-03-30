@@ -86,6 +86,7 @@ public class MvxConsoleContainer
         return GoBack();
     }
 
+    [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override Task<bool> GoBack()
     {
         lock (_lockObject)

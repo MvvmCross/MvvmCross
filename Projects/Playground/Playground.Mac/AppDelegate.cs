@@ -29,9 +29,10 @@ namespace Playground.Mac
                     false);
 
             MvxMacHostBuilder.CreateBuilder(mainWindow)
+                .StartWith<RootViewModel>()
                 .ConfigureServices(services =>
                 {
-                    services.AddMvvmCross<PlaygroundStartup>(opts => opts.StartWith<RootViewModel>());
+                    services.AddMvxBindings();
                     services.AddMvxJson();
                 })
                 .Build()

@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
 using Android.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.Bindings.Target.Construction;
@@ -16,11 +16,11 @@ using Playground.Core;
 using Playground.Droid.Bindings;
 using Playground.Droid.Controls;
 using Serilog;
-using Serilog.Extensions.Logging;
 
 namespace Playground.Droid
 {
     [Application]
+    [RequiresUnreferencedCode("The MainApplication uses MvvmCross which may use reflection for view and ViewModel assembly scanning, and may call methods that require unreferenced code.")]
     public class MainApplication : MvxAndroidApplication
     {
         public MainApplication(IntPtr javaReference, JniHandleOwnership transfer)
@@ -37,25 +37,27 @@ namespace Playground.Droid
                 .CreateLogger();
 
             MvxAndroidHostBuilder.CreateBuilder(this)
-                .ConfigureTargetBindings(registry =>
-                    registry.RegisterCustomBindingFactory<BinaryEdit>(
-                        "MyCount",
-                        view => new BinaryEditTargetBinding(view)))
+                .StartWith<Playground.Core.ViewModels.RootViewModel>()
                 .ConfigureServices(services =>
                 {
+                    services.AddMvxBindings(config => config
+                        .FillTargetFactories(registry =>
+                            registry.RegisterCustomBindingFactory<BinaryEdit>(
+                                "MyCount",
+                                view => new BinaryEditTargetBinding(view))));
                     services.AddLogging(l => l.AddSerilog());
-                    services.AddMvvmCross<PlaygroundStartup>(opts =>
-                        opts.StartWith<Playground.Core.ViewModels.RootViewModel>());
                     services.AddMvxVisibility();
                     services.AddMvxColor();
                     services.AddMvxJson();
                     // Register ViewModels from the Core assembly for name-based lookup.
-                    services.AddMvxViewModels(typeof(PlaygroundStartup).Assembly);
+                    services.AddMvxViewModels(typeof(Playground.Core.ViewModels.RootViewModel).Assembly);
                     // Register all MvvmCross views (Activities and Fragments) in this assembly.
                     services.AddMvxAndroidViews(typeof(MainApplication).Assembly);
                 })
                 .Build()
-                .Start();
+                .Start()
+                .GetAwaiter()
+                .GetResult();
         }
     }
 }

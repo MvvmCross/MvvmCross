@@ -5,7 +5,6 @@
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MvvmCross.DependencyInjection;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
 using System.Diagnostics.CodeAnalysis;
@@ -53,28 +52,16 @@ public class MvxHost
     }
 
     /// <summary>
-    /// Sets this host as the current ambient host, then invokes <see cref="IMvxStartup.OnStartup"/>
-    /// for service configuration. On platforms with a dedicated start screen (e.g. Android's
-    /// <c>MvxStartActivity</c>) navigation to the first ViewModel is handled there; on headless
-    /// or desktop platforms (WPF, console) <see cref="IMvxAppStart"/> is triggered here as a
-    /// fallback when no <see cref="IMvxStartup"/> is registered.
+    /// Sets this host as the current ambient host. On platforms with a dedicated start screen
+    /// (e.g. Android's <c>MvxStartActivity</c>) navigation to the first ViewModel is handled
+    /// there; on headless or desktop platforms (WPF, console) <see cref="IMvxAppStart"/> is
+    /// triggered here.
     /// </summary>
     [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
     public virtual async Task Start()
     {
         _current = this;
 
-        var startup = Services.GetService<IMvxStartup>();
-        if (startup is not null)
-        {
-            // OnStartup is for service-level initialisation (registering extra services, etc.).
-            // Do NOT navigate here — platform start activities handle first navigation.
-            await startup.OnStartup(Services).ConfigureAwait(false);
-            return;
-        }
-
-        // Fallback for platforms without a dedicated start screen (WPF, console, etc.):
-        // trigger the first navigation directly from here.
         var appStart = Services.GetService<IMvxAppStart>();
         if (appStart is not null)
         {
@@ -84,9 +71,8 @@ public class MvxHost
         {
             Services.GetService<ILogger<MvxHost>>()
                 ?.Log(LogLevel.Warning,
-                    "MvxHost started but no IMvxStartup or IMvxAppStart was registered. " +
-                    "Register one via AddMvvmCross(options => options.StartWith<TViewModel>()) " +
-                    "or implement IMvxStartup.");
+                    "MvxHost started but no IMvxAppStart was registered. " +
+                    "Call builder.StartWith<TViewModel>() to configure the initial navigation.");
         }
     }
 

@@ -30,11 +30,10 @@ namespace Playground.WinUi
         {
             base.OnLaunched(args);
             await MvxWinUiHostBuilder.CreateBuilder(MainWindow!)
+                .StartWith<RootViewModel>(opts => opts.AddViewAssembly(typeof(App).Assembly))
                 .ConfigureServices(services =>
                 {
-                    services.AddMvvmCross<PlaygroundStartup>(opts =>
-                        opts.StartWith<RootViewModel>()
-                            .AddViewAssembly(typeof(App).Assembly));
+                    services.AddMvxBindings();
                     services.AddMvxVisibility();
                     services.AddMvxColor();
                     services.AddMvxJson();

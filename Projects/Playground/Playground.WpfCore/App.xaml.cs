@@ -19,11 +19,10 @@ namespace Playground.WpfCore
             base.OnStartup(e);
             var mainWindow = new MainWindow();
             MvxWpfHostBuilder.CreateBuilder(mainWindow)
+                .StartWith<RootViewModel>(opts => opts.AddViewAssembly(typeof(App).Assembly))
                 .ConfigureServices(services =>
                 {
-                    services.AddMvvmCross<PlaygroundStartup>(opts =>
-                        opts.StartWith<RootViewModel>()
-                            .AddViewAssembly(typeof(App).Assembly));
+                    services.AddMvxBindings();
                     services.AddMvxVisibility();
                     services.AddMvxColor();
                     services.AddMvxMessenger();

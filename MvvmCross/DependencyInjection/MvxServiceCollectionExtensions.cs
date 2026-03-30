@@ -41,21 +41,6 @@ public static class MvxServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Registers all core MvvmCross framework services and registers a user-defined
-    /// <see cref="IMvxStartup"/> implementation.
-    /// </summary>
-    [RequiresUnreferencedCode("Configuring MvvmCross via StartWith<TViewModel>() or UseAppStart<TAppStart>() stores types that are registered via reflection.")]
-    public static IServiceCollection AddMvvmCross<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TStartup>(
-        this IServiceCollection services,
-        Action<MvxOptions>? configure = null)
-            where TStartup : class, IMvxStartup
-    {
-        services.AddMvvmCross(configure);
-        services.TryAddSingleton<IMvxStartup, TStartup>();
-        return services;
-    }
-
-    /// <summary>
     /// Scans the given assembly for <see cref="IMvxViewModel"/> implementations and registers
     /// them by name so they can be looked up by <see cref="IMvxViewModelByNameLookup"/>.
     /// Call this for each assembly that contains ViewModels (typically your Core assembly).

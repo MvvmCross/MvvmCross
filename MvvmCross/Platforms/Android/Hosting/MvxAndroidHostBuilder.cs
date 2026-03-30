@@ -9,8 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MvvmCross.Base;
 using MvvmCross.Hosting;
-using MvvmCross.Platforms.Android.Binding;
-using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Platforms.Android.Views;
@@ -26,10 +24,6 @@ namespace MvvmCross.Platforms.Android.Hosting;
 /// </summary>
 public class MvxAndroidHostBuilder : MvxHostBuilder
 {
-    // Android-specific fill callbacks (base class owns the common ones)
-    private Action<IMvxViewTypeRegistry> _fillViewTypes = _ => { };
-    private Action<IMvxAxmlNameViewTypeResolver> _fillAxmlViewTypeResolver = _ => { };
-    private Action<IMvxNamespaceListViewTypeResolver> _fillNamespaceListViewTypeResolver = _ => { };
 
     /// <summary>
     /// Creates an <see cref="MvxAndroidHostBuilder"/> for the given Android <see cref="Application"/>.
@@ -41,18 +35,6 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
     {
         ArgumentNullException.ThrowIfNull(application);
         return new MvxAndroidHostBuilder(application);
-    }
-
-    /// <summary>
-    /// Registers additional Android view types for the XML inflater
-    /// (equivalent to overriding <c>FillViewTypes</c> in the old <c>MvxAndroidSetup</c>).
-    /// </summary>
-    public MvxAndroidHostBuilder ConfigureViewTypes(Action<IMvxViewTypeRegistry> configure)
-    {
-        ArgumentNullException.ThrowIfNull(configure);
-        var previous = _fillViewTypes;
-        _fillViewTypes = registry => { previous(registry); configure(registry); };
-        return this;
     }
 
     [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Registering Android view container factory uses reflection via IMvxAndroidViewRegistration.Apply which may scan assemblies.")]
@@ -132,24 +114,5 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
             sp => sp.GetRequiredService<MvxAndroidViewsContainer>());
         Services.TryAddSingleton<IMvxAndroidViewModelLoader>(
             sp => sp.GetRequiredService<MvxAndroidViewsContainer>());
-    }
-
-    /// <inheritdoc/>
-    public override MvxHost Build()
-    {
-        // Binding registrations are deferred to Build() so that Configure* calls made between
-        // CreateBuilder() and Build() are included (e.g. ConfigureTargetBindings).
-        var bindingBuilder = new MvxAndroidBindingBuilder(
-            fillValueConverters: FillValueConverters,
-            fillValueCombiners: FillValueCombiners,
-            fillTargetFactories: FillTargetFactories,
-            fillBindingNames: FillBindingNames,
-            fillViewTypes: _fillViewTypes,
-            fillAxmlViewTypeResolver: _fillAxmlViewTypeResolver,
-            fillNamespaceListViewTypeResolver: _fillNamespaceListViewTypeResolver);
-#pragma warning disable IL2026 // assembly-scanning trimming warning — acceptable at setup time
-        bindingBuilder.DoRegistration(Services);
-#pragma warning restore IL2026
-        return base.Build();
     }
 }

@@ -6,9 +6,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MvvmCross.Base;
-using MvvmCross.DependencyInjection;
 using MvvmCross.Hosting;
-using MvvmCross.Platforms.Ios.Binding;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Views;
 using MvvmCross.Presenters;
@@ -72,21 +70,6 @@ public class MvxIosHostBuilder : MvxHostBuilder
     }
 
     /// <inheritdoc/>
-    public override MvxHost Build()
-    {
-        // Binding registrations are deferred to Build() so that Configure* calls are included.
-        var bindingBuilder = new MvxIosBindingBuilder(
-            fillRegistryAction: FillTargetFactories,
-            fillValueConvertersAction: FillValueConverters,
-            fillValueCombinersAction: FillValueCombiners,
-            fillBindingNamesAction: FillBindingNames);
-#pragma warning disable IL2026
-        bindingBuilder.DoRegistration(Services);
-#pragma warning restore IL2026
-        return base.Build();
-    }
-
-    /// <inheritdoc/>
     protected override MvxHost CreateHost(IServiceProvider serviceProvider)
         => new MvxIosHost(serviceProvider);
 
@@ -100,14 +83,9 @@ public class MvxIosHostBuilder : MvxHostBuilder
 
         public override async Task Start()
         {
-            // Set Current first, then run OnStartup for service configuration.
             // Unlike Android (which defers navigation to MvxStartActivity), iOS triggers
             // first navigation here where the UIWindow and UIScene are already available.
             SetAsCurrent();
-
-            var startup = Services.GetService<IMvxStartup>();
-            if (startup is not null)
-                await startup.OnStartup(Services).ConfigureAwait(false);
 
             var appStart = Services.GetService<IMvxAppStart>();
             if (appStart is not null && !appStart.IsStarted)

@@ -18,6 +18,7 @@ using Serilog;
 namespace Playground.iOS;
 
 [Register("SceneDelegate")]
+[RequiresUnreferencedCode("The SceneDelegate uses MvvmCross which may use reflection for view and ViewModel assembly scanning, and may call methods that require unreferenced code.")]
 public class SceneDelegate : MvxSceneDelegate
 {
     public override void WillConnect(UIScene scene, UISceneSession session, UISceneConnectionOptions connectionOptions)
@@ -30,19 +31,20 @@ public class SceneDelegate : MvxSceneDelegate
 
         Window = new UIWindow((UIWindowScene)scene);
         MvxIosHostBuilder.CreateBuilder(Window)
-            .ConfigureTargetBindings(registry =>
-                registry.RegisterCustomBindingFactory<BinaryEdit>(
-                    "MyCount",
-                    view => new BinaryEditTargetBinding(view)))
+            .StartWith<RootViewModel>()
             .ConfigureServices(services =>
             {
+                services.AddMvxBindings(config => config
+                    .FillTargetFactories(registry =>
+                        registry.RegisterCustomBindingFactory<BinaryEdit>(
+                            "MyCount",
+                            view => new BinaryEditTargetBinding(view))));
                 services.AddLogging(l => l.AddSerilog());
-                services.AddMvvmCross<PlaygroundStartup>(opts => opts.StartWith<RootViewModel>());
                 services.AddMvxMessenger();
                 services.AddMvxVisibility();
                 services.AddMvxColor();
                 services.AddMvxJson();
-                services.AddMvxViewModels(typeof(PlaygroundStartup).Assembly);
+                services.AddMvxViewModels(typeof(RootViewModel).Assembly);
                 services.AddMvxIosViews(typeof(SceneDelegate).Assembly);
             })
             .Build()

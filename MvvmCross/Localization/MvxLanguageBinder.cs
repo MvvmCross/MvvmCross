@@ -31,7 +31,7 @@ public class MvxLanguageBinder(string? namespaceName = null, string? typeName = 
             if (cachedTextProvider == null)
             {
                 throw new MvxException(
-                    "Missing text provider - please register IMvxTextProvider with AddMvvmCrossResxLocalization or AddMvvmCrossJsonLocalization");
+                    "Missing text provider - please register IMvxTextProvider with AddMvxResxLocalization or AddMvxJsonLocalization");
             }
 
             return _cachedTextProvider = cachedTextProvider;

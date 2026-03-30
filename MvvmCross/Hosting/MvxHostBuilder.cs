@@ -3,12 +3,10 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.Combiners;
-using MvvmCross.Converters;
 using MvvmCross.DependencyInjection;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Hosting;
 
@@ -26,11 +24,24 @@ public abstract class MvxHostBuilder
     /// </summary>
     public IServiceCollection Services { get; } = new ServiceCollection();
 
-    // Binding fill callbacks — populated by Configure* methods, consumed in Build().
-    protected Action<IMvxTargetBindingFactoryRegistry> FillTargetFactories { get; private set; } = _ => { };
-    protected Action<IMvxValueConverterRegistry> FillValueConverters { get; private set; } = _ => { };
-    protected Action<IMvxValueCombinerRegistry> FillValueCombiners { get; private set; } = _ => { };
-    protected Action<IMvxBindingNameRegistry> FillBindingNames { get; private set; } = _ => { };
+    /// <summary>
+    /// Registers the MvvmCross framework and configures <typeparamref name="TViewModel"/> as the
+    /// first ViewModel to navigate to on startup.
+    /// </summary>
+    /// <typeparam name="TViewModel">The initial ViewModel the app should navigate to.</typeparam>
+    /// <param name="configure">Optional callback for additional options such as <see cref="MvxOptions.AddViewAssembly"/>.</param>
+    [RequiresUnreferencedCode("Configuring MvvmCross via StartWith<TViewModel>() stores types that are registered via reflection.")]
+    public MvxHostBuilder StartWith<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(
+        Action<MvxOptions>? configure = null)
+            where TViewModel : IMvxViewModel
+    {
+        Services.AddMvvmCross(opts =>
+        {
+            opts.StartWith<TViewModel>();
+            configure?.Invoke(opts);
+        });
+        return this;
+    }
 
     /// <summary>
     /// Adds services to the container using the provided callback.
@@ -39,54 +50,6 @@ public abstract class MvxHostBuilder
     {
         ArgumentNullException.ThrowIfNull(configure);
         configure(Services);
-        return this;
-    }
-
-    /// <summary>
-    /// Registers custom target binding factories
-    /// (equivalent to overriding <c>FillTargetFactories</c> in the old setup classes).
-    /// </summary>
-    public MvxHostBuilder ConfigureTargetBindings(Action<IMvxTargetBindingFactoryRegistry> configure)
-    {
-        ArgumentNullException.ThrowIfNull(configure);
-        var previous = FillTargetFactories;
-        FillTargetFactories = registry => { previous(registry); configure(registry); };
-        return this;
-    }
-
-    /// <summary>
-    /// Registers additional value converters
-    /// (equivalent to overriding <c>FillValueConverters</c> in the old setup classes).
-    /// </summary>
-    public MvxHostBuilder ConfigureValueConverters(Action<IMvxValueConverterRegistry> configure)
-    {
-        ArgumentNullException.ThrowIfNull(configure);
-        var previous = FillValueConverters;
-        FillValueConverters = registry => { previous(registry); configure(registry); };
-        return this;
-    }
-
-    /// <summary>
-    /// Registers additional value combiners
-    /// (equivalent to overriding <c>FillValueCombiners</c> in the old setup classes).
-    /// </summary>
-    public MvxHostBuilder ConfigureValueCombiners(Action<IMvxValueCombinerRegistry> configure)
-    {
-        ArgumentNullException.ThrowIfNull(configure);
-        var previous = FillValueCombiners;
-        FillValueCombiners = registry => { previous(registry); configure(registry); };
-        return this;
-    }
-
-    /// <summary>
-    /// Registers additional default binding names
-    /// (equivalent to overriding <c>FillDefaultBindingNames</c> in the old setup classes).
-    /// </summary>
-    public MvxHostBuilder ConfigureBindingNames(Action<IMvxBindingNameRegistry> configure)
-    {
-        ArgumentNullException.ThrowIfNull(configure);
-        var previous = FillBindingNames;
-        FillBindingNames = registry => { previous(registry); configure(registry); };
         return this;
     }
 
