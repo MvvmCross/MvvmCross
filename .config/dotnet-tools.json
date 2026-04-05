@@ -10,7 +10,7 @@
       "rollForward": false
     },
     "dotnet-sonarscanner": {
-      "version": "11.2.0",
+      "version": "11.2.1",
       "commands": [
         "dotnet-sonarscanner"
       ],
