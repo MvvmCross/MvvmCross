@@ -69,6 +69,47 @@ public class MvxIosHostBuilder : MvxHostBuilder
             sp => sp.GetRequiredService<MvxIosViewsContainer>());
     }
 
+    /// <summary>
+    /// Replaces the default <see cref="IMvxIosViewPresenter"/> registration with a custom
+    /// implementation resolved via dependency injection.
+    /// </summary>
+    /// <typeparam name="T">A type that implements <see cref="IMvxIosViewPresenter"/>.</typeparam>
+    /// <remarks>
+    /// Also replaces the <see cref="IMvxViewPresenter"/> alias so navigation service and
+    /// dispatcher both resolve the same instance. Call this before
+    /// <see cref="MvxHostBuilder.StartWith{TViewModel}"/> or
+    /// <see cref="MvxHostBuilder.ConfigureServices"/> to keep the platform-typed fluent chain.
+    /// </remarks>
+    public MvxIosHostBuilder UsePresenter<T>()
+        where T : class, IMvxIosViewPresenter
+    {
+        Services.RemoveAll<IMvxIosViewPresenter>();
+        Services.RemoveAll<IMvxViewPresenter>();
+        Services.AddSingleton<IMvxIosViewPresenter, T>();
+        Services.AddSingleton<IMvxViewPresenter>(
+            sp => sp.GetRequiredService<IMvxIosViewPresenter>());
+        return this;
+    }
+
+    /// <summary>
+    /// Replaces the default <see cref="IMvxIosViewPresenter"/> registration with an instance
+    /// produced by the supplied factory.
+    /// </summary>
+    /// <typeparam name="T">A type that implements <see cref="IMvxIosViewPresenter"/>.</typeparam>
+    /// <param name="factory">Factory delegate that receives the <see cref="IServiceProvider"/>
+    /// and returns the presenter instance.</param>
+    public MvxIosHostBuilder UsePresenter<T>(Func<IServiceProvider, T> factory)
+        where T : class, IMvxIosViewPresenter
+    {
+        ArgumentNullException.ThrowIfNull(factory);
+        Services.RemoveAll<IMvxIosViewPresenter>();
+        Services.RemoveAll<IMvxViewPresenter>();
+        Services.AddSingleton<IMvxIosViewPresenter>(factory);
+        Services.AddSingleton<IMvxViewPresenter>(
+            sp => sp.GetRequiredService<IMvxIosViewPresenter>());
+        return this;
+    }
+
     /// <inheritdoc/>
     protected override MvxHost CreateHost(IServiceProvider serviceProvider)
         => new MvxIosHost(serviceProvider);

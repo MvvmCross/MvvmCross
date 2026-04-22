@@ -12,7 +12,6 @@ using MvvmCross.Core;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using MvvmCross.ViewModels.Result;
-using MvvmCross.Views;
 
 namespace MvvmCross.DependencyInjection;
 

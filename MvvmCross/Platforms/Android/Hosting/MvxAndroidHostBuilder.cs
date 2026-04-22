@@ -115,4 +115,45 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
         Services.TryAddSingleton<IMvxAndroidViewModelLoader>(
             sp => sp.GetRequiredService<MvxAndroidViewsContainer>());
     }
+
+    /// <summary>
+    /// Replaces the default <see cref="IMvxAndroidViewPresenter"/> registration with a custom
+    /// implementation resolved via dependency injection.
+    /// </summary>
+    /// <typeparam name="T">A type that implements <see cref="IMvxAndroidViewPresenter"/>.</typeparam>
+    /// <remarks>
+    /// Also replaces the <see cref="IMvxViewPresenter"/> alias so navigation service and
+    /// dispatcher both resolve the same instance. Call this before
+    /// <see cref="MvxHostBuilder.StartWith{TViewModel}"/> or
+    /// <see cref="MvxHostBuilder.ConfigureServices"/> to keep the platform-typed fluent chain.
+    /// </remarks>
+    public MvxAndroidHostBuilder UsePresenter<T>()
+        where T : class, IMvxAndroidViewPresenter
+    {
+        Services.RemoveAll<IMvxAndroidViewPresenter>();
+        Services.RemoveAll<IMvxViewPresenter>();
+        Services.AddSingleton<IMvxAndroidViewPresenter, T>();
+        Services.AddSingleton<IMvxViewPresenter>(
+            sp => sp.GetRequiredService<IMvxAndroidViewPresenter>());
+        return this;
+    }
+
+    /// <summary>
+    /// Replaces the default <see cref="IMvxAndroidViewPresenter"/> registration with an instance
+    /// produced by the supplied factory.
+    /// </summary>
+    /// <typeparam name="T">A type that implements <see cref="IMvxAndroidViewPresenter"/>.</typeparam>
+    /// <param name="factory">Factory delegate that receives the <see cref="IServiceProvider"/>
+    /// and returns the presenter instance.</param>
+    public MvxAndroidHostBuilder UsePresenter<T>(Func<IServiceProvider, T> factory)
+        where T : class, IMvxAndroidViewPresenter
+    {
+        ArgumentNullException.ThrowIfNull(factory);
+        Services.RemoveAll<IMvxAndroidViewPresenter>();
+        Services.RemoveAll<IMvxViewPresenter>();
+        Services.AddSingleton<IMvxAndroidViewPresenter>(factory);
+        Services.AddSingleton<IMvxViewPresenter>(
+            sp => sp.GetRequiredService<IMvxAndroidViewPresenter>());
+        return this;
+    }
 }

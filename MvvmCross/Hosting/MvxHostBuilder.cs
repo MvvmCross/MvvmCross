@@ -5,7 +5,10 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using MvvmCross.DependencyInjection;
+using MvvmCross.Navigation;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Hosting;
@@ -50,6 +53,84 @@ public abstract class MvxHostBuilder
     {
         ArgumentNullException.ThrowIfNull(configure);
         configure(Services);
+        return this;
+    }
+
+    /// <summary>
+    /// Replaces the default <see cref="IMvxNavigationService"/> registration with a custom
+    /// implementation resolved via dependency injection.
+    /// </summary>
+    /// <typeparam name="T">The custom navigation service type.</typeparam>
+    /// <remarks>
+    /// Can be called before or after <see cref="StartWith{TViewModel}"/>. When called before,
+    /// the default registration in <c>AddMvvmCross</c> is skipped. When called after, the
+    /// previously registered default is replaced.
+    /// </remarks>
+    public MvxHostBuilder UseNavigationService<T>()
+        where T : class, IMvxNavigationService
+    {
+        Services.RemoveAll<IMvxNavigationService>();
+        Services.AddSingleton<IMvxNavigationService, T>();
+        return this;
+    }
+
+    /// <summary>
+    /// Replaces the default <see cref="IMvxNavigationService"/> registration with an instance
+    /// produced by the supplied factory.
+    /// </summary>
+    /// <typeparam name="T">The custom navigation service type.</typeparam>
+    /// <param name="factory">Factory delegate that receives the <see cref="IServiceProvider"/>
+    /// and returns the navigation service instance.</param>
+    public MvxHostBuilder UseNavigationService<T>(Func<IServiceProvider, T> factory)
+        where T : class, IMvxNavigationService
+    {
+        ArgumentNullException.ThrowIfNull(factory);
+        Services.RemoveAll<IMvxNavigationService>();
+        Services.AddSingleton<IMvxNavigationService>(factory);
+        return this;
+    }
+
+    /// <summary>
+    /// Replaces the <see cref="IMvxViewPresenter"/> registration with a custom implementation
+    /// resolved via dependency injection.
+    /// </summary>
+    /// <typeparam name="T">The custom view presenter type.</typeparam>
+    /// <remarks>
+    /// <para>
+    /// On platforms where a dispatcher depends on a platform-specific presenter interface
+    /// (e.g. <c>IMvxAndroidViewPresenter</c>), prefer the platform-builder's typed
+    /// <c>UsePresenter</c> overload, which also replaces the platform-specific registration
+    /// and keeps the dispatcher wired correctly.
+    /// </para>
+    /// <para>
+    /// This method is safe for platform-agnostic scenarios (e.g. unit tests, WPF, WinUI, Mac,
+    /// tvOS) where the dispatcher either does not exist or is not yet registered.
+    /// </para>
+    /// </remarks>
+    public MvxHostBuilder UsePresenter<T>()
+        where T : class, IMvxViewPresenter
+    {
+        Services.RemoveAll<IMvxViewPresenter>();
+        Services.AddSingleton<IMvxViewPresenter, T>();
+        return this;
+    }
+
+    /// <summary>
+    /// Replaces the <see cref="IMvxViewPresenter"/> registration with an instance produced by
+    /// the supplied factory.
+    /// </summary>
+    /// <typeparam name="T">The custom view presenter type.</typeparam>
+    /// <param name="factory">Factory delegate that receives the <see cref="IServiceProvider"/>
+    /// and returns the presenter instance.</param>
+    /// <remarks>
+    /// See remarks on <see cref="UsePresenter{T}()"/> for platform-specific guidance.
+    /// </remarks>
+    public MvxHostBuilder UsePresenter<T>(Func<IServiceProvider, T> factory)
+        where T : class, IMvxViewPresenter
+    {
+        ArgumentNullException.ThrowIfNull(factory);
+        Services.RemoveAll<IMvxViewPresenter>();
+        Services.AddSingleton<IMvxViewPresenter>(factory);
         return this;
     }
 
