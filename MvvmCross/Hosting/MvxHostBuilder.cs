@@ -135,6 +135,42 @@ public abstract class MvxHostBuilder
     }
 
     /// <summary>
+    /// Replaces the <see cref="IMvxAppStart"/> registration with a custom implementation
+    /// resolved via dependency injection.
+    /// </summary>
+    /// <typeparam name="T">The custom app start type.</typeparam>
+    /// <remarks>
+    /// Can be called before or after <see cref="StartWith{TViewModel}"/>. When called before,
+    /// the default registration in <c>AddMvvmCross</c> is skipped. When called after, the
+    /// previously registered default is replaced. In either case the core MvvmCross services
+    /// are only registered when <see cref="StartWith{TViewModel}"/> or
+    /// <see cref="ConfigureServices"/> with <c>AddMvvmCross()</c> is called.
+    /// </remarks>
+    public MvxHostBuilder UseAppStart<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
+        where T : class, IMvxAppStart
+    {
+        Services.RemoveAll<IMvxAppStart>();
+        Services.AddSingleton<IMvxAppStart, T>();
+        return this;
+    }
+
+    /// <summary>
+    /// Replaces the <see cref="IMvxAppStart"/> registration with an instance produced by
+    /// the supplied factory.
+    /// </summary>
+    /// <typeparam name="T">The custom app start type.</typeparam>
+    /// <param name="factory">Factory delegate that receives the <see cref="IServiceProvider"/>
+    /// and returns the app start instance.</param>
+    public MvxHostBuilder UseAppStart<T>(Func<IServiceProvider, T> factory)
+        where T : class, IMvxAppStart
+    {
+        ArgumentNullException.ThrowIfNull(factory);
+        Services.RemoveAll<IMvxAppStart>();
+        Services.AddSingleton<IMvxAppStart>(factory);
+        return this;
+    }
+
+    /// <summary>
     /// Builds the <see cref="MvxHost"/> by finalising the service registrations
     /// and building the <see cref="IServiceProvider"/>.
     /// </summary>
@@ -146,7 +182,9 @@ public abstract class MvxHostBuilder
 
     /// <summary>
     /// Factory method called by <see cref="Build"/> to create the host instance.
-    /// Override to return a platform-specific <see cref="MvxHost"/> subclass.
+    /// Override in a platform-specific builder subclass to return a custom <see cref="MvxHost"/>
+    /// subclass, which can then override <see cref="MvxHost.Start"/> to perform post-build
+    /// initialisation (the equivalent of the old <c>InitializeLastChance</c> hook).
     /// </summary>
     protected virtual MvxHost CreateHost(IServiceProvider serviceProvider)
         => new MvxHost(serviceProvider);

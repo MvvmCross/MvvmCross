@@ -46,7 +46,17 @@ public class MvxHost
     /// </summary>
     public IServiceProvider Services { get; }
 
-    internal MvxHost(IServiceProvider services)
+    /// <summary>
+    /// Initialises a new host with the given service provider. The constructor is public to
+    /// allow user subclasses that override <see cref="Start"/> for post-build initialisation
+    /// (the equivalent of the old <c>InitializeLastChance</c> virtual method).
+    /// <para>
+    /// In normal application code use a platform-specific <see cref="MvxHostBuilder"/> and
+    /// override <see cref="MvxHostBuilder.CreateHost"/> to return your subclass. Direct
+    /// instantiation outside of builders or tests is not recommended.
+    /// </para>
+    /// </summary>
+    public MvxHost(IServiceProvider services)
     {
         Services = services;
     }
