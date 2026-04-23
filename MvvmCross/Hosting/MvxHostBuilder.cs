@@ -66,7 +66,7 @@ public abstract class MvxHostBuilder
     /// the default registration in <c>AddMvxCore</c> is skipped. When called after, the
     /// previously registered default is replaced.
     /// </remarks>
-    public MvxHostBuilder UseNavigationService<T>()
+    public MvxHostBuilder UseNavigationService<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
         where T : class, IMvxNavigationService
     {
         Services.RemoveAll<IMvxNavigationService>();
@@ -107,7 +107,7 @@ public abstract class MvxHostBuilder
     /// tvOS) where the dispatcher either does not exist or is not yet registered.
     /// </para>
     /// </remarks>
-    public MvxHostBuilder UsePresenter<T>()
+    public MvxHostBuilder UsePresenter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
         where T : class, IMvxViewPresenter
     {
         Services.RemoveAll<IMvxViewPresenter>();
