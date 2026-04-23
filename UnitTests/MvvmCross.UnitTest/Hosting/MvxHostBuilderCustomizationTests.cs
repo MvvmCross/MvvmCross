@@ -52,12 +52,12 @@ namespace MvvmCross.UnitTest.Hosting
         }
 
         [Fact]
-        [RequiresUnreferencedCode("Uses AddMvvmCross which stores types via reflection.")]
+        [RequiresUnreferencedCode("Uses AddMvxCore which stores types via reflection.")]
         public void UseNavigationService_CalledBeforeStartWith_WinsOverDefault()
         {
             var builder = CreateTestBuilder();
 
-            // Custom registration BEFORE StartWith (which calls AddMvvmCross / TryAddSingleton)
+            // Custom registration BEFORE StartWith (which calls AddMvxCore / TryAddSingleton)
             builder.UseNavigationService<CustomNavigationService>();
             builder.StartWith<StubViewModel>();
 
@@ -67,12 +67,12 @@ namespace MvvmCross.UnitTest.Hosting
         }
 
         [Fact]
-        [RequiresUnreferencedCode("Uses AddMvvmCross which stores types via reflection.")]
+        [RequiresUnreferencedCode("Uses AddMvxCore which stores types via reflection.")]
         public void UseNavigationService_CalledAfterStartWith_WinsOverDefault()
         {
             var builder = CreateTestBuilder();
 
-            // Custom registration AFTER StartWith (which calls AddMvvmCross / TryAddSingleton)
+            // Custom registration AFTER StartWith (which calls AddMvxCore / TryAddSingleton)
             builder.StartWith<StubViewModel>();
             builder.UseNavigationService<CustomNavigationService>();
 
@@ -180,7 +180,7 @@ namespace MvvmCross.UnitTest.Hosting
         }
 
         [Fact]
-        [RequiresUnreferencedCode("Uses AddMvvmCross which stores types via reflection.")]
+        [RequiresUnreferencedCode("Uses AddMvxCore which stores types via reflection.")]
         public void UseAppStart_CalledBeforeStartWith_WinsOverDefault()
         {
             var builder = CreateTestBuilder();
@@ -193,7 +193,7 @@ namespace MvvmCross.UnitTest.Hosting
         }
 
         [Fact]
-        [RequiresUnreferencedCode("Uses AddMvvmCross which stores types via reflection.")]
+        [RequiresUnreferencedCode("Uses AddMvxCore which stores types via reflection.")]
         public void UseAppStart_CalledAfterStartWith_WinsOverDefault()
         {
             var builder = CreateTestBuilder();

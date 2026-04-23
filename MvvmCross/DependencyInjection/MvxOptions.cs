@@ -9,7 +9,7 @@ using MvvmCross.ViewModels;
 namespace MvvmCross.DependencyInjection;
 
 /// <summary>
-/// Options for configuring the MvvmCross framework via <see cref="MvxServiceCollectionExtensions.AddMvvmCross"/>.
+/// Options for configuring the MvvmCross framework via <see cref="MvxServiceCollectionExtensions.AddMvxCore"/>.
 /// </summary>
 public sealed class MvxOptions
 {

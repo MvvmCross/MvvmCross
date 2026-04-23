@@ -26,7 +26,7 @@ public static class MvxServiceCollectionExtensions
     /// <param name="services">The service collection to add MvvmCross services to.</param>
     /// <param name="configure">Optional callback to customise framework options.</param>
     [RequiresUnreferencedCode("Configuring MvvmCross via StartWith<TViewModel>() or UseAppStart<TAppStart>() stores types that are registered via reflection. Use explicit type parameters for trim-compatible setup.")]
-    public static IServiceCollection AddMvvmCross(
+    public static IServiceCollection AddMvxCore(
         this IServiceCollection services,
         Action<MvxOptions>? configure = null)
     {

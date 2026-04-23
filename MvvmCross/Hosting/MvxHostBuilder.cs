@@ -38,7 +38,7 @@ public abstract class MvxHostBuilder
         Action<MvxOptions>? configure = null)
             where TViewModel : IMvxViewModel
     {
-        Services.AddMvvmCross(opts =>
+        Services.AddMvxCore(opts =>
         {
             opts.StartWith<TViewModel>();
             configure?.Invoke(opts);
@@ -63,7 +63,7 @@ public abstract class MvxHostBuilder
     /// <typeparam name="T">The custom navigation service type.</typeparam>
     /// <remarks>
     /// Can be called before or after <see cref="StartWith{TViewModel}"/>. When called before,
-    /// the default registration in <c>AddMvvmCross</c> is skipped. When called after, the
+    /// the default registration in <c>AddMvxCore</c> is skipped. When called after, the
     /// previously registered default is replaced.
     /// </remarks>
     public MvxHostBuilder UseNavigationService<T>()
@@ -141,10 +141,10 @@ public abstract class MvxHostBuilder
     /// <typeparam name="T">The custom app start type.</typeparam>
     /// <remarks>
     /// Can be called before or after <see cref="StartWith{TViewModel}"/>. When called before,
-    /// the default registration in <c>AddMvvmCross</c> is skipped. When called after, the
+    /// the default registration in <c>AddMvxCore</c> is skipped. When called after, the
     /// previously registered default is replaced. In either case the core MvvmCross services
     /// are only registered when <see cref="StartWith{TViewModel}"/> or
-    /// <see cref="ConfigureServices"/> with <c>AddMvvmCross()</c> is called.
+    /// <see cref="ConfigureServices"/> with <c>AddMvxCore()</c> is called.
     /// </remarks>
     public MvxHostBuilder UseAppStart<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
         where T : class, IMvxAppStart
