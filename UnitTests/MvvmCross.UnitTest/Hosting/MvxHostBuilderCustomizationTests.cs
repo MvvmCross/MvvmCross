@@ -154,6 +154,107 @@ namespace MvvmCross.UnitTest.Hosting
 
         #endregion
 
+        #region UseAppStart
+
+        [Fact]
+        public void UseAppStart_Generic_ResolvesCustomImplementation()
+        {
+            var builder = CreateTestBuilder();
+            builder.UseAppStart<CustomAppStart>();
+
+            var provider = builder.Services.BuildServiceProvider();
+
+            Assert.IsType<CustomAppStart>(provider.GetRequiredService<IMvxAppStart>());
+        }
+
+        [Fact]
+        public void UseAppStart_Factory_ResolvesViaFactory()
+        {
+            var instance = Substitute.For<IMvxAppStart>();
+            var builder = CreateTestBuilder();
+            builder.UseAppStart(_ => instance);
+
+            var provider = builder.Services.BuildServiceProvider();
+
+            Assert.Same(instance, provider.GetRequiredService<IMvxAppStart>());
+        }
+
+        [Fact]
+        [RequiresUnreferencedCode("Uses AddMvvmCross which stores types via reflection.")]
+        public void UseAppStart_CalledBeforeStartWith_WinsOverDefault()
+        {
+            var builder = CreateTestBuilder();
+            builder.UseAppStart<CustomAppStart>();
+            builder.StartWith<StubViewModel>();
+
+            var provider = builder.Services.BuildServiceProvider();
+
+            Assert.IsType<CustomAppStart>(provider.GetRequiredService<IMvxAppStart>());
+        }
+
+        [Fact]
+        [RequiresUnreferencedCode("Uses AddMvvmCross which stores types via reflection.")]
+        public void UseAppStart_CalledAfterStartWith_WinsOverDefault()
+        {
+            var builder = CreateTestBuilder();
+            builder.StartWith<StubViewModel>();
+            builder.UseAppStart<CustomAppStart>();
+
+            var provider = builder.Services.BuildServiceProvider();
+
+            Assert.IsType<CustomAppStart>(provider.GetRequiredService<IMvxAppStart>());
+        }
+
+        [Fact]
+        public void UseAppStart_CalledTwice_LastOneWins()
+        {
+            var builder = CreateTestBuilder();
+            builder.UseAppStart<CustomAppStart>();
+            builder.UseAppStart<AnotherCustomAppStart>();
+
+            var provider = builder.Services.BuildServiceProvider();
+
+            Assert.IsType<AnotherCustomAppStart>(provider.GetRequiredService<IMvxAppStart>());
+        }
+
+        [Fact]
+        public void UseAppStart_NullFactory_Throws()
+        {
+            var builder = CreateTestBuilder();
+            Assert.Throws<ArgumentNullException>(
+                () => builder.UseAppStart<IMvxAppStart>(null!));
+        }
+
+        [Fact]
+        public void UseAppStart_ReturnsBuilderForChaining()
+        {
+            var builder = CreateTestBuilder();
+            var result = builder.UseAppStart<CustomAppStart>();
+            Assert.Same(builder, result);
+        }
+
+        #endregion
+
+        #region MvxHost subclassing
+
+        [Fact]
+        public void MvxHost_CanBeSubclassed_AndCreatedWithPublicConstructor()
+        {
+            var services = new ServiceCollection().BuildServiceProvider();
+            var host = new CustomMvxHost(services);
+            Assert.NotNull(host);
+        }
+
+        [Fact]
+        public void CreateHost_Override_ReturnsCustomSubclass()
+        {
+            var builder = new CustomHostBuilder();
+            var host = builder.Build();
+            Assert.IsType<CustomMvxHost>(host);
+        }
+
+        #endregion
+
         #region Stub types
 
         private sealed class StubViewModel : MvxViewModel
@@ -302,6 +403,37 @@ namespace MvvmCross.UnitTest.Hosting
 
             [RequiresUnreferencedCode("")]
             public Task<bool> Close(IMvxViewModel viewModel) => Task.FromResult(false);
+        }
+
+        private sealed class CustomAppStart : IMvxAppStart
+        {
+            public bool IsStarted => false;
+            [RequiresUnreferencedCode("")]
+            public void Start(object? hint = null) { }
+            [RequiresUnreferencedCode("")]
+            public Task StartAsync(object? hint = null) => Task.CompletedTask;
+            public void ResetStart() { }
+        }
+
+        private sealed class AnotherCustomAppStart : IMvxAppStart
+        {
+            public bool IsStarted => false;
+            [RequiresUnreferencedCode("")]
+            public void Start(object? hint = null) { }
+            [RequiresUnreferencedCode("")]
+            public Task StartAsync(object? hint = null) => Task.CompletedTask;
+            public void ResetStart() { }
+        }
+
+        private sealed class CustomMvxHost : MvxHost
+        {
+            public CustomMvxHost(IServiceProvider services) : base(services) { }
+        }
+
+        private sealed class CustomHostBuilder : MvxHostBuilder
+        {
+            protected override MvxHost CreateHost(IServiceProvider serviceProvider)
+                => new CustomMvxHost(serviceProvider);
         }
 
         #endregion
