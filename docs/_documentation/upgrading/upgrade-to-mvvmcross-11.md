@@ -242,6 +242,65 @@ builder.UseNavigationService(sp => new MyNavigationService(
 
 ---
 
+## Custom view dispatcher
+
+The view dispatcher routes ViewModel show/close requests onto the main thread. Override it via `UseViewDispatcher` on any platform builder. This replaces the old `CreateViewDispatcher()` override in Setup.cs and has the same scope — only `IMvxViewDispatcher` is replaced; platform main-thread scheduling (`IMvxMainThreadAsyncDispatcher`, `IMvxMainThreadDispatcher`) remains unchanged.
+
+```csharp
+// Before (Setup.cs)
+protected override IMvxViewDispatcher CreateViewDispatcher()
+    => new MyViewDispatcher(Presenter);
+
+// After (any builder — call before or after StartWith, last wins)
+builder.UseViewDispatcher<MyViewDispatcher>();
+
+// Or with a factory:
+builder.UseViewDispatcher(sp => new MyViewDispatcher(
+    sp.GetRequiredService<IMvxAndroidViewPresenter>()));
+```
+
+---
+
+## Custom views container
+
+The views container maps ViewModel types to their corresponding View types. Platform-specific `UseViewsContainer` overloads are available on the Android and iOS builders and replace the full alias chain so all internal consumers see the custom implementation.
+
+```csharp
+// Before (Setup.cs)
+protected override IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider)
+    => new MyAndroidViewsContainer(ApplicationContext);
+
+// After (Android builder)
+MvxAndroidHostBuilder.CreateBuilder(this)
+    .UseViewsContainer<MyAndroidViewsContainer>()
+    .StartWith<RootViewModel>()
+    .Build();
+
+// After (iOS builder)
+MvxIosHostBuilder.CreateBuilder(window)
+    .UseViewsContainer<MyIosViewsContainer>()
+    .StartWith<RootViewModel>()
+    .Build();
+```
+
+Platform type constraints for `UseViewsContainer`:
+
+| Platform | Type constraint |
+|---|---|
+| Android | `IMvxAndroidViewsContainer, IMvxViewsContainer`¹ |
+| iOS | `IMvxIosViewsContainer` |
+
+> ¹ Android's `IMvxAndroidViewsContainer` does not inherit from `IMvxViewsContainer` (separate interface hierarchies), so both are required as constraints.
+
+A factory overload is available when the container needs constructor arguments not in DI:
+
+```csharp
+.UseViewsContainer(sp => new MyAndroidViewsContainer(
+    sp.GetRequiredService<Android.Content.Context>()))
+```
+
+---
+
 ## Initialization hooks (InitializeFirstChance / InitializeLastChance)
 
 ### Pre-build initialization (replaces InitializeFirstChance)
