@@ -10,6 +10,7 @@ using MvvmCross.DependencyInjection;
 using MvvmCross.Navigation;
 using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Hosting;
 
@@ -167,6 +168,45 @@ public abstract class MvxHostBuilder
         ArgumentNullException.ThrowIfNull(factory);
         Services.RemoveAll<IMvxAppStart>();
         Services.AddSingleton<IMvxAppStart>(factory);
+        return this;
+    }
+
+    /// <summary>
+    /// Replaces the <see cref="IMvxViewDispatcher"/> registration with a custom implementation
+    /// resolved via dependency injection.
+    /// </summary>
+    /// <typeparam name="T">The custom view dispatcher type.</typeparam>
+    /// <remarks>
+    /// Only replaces the <see cref="IMvxViewDispatcher"/> registration. Platform-specific
+    /// main-thread dispatcher aliases (<c>IMvxMainThreadAsyncDispatcher</c>,
+    /// <c>IMvxMainThreadDispatcher</c>) are left untouched — those are platform threading
+    /// concerns separate from view dispatching. This matches the scope of the old
+    /// <c>CreateViewDispatcher()</c> override in Setup.cs.
+    /// </remarks>
+    public MvxHostBuilder UseViewDispatcher<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
+        where T : class, IMvxViewDispatcher
+    {
+        Services.RemoveAll<IMvxViewDispatcher>();
+        Services.AddSingleton<IMvxViewDispatcher, T>();
+        return this;
+    }
+
+    /// <summary>
+    /// Replaces the <see cref="IMvxViewDispatcher"/> registration with an instance produced by
+    /// the supplied factory.
+    /// </summary>
+    /// <typeparam name="T">The custom view dispatcher type.</typeparam>
+    /// <param name="factory">Factory delegate that receives the <see cref="IServiceProvider"/>
+    /// and returns the dispatcher instance.</param>
+    /// <remarks>
+    /// See remarks on <see cref="UseViewDispatcher{T}()"/> for scope details.
+    /// </remarks>
+    public MvxHostBuilder UseViewDispatcher<T>(Func<IServiceProvider, T> factory)
+        where T : class, IMvxViewDispatcher
+    {
+        ArgumentNullException.ThrowIfNull(factory);
+        Services.RemoveAll<IMvxViewDispatcher>();
+        Services.AddSingleton<IMvxViewDispatcher>(factory);
         return this;
     }
 

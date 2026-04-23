@@ -156,4 +156,59 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
             sp => sp.GetRequiredService<IMvxAndroidViewPresenter>());
         return this;
     }
+
+    /// <summary>
+    /// Replaces the default <see cref="MvxAndroidViewsContainer"/> registration with a custom
+    /// implementation resolved via dependency injection.
+    /// </summary>
+    /// <typeparam name="T">A type that implements both <see cref="IMvxAndroidViewsContainer"/>
+    /// and <see cref="IMvxViewsContainer"/>.</typeparam>
+    /// <remarks>
+    /// Replaces all alias registrations so that <see cref="IMvxAndroidViewsContainer"/>,
+    /// <see cref="IMvxViewsContainer"/>, <see cref="IMvxAndroidViewModelRequestTranslator"/>,
+    /// and <see cref="IMvxAndroidViewModelLoader"/> all resolve to the same custom instance.
+    /// Note that <see cref="IMvxAndroidViewsContainer"/> does not inherit from
+    /// <see cref="IMvxViewsContainer"/> (separate interface hierarchies), hence both are
+    /// required in the type constraint.
+    /// </remarks>
+    public MvxAndroidHostBuilder UseViewsContainer<[System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
+        where T : class, IMvxAndroidViewsContainer, IMvxViewsContainer
+    {
+        Services.RemoveAll<MvxAndroidViewsContainer>();
+        Services.RemoveAll<IMvxAndroidViewsContainer>();
+        Services.RemoveAll<IMvxViewsContainer>();
+        Services.RemoveAll<IMvxAndroidViewModelRequestTranslator>();
+        Services.RemoveAll<IMvxAndroidViewModelLoader>();
+        Services.AddSingleton<T>();
+        Services.AddSingleton<IMvxAndroidViewsContainer>(sp => sp.GetRequiredService<T>());
+        Services.AddSingleton<IMvxViewsContainer>(sp => sp.GetRequiredService<T>());
+        Services.AddSingleton<IMvxAndroidViewModelRequestTranslator>(sp => sp.GetRequiredService<T>());
+        Services.AddSingleton<IMvxAndroidViewModelLoader>(sp => sp.GetRequiredService<T>());
+        return this;
+    }
+
+    /// <summary>
+    /// Replaces the default <see cref="MvxAndroidViewsContainer"/> registration with an instance
+    /// produced by the supplied factory.
+    /// </summary>
+    /// <typeparam name="T">A type that implements both <see cref="IMvxAndroidViewsContainer"/>
+    /// and <see cref="IMvxViewsContainer"/>.</typeparam>
+    /// <param name="factory">Factory delegate that receives the <see cref="IServiceProvider"/>
+    /// and returns the container instance.</param>
+    public MvxAndroidHostBuilder UseViewsContainer<T>(Func<IServiceProvider, T> factory)
+        where T : class, IMvxAndroidViewsContainer, IMvxViewsContainer
+    {
+        ArgumentNullException.ThrowIfNull(factory);
+        Services.RemoveAll<MvxAndroidViewsContainer>();
+        Services.RemoveAll<IMvxAndroidViewsContainer>();
+        Services.RemoveAll<IMvxViewsContainer>();
+        Services.RemoveAll<IMvxAndroidViewModelRequestTranslator>();
+        Services.RemoveAll<IMvxAndroidViewModelLoader>();
+        Services.AddSingleton(factory);
+        Services.AddSingleton<IMvxAndroidViewsContainer>(sp => sp.GetRequiredService<T>());
+        Services.AddSingleton<IMvxViewsContainer>(sp => sp.GetRequiredService<T>());
+        Services.AddSingleton<IMvxAndroidViewModelRequestTranslator>(sp => sp.GetRequiredService<T>());
+        Services.AddSingleton<IMvxAndroidViewModelLoader>(sp => sp.GetRequiredService<T>());
+        return this;
+    }
 }

@@ -110,6 +110,59 @@ public class MvxIosHostBuilder : MvxHostBuilder
         return this;
     }
 
+    /// <summary>
+    /// Replaces the default <see cref="MvxIosViewsContainer"/> registration with a custom
+    /// implementation resolved via dependency injection.
+    /// </summary>
+    /// <typeparam name="T">A type that implements <see cref="IMvxIosViewsContainer"/>.</typeparam>
+    /// <remarks>
+    /// <see cref="IMvxIosViewsContainer"/> inherits <see cref="IMvxViewsContainer"/> and
+    /// <see cref="IMvxIosViewCreator"/> (which in turn inherits <see cref="IMvxCurrentRequest"/>),
+    /// so a single type constraint is sufficient. All alias registrations are replaced so that
+    /// <see cref="IMvxIosViewsContainer"/>, <see cref="IMvxViewsContainer"/>,
+    /// <see cref="IMvxIosViewCreator"/>, and <see cref="IMvxCurrentRequest"/> all resolve to
+    /// the same custom instance.
+    /// </remarks>
+    public MvxIosHostBuilder UseViewsContainer<[System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
+        where T : class, IMvxIosViewsContainer
+    {
+        Services.RemoveAll<MvxIosViewsContainer>();
+        Services.RemoveAll<IMvxIosViewsContainer>();
+        Services.RemoveAll<IMvxViewsContainer>();
+        Services.RemoveAll<IMvxIosViewCreator>();
+        Services.RemoveAll<IMvxCurrentRequest>();
+        Services.AddSingleton<T>();
+        Services.AddSingleton<IMvxIosViewsContainer>(sp => sp.GetRequiredService<T>());
+        Services.AddSingleton<IMvxViewsContainer>(sp => sp.GetRequiredService<T>());
+        Services.AddSingleton<IMvxIosViewCreator>(sp => sp.GetRequiredService<T>());
+        Services.AddSingleton<IMvxCurrentRequest>(sp => sp.GetRequiredService<T>());
+        return this;
+    }
+
+    /// <summary>
+    /// Replaces the default <see cref="MvxIosViewsContainer"/> registration with an instance
+    /// produced by the supplied factory.
+    /// </summary>
+    /// <typeparam name="T">A type that implements <see cref="IMvxIosViewsContainer"/>.</typeparam>
+    /// <param name="factory">Factory delegate that receives the <see cref="IServiceProvider"/>
+    /// and returns the container instance.</param>
+    public MvxIosHostBuilder UseViewsContainer<T>(Func<IServiceProvider, T> factory)
+        where T : class, IMvxIosViewsContainer
+    {
+        ArgumentNullException.ThrowIfNull(factory);
+        Services.RemoveAll<MvxIosViewsContainer>();
+        Services.RemoveAll<IMvxIosViewsContainer>();
+        Services.RemoveAll<IMvxViewsContainer>();
+        Services.RemoveAll<IMvxIosViewCreator>();
+        Services.RemoveAll<IMvxCurrentRequest>();
+        Services.AddSingleton(factory);
+        Services.AddSingleton<IMvxIosViewsContainer>(sp => sp.GetRequiredService<T>());
+        Services.AddSingleton<IMvxViewsContainer>(sp => sp.GetRequiredService<T>());
+        Services.AddSingleton<IMvxIosViewCreator>(sp => sp.GetRequiredService<T>());
+        Services.AddSingleton<IMvxCurrentRequest>(sp => sp.GetRequiredService<T>());
+        return this;
+    }
+
     /// <inheritdoc/>
     protected override MvxHost CreateHost(IServiceProvider serviceProvider)
         => new MvxIosHost(serviceProvider);

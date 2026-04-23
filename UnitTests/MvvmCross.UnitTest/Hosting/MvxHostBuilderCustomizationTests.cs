@@ -8,11 +8,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Base;
 using MvvmCross.Hosting;
 using MvvmCross.Navigation;
 using MvvmCross.Navigation.EventArguments;
 using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
+using MvvmCross.Views;
 using NSubstitute;
 using Xunit;
 
@@ -275,6 +277,87 @@ namespace MvvmCross.UnitTest.Hosting
 
         #endregion
 
+        #region UseViewDispatcher
+
+        [Fact]
+        public void UseViewDispatcher_Generic_ResolvesCustomImplementation()
+        {
+            var host = new CustomHostBuilder()
+                .UseViewDispatcher<CustomViewDispatcher>()
+                .StartWith<StubViewModel>()
+                .Build();
+
+            var dispatcher = host.Services.GetRequiredService<IMvxViewDispatcher>();
+            Assert.IsType<CustomViewDispatcher>(dispatcher);
+        }
+
+        [Fact]
+        public void UseViewDispatcher_Factory_ResolvesViaFactory()
+        {
+            var expected = new CustomViewDispatcher();
+            var host = new CustomHostBuilder()
+                .UseViewDispatcher(_ => expected)
+                .StartWith<StubViewModel>()
+                .Build();
+
+            var dispatcher = host.Services.GetRequiredService<IMvxViewDispatcher>();
+            Assert.Same(expected, dispatcher);
+        }
+
+        [Fact]
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("")]
+        public void UseViewDispatcher_CalledBeforeStartWith_WinsOverDefault()
+        {
+            var host = new CustomHostBuilder()
+                .UseViewDispatcher<CustomViewDispatcher>()
+                .StartWith<StubViewModel>()
+                .Build();
+
+            Assert.IsType<CustomViewDispatcher>(host.Services.GetRequiredService<IMvxViewDispatcher>());
+        }
+
+        [Fact]
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("")]
+        public void UseViewDispatcher_CalledAfterStartWith_WinsOverDefault()
+        {
+            var host = new CustomHostBuilder()
+                .StartWith<StubViewModel>()
+                .UseViewDispatcher<CustomViewDispatcher>()
+                .Build();
+
+            Assert.IsType<CustomViewDispatcher>(host.Services.GetRequiredService<IMvxViewDispatcher>());
+        }
+
+        [Fact]
+        public void UseViewDispatcher_CalledTwice_LastOneWins()
+        {
+            var host = new CustomHostBuilder()
+                .UseViewDispatcher<CustomViewDispatcher>()
+                .UseViewDispatcher<AnotherCustomViewDispatcher>()
+                .StartWith<StubViewModel>()
+                .Build();
+
+            Assert.IsType<AnotherCustomViewDispatcher>(host.Services.GetRequiredService<IMvxViewDispatcher>());
+        }
+
+        [Fact]
+        public void UseViewDispatcher_NullFactory_Throws()
+        {
+            var builder = new CustomHostBuilder();
+            Assert.Throws<ArgumentNullException>(() =>
+                builder.UseViewDispatcher((Func<IServiceProvider, CustomViewDispatcher>)null!));
+        }
+
+        [Fact]
+        public void UseViewDispatcher_ReturnsBuilderForChaining()
+        {
+            var builder = new CustomHostBuilder();
+            var result = builder.UseViewDispatcher<CustomViewDispatcher>();
+            Assert.Same(builder, result);
+        }
+
+        #endregion
+
         #region MvxHost subclassing
 
         [Fact]
@@ -474,6 +557,34 @@ namespace MvvmCross.UnitTest.Hosting
         {
             protected override MvxHost CreateHost(IServiceProvider serviceProvider)
                 => new CustomMvxHost(serviceProvider);
+        }
+
+        private sealed class CustomViewDispatcher : IMvxViewDispatcher
+        {
+            public bool IsOnMainThread => true;
+            public Task ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true) => Task.CompletedTask;
+            public Task ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true) => Task.CompletedTask;
+            public bool RequestMainThreadAction(Action action, bool maskExceptions = true) => true;
+
+            [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("")]
+            public Task<bool> ShowViewModel(MvxViewModelRequest request) => Task.FromResult(false);
+
+            [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("")]
+            public Task<bool> ChangePresentation(MvxPresentationHint hint) => Task.FromResult(false);
+        }
+
+        private sealed class AnotherCustomViewDispatcher : IMvxViewDispatcher
+        {
+            public bool IsOnMainThread => true;
+            public Task ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true) => Task.CompletedTask;
+            public Task ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true) => Task.CompletedTask;
+            public bool RequestMainThreadAction(Action action, bool maskExceptions = true) => true;
+
+            [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("")]
+            public Task<bool> ShowViewModel(MvxViewModelRequest request) => Task.FromResult(false);
+
+            [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("")]
+            public Task<bool> ChangePresentation(MvxPresentationHint hint) => Task.FromResult(false);
         }
 
         #endregion
