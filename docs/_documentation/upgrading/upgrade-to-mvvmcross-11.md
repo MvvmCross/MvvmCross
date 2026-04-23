@@ -169,12 +169,16 @@ public class MyAppStart : MvxAppStart<RootViewModel>
 
 Logging now uses the standard `Microsoft.Extensions.Logging` abstractions. The `CreateLogProvider()` and `CreateLogFactory()` virtual methods in Setup.cs are removed.
 
+MvvmCross 11 automatically calls `services.AddLogging()` inside `AddMvxCore`, so `ILoggerFactory` and `ILogger<T>` are **always resolvable** — even if you never configure any logging provider. By default this gives you a no-op (silent) logger, which prevents framework classes such as `MvxNavigationViewModel` from throwing at DI resolution.
+
+To attach real log output, call `AddLogging` in your `ConfigureServices` callback. Because `AddLogging` is idempotent, adding providers there simply layers them onto the already-registered factory:
+
 ```csharp
 // Before (Setup.cs)
 protected override ILoggerFactory CreateLogFactory() => new SerilogLoggerFactory();
 protected override ILoggerProvider CreateLogProvider() => new SerilogLoggerProvider();
 
-// After (ConfigureServices)
+// After (ConfigureServices) — providers are added on top of the default no-op factory
 services.AddLogging(logging =>
 {
     logging.AddSerilog(dispose: true);

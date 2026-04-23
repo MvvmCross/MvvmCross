@@ -58,6 +58,14 @@ public static class MvxServiceCollectionExtensions
     [RequiresUnreferencedCode("Registering ViewModel lookup factory uses reflection via IMvxViewModelRegistration.Apply which may scan assemblies.")]
     private static void RegisterCoreServices(IServiceCollection services)
     {
+        // Ensure ILoggerFactory and ILogger<T> are always resolvable with a no-op (silent) implementation
+        // by default. Framework classes such as MvxNavigationViewModel require ILoggerFactory as a
+        // non-nullable constructor parameter, so DI resolution would throw without this.
+        // AddLogging() is idempotent: a subsequent call such as
+        //   services.AddLogging(b => b.AddSerilog())
+        // simply adds providers to the already-registered factory rather than replacing it.
+        services.AddLogging();
+
         // Settings
         services.TryAddSingleton<IMvxSettings, MvxSettings>();
 

@@ -7,6 +7,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Hosting;
 using MvvmCross.Navigation;
 using MvvmCross.Navigation.EventArguments;
@@ -231,6 +232,45 @@ namespace MvvmCross.UnitTest.Hosting
             var builder = CreateTestBuilder();
             var result = builder.UseAppStart<CustomAppStart>();
             Assert.Same(builder, result);
+        }
+
+        #endregion
+
+        #region Default logging
+
+        [Fact]
+        public void AddMvxCore_WithoutExplicitAddLogging_ILoggerFactory_ResolvesSuccessfully()
+        {
+            var host = new CustomHostBuilder()
+                .StartWith<StubViewModel>()
+                .Build();
+
+            var loggerFactory = host.Services.GetService<ILoggerFactory>();
+            Assert.NotNull(loggerFactory);
+        }
+
+        [Fact]
+        public void AddMvxCore_WithoutExplicitAddLogging_ILoggerT_ResolvesSuccessfully()
+        {
+            var host = new CustomHostBuilder()
+                .StartWith<StubViewModel>()
+                .Build();
+
+            var logger = host.Services.GetService<ILogger<StubViewModel>>();
+            Assert.NotNull(logger);
+        }
+
+        [Fact]
+        public void AddMvxCore_UserAddLogging_DoesNotBreakFramework()
+        {
+            var host = new CustomHostBuilder()
+                .StartWith<StubViewModel>()
+                .ConfigureServices(s => s.AddLogging(b => b.SetMinimumLevel(LogLevel.Debug)))
+                .Build();
+
+            // ILoggerFactory must still be resolvable after user customisation.
+            var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
+            Assert.NotNull(loggerFactory);
         }
 
         #endregion
