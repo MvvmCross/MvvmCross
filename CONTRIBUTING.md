@@ -74,6 +74,19 @@ Before submitting a Pull Request, make sure that the entire project builds and t
 
 You can also run the Unit Tests separately with `dotnet run --project build/Build.csproj --target=UnitTest` or through your IDE.
 
+## AI Contribution Policy
+
+Contributions made with the assistance of AI tools are welcome, but contributors must use them responsibly.
+
+1. Include related issues or pull requests in the prompt so that the AI has ideal context.
+2. Review AI-generated code closely before submitting a pull request.
+3. Manually test the changes and add appropriate automated tests where feasible.
+4. Only use AI to assist in contributions that you understand well enough to respond to feedback without relying on AI.
+5. Indicate AI-generated content in issue and pull requests descriptions and comments. Specify which model was used.
+6. Do not use AI to reply to questions about your issue or pull request. The questions are for you, not an AI model.
+
+Maintainers reserve the right to close pull requests and issues that appear to be low-quality AI-generated content. We welcome new contributors, but cannot sustain the effort of supporting contributors who primarily defer to AI rather than engaging substantively with the review process.
+
 ## Finding an issue to work on
 
 We have issue labeled with [`up-for-grabs`](https://github.com/MvvmCross/MvvmCross/labels/up-for-grabs) or [`first-timers-only`](https://github.com/MvvmCross/MvvmCross/labels/first-timers-only) to get you started on easy work.
