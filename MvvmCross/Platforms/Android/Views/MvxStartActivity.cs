@@ -5,6 +5,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Android.Runtime;
 using Android.Views;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views;
@@ -12,7 +13,7 @@ namespace MvvmCross.Platforms.Android.Views;
 [Register("mvvmcross.platforms.android.views.MvxStartActivity")]
 [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
 public abstract class MvxStartActivity
-    : MvxActivity
+    : MvxActivity<MvxStartViewModel>
 {
     protected const int NoContent = 0;
 
@@ -20,11 +21,7 @@ public abstract class MvxStartActivity
 
     private Bundle _bundle;
 
-    public new MvxNullViewModel ViewModel
-    {
-        get { return base.ViewModel as MvxNullViewModel; }
-        set { base.ViewModel = value; }
-    }
+    public virtual bool SingleHostActivity => false;
 
     protected MvxStartActivity(int resourceId = NoContent)
     {
@@ -39,7 +36,8 @@ public abstract class MvxStartActivity
 
     protected virtual void RequestWindowFeatures()
     {
-        RequestWindowFeature(WindowFeatures.NoTitle);
+        if (!SingleHostActivity)
+            RequestWindowFeature(WindowFeatures.NoTitle);
     }
 
     protected override void OnCreate(Bundle savedInstanceState)
@@ -52,9 +50,7 @@ public abstract class MvxStartActivity
 
         if (_resourceId != NoContent)
         {
-            // Set our view from the "splash" layout resource
-            // Be careful to use non-binding inflation
-            var content = LayoutInflater.Inflate(_resourceId, null);
+            var content = this.BindingInflate(_resourceId, null);
             SetContentView(content);
         }
     }
@@ -75,7 +71,7 @@ public abstract class MvxStartActivity
             {
                 await startup.StartAsync(GetAppStartHint(bundle));
             }
-            else
+            else if (!SingleHostActivity)
             {
                 Finish();
             }
@@ -91,3 +87,5 @@ public abstract class MvxStartActivity
     {
     }
 }
+
+public class MvxStartViewModel : MvxNullViewModel {}
