@@ -14,6 +14,7 @@ using MvvmCross.Platforms.Wpf.Presenters.Attributes;
 using MvvmCross.Platforms.Wpf.Views;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
+using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Wpf.Presenters
@@ -43,6 +44,8 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             }
         }
 
+        private readonly Stack<IMvxViewModel> _viewModelsStack = new();
+
         protected MvxWpfViewPresenter()
         {
         }
@@ -61,6 +64,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
                     (_, attribute, request) =>
                     {
                         var view = WpfViewLoader.CreateView(request);
+                        TryAddViewModelFromRequestToStack(request);
                         return ShowWindow(view, attribute, request);
                     },
                     (viewModel, _) => CloseWindow(viewModel));
@@ -69,9 +73,16 @@ namespace MvvmCross.Platforms.Wpf.Presenters
                     (_, attribute, request) =>
                     {
                         var view = WpfViewLoader.CreateView(request);
+                        TryAddViewModelFromRequestToStack(request);
                         return ShowContentView(view, attribute, request);
                     },
                     (viewModel, _) => CloseContentView(viewModel));
+        }
+
+        private void TryAddViewModelFromRequestToStack(MvxViewModelRequest request)
+        {
+            if (request is MvxViewModelInstanceRequest instanceRequest)
+                _viewModelsStack.Push(instanceRequest.ViewModelInstance);
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
@@ -175,6 +186,20 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             FrameworkElementsDictionary[contentControl].Push(element);
             contentControl.Content = element;
             return Task.FromResult(true);
+        }
+
+        public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
+        {
+            if (hint is not MvxPopToRootPresentationHint)
+                return await base.ChangePresentation(hint);
+            
+            while (_viewModelsStack.Count > 1)
+            {
+                if (!await Close(_viewModelsStack.Peek()))
+                    return false;
+                _viewModelsStack.Pop();
+            }
+            return await base.ChangePresentation(hint);
         }
 
         public override async Task<bool> Close(IMvxViewModel viewModel)
