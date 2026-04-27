@@ -4,6 +4,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Base;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
@@ -11,6 +12,7 @@ using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Binding.BindingContext
 {
@@ -64,7 +66,7 @@ namespace MvvmCross.Binding.BindingContext
 
             public MvxSourceStepDescription CreateSourceStep(MvxSourceStepDescription inputs)
             {
-                var parser = Mvx.IoCProvider.Resolve<IMvxBindingDescriptionParser>();
+                var parser = MvxHost.Current!.Services.GetRequiredService<IMvxBindingDescriptionParser>();
                 var parsedDescription = parser.ParseSingle(_freeText);
 
                 if (inputs.Converter == null
@@ -124,7 +126,7 @@ namespace MvvmCross.Binding.BindingContext
 
             public MvxSourceStepDescription CreateSourceStep(MvxSourceStepDescription inputs)
             {
-                var parser = Mvx.IoCProvider.Resolve<IMvxBindingDescriptionParser>();
+                var parser = MvxHost.Current!.Services.GetRequiredService<IMvxBindingDescriptionParser>();
                 var innerSteps = _useParser ?
                     _properties.Select(p => parser.ParseSingle(p).Source) :
                     _properties.Select(p => new MvxPathSourceStepDescription { SourcePropertyPath = p });

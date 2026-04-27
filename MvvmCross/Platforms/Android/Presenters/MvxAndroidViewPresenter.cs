@@ -10,8 +10,10 @@ using Android.Util;
 using AndroidX.ViewPager.Widget;
 using Google.Android.Material.Tabs;
 using Java.Lang;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -37,13 +39,10 @@ namespace MvvmCross.Platforms.Android.Presenters
         public const string SharedElementsBundleKey = "__sharedElementsKey";
 
         private readonly Lazy<IMvxAndroidCurrentTopActivity?> _androidCurrentTopActivity =
-            new(() => Mvx.IoCProvider?.Resolve<IMvxAndroidCurrentTopActivity>());
-
-        private readonly Lazy<IMvxAndroidActivityLifetimeListener?> _activityLifetimeListener =
-            new(() => Mvx.IoCProvider?.Resolve<IMvxAndroidActivityLifetimeListener>());
+            new(() => MvxHost.Current?.Services.GetService<IMvxAndroidCurrentTopActivity>());
 
         private readonly Lazy<IMvxNavigationSerializer?> _navigationSerializer =
-            new(() => Mvx.IoCProvider?.Resolve<IMvxNavigationSerializer>());
+            new(() => MvxHost.Current?.Services.GetService<IMvxNavigationSerializer>());
 
         private readonly Lazy<ILogger?> _logger = new(() => MvxLogHost.GetLog<MvxAndroidViewPresenter>());
 
@@ -65,19 +64,23 @@ namespace MvvmCross.Platforms.Android.Presenters
         protected virtual Activity? CurrentActivity =>
             _androidCurrentTopActivity.Value?.Activity as Activity;
 
-        protected IMvxAndroidActivityLifetimeListener? ActivityLifetimeListener =>
-            _activityLifetimeListener.Value;
+        protected IMvxAndroidActivityLifetimeListener? ActivityLifetimeListener { get; }
 
         protected IMvxNavigationSerializer? NavigationSerializer =>
             _navigationSerializer.Value;
 
-        public MvxAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies)
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
+        public MvxAndroidViewPresenter(
+            IEnumerable<Assembly> androidViewAssemblies,
+            IMvxAndroidActivityLifetimeListener? activityLifetimeListener = null)
         {
             AndroidViewAssemblies = androidViewAssemblies;
+            ActivityLifetimeListener = activityLifetimeListener;
             if (ActivityLifetimeListener != null)
                 ActivityLifetimeListener.ActivityChanged += ActivityLifetimeListenerOnActivityChanged;
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         protected virtual void ActivityLifetimeListenerOnActivityChanged(object? sender, MvxActivityEventArgs e)
         {
             if (e.ActivityState == MvxActivityState.OnResume && PendingRequest != null)
@@ -106,6 +109,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             return viewModelType ?? fromFragmentType.GetBasePresentationAttributes().First().ViewModelType;
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Register<MvxActivityPresentationAttribute>(ShowActivity, CloseActivity);
@@ -115,6 +119,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             AttributeTypesToActionsDictionary.Register<MvxViewPagerFragmentPresentationAttribute>(ShowViewPagerFragment, CloseViewPagerFragment);
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute uses type hierarchy checks and may call CreatePresentationAttribute which requires unreferenced code.")]
         public override MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
         {
             ValidateArguments(request);
@@ -199,6 +204,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             return attribute;
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
         public override MvxBasePresentationAttribute CreatePresentationAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewType)
@@ -209,7 +215,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (viewType.IsSubclassOf(typeof(DialogFragment)))
             {
                 _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewName}. Assuming DialogFragment presentation", viewType.Name);
-                return new MvxDialogFragmentPresentationAttribute(enterAnimation: int.MinValue)
+                return new MvxDialogFragmentPresentationAttribute(activityHostViewModelType: null, enterAnimation: int.MinValue)
                 {
                     ViewType = viewType,
                     ViewModelType = viewModelType
@@ -239,6 +245,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             throw new InvalidOperationException($"Don't know how to create a presentation attribute for type {viewType}");
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute uses type hierarchy checks and may call CreatePresentationAttribute which requires unreferenced code.")]
         public override Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
             if (hint == null)
@@ -253,6 +260,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             return base.ChangePresentation(hint);
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute uses type hierarchy checks and may call CreatePresentationAttribute which requires unreferenced code.")]
         private bool ChangePagePresentation(MvxPagePresentationHint pagePresentationHint)
         {
             var request = new MvxViewModelRequest(pagePresentationHint.ViewModel);
@@ -419,20 +427,24 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual Intent? CreateIntentForRequest(MvxViewModelRequest? request)
         {
-            if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidViewModelRequestTranslator? requestTranslator) != true || requestTranslator == null)
+            IMvxAndroidViewModelRequestTranslator? requestTranslator;
+            if ((requestTranslator = MvxHost.Current?.Services.GetService<IMvxAndroidViewModelRequestTranslator>()) == null)
                 return null;
 
             if (request is MvxViewModelInstanceRequest viewModelInstanceRequest)
             {
-                var intentWithKey = requestTranslator.GetIntentWithKeyFor(
-                    viewModelInstanceRequest.ViewModelInstance,
-                    viewModelInstanceRequest
-                );
+                if (viewModelInstanceRequest.ViewModelInstance != null)
+                {
+                    var intentWithKey = requestTranslator.GetIntentWithKeyFor(
+                        viewModelInstanceRequest.ViewModelInstance,
+                        viewModelInstanceRequest
+                    );
 
-                return intentWithKey.intent;
+                    return intentWithKey.intent;
+                }
             }
 
-            return requestTranslator.GetIntentFor(request);
+            return requestTranslator.GetIntentFor(request!);
         }
 
         protected virtual void ShowIntent(Intent intent, Bundle? bundle)
@@ -464,6 +476,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         protected virtual void ShowHostActivity(MvxFragmentPresentationAttribute attribute)
         {
             ValidateArguments(attribute);
@@ -482,6 +495,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             Show(hostViewModelRequest);
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         protected virtual Task<bool> ShowFragment(
             Type view,
             MvxFragmentPresentationAttribute attribute,
@@ -732,6 +746,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             return Task.FromResult(true);
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         protected virtual Task<bool> ShowViewPagerFragment(
             Type view,
             MvxViewPagerFragmentPresentationAttribute attribute,
@@ -807,6 +822,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             return Task.FromResult(true);
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         protected virtual async Task<bool> ShowTabLayout(
             Type view,
             MvxTabLayoutPresentationAttribute attribute,

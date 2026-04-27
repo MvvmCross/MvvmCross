@@ -14,21 +14,21 @@ namespace MvvmCross.ViewModels
     public abstract class MvxAppStart : IMvxAppStart
     {
         protected readonly IMvxNavigationService NavigationService;
-        protected readonly IMvxApplication Application;
 
         private int startHasCommenced;
 
-        protected MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService)
+        protected MvxAppStart(IMvxNavigationService navigationService)
         {
-            Application = application;
             NavigationService = navigationService;
         }
 
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         public void Start(object? hint = null)
         {
             StartAsync(hint).GetAwaiter().GetResult();
         }
 
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         public async Task StartAsync(object? hint = null)
         {
             // Check whether Start has commenced, and return if it has
@@ -44,12 +44,12 @@ namespace MvvmCross.ViewModels
             await NavigateToFirstViewModel(applicationHint);
         }
 
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         protected abstract Task NavigateToFirstViewModel(object? hint = null);
 
-        protected virtual async Task<object?> ApplicationStartup(object? hint = null)
+        protected virtual Task<object?> ApplicationStartup(object? hint = null)
         {
-            await Application.Startup();
-            return hint;
+            return Task.FromResult(hint);
         }
 
         public virtual bool IsStarted => startHasCommenced != 0;
@@ -62,7 +62,7 @@ namespace MvvmCross.ViewModels
 
         protected virtual void Reset()
         {
-            Application.Reset();
+            // override to handle app restart
         }
     }
 
@@ -70,11 +70,12 @@ namespace MvvmCross.ViewModels
         : MvxAppStart
             where TViewModel : IMvxViewModel
     {
-        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService)
-            : base(application, navigationService)
+        public MvxAppStart(IMvxNavigationService navigationService)
+            : base(navigationService)
         {
         }
 
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         protected override async Task NavigateToFirstViewModel(object? hint = null)
         {
             try
@@ -93,20 +94,17 @@ namespace MvvmCross.ViewModels
             where TViewModel : IMvxViewModel<TParameter>
             where TParameter : notnull
     {
-        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService)
-            : base(application, navigationService)
+        public MvxAppStart(IMvxNavigationService navigationService)
+            : base(navigationService)
         {
         }
 
         protected override async Task<object?> ApplicationStartup(object? hint = null)
         {
-            var applicationHint = await base.ApplicationStartup(hint);
-            if (applicationHint is TParameter parameter && Application is IMvxApplication<TParameter> typedApplication)
-                return typedApplication.Startup(parameter);
-            else
-                return applicationHint;
+            return await base.ApplicationStartup(hint);
         }
 
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         protected override async Task NavigateToFirstViewModel(object? hint = null)
         {
             try

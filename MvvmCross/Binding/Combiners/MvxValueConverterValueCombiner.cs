@@ -8,11 +8,9 @@ using System.Globalization;
 using System.Linq;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Converters;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Binding.Combiners
 {
-    [MvxUnconventional]
     public class MvxValueConverterValueCombiner : MvxValueCombiner
     {
         private readonly IMvxValueConverter _valueConverter;

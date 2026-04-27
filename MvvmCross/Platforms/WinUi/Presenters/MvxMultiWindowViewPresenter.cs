@@ -1,5 +1,7 @@
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Controls;
@@ -7,6 +9,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Localization;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -71,7 +74,7 @@ public class MvxMultiWindowViewPresenter
     /// </summary>
     public IMvxViewModelLoader? ViewModelLoader
     {
-        get => _viewModelLoader ??= Mvx.IoCProvider?.Resolve<IMvxViewModelLoader>();
+        get => _viewModelLoader ??= MvxHost.Current?.Services.GetService<IMvxViewModelLoader>();
         set => _viewModelLoader = value;
     }
 
@@ -81,6 +84,7 @@ public class MvxMultiWindowViewPresenter
     /// <param name="viewModelType"></param>
     /// <param name="viewType"></param>
     /// <returns></returns>
+    [RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
     public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
     {
         _logger?.LogInformation("PresentationAttribute not found for {ViewTypeName}. Assuming new page presentation",
@@ -91,6 +95,7 @@ public class MvxMultiWindowViewPresenter
     /// <summary>
     ///     Registers default attribute types.
     /// </summary>
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override void RegisterAttributeTypes()
     {
         AttributeTypesToActionsDictionary.Register<MvxPagePresentationAttribute>(ShowPage,
@@ -206,7 +211,7 @@ public class MvxMultiWindowViewPresenter
             return;
         }
 
-        var navigationService = Mvx.IoCProvider?.Resolve<IMvxNavigationService>();
+        var navigationService = MvxHost.Current?.Services.GetService<IMvxNavigationService>();
         if (navigationService != null && currentView.ViewModel != null)
         {
             backRequestedEventArgs.Handled = await navigationService.Close(currentView.ViewModel);
@@ -290,7 +295,7 @@ public class MvxMultiWindowViewPresenter
     protected virtual Task<bool> CloseRegionView(IMvxViewModel viewModel, MvxRegionPresentationAttribute attribute)
     {
         var windowInformation = GetWindowInformation(viewModel);
-        var viewFinder = Mvx.IoCProvider?.Resolve<IMvxViewsContainer>();
+        var viewFinder = MvxHost.Current?.Services.GetService<IMvxViewsContainer>();
         if (viewFinder == null)
         {
             return Task.FromResult(false);
@@ -352,7 +357,7 @@ public class MvxMultiWindowViewPresenter
     /// <returns>A text representation of the request.</returns>
     protected virtual string GetRequestText(MvxViewModelRequest request)
     {
-        var requestTranslator = Mvx.IoCProvider?.Resolve<IMvxWindowsViewModelRequestTranslator>();
+        var requestTranslator = MvxHost.Current?.Services.GetService<IMvxWindowsViewModelRequestTranslator>();
         if (requestTranslator == null)
         {
             return "Request translator is not found";
@@ -651,7 +656,7 @@ public class MvxMultiWindowViewPresenter
     protected virtual async Task<bool> ShowNewWindowAsync(MvxViewModelRequest request, MvxNewWindowPresentationAttribute attribute)
     {
         var newWindow = new Window();
-        var viewsContainer = Mvx.IoCProvider!.Resolve<IMvxViewsContainer>();
+        var viewsContainer = MvxHost.Current!.Services.GetRequiredService<IMvxViewsContainer>();
         var viewType = viewsContainer?.GetViewType(request.ViewModelType);
         if (viewType == null)
         {

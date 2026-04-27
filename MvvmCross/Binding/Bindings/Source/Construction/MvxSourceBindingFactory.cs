@@ -3,10 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Binding.Bindings.Source.Construction
 {
@@ -16,7 +18,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
     {
         private IMvxSourcePropertyPathParser _propertyPathParser;
 
-        protected IMvxSourcePropertyPathParser SourcePropertyPathParser => _propertyPathParser ??= Mvx.IoCProvider.Resolve<IMvxSourcePropertyPathParser>();
+        protected IMvxSourcePropertyPathParser SourcePropertyPathParser => _propertyPathParser ??= MvxHost.Current!.Services.GetRequiredService<IMvxSourcePropertyPathParser>();
 
         private readonly List<IMvxSourceBindingFactoryExtension> _extensions = [];
 

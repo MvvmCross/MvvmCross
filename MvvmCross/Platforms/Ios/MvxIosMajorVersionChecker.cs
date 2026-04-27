@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Platforms.Ios
@@ -18,7 +20,8 @@ namespace MvvmCross.Platforms.Ios
 
         private static bool ReadIsIosVersionOrHigher(int target, bool defaultValue)
         {
-            if (Mvx.IoCProvider?.TryResolve(out IMvxIosSystem iosSystem) != true)
+            var iosSystem = MvxHost.Current?.Services.GetService<IMvxIosSystem>();
+            if (iosSystem == null)
             {
                 MvxLogHost.Default?.LogWarning(
                     "IMvxIosSystem not found - so assuming we {Target} on iOS {Default} or later", target, defaultValue ? "are" : "are not");

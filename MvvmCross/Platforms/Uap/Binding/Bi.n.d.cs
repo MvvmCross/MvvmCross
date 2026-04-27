@@ -4,10 +4,11 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Base;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using Windows.UI.Xaml;
 
 namespace MvvmCross.Platforms.Uap.Binding
@@ -54,13 +55,10 @@ namespace MvvmCross.Platforms.Uap.Binding
 
         private static IMvxBindingCreator ResolveBindingCreator()
         {
-            IMvxBindingCreator toReturn;
-            if (!Mvx.IoCProvider.TryResolve<IMvxBindingCreator>(out toReturn))
-            {
+            var creator = MvxHost.Current?.Services.GetService<IMvxBindingCreator>();
+            if (creator == null)
                 throw new MvxException("Unable to resolve the binding creator - have you initialized Windows Binding");
-            }
-
-            return toReturn;
+            return creator;
         }
 
         private static void CallBackWhenndIsChanged(
@@ -75,10 +73,8 @@ namespace MvvmCross.Platforms.Uap.Binding
 
         private static IEnumerable<MvxBindingDescription> ParseBindingDescriptions(string bindingText)
         {
-            if (MvxSingleton<IMvxBindingSingletonCache>.Instance == null)
-                return Array.Empty<MvxBindingDescription>();
-
-            return MvxSingleton<IMvxBindingSingletonCache>.Instance.BindingDescriptionParser.Parse(bindingText);
+            return MvxHost.Current?.Services.GetService<IMvxBindingSingletonCache>()
+                ?.BindingDescriptionParser.Parse(bindingText);
         }
     }
 }

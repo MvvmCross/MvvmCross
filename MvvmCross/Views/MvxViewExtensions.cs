@@ -4,7 +4,9 @@
 
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
 
@@ -45,8 +47,9 @@ public static class MvxViewExtensions
     {
         ArgumentNullException.ThrowIfNull(view);
 
-        if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelTypeFinder? associatedTypeFinder) == true)
-            return associatedTypeFinder?.FindTypeOrNull(view.GetType());
+        var associatedTypeFinder = MvxHost.Current?.Services.GetService<IMvxViewModelTypeFinder>();
+        if (associatedTypeFinder != null)
+            return associatedTypeFinder.FindTypeOrNull(view.GetType());
 
         MvxLogHost.Default?.Log(LogLevel.Trace,
             "No view model type finder available - assuming we are looking for a splash screen - returning null");

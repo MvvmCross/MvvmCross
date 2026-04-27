@@ -14,12 +14,19 @@ namespace MvvmCross.Presenters
     {
         IMvxViewModelTypeFinder? ViewModelTypeFinder { get; }
         IMvxViewsContainer? ViewsContainer { get; }
-        IDictionary<Type, MvxPresentationAttributeAction>? AttributeTypesToActionsDictionary { get; }
+        IDictionary<Type, MvxPresentationAttributeAction>? AttributeTypesToActionsDictionary
+        {
+            [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
+            get;
+        }
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         void RegisterAttributeTypes();
 
         //TODO: Maybe move those to helper class
+        [RequiresUnreferencedCode("Getting presentation attribute uses type hierarchy checks and may call CreatePresentationAttribute which requires unreferenced code.")]
         MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request);
 
+        [RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
         MvxBasePresentationAttribute CreatePresentationAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewType);

@@ -3,10 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Platforms.Uap.Presenters.Attributes;
@@ -42,7 +45,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             get
             {
                 if (_viewModelLoader == null)
-                    _viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
+                    _viewModelLoader = MvxHost.Current!.Services.GetRequiredService<IMvxViewModelLoader>();
                 return _viewModelLoader;
             }
             set
@@ -51,6 +54,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             }
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Register<MvxPagePresentationAttribute>(ShowPage, ClosePage);
@@ -59,6 +63,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             AttributeTypesToActionsDictionary.Register<MvxDialogViewPresentationAttribute>(ShowDialog, CloseDialog);
         }
 
+        [RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             _logger?.LogTrace("PresentationAttribute not found for {viewTypeName}. Assuming new page presentation", viewType.Name);
@@ -77,14 +82,14 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 return;
             }
 
-            var navigationService = Mvx.IoCProvider.Resolve<IMvxNavigationService>();
+            var navigationService = MvxHost.Current!.Services.GetRequiredService<IMvxNavigationService>();
 
             backRequestedEventArgs.Handled = await navigationService.Close(currentView.ViewModel);
         }
 
         protected virtual string GetRequestText(MvxViewModelRequest request)
         {
-            var requestTranslator = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelRequestTranslator>();
+            var requestTranslator = MvxHost.Current!.Services.GetRequiredService<IMvxWindowsViewModelRequestTranslator>();
             string requestText = string.Empty;
             if (request is MvxViewModelInstanceRequest)
             {
@@ -106,7 +111,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
         protected virtual Task<bool> ShowSplitView(Type viewType, MvxSplitViewPresentationAttribute attribute, MvxViewModelRequest request)
         {
-            var viewsContainer = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
+            var viewsContainer = MvxHost.Current!.Services.GetRequiredService<IMvxViewsContainer>();
 
             if (_rootFrame.Content is MvxWindowsPage currentPage)
             {
@@ -166,7 +171,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
         protected virtual Task<bool> CloseRegionView(IMvxViewModel viewModel, MvxRegionPresentationAttribute attribute)
         {
-            var viewFinder = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
+            var viewFinder = MvxHost.Current!.Services.GetRequiredService<IMvxViewsContainer>();
             var viewType = viewFinder.GetViewType(viewModel.GetType());
             if (viewType.HasRegionAttribute())
             {
@@ -218,7 +223,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             try
             {
                 var requestText = GetRequestText(request);
-                var viewsContainer = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
+                var viewsContainer = MvxHost.Current!.Services.GetRequiredService<IMvxViewsContainer>();
 
                 _rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
 

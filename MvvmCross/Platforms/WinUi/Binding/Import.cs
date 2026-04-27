@@ -3,8 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Reflection;
-using MvvmCross.Base;
-using MvvmCross.IoC;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Platforms.WinUi.Binding
 {
@@ -39,7 +38,7 @@ namespace MvvmCross.Platforms.WinUi.Binding
 
         private static void RegisterAssembly(Assembly assembly)
         {
-            if (MvxSingleton<IMvxIoCProvider>.Instance == null)
+            if (MvxHost.Current == null)
             {
                 MvxWindowsAssemblyCache.EnsureInitialized();
                 MvxWindowsAssemblyCache.Instance?.Assemblies.Add(assembly);

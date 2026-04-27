@@ -7,7 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.Util;
 using Android.Views;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.Bindings;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders
 {
@@ -26,9 +28,9 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             _source = source;
         }
 
-        protected virtual IMvxAndroidViewFactory? AndroidViewFactory => _androidViewFactory ??= Mvx.IoCProvider?.Resolve<IMvxAndroidViewFactory>();
+        protected virtual IMvxAndroidViewFactory? AndroidViewFactory => _androidViewFactory ??= MvxHost.Current?.Services.GetService<IMvxAndroidViewFactory>();
 
-        protected virtual IMvxAndroidViewBinder? Binder => _binder ??= Mvx.IoCProvider?.Resolve<IMvxAndroidViewBinderFactory>().Create(_source);
+        protected virtual IMvxAndroidViewBinder? Binder => _binder ??= MvxHost.Current?.Services.GetService<IMvxAndroidViewBinderFactory>()?.Create(_source);
 
         public virtual IList<KeyValuePair<object, IMvxUpdateableBinding>>? CreatedBindings => Binder?.CreatedBindings;
 

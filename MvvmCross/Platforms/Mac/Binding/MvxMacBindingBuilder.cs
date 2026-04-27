@@ -10,7 +10,6 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
-using MvvmCross.IoC;
 using MvvmCross.Platforms.Mac.Binding.Target;
 
 namespace MvvmCross.Platforms.Mac.Binding
