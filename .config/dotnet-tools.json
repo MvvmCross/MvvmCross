@@ -3,7 +3,7 @@
   "isRoot": true,
   "tools": {
     "dotnet-reportgenerator-globaltool": {
-      "version": "5.5.9",
+      "version": "5.5.10",
       "commands": [
         "reportgenerator"
       ],
