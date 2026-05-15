@@ -9,34 +9,30 @@ using MvvmCross.Binding.Bindings.Target;
 
 namespace MvvmCross.Platforms.Mac.Binding.Target
 {
-    public class MvxNSTextViewTextTargetBinding : MvxConvertingTargetBinding<NSTextView, string>
+    public class MvxNSTextViewTextTargetBinding : MvxPropertyInfoTargetBinding<NSTextView>
     {
-        public MvxNSTextViewTextTargetBinding(NSTextView target)
-            : base(target)
+        public MvxNSTextViewTextTargetBinding(NSTextView target, PropertyInfo targetPropertyInfo)
+            : base(target, targetPropertyInfo)
         {
-            var editText = Target;
+            var editText = View;
             if (editText == null)
             {
                 MvxBindingLog.Instance?.LogError(
                                       "NSTextView is null in MvxNSTextViewTextTargetBinding");
             }
-        }
-
-        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
-        public override void SubscribeToEvents()
-        {
-            base.SubscribeToEvents();
-            // Todo: Perhaps we want to trigger on editing complete rather than didChange
-            if (Target is { } editText)
+            else
+            {
+                // Todo: Perhaps we want to trigger on editing complete rather than didChange
                 editText.TextDidChange += EditTextDidChange;
+            }
         }
 
         private void EditTextDidChange(object sender, EventArgs eventArgs)
         {
-            var view = Target;
+            var view = View;
             if (view == null)
                 return;
-            FireValueChanged(view.TextStorage.Value);
+            FireValueChanged(view.TextStorage.ToString());
         }
 
         public override MvxBindingMode DefaultMode
@@ -44,18 +40,17 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
-        protected override void SetValueImpl(NSTextView target, string value)
+        protected override void SetValueImpl(object target, object value)
         {
-            target?.TextStorage.SetString(new NSAttributedString(value ?? string.Empty));
+            base.SetValueImpl(target, value ?? "");
         }
 
-        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = Target;
+                var editText = View;
                 if (editText != null)
                 {
                     editText.TextDidChange -= EditTextDidChange;
