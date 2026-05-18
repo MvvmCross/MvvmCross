@@ -34,6 +34,10 @@
   <ItemGroup>
     <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Sinks.Async" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+    <PackageReference Include="Serilog.Sinks.Trace" />
+    <PackageReference Include="Serilog.Sinks.Xamarin" />
   </ItemGroup>
 
   <ItemGroup>
