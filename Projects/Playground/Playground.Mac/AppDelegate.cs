@@ -13,7 +13,7 @@ namespace Playground.Mac
     [Register("AppDelegate")]
     public class AppDelegate : MvxApplicationDelegate
     {
-        public AppDelegate()
+        static AppDelegate()
         {
             MvxWindowPresentationAttribute.DefaultWidth = 250;
             MvxWindowPresentationAttribute.DefaultHeight = 250;
@@ -27,13 +27,6 @@ namespace Playground.Mac
                 .WriteTo.Async(a => a.Console())
                 .WriteTo.Async(a => a.Trace())
                 .CreateLogger();
-
-            var mainWindow = NSApplication.SharedApplication.MainWindow
-                ?? new NSWindow(
-                    new CGRect(0, 0, MvxWindowPresentationAttribute.DefaultWidth, MvxWindowPresentationAttribute.DefaultHeight),
-                    NSWindowStyle.Titled | NSWindowStyle.Closable | NSWindowStyle.Miniaturizable | NSWindowStyle.Resizable,
-                    NSBackingStore.Buffered,
-                    false);
 
             MvxMacHostBuilder.CreateBuilder()
                 .StartWith<RootViewModel>()
