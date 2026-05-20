@@ -6,7 +6,6 @@ using System;
 
 namespace MvvmCross.Exceptions
 {
-#nullable enable
     public class MvxException : Exception
     {
         public MvxException()
@@ -34,5 +33,4 @@ namespace MvvmCross.Exceptions
         {
         }
     }
-#nullable restore
 }

@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
         {
         }
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object target, object? value)
         {
             var datePicker = this.DatePicker;
             if (datePicker == null)
@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
 
             // sets DateValue to the GMT value of DateTime, but the UI will show the correct time
             // Note: Probably we should not use DateTime, but instead DateTimeOffset or something else that identifies timezone
-            datePicker.DateValue = (NSDate)((DateTime)value);
+            datePicker.DateValue = (NSDate)((DateTime)(value ?? DateTime.Now));
         }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
@@ -38,7 +38,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
         }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
-        protected override object MakeSafeValue(object value)
+        protected override object? MakeSafeValue(object? value)
         {
             if (value == null)
                 value = DateTime.Now;

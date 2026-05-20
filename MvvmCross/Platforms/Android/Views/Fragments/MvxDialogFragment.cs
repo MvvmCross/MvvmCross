@@ -27,11 +27,11 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             this.AddEventListeners();
         }
 
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; } = null!;
 
-        private object _dataContext;
+        private object? _dataContext;
 
-        public object DataContext
+        public object? DataContext
         {
             get
             {
@@ -45,7 +45,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             }
         }
 
-        public virtual IMvxViewModel ViewModel
+        public virtual IMvxViewModel? ViewModel
         {
             get
             {
@@ -62,9 +62,9 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         {
         }
 
-        public string UniqueImmutableCacheTag => Tag;
+        public string UniqueImmutableCacheTag => Tag!;
 
-        public override void OnCreate(Bundle savedInstanceState)
+        public override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             ViewModel?.ViewCreated();
@@ -113,9 +113,9 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         {
         }
 
-        public new TViewModel ViewModel
+        public new TViewModel? ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
+            get { return (TViewModel?)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 

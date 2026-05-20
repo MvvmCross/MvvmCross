@@ -15,13 +15,13 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
         {
         }
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object target, object? value)
         {
             var picker = this.DatePicker;
             if (picker == null)
                 return;
 
-            var time = (DateTime)value;
+            var time = (DateTime)(value ?? DateTime.Now);
 
             // Do this in a way that does not mess up the date, grab current date, then modify the time
             var pickerDate = this.GetLocalTime(this.DatePicker);
@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
         }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
-        protected override object MakeSafeValue(object value)
+        protected override object? MakeSafeValue(object? value)
         {
             if (value == null)
                 value = TimeSpan.FromSeconds(0);

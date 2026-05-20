@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Android
     public class MvxJavaContainer<T> : MvxJavaContainer
     {
         public MvxJavaContainer(T theObject)
-            : base(theObject)
+            : base(theObject!)
         {
         }
 

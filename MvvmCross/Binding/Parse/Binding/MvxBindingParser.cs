@@ -17,7 +17,7 @@ namespace MvvmCross.Binding.Parse.Binding
     {
         protected abstract MvxSerializableBindingDescription ParseBindingDescription();
 
-        public bool TryParseBindingDescription(string text, out MvxSerializableBindingDescription requestedDescription)
+        public bool TryParseBindingDescription(string text, out MvxSerializableBindingDescription? requestedDescription)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace MvvmCross.Binding.Parse.Binding
             }
         }
 
-        public bool TryParseBindingSpecification(string text, out MvxSerializableBindingSpecification requestedBindings)
+        public bool TryParseBindingSpecification(string text, out MvxSerializableBindingSpecification? requestedBindings)
         {
             try
             {

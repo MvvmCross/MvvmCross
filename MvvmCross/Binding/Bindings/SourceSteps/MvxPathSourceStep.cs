@@ -12,7 +12,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 {
     public class MvxPathSourceStep : MvxSourceStep<MvxPathSourceStepDescription>
     {
-        private IMvxSourceBinding _sourceBinding;
+        private IMvxSourceBinding? _sourceBinding;
 
         private readonly object _sourceLocker = new object();
 
@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
         {
         }
 
-        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
+        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance!.SourceBindingFactory!;
 
         protected override void Dispose(bool isDisposing)
         {
@@ -50,10 +50,13 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
         protected override void OnDataContextChanged()
         {
             ClearPathSourceBinding();
-            _sourceBinding = SourceBindingFactory.CreateBinding(DataContext, Description.SourcePropertyPath);
-            if (_sourceBinding != null)
+            if (DataContext != null && Description.SourcePropertyPath != null)
             {
-                _sourceBinding.Changed += SourceBindingOnChanged;
+                _sourceBinding = SourceBindingFactory.CreateBinding(DataContext, Description.SourcePropertyPath);
+                if (_sourceBinding != null)
+                {
+                    _sourceBinding.Changed += SourceBindingOnChanged;
+                }
             }
             base.OnDataContextChanged();
         }
@@ -71,12 +74,12 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             }
         }
 
-        private void SourceBindingOnChanged(object sender, EventArgs args)
+        private void SourceBindingOnChanged(object? sender, EventArgs args)
         {
             SendSourcePropertyChanged();
         }
 
-        protected override void SetSourceValue(object sourceValue)
+        protected override void SetSourceValue(object? sourceValue)
         {
             if (_sourceBinding == null)
                 return;
@@ -87,10 +90,10 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             if (sourceValue == MvxBindingConstant.DoNothing)
                 return;
 
-            _sourceBinding.SetValue(sourceValue);
+            _sourceBinding.SetValue(sourceValue!);
         }
 
-        protected override object GetSourceValue()
+        protected override object? GetSourceValue()
         {
             if (_sourceBinding == null)
             {

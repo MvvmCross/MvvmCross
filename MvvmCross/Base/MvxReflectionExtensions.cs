@@ -8,7 +8,6 @@ using System.Reflection;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public static class MvxReflectionExtensions
     {
         public static Attribute[] GetCustomAttributes(this Type type, Type attributeType, bool inherit)
@@ -56,5 +55,4 @@ namespace MvvmCross.Base
             return property.GetMethod;
         }
     }
-#nullable restore
 }

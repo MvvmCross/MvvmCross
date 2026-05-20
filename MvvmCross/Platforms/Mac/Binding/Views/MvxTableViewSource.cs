@@ -24,8 +24,8 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
 {
     public class MvxTableViewSource : NSTableViewSource
     {
-        private IEnumerable _itemsSource;
-        private IDisposable _subscription;
+        private IEnumerable? _itemsSource;
+        private IDisposable? _subscription;
         private readonly NSTableView _tableView;
 
         public MvxTableViewSource(NSTableView tableView) : base()
@@ -35,11 +35,11 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
 
         public override nint GetRowCount(NSTableView tableView)
         {
-            return ItemsSource.Count();
+            return ItemsSource?.Count() ?? 0;
         }
 
         [MvxSetToNullAfterBinding]
-        public virtual IEnumerable ItemsSource
+        public virtual IEnumerable? ItemsSource
         {
             get
             {
@@ -84,15 +84,15 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
                     view = new MvxTableCellView(bindableColumn.BindingText);
                 else
                 {
-                    IMvxBindingContextOwner bindableView = view as IMvxBindingContextOwner;
-                    bindableView.CreateBindingContext(bindableColumn.BindingText);
+                    IMvxBindingContextOwner? bindableView = view as IMvxBindingContextOwner;
+                    bindableView?.CreateBindingContext(bindableColumn.BindingText);
                 }
             }
             return view;
         }
 
         [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "This method creates bindings which are designed to be reflection-safe. The base NSTableViewSource.GetViewForItem cannot have RequiresUnreferencedCode annotation.")]
-        public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
+        public override NSView? GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
         {
             if (ItemsSource == null)
                 return null;
@@ -106,7 +106,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
             return view;
         }
 
-        protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        protected virtual void CollectionChangedOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
         {
             Action action = () =>
             {
@@ -219,19 +219,19 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
             {
                 case NotifyCollectionChangedAction.Add:
                     {
-                        var newIndexSet = CreateNSIndexSet(args.NewStartingIndex, args.NewItems.Count);
+                        var newIndexSet = CreateNSIndexSet(args.NewStartingIndex, args.NewItems!.Count);
                         _tableView.InsertRows(newIndexSet, NSTableViewAnimation.Fade);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Remove:
                     {
-                        var newIndexSet = CreateNSIndexSet(args.OldStartingIndex, args.OldItems.Count);
+                        var newIndexSet = CreateNSIndexSet(args.OldStartingIndex, args.OldItems!.Count);
                         _tableView.RemoveRows(newIndexSet, NSTableViewAnimation.Fade);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Move:
                     {
-                        if (args.NewItems.Count != 1 && args.OldItems.Count != 1)
+                        if (args.NewItems!.Count != 1 && args.OldItems!.Count != 1)
                             return false;
                         _tableView.MoveRow(args.OldStartingIndex, args.NewStartingIndex);
                         return true;

@@ -27,9 +27,9 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(ICommand);
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object? target, object? value)
         {
-            _behaviour.Command = (ICommand)value;
+            _behaviour.Command = (ICommand)value!;
         }
     }
 }

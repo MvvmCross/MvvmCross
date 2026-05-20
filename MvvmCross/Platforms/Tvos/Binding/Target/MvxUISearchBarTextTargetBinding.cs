@@ -26,9 +26,9 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             }
         }
 
-        private void HandleSearchBarValueChanged(object sender, UISearchBarTextChangedEventArgs e)
+        private void HandleSearchBarValueChanged(object? sender, UISearchBarTextChangedEventArgs e)
         {
-            FireValueChanged(View.Text);
+            FireValueChanged(View?.Text);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;

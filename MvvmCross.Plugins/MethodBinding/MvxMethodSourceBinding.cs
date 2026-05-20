@@ -38,29 +38,29 @@ namespace MvvmCross.Plugin.MethodBinding
             return this;
         }
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
-            object[] parameters;
+            object?[] parameters;
             if (_methodInfo.GetParameters().Any())
             {
-                parameters = new object[]
+                parameters = new object?[]
                     {
                         parameter
                     };
             }
             else
             {
-                parameters = new object[0];
+                parameters = new object?[0];
             }
 
             _methodInfo.Invoke(Source, parameters);
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
     }
 }

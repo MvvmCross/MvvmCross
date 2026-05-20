@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Tvos.Views
 {
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxTvosView TvosView => ViewController as IMvxTvosView;
+        protected IMvxTvosView? TvosView => ViewController as IMvxTvosView;
 
         public MvxBindingViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)
@@ -22,10 +22,10 @@ namespace MvvmCross.Platforms.Tvos.Views
             if (!(eventSource is IMvxTvosView))
                 throw new ArgumentException(nameof(eventSource), $"{nameof(eventSource)} should be a {nameof(IMvxTvosView)}");
 
-            TvosView.BindingContext = MvxHost.Current!.Services.GetRequiredService<IMvxBindingContext>();
+            TvosView!.BindingContext = MvxHost.Current!.Services.GetRequiredService<IMvxBindingContext>();
         }
 
-        public override void HandleDisposeCalled(object sender, EventArgs e)
+        public override void HandleDisposeCalled(object? sender, EventArgs e)
         {
             if (TvosView == null)
             {

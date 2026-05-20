@@ -47,8 +47,8 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
             base.ViewDidLoad();
 
-            GetNextViewController = (pc, rc) => GetNextViewControllerPage(rc);
-            GetPreviousViewController = (pc, rc) => GetPreviousViewControllerPage(rc);
+            GetNextViewController = (pc, rc) => GetNextViewControllerPage(rc)!;
+            GetPreviousViewController = (pc, rc) => GetPreviousViewControllerPage(rc)!;
         }
 
         private List<UIViewController> Pages = new List<UIViewController>();
@@ -57,9 +57,9 @@ namespace MvvmCross.Platforms.Tvos.Views
 
         public bool IsLastPage(UIViewController viewController) => Pages.IndexOf(viewController) == Pages.Count - 1;
 
-        protected UIViewController GetNextViewControllerPage(UIViewController rc) => IsLastPage(rc) ? null : Pages[Pages.IndexOf(rc) + 1];
+        protected UIViewController? GetNextViewControllerPage(UIViewController rc) => IsLastPage(rc) ? null : Pages[Pages.IndexOf(rc) + 1];
 
-        protected UIViewController GetPreviousViewControllerPage(UIViewController rc) => IsFirstPage(rc) ? null : Pages[Pages.IndexOf(rc) - 1];
+        protected UIViewController? GetPreviousViewControllerPage(UIViewController rc) => IsFirstPage(rc) ? null : Pages[Pages.IndexOf(rc) - 1];
 
         public void AddPage(UIViewController viewController, MvxPagePresentationAttribute attribute)
         {
@@ -80,7 +80,7 @@ namespace MvvmCross.Platforms.Tvos.Views
 
             var pageToClose = Pages.Where(v => !(v is UINavigationController))
                                               .Select(v => v.GetIMvxTvosView())
-                                              .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+                                              .FirstOrDefault(mvxView => mvxView?.ViewModel == viewModel);
 
             if (pageToClose != null)
             {
@@ -102,9 +102,9 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
         }
 
-        public new TViewModel ViewModel
+        public new TViewModel? ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
+            get { return (TViewModel?)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 

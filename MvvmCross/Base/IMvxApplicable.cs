@@ -6,11 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public interface IMvxApplicable
     {
         [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         void Apply();
     }
-#nullable restore
 }

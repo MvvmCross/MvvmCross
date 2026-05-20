@@ -101,22 +101,22 @@ namespace MvvmCross.Platforms.Mac.Views.Base
             base.Dispose(disposing);
         }
 
-        public event EventHandler ViewDidLoadCalled;
+        public event EventHandler? ViewDidLoadCalled;
 
-        public event EventHandler ViewDidLayoutCalled;
+        public event EventHandler? ViewDidLayoutCalled;
 
-        public event EventHandler ViewWillAppearCalled;
+        public event EventHandler? ViewWillAppearCalled;
 
-        public event EventHandler ViewDidAppearCalled;
+        public event EventHandler? ViewDidAppearCalled;
 
-        public event EventHandler ViewDidDisappearCalled;
+        public event EventHandler? ViewDidDisappearCalled;
 
-        public event EventHandler ViewWillDisappearCalled;
+        public event EventHandler? ViewWillDisappearCalled;
 
-        public event EventHandler DidSelectCalled;
+        public event EventHandler? DidSelectCalled;
 
-        public event EventHandler WillSelectCalled;
+        public event EventHandler? WillSelectCalled;
 
-        public event EventHandler DisposeCalled;
+        public event EventHandler? DisposeCalled;
     }
 }

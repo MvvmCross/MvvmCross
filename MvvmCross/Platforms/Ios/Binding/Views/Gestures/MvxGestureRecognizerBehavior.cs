@@ -9,9 +9,9 @@ namespace MvvmCross.Platforms.Ios.Binding.Views.Gestures
 {
     public abstract class MvxGestureRecognizerBehavior : UIGestureRecognizerDelegate
     {
-        public ICommand Command { get; set; }
+        public ICommand? Command { get; set; }
 
-        protected void FireCommand(object argument = null)
+        protected void FireCommand(object? argument = null)
         {
             var command = Command;
             command?.Execute(argument);

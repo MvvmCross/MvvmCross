@@ -8,7 +8,6 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
 {
-#nullable enable
     public class MvxRemovePresentationHint
         : MvxPresentationHint
     {
@@ -29,5 +28,4 @@ namespace MvvmCross.Presenters.Hints
 
         public Type ViewModelToRemove { get; }
     }
-#nullable restore
 }

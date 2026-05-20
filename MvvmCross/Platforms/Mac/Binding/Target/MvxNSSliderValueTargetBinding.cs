@@ -30,7 +30,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
         }
 
         [Export("sliderChanged:")]
-        private void HandleSliderActivation(object sender, EventArgs args)
+        private void HandleSliderActivation(object? sender, EventArgs args)
         {
             var view = View;
             if (view == null)

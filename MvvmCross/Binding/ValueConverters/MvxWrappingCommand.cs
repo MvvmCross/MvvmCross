@@ -14,30 +14,30 @@ namespace MvvmCross.Binding.ValueConverters
     public class MvxWrappingCommand
         : ICommand
     {
-        private static readonly EventInfo CanExecuteChangedEventInfo = typeof(ICommand).GetEvent("CanExecuteChanged");
+        private static readonly EventInfo? CanExecuteChangedEventInfo = typeof(ICommand).GetEvent("CanExecuteChanged");
 
-        private readonly ICommand _wrapped;
-        private readonly object _commandParameterOverride;
-        private readonly IDisposable _canChangedEventSubscription;
+        private readonly ICommand? _wrapped;
+        private readonly object? _commandParameterOverride;
+        private readonly IDisposable? _canChangedEventSubscription;
 
-        public MvxWrappingCommand(ICommand wrapped, object commandParameterOverride)
+        public MvxWrappingCommand(ICommand wrapped, object? commandParameterOverride)
         {
             _wrapped = wrapped;
             _commandParameterOverride = commandParameterOverride;
 
             if (_wrapped != null)
             {
-                _canChangedEventSubscription = CanExecuteChangedEventInfo.WeakSubscribe(_wrapped, WrappedOnCanExecuteChanged);
+                _canChangedEventSubscription = CanExecuteChangedEventInfo?.WeakSubscribe(_wrapped, WrappedOnCanExecuteChanged);
             }
         }
 
         // Note - this is public because we use it in weak referenced situations
-        public void WrappedOnCanExecuteChanged(object sender, EventArgs eventArgs)
+        public void WrappedOnCanExecuteChanged(object? sender, EventArgs eventArgs)
         {
             CanExecuteChanged?.Invoke(this, eventArgs);
         }
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             if (_wrapped == null)
                 return false;
@@ -48,7 +48,7 @@ namespace MvvmCross.Binding.ValueConverters
             return _wrapped.CanExecute(_commandParameterOverride);
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             if (_wrapped == null)
                 return;
@@ -58,6 +58,6 @@ namespace MvvmCross.Binding.ValueConverters
             _wrapped.Execute(_commandParameterOverride);
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
     }
 }

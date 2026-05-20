@@ -36,7 +36,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             public Task ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true)
             {
-                return action?.Invoke();
+                return action?.Invoke() ?? Task.CompletedTask;
             }
         }
 
@@ -84,7 +84,7 @@ namespace MvvmCross.UnitTest.ViewModels
             NotifyCollectionChangedEventHandler handler = (s, a) =>
             {
                 Assert.Equal(0, a.NewStartingIndex);
-                Assert.Equal(newItems.Length, a.NewItems.Count);
+                Assert.Equal(newItems.Length, a.NewItems!.Count);
                 Assert.Null(a.OldItems);
             };
 
@@ -98,7 +98,7 @@ namespace MvvmCross.UnitTest.ViewModels
             handler = (s, a) =>
             {
                 Assert.Equal(newStartIndex, a.NewStartingIndex);
-                Assert.Equal(newItems.Length, a.NewItems.Count);
+                Assert.Equal(newItems.Length, a.NewItems!.Count);
             };
 
             collection.CollectionChanged += handler;
@@ -110,7 +110,7 @@ namespace MvvmCross.UnitTest.ViewModels
         public void AddRangeThrowsArgumentNullExceptionOnNullInput()
         {
             var collection = new MvxObservableCollection<string>();
-            Assert.Throws<ArgumentNullException>(() => collection.AddRange(null));
+            Assert.Throws<ArgumentNullException>(() => collection.AddRange(null!));
         }
 
         [Theory]
@@ -130,7 +130,7 @@ namespace MvvmCross.UnitTest.ViewModels
         {
             var collection = new MvxObservableCollection<string>(new[] { "foo" });
 
-            Assert.Throws<ArgumentNullException>(() => collection.RemoveItems(null));
+            Assert.Throws<ArgumentNullException>(() => collection.RemoveItems(null!));
         }
     }
 }

@@ -13,11 +13,11 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
 {
     public class MvxUIControlTouchUpInsideTargetBinding : MvxConvertingTargetBinding
     {
-        private ICommand _command;
-        private IDisposable _canExecuteSubscription;
+        private ICommand? _command;
+        private IDisposable? _canExecuteSubscription;
         private readonly EventHandler<EventArgs> _canExecuteEventHandler;
 
-        protected UIControl Control => Target as UIControl;
+        protected UIControl? Control => Target as UIControl;
 
         public MvxUIControlTouchUpInsideTargetBinding(UIControl control)
             : base(control)
@@ -34,7 +34,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             _canExecuteEventHandler = new EventHandler<EventArgs>(OnCanExecuteChanged);
         }
 
-        private void ControlOnTouchUpInside(object sender, EventArgs eventArgs)
+        private void ControlOnTouchUpInside(object? sender, EventArgs eventArgs)
         {
             if (_command == null)
                 return;
@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(ICommand);
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object? target, object? value)
         {
             if (_canExecuteSubscription != null)
             {
@@ -79,7 +79,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             view.Enabled = shouldBeEnabled;
         }
 
-        private void OnCanExecuteChanged(object sender, EventArgs e)
+        private void OnCanExecuteChanged(object? sender, EventArgs e)
         {
             RefreshEnabledState();
         }

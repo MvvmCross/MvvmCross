@@ -9,6 +9,6 @@ namespace MvvmCross.Plugin.FieldBinding
 {
     internal static class MvxPluginLog
     {
-        internal static ILogger Instance { get; } = MvxLogHost.GetLog("MvxPlugin.FieldBinding");
+        internal static ILogger? Instance { get; } = MvxLogHost.GetLog("MvxPlugin.FieldBinding");
     }
 }

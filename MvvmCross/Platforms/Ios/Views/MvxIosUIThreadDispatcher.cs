@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Ios.Views
 
         protected MvxIosUIThreadDispatcher()
         {
-            _uiSynchronizationContext = SynchronizationContext.Current;
+            _uiSynchronizationContext = SynchronizationContext.Current!;
             if (_uiSynchronizationContext == null)
                 throw new MvxException("SynchronizationContext must not be null - check to make sure Dispatcher is created on UI thread");
         }

@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
     [RequiresUnreferencedCode("This class uses reflection which may not be preserved during trimming")]
     public class MvxIndexerLeafPropertyInfoSourceBinding : MvxLeafPropertyInfoSourceBinding
     {
-        private readonly object _key;
+        private readonly object? _key;
 
         public MvxIndexerLeafPropertyInfoSourceBinding(
             object source,
@@ -22,7 +22,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
             _key = indexToken.Key;
         }
 
-        protected override object[] PropertyIndexParameters()
+        protected override object?[] PropertyIndexParameters()
         {
             return [_key];
         }

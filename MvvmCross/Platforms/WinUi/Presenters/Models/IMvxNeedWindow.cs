@@ -1,4 +1,3 @@
-#nullable enable
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 

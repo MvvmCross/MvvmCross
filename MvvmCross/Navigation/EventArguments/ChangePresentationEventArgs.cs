@@ -7,7 +7,6 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Navigation.EventArguments
 {
-#nullable enable
     public class ChangePresentationEventArgs : MvxCancelEventArgs
     {
         public ChangePresentationEventArgs(CancellationToken cancellationToken = default)
@@ -25,5 +24,4 @@ namespace MvvmCross.Navigation.EventArguments
 
         public bool? Result { get; set; }
     }
-#nullable restore
 }

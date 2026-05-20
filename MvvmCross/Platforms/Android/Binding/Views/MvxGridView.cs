@@ -19,8 +19,8 @@ namespace MvvmCross.Platforms.Android.Binding.Views
     public class MvxGridView
         : GridView
     {
-        private ICommand _itemClick;
-        private ICommand _itemLongClick;
+        private ICommand _itemClick = null!;
+        private ICommand _itemLongClick = null!;
 
         private bool _itemClickOverloaded;
         private bool _itemLongClickOverloaded;
@@ -52,7 +52,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             get
             {
-                return base.Adapter as IMvxAdapter;
+                return (base.Adapter as IMvxAdapter)!;
             }
             set
             {
@@ -69,7 +69,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 base.Adapter = value;
 
                 if (existing != null)
-                    existing.ItemsSource = null;
+                    existing.ItemsSource = null!;
             }
         }
 
@@ -109,7 +109,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             base.ItemClick += ItemOnClick;
         }
 
-        private void ItemOnClick(object sender, ItemClickEventArgs e)
+        private void ItemOnClick(object? sender, ItemClickEventArgs e)
         {
             ExecuteCommandOnItem(ItemClick, e.Position);
         }
@@ -137,7 +137,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             base.ItemLongClick += ItemOnLongClick;
         }
 
-        private void ItemOnLongClick(object sender, ItemLongClickEventArgs e)
+        private void ItemOnLongClick(object? sender, ItemLongClickEventArgs e)
         {
             ExecuteCommandOnItem(ItemLongClick, e.Position);
         }
@@ -177,7 +177,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 //expand the view to the full height of it's contents to disable scrolling
                 var expandSpec = MeasureSpec.MakeMeasureSpec(MeasuredSizeMask, MeasureSpecMode.AtMost);
                 base.OnMeasure(widthMeasureSpec, expandSpec);
-                LayoutParameters.Height = MeasuredHeight;
+                LayoutParameters!.Height = MeasuredHeight;
             }
         }
     }

@@ -6,7 +6,7 @@ namespace MvvmCross.Platforms.Android
 {
     public class MvxReplaceableJavaContainer : Java.Lang.Object
     {
-        public object Object { get; set; }
+        public object? Object { get; set; }
 
         public override string ToString()
         {

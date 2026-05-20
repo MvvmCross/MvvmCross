@@ -25,6 +25,6 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 
         public MvxViewModelRequest Request { get; }
 
-        public Fragment CachedFragment { get; set; }
+        public Fragment? CachedFragment { get; set; }
     }
 }

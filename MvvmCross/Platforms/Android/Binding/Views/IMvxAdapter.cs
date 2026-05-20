@@ -18,7 +18,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         int ItemTemplateId { get; set; }
         int DropDownItemTemplateId { get; set; }
 
-        object GetRawItem(int position);
+        object? GetRawItem(int position);
 
         int GetPosition(object value);
     }

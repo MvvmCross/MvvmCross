@@ -31,7 +31,7 @@ namespace MvvmCross.UnitTest.Parse
         {
             var parameterBundle = new MvxBundle(new Dictionary<string, string> { { "On'e", "1'\\" }, { "Two", "2" } });
             var presentationBundle =
-                new MvxBundle(new Dictionary<string, string> { { "Thre\"\'\\e", "3\"\'\\" }, { "Four", null } });
+                new MvxBundle(new Dictionary<string, string> { { "Thre\"\'\\e", "3\"\'\\" }, { "Four", null! } });
             var request = new MvxViewModelRequest<Test1ViewModel>(parameterBundle, presentationBundle);
 
             var serializer = new MvxViewModelRequestCustomTextSerializer();
@@ -40,9 +40,9 @@ namespace MvvmCross.UnitTest.Parse
             var deserializer = new MvxViewModelRequestCustomTextSerializer();
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
-            Assert.Equal(typeof(Test1ViewModel), deserialized.ViewModelType);
-            Assert.Equal(2, deserialized.PresentationValues.Count);
-            Assert.Equal(2, deserialized.ParameterValues.Count);
+            Assert.Equal(typeof(Test1ViewModel), deserialized!.ViewModelType);
+            Assert.Equal(2, deserialized!.PresentationValues!.Count);
+            Assert.Equal(2, deserialized!.ParameterValues!.Count);
             Assert.Equal("1'\\", deserialized.ParameterValues["On'e"]);
             Assert.Equal("2", deserialized.ParameterValues["Two"]);
             Assert.Equal("3\"\'\\", deserialized.PresentationValues["Thre\"\'\\e"]);
@@ -62,9 +62,9 @@ namespace MvvmCross.UnitTest.Parse
             var deserializer = new MvxViewModelRequestCustomTextSerializer();
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
-            Assert.Equal(typeof(Test1ViewModel), deserialized.ViewModelType);
-            Assert.Empty(deserialized.PresentationValues);
-            Assert.Empty(deserialized.ParameterValues);
+            Assert.Equal(typeof(Test1ViewModel), deserialized!.ViewModelType);
+            Assert.Empty(deserialized!.PresentationValues!);
+            Assert.Empty(deserialized!.ParameterValues!);
         }
     }
 }

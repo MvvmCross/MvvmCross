@@ -21,7 +21,7 @@ namespace Playground.iOS.Views
         {
             base.ViewDidLoad();
 
-            View.BackgroundColor = UIColor.Orange;
+            View!.BackgroundColor = UIColor.Orange;
 
             var set = CreateBindingSet();
             set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);

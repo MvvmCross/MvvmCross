@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-#nullable enable
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -30,7 +29,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         }
 
         [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming.")]
-        protected override void HandleCreateCalled(object? sender, MvxValueEventArgs<Bundle>? e)
+        protected override void HandleCreateCalled(object? sender, MvxValueEventArgs<Bundle?>? e)
         {
             // Create is called after Fragment is attached to Activity
             // it's safe to assume that Fragment has activity
@@ -155,7 +154,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
 
             var cache = MvxHost.Current?.Services.GetService<IMvxMultipleViewModelCache>();
             if (cache != null)
-                cache.Cache(FragmentView.ViewModel, FragmentView.UniqueImmutableCacheTag);
+                cache.Cache(FragmentView.ViewModel!, FragmentView.UniqueImmutableCacheTag);
         }
 
         protected override void HandleDestroyViewCalled(object? sender, EventArgs e)

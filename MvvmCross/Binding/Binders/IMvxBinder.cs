@@ -8,25 +8,23 @@ using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Binding.Binders
 {
-#nullable enable
     public interface IMvxBinder
     {
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
-        IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText);
+        IEnumerable<IMvxUpdateableBinding> Bind(object? source, object target, string bindingText);
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
-        IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
+        IEnumerable<IMvxUpdateableBinding> Bind(object? source, object target,
                                                 IEnumerable<MvxBindingDescription> bindingDescriptions);
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
-        IEnumerable<IMvxUpdateableBinding> LanguageBind(object source, object target, string bindingText);
+        IEnumerable<IMvxUpdateableBinding> LanguageBind(object? source, object target, string bindingText);
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
-        IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName,
+        IMvxUpdateableBinding? BindSingle(object source, object target, string targetPropertyName,
                                          string partialBindingDescription);
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         IMvxUpdateableBinding BindSingle(MvxBindingRequest bindingRequest);
     }
-#nullable restore
 }

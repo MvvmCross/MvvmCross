@@ -33,9 +33,9 @@ namespace MvvmCross.UnitTest.Binding.Mocks
         public Type TargetValueType { get; set; }
         public MvxBindingMode DefaultMode { get; set; }
 
-        public List<object> Values { get; } = new List<object>();
+        public List<object?> Values { get; } = new List<object?>();
 
-        public void SetValue(object value)
+        public void SetValue(object? value)
         {
             Values.Add(value);
         }
@@ -45,6 +45,6 @@ namespace MvvmCross.UnitTest.Binding.Mocks
             ValueChanged?.Invoke(this, args);
         }
 
-        public event EventHandler<MvxTargetChangedEventArgs> ValueChanged;
+        public event EventHandler<MvxTargetChangedEventArgs>? ValueChanged;
     }
 }

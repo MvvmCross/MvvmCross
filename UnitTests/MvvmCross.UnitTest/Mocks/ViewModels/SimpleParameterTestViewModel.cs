@@ -8,12 +8,12 @@ namespace MvvmCross.UnitTest.Mocks.ViewModels
 {
     public class SimpleParameter
     {
-        public string Hello { get; set; }
+        public string? Hello { get; set; }
     }
 
     public class SimpleParameterTestViewModel : MvxViewModel<SimpleParameter>
     {
-        public string Parameter { get; set; }
+        public string? Parameter { get; set; }
 
         public virtual void Init()
         {

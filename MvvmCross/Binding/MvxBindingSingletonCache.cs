@@ -24,23 +24,23 @@ namespace MvvmCross.Binding
         /// Resolves the registered <see cref="IMvxBindingSingletonCache"/> from the ambient host.
         /// Returns <c>null</c> if the host has not been started yet.
         /// </summary>
-        public static IMvxBindingSingletonCache Instance =>
+        public static IMvxBindingSingletonCache? Instance =>
             MvxHost.Current?.Services.GetService<IMvxBindingSingletonCache>();
 
-        private IMvxAutoValueConverters _autoValueConverters;
-        private IMvxBindingDescriptionParser _bindingDescriptionParser;
-        private IMvxSourceBindingFactory _sourceBindingFactory;
-        private IMvxTargetBindingFactory _targetBindingFactory;
-        private IMvxLanguageBindingParser _languageParser;
-        private IMvxPropertyExpressionParser _propertyExpressionParser;
-        private IMvxValueConverterLookup _valueConverterLookup;
-        private IMvxBindingNameLookup _defaultBindingName;
-        private IMvxBinder _binder;
-        private IMvxSourceStepFactory _sourceStepFactory;
-        private IMvxValueCombinerLookup _valueCombinerLookup;
-        private IMvxMainThreadAsyncDispatcher _mainThreadDispatcher;
+        private IMvxAutoValueConverters? _autoValueConverters;
+        private IMvxBindingDescriptionParser? _bindingDescriptionParser;
+        private IMvxSourceBindingFactory? _sourceBindingFactory;
+        private IMvxTargetBindingFactory? _targetBindingFactory;
+        private IMvxLanguageBindingParser? _languageParser;
+        private IMvxPropertyExpressionParser? _propertyExpressionParser;
+        private IMvxValueConverterLookup? _valueConverterLookup;
+        private IMvxBindingNameLookup? _defaultBindingName;
+        private IMvxBinder? _binder;
+        private IMvxSourceStepFactory? _sourceStepFactory;
+        private IMvxValueCombinerLookup? _valueCombinerLookup;
+        private IMvxMainThreadAsyncDispatcher? _mainThreadDispatcher;
 
-        public IMvxAutoValueConverters AutoValueConverters
+        public IMvxAutoValueConverters? AutoValueConverters
         {
             get
             {
@@ -49,7 +49,7 @@ namespace MvvmCross.Binding
             }
         }
 
-        public IMvxBindingDescriptionParser BindingDescriptionParser
+        public IMvxBindingDescriptionParser? BindingDescriptionParser
         {
             get
             {
@@ -58,7 +58,7 @@ namespace MvvmCross.Binding
             }
         }
 
-        public IMvxLanguageBindingParser LanguageParser
+        public IMvxLanguageBindingParser? LanguageParser
         {
             get
             {
@@ -67,7 +67,7 @@ namespace MvvmCross.Binding
             }
         }
 
-        public IMvxPropertyExpressionParser PropertyExpressionParser
+        public IMvxPropertyExpressionParser? PropertyExpressionParser
         {
             get
             {
@@ -76,7 +76,7 @@ namespace MvvmCross.Binding
             }
         }
 
-        public IMvxValueConverterLookup ValueConverterLookup
+        public IMvxValueConverterLookup? ValueConverterLookup
         {
             get
             {
@@ -85,7 +85,7 @@ namespace MvvmCross.Binding
             }
         }
 
-        public IMvxValueCombinerLookup ValueCombinerLookup
+        public IMvxValueCombinerLookup? ValueCombinerLookup
         {
             get
             {
@@ -94,7 +94,7 @@ namespace MvvmCross.Binding
             }
         }
 
-        public IMvxBindingNameLookup DefaultBindingNameLookup
+        public IMvxBindingNameLookup? DefaultBindingNameLookup
         {
             get
             {
@@ -103,7 +103,7 @@ namespace MvvmCross.Binding
             }
         }
 
-        public IMvxBinder Binder
+        public IMvxBinder? Binder
         {
             get
             {
@@ -112,7 +112,7 @@ namespace MvvmCross.Binding
             }
         }
 
-        public IMvxSourceBindingFactory SourceBindingFactory
+        public IMvxSourceBindingFactory? SourceBindingFactory
         {
             get
             {
@@ -121,7 +121,7 @@ namespace MvvmCross.Binding
             }
         }
 
-        public IMvxTargetBindingFactory TargetBindingFactory
+        public IMvxTargetBindingFactory? TargetBindingFactory
         {
             get
             {
@@ -130,7 +130,7 @@ namespace MvvmCross.Binding
             }
         }
 
-        public IMvxSourceStepFactory SourceStepFactory
+        public IMvxSourceStepFactory? SourceStepFactory
         {
             get
             {
@@ -139,7 +139,7 @@ namespace MvvmCross.Binding
             }
         }
 
-        public IMvxMainThreadAsyncDispatcher MainThreadDispatcher
+        public IMvxMainThreadAsyncDispatcher? MainThreadDispatcher
         {
             get
             {

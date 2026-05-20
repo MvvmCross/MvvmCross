@@ -12,8 +12,8 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
 {
     public interface IMvxLayoutInflaterHolderFactory : IMvxLayoutInflaterFactory
     {
-        IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings { get; }
+        IList<KeyValuePair<object, IMvxUpdateableBinding>>? CreatedBindings { get; }
 
-        View BindCreatedView(View view, Context context, IAttributeSet attrs);
+        View? BindCreatedView(View? view, Context context, IAttributeSet attrs);
     }
 }

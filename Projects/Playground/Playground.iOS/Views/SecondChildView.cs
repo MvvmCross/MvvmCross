@@ -20,7 +20,7 @@ namespace Playground.iOS.Views
         {
             base.ViewDidLoad();
 
-            View.BackgroundColor = UIColor.Green;
+            View!.BackgroundColor = UIColor.Green;
 
             var set = CreateBindingSet();
             set.Bind(btnClose).To(vm => vm.CloseCommand);
@@ -46,14 +46,14 @@ namespace Playground.iOS.Views
             var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
             var presenter = MvxHost.Current?.Services.GetService<IMvxIosViewPresenter>() as MvxIosViewPresenter;
 
-            if (appDelegate.Window.RootViewController.PresentedViewController != null)
+            if (appDelegate!.Window!.RootViewController!.PresentedViewController != null)
             {
                 appDelegate.Window.RootViewController.DismissViewController(true, null);
-                presenter.CloseModalViewControllers();
+                presenter!.CloseModalViewControllers();
             }
             else
             {
-                presenter.MasterNavigationController.PopToRootViewController(true);
+                presenter!.MasterNavigationController!.PopToRootViewController(true);
             }
         }
     }

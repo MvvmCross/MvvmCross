@@ -12,15 +12,15 @@ namespace MvvmCross.Binding
         {
         }
 
-        public MvxBindingRequest(object source, object target, MvxBindingDescription description)
+        public MvxBindingRequest(object? source, object target, MvxBindingDescription description)
         {
             Target = target;
             Source = source;
             Description = description;
         }
 
-        public object Target { get; set; }
-        public object Source { get; set; }
-        public MvxBindingDescription Description { get; set; }
+        public object Target { get; set; } = null!;
+        public object? Source { get; set; }
+        public MvxBindingDescription Description { get; set; } = null!;
     }
 }

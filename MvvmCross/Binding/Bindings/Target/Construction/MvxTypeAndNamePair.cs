@@ -18,7 +18,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             Name = name;
         }
 
-        public Type Type { get; set; }
-        public string Name { get; set; }
+        public Type? Type { get; set; }
+        public string? Name { get; set; }
     }
 }

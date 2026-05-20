@@ -38,7 +38,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
                 if (split.Length == 2)
                 {
                     var abbreviate = split[0];
-                    string fullName;
+                    string? fullName;
                     if (ViewNamespaceAbbreviations.TryGetValue(abbreviate, out fullName))
                     {
                         filteredTagName = fullName + "." + split[1];

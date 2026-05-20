@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-#nullable enable
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Android.Content;
@@ -272,7 +271,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 if (viewPager?.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
                 {
                     var fragmentInfo = FindFragmentInfoFromAttribute(pagerFragmentAttribute, adapter);
-                    var index = adapter.FragmentsInfo.IndexOf(fragmentInfo);
+                    var index = adapter.FragmentsInfo.IndexOf(fragmentInfo!);
                     if (index < 0)
                     {
                         _logger.Value?.Log(LogLevel.Trace, "Did not find ViewPager index for {Fragment}, skipping presentation change...", pagerFragmentAttribute.Tag);
@@ -562,7 +561,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (fragmentManager == null)
                 throw new ArgumentNullException(nameof(fragmentManager));
 
-            var fragmentName = attribute.Tag ?? attribute.ViewType.FragmentJavaName();
+            var fragmentName = attribute.Tag ?? attribute.ViewType!.FragmentJavaName();
 
             IMvxFragmentView? fragmentView = null;
             if (attribute.IsCacheableFragment)
@@ -800,8 +799,8 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (viewPager == null)
                 throw new MvxException("ViewPager not found");
 
-            var tag = attribute.Tag ?? attribute.ViewType.FragmentJavaName();
-            var fragmentInfo = new MvxViewPagerFragmentInfo(attribute.Title, tag, attribute.ViewType, request);
+            var tag = attribute.Tag ?? attribute.ViewType!.FragmentJavaName();
+            var fragmentInfo = new MvxViewPagerFragmentInfo(attribute.Title!, tag, attribute.ViewType!, request);
 
             if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
             {
@@ -811,7 +810,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             else
             {
                 viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(
-                    fragmentManager,
+                    fragmentManager!,
                     new List<MvxViewPagerFragmentInfo>
                     {
                         fragmentInfo
@@ -891,7 +890,7 @@ namespace MvvmCross.Platforms.Android.Presenters
         {
             ValidateArguments(attribute);
 
-            string tag = attribute.Tag ?? attribute.ViewType.FragmentJavaName();
+            string tag = attribute.Tag ?? attribute.ViewType!.FragmentJavaName();
             var toClose = CurrentFragmentManager?.FindFragmentByTag(tag);
             if (toClose is DialogFragment dialog)
             {
@@ -956,7 +955,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             try
             {
-                var fragmentName = fragmentAttribute.Tag ?? fragmentAttribute.ViewType.FragmentJavaName();
+                var fragmentName = fragmentAttribute.Tag ?? fragmentAttribute.ViewType!.FragmentJavaName();
                 if (fragmentManager.BackStackEntryCount > 0)
                 {
                     PopOnBackstackEntries(fragmentName, fragmentManager, fragmentAttribute);

@@ -43,24 +43,24 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
         }
 
-        public void AdapterOnDataSetChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
+        public void AdapterOnDataSetChanged(object? sender, NotifyCollectionChangedEventArgs eventArgs)
         {
             this.UpdateDataSetFromChange(sender, eventArgs);
         }
 
-        private void OnChildViewRemoved(object sender, ViewGroup.ChildViewRemovedEventArgs childViewRemovedEventArgs)
+        private void OnChildViewRemoved(object? sender, ViewGroup.ChildViewRemovedEventArgs childViewRemovedEventArgs)
         {
             var boundChild = childViewRemovedEventArgs.Child as IMvxBindingContextOwner;
             boundChild?.ClearAllBindings();
         }
 
-        private IMvxAdapterWithChangedEvent _adapter;
+        private IMvxAdapterWithChangedEvent? _adapter;
 
         public IMvxAdapterWithChangedEvent Adapter
         {
             get
             {
-                return _adapter;
+                return _adapter!;
             }
             protected set
             {
@@ -93,7 +93,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 }
 
                 if (existing != null)
-                    existing.ItemsSource = null;
+                    existing.ItemsSource = null!;
             }
         }
 

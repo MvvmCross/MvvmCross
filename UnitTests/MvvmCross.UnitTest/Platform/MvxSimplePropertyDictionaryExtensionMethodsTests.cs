@@ -33,20 +33,20 @@ namespace MvvmCross.UnitTest.Platform
 
             var deserialized = dictionary.Read<ObjectWithValidPropertiesInBaseClass>();
 
-            Assert.Equal(value, deserialized.ChildProperty);
+            Assert.Equal(value, deserialized!.ChildProperty);
             Assert.Equal(value, deserialized.BasePropertyInternalSet);
             Assert.Equal(value, deserialized.BasePropertyPublicSet);
         }
 
         private class ObjectWithValidPropertiesInBaseClass : ObjectWithValidPropertiesInBaseClassBase
         {
-            public string ChildProperty { get; set; }
+            public string? ChildProperty { get; set; }
         }
 
         private abstract class ObjectWithValidPropertiesInBaseClassBase
         {
-            public string BasePropertyInternalSet { get; internal set; }
-            public string BasePropertyPublicSet { get; set; }
+            public string? BasePropertyInternalSet { get; internal set; }
+            public string? BasePropertyPublicSet { get; set; }
         }
     }
 }

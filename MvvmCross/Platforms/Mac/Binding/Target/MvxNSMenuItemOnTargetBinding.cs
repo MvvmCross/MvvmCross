@@ -27,7 +27,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             }
         }
 
-        private void HandleMenuItemCheckBoxAction(object sender, EventArgs e)
+        private void HandleMenuItemCheckBoxAction(object? sender, EventArgs e)
         {
             var view = View;
             if (view == null)
@@ -37,7 +37,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
         }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
-        protected override object MakeSafeValue(object value)
+        protected override object? MakeSafeValue(object? value)
         {
             if (value is bool)
             {

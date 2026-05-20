@@ -10,7 +10,7 @@ namespace MvvmCross.Platforms.Mac.Views
 {
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxMacView MacView
+        protected IMvxMacView? MacView
         {
             get { return base.ViewController as IMvxMacView; }
         }
@@ -22,15 +22,15 @@ namespace MvvmCross.Platforms.Mac.Views
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxMacView");
         }
 
-        public override void HandleViewDidLoadCalled(object sender, EventArgs e)
+        public override void HandleViewDidLoadCalled(object? sender, EventArgs e)
         {
-            MacView.OnViewCreate();
+            MacView?.OnViewCreate();
             base.HandleViewDidLoadCalled(sender, e);
         }
 
-        public override void HandleDisposeCalled(object sender, EventArgs e)
+        public override void HandleDisposeCalled(object? sender, EventArgs e)
         {
-            MacView.OnViewDestroy();
+            MacView?.OnViewDestroy();
             base.HandleDisposeCalled(sender, e);
         }
     }

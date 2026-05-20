@@ -14,14 +14,14 @@ public class MvxPropertyPathParser : MvxParser
 {
     protected List<IMvxPropertyToken> CurrentTokens { get; } = [];
 
-    protected override void Reset(string textToParse)
+    protected override void Reset(string? textToParse)
     {
         CurrentTokens.Clear();
         textToParse = MakeSafe(textToParse);
         base.Reset(textToParse);
     }
 
-    public static string MakeSafe(string textToParse)
+    public static string MakeSafe(string? textToParse)
     {
         if (textToParse == null)
             return string.Empty;

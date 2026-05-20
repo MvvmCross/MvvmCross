@@ -19,16 +19,16 @@ namespace MvvmCross.Platforms.Tvos.Binding
     public class MvxTvosBindingBuilder
         : MvxBindingBuilder
     {
-        private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
-        private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
-        private readonly Action<IMvxBindingNameRegistry> _fillBindingNamesAction;
-        private readonly Action<IMvxValueCombinerRegistry> _fillValueCombinersAction;
+        private readonly Action<IMvxTargetBindingFactoryRegistry>? _fillRegistryAction;
+        private readonly Action<IMvxValueConverterRegistry>? _fillValueConvertersAction;
+        private readonly Action<IMvxBindingNameRegistry>? _fillBindingNamesAction;
+        private readonly Action<IMvxValueCombinerRegistry>? _fillValueCombinersAction;
         private readonly MvxUnifiedTypesValueConverter _unifiedValueTypesConverter;
 
-        public MvxTvosBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction = null,
-                                    Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
-                                    Action<IMvxBindingNameRegistry> fillBindingNamesAction = null,
-                                    Action<IMvxValueCombinerRegistry> fillValueCombinersAction = null)
+        public MvxTvosBindingBuilder(Action<IMvxTargetBindingFactoryRegistry>? fillRegistryAction = null,
+                                    Action<IMvxValueConverterRegistry>? fillValueConvertersAction = null,
+                                    Action<IMvxBindingNameRegistry>? fillBindingNamesAction = null,
+                                    Action<IMvxValueCombinerRegistry>? fillValueCombinersAction = null)
         {
             _fillRegistryAction = fillRegistryAction;
             _fillValueConvertersAction = fillValueConvertersAction;

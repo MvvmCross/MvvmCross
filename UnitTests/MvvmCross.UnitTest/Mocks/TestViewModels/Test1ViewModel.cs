@@ -10,17 +10,17 @@ namespace MvvmCross.UnitTest.Mocks.TestViewModels
     public class Test1ViewModel : MvxViewModel
     {
         public ITestThing Thing { get; private set; }
-        public IMvxBundle BundleInit { get; private set; }
-        public IMvxBundle BundleState { get; private set; }
+        public IMvxBundle? BundleInit { get; private set; }
+        public IMvxBundle? BundleState { get; private set; }
         public bool StartCalled { get; private set; }
-        public string TheInitString1Set { get; private set; }
+        public string? TheInitString1Set { get; private set; }
         public Guid TheInitGuid1Set { get; private set; }
         public Guid TheInitGuid2Set { get; private set; }
-        public BundleObject TheInitBundleSet { get; private set; }
-        public string TheReloadString1Set { get; private set; }
+        public BundleObject? TheInitBundleSet { get; private set; }
+        public string? TheReloadString1Set { get; private set; }
         public Guid TheReloadGuid1Set { get; private set; }
         public Guid TheReloadGuid2Set { get; private set; }
-        public BundleObject TheReloadBundleSet { get; private set; }
+        public BundleObject? TheReloadBundleSet { get; private set; }
 
         public Test1ViewModel(ITestThing thing)
         {

@@ -10,14 +10,14 @@ namespace MvvmCross.Binding.BindingContext
 {
     public static partial class MvxBindingContextOwnerExtensions
     {
-        public static IMvxLanguageBindingParser LanguageParser => MvxBindingSingletonCache.Instance.LanguageParser;
+        public static IMvxLanguageBindingParser LanguageParser => MvxBindingSingletonCache.Instance!.LanguageParser!;
 
-        public static IMvxPropertyExpressionParser PropertyExpressionParser => MvxBindingSingletonCache.Instance.PropertyExpressionParser;
+        public static IMvxPropertyExpressionParser PropertyExpressionParser => MvxBindingSingletonCache.Instance!.PropertyExpressionParser!;
 
-        public static IMvxValueConverterLookup ValueConverterLookup => MvxBindingSingletonCache.Instance.ValueConverterLookup;
+        public static IMvxValueConverterLookup ValueConverterLookup => MvxBindingSingletonCache.Instance!.ValueConverterLookup!;
 
-        public static IMvxBindingNameLookup DefaultBindingNameLookup => MvxBindingSingletonCache.Instance.DefaultBindingNameLookup;
+        public static IMvxBindingNameLookup DefaultBindingNameLookup => MvxBindingSingletonCache.Instance!.DefaultBindingNameLookup!;
 
-        public static IMvxBinder Binder => MvxBindingSingletonCache.Instance.Binder;
+        public static IMvxBinder Binder => MvxBindingSingletonCache.Instance!.Binder!;
     }
 }

@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.BindingContext
         public static T Bind<T, TViewModel>(this T element, MvxInlineBindingTarget<TViewModel> target,
                                             string descriptionText)
         {
-            target.BindingContextOwner.AddBindings(element, descriptionText);
+            target.BindingContextOwner.AddBindings(element!, descriptionText);
             return element;
         }
 
@@ -29,9 +29,9 @@ namespace MvvmCross.Binding.BindingContext
         public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
                                             Expression<Func<TViewModel, object>> sourcePropertyPath,
-                                            string converterName = null,
-                                            object converterParameter = null,
-                                            object fallbackValue = null,
+                                            string? converterName = null,
+                                            object? converterParameter = null,
+                                            object? fallbackValue = null,
                                             MvxBindingMode mode = MvxBindingMode.Default)
         {
             return element.Bind(target, null, sourcePropertyPath, converterName, converterParameter, fallbackValue, mode);
@@ -42,8 +42,8 @@ namespace MvvmCross.Binding.BindingContext
                                             MvxInlineBindingTarget<TViewModel> target,
                                             Expression<Func<TViewModel, object>> sourcePropertyPath,
                                             IMvxValueConverter converter,
-                                            object converterParameter = null,
-                                            object fallbackValue = null,
+                                            object? converterParameter = null,
+                                            object? fallbackValue = null,
                                             MvxBindingMode mode = MvxBindingMode.Default)
         {
             return element.Bind(target, null, sourcePropertyPath, converter, converterParameter, fallbackValue, mode);
@@ -52,14 +52,14 @@ namespace MvvmCross.Binding.BindingContext
         [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
-                                            Expression<Func<T, object>> targetPropertyPath,
+                                            Expression<Func<T, object>>? targetPropertyPath,
                                             Expression<Func<TViewModel, object>> sourcePropertyPath,
-                                            string converterName = null,
-                                            object converterParameter = null,
-                                            object fallbackValue = null,
+                                            string? converterName = null,
+                                            object? converterParameter = null,
+                                            object? fallbackValue = null,
                                             MvxBindingMode mode = MvxBindingMode.Default)
         {
-            var converter = MvxBindingSingletonCache.Instance.ValueConverterLookup.Find(converterName);
+            var converter = MvxBindingSingletonCache.Instance!.ValueConverterLookup!.Find(converterName!);
             return element.Bind(target, targetPropertyPath, sourcePropertyPath, converter, converterParameter,
                                 fallbackValue, mode);
         }
@@ -67,14 +67,14 @@ namespace MvvmCross.Binding.BindingContext
         [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
-                                            Expression<Func<T, object>> targetPropertyPath,
+                                            Expression<Func<T, object>>? targetPropertyPath,
                                             Expression<Func<TViewModel, object>> sourcePropertyPath,
-                                            IMvxValueConverter converter,
-                                            object converterParameter = null,
-                                            object fallbackValue = null,
+                                            IMvxValueConverter? converter,
+                                            object? converterParameter = null,
+                                            object? fallbackValue = null,
                                             MvxBindingMode mode = MvxBindingMode.Default)
         {
-            var parser = MvxBindingSingletonCache.Instance.PropertyExpressionParser;
+            var parser = MvxBindingSingletonCache.Instance!.PropertyExpressionParser!;
             var sourcePath = parser.Parse(sourcePropertyPath).Print();
             var targetPath = targetPropertyPath == null ? null : parser.Parse(targetPropertyPath).Print();
             return element.Bind(target, targetPath, sourcePath, converter, converterParameter, fallbackValue, mode);
@@ -83,15 +83,15 @@ namespace MvvmCross.Binding.BindingContext
         [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] T, TViewModel>(this T element,
                                             MvxInlineBindingTarget<TViewModel> target,
-                                            string targetPath,
+                                            string? targetPath,
                                             string sourcePath,
-                                            IMvxValueConverter converter = null,
-                                            object converterParameter = null,
-                                            object fallbackValue = null,
+                                            IMvxValueConverter? converter = null,
+                                            object? converterParameter = null,
+                                            object? fallbackValue = null,
                                             MvxBindingMode mode = MvxBindingMode.Default)
         {
             if (string.IsNullOrEmpty(targetPath))
-                targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(T));
+                targetPath = MvxBindingSingletonCache.Instance!.DefaultBindingNameLookup!.DefaultFor(typeof(T));
 
             var bindingDescription = new MvxBindingDescription(
                 targetPath,
@@ -101,7 +101,7 @@ namespace MvvmCross.Binding.BindingContext
                 fallbackValue,
                 mode);
 
-            target.BindingContextOwner.AddBinding(element, bindingDescription);
+            target.BindingContextOwner.AddBinding(element!, bindingDescription);
 
             return element;
         }
@@ -109,7 +109,7 @@ namespace MvvmCross.Binding.BindingContext
         [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public static T Bind<T>(this T element, IMvxBindingContextOwner bindingContextOwner, string descriptionText)
         {
-            bindingContextOwner.AddBindings(element, descriptionText);
+            bindingContextOwner.AddBindings(element!, descriptionText);
             return element;
         }
 
@@ -117,7 +117,7 @@ namespace MvvmCross.Binding.BindingContext
         public static T Bind<T>(this T element, IMvxBindingContextOwner bindingContextOwner,
                                 IEnumerable<MvxBindingDescription> descriptions)
         {
-            bindingContextOwner.AddBindings(element, descriptions);
+            bindingContextOwner.AddBindings(element!, descriptions);
             return element;
         }
     }

@@ -40,7 +40,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding
                 Assert.Null(actual.Sources);
             else
             {
-                Assert.Equal(expected.Sources.Count, actual.Sources.Count);
+                Assert.Equal(expected.Sources.Count, actual.Sources!.Count);
                 for (var i = 0; i < expected.Sources.Count; i++)
                     AssertAreEquivalent(expected.Sources[i], actual.Sources[i]);
             }

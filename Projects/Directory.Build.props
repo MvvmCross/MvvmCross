@@ -2,6 +2,10 @@
   <Import Project="..\Directory.Build.props" />
 
   <PropertyGroup>
+    <Nullable>warnings</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
     <Authors>.NET Foundation and Contributors</Authors>
     <Owners>MvvmCross;slodge;cheesebaron;martijn00</Owners>

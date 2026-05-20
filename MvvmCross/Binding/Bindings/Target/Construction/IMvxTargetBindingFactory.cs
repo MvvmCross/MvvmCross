@@ -9,6 +9,6 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
     public interface IMvxTargetBindingFactory
     {
         [RequiresUnreferencedCode("This method creates bindings using reflection which may not be preserved by trimming")]
-        IMvxTargetBinding CreateBinding(object target, string targetName);
+        IMvxTargetBinding? CreateBinding(object target, string targetName);
     }
 }

@@ -11,7 +11,6 @@ using MvvmCross.Exceptions;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public abstract class MvxParser
     {
         protected string? FullText { get; private set; }
@@ -545,5 +544,4 @@ namespace MvvmCross.Base
             }
         }
     }
-#nullable restore
 }

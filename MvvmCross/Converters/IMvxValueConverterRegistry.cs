@@ -7,10 +7,8 @@ using MvvmCross.Binding.Binders;
 
 namespace MvvmCross.Converters
 {
-#nullable enable
     public interface IMvxValueConverterRegistry
         : IMvxNamedInstanceRegistry<IMvxValueConverter>, IMvxValueConverterLookup
     {
     }
-#nullable restore
 }

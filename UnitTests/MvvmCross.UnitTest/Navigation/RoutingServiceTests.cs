@@ -26,8 +26,8 @@ namespace MvvmCross.UnitTest.Navigation
     [Collection("MvxTest")]
     public class RoutingServiceTests
     {
-        protected NavigationMockDispatcher MockDispatcher;
-        protected IMvxNavigationService RoutingService;
+        protected NavigationMockDispatcher MockDispatcher = null!;
+        protected IMvxNavigationService RoutingService = null!;
         private readonly NavigationTestFixture _fixture;
 
         public RoutingServiceTests(NavigationTestFixture fixture)
@@ -36,7 +36,7 @@ namespace MvvmCross.UnitTest.Navigation
             _fixture.ClearAll();
 
             // ReSharper disable once AssignNullToNotNullAttribute
-            Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!;
 
             AdditionalSetup(fixture);
         }

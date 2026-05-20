@@ -14,7 +14,7 @@ namespace MvvmCross.Binding.Combiners
 
         void SetValue(IEnumerable<IMvxSourceStep> steps, object value);
 
-        bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value);
+        bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object? value);
 
         IEnumerable<Type> SubStepTargetTypes(IEnumerable<IMvxSourceStep> subSteps, Type overallTargetType);
     }

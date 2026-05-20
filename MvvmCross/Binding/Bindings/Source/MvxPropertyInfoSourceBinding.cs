@@ -13,7 +13,7 @@ namespace MvvmCross.Binding.Bindings.Source
     [RequiresUnreferencedCode("This class may use types that are not preserved by trimming")]
     public abstract class MvxPropertyInfoSourceBinding : MvxSourceBinding
     {
-        private IDisposable _subscription;
+        private IDisposable? _subscription;
 
         protected MvxPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)
             : base(source)
@@ -65,7 +65,7 @@ namespace MvvmCross.Binding.Bindings.Source
         }
 
         // Note - this is public because we use it in weak referenced situations
-        public void SourcePropertyChanged(object sender, PropertyChangedEventArgs e)
+        public void SourcePropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             // we test for null or empty here - this means all properties have changed
             // - fix for https://github.com/slodge/MvvmCross/issues/280

@@ -7,7 +7,6 @@ using MvvmCross.Base;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public class MvxInteraction : IMvxInteraction
     {
         public void Raise()
@@ -27,5 +26,4 @@ namespace MvvmCross.ViewModels
 
         public event EventHandler<MvxValueEventArgs<T>>? Requested;
     }
-#nullable restore
 }

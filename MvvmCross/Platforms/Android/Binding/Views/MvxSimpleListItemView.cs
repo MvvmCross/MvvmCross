@@ -18,7 +18,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
         }
 
-        public override object DataContext
+        public override object? DataContext
         {
             get => base.DataContext;
             set

@@ -32,7 +32,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
             #region Overrides of Filter
 
-            protected override FilterResults PerformFiltering(ICharSequence constraint)
+            protected override FilterResults PerformFiltering(ICharSequence? constraint)
             {
                 var stringConstraint = constraint == null ? string.Empty : constraint.ToString();
 
@@ -48,7 +48,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 };
             }
 
-            protected override void PublishResults(ICharSequence constraint, FilterResults results)
+            protected override void PublishResults(ICharSequence? constraint, FilterResults? results)
             {
                 if (results != null && results.Count > 0)
                 {
@@ -67,13 +67,13 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             #endregion Overrides of Filter
         }
 
-        public Func<object, string, bool> DefaultFilterPredicate = (item, filterString) => item.ToString().Contains(filterString, StringComparison.InvariantCultureIgnoreCase);
+        public Func<object, string, bool> DefaultFilterPredicate = (item, filterString) => item.ToString()!.Contains(filterString, StringComparison.InvariantCultureIgnoreCase);
         public Func<object, string, bool> FilterPredicate { get; set; }
 
         protected virtual (int, IEnumerable) FilterValues(string constraint)
         {
             if (PartialText == constraint)
-                return (-1, null);
+                return (-1, null!);
 
             PartialText = constraint;
             var filteredItems = ItemsSource.Filter(item => FilterPredicate(item, constraint));
@@ -93,13 +93,13 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        private IEnumerable FilteredItemsSource { get; set; }
+        private IEnumerable? FilteredItemsSource { get; set; }
 
-        private string _partialText;
+        private string? _partialText;
 
-        public event EventHandler PartialTextChanged;
+        public event EventHandler? PartialTextChanged;
 
-        public string PartialText
+        public string? PartialText
         {
             get => _partialText;
             private set
@@ -119,7 +119,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             });
         }
 
-        public MvxFilteringAdapter(Context context) : this(context, MvxAndroidBindingContextHelpers.Current())
+        public MvxFilteringAdapter(Context context) : this(context, MvxAndroidBindingContextHelpers.Current()!)
         {
         }
 
@@ -133,11 +133,12 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         protected MvxFilteringAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
+            FilterPredicate = DefaultFilterPredicate;
         }
 
         public bool ReturnSingleObjectFromGetItem { get; set; }
 
-        private MvxReplaceableJavaContainer _javaContainer;
+        private MvxReplaceableJavaContainer? _javaContainer;
 
         public override Object GetItem(int position)
         {
@@ -153,7 +154,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 return _javaContainer;
             }
 
-            return base.GetItem(position);
+            return base.GetItem(position)!;
         }
 
         public override object GetRawItem(int position)
@@ -161,7 +162,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             lock (_syncLock)
             {
                 var element = FilteredItemsSource?.ElementAt(position);
-                return element;
+                return element!;
             }
         }
 
@@ -187,7 +188,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         #region Implementation of IFilterable
 
-        public Filter Filter { get; set; }
+        public Filter Filter { get; set; } = null!;
 
         #endregion Implementation of IFilterable
     }

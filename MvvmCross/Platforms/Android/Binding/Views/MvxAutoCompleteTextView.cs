@@ -41,12 +41,12 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
         }
 
-        private void OnItemClick(object sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
+        private void OnItemClick(object? sender, AdapterView.ItemClickEventArgs itemClickEventArgs)
         {
             OnItemClick(itemClickEventArgs.Position);
         }
 
-        private void OnItemSelected(object sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
+        private void OnItemSelected(object? sender, AdapterView.ItemSelectedEventArgs itemSelectedEventArgs)
         {
             OnItemSelected(itemSelectedEventArgs.Position);
         }
@@ -67,7 +67,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             get
             {
-                return base.Adapter as MvxFilteringAdapter;
+                return (base.Adapter as MvxFilteringAdapter)!;
             }
             set
             {
@@ -90,11 +90,11 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 base.Adapter = value;
 
                 if (existing != null)
-                    existing.ItemsSource = null;
+                    existing.ItemsSource = null!;
             }
         }
 
-        private void AdapterOnPartialTextChanged(object sender, EventArgs eventArgs)
+        private void AdapterOnPartialTextChanged(object? sender, EventArgs eventArgs)
         {
             FireChanged(PartialTextChanged);
         }
@@ -114,13 +114,13 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         public string PartialText => Adapter.PartialText;
 
-        private object _selectedObject;
+        private object? _selectedObject;
 
         public object SelectedObject
         {
             get
             {
-                return _selectedObject;
+                return _selectedObject!;
             }
             private set
             {
@@ -132,11 +132,11 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        public event EventHandler SelectedObjectChanged;
+        public event EventHandler? SelectedObjectChanged;
 
-        public event EventHandler PartialTextChanged;
+        public event EventHandler? PartialTextChanged;
 
-        private void FireChanged(EventHandler eventHandler)
+        private void FireChanged(EventHandler? eventHandler)
         {
             eventHandler?.Invoke(this, EventArgs.Empty);
         }

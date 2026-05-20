@@ -21,7 +21,7 @@ namespace Playground.iOS.Views
         {
             base.ViewDidLoad();
 
-            View.BackgroundColor = UIColor.Red;
+            View!.BackgroundColor = UIColor.Red;
 
             var set = CreateBindingSet();
             set.Bind(btnShowChild).To(vm => vm.ShowChildCommand);

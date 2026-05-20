@@ -11,6 +11,6 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
     public class MvxSimpleLeafPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)
         : MvxLeafPropertyInfoSourceBinding(source, propertyInfo)
     {
-        protected override object[] PropertyIndexParameters() => [];
+        protected override object?[] PropertyIndexParameters() => [];
     }
 }

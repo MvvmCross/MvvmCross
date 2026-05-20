@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes;
 
-#nullable enable
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class MvxDialogFragmentPresentationAttribute : MvxFragmentPresentationAttribute
 {

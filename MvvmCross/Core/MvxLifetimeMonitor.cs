@@ -6,7 +6,6 @@ using System;
 
 namespace MvvmCross.Core
 {
-#nullable enable
     public abstract class MvxLifetimeMonitor : IMvxLifetime
     {
 #pragma warning disable CA1030 // Use events where appropriate
@@ -18,5 +17,4 @@ namespace MvvmCross.Core
 
         public event EventHandler<MvxLifetimeEventArgs>? LifetimeChanged;
     }
-#nullable restore
 }

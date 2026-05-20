@@ -18,15 +18,15 @@ namespace MvvmCross.Binding.BindingContext
         private readonly List<Action> _delayedActions = new();
         private readonly List<MvxBindingContext.TargetAndBinding> _directBindings = new();
         private readonly List<KeyValuePair<object, IList<MvxBindingContext.TargetAndBinding>>> _viewBindings = new();
-        private object _dataContext;
-        private IMvxBinder _binder;
+        private object? _dataContext;
+        private IMvxBinder? _binder;
 
         public bool RunSynchronously { get; set; }
 
-        public event EventHandler DataContextChanged;
+        public event EventHandler? DataContextChanged;
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
-        public IMvxBindingContext Init(object dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue)
+        public IMvxBindingContext Init(object? dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue)
         {
             AddDelayedAction(firstBindingKey, firstBindingValue);
             if (dataContext != null)
@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.BindingContext
         }
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
-        public IMvxBindingContext Init(object dataContext, object firstBindingKey, string firstBindingValue)
+        public IMvxBindingContext Init(object? dataContext, object firstBindingKey, string firstBindingValue)
         {
             AddDelayedAction(firstBindingKey, firstBindingValue);
             if (dataContext != null)
@@ -90,7 +90,7 @@ namespace MvvmCross.Binding.BindingContext
             }
         }
 
-        public object DataContext
+        public object? DataContext
         {
             get
             {

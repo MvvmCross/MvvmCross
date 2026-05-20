@@ -9,6 +9,6 @@ namespace MvvmCross.Plugin.Color
 {
     internal static class MvxPluginLog
     {
-        internal static ILogger Instance { get; } = MvxLogHost.GetLog("MvxPlugin.Color");
+        internal static ILogger? Instance { get; } = MvxLogHost.GetLog("MvxPlugin.Color");
     }
 }

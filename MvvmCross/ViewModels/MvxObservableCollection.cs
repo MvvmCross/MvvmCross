@@ -285,7 +285,7 @@ namespace MvvmCross.ViewModels
                 new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItems, start));
         }
 
-        private IMvxMainThreadAsyncDispatcher _dispatcher;
+        private IMvxMainThreadAsyncDispatcher? _dispatcher;
 
         protected virtual Task InvokeOnMainThread(Action action)
         {

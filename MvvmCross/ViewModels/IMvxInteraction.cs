@@ -7,7 +7,6 @@ using MvvmCross.Base;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public interface IMvxInteraction
     {
         event EventHandler? Requested;
@@ -17,5 +16,4 @@ namespace MvvmCross.ViewModels
     {
         event EventHandler<MvxValueEventArgs<T>>? Requested;
     }
-#nullable restore
 }

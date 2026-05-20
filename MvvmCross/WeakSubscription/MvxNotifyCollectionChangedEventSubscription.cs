@@ -8,7 +8,6 @@ using System.Reflection;
 
 namespace MvvmCross.WeakSubscription
 {
-#nullable enable
     public class MvxNotifyCollectionChangedEventSubscription
         : MvxWeakEventSubscription<INotifyCollectionChanged, NotifyCollectionChangedEventArgs>
     {
@@ -32,5 +31,4 @@ namespace MvvmCross.WeakSubscription
             return new NotifyCollectionChangedEventHandler(OnSourceEvent);
         }
     }
-#nullable restore
 }

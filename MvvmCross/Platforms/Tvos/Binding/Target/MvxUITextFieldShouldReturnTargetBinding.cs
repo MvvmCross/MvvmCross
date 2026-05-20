@@ -14,9 +14,9 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
     public class MvxUITextFieldShouldReturnTargetBinding
         : MvxTargetBinding
     {
-        private ICommand _command;
+        private ICommand? _command;
 
-        protected UITextField View => Target as UITextField;
+        protected UITextField? View => Target as UITextField;
 
         public MvxUITextFieldShouldReturnTargetBinding(UITextField target)
             : base(target)
@@ -41,7 +41,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
-        public override void SetValue(object value)
+        public override void SetValue(object? value)
         {
             var command = value as ICommand;
             _command = command;

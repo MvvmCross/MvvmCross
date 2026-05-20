@@ -113,9 +113,9 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        public new TViewModel ViewModel
+        public new TViewModel? ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
+            get { return (TViewModel?)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 
