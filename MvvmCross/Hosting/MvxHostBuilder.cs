@@ -28,6 +28,11 @@ public abstract class MvxHostBuilder
     /// </summary>
     public IServiceCollection Services { get; } = new ServiceCollection();
 
+    protected MvxHostBuilder()
+    {
+        Services.AddLogging();
+    }
+
     /// <summary>
     /// Registers the MvvmCross framework and configures <typeparamref name="TViewModel"/> as the
     /// first ViewModel to navigate to on startup.
@@ -229,4 +234,3 @@ public abstract class MvxHostBuilder
     protected virtual MvxHost CreateHost(IServiceProvider serviceProvider)
         => new MvxHost(serviceProvider);
 }
-
