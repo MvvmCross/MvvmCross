@@ -29,10 +29,10 @@ jobs:
         fetch-depth: 0
         fetch-tags: true  
 
-    - name: Install .NET 10.0.100
+    - name: Install .NET 10.0.300
       uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7 # v5.2.0
       with:
-        dotnet-version: 10.0.100
+        dotnet-version: 10.0.300
 
     - name: Restore .NET tools
       shell: pwsh
