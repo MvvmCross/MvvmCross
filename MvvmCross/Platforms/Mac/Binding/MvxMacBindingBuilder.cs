@@ -82,9 +82,14 @@ namespace MvvmCross.Platforms.Mac.Binding
                 MvxMacPropertyBinding.NSTextField_StringValue);
 
             registry.RegisterCustomBindingFactory<NSTextView>(
-                MvxMacPropertyBinding.NSTextView_StringValue,
-                view => new MvxNSTextViewTextTargetBinding(view)
-                );
+                nameof(NSTextView.AttributedString),
+                view => new MvxNSTextViewAttributedStringTargetBinding(view)
+            );
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSTextViewTextTargetBinding),
+                typeof(NSTextView),
+                MvxMacPropertyBinding.NSTextView_StringValue);
 
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxNSSwitchOnTargetBinding),
