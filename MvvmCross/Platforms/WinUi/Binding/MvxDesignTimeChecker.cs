@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Base;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.Parse.Binding;
-using MvvmCross.IoC;
+using MvvmCross.Hosting;
 using Windows.ApplicationModel;
 
 namespace MvvmCross.Platforms.WinUi.Binding
@@ -23,16 +23,12 @@ namespace MvvmCross.Platforms.WinUi.Binding
             if (!DesignMode.DesignModeEnabled)
                 return;
 
-            if (MvxSingleton<IMvxIoCProvider>.Instance == null)
-            {
-                var iocProvider = MvxIoCProvider.Initialize();
-                Mvx.IoCProvider.RegisterSingleton(iocProvider);
-            }
+            if (MvxHost.Current == null)
+                return;
 
-            if (!Mvx.IoCProvider.CanResolve<IMvxBindingParser>())
+            if (MvxHost.Current?.Services.GetService<IMvxBindingParser>() == null)
             {
-                var builder = new MvxWindowsBindingBuilder(bindingType: MvxWindowsBindingBuilder.BindingType.MvvmCross);
-                builder.DoRegistration(Mvx.IoCProvider);
+                // Design-time minimal initialization is now a no-op since the host builder handles service registration.
             }
         }
     }

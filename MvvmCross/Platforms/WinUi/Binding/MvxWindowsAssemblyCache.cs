@@ -4,27 +4,24 @@
 
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Base;
-using MvvmCross.Exceptions;
 
 namespace MvvmCross.Platforms.WinUi.Binding
 {
-    public class MvxWindowsAssemblyCache
-        : MvxSingleton<IMvxWindowsAssemblyCache>, IMvxWindowsAssemblyCache
+    public class MvxWindowsAssemblyCache : IMvxWindowsAssemblyCache
     {
+        private static MvxWindowsAssemblyCache? _instance;
+        public static MvxWindowsAssemblyCache? Instance => _instance;
+
         public static void EnsureInitialized()
         {
-            if (Instance != null)
-                return;
-
-            var instance = new MvxWindowsAssemblyCache();
-
-            if (Instance != instance)
-                throw new MvxException("Error initialising MvxWindowsAssemblyCache");
+            if (_instance == null)
+                _instance = new MvxWindowsAssemblyCache();
         }
 
         public MvxWindowsAssemblyCache()
         {
+            if (_instance == null)
+                _instance = this;
             Assemblies = new List<Assembly>();
         }
 

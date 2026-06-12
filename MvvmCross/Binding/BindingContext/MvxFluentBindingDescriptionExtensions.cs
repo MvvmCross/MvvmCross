@@ -3,8 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Converters;
+using MvvmCross.Hosting;
 using MvvmCross.Localization;
 
 namespace MvvmCross.Binding.BindingContext
@@ -18,7 +20,7 @@ namespace MvvmCross.Binding.BindingContext
                     where TSource : IMvxLocalizedTextSourceOwner
                     where TTarget : class
         {
-            var valueConverter = Mvx.IoCProvider.Resolve<IMvxValueConverterLookup>().Find("Language");
+            var valueConverter = MvxHost.Current!.Services.GetRequiredService<IMvxValueConverterLookup>().Find("Language");
             return bindingDescription.To(vm => vm.LocalizedTextSource)
                 .OneTime()
                 .WithConversion(valueConverter, localizationId);

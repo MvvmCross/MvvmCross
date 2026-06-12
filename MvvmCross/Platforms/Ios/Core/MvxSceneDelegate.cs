@@ -3,13 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 #nullable enable
-using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Core;
-using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Ios.Core;
 
-[RequiresUnreferencedCode("This class uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
+/// <summary>
+/// Base scene delegate that fires MvvmCross lifetime events.
+/// Use <see cref="MvvmCross.Platforms.Ios.Hosting.MvxIosHostBuilder"/> in your
+/// <see cref="WillConnect"/> override to initialize the framework.
+/// </summary>
 public abstract class MvxSceneDelegate : UIResponder, IUIWindowSceneDelegate, IMvxLifetime
 {
     public event EventHandler<MvxLifetimeEventArgs>? LifetimeChanged;
@@ -22,16 +24,6 @@ public abstract class MvxSceneDelegate : UIResponder, IUIWindowSceneDelegate, IM
         UISceneSession session,
         UISceneConnectionOptions connectionOptions)
     {
-        if (scene is UIWindowScene windowScene)
-        {
-            RegisterSetup();
-            Window = new UIWindow(windowScene);
-            MvxIosSetupSingleton
-                .EnsureSingletonAvailable(this, Window)
-                .EnsureInitialized();
-            RunAppStart();
-            FireLifetimeChanged(MvxLifetimeEvent.Launching);
-        }
     }
 
     [Export("sceneDidDisconnect:")]
@@ -61,33 +53,9 @@ public abstract class MvxSceneDelegate : UIResponder, IUIWindowSceneDelegate, IM
     {
     }
 
-    protected virtual void RunAppStart()
+    protected void FireLifetimeChanged(MvxLifetimeEvent which)
     {
-        if (Mvx.IoCProvider?.TryResolve(out IMvxAppStart? startup) == true &&
-            startup is { IsStarted: false })
-        {
-            startup.Start();
-        }
-
-        Window?.MakeKeyAndVisible();
-    }
-
-    protected abstract void RegisterSetup();
-
-    private void FireLifetimeChanged(MvxLifetimeEvent which)
-    {
-        var handler = LifetimeChanged;
-        handler?.Invoke(this, new MvxLifetimeEventArgs(which));
+        LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
     }
 }
 
-[RequiresUnreferencedCode("This class uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
-public abstract class MvxSceneDelegate<TMvxIosSetup, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TApplication> : MvxSceneDelegate
-    where TMvxIosSetup : MvxIosSetup<TApplication>, new()
-    where TApplication : class, IMvxApplication, new()
-{
-    protected override void RegisterSetup()
-    {
-        this.RegisterSetupType<TMvxIosSetup>();
-    }
-}

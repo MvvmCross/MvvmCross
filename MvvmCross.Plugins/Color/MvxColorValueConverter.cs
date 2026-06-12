@@ -4,14 +4,17 @@
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Converters;
+using MvvmCross.Hosting;
 using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color;
 
 public abstract class MvxColorValueConverter : MvxValueConverter
 {
-    private readonly Lazy<IMvxNativeColor?> _nativeColor = new(() => Mvx.IoCProvider?.Resolve<IMvxNativeColor>());
+    private readonly Lazy<IMvxNativeColor?> _nativeColor =
+        new(() => MvxHost.Current?.Services.GetService<IMvxNativeColor>());
 
     protected abstract System.Drawing.Color Convert(object value, object? parameter, CultureInfo? culture);
 

@@ -5,10 +5,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Base;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Converters;
-using MvvmCross.IoC;
 
 [assembly: InternalsVisibleTo("MvvmCross.UnitTest")]
 

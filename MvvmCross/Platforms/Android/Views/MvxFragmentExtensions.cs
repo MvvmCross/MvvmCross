@@ -4,8 +4,10 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Presenters;
@@ -56,7 +58,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (request == null)
                 request = MvxViewModelRequest.GetDefaultRequest(viewModelType);
 
-            var viewModelCache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
+            var viewModelCache = MvxHost.Current!.Services.GetRequiredService<IMvxChildViewModelCache>();
             if (viewModelCache.Exists(viewModelType))
             {
                 var viewModelCached = viewModelCache.Get(viewModelType);
@@ -64,7 +66,7 @@ namespace MvvmCross.Platforms.Android.Views
                 return viewModelCached;
             }
 
-            var loaderService = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
+            var loaderService = MvxHost.Current!.Services.GetRequiredService<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(request, savedState);
 
             return viewModel;

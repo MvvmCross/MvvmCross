@@ -9,7 +9,7 @@ using MvvmCross.Logging;
 namespace MvvmCross.Base
 {
 #nullable enable
-    public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>, IMvxMainThreadDispatcher
+    public abstract class MvxMainThreadDispatcher : IMvxMainThreadDispatcher
     {
         public static void ExceptionMaskedAction(Action action, bool maskExceptions)
         {
