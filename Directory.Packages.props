@@ -43,7 +43,7 @@
     <PackageVersion Include="xunit.v3.mtp-v2" Version="3.2.0" />
     <PackageVersion Include="XunitXml.TestLogger" Version="7.0.2" />
     <PackageVersion Include="Cake.Frosting" Version="6.2.0" />
-    <PackageVersion Include="Cake.GitVersioning" Version="3.9.50" />
+    <PackageVersion Include="Cake.GitVersioning" Version="3.10.85" />
   </ItemGroup>
 
   <!-- Pinned transitive packages -->
