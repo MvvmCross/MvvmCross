@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Localization;
 using MvvmCross.Navigation;
@@ -91,6 +91,9 @@ namespace Playground.Core.ViewModels
                 new MvxCommand(() => IsVisible = !IsVisible);
 
             FragmentCloseCommand = new MvxAsyncCommand(() => NavigationService.Navigate<FragmentCloseViewModel>());
+
+            ShowBottomNavigationCommand = new MvxAsyncCommand(async () =>
+                await NavigationService.Navigate<MultiBackStackViewModel>());
         }
 
         private Task DoShowChildWithResult()
@@ -167,6 +170,8 @@ namespace Playground.Core.ViewModels
 
         public MvxAsyncCommand ShowViewModelWithResult { get; set; }
 
+        public IMvxCommand ShowBottomNavigationCommand { get; }
+
         private bool _isVisible;
 
         public bool IsVisible
@@ -237,11 +242,13 @@ namespace Playground.Core.ViewModels
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            Mvx.IoCProvider.RegisterTypesWithReflection();
+            var sc1 = new ServiceCollection();
+            sc1.RegisterTypesWithReflection();
+            var sp1 = sc1.BuildServiceProvider();
             var registered = stopwatch.ElapsedTicks;
             for (int i = 0; i < 20; i++)
             {
-                Mvx.IoCProvider.ResolveTypes();
+                sp1.ResolveTypes();
             }
             stopwatch.Stop();
             var total = stopwatch.ElapsedTicks;
@@ -257,11 +264,13 @@ namespace Playground.Core.ViewModels
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            Mvx.IoCProvider.RegisterTypesWithNoReflection();
+            var sc2 = new ServiceCollection();
+            sc2.RegisterTypesWithNoReflection();
+            var sp2 = sc2.BuildServiceProvider();
             var registered = stopwatch.ElapsedTicks;
             for (int i = 0; i < 20; i++)
             {
-                Mvx.IoCProvider.ResolveTypes();
+                sp2.ResolveTypes();
             }
             stopwatch.Stop();
             var total = stopwatch.ElapsedTicks;

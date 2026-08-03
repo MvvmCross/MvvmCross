@@ -3,12 +3,10 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
-using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Base;
 
 namespace MvvmCross.ViewModels
 {
-
     public class MvxNavigationSerializer
         : IMvxNavigationSerializer
     {
@@ -18,16 +16,5 @@ namespace MvvmCross.ViewModels
         }
 
         public IMvxTextSerializer Serializer { get; }
-    }
-
-    public class MvxNavigationSerializer<
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>
-            : MvxNavigationSerializer
-                where T : class, IMvxTextSerializer
-    {
-        public MvxNavigationSerializer()
-            : base(Mvx.IoCProvider.Resolve<T>())
-        {
-        }
     }
 }

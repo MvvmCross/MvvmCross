@@ -1,7 +1,3 @@
 <Project>
-
   <Import Project="..\Directory.Packages.props" />
-  <ItemGroup>
-    <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
-  </ItemGroup>
 </Project>

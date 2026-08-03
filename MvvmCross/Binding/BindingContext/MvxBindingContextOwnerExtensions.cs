@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.Bindings;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Binding.BindingContext
 {
@@ -13,20 +15,20 @@ namespace MvvmCross.Binding.BindingContext
     {
         public static void CreateBindingContext(this IMvxBindingContextOwner view)
         {
-            view.BindingContext = Mvx.IoCProvider.Resolve<IMvxBindingContext>();
+            view.BindingContext = MvxHost.Current!.Services.GetRequiredService<IMvxBindingContext>();
         }
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public static void CreateBindingContext(this IMvxBindingContextOwner view, string bindingText)
         {
-            view.BindingContext = Mvx.IoCProvider.Resolve<IMvxBindingContext>().Init(null, view, bindingText);
+            view.BindingContext = MvxHost.Current!.Services.GetRequiredService<IMvxBindingContext>().Init(null, view, bindingText);
         }
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
         public static void CreateBindingContext(this IMvxBindingContextOwner view,
                                                 IEnumerable<MvxBindingDescription> bindings)
         {
-            view.BindingContext = Mvx.IoCProvider.Resolve<IMvxBindingContext>().Init(null, view, bindings);
+            view.BindingContext = MvxHost.Current!.Services.GetRequiredService<IMvxBindingContext>().Init(null, view, bindings);
         }
 
         /*

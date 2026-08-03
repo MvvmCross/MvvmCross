@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -14,7 +15,7 @@ using Playground.Core.ViewModels;
 namespace Playground.Droid.Fragments
 {
     [MvxDialogFragmentPresentation]
-    [Register(nameof(SheetView))]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public class SheetView : MvxBottomSheetDialogFragment<SheetViewModel>
     {
         public SheetView()
@@ -30,7 +31,7 @@ namespace Playground.Droid.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.SheetView, null);
+            var view = this.BindingInflate(Resource.Layout.SheetView, container, false);
 
             return view;
         }

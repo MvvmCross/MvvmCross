@@ -5,7 +5,9 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Android.Content;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Core;
+using MvvmCross.Hosting;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views
@@ -19,9 +21,9 @@ namespace MvvmCross.Platforms.Android.Views
         }
 
         public static Intent CreateIntentFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTargetViewModel>(
-        this IMvxAndroidView view,
-        IDictionary<string, string> parameterValues = null)
-        where TTargetViewModel : class, IMvxViewModel
+                this IMvxAndroidView view,
+                IDictionary<string, string> parameterValues = null)
+            where TTargetViewModel : class, IMvxViewModel
         {
             var parameterBundle = new MvxBundle(parameterValues);
             var request = new MvxViewModelRequest<TTargetViewModel>(parameterBundle, null);
@@ -30,12 +32,12 @@ namespace MvvmCross.Platforms.Android.Views
 
         public static Intent CreateIntentFor(this IMvxAndroidView view, MvxViewModelRequest request)
         {
-            return Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>().GetIntentFor(request);
+            return MvxHost.Current!.Services.GetRequiredService<IMvxAndroidViewModelRequestTranslator>().GetIntentFor(request);
         }
 
         public static Intent CreateIntentFor(this IMvxChildViewModelOwner view, IMvxViewModel subViewModel)
         {
-            var requestTranslator = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>();
+            var requestTranslator = MvxHost.Current!.Services.GetRequiredService<IMvxAndroidViewModelRequestTranslator>();
             var (intent, key) = requestTranslator.GetIntentWithKeyFor(subViewModel, null);
 
             view.OwnedSubViewModelIndicies.Add(key);
@@ -45,7 +47,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public static void ClearOwnedSubIndicies(this IMvxChildViewModelOwner view)
         {
-            var translator = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>();
+            var translator = MvxHost.Current!.Services.GetRequiredService<IMvxAndroidViewModelRequestTranslator>();
             foreach (var ownedSubViewModelIndex in view.OwnedSubViewModelIndicies)
             {
                 translator.RemoveSubViewModelWithKey(ownedSubViewModelIndex);

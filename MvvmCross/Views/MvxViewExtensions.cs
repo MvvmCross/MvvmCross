@@ -4,7 +4,9 @@
 
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
 
@@ -37,14 +39,17 @@ public static class MvxViewExtensions
         // nothing needed currently
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "The generic constraint ensures TViewType has the required members")]
+    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)]
     public static Type? FindAssociatedViewModelTypeOrNull<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)] TViewType>(
-        this TViewType view)
-            where TViewType : IMvxView
+            this TViewType view)
+        where TViewType : IMvxView
     {
         ArgumentNullException.ThrowIfNull(view);
 
-        if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelTypeFinder? associatedTypeFinder) == true)
-            return associatedTypeFinder?.FindTypeOrNull(typeof(TViewType));
+        var associatedTypeFinder = MvxHost.Current?.Services.GetService<IMvxViewModelTypeFinder>();
+        if (associatedTypeFinder != null)
+            return associatedTypeFinder.FindTypeOrNull(view.GetType());
 
         MvxLogHost.Default?.Log(LogLevel.Trace,
             "No view model type finder available - assuming we are looking for a splash screen - returning null");

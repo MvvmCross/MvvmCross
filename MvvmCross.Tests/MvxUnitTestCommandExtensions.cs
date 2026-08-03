@@ -1,5 +1,7 @@
 using System;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Commands;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Tests
 {
@@ -19,17 +21,13 @@ namespace MvvmCross.Tests
 
         private static MvxUnitTestCommandHelper GetCommandHelper()
         {
-            if (Mvx.IoCProvider?.TryResolve<IMvxCommandHelper>(out IMvxCommandHelper helper) == true)
-            {
-                if (helper is MvxUnitTestCommandHelper unitTestHelper)
-                {
-                    return unitTestHelper;
-                }
-            }
+            var existing = MvxHost.Current?.Services.GetService<IMvxCommandHelper>();
+            if (existing is MvxUnitTestCommandHelper unitTestHelper)
+                return unitTestHelper;
 
-            helper = new MvxUnitTestCommandHelper();
-            Mvx.IoCProvider?.RegisterSingleton<IMvxCommandHelper>(helper);
-            return (MvxUnitTestCommandHelper)helper;
+            // No helper registered yet — return a standalone instance (not registered to DI).
+            // Tests that need the helper registered should do so via ServiceCollection before BuildServices().
+            return new MvxUnitTestCommandHelper();
         }
     }
 }

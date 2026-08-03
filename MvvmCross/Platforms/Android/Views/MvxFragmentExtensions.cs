@@ -4,8 +4,10 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Presenters;
@@ -16,8 +18,6 @@ namespace MvvmCross.Platforms.Android.Views
 {
     public static class MvxFragmentExtensions
     {
-        [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Fragment types are preserved by the Android presenter infrastructure and their associated attributes.")]
-        [UnconditionalSuppressMessage("Trimming", "IL2073", Justification = "ViewModel types from FindAssociatedViewModelTypeOrNull and presentation attributes are preserved by the navigation infrastructure.")]
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         public static Type FindAssociatedViewModelType(this IMvxFragmentView fragmentView, Type fragmentActivityParentType)
         {
@@ -50,14 +50,15 @@ namespace MvvmCross.Platforms.Android.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxLogHost.Default?.Log(LogLevel.Trace, "No ViewModel class specified for {fragmentViewType} in LoadViewModel",
+                MvxLogHost.Default?.Log(LogLevel.Trace,
+                    "No ViewModel class specified for {FragmentViewType} in LoadViewModel",
                     fragmentView.GetType().Name);
             }
 
             if (request == null)
                 request = MvxViewModelRequest.GetDefaultRequest(viewModelType);
 
-            var viewModelCache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
+            var viewModelCache = MvxHost.Current!.Services.GetRequiredService<IMvxChildViewModelCache>();
             if (viewModelCache.Exists(viewModelType))
             {
                 var viewModelCached = viewModelCache.Get(viewModelType);
@@ -65,7 +66,7 @@ namespace MvvmCross.Platforms.Android.Views
                 return viewModelCached;
             }
 
-            var loaderService = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
+            var loaderService = MvxHost.Current!.Services.GetRequiredService<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(request, savedState);
 
             return viewModel;

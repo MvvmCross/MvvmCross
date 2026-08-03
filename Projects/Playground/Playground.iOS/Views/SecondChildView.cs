@@ -1,4 +1,6 @@
-using MvvmCross;
+using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Views;
 using ObjCRuntime;
@@ -7,6 +9,7 @@ using Playground.Core.ViewModels;
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public partial class SecondChildView : MvxViewController<SecondChildViewModel>
     {
         public SecondChildView(NativeHandle handle) : base(handle)
@@ -41,7 +44,7 @@ namespace Playground.iOS.Views
         private void BtnCloseStack_TouchUpInside(object sender, EventArgs e)
         {
             var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-            var presenter = Mvx.IoCProvider.GetSingleton<IMvxIosViewPresenter>() as MvxIosViewPresenter;
+            var presenter = MvxHost.Current?.Services.GetService<IMvxIosViewPresenter>() as MvxIosViewPresenter;
 
             if (appDelegate.Window.RootViewController.PresentedViewController != null)
             {

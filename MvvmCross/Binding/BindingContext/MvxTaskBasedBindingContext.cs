@@ -3,8 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Binding.BindingContext
 {
@@ -83,7 +85,7 @@ namespace MvvmCross.Binding.BindingContext
         {
             get
             {
-                _binder ??= Mvx.IoCProvider.Resolve<IMvxBinder>();
+                _binder ??= MvxHost.Current!.Services.GetRequiredService<IMvxBinder>();
                 return _binder;
             }
         }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0-macos</TargetFramework>
+    <TargetFramework>net10.0-macos</TargetFramework>
     <AssemblyName>Playground.Mac</AssemblyName>
     <RootNamespace>Playground.Mac</RootNamespace>
     <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
@@ -34,6 +34,10 @@
   <ItemGroup>
     <PackageReference Include="Serilog.Extensions.Logging" />
     <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Sinks.Async" />
+    <PackageReference Include="Serilog.Sinks.Console" />
+    <PackageReference Include="Serilog.Sinks.Trace" />
+    <PackageReference Include="Serilog.Sinks.Xamarin" />
   </ItemGroup>
 
   <ItemGroup>

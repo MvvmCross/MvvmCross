@@ -5,9 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
@@ -28,7 +30,7 @@ namespace MvvmCross.Platforms.Mac.Views
             {
                 MvxLogHost.Default?.Log(LogLevel.Trace,
                     "Request is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
-                macView.Request = Mvx.IoCProvider.Resolve<IMvxCurrentRequest>().CurrentRequest;
+                macView.Request = MvxHost.Current!.Services.GetRequiredService<IMvxCurrentRequest>().CurrentRequest;
             }
 
             var instanceRequest = macView.Request as MvxViewModelInstanceRequest;
@@ -37,7 +39,7 @@ namespace MvvmCross.Platforms.Mac.Views
                 return instanceRequest.ViewModelInstance;
             }
 
-            var loader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
+            var loader = MvxHost.Current!.Services.GetRequiredService<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(macView.Request, null /* no saved state on iOS currently */);
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + macView.Request.ViewModelType);
@@ -71,28 +73,28 @@ namespace MvvmCross.Platforms.Mac.Views
             MvxViewModelRequest request)
             where TTargetViewModel : class, IMvxViewModel
         {
-            return Mvx.IoCProvider.Resolve<IMvxMacViewCreator>().CreateView(request);
+            return MvxHost.Current!.Services.GetRequiredService<IMvxMacViewCreator>().CreateView(request);
         }
 
         public static IMvxMacView CreateViewControllerFor(
             this IMvxCanCreateMacView view,
             MvxViewModelRequest request)
         {
-            return Mvx.IoCProvider.Resolve<IMvxMacViewCreator>().CreateView(request);
+            return MvxHost.Current!.Services.GetRequiredService<IMvxMacViewCreator>().CreateView(request);
         }
 
         public static IMvxMacView CreateViewControllerFor(
             this IMvxCanCreateMacView view, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType,
             MvxViewModelRequest request)
         {
-            return Mvx.IoCProvider.Resolve<IMvxMacViewCreator>().CreateViewOfType(viewType, request);
+            return MvxHost.Current!.Services.GetRequiredService<IMvxMacViewCreator>().CreateViewOfType(viewType, request);
         }
 
         public static IMvxMacView CreateViewControllerFor(
             this IMvxCanCreateMacView view,
             IMvxViewModel viewModel)
         {
-            return Mvx.IoCProvider.Resolve<IMvxMacViewCreator>().CreateView(viewModel);
+            return MvxHost.Current!.Services.GetRequiredService<IMvxMacViewCreator>().CreateView(viewModel);
         }
     }
 }

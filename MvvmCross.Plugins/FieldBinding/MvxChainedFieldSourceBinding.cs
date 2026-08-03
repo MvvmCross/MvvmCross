@@ -15,6 +15,7 @@ using MvvmCross.Converters;
 namespace MvvmCross.Plugin.FieldBinding
 {
     [Preserve(AllMembers = true)]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public class MvxChainedFieldSourceBinding
         : MvxFieldSourceBinding
     {

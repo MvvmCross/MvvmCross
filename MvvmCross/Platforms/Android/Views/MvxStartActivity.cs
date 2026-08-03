@@ -2,13 +2,21 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+#nullable enable
+
+using System.Diagnostics.CodeAnalysis;
 using Android.Runtime;
 using Android.Views;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using MvvmCross.Hosting;
+using MvvmCross.Logging;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views;
 
 [Register("mvvmcross.platforms.android.views.MvxStartActivity")]
+[RequiresUnreferencedCode("MvxBindings require unreferenced code")]
 public abstract class MvxStartActivity
     : MvxActivity
 {
@@ -16,9 +24,9 @@ public abstract class MvxStartActivity
 
     private readonly int _resourceId;
 
-    private Bundle _bundle;
+    private Bundle? _bundle;
 
-    public new MvxNullViewModel ViewModel
+    public new MvxNullViewModel? ViewModel
     {
         get { return base.ViewModel as MvxNullViewModel; }
         set { base.ViewModel = value; }
@@ -40,7 +48,7 @@ public abstract class MvxStartActivity
         RequestWindowFeature(WindowFeatures.NoTitle);
     }
 
-    protected override void OnCreate(Bundle savedInstanceState)
+    protected override void OnCreate(Bundle? savedInstanceState)
     {
         RequestWindowFeatures();
 
@@ -61,13 +69,23 @@ public abstract class MvxStartActivity
     protected override async void OnResume()
     {
         base.OnResume();
-        await RunAppStartAsync(_bundle);
+        try
+        {
+            await RunAppStartAsync(_bundle);
+        }
+        catch (Exception ex)
+        {
+            MvxLogHost.Default?.Log(LogLevel.Critical,
+                ex, "Unhandled exception during MvvmCross app startup");
+            throw;
+        }
     }
 #pragma warning restore AsyncFixer01, AsyncFixer03
 
-    protected virtual async Task RunAppStartAsync(Bundle bundle)
+    protected virtual async Task RunAppStartAsync(Bundle? bundle)
     {
-        if (Mvx.IoCProvider?.TryResolve(out IMvxAppStart startup) == true)
+        IMvxAppStart? startup;
+        if ((startup = MvxHost.Current?.Services.GetService<IMvxAppStart>()) != null)
         {
             if (!startup.IsStarted)
             {
@@ -80,7 +98,7 @@ public abstract class MvxStartActivity
         }
     }
 
-    protected virtual object GetAppStartHint(object hint = null)
+    protected virtual object? GetAppStartHint(object? hint = null)
     {
         return hint;
     }

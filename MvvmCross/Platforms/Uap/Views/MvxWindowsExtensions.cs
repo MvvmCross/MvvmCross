@@ -4,6 +4,8 @@
 
 using System;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Uap.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using Windows.UI.Xaml;
@@ -31,7 +33,7 @@ namespace MvvmCross.Platforms.Uap.Views
         {
             if (key > 0)
             {
-                var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelRequestTranslator>();
+                var viewModelLoader = MvxHost.Current!.Services.GetRequiredService<IMvxWindowsViewModelRequestTranslator>();
                 viewModelLoader.RemoveSubViewModelWithKey(key);
             }
         }
@@ -95,7 +97,7 @@ namespace MvvmCross.Platforms.Uap.Views
             //#warning TODO - BackStack not cleared for WinRT
             //phoneView.ClearBackStack();
             //            }
-            var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelLoader>();
+            var viewModelLoader = MvxHost.Current!.Services.GetRequiredService<IMvxWindowsViewModelLoader>();
             return viewModelLoader.Load(requestText, bundle);
         }
     }

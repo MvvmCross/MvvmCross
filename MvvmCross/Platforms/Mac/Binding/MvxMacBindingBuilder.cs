@@ -10,7 +10,6 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
-using MvvmCross.IoC;
 using MvvmCross.Platforms.Mac.Binding.Target;
 
 namespace MvvmCross.Platforms.Mac.Binding
@@ -83,9 +82,14 @@ namespace MvvmCross.Platforms.Mac.Binding
                 MvxMacPropertyBinding.NSTextField_StringValue);
 
             registry.RegisterCustomBindingFactory<NSTextView>(
-                MvxMacPropertyBinding.NSTextView_StringValue,
-                view => new MvxNSTextViewTextTargetBinding(view)
-                );
+                nameof(NSTextView.AttributedString),
+                view => new MvxNSTextViewAttributedStringTargetBinding(view)
+            );
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSTextViewTextTargetBinding),
+                typeof(NSTextView),
+                MvxMacPropertyBinding.NSTextView_StringValue);
 
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxNSSwitchOnTargetBinding),

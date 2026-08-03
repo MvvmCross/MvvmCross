@@ -6,8 +6,11 @@
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
+using MvvmCross.Core;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 
 namespace MvvmCross.ViewModels;
@@ -54,12 +57,10 @@ public abstract class MvxNotifyPropertyChanged
 
     protected MvxNotifyPropertyChanged()
     {
-        var alwaysOnUIThread = MvxSingletonCache.Instance?.Settings?.AlwaysRaiseInpcOnUserInterfaceThread != false;
-        ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
-        var raisePropertyChanging = MvxSingletonCache.Instance?.Settings?.ShouldRaisePropertyChanging != false;
-        ShouldRaisePropertyChanging(raisePropertyChanging);
-        var shouldLogInpc = MvxSingletonCache.Instance?.Settings?.ShouldLogInpc == true;
-        ShouldLogInpc(shouldLogInpc);
+        var settings = MvxHost.Current?.Services.GetService<IMvxSettings>();
+        ShouldAlwaysRaiseInpcOnUserInterfaceThread(settings?.AlwaysRaiseInpcOnUserInterfaceThread != false);
+        ShouldRaisePropertyChanging(settings?.ShouldRaisePropertyChanging != false);
+        ShouldLogInpc(settings?.ShouldLogInpc == true);
     }
 
     public bool RaisePropertyChanging<T>(T newValue, Expression<Func<T>> propertyExpression)
@@ -190,28 +191,18 @@ public abstract class MvxNotifyPropertyChanged
 
     protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanged(PropertyChangedEventArgs changedArgs)
     {
-        if (MvxSingletonCache.Instance != null)
-        {
-            var interceptor = MvxSingletonCache.Instance.InpcInterceptor;
-            if (interceptor != null)
-            {
-                return interceptor.Intercept(this, changedArgs);
-            }
-        }
+        var interceptor = MvxHost.Current?.Services.GetService<IMvxInpcInterceptor>();
+        if (interceptor != null)
+            return interceptor.Intercept(this, changedArgs);
 
         return MvxInpcInterceptionResult.NotIntercepted;
     }
 
     protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanging(PropertyChangingEventArgs changingArgs)
     {
-        if (MvxSingletonCache.Instance != null)
-        {
-            var interceptor = MvxSingletonCache.Instance.InpcInterceptor;
-            if (interceptor != null)
-            {
-                return interceptor.Intercept(this, changingArgs);
-            }
-        }
+        var interceptor = MvxHost.Current?.Services.GetService<IMvxInpcInterceptor>();
+        if (interceptor != null)
+            return interceptor.Intercept(this, changingArgs);
 
         return MvxInpcInterceptionResult.NotIntercepted;
     }

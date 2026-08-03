@@ -34,13 +34,18 @@ namespace MvvmCross.Platforms.Mac.Presenters
         /// </summary>
         protected readonly ConditionalWeakTable<NSWindow, NSWindowController> _windowsToWindowControllers = new();
 
-        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
+        public override MvxBasePresentationAttribute CreatePresentationAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewType)
         {
             MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. Assuming new window presentation", viewType.Name);
             return new MvxWindowPresentationAttribute { ViewModelType = viewModelType, ViewType = viewType };
         }
 
-        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
+        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(
+            MvxViewModelRequest request,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.Interfaces)] Type viewType)
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
@@ -81,6 +86,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             NSWindow.Notifications.ObserveWillClose(OnWindowWillCloseNotification);
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Register<MvxWindowPresentationAttribute>(
@@ -220,8 +226,17 @@ namespace MvvmCross.Platforms.Mac.Presenters
             }
             else
             {
+                var controllerType = attribute.WindowControllerType ?? Type.GetType(attribute.WindowControllerName);
+                if (controllerType is null)
+                {
+                    throw new MvxException(
+                        $"Could not determine window controller type for the {attribute.ViewModelType?.Name ?? "<unknown vm>"} view model. " +
+                        $"Please specify either the {nameof(MvxWindowPresentationAttribute.WindowControllerType)} or " +
+                        $"{nameof(MvxWindowPresentationAttribute.WindowControllerName)} property of the {nameof(MvxWindowPresentationAttribute)} " +
+                        $"for the corresponding view model.");
+                }
                 // Instantiate using Reflection - failure is possible if blank constructor is missing
-                windowController = (MvxWindowController)Activator.CreateInstance(Type.GetType(attribute.WindowControllerName));
+                windowController = (MvxWindowController)Activator.CreateInstance(controllerType);
             }
             windowController.ShouldCascadeWindows = attribute.ShouldCascadeWindows;
             return windowController;
@@ -299,6 +314,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             return window;
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public override Task<bool> Close(IMvxViewModel viewModel)
         {
             for (int i = Windows.Count - 1; i >= 0; i--)

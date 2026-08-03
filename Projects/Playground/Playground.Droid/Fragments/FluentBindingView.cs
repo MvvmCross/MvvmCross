@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.OS;
+using System.Diagnostics.CodeAnalysis;
 using Android.Views;
-using Android.Widget;
 using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding;
@@ -18,6 +17,7 @@ using Playground.Core.ViewModels.Bindings;
 namespace Playground.Droid.Fragments
 {
     [MvxFragmentPresentation(typeof(RootViewModel), Resource.Id.content_frame)]
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class FluentBindingView : MvxFragment<FluentBindingViewModel>
     {
         EditText _inputText;
@@ -55,6 +55,7 @@ namespace Playground.Droid.Fragments
             return view;
         }
 
+        [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
         void BindTextInput()
         {
             var bindingSet = CreateBindingSet();

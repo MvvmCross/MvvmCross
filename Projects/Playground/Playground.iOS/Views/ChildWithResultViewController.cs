@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Platforms.Ios.Views;
 using Playground.Core.ViewModels.Navigation;
 
 namespace Playground.iOS.Views;
 
+[RequiresUnreferencedCode("MvxBindings require unreferenced code")]
 public sealed class ChildWithResultViewController : MvxViewController<ChildWithResultViewModel>
 {
     private UITextField _message;

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using Android.App;
 using Android.OS;
 using Android.Views;
@@ -15,11 +16,12 @@ namespace Playground.Droid.Activities
 {
     [MvxActivityPresentation]
     [Activity(Theme = "@style/AppTheme", ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public class TabsRootView : MvxActivity<TabsRootViewModel>
     {
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(bundle);
+            base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.TabsRootView);
 
@@ -27,7 +29,7 @@ namespace Playground.Droid.Activities
             if (viewPager.Adapter is not MvxCachingFragmentStatePagerAdapter)
                 viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(SupportFragmentManager, new());
 
-            if (bundle == null)
+            if (savedInstanceState == null)
             {
                 ViewModel.ShowInitialViewModelsCommand.Execute();
             }

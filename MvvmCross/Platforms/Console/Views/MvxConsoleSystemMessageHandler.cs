@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Console.Views;
@@ -10,7 +12,8 @@ public class MvxConsoleSystemMessageHandler
 {
     public bool ExitFlag { get; set; }
 
-    private static IMvxConsoleNavigation? ConsoleNavigation => Mvx.IoCProvider?.Resolve<IMvxConsoleNavigation>();
+    private static IMvxConsoleNavigation? ConsoleNavigation =>
+        MvxHost.Current?.Services.GetService<IMvxConsoleNavigation>();
 
     public virtual bool HandleInput(IMvxViewModel? viewModel, string input)
     {

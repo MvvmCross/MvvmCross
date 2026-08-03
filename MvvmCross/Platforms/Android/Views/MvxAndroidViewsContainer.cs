@@ -5,8 +5,10 @@
 
 using System.Diagnostics.CodeAnalysis;
 using Android.Content;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
@@ -76,8 +78,8 @@ public class MvxAndroidViewsContainer
             return null;
         }
 
-        if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelLoader? viewModelLoader) != true ||
-            viewModelLoader == null)
+        var viewModelLoader = MvxHost.Current?.Services.GetService<IMvxViewModelLoader>();
+        if (viewModelLoader == null)
         {
             return null;
         }
@@ -94,8 +96,8 @@ public class MvxAndroidViewsContainer
         if (extraData == null)
             return null;
 
-        if (Mvx.IoCProvider?.TryResolve(out IMvxNavigationSerializer? navigationSerializer) != true ||
-            navigationSerializer == null)
+        var navigationSerializer = MvxHost.Current?.Services.GetService<IMvxNavigationSerializer>();
+        if (navigationSerializer == null)
         {
             return null;
         }
@@ -109,7 +111,8 @@ public class MvxAndroidViewsContainer
         if (viewModelRequest == null)
             return null;
 
-        if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelLoader? viewModelLoader) == true && viewModelLoader != null)
+        var viewModelLoader = MvxHost.Current?.Services.GetService<IMvxViewModelLoader>();
+        if (viewModelLoader != null)
         {
             return viewModelLoader.LoadViewModel(viewModelRequest, savedState);
         }
@@ -122,8 +125,8 @@ public class MvxAndroidViewsContainer
         var embeddedViewModelKey = intent.Extras?.GetInt(SubViewModelKey);
         if (embeddedViewModelKey != null && embeddedViewModelKey.Value != 0)
         {
-            if (Mvx.IoCProvider?.TryResolve(out IMvxChildViewModelCache? childViewModelCache) != true ||
-                childViewModelCache == null)
+            var childViewModelCache = MvxHost.Current?.Services.GetService<IMvxChildViewModelCache>();
+            if (childViewModelCache == null)
             {
                 mvxViewModel = null;
                 return false;
@@ -151,13 +154,13 @@ public class MvxAndroidViewsContainer
 
         var intent = new Intent(_applicationContext, viewType);
 
-        if (Mvx.IoCProvider?.TryResolve(out IMvxNavigationSerializer? navigationSerializer) != true ||
-            navigationSerializer == null)
+        var navigationSerializer2 = MvxHost.Current?.Services.GetService<IMvxNavigationSerializer>();
+        if (navigationSerializer2 == null)
         {
             return intent;
         }
 
-        var requestText = navigationSerializer.Serializer.SerializeObject(request);
+        var requestText = navigationSerializer2.Serializer.SerializeObject(request);
         intent.PutExtra(ExtrasKey, requestText);
         AdjustIntentForPresentation(intent, request);
 
@@ -172,13 +175,17 @@ public class MvxAndroidViewsContainer
         //                intent.AddFlags(ActivityFlags.ClearTop);
     }
 
-    public virtual (Intent intent, int key) GetIntentWithKeyFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(TViewModel existingViewModelToUse, MvxViewModelRequest? request)
+    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "The generic constraint ensures TViewModel has the required members")]
+    public virtual (Intent intent, int key) GetIntentWithKeyFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(
+            TViewModel existingViewModelToUse,
+            MvxViewModelRequest? request)
         where TViewModel : IMvxViewModel
     {
-        request ??= MvxViewModelRequest.GetDefaultRequest(typeof(TViewModel));
+        request ??= MvxViewModelRequest.GetDefaultRequest(existingViewModelToUse.GetType());
         var intent = GetIntentFor(request);
 
-        if (Mvx.IoCProvider?.TryResolve(out IMvxChildViewModelCache? viewModelCache) != true || viewModelCache == null)
+        var viewModelCache = MvxHost.Current?.Services.GetService<IMvxChildViewModelCache>();
+        if (viewModelCache == null)
         {
             return (intent, -1);
         }
@@ -190,9 +197,10 @@ public class MvxAndroidViewsContainer
 
     public void RemoveSubViewModelWithKey(int key)
     {
-        if (Mvx.IoCProvider?.TryResolve(out IMvxChildViewModelCache? viewModelCache) == true && viewModelCache != null)
+        var viewModelCache2 = MvxHost.Current?.Services.GetService<IMvxChildViewModelCache>();
+        if (viewModelCache2 != null)
         {
-            viewModelCache.Remove(key);
+            viewModelCache2.Remove(key);
         }
     }
 

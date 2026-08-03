@@ -13,6 +13,7 @@ using MvvmCross.UnitTest.Binding.Mocks;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
 using NSubstitute;
 using Xunit;
+using System.Collections.Concurrent;
 
 namespace MvvmCross.UnitTest.Binding.Bindings
 {
@@ -378,6 +379,360 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             var request = new MvxBindingRequest(source, target, bindingDescription);
             var toTest = new MvxFullBinding(request);
             return toTest;
+        }
+
+        [Fact]
+        public async Task TestConcurrentDataContextChanges_ShouldNotThrow()
+        {
+            // Arrange
+            using var binding = TestSetupCommon(MvxBindingMode.TwoWay,
+                out MockSourceBinding _, out MockTargetBinding _);
+
+            var exceptions = new ConcurrentBag<Exception>();
+            var tasks = new List<Task>();
+            var iterations = 100;
+
+            // Act - Multiple threads changing DataContext simultaneously
+            for (int i = 0; i < 10; i++)
+            {
+                int threadId = i;
+                tasks.Add(Task.Run(async () =>
+                {
+                    try
+                    {
+                        for (int j = 0; j < iterations; j++)
+                        {
+                            binding.DataContext = new { Value = threadId * 1000 + j };
+                            await Task.Delay(1, TestContext.Current.CancellationToken);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
+                }, TestContext.Current.CancellationToken));
+            }
+
+            await Task.WhenAll(tasks);
+
+            // Assert
+            Assert.Empty(exceptions);
+        }
+
+        [Fact]
+        public async Task TestConcurrentSourceChangesAndDispose_ShouldNotThrow()
+        {
+            // Arrange
+            using var binding = TestSetupCommon(MvxBindingMode.OneWay,
+                out MockSourceBinding mockSource, out MockTargetBinding _);
+
+            var exceptions = new ConcurrentBag<Exception>();
+
+            // Act - One thread firing source changes, another disposing
+
+            Task[] tasks = [
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        for (int i = 0; i < 1000; i++)
+                        {
+                            mockSource.TryGetValueValue = $"Value{i}";
+                            mockSource.FireSourceChanged();
+                            await Task.Delay(1, TestContext.Current.CancellationToken);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
+                }, TestContext.Current.CancellationToken),
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        // Let some source changes happen first
+                        await Task.Delay(50, TestContext.Current.CancellationToken);
+                        for (int i = 0; i < 10; i++)
+                        {
+                            binding.DataContext = new { Value = i };
+                            await Task.Delay(10, TestContext.Current.CancellationToken);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
+                }, TestContext.Current.CancellationToken)
+            ];
+
+            await Task.WhenAll(tasks);
+
+            // Assert
+            Assert.Empty(exceptions);
+        }
+
+        [Fact]
+        public async Task TestConcurrentTargetChangesAndDataContextChanges_ShouldNotThrow()
+        {
+            // Arrange
+            using var binding = TestSetupCommon(MvxBindingMode.TwoWay,
+                out MockSourceBinding _, out MockTargetBinding mockTarget);
+
+            var exceptions = new ConcurrentBag<Exception>();
+
+            // Act - Concurrent target value changes and data context changes
+            Task[] tasks =
+            [
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        for (int i = 0; i < 500; i++)
+                        {
+                            mockTarget.FireValueChanged(new MvxTargetChangedEventArgs($"TargetValue{i}"));
+                            await Task.Delay(1, TestContext.Current.CancellationToken);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
+                }, TestContext.Current.CancellationToken),
+
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        for (int i = 0; i < 500; i++)
+                        {
+                            binding.DataContext = new { Value = i };
+                            await Task.Delay(1, TestContext.Current.CancellationToken);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
+                }, TestContext.Current.CancellationToken)
+            ];
+
+            await Task.WhenAll(tasks);
+
+            // Assert
+            Assert.Empty(exceptions);
+        }
+
+        [Fact]
+        public async Task TestActualBindingModeAccess_WhileDisposing_ShouldNotThrow()
+        {
+            // This tests the specific bug reported - accessing ActualBindingMode during disposal
+            var binding = TestSetupCommon(MvxBindingMode.TwoWay,
+                out MockSourceBinding _, out MockTargetBinding _);
+
+            var exceptions = new ConcurrentBag<Exception>();
+            var keepRunning = true;
+
+            // Act - Read ActualBindingMode repeatedly while disposing
+            var readTask = Task.Run(async () =>
+            {
+                try
+                {
+                    while (keepRunning)
+                    {
+                        _ = binding.ActualBindingMode;
+                        await Task.Delay(1, TestContext.Current.CancellationToken);
+                    }
+                }
+                catch (ObjectDisposedException)
+                {
+                    // This is acceptable - we're accessing after disposal
+                }
+                catch (Exception ex)
+                {
+                    // But null reference exceptions are NOT acceptable
+                    exceptions.Add(ex);
+                }
+            }, TestContext.Current.CancellationToken);
+
+            await Task.Delay(50, TestContext.Current.CancellationToken);
+            binding.Dispose();
+            keepRunning = false;
+
+            await readTask;
+
+            // Assert - No null reference exceptions should occur
+            Assert.Empty(exceptions);
+        }
+
+        [Fact]
+        public async Task TestConcurrentSourceChanges_WithCancellation_ShouldNotThrow()
+        {
+            // Tests that CancellationTokenSource operations are thread-safe
+            var binding = TestSetupCommon(MvxBindingMode.OneWay,
+                out MockSourceBinding mockSource, out MockTargetBinding _);
+
+            var exceptions = new ConcurrentBag<Exception>();
+            var tasks = new List<Task>();
+
+            // Act - Multiple threads triggering source changes (which creates new CancellationTokenSources)
+            for (int i = 0; i < 5; i++)
+            {
+                int threadId = i;
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        for (int j = 0; j < 100; j++)
+                        {
+                            mockSource.TryGetValueValue = $"Thread{threadId}_Value{j}";
+                            mockSource.FireSourceChanged();
+
+                            // Also change DataContext which recreates CancellationTokenSource
+                            if (j % 10 == 0)
+                            {
+                                binding.DataContext = new { ThreadId = threadId, Iteration = j };
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
+                }, TestContext.Current.CancellationToken));
+            }
+
+            await Task.WhenAll(tasks);
+            binding.Dispose();
+
+            // Assert
+            Assert.Empty(exceptions);
+        }
+
+        [Fact]
+        public async Task TestConcurrentDispose_ShouldBeIdempotent()
+        {
+            // Arrange
+            var binding = TestSetupCommon(MvxBindingMode.TwoWay,
+                out MockSourceBinding _, out MockTargetBinding _);
+
+            var exceptions = new ConcurrentBag<Exception>();
+            var tasks = new List<Task>();
+
+            // Act - Multiple threads trying to dispose simultaneously
+            for (int i = 0; i < 10; i++)
+            {
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        binding.Dispose();
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
+                }, TestContext.Current.CancellationToken));
+            }
+
+            await Task.WhenAll(tasks);
+
+            // Assert - Dispose should be safe to call multiple times
+            Assert.Empty(exceptions);
+        }
+
+        [Fact]
+        public async Task TestStressTest_AllOperationsConcurrently_ShouldNotThrow()
+        {
+            // Comprehensive stress test combining all operations
+            var binding = TestSetupCommon(MvxBindingMode.TwoWay,
+                out MockSourceBinding mockSource, out MockTargetBinding mockTarget);
+
+            var exceptions = new ConcurrentBag<Exception>();
+            var keepRunning = true;
+
+            Task[] tasks =
+            [
+                // Source changes
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        for (int i = 0; i < 500 && keepRunning; i++)
+                        {
+                            mockSource.TryGetValueValue = $"Source{i}";
+                            mockSource.FireSourceChanged();
+                            await Task.Delay(1, TestContext.Current.CancellationToken);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
+                }, TestContext.Current.CancellationToken),
+
+                // Target changes
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        for (int i = 0; i < 500 && keepRunning; i++)
+                        {
+                            mockTarget.FireValueChanged(new MvxTargetChangedEventArgs($"Target{i}"));
+                            await Task.Delay(1, TestContext.Current.CancellationToken);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
+                }, TestContext.Current.CancellationToken),
+
+                // DataContext changes
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        for (int i = 0; i < 100 && keepRunning; i++)
+                        {
+                            binding.DataContext = new { Value = i };
+                            await Task.Delay(5, TestContext.Current.CancellationToken);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
+                }, TestContext.Current.CancellationToken),
+
+                // Read ActualBindingMode
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        for (int i = 0; i < 1000 && keepRunning; i++)
+                        {
+                            _ = binding.ActualBindingMode;
+                            await Task.Delay(1, TestContext.Current.CancellationToken);
+                        }
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        // intentionally empty
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptions.Add(ex);
+                    }
+                }, TestContext.Current.CancellationToken)
+            ];
+
+            await Task.WhenAll(tasks);
+            keepRunning = false;
+            binding.Dispose();
+
+            // Assert
+            Assert.Empty(exceptions);
         }
     }
 }

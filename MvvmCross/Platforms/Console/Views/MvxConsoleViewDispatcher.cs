@@ -2,7 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Base;
+using MvvmCross.Hosting;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
@@ -20,9 +23,11 @@ public class MvxConsoleViewDispatcher
         return true;
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public async Task<bool> ShowViewModel(MvxViewModelRequest request)
     {
-        if (Mvx.IoCProvider?.TryResolve(out IMvxConsoleNavigation? navigation) == true && navigation != null)
+        var navigation = MvxHost.Current?.Services.GetService<IMvxConsoleNavigation>();
+        if (navigation != null)
         {
             await ExecuteOnMainThreadAsync(() => navigation.Show(request));
             return true;
@@ -31,9 +36,11 @@ public class MvxConsoleViewDispatcher
         return false;
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public async Task<bool> ChangePresentation(MvxPresentationHint hint)
     {
-        if (Mvx.IoCProvider?.TryResolve(out IMvxConsoleNavigation? navigation) == true && navigation != null)
+        var navigation = MvxHost.Current?.Services.GetService<IMvxConsoleNavigation>();
+        if (navigation != null)
         {
             await ExecuteOnMainThreadAsync(() => navigation.ChangePresentation(hint));
             return true;

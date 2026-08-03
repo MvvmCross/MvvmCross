@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using AppKit;
 using MvvmCross.Presenters.Attributes;
 
@@ -43,6 +44,9 @@ namespace MvvmCross.Platforms.Mac.Presenters.Attributes
         public string Identifier { get; set; }
 
         public string WindowControllerName { get; set; }
+
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+        public Type WindowControllerType { get; set; }
 
         public string StoryboardName { get; set; }
     }

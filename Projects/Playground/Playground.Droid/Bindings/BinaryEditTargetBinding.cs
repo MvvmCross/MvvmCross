@@ -1,10 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.Binding.Target;
 using Playground.Droid.Controls;
 
 namespace Playground.Droid.Bindings
 {
+    [RequiresUnreferencedCode("MvxBindings requires unreferenced code")]
     public class BinaryEditTargetBinding : MvxAndroidTargetBinding<BinaryEdit, int>
     {
         public BinaryEditTargetBinding(BinaryEdit target) : base(target)

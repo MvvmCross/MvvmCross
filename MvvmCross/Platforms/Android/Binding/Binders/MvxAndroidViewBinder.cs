@@ -10,11 +10,13 @@ using Android.Content;
 using Android.Content.Res;
 using Android.Util;
 using Android.Views;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders
@@ -22,7 +24,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
     public class MvxAndroidViewBinder : IMvxAndroidViewBinder
     {
         private readonly List<KeyValuePair<object, IMvxUpdateableBinding>> _viewBindings = new List<KeyValuePair<object, IMvxUpdateableBinding>>();
-        private readonly Lazy<IMvxAndroidBindingResource> mvxAndroidBindingResource = new Lazy<IMvxAndroidBindingResource>(() => Mvx.IoCProvider.GetSingleton<IMvxAndroidBindingResource>());
+        private readonly Lazy<IMvxAndroidBindingResource> mvxAndroidBindingResource = new Lazy<IMvxAndroidBindingResource>(() => MvxHost.Current!.Services.GetRequiredService<IMvxAndroidBindingResource>());
 
         private readonly object _source;
 
@@ -33,7 +35,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
 
         private IMvxBinder _binder;
 
-        protected IMvxBinder Binder => _binder ?? (_binder = Mvx.IoCProvider.Resolve<IMvxBinder>());
+        protected IMvxBinder Binder => _binder ?? (_binder = MvxHost.Current!.Services.GetRequiredService<IMvxBinder>());
 
         public IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings => _viewBindings;
 

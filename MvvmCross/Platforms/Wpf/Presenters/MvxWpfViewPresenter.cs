@@ -4,11 +4,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Wpf.Presenters.Attributes;
 using MvvmCross.Platforms.Wpf.Views;
@@ -27,7 +30,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             get
             {
                 if (_wpfViewLoader == null)
-                    _wpfViewLoader = Mvx.IoCProvider.Resolve<IMvxWpfViewLoader>();
+                    _wpfViewLoader = MvxHost.Current?.Services.GetRequiredService<IMvxWpfViewLoader>();
                 return _wpfViewLoader;
             }
         }
@@ -55,6 +58,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             FrameworkElementsDictionary.Add(contentControl, new Stack<FrameworkElement>());
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Register<MvxWindowPresentationAttribute>(
@@ -74,6 +78,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
                     (viewModel, _) => CloseContentView(viewModel));
         }
 
+        [RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             if (viewType.IsSubclassOf(typeof(Window)))
@@ -177,6 +182,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             return Task.FromResult(true);
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public override async Task<bool> Close(IMvxViewModel viewModel)
         {
             // toClose is window

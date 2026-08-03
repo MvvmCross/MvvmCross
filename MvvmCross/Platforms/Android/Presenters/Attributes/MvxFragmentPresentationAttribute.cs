@@ -4,6 +4,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -31,7 +33,9 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         string? tag = null,
         string popBackStackImmediateName = "",
         MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive,
-        bool addFragment = false
+        bool addFragment = false,
+        bool allowReordering = false,
+        bool setAsPrimaryFragment = false
     )
     {
         ActivityHostViewModelType = activityHostViewModelType;
@@ -48,6 +52,8 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         PopBackStackImmediateName = popBackStackImmediateName;
         PopBackStackImmediateFlag = popBackStackImmediateFlag;
         AddFragment = addFragment;
+        AllowReordering = allowReordering;
+        SetAsPrimaryFragment = setAsPrimaryFragment;
     }
 
     public MvxFragmentPresentationAttribute(
@@ -65,10 +71,13 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         string? tag = null,
         string popBackStackImmediateName = "",
         MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive,
-        bool addFragment = false
+        bool addFragment = false,
+        bool allowReordering = false,
+        bool setAsPrimaryFragment = false
     )
     {
-        if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidGlobals globals) == true &&
+        IMvxAndroidGlobals? globals = null;
+        if ((globals = MvxHost.Current?.Services.GetService<IMvxAndroidGlobals>()) != null &&
             globals.ApplicationContext.Resources != null)
         {
             var context = globals.ApplicationContext;
@@ -106,6 +115,8 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         PopBackStackImmediateName = popBackStackImmediateName;
         PopBackStackImmediateFlag = popBackStackImmediateFlag;
         AddFragment = addFragment;
+        AllowReordering = allowReordering;
+        SetAsPrimaryFragment = setAsPrimaryFragment;
     }
 
     /// <summary>
@@ -186,4 +197,14 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
     /// Setting this to true, will use Add instead of Replace on the Fragment transaction
     /// </summary>
     public bool AddFragment { get; set; }
+
+    /// <summary>
+    /// Setting this to true, will use SetReorderingAllowed on the Fragment transaction
+    /// </summary>
+    public bool AllowReordering { get; set; }
+
+    /// <summary>
+    /// Setting this to true, will use SetPrimaryNavigationFragment on the Fragment transaction
+    /// </summary>
+    public bool SetAsPrimaryFragment { get; set; }
 }

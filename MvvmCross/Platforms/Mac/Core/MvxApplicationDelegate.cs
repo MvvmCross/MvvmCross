@@ -3,41 +3,19 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using AppKit;
 using MvvmCross.Core;
-using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Mac.Core
 {
-    [RequiresUnreferencedCode("This class may use types that are not preserved by trimming")]
+    /// <summary>
+    /// Base application delegate that fires MvvmCross lifetime events.
+    /// Use <see cref="MvvmCross.Platforms.Mac.Hosting.MvxMacHostBuilder"/> in your
+    /// <see cref="DidFinishLaunching"/> override to initialize the framework.
+    /// </summary>
     public abstract class MvxApplicationDelegate : NSApplicationDelegate, IMvxApplicationDelegate
     {
-        protected MvxApplicationDelegate() : base()
-        {
-            RegisterSetup();
-        }
-
-        public override void DidFinishLaunching(Foundation.NSNotification notification)
-        {
-            MvxMacSetupSingleton.EnsureSingletonAvailable(this).EnsureInitialized();
-            RunAppStart(notification);
-
-            FireLifetimeChanged(MvxLifetimeEvent.Launching);
-        }
-
-        protected virtual void RunAppStart(object hint = null)
-        {
-            if (Mvx.IoCProvider?.TryResolve(out IMvxAppStart startup) == true && !startup.IsStarted)
-            {
-                startup.Start(GetAppStartHint(hint));
-            }
-        }
-
-        protected virtual object GetAppStartHint(object hint = null)
-        {
-            return hint;
-        }
+        public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
 
         public override void WillBecomeActive(Foundation.NSNotification notification)
         {
@@ -54,26 +32,10 @@ namespace MvvmCross.Platforms.Mac.Core
             FireLifetimeChanged(MvxLifetimeEvent.Closing);
         }
 
-        private void FireLifetimeChanged(MvxLifetimeEvent which)
+        protected void FireLifetimeChanged(MvxLifetimeEvent which)
         {
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
-
-        protected virtual void RegisterSetup()
-        {
-        }
-
-        public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
-    }
-
-    [RequiresUnreferencedCode("This class may use types that are not preserved by trimming")]
-    public class MvxApplicationDelegate<TMvxMacSetup, TApplication> : MvxApplicationDelegate
-        where TMvxMacSetup : MvxMacSetup<TApplication>, new()
-        where TApplication : class, IMvxApplication, new()
-    {
-        protected override void RegisterSetup()
-        {
-            this.RegisterSetupType<TMvxMacSetup>();
-        }
     }
 }
+

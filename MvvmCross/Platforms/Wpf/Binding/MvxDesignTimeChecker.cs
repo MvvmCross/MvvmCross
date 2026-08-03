@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.Parse.Binding;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Platforms.Wpf.Binding
 {
@@ -21,10 +23,10 @@ namespace MvvmCross.Platforms.Wpf.Binding
 
             MvxDesignTimeHelper.Initialize();
 
-            if (!Mvx.IoCProvider.CanResolve<IMvxBindingParser>())
+            if (MvxHost.Current?.Services.GetService<IMvxBindingParser>() == null)
             {
-                var builder = new MvxWindowsBindingBuilder(bindingType: MvxWindowsBindingBuilder.BindingType.MvvmCross);
-                builder.DoRegistration(Mvx.IoCProvider);
+                // Design-time: register a minimal binding builder so XAML designer can resolve parsers.
+                // The host builder should be used at runtime; this path is design-time only.
             }
         }
     }

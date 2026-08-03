@@ -6,7 +6,9 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Base;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Core;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.ViewModels
 {
@@ -54,7 +56,7 @@ namespace MvvmCross.ViewModels
                     return;
                 }
 
-                if (MvxSingletonCache.Instance?.Parser?.TypeSupported(parameters[0].ParameterType) == false)
+                if (MvxHost.Current?.Services.GetService<IMvxStringToTypeParser>()?.TypeSupported(parameters[0].ParameterType) == false)
                 {
                     // call method using typed object
                     var value = bundle.Read(parameters[0].ParameterType);

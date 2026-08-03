@@ -4,7 +4,6 @@ using System.Windows.Input;
 using Android.App;
 using Android.Views;
 using Android.Widget;
-using MvvmCross;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
@@ -90,11 +89,6 @@ namespace Playground.Droid
             command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
         }
 
-        public void Include(MvvmCross.IoC.MvxPropertyInjector injector)
-        {
-            injector = new MvvmCross.IoC.MvxPropertyInjector();
-        }
-
         public void Include(System.ComponentModel.INotifyPropertyChanged changed)
         {
             changed.PropertyChanged += (sender, e) =>
@@ -110,9 +104,9 @@ namespace Playground.Droid
             context2.Dispose();
         }
 
-        public void Include(MvxNavigationService service, IMvxViewModelLoader loader, IMvxViewDispatcher viewDispatcher)
+        public void Include(MvxNavigationService service, IMvxViewModelLoader loader, IMvxViewDispatcher viewDispatcher, IServiceProvider serviceProvider)
         {
-            service = new MvxNavigationService(null, viewDispatcher, Mvx.IoCProvider);
+            service = new MvxNavigationService(loader, viewDispatcher, serviceProvider);
         }
 
         public void Include(ConsoleColor color)
@@ -126,11 +120,6 @@ namespace Playground.Droid
             Console.ForegroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = ConsoleColor.DarkGray;
-        }
-
-        public void Include(MvvmCross.Plugin.Json.Plugin plugin)
-        {
-            plugin.Load(Mvx.IoCProvider);
         }
     }
 }

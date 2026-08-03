@@ -4,8 +4,10 @@
 #nullable enable
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
@@ -39,7 +41,10 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         Window = window;
     }
 
-    public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+    [RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
+    public override MvxBasePresentationAttribute CreatePresentationAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewType)
     {
         ValidateArguments(viewModelType, viewType);
 
@@ -48,7 +53,7 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         {
             MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogTrace(
                 "PresentationAttribute nor MasterNavigationController found for {ViewTypeName}. Assuming Root presentation",
-                viewType.Name);
+                viewType?.Name);
             return new MvxRootPresentationAttribute
             {
                 WrapInNavigationController = true,
@@ -58,24 +63,22 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         }
 
         MvxLogHost.GetLog<MvxIosViewPresenter>()?.LogTrace(
-            "PresentationAttribute not found for {ViewTypeName}. Assuming animated Child presentation", viewType.Name);
+            "PresentationAttribute not found for {ViewTypeName}. Assuming animated Child presentation", viewType?.Name);
 
         return new MvxChildPresentationAttribute { ViewType = viewType, ViewModelType = viewModelType };
     }
 
     public override object? CreateOverridePresentationAttributeViewInstance(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType)
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewType)
     {
         ArgumentNullException.ThrowIfNull(viewType);
 
         return this.CreateViewControllerFor(viewType);
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override void RegisterAttributeTypes()
     {
-        if (AttributeTypesToActionsDictionary == null)
-            throw new InvalidOperationException("Cannot register attribute types on null dictionary");
-
         AttributeTypesToActionsDictionary.Register<MvxRootPresentationAttribute>(
             (_, attribute, request) =>
             {
@@ -181,6 +184,7 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         RegisterPopoverAttributeType();
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     protected virtual void RegisterPopoverAttributeType()
     {
         AttributeTypesToActionsDictionary.Register<MvxPopoverPresentationAttribute>(
@@ -274,6 +278,7 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         return true;
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override Task<bool> ChangePresentation(MvxPresentationHint hint)
     {
         return hint switch
@@ -506,7 +511,7 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         if (presentationController != null)
         {
             presentationController.PermittedArrowDirections = attribute.PermittedArrowDirections;
-            var sourceProvider = Mvx.IoCProvider?.Resolve<IMvxPopoverPresentationSourceProvider>();
+            var sourceProvider = MvxHost.Current?.Services.GetService<IMvxPopoverPresentationSourceProvider>();
             sourceProvider?.SetSource(presentationController);
             presentationController.Delegate = new MvxPopoverPresentationControllerDelegate(this);
         }
@@ -881,7 +886,7 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         PopoverViewController = null;
     }
 
-    private static void ValidateArguments(Type viewModelType, Type viewType)
+    private static void ValidateArguments(Type? viewModelType, Type? viewType)
     {
         ArgumentNullException.ThrowIfNull(viewModelType);
         ArgumentNullException.ThrowIfNull(viewType);

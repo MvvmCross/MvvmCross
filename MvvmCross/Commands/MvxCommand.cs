@@ -3,7 +3,10 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Base;
+using MvvmCross.Core;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Commands
 {
@@ -104,20 +107,11 @@ namespace MvvmCross.Commands
 
         protected MvxCommandBase()
         {
-            if (Mvx.IoCProvider?.TryResolve(out IMvxCommandHelper? commandHelper) == true && commandHelper != null)
-            {
-                _commandHelper = commandHelper;
-            }
-            else
-            {
-                // fallback on MvxWeakCommandHelper if no IoC has been set up
-                _commandHelper = new MvxWeakCommandHelper();
-            }
+            _commandHelper = MvxHost.Current?.Services.GetService<IMvxCommandHelper>()
+                ?? new MvxWeakCommandHelper();
 
-            // default to true if no Singleton Cache has been set up
-            var alwaysOnUIThread =
-                MvxSingletonCache.Instance?.Settings?.AlwaysRaiseInpcOnUserInterfaceThread ?? true;
-            ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
+            var settings = MvxHost.Current?.Services.GetService<IMvxSettings>();
+            ShouldAlwaysRaiseCECOnUserInterfaceThread = settings?.AlwaysRaiseInpcOnUserInterfaceThread ?? true;
         }
 
         public event EventHandler? CanExecuteChanged

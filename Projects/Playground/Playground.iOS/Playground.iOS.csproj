@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0-ios</TargetFramework>
+    <TargetFramework>net10.0-ios</TargetFramework>
     <AssemblyName>Playground.iOS</AssemblyName>
     <RootNamespace>Playground.iOS</RootNamespace>
     <OutputType>Exe</OutputType>
@@ -22,8 +22,15 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Messenger\MvvmCross.Plugin.Messenger.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Visibility\MvvmCross.Plugin.Visibility.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
   </ItemGroup>
+
+  <PropertyGroup Condition=" $(Configuration) == 'Debug' ">
+    <!-- needed otherwise debugger detaches immediately on launch -->
+    <UseInterpreter>true</UseInterpreter>
+  </PropertyGroup>
 </Project>

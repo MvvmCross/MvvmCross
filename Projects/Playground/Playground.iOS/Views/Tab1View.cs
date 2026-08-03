@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
+using MvvmCross.Platforms.Ios.Binding;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using ObjCRuntime;
@@ -8,6 +10,7 @@ namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
     [MvxTabPresentation(WrapInNavigationController = true, TabIconName = "home", TabName = "Tab 1")]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public partial class Tab1View : MvxViewController<Tab1ViewModel>
     {
         public Tab1View(NativeHandle handle) : base(handle)
@@ -23,6 +26,8 @@ namespace Playground.iOS.Views
             set.Bind(btnNavModal).To(vm => vm.OpenNavModalCommand);
             set.Bind(btnChild).To(vm => vm.OpenChildCommand);
             set.Bind(btnTab2).To(vm => vm.OpenTab2Command);
+            set.Bind(btnStar).For(v => v.BindSelected()).To(vm => vm.IsSelected);
+            set.Bind(btnSetStar).To(vm => vm.SetStarCommand);
             set.Apply();
         }
     }

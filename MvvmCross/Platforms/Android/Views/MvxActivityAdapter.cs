@@ -2,11 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using System.Diagnostics.CodeAnalysis;
 using Android.Content;
-using Android.OS;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views.Base;
@@ -14,6 +15,7 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.Android.Views
 {
+    [RequiresUnreferencedCode("Loading ViewModels requires unreferenced code")]
     public class MvxActivityAdapter : MvxBaseActivityAdapter
     {
         protected IMvxAndroidView AndroidView => Activity as IMvxAndroidView;
@@ -82,7 +84,8 @@ namespace MvvmCross.Platforms.Android.Views
             var mvxBundle = AndroidView.CreateSaveStateBundle();
             if (mvxBundle != null)
             {
-                if (Mvx.IoCProvider?.TryResolve<IMvxSavedStateConverter>(out var converter) != true)
+                var converter = MvxHost.Current?.Services.GetService<IMvxSavedStateConverter>();
+                if (converter == null)
                 {
                     MvxLogHost.GetLog<MvxActivityAdapter>()?.Log(LogLevel.Warning,
                         "Saved state converter not available - saving state will be hard");
@@ -93,7 +96,8 @@ namespace MvvmCross.Platforms.Android.Views
                 }
             }
 
-            if (Mvx.IoCProvider?.TryResolve<IMvxSingleViewModelCache>(out var cache) == true)
+            var cache = MvxHost.Current?.Services.GetService<IMvxSingleViewModelCache>();
+            if (cache != null)
             {
                 cache.Cache(AndroidView.ViewModel, eventArgs.Value);
             }
@@ -102,7 +106,8 @@ namespace MvvmCross.Platforms.Android.Views
         protected override void EventSourceOnActivityResultCalled(
             object sender, MvxValueEventArgs<MvxActivityResultParameters> eventArgs)
         {
-            if (Mvx.IoCProvider?.TryResolve<IMvxIntentResultSink>(out var sink) == true)
+            var sink = MvxHost.Current?.Services.GetService<IMvxIntentResultSink>();
+            if (sink != null)
             {
                 var resultParameters = eventArgs.Value;
                 var intentResult = new MvxIntentResultEventArgs(

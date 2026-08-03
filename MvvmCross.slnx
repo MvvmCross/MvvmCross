@@ -90,6 +90,7 @@
     <Project Path="UnitTests/Plugins.Visibility.UnitTest/MvvmCross.Plugins.Visibility.UnitTest.csproj" />
   </Folder>
   <Project Path="MvvmCross.Tests/MvvmCross.Tests.csproj" />
+  <Project Path="MvvmCross.WinUI/MvvmCross.Platforms.WinUI.csproj" />
   <Project Path="MvvmCross.Wpf/MvvmCross.Platforms.Wpf.csproj" />
   <Project Path="MvvmCross/MvvmCross.csproj" />
 </Solution>

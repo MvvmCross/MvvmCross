@@ -22,12 +22,12 @@ jobs:
 
     steps:
     - name: Harden the runner (Audit all outbound calls)
-      uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
+      uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
       with:
         egress-policy: audit
-
+  
     - name: Checkout
-      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
       with:
         fetch-depth: 0
         fetch-tags: true
@@ -41,7 +41,7 @@ jobs:
       run: dotnet tool install --tool-path . sign --version 0.9.1-beta.25379.1
 
     - name: 'Az CLI login'
-      uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 #v2.3.0
+      uses: azure/login@532459ea530d8321f2fb9bb10d1e0bcf23869a43 # v3.0.0
       with:
         client-id: ${{ secrets.SIGN_AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.SIGN_AZURE_TENANT_ID }}
@@ -60,20 +60,20 @@ jobs:
         --azure-key-vault-certificate "${{ secrets.SIGN_AZURE_KEY_VAULT_CERTIFICATE_ID }}"
 
     - name: Attest NuGet packages
-      uses: actions/attest-sbom@4651f806c01d8637787e274ac3bdf724ef169f34 # v3.0.0
+      uses: actions/attest@508db95dd578ae2727ebd6217d5ba78e4fbda05d # v4.2.1
       with:
         subject-path: ${{ github.workspace }}\output\NuGet\*.nupkg
         sbom-path: ${{ github.workspace }}\output\sbom\MvvmCross.sbom.json
         push-to-registry: true
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: build-artifacts
         path: ${{ github.workspace }}\output
 
     - name: NuGet login (OIDC → temp API key)
-      uses: NuGet/login@d22cc5f58ff5b88bf9bd452535b4335137e24544 #v1
+      uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1
       id: login
       with:
         user: ${{ secrets.NUGET_USER }}

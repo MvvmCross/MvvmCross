@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.WinUi;
 using MvvmCross.UI;
 
@@ -12,14 +14,8 @@ namespace MvvmCross.Plugin.Visibility.Platforms.WinUi
     {
         public MvxVisibilityDesignTimeHelper()
         {
-            if (!IsInDesignTool)
-                return;
-
-            if (Mvx.IoCProvider?.CanResolve<IMvxNativeVisibility>() == true)
-                return;
-
-            var forceVisibilityLoaded = new Plugin();
-            forceVisibilityLoaded.Load(Mvx.IoCProvider);
+            // Design-time plugin loading is no longer needed.
+            // Register IMvxNativeVisibility at startup with services.AddMvxVisibility().
         }
     }
 }

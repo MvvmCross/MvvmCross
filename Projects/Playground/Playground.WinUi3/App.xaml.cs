@@ -1,7 +1,13 @@
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
-using MvvmCross.Core;
+using MvvmCross.DependencyInjection;
+using MvvmCross.Platforms.WinUi.Hosting;
 using MvvmCross.Platforms.WinUi.Views;
-using Playground.WinUi3;
+using MvvmCross.Plugin.Color.Platforms.WinUi;
+using MvvmCross.Plugin.Json;
+using MvvmCross.Plugin.Visibility.Platforms.WinUi;
+using Playground.Core;
+using Playground.Core.ViewModels;
 
 namespace Playground.WinUi
 {
@@ -20,9 +26,21 @@ namespace Playground.WinUi
             };
         }
 
-        protected override void RegisterSetup()
+        protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
-            this.RegisterSetupType<WinUiPlaygroundSetup>();
+            base.OnLaunched(args);
+            await MvxWinUiHostBuilder.CreateBuilder(MainWindow!)
+                .StartWith<RootViewModel>(opts => opts.AddViewAssembly(typeof(App).Assembly))
+                .ConfigureServices(services =>
+                {
+                    services.AddMvxBindings();
+                    services.AddMvxVisibility();
+                    services.AddMvxColor();
+                    services.AddMvxJson();
+                })
+                .Build()
+                .Start();
+            MainWindow!.Activate();
         }
     }
 }

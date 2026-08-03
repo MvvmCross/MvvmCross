@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using ObjCRuntime;
@@ -8,6 +9,7 @@ namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
     [MvxTabPresentation]
+    [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public partial class Tab2View : MvxViewController<Tab2ViewModel>
     {
         public Tab2View(NativeHandle handle) : base(handle)
