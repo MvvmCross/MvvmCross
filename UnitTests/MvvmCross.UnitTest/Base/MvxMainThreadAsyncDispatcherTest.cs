@@ -86,6 +86,27 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact(Timeout = TestTimeoutMs)]
+        public async Task ExecuteOnMainThreadAsync_ActionThrows_WhenDispatchedFromBackgroundThread_ReturnedTaskFaults()
+        {
+            var dispatcher = new BackgroundMockMainThreadDispatcher();
+            Action action = () => throw new InvalidOperationException("boom");
+
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                () => dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: false));
+
+            Assert.Equal("boom", exception.Message);
+        }
+
+        [Fact(Timeout = TestTimeoutMs)]
+        public async Task ExecuteOnMainThreadAsync_ActionThrows_WhenDispatchedFromBackgroundThread_WithMaskExceptionsTrue_ReturnedTaskCompletes()
+        {
+            var dispatcher = new BackgroundMockMainThreadDispatcher();
+            Action action = () => throw new InvalidOperationException("boom");
+
+            await dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: true);
+        }
+
+        [Fact(Timeout = TestTimeoutMs)]
         public async Task ExecuteOnMainThreadAsync_AsyncActionThrows_WhenDispatchedFromBackgroundThread_ReturnedTaskFaults()
         {
             var dispatcher = new BackgroundMockMainThreadDispatcher();

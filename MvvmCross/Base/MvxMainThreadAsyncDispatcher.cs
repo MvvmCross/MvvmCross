@@ -50,15 +50,11 @@ namespace MvvmCross.Base
 
             try
             {
-                // If we're already on main thread, then the action will
-                // have already completed at this point. Otherwise, make
-                // sure we don't introduce weird locking issues blocking
-                // on the completion source by jumping onto a new thread
-                // to wait
-                if (completion.Task.IsCompleted)
-                    await completion.Task;
-                else
-                    await Task.Run(async () => await completion.Task);
+                // The completion source runs continuations asynchronously,
+                // so awaiting directly cannot block the main thread that
+                // completes it; when the action already ran inline the task
+                // is completed and this returns synchronously
+                await completion.Task;
             }
             catch (Exception exception)
             {
