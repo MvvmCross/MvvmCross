@@ -26,6 +26,7 @@
     },
     {
       "matchPackagePatterns": [
+        "Xamarin.Google.Android.Material",
         "Xamarin.GooglePlayServices.*",
         "Xamarin.Google.Android.Play.*",
         "Xamarin.Android.*"
