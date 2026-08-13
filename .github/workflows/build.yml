@@ -41,23 +41,6 @@ jobs:
     - name: Build
       run: dotnet run --project build/Build.csproj -- --verbosity=Minimal --artifactsDir="${{ github.workspace }}\output" --ctrfDir="${{ github.workspace }}\ctrf"
 
-    - name: Print ctrf files in output
-      run: |
-        echo "ctrf files in output:"
-        dir ${{ github.workspace }}\ctrf
-    
-    - name: Publish Test Report
-      uses: ctrf-io/github-test-reporter@e500b992f936420eb633c91644cf10d4d71df700 # v1.1.0
-      with:
-        report-path: ${{ github.workspace }}/ctrf/*.ctrf.json
-        summary-report: true
-        github-report: true
-        pull-request: true
-        update-comment: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      if: always()
-
     - name: Upload artifacts
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:

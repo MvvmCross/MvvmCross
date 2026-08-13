@@ -207,9 +207,11 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
                 Verbosity = context.VerbosityDotNet,
                 ArgumentCustomization = args => args
                     .Append("-- ")
+                    .Append($"--report-trx --report-trx-filename {projectName}.trx")
                     .Append($"--report-xunit --report-xunit-filename {projectName}.xunit.xml")
                     .Append($"--report-ctrf --report-ctrf-filename {projectName}.ctrf.json")
                     .Append($"--coverage --coverage-output {projectName}.coverage --coverage-output-format cobertura")
+                    .Append("--report-gh")
             };
 
             try
@@ -221,8 +223,10 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
                 // ignore
             }
 
+            var testTrxFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.trx");
             var testXmlFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.xml");
             var coverageFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.coverage");
+            context.CopyFiles(testTrxFiles, testReportFolder);
             context.CopyFiles(testXmlFiles, testReportFolder);
             context.CopyFiles(coverageFiles, testReportFolder);
 
