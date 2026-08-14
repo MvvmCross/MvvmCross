@@ -207,9 +207,9 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
                 Verbosity = context.VerbosityDotNet,
                 ArgumentCustomization = args => args
                     .Append("-- ")
-                    .Append($"--report-trx --report-trx-filename {projectName}.trx")
-                    .Append($"--report-xunit --report-xunit-filename {projectName}.xunit.xml")
-                    .Append($"--report-ctrf --report-ctrf-filename {projectName}.ctrf.json")
+                    .Append($"--report-xunit-trx --report-xunit-trx-filename {projectName}.xunit.trx")
+                    .Append($"--report-xunit-xml --report-xunit-xml-filename {projectName}.xunit.xml")
+                    .Append($"--report-xunit-ctrf --report-xunit-ctrf-filename {projectName}.ctrf.json")
                     .Append($"--coverage --coverage-output {projectName}.coverage --coverage-output-format cobertura")
                     .Append("--report-gh")
             };
