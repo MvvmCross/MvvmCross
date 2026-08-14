@@ -4,11 +4,11 @@ inputs:
   dotnet-version:
     description: 'The .NET version to install'
     required: false
-    default: '10.0.300'
+    default: '11.0.100-preview.7'
   dotnet-workload-version:
     description: 'The .NET workload version to install'
     required: false
-    default: '10.0.300.1'
+    default: '11.100.0-preview.7.26410.2'
   java-version:
     description: 'The Java version to install'
     required: false
