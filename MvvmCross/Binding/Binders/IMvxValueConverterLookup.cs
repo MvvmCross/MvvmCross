@@ -8,7 +8,7 @@ namespace MvvmCross.Binding.Binders
 {
     public interface IMvxNamedInstanceLookup<out T>
     {
-        T Find(string name);
+        T? Find(string name);
     }
 
     public interface IMvxValueConverterLookup

@@ -27,7 +27,7 @@ namespace MvvmCross.Plugin.ResxLocalization
 
         public CultureInfo CurrentLanguage { get; set; }
 
-        public virtual string GetText(string namespaceKey, string typeKey, string name)
+        public virtual string? GetText(string? namespaceKey, string? typeKey, string name)
         {
             var resolvedKey = name;
 
@@ -50,7 +50,7 @@ namespace MvvmCross.Plugin.ResxLocalization
             return null;
         }
 
-        public virtual string GetText(string namespaceKey, string typeKey, string name, params object[] formatArgs)
+        public virtual string? GetText(string? namespaceKey, string? typeKey, string name, params object[] formatArgs)
         {
             var baseText = GetText(namespaceKey, typeKey, name);
 
@@ -62,13 +62,13 @@ namespace MvvmCross.Plugin.ResxLocalization
             return string.Format(baseText, formatArgs);
         }
 
-        public virtual bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name)
+        public virtual bool TryGetText(out string textValue, string? namespaceKey, string? typeKey, string name)
         {
-            textValue = GetText(namespaceKey, typeKey, name);
-            return textValue != null;
+            textValue = GetText(namespaceKey, typeKey, name) ?? string.Empty;
+            return !string.IsNullOrEmpty(textValue);
         }
 
-        public virtual bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name, params object[] formatArgs)
+        public virtual bool TryGetText(out string textValue, string? namespaceKey, string? typeKey, string name, params object[] formatArgs)
         {
             if (!TryGetText(out textValue, namespaceKey, typeKey, name))
                 return false;

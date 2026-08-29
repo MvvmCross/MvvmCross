@@ -8,7 +8,6 @@ using System.Reflection;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public interface IMvxViewModelByNameRegistry
     {
         void Add(Type viewModelType);
@@ -18,5 +17,4 @@ namespace MvvmCross.ViewModels
         [RequiresUnreferencedCode("This method registers view models that may not be preserved by trimming")]
         void AddAll(Assembly assembly);
     }
-#nullable restore
 }

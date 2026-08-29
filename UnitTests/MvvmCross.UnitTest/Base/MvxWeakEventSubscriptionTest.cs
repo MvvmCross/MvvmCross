@@ -8,7 +8,7 @@ namespace MvvmCross.UnitTest.Base
         private sealed class DisposableClass : IDisposable
         {
             private bool _isDisposed;
-            private EventHandler _testEvent;
+            private EventHandler? _testEvent;
 
             public event EventHandler TestEvent
             {

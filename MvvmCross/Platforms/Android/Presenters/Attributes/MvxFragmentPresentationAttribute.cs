@@ -10,7 +10,6 @@ using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes;
 
-#nullable enable
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
 {

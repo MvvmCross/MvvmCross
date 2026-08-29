@@ -15,10 +15,10 @@ namespace MvvmCross.Binding.BindingContext
     {
         private readonly Dictionary<Type, string> _lookup = [];
 
-        public string DefaultFor(
+        public string? DefaultFor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type)
         {
-            string toReturn;
+            string? toReturn;
             TryDefaultFor(type, out toReturn, true);
             return toReturn;
         }
@@ -27,7 +27,7 @@ namespace MvvmCross.Binding.BindingContext
             Justification = "The interface types returned by GetInterfaces() on a type with DynamicallyAccessedMemberTypes.Interfaces are safe to process")]
         private bool TryDefaultFor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type,
-            out string toReturn,
+            out string? toReturn,
             bool includeInterfaces = true)
         {
             if (type == typeof(object))
@@ -59,7 +59,7 @@ namespace MvvmCross.Binding.BindingContext
                 }
             }
 
-            return TryDefaultFor(type.GetTypeInfo().BaseType, out toReturn, false);
+            return TryDefaultFor(type.GetTypeInfo().BaseType!, out toReturn, false);
         }
 
         public void AddOrOverwrite(Type type, string name)
@@ -69,7 +69,7 @@ namespace MvvmCross.Binding.BindingContext
 
         public void AddOrOverwrite<T>(Expression<Func<T, object>> nameExpression)
         {
-            var path = MvxBindingSingletonCache.Instance.PropertyExpressionParser.Parse(nameExpression);
+            var path = MvxBindingSingletonCache.Instance!.PropertyExpressionParser!.Parse(nameExpression);
             _lookup[typeof(T)] = path.Print();
         }
     }

@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Mac.Views
     public class MvxMacViewsContainer
         : MvxViewsContainer, IMvxMacViewsContainer
     {
-        public MvxViewModelRequest CurrentRequest { get; private set; }
+        public MvxViewModelRequest? CurrentRequest { get; private set; }
 
         public virtual IMvxMacView CreateView(MvxViewModelRequest request)
         {
@@ -44,7 +44,7 @@ namespace MvvmCross.Platforms.Mac.Views
                 var storyboardName = storyboardAttribute.StoryboardName ?? viewType.Name;
                 try
                 {
-                    var storyboard = NSStoryboard.FromName(storyboardName, null);
+                    var storyboard = NSStoryboard.FromName(storyboardName, null!);
                     var viewController = storyboard.InstantiateControllerWithIdentifier(viewType.Name);
                     return (IMvxMacView)viewController;
                 }

@@ -82,18 +82,18 @@ namespace MvvmCross.Platforms.Ios.Views.Base
             base.Dispose(disposing);
         }
 
-        public event EventHandler ViewDidLoadCalled;
+        public event EventHandler? ViewDidLoadCalled;
 
-        public event EventHandler ViewDidLayoutSubviewsCalled;
+        public event EventHandler? ViewDidLayoutSubviewsCalled;
 
-        public event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
+        public event EventHandler<MvxValueEventArgs<bool>>? ViewWillAppearCalled;
 
-        public event EventHandler<MvxValueEventArgs<bool>> ViewDidAppearCalled;
+        public event EventHandler<MvxValueEventArgs<bool>>? ViewDidAppearCalled;
 
-        public event EventHandler<MvxValueEventArgs<bool>> ViewDidDisappearCalled;
+        public event EventHandler<MvxValueEventArgs<bool>>? ViewDidDisappearCalled;
 
-        public event EventHandler<MvxValueEventArgs<bool>> ViewWillDisappearCalled;
+        public event EventHandler<MvxValueEventArgs<bool>>? ViewWillDisappearCalled;
 
-        public event EventHandler DisposeCalled;
+        public event EventHandler? DisposeCalled;
     }
 }

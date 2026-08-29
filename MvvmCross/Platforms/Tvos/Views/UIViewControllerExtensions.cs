@@ -10,7 +10,7 @@ namespace MvvmCross.Platforms.Tvos.Views
 {
     public static class UIViewControllerExtensions
     {
-        public static IMvxTvosView GetIMvxTvosView(this UIViewController viewController)
+        public static IMvxTvosView? GetIMvxTvosView(this UIViewController viewController)
         {
             var mvxView = viewController as IMvxTvosView;
             if (mvxView == null)

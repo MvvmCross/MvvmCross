@@ -16,7 +16,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
     public class MvxCollectionViewCell
         : UICollectionViewCell, IMvxBindable
     {
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; } = null!;
 
         [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         public MvxCollectionViewCell()
@@ -79,7 +79,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             base.Dispose(disposing);
         }
 
-        public object DataContext
+        public object? DataContext
         {
             get { return BindingContext.DataContext; }
             set { BindingContext.DataContext = value; }

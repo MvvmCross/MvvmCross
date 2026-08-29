@@ -13,7 +13,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
     public abstract class MvxBaseTableViewSource : UITableViewSource
     {
-        private readonly UITableView _tableView;
+        private readonly UITableView _tableView = null!;
 
         protected MvxBaseTableViewSource(UITableView tableView)
         {
@@ -33,9 +33,9 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 
         public bool DeselectChangedEnabled { get; set; }
 
-        public ICommand SelectionChangedCommand { get; set; }
+        public ICommand? SelectionChangedCommand { get; set; }
 
-        public ICommand AccessoryTappedCommand { get; set; }
+        public ICommand? AccessoryTappedCommand { get; set; }
 
         public override void AccessoryButtonTapped(UITableView tableView, NSIndexPath indexPath)
         {
@@ -62,9 +62,9 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         }
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
-        protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
+        protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object? item);
 
-        protected abstract object GetItemAt(NSIndexPath indexPath);
+        protected abstract object? GetItemAt(NSIndexPath indexPath);
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
@@ -96,9 +96,9 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             }
         }
 
-        private object _selectedItem;
+        private object? _selectedItem;
 
-        public object SelectedItem
+        public object? SelectedItem
         {
             get
             {
@@ -114,7 +114,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             }
         }
 
-        public event EventHandler SelectedItemChanged;
+        public event EventHandler? SelectedItemChanged;
 
         [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "This method creates bindings which are designed to be reflection-safe. The base UITableViewSource.GetCell cannot have RequiresUnreferencedCode annotation.")]
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)

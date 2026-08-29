@@ -34,8 +34,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
                     },
             };
 
-        private readonly IEnumerable<MvxBindingDescription> _bindingDescriptions;
-        private readonly NSString _cellIdentifier;
+        private readonly IEnumerable<MvxBindingDescription> _bindingDescriptions = null!;
+        private readonly NSString _cellIdentifier = null!;
         private readonly UITableViewCellStyle _cellStyle;
         private readonly UITableViewCellAccessory _tableViewCellAccessory = UITableViewCellAccessory.None;
 
@@ -97,7 +97,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         }
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
-        protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
+        protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object? item)
         {
             var reuse = tableView.DequeueReusableCell(CellIdentifier);
             if (reuse != null)
@@ -108,7 +108,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
         protected virtual MvxStandardTableViewCell CreateDefaultBindableCell(UITableView tableView,
-                                                                             NSIndexPath indexPath, object item)
+                                                                             NSIndexPath indexPath, object? item)
         {
             return new MvxStandardTableViewCell(_bindingDescriptions, _cellStyle, CellIdentifier,
                                                 _tableViewCellAccessory);

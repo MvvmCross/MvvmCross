@@ -22,7 +22,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
         [RequiresUnreferencedCode("This method creates source steps that may use type inspection which may not be preserved by trimming")]
         public IMvxSourceStep Create(MvxSourceStepDescription description)
         {
-            IMvxSourceStepFactory subFactory;
+            IMvxSourceStepFactory? subFactory;
             if (!_subFactories.TryGetValue(description.GetType(), out subFactory))
             {
                 throw new MvxException("Failed to get factory for step type {0}", description.GetType().Name);

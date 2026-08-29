@@ -8,12 +8,12 @@ namespace MvvmCross.Plugin.ResourceLoader
 {
     public abstract class MvxResourceProvider
     {
-        protected static string MakeLookupKey(string namespaceKey, string typeKey)
+        protected static string MakeLookupKey(string? namespaceKey, string? typeKey)
         {
             return $"{namespaceKey}|{typeKey}";
         }
 
-        protected static string MakeLookupKey(string namespaceKey, string typeKey, string name)
+        protected static string MakeLookupKey(string? namespaceKey, string? typeKey, string name)
         {
             return $"{namespaceKey}|{typeKey}|{name}";
         }

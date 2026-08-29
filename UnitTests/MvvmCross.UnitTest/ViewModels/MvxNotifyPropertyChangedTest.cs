@@ -26,7 +26,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
         public class TestInpc : MvxNotifyPropertyChanged
         {
-            private string _foo;
+            private string? _foo;
 
             public string Foo { get => _foo; set => SetProperty(ref _foo, value); }
         }
@@ -35,7 +35,7 @@ namespace MvvmCross.UnitTest.ViewModels
         {
             public int TestActionValue;
 
-            private string _foo;
+            private string? _foo;
 
             public string Foo
             {
@@ -48,7 +48,7 @@ namespace MvvmCross.UnitTest.ViewModels
         {
             public int TestActionValue;
 
-            private string _foo;
+            private string? _foo;
 
             public string Foo
             {
@@ -67,9 +67,9 @@ namespace MvvmCross.UnitTest.ViewModels
         {
             public int TestActionValue;
 
-            private string _foo;
+            private string? _foo;
 
-            public Action<bool> IncreaseTestActionValue = null;
+            public Action<bool>? IncreaseTestActionValue = null;
 
             public string Foo
             {
@@ -90,7 +90,7 @@ namespace MvvmCross.UnitTest.ViewModels
             var newValue = string.Empty;
             t.PropertyChanging += (sender, args) =>
             {
-                notified.Add(args.PropertyName);
+                notified.Add(args.PropertyName!);
                 newValue = (args as MvxPropertyChangingEventArgs<string>)?.NewValue;
             };
             t.RaisePropertyChanging("Foobar", () => t.Foo);
@@ -112,7 +112,7 @@ namespace MvvmCross.UnitTest.ViewModels
             var newValue = string.Empty;
             t.PropertyChanging += (sender, args) =>
             {
-                notified.Add(args.PropertyName);
+                notified.Add(args.PropertyName!);
                 newValue = (args as MvxPropertyChangingEventArgs<string>)?.NewValue;
             };
             t.RaisePropertyChanging("Foobar", "Foo");
@@ -134,7 +134,7 @@ namespace MvvmCross.UnitTest.ViewModels
             var newValue = string.Empty;
             t.PropertyChanging += (sender, args) =>
             {
-                notified.Add(args.PropertyName);
+                notified.Add(args.PropertyName!);
                 newValue = (args as MvxPropertyChangingEventArgs<string>)?.NewValue;
             };
             t.RaisePropertyChanging(new MvxPropertyChangingEventArgs<string>("Foo", "Foobar"));
@@ -153,7 +153,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var notified = new List<string>();
             var t = new TestInpc();
-            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
+            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName!);
             await t.RaisePropertyChanged(() => t.Foo);
 
             Assert.True(notified.Count == 1);
@@ -169,7 +169,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var notified = new List<string>();
             var t = new TestInpc();
-            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
+            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName!);
             await t.RaisePropertyChanged("Foo");
 
             Assert.True(notified.Count == 1);
@@ -185,7 +185,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var notified = new List<string>();
             var t = new TestInpc();
-            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
+            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName!);
             await t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
 
             Assert.True(notified.Count == 1);
@@ -201,7 +201,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var notified = new List<string>();
             var t = new TestInpc();
-            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
+            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName!);
             t.Foo = "Foobar";
 
             Assert.True(notified.Count == 1);
@@ -219,7 +219,7 @@ namespace MvvmCross.UnitTest.ViewModels
             var notified = new List<string>();
             var t = new TestInpc();
             t.Foo = "Foobar";
-            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
+            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName!);
             t.Foo = "Foobar";
 
             Assert.True(notified.Count == 0);
@@ -236,8 +236,8 @@ namespace MvvmCross.UnitTest.ViewModels
             var notified = new List<string>();
             var t = new TestInpc();
             t.Foo = "Default value";
-            t.PropertyChanging += (sender, args) => (args as MvxPropertyChangingEventArgs<string>).Cancel = true;
-            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
+            t.PropertyChanging += (sender, args) => (args as MvxPropertyChangingEventArgs<string>)!.Cancel = true;
+            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName!);
             t.Foo = "Foobar";
 
             Assert.True(notified.Count == 0);
@@ -253,7 +253,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var notified = new List<string>();
             var t = new TestInpc();
-            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
+            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName!);
             t.ShouldAlwaysRaiseInpcOnUserInterfaceThread(false);
             await t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
 
@@ -317,17 +317,17 @@ namespace MvvmCross.UnitTest.ViewModels
 
         public class Interceptor : IMvxInpcInterceptor
         {
-            public Func<IMvxNotifyPropertyChanged, PropertyChangedEventArgs, MvxInpcInterceptionResult> Handler;
-            public Func<IMvxNotifyPropertyChanged, PropertyChangingEventArgs, MvxInpcInterceptionResult> ChangingHandler;
+            public Func<IMvxNotifyPropertyChanged, PropertyChangedEventArgs, MvxInpcInterceptionResult>? Handler;
+            public Func<IMvxNotifyPropertyChanged, PropertyChangingEventArgs, MvxInpcInterceptionResult>? ChangingHandler;
 
             public MvxInpcInterceptionResult Intercept(IMvxNotifyPropertyChanged sender, PropertyChangedEventArgs args)
             {
-                return Handler(sender, args);
+                return Handler!(sender, args);
             }
 
             public MvxInpcInterceptionResult Intercept(IMvxNotifyPropertyChanged sender, PropertyChangingEventArgs args)
             {
-                return ChangingHandler(sender, args);
+                return ChangingHandler!(sender, args);
             }
         }
 
@@ -344,7 +344,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var notified = new List<string>();
             var t = new TestInpc();
-            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
+            t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName!);
             interceptor.ChangingHandler = (s, e) => MvxInpcInterceptionResult.RaisePropertyChanging;
             interceptor.Handler = (s, e) => MvxInpcInterceptionResult.RaisePropertyChanged;
             await t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));

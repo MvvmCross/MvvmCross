@@ -53,7 +53,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         public virtual void ShowTabView(UIViewController viewController, MvxTabPresentationAttribute attribute)
         {
             if (!string.IsNullOrEmpty(attribute.TabAccessibilityIdentifier))
-                viewController.View.AccessibilityIdentifier = attribute.TabAccessibilityIdentifier;
+                viewController.View!.AccessibilityIdentifier = attribute.TabAccessibilityIdentifier;
 
             // setup Tab
             SetTitleAndTabBarItem(viewController, attribute);
@@ -105,14 +105,14 @@ namespace MvvmCross.Platforms.Tvos.Views
                 && navController.ViewControllers.Any())
             {
                 // if the ViewModel to close if the last in the stack, close it animated
-                if (navController.TopViewController.GetIMvxTvosView().ViewModel == viewModel)
+                if (navController.TopViewController!.GetIMvxTvosView()?.ViewModel == viewModel)
                 {
                     navController.PopViewController(true);
                     return true;
                 }
 
                 var controllers = navController.ViewControllers.ToList();
-                var controllerToClose = controllers.FirstOrDefault(vc => vc.GetIMvxTvosView().ViewModel == viewModel);
+                var controllerToClose = controllers.FirstOrDefault(vc => vc.GetIMvxTvosView()?.ViewModel == viewModel);
 
                 if (controllerToClose != null)
                 {
@@ -134,7 +134,7 @@ namespace MvvmCross.Platforms.Tvos.Views
             // loop through plain Tabs
             var plainToClose = ViewControllers.Where(v => !(v is UINavigationController))
                                               .Select(v => v.GetIMvxTvosView())
-                                              .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+                                              .FirstOrDefault(mvxView => mvxView?.ViewModel == viewModel);
             if (plainToClose != null)
             {
                 RemoveTabController((UIViewController)plainToClose);
@@ -142,12 +142,12 @@ namespace MvvmCross.Platforms.Tvos.Views
             }
 
             // loop through nav stack Tabs
-            UIViewController toClose = null;
-            foreach (var vc in ViewControllers.Where(v => v is UINavigationController))
+            UIViewController? toClose = null;
+            foreach (var vc in ViewControllers!.Where(v => v is UINavigationController))
             {
-                var root = ((UINavigationController)vc).ViewControllers.FirstOrDefault();
-                var vcFromRoot = root.GetIMvxTvosView();
-                if (root != null && vcFromRoot.ViewModel == viewModel)
+                var root = ((UINavigationController)vc).ViewControllers?.FirstOrDefault();
+                var vcFromRoot = root?.GetIMvxTvosView();
+                if (root != null && vcFromRoot?.ViewModel == viewModel)
                 {
                     toClose = root;
                     break;
@@ -164,7 +164,7 @@ namespace MvvmCross.Platforms.Tvos.Views
 
         public void PresentViewControllerWithNavigation(UIViewController controller,
                                                         bool animated = true,
-                                                        Action completionHandler = null)
+                                                        Action? completionHandler = null)
         {
             PresentViewController(new UINavigationController(controller), animated, completionHandler);
         }
@@ -176,7 +176,7 @@ namespace MvvmCross.Platforms.Tvos.Views
 
         protected virtual void RemoveTabController(UIViewController toClose)
         {
-            var newTabs = ViewControllers.Where(v => v != toClose);
+            var newTabs = ViewControllers!.Where(v => v != toClose);
             ViewControllers = newTabs.ToArray();
         }
 
@@ -187,21 +187,21 @@ namespace MvvmCross.Platforms.Tvos.Views
                 var topViewController = (SelectedViewController as UINavigationController)
                     ?.TopViewController ?? SelectedViewController;
 
-                if (topViewController.PresentedViewController != null)
+                if (topViewController!.PresentedViewController != null)
                 {
                     var presentedNavigationController = topViewController.PresentedViewController as UINavigationController;
                     if (presentedNavigationController != null)
                     {
-                        return presentedNavigationController.TopViewController;
+                        return presentedNavigationController.TopViewController!;
                     }
                     else
                     {
-                        return topViewController.PresentedViewController;
+                        return topViewController.PresentedViewController!;
                     }
                 }
                 else
                 {
-                    return topViewController;
+                    return topViewController!;
                 }
             }
         }
@@ -232,7 +232,7 @@ namespace MvvmCross.Platforms.Tvos.Views
 
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
+            get { return (TViewModel)base.ViewModel!; }
             set { base.ViewModel = value; }
         }
     }

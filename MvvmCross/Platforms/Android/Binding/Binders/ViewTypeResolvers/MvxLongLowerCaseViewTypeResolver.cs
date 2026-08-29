@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
         protected Type ResolveLowerCaseTypeName(string longLowerCaseName)
         {
             Registry.TryResolve(longLowerCaseName, out var type);
-            return type;
+            return type!;
         }
     }
 }

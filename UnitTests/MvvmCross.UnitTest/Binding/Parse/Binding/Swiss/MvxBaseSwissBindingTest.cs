@@ -200,14 +200,14 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                 "Life[1].Foo[2].Bar",
             };
 
-        private readonly List<string> _converters = new List<string>
+        private readonly List<string?> _converters = new List<string?>
             {
                 null,
                 "IntConvert",
                 "TheName",
             };
 
-        private readonly Dictionary<string, object> _values = new Dictionary<string, object>
+        private readonly Dictionary<string, object?> _values = new Dictionary<string, object?>
             {
                 { string.Empty, null },
                 { "'One'", "One" },
@@ -398,12 +398,12 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
         protected void PerformTest(string text, MvxSerializableBindingSpecification expectedLookup)
         {
             var theParser = new TParser();
-            MvxSerializableBindingSpecification specification;
+            MvxSerializableBindingSpecification? specification;
             var result = theParser.TryParseBindingSpecification(text, out specification);
             if (!result)
                 Debug.WriteLine("Failed on: " + text);
             Assert.True(result);
-            AssertAreEquivalent(expectedLookup, specification);
+            AssertAreEquivalent(expectedLookup, specification!);
         }
     }
 }

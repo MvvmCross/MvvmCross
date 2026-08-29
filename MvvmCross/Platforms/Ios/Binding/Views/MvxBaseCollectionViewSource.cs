@@ -14,10 +14,10 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 {
     public abstract class MvxBaseCollectionViewSource : UICollectionViewSource
     {
-        public event EventHandler SelectedItemChanged;
+        public event EventHandler? SelectedItemChanged;
 
         private readonly WeakReference<UICollectionView> _collectionView;
-        private object _selectedItem;
+        private object? _selectedItem;
 
         public static readonly NSString UnknownCellIdentifier = NSString.Empty;
 
@@ -35,7 +35,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             DefaultCellIdentifier = cellIdentifier;
         }
 
-        protected UICollectionView CollectionView
+        protected UICollectionView? CollectionView
         {
             get
             {
@@ -49,13 +49,13 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
         }
 
-        public ICommand SelectionChangedCommand { get; set; }
+        public ICommand? SelectionChangedCommand { get; set; }
 
         public virtual void ReloadData()
         {
             try
             {
-                CollectionView.ReloadData();
+                CollectionView!.ReloadData();
             }
             catch (Exception exception)
             {
@@ -74,7 +74,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             SelectedItem = item;
         }
 
-        public object SelectedItem
+        public object? SelectedItem
         {
             get => _selectedItem;
             set
@@ -119,11 +119,11 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         }
 
         protected virtual UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath,
-            object item)
+            object? item)
         {
             return (UICollectionViewCell)collectionView.DequeueReusableCell(DefaultCellIdentifier, indexPath);
         }
 
-        protected abstract object GetItemAt(NSIndexPath indexPath);
+        protected abstract object? GetItemAt(NSIndexPath indexPath);
     }
 }

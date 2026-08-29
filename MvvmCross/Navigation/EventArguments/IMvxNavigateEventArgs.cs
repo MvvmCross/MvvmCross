@@ -6,12 +6,10 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Navigation.EventArguments
 {
-#nullable enable
     public interface IMvxNavigateEventArgs
     {
         bool Cancel { get; set; }
         NavigationMode Mode { get; set; }
         IMvxViewModel? ViewModel { get; set; }
     }
-#nullable restore
 }

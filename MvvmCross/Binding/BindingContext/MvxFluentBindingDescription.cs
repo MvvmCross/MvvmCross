@@ -119,21 +119,21 @@ namespace MvvmCross.Binding.BindingContext
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(string converterName,
-                                                                            object converterParameter = null)
+                                                                            object? converterParameter = null)
         {
             var converter = ValueConverterFromName(converterName);
             return WithConversion(converter, converterParameter);
         }
 
-        public MvxFluentBindingDescription<TTarget, TSource> WithConversion(IMvxValueConverter converter,
-                                                                            object converterParameter = null)
+        public MvxFluentBindingDescription<TTarget, TSource> WithConversion(IMvxValueConverter? converter,
+                                                                            object? converterParameter = null)
         {
             SourceStepDescription.Converter = converter;
             SourceStepDescription.ConverterParameter = converterParameter;
             return this;
         }
 
-        public MvxFluentBindingDescription<TTarget, TSource> WithConversion<TValueConverter>(object converterParameter = null)
+        public MvxFluentBindingDescription<TTarget, TSource> WithConversion<TValueConverter>(object? converterParameter = null)
             where TValueConverter : IMvxValueConverter
         {
             var filler = MvxHost.Current!.Services.GetRequiredService<IMvxValueConverterRegistryFiller>();
@@ -151,8 +151,8 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget, TSource> SourceDescribed(string bindingDescription)
         {
             var newBindingDescription =
-                MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
-            return SourceDescribed(newBindingDescription);
+                MvxBindingSingletonCache.Instance?.BindingDescriptionParser?.ParseSingle(bindingDescription);
+            return SourceDescribed(newBindingDescription ?? new MvxBindingDescription());
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> SourceDescribed(MvxBindingDescription description)
@@ -164,8 +164,8 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget, TSource> FullyDescribed(string bindingDescription)
         {
             var newBindingDescription =
-                MvxBindingSingletonCache.Instance.BindingDescriptionParser.Parse(bindingDescription)
-                .ToList();
+                MvxBindingSingletonCache.Instance?.BindingDescriptionParser?.Parse(bindingDescription)
+                .ToList() ?? [];
 
             if (newBindingDescription.Count > 1)
             {
@@ -175,7 +175,7 @@ namespace MvvmCross.Binding.BindingContext
             return FullyDescribed(newBindingDescription.FirstOrDefault());
         }
 
-        public MvxFluentBindingDescription<TTarget, TSource> FullyDescribed(MvxBindingDescription description)
+        public MvxFluentBindingDescription<TTarget, TSource> FullyDescribed(MvxBindingDescription? description)
         {
             FullOverwrite(description ?? new MvxBindingDescription());
             return this;
@@ -192,7 +192,7 @@ namespace MvvmCross.Binding.BindingContext
         : MvxBaseFluentBindingDescription<TTarget>
         where TTarget : class
     {
-        public MvxFluentBindingDescription(IMvxBindingContextOwner bindingContextOwner, TTarget target = null)
+        public MvxFluentBindingDescription(IMvxBindingContextOwner bindingContextOwner, TTarget? target = null)
             : base(bindingContextOwner, target)
         {
         }
@@ -254,21 +254,21 @@ namespace MvvmCross.Binding.BindingContext
         }
 
         public MvxFluentBindingDescription<TTarget> WithConversion(string converterName,
-                                                                   object converterParameter = null)
+                                                                   object? converterParameter = null)
         {
             var converter = ValueConverterFromName(converterName);
             return WithConversion(converter, converterParameter);
         }
 
-        public MvxFluentBindingDescription<TTarget> WithConversion(IMvxValueConverter converter,
-                                                                   object converterParameter)
+        public MvxFluentBindingDescription<TTarget> WithConversion(IMvxValueConverter? converter,
+                                                                   object? converterParameter)
         {
             SourceStepDescription.Converter = converter;
             SourceStepDescription.ConverterParameter = converterParameter;
             return this;
         }
 
-        public MvxFluentBindingDescription<TTarget> WithConversion<TValueConverter>(object converterParameter = null)
+        public MvxFluentBindingDescription<TTarget> WithConversion<TValueConverter>(object? converterParameter = null)
             where TValueConverter : IMvxValueConverter
         {
             var filler = MvxHost.Current!.Services.GetRequiredService<IMvxValueConverterRegistryFiller>();
@@ -286,8 +286,8 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget> SourceDescribed(string bindingDescription)
         {
             var newBindingDescription =
-                MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
-            return SourceDescribed(newBindingDescription);
+                MvxBindingSingletonCache.Instance?.BindingDescriptionParser?.ParseSingle(bindingDescription);
+            return SourceDescribed(newBindingDescription ?? new MvxBindingDescription());
         }
 
         public MvxFluentBindingDescription<TTarget> SourceDescribed(MvxBindingDescription description)
@@ -299,8 +299,8 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget> FullyDescribed(string bindingDescription)
         {
             var newBindingDescription =
-                MvxBindingSingletonCache.Instance.BindingDescriptionParser.Parse(bindingDescription)
-                .ToList();
+                MvxBindingSingletonCache.Instance?.BindingDescriptionParser?.Parse(bindingDescription)
+                .ToList() ?? [];
 
             if (newBindingDescription.Count > 1)
             {
@@ -312,7 +312,7 @@ namespace MvvmCross.Binding.BindingContext
             return FullyDescribed(newBindingDescription.FirstOrDefault());
         }
 
-        public MvxFluentBindingDescription<TTarget> FullyDescribed(MvxBindingDescription description)
+        public MvxFluentBindingDescription<TTarget> FullyDescribed(MvxBindingDescription? description)
         {
             FullOverwrite(description ?? new MvxBindingDescription());
             return this;

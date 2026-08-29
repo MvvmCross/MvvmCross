@@ -8,7 +8,6 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Navigation.EventArguments
 {
-#nullable enable
     public enum NavigationMode
     {
         None,
@@ -33,5 +32,4 @@ namespace MvvmCross.Navigation.EventArguments
         public NavigationMode Mode { get; set; }
         public IMvxViewModel? ViewModel { get; set; }
     }
-#nullable restore
 }

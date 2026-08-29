@@ -7,7 +7,6 @@ using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Presenters
 {
-#nullable enable
     public class MvxPopoverPresentationSourceProvider : IMvxPopoverPresentationSourceProvider
     {
         private readonly WeakReference<UIView?> _sourceViewWeakReference = new WeakReference<UIView?>(null);
@@ -72,5 +71,4 @@ namespace MvvmCross.Platforms.Ios.Presenters
             }
         }
     }
-#nullable restore
 }

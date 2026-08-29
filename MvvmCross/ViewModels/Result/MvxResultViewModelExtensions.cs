@@ -13,7 +13,7 @@ public static class MvxResultViewModelExtensions
         IMvxBundle savedStateBundle,
         IMvxResultViewModelManager resultViewModelManager)
     {
-        if (savedStateBundle?.Data.TryGetValue(BundleRegisterKey, out string restoreRegisterStr) == true &&
+        if (savedStateBundle?.Data.TryGetValue(BundleRegisterKey, out string? restoreRegisterStr) == true &&
             bool.TryParse(restoreRegisterStr, out bool restoreRegister) && restoreRegister)
         {
             resultViewModelManager.RegisterToResult(viewModel);

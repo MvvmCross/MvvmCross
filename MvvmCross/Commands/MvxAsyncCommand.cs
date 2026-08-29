@@ -9,7 +9,6 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Commands
 {
-#nullable enable
     public abstract class MvxAsyncCommandBase
         : MvxCommandBase
     {
@@ -260,5 +259,4 @@ namespace MvvmCross.Commands
         protected override Task ExecuteAsyncImpl(object? parameter)
             => _execute((T?)typeof(T).MakeSafeValueCore(parameter), CancelToken);
     }
-#nullable restore
 }

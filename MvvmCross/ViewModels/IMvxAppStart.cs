@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public interface IMvxAppStart
     {
         [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
@@ -20,5 +19,4 @@ namespace MvvmCross.ViewModels
 
         void ResetStart();
     }
-#nullable restore
 }

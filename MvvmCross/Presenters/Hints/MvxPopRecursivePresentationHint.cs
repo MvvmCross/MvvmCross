@@ -8,7 +8,6 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
 {
-#nullable enable
     public class MvxPopRecursivePresentationHint
         : MvxPresentationHint
     {
@@ -33,5 +32,4 @@ namespace MvvmCross.Presenters.Hints
 
         public bool Animated { get; set; }
     }
-#nullable restore
 }

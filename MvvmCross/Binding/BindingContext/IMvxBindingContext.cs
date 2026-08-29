@@ -13,13 +13,13 @@ namespace MvvmCross.Binding.BindingContext
     public interface IMvxBindingContext
         : IMvxDataConsumer
     {
-        event EventHandler DataContextChanged;
+        event EventHandler? DataContextChanged;
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
-        IMvxBindingContext Init(object dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue);
+        IMvxBindingContext Init(object? dataContext, object firstBindingKey, IEnumerable<MvxBindingDescription> firstBindingValue);
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
-        IMvxBindingContext Init(object dataContext, object firstBindingKey, string firstBindingValue);
+        IMvxBindingContext Init(object? dataContext, object firstBindingKey, string firstBindingValue);
 
         void RegisterBinding(object target, IMvxUpdateableBinding binding);
 

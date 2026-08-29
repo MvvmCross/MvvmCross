@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-#nullable enable
 using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.Runtime;
@@ -55,14 +54,14 @@ namespace MvvmCross.Platforms.Android.Views
             StartActivityForResult(intent, requestCode);
         }
 
-        public IMvxBindingContext? BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; } = null!;
 
         // ReSharper disable once InconsistentNaming
         public override void SetContentView(int layoutResID)
         {
             if (BaseContextToAttach(this) is MvxContextWrapper)
             {
-                var view = this.BindingInflate(layoutResID, null);
+                var view = this.BindingInflate(layoutResID, null!);
                 SetContentView(view);
                 return;
             }
@@ -75,7 +74,7 @@ namespace MvvmCross.Platforms.Android.Views
         }
 
         protected virtual Context BaseContextToAttach(Context? @base)
-            => MvxContextWrapper.Wrap(@base, this);
+            => MvxContextWrapper.Wrap(@base!, this);
 
         protected override void AttachBaseContext(Context? @base)
         {

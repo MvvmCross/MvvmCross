@@ -52,7 +52,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         public new IMvxAdapter Adapter
         {
-            get => base.Adapter as IMvxAdapter;
+            get => (base.Adapter as IMvxAdapter)!;
             set
             {
                 var existing = Adapter;
@@ -89,9 +89,9 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             set => Adapter.DropDownItemTemplateId = value;
         }
 
-        public ICommand HandleItemSelected { get; set; }
+        public ICommand? HandleItemSelected { get; set; }
 
-        private void OnItemSelected(object sender, ItemSelectedEventArgs e)
+        private void OnItemSelected(object? sender, ItemSelectedEventArgs e)
         {
             var position = e.Position;
             HandleSelected(position);

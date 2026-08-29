@@ -6,10 +6,8 @@ using System;
 
 namespace MvvmCross.Core
 {
-#nullable enable
     public interface IMvxLifetime
     {
         event EventHandler<MvxLifetimeEventArgs>? LifetimeChanged;
     }
-#nullable restore
 }

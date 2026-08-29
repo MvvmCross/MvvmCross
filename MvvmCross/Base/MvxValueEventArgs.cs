@@ -6,7 +6,6 @@ using System;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public class MvxValueEventArgs<T>
         : EventArgs
     {
@@ -17,5 +16,4 @@ namespace MvvmCross.Base
 
         public T Value { get; private set; }
     }
-#nullable restore
 }

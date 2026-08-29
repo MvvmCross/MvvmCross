@@ -14,6 +14,6 @@ namespace MvvmCross.Platforms.Android
             Result?.Invoke(this, result);
         }
 
-        public event EventHandler<MvxIntentResultEventArgs> Result;
+        public event EventHandler<MvxIntentResultEventArgs>? Result;
     }
 }

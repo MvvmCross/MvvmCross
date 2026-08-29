@@ -33,7 +33,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             _source = source;
         }
 
-        private IMvxBinder _binder;
+        private IMvxBinder? _binder;
 
         protected IMvxBinder Binder => _binder ?? (_binder = MvxHost.Current!.Services.GetRequiredService<IMvxBinder>());
 
@@ -70,7 +70,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             try
             {
                 var bindingText = typedArray.GetString(attributeId);
-                var newBindings = Binder.Bind(_source, view, bindingText);
+                var newBindings = Binder.Bind(_source, view, bindingText!);
                 StoreBindings(view, newBindings);
             }
             catch (Exception exception)
@@ -93,7 +93,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             try
             {
                 var bindingText = typedArray.GetString(attributeId);
-                var newBindings = Binder.LanguageBind(_source, view, bindingText);
+                var newBindings = Binder.LanguageBind(_source, view, bindingText!);
                 StoreBindings(view, newBindings);
             }
             catch (Exception exception)

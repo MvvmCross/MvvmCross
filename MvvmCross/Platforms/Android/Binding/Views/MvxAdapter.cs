@@ -35,11 +35,11 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private int _itemTemplateId = global::Android.Resource.Layout.SimpleListItem1;
         private int _dropDownItemTemplateId = global::Android.Resource.Layout.SimpleSpinnerDropDownItem;
-        private IEnumerable _itemsSource;
-        private IDisposable _subscription;
+        private IEnumerable? _itemsSource;
+        private IDisposable? _subscription;
 
         public MvxAdapter(Context context)
-            : this(context, MvxAndroidBindingContextHelpers.Current())
+            : this(context, MvxAndroidBindingContextHelpers.Current()!)
         {
         }
 
@@ -61,16 +61,16 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
         }
 
-        protected Context Context { get; }
+        protected Context Context { get; } = null!;
 
-        protected IMvxAndroidBindingContext BindingContext { get; }
+        protected IMvxAndroidBindingContext BindingContext { get; } = null!;
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
 
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get => _itemsSource;
+            get => _itemsSource!;
             set => SetItemsSource(value);
         }
 
@@ -125,7 +125,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             NotifyDataSetChanged();
         }
 
-        protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        protected virtual void OnItemsSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             NotifyDataSetChanged(e);
         }
@@ -158,12 +158,12 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return ItemsSource.GetPosition(item);
         }
 
-        public virtual object GetRawItem(int position)
+        public virtual object? GetRawItem(int position)
         {
             return ItemsSource.ElementAt(position);
         }
 
-        public override Object GetItem(int position)
+        public override Object? GetItem(int position)
         {
             // we return null to Java here
             // we do **not**: return new MvxJavaContainer<object>(GetRawItem(position));
@@ -176,13 +176,13 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return position;
         }
 
-        public override View GetDropDownView(int position, View convertView, ViewGroup parent)
+        public override View? GetDropDownView(int position, View? convertView, ViewGroup? parent)
             => GetView(position, convertView, parent, DropDownItemTemplateId);
 
-        public override View GetView(int position, View convertView, ViewGroup parent)
+        public override View? GetView(int position, View? convertView, ViewGroup? parent)
             => GetView(position, convertView, parent, ItemTemplateId);
 
-        protected virtual View GetView(int position, View convertView, ViewGroup parent, int templateId)
+        protected virtual View? GetView(int position, View? convertView, ViewGroup? parent, int templateId)
         {
             if (ItemsSource == null)
             {
@@ -195,10 +195,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return GetBindableView(convertView, source, parent, templateId);
         }
 
-        protected virtual View GetBindableView(
-            View convertView, object dataContext, ViewGroup parent, int templateId)
+        protected virtual View? GetBindableView(
+            View? convertView, object? dataContext, ViewGroup? parent, int templateId)
         {
-            IMvxListItemView viewToUse = null;
+            IMvxListItemView? viewToUse = null;
 
             // we have a templateid lets use bind and inflate on it :)
             if (convertView?.Tag is IMvxListItemView item &&
@@ -218,28 +218,28 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         }
 
         protected virtual void BindBindableView(
-            object source, IMvxListItemView viewToUse)
+            object? source, IMvxListItemView viewToUse)
             => viewToUse.DataContext = source;
 
         protected virtual IMvxListItemView CreateBindableView(
-            object dataContext, ViewGroup parent, int templateId)
+            object? dataContext, ViewGroup? parent, int templateId)
         {
             if (SimpleItemTemplateIds.Contains(templateId) ||
                 global::Android.Resource.Layout.SimpleSpinnerDropDownItem == templateId)
             {
                 return new MvxSimpleListItemView(Context, BindingContext.LayoutInflaterHolder,
-                    dataContext, parent, templateId);
+                    dataContext!, parent!, templateId);
             }
 
             return new MvxListItemView(Context, BindingContext.LayoutInflaterHolder,
-                dataContext, parent, templateId);
+                dataContext!, parent!, templateId);
         }
     }
 
     public class MvxAdapter<TItem> : MvxAdapter where TItem : class
     {
         public MvxAdapter(Context context)
-            : base(context, MvxAndroidBindingContextHelpers.Current())
+            : base(context, MvxAndroidBindingContextHelpers.Current()!)
         {
         }
 
@@ -254,10 +254,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         }
 
         [MvxSetToNullAfterBinding]
-        public new IEnumerable<TItem> ItemsSource
+        public new IEnumerable<TItem>? ItemsSource
         {
             get => base.ItemsSource as IEnumerable<TItem>;
-            set => base.ItemsSource = value;
+            set => base.ItemsSource = value!;
         }
     }
 }

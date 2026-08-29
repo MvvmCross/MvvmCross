@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         };
 
         [RequiresUnreferencedCode("This method creates bindings using reflection which may not be preserved by trimming")]
-        public IMvxTargetBinding CreateBinding(object target, string targetName)
+        public IMvxTargetBinding? CreateBinding(object target, string targetName)
         {
             if (target is not TTarget castTarget)
             {

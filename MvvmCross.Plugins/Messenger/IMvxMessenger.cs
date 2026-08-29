@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace MvvmCross.Plugin.Messenger
 {
-#nullable enable
     public interface IMvxMessenger
     {
         /// <summary>
@@ -76,7 +75,7 @@ namespace MvvmCross.Plugin.Messenger
         /// <typeparam name="TMessage"></typeparam>
         /// <param name="tag">An optional tag to include with this subscription</param>
         /// <returns></returns>
-        bool HasSubscriptionsForTag<TMessage>(string tag)
+        bool HasSubscriptionsForTag<TMessage>(string? tag)
              where TMessage : MvxMessage;
 
         /// <summary>
@@ -85,7 +84,7 @@ namespace MvvmCross.Plugin.Messenger
         /// <typeparam name="TMessage"></typeparam>
         /// <param name="tag">An optional tag to include with this subscription</param>
         /// <returns></returns>
-        int CountSubscriptionsForTag<TMessage>(string tag)
+        int CountSubscriptionsForTag<TMessage>(string? tag)
              where TMessage : MvxMessage;
 
         /// <summary>
@@ -93,7 +92,7 @@ namespace MvvmCross.Plugin.Messenger
         /// </summary>
         /// <typeparam name="TMessage"></typeparam>
         /// <returns></returns>
-        IList<string> GetSubscriptionTagsFor<TMessage>()
+        IList<string?> GetSubscriptionTagsFor<TMessage>()
              where TMessage : MvxMessage;
 
         /// <summary>
@@ -137,5 +136,4 @@ namespace MvvmCross.Plugin.Messenger
         /// <typeparam name="TMessageType">The type of the message to remove</typeparam>
         void RemoveSticky<TMessageType>() where TMessageType : MvxMessage;
     }
-#nullable restore
 }

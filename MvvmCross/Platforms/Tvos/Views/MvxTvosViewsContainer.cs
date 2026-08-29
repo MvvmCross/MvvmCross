@@ -16,7 +16,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         : MvxViewsContainer
         , IMvxTvosViewsContainer
     {
-        public MvxViewModelRequest CurrentRequest { get; private set; }
+        public MvxViewModelRequest CurrentRequest { get; private set; } = null!;
 
         public virtual IMvxTvosView CreateView(MvxViewModelRequest request)
         {
@@ -33,7 +33,7 @@ namespace MvvmCross.Platforms.Tvos.Views
             }
             finally
             {
-                CurrentRequest = null;
+                CurrentRequest = null!;
             }
         }
 

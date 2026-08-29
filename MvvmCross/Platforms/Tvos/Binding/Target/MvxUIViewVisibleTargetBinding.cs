@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         {
         }
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object? target, object? value)
         {
             var view = View;
             if (view == null)

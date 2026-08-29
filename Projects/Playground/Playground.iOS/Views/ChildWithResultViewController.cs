@@ -41,7 +41,7 @@ public sealed class ChildWithResultViewController : MvxViewController<ChildWithR
         Add(_close);
 
         NSLayoutConstraint.ActivateConstraints([
-            _message.TopAnchor.ConstraintEqualTo(View.SafeAreaLayoutGuide.TopAnchor, 16),
+            _message.TopAnchor.ConstraintEqualTo(View!.SafeAreaLayoutGuide.TopAnchor, 16),
             _message.LeadingAnchor.ConstraintEqualTo(View.LeadingAnchor, 16),
             _message.TrailingAnchor.ConstraintEqualTo(View.TrailingAnchor, -16),
             _message.HeightAnchor.ConstraintEqualTo(40),

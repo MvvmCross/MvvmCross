@@ -6,7 +6,6 @@ using System;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public static class MvxObjectExtensions
     {
         public static void DisposeIfDisposable(this object thing)
@@ -15,5 +14,4 @@ namespace MvvmCross.Base
                 disposable.Dispose();
         }
     }
-#nullable restore
 }

@@ -6,6 +6,6 @@ namespace MvvmCross.Binding.Bindings
 {
     public interface IMvxUpdateableBinding : IMvxBinding
     {
-        object DataContext { get; set; }
+        object? DataContext { get; set; }
     }
 }

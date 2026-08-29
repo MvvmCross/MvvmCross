@@ -4,10 +4,8 @@
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public class MvxNullViewModel
         : MvxViewModel
     {
     }
-#nullable restore
 }

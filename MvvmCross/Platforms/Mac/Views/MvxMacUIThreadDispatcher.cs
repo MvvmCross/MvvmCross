@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Mac.Views
     public abstract class MvxMacUIThreadDispatcher
         : MvxMainThreadAsyncDispatcher
     {
-        private readonly SynchronizationContext _uiSynchronizationContext;
+        private readonly SynchronizationContext? _uiSynchronizationContext;
 
         protected MvxMacUIThreadDispatcher()
         {

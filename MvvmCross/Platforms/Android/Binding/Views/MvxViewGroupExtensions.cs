@@ -11,22 +11,22 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 {
     public static class MvxViewGroupExtensions
     {
-        public static void UpdateDataSetFromChange<T>(this T viewGroup, object sender,
+        public static void UpdateDataSetFromChange<T>(this T viewGroup, object? sender,
                                                       NotifyCollectionChangedEventArgs eventArgs)
             where T : ViewGroup, IMvxWithChangeAdapter
         {
             switch (eventArgs.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    viewGroup.Add(viewGroup.Adapter, eventArgs.NewStartingIndex, eventArgs.NewItems.Count);
+                    viewGroup.Add(viewGroup.Adapter, eventArgs.NewStartingIndex, eventArgs.NewItems!.Count);
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
-                    viewGroup.Remove(eventArgs.OldStartingIndex, eventArgs.OldItems.Count);
+                    viewGroup.Remove(eventArgs.OldStartingIndex, eventArgs.OldItems!.Count);
                     break;
 
                 case NotifyCollectionChangedAction.Replace:
-                    if (eventArgs.NewItems.Count != eventArgs.OldItems.Count)
+                    if (eventArgs.NewItems!.Count != eventArgs.OldItems!.Count)
                     {
                         viewGroup.Refill(viewGroup.Adapter);
                     }

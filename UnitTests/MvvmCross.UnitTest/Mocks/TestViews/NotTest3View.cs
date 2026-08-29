@@ -11,7 +11,7 @@ namespace MvvmCross.UnitTest.Mocks.TestViews
     [MvxViewFor(typeof(Test3ViewModel))]
     public class NotTest3View : IMvxView
     {
-        public object DataContext { get; set; }
-        public IMvxViewModel ViewModel { get; set; }
+        public object? DataContext { get; set; }
+        public IMvxViewModel? ViewModel { get; set; }
     }
 }

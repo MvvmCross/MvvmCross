@@ -28,7 +28,7 @@ namespace MvvmCross.UnitTest.Platform
             var assembly = GetType().Assembly;
             var finder = new MvxViewModelByNameLookup();
             finder.AddAll(assembly);
-            Type result;
+            Type? result;
             Assert.True(finder.TryLookupByName("Test1ViewModel", out result));
             Assert.Equal(typeof(Test1ViewModel), result);
             Assert.True(finder.TryLookupByName("Test2ViewModel", out result));

@@ -18,7 +18,7 @@ namespace MvvmCross.Plugin.MethodBinding
         : IMvxSourceBindingFactoryExtension
     {
         [RequiresUnreferencedCode("This method uses reflection to bind to methods which may not be preserved by trimming.")]
-        public bool TryCreateBinding(object source, IMvxPropertyToken currentToken, List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+        public bool TryCreateBinding(object? source, IMvxPropertyToken currentToken, List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding? result)
         {
             if (source == null)
             {
@@ -59,7 +59,7 @@ namespace MvvmCross.Plugin.MethodBinding
         }
 
         [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Method binding plugin intentionally uses reflection to bind to methods at runtime.")]
-        protected MethodInfo FindMethodInfo(object source, string name)
+        protected MethodInfo? FindMethodInfo(object source, string name)
         {
             var methodInfo = source.GetType().GetMethod(name);
             return methodInfo;

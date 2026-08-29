@@ -25,7 +25,7 @@ namespace MvvmCross.Platforms.Tvos.Views
 
         public static IMvxTvosView CreateViewControllerFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTargetViewModel>(
             this IMvxCanCreateTvosView view,
-            IDictionary<string, string> parameterValues = null)
+            IDictionary<string, string>? parameterValues = null)
                 where TTargetViewModel : class, IMvxViewModel
         {
             var parameterBundle = new MvxBundle(parameterValues);

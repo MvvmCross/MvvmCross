@@ -9,7 +9,6 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views
 {
-#nullable enable
     /// <summary>
     /// Used by Android presenters to check if they need to include shared element animations on navigation
     /// </summary>
@@ -23,5 +22,4 @@ namespace MvvmCross.Platforms.Android.Views
         /// <returns>An <see cref="IDictionary{key, value}"/> containing the identifier key and view to animate with assigned transition name.</returns>
         IDictionary<string, View> FetchSharedElementsToAnimate(MvxBasePresentationAttribute attribute, MvxViewModelRequest request);
     }
-#nullable restore
 }

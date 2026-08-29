@@ -4,10 +4,8 @@
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public interface IMvxViewModelTypeFinder
         : IMvxTypeFinder
     {
     }
-#nullable restore
 }

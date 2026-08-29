@@ -18,7 +18,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
         {
             foreach (var test in new[] { null, string.Empty, ".", "\t", " .\r\n" })
             {
-                var result = Tokenise(test);
+                var result = Tokenise(test!);
                 Assert.Single(result);
                 Assert.IsType<MvxEmptyPropertyToken>(result[0]);
             }

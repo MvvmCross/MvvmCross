@@ -8,13 +8,13 @@ namespace MvvmCross.Platforms.Android.Views.Base
 {
     public class MvxStartActivityForResultParameters
     {
-        public MvxStartActivityForResultParameters(Intent intent, int requestCode)
+        public MvxStartActivityForResultParameters(Intent? intent, int requestCode)
         {
             RequestCode = requestCode;
             Intent = intent;
         }
 
-        public Intent Intent { get; private set; }
+        public Intent? Intent { get; private set; }
         public int RequestCode { get; private set; }
     }
 }

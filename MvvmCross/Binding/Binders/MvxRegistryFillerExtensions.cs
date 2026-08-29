@@ -82,6 +82,7 @@ namespace MvvmCross.Binding.Binders
             this IMvxNamedInstanceRegistry<T> registry,
             IMvxNamedInstanceRegistryFiller<T> filler,
             IEnumerable<Type> types)
+            where T : notnull
         {
             if (types == null)
                 return;

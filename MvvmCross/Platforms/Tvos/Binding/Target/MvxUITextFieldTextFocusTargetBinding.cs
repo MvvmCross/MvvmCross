@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
     {
         private bool _subscribed;
 
-        protected UITextField TextField => Target as UITextField;
+        protected UITextField? TextField => Target as UITextField;
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(string);
@@ -27,7 +27,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may perform type conversions which may not be preserved by trimming")]
-        public override void SetValue(object value)
+        public override void SetValue(object? value)
         {
             if (TextField == null) return;
 
@@ -44,7 +44,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             _subscribed = true;
         }
 
-        private void HandleLostFocus(object sender, EventArgs e)
+        private void HandleLostFocus(object? sender, EventArgs e)
         {
             if (TextField == null) return;
 

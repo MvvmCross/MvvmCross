@@ -22,7 +22,7 @@ namespace MvvmCross.Platforms.Mac.Views
         [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Runtime type inspection is necessary for segue-based navigation")]
         [UnconditionalSuppressMessage("Trimming", "IL2073", Justification = "PropertyInfo.PropertyType doesn't preserve annotations")]
         [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Runtime property inspection is necessary for ViewModel discovery")]
-        internal static Type GetViewModelType(this IMvxView view)
+        internal static Type? GetViewModelType(this IMvxView view)
         {
             var viewType = view.GetType();
             var props = viewType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -54,7 +54,7 @@ namespace MvvmCross.Platforms.Mac.Views
             self.ViewModelRequestForSegueImpl(segue, new MvxBundle(parameterValues));
         }
 
-        private static void ViewModelRequestForSegueImpl(this IMvxEventSourceViewController _, NSStoryboardSegue segue, IMvxBundle parameterBundle = null)
+        private static void ViewModelRequestForSegueImpl(this IMvxEventSourceViewController _, NSStoryboardSegue segue, IMvxBundle? parameterBundle = null)
         {
             if (segue.DestinationController is IMvxMacView { Request: null } view)
             {

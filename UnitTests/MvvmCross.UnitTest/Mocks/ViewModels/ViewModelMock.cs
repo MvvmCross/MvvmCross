@@ -10,8 +10,8 @@ namespace MvvmCross.UnitTest.Mocks.ViewModels
 
         public ViewModelMock()
         {
-            _object = (T)Activator.CreateInstance(typeof(T));
-            _object.InitializeTask = MvxNotifyTask.Create(() => Task.CompletedTask);
+            _object = (T)Activator.CreateInstance(typeof(T))!;
+            _object!.InitializeTask = MvxNotifyTask.Create(() => Task.CompletedTask);
         }
 
         public T Object

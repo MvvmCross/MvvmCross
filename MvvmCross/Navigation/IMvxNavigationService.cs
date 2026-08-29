@@ -9,7 +9,6 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Navigation
 {
-#nullable enable
     /// <summary>
     /// Allows for Task and URI based navigation in MvvmCross
     /// </summary>
@@ -289,5 +288,4 @@ namespace MvvmCross.Navigation
             IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
             where TParameter : notnull;
     }
-#nullable restore
 }

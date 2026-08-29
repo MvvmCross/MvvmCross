@@ -16,17 +16,17 @@ namespace MvvmCross.Binding
 {
     public interface IMvxBindingSingletonCache
     {
-        IMvxAutoValueConverters AutoValueConverters { get; }
-        IMvxBindingDescriptionParser BindingDescriptionParser { get; }
-        IMvxLanguageBindingParser LanguageParser { get; }
-        IMvxPropertyExpressionParser PropertyExpressionParser { get; }
-        IMvxValueConverterLookup ValueConverterLookup { get; }
-        IMvxBindingNameLookup DefaultBindingNameLookup { get; }
-        IMvxBinder Binder { get; }
-        IMvxSourceBindingFactory SourceBindingFactory { get; }
-        IMvxTargetBindingFactory TargetBindingFactory { get; }
-        IMvxSourceStepFactory SourceStepFactory { get; }
-        IMvxValueCombinerLookup ValueCombinerLookup { get; }
-        IMvxMainThreadAsyncDispatcher MainThreadDispatcher { get; }
+        IMvxAutoValueConverters? AutoValueConverters { get; }
+        IMvxBindingDescriptionParser? BindingDescriptionParser { get; }
+        IMvxLanguageBindingParser? LanguageParser { get; }
+        IMvxPropertyExpressionParser? PropertyExpressionParser { get; }
+        IMvxValueConverterLookup? ValueConverterLookup { get; }
+        IMvxBindingNameLookup? DefaultBindingNameLookup { get; }
+        IMvxBinder? Binder { get; }
+        IMvxSourceBindingFactory? SourceBindingFactory { get; }
+        IMvxTargetBindingFactory? TargetBindingFactory { get; }
+        IMvxSourceStepFactory? SourceStepFactory { get; }
+        IMvxValueCombinerLookup? ValueCombinerLookup { get; }
+        IMvxMainThreadAsyncDispatcher? MainThreadDispatcher { get; }
     }
 }

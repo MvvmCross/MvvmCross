@@ -21,8 +21,8 @@ namespace MvvmCross.Binding.Parse.Binding
     public class MvxBindingDescriptionParser
         : IMvxBindingDescriptionParser
     {
-        private IMvxBindingParser _bindingParser;
-        private IMvxValueConverterLookup _valueConverterLookup;
+        private IMvxBindingParser? _bindingParser;
+        private IMvxValueConverterLookup? _valueConverterLookup;
 
         protected IMvxBindingParser BindingParser
         {
@@ -33,7 +33,7 @@ namespace MvvmCross.Binding.Parse.Binding
             }
         }
 
-        private IMvxLanguageBindingParser _languageBindingParser;
+        private IMvxLanguageBindingParser? _languageBindingParser;
 
         protected IMvxLanguageBindingParser LanguageBindingParser
         {
@@ -53,7 +53,7 @@ namespace MvvmCross.Binding.Parse.Binding
             }
         }
 
-        protected IMvxValueConverter FindConverter(string converterName)
+        protected IMvxValueConverter? FindConverter(string? converterName)
         {
             if (converterName == null)
                 return null;
@@ -65,9 +65,9 @@ namespace MvvmCross.Binding.Parse.Binding
             return toReturn;
         }
 
-        protected IMvxValueCombiner FindCombiner(string combiner)
+        protected IMvxValueCombiner? FindCombiner(string combiner)
         {
-            return MvxBindingSingletonCache.Instance?.ValueCombinerLookup.Find(combiner);
+            return MvxBindingSingletonCache.Instance?.ValueCombinerLookup?.Find(combiner);
         }
 
         public IEnumerable<MvxBindingDescription> Parse(string text)
@@ -78,7 +78,7 @@ namespace MvvmCross.Binding.Parse.Binding
 
         public IEnumerable<MvxBindingDescription> Parse(string text, IMvxBindingParser parser)
         {
-            MvxSerializableBindingSpecification specification;
+            MvxSerializableBindingSpecification? specification;
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
                 MvxBindingLog.Instance?.LogError("Failed to parse binding description starting with {BindingText}",
@@ -99,9 +99,9 @@ namespace MvvmCross.Binding.Parse.Binding
             return Parse(text, parser);
         }
 
-        public MvxBindingDescription ParseSingle(string text)
+        public MvxBindingDescription? ParseSingle(string text)
         {
-            MvxSerializableBindingDescription description;
+            MvxSerializableBindingDescription? description;
             var parser = BindingParser;
             if (!parser.TryParseBindingDescription(text, out description))
             {
@@ -127,8 +127,8 @@ namespace MvvmCross.Binding.Parse.Binding
             return text;
         }
 
-        public MvxBindingDescription SerializableBindingToBinding(
-            string targetName, MvxSerializableBindingDescription description)
+        public MvxBindingDescription? SerializableBindingToBinding(
+            string? targetName, MvxSerializableBindingDescription description)
         {
             return new MvxBindingDescription
             {
@@ -216,7 +216,7 @@ namespace MvvmCross.Binding.Parse.Binding
                     {
                         return new MvxCombinerSourceStepDescription()
                         {
-                            Combiner = new MvxValueConverterValueCombiner(converter),
+                            Combiner = new MvxValueConverterValueCombiner(converter!),
                             InnerSteps = description.Sources.Select(source => SourceStepDescriptionFrom(source)).ToList(),
                             Converter = FindConverter(description.Converter),
                             ConverterParameter = description.ConverterParameter,

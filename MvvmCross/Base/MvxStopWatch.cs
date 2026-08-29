@@ -8,7 +8,6 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public sealed class MvxStopWatch
         : IDisposable
     {
@@ -46,5 +45,4 @@ namespace MvvmCross.Base
             return new MvxStopWatch(tag, text, args);
         }
     }
-#nullable restore
 }

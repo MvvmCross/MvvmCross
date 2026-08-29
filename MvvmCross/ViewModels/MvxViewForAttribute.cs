@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxViewForAttribute : Attribute
     {
@@ -19,5 +18,4 @@ namespace MvvmCross.ViewModels
             ViewModel = viewModel;
         }
     }
-#nullable restore
 }

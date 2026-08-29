@@ -34,7 +34,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
         [Export("searchFieldAction:")]
         private void searchFieldAction()
         {
-            FireValueChanged(View.StringValue);
+            FireValueChanged(View?.StringValue);
         }
 
         public override MvxBindingMode DefaultMode

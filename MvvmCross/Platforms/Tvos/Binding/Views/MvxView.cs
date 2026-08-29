@@ -10,7 +10,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
     public class MvxView
         : UIView, IMvxBindable
     {
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; } = null!;
 
         public MvxView()
         {
@@ -39,7 +39,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         }
 
         [MvxSetToNullAfterBinding]
-        public object DataContext
+        public object? DataContext
         {
             get { return BindingContext.DataContext; }
             set { BindingContext.DataContext = value; }

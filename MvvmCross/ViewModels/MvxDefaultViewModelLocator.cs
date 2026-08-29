@@ -10,7 +10,6 @@ using MvvmCross.Navigation.EventArguments;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     /// <inheritdoc cref="IMvxViewModelLocator"/>
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator
@@ -181,5 +180,4 @@ namespace MvvmCross.ViewModels
             }
         }
     }
-#nullable restore
 }

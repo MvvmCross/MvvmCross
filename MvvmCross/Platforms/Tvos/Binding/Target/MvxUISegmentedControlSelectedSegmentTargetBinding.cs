@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         {
         }
 
-        private void HandleValueChanged(object sender, EventArgs e)
+        private void HandleValueChanged(object? sender, EventArgs e)
         {
             var view = View;
             if (view == null)
@@ -44,13 +44,13 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             segmentedControl.ValueChanged += HandleValueChanged;
         }
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object? target, object? value)
         {
             var view = target as UISegmentedControl;
             if (view == null)
                 return;
 
-            view.SelectedSegment = (nint)value;
+            view.SelectedSegment = (nint)value!;
         }
 
         [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]

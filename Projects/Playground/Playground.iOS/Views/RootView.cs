@@ -21,7 +21,7 @@ public sealed class RootView : MvxViewController<RootViewModel>
     {
         base.LoadView();
 
-        View.BackgroundColor = UIColor.LightGray;
+        View!.BackgroundColor = UIColor.LightGray;
 
         _btnTabs = new UIButton { TranslatesAutoresizingMaskIntoConstraints = false };
         _btnPages = new UIButton { TranslatesAutoresizingMaskIntoConstraints = false };

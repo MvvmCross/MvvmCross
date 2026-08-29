@@ -203,7 +203,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                 ThrowOnConversion = true
             };
             var parameter = new { Ignored = 12 };
-            object fallback = null;
+            object? fallback = null;
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
             Assert.Single(mockValueConverter.ConversionsRequested);
@@ -241,7 +241,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                 ThrowOnConversion = true
             };
             var parameter = new { Ignored = 12 };
-            object fallback = null;
+            object? fallback = null;
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int), out mockSource, out mockTarget);
 
             Assert.Single(mockValueConverter.ConversionsRequested);
@@ -279,7 +279,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                 ThrowOnConversion = true
             };
             var parameter = new { Ignored = 12 };
-            object fallback = null;
+            object? fallback = null;
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int?), out mockSource, out mockTarget);
 
             Assert.Single(mockValueConverter.ConversionsRequested);
@@ -317,7 +317,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                 ConversionResult = "A test value"
             };
             var parameter = new { Ignored = 12 };
-            object fallback = null;
+            object? fallback = null;
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
             Assert.Single(mockValueConverter.ConversionsRequested);
@@ -365,7 +365,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                 ConversionResult = "A test value"
             };
             var parameter = new { Ignored = 12 };
-            object fallback = null;
+            object? fallback = null;
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int), out mockSource, out mockTarget);
 
             Assert.Single(mockValueConverter.ConversionsRequested);
@@ -412,7 +412,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
                 ConversionResult = "A test value"
             };
             var parameter = new { Ignored = 12 };
-            object fallback = null;
+            object? fallback = null;
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int?), out mockSource, out mockTarget);
 
             Assert.Single(mockValueConverter.ConversionsRequested);
@@ -455,7 +455,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             return TestSetupCommon(valueConverter, converterParameter, new { Value = 4 }, targetType, out mockSource, out mockTarget);
         }
 
-        private MvxFullBinding TestSetupCommon(IMvxValueConverter valueConverter, object converterParameter, object fallbackValue,
+        private MvxFullBinding TestSetupCommon(IMvxValueConverter valueConverter, object converterParameter, object? fallbackValue,
             Type targetValueType, out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
         {
             _fixture.ClearAll();

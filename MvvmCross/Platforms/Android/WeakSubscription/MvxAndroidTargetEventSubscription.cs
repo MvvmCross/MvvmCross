@@ -29,7 +29,7 @@ namespace MvvmCross.Platforms.Android.WeakSubscription
         {
         }
 
-        protected override object GetTargetObject()
+        protected override object? GetTargetObject()
         {
             // If the object has been GCed by java but NOT mono
             // then it is invalid and should not be manipulated.
@@ -60,7 +60,7 @@ namespace MvvmCross.Platforms.Android.WeakSubscription
         {
         }
 
-        protected override object GetTargetObject()
+        protected override object? GetTargetObject()
         {
             // If the object has been GCed by java but NOT mono
             // then it is invalid and should not be manipulated.

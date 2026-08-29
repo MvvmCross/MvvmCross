@@ -9,16 +9,16 @@ namespace MvvmCross.Platforms.Ios.Views.Base
 {
     public interface IMvxEventSourceViewController : IMvxDisposeSource
     {
-        event EventHandler ViewDidLoadCalled;
+        event EventHandler? ViewDidLoadCalled;
 
-        event EventHandler ViewDidLayoutSubviewsCalled;
+        event EventHandler? ViewDidLayoutSubviewsCalled;
 
-        event EventHandler<MvxValueEventArgs<bool>> ViewWillAppearCalled;
+        event EventHandler<MvxValueEventArgs<bool>>? ViewWillAppearCalled;
 
-        event EventHandler<MvxValueEventArgs<bool>> ViewDidAppearCalled;
+        event EventHandler<MvxValueEventArgs<bool>>? ViewDidAppearCalled;
 
-        event EventHandler<MvxValueEventArgs<bool>> ViewDidDisappearCalled;
+        event EventHandler<MvxValueEventArgs<bool>>? ViewDidDisappearCalled;
 
-        event EventHandler<MvxValueEventArgs<bool>> ViewWillDisappearCalled;
+        event EventHandler<MvxValueEventArgs<bool>>? ViewWillDisappearCalled;
     }
 }

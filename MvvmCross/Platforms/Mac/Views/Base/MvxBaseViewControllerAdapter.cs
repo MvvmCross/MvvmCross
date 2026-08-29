@@ -11,7 +11,7 @@ namespace MvvmCross.Platforms.Mac.Views.Base
     {
         private readonly IMvxEventSourceViewController _eventSource;
 
-        protected NSViewController ViewController
+        protected NSViewController? ViewController
         {
             get { return this._eventSource as NSViewController; }
         }
@@ -34,31 +34,31 @@ namespace MvvmCross.Platforms.Mac.Views.Base
             this._eventSource.ViewWillAppearCalled += this.HandleViewDidDisappearCalled;
         }
 
-        public virtual void HandleViewDidLoadCalled(object sender, EventArgs e)
+        public virtual void HandleViewDidLoadCalled(object? sender, EventArgs e)
         {
         }
 
-        public virtual void HandleViewDidLayoutCalled(object sender, EventArgs e)
+        public virtual void HandleViewDidLayoutCalled(object? sender, EventArgs e)
         {
         }
 
-        public virtual void HandleViewWillAppearCalled(object sender, EventArgs e)
+        public virtual void HandleViewWillAppearCalled(object? sender, EventArgs e)
         {
         }
 
-        public virtual void HandleViewDidAppearCalled(object sender, EventArgs e)
+        public virtual void HandleViewDidAppearCalled(object? sender, EventArgs e)
         {
         }
 
-        public virtual void HandleViewWillDisappearCalled(object sender, EventArgs e)
+        public virtual void HandleViewWillDisappearCalled(object? sender, EventArgs e)
         {
         }
 
-        public virtual void HandleViewDidDisappearCalled(object sender, EventArgs e)
+        public virtual void HandleViewDidDisappearCalled(object? sender, EventArgs e)
         {
         }
 
-        public virtual void HandleDisposeCalled(object sender, EventArgs e)
+        public virtual void HandleDisposeCalled(object? sender, EventArgs e)
         {
         }
     }

@@ -12,13 +12,13 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
         Type TargetType { get; set; }
         Type SourceType { get; }
 
-        void SetValue(object value);
+        void SetValue(object? value);
 
         event EventHandler Changed;
 
         object GetValue();
 
-        object DataContext
+        object? DataContext
         {
             get;
             [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]

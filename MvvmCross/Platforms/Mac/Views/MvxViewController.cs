@@ -48,21 +48,21 @@ namespace MvvmCross.Platforms.Mac.Views
             this.AdaptForBinding();
         }
 
-        public object DataContext
+        public object? DataContext
         {
             get { return BindingContext.DataContext; }
             set { BindingContext.DataContext = value; }
         }
 
-        public IMvxViewModel ViewModel
+        public IMvxViewModel? ViewModel
         {
-            get { return (IMvxViewModel)DataContext; }
+            get { return (IMvxViewModel?)DataContext; }
             set { DataContext = value; }
         }
 
-        public MvxViewModelRequest Request { get; set; }
+        public MvxViewModelRequest? Request { get; set; }
 
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; } = null!;
 
         public override void ViewDidLoad()
         {
@@ -94,10 +94,10 @@ namespace MvvmCross.Platforms.Mac.Views
             ViewModel?.ViewDisappeared();
         }
 
-        public override void PrepareForSegue(NSStoryboardSegue segue, NSObject sender)
+        public override void PrepareForSegue(NSStoryboardSegue segue, NSObject? sender)
         {
-            base.PrepareForSegue(segue, sender);
-            this.ViewModelRequestForSegue(segue, sender);
+            base.PrepareForSegue(segue, sender!);
+            this.ViewModelRequestForSegue(segue, sender!);
         }
 
         public override void RemoveFromParentViewController()
@@ -128,9 +128,9 @@ namespace MvvmCross.Platforms.Mac.Views
         {
         }
 
-        public new TViewModel ViewModel
+        public new TViewModel? ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
+            get { return (TViewModel?)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 

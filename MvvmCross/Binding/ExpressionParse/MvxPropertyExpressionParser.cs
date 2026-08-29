@@ -23,10 +23,10 @@ namespace MvvmCross.Binding.ExpressionParse
 
         public IMvxParsedExpression Parse<TObj, TRet>(Expression<Func<TObj, TRet>> propertyPath)
         {
-            if (propertyPath.Body is MethodCallExpression
-                && (propertyPath.Body as MethodCallExpression).Method.Name.Contains("Bind"))
+            if (propertyPath.Body is MethodCallExpression methodCallExpr
+                && methodCallExpr.Method.Name.Contains("Bind"))
             {
-                return ParseBindExtensionMethod(propertyPath as LambdaExpression, default(TObj));
+                return ParseBindExtensionMethod((LambdaExpression)propertyPath, default(TObj));
             }
 
             return Parse((LambdaExpression)propertyPath);
@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.ExpressionParse
         {
             var toReturn = new MvxParsedExpression();
 
-            var current = propertyPath.Body;
+            Expression? current = propertyPath.Body;
             while (current != null
                    && current.NodeType != ExpressionType.Parameter)
             {
@@ -46,7 +46,7 @@ namespace MvvmCross.Binding.ExpressionParse
             return toReturn;
         }
 
-        private static Expression ParseTo(Expression current, MvxParsedExpression toReturn, ILogger log)
+        private static Expression? ParseTo(Expression current, MvxParsedExpression toReturn, ILogger log)
         {
             // This happens when a value type gets boxed
             if (current.NodeType == ExpressionType.Convert || current.NodeType == ExpressionType.ConvertChecked)
@@ -68,7 +68,7 @@ namespace MvvmCross.Binding.ExpressionParse
                 "Property expression must be of the form 'x => x.SomeProperty.SomeOtherProperty'");
         }
 
-        private static Expression ParseMethodCall(Expression current, MvxParsedExpression toReturn, ILogger log)
+        private static Expression? ParseMethodCall(Expression current, MvxParsedExpression toReturn, ILogger log)
         {
             var me = (MethodCallExpression)current;
             if (me.Method.Name != "get_Item"
@@ -79,15 +79,15 @@ namespace MvvmCross.Binding.ExpressionParse
             }
             var argument = me.Arguments[0];
             argument = ConvertMemberAccessToConstant(argument, log);
-            toReturn.PrependIndexed(argument.ToString());
-            current = me.Object;
-            return current;
+            toReturn.PrependIndexed(argument.ToString() ?? string.Empty);
+            Expression? result = me.Object;
+            return result;
         }
 
-        private static IMvxParsedExpression ParseBindExtensionMethod(LambdaExpression propertyPath, object controlType)
+        private static IMvxParsedExpression ParseBindExtensionMethod(LambdaExpression propertyPath, object? controlType)
         {
             var compiled = propertyPath.Compile();
-            var virtualPropertyName = compiled.DynamicInvoke(controlType) as string;
+            var virtualPropertyName = compiled.DynamicInvoke(controlType) as string ?? string.Empty;
 
             var toReturn = new MvxParsedExpression();
             toReturn.PrependProperty(virtualPropertyName);
@@ -102,7 +102,7 @@ namespace MvvmCross.Binding.ExpressionParse
 
             try
             {
-                var constExpr = ConvertMemberAccessToConstant(memberExpr.Expression, log) as ConstantExpression;
+                var constExpr = ConvertMemberAccessToConstant(memberExpr.Expression ?? Expression.Constant(null), log) as ConstantExpression;
                 var value = constExpr?.Value;
 
                 var property = memberExpr.Member as PropertyInfo;
@@ -127,12 +127,12 @@ namespace MvvmCross.Binding.ExpressionParse
             return argument;
         }
 
-        private static Expression ParseProperty(Expression current, MvxParsedExpression toReturn)
+        private static Expression? ParseProperty(Expression current, MvxParsedExpression toReturn)
         {
             var me = (MemberExpression)current;
             toReturn.PrependProperty(me.Member.Name);
-            current = me.Expression;
-            return current;
+            Expression? result = me.Expression;
+            return result;
         }
 
         private static Expression Unbox(Expression current)

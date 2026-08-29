@@ -28,8 +28,8 @@ namespace MvvmCross.Platforms.Ios.Views
     {
         private SectionExpandableController _sectionExpandableController = new DefaultAllSectionsExpandableController();
 
-        private IEnumerable _itemsSource;
-        public new IEnumerable ItemsSource
+        private IEnumerable? _itemsSource;
+        public new IEnumerable? ItemsSource
         {
             get => _itemsSource;
             set
@@ -48,21 +48,21 @@ namespace MvvmCross.Platforms.Ios.Views
             }
         }
 
-        public ICommand HeaderTappedCommand { get; set; }
+        public ICommand? HeaderTappedCommand { get; set; }
 
-        private IEnumerable<TItemSource> CastItemSource => ItemsSource as IEnumerable<TItemSource>;
+        private IEnumerable<TItemSource>? CastItemSource => ItemsSource as IEnumerable<TItemSource>;
 
         protected MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
         }
 
-        private void OnHeaderButtonClicked(object sender, EventArgs e)
+        private void OnHeaderButtonClicked(object? sender, EventArgs e)
         {
             var button = sender as UIButton;
-            var section = button.Tag;
+            var section = button!.Tag;
 
             var changedSectionsResponse = _sectionExpandableController.ToggleState((int)section);
-            TableView.ReloadData();
+            TableView!.ReloadData();
 
             var pathsToAnimate = new List<NSIndexPath>();
 
@@ -110,7 +110,7 @@ namespace MvvmCross.Platforms.Ios.Views
             }
         }
 
-        protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        protected override void CollectionChangedOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
         {
             _sectionExpandableController.ResetState();
             base.CollectionChangedOnCollectionChanged(sender, args);
@@ -134,7 +134,7 @@ namespace MvvmCross.Platforms.Ios.Views
             return CastItemSource.Count();
         }
 
-        protected override object GetItemAt(NSIndexPath indexPath)
+        protected override object? GetItemAt(NSIndexPath indexPath)
         {
             if (CastItemSource == null)
                 return null;
@@ -142,7 +142,7 @@ namespace MvvmCross.Platforms.Ios.Views
             return ((IEnumerable<object>)CastItemSource.ElementAt(indexPath.Section)).ElementAt(indexPath.Row);
         }
 
-        protected object GetHeaderItemAt(nint section)
+        protected object? GetHeaderItemAt(nint section)
         {
             if (CastItemSource == null)
                 return null;

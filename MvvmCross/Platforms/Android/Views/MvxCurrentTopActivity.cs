@@ -6,7 +6,6 @@ using Android.Runtime;
 
 namespace MvvmCross.Platforms.Android.Views;
 
-#nullable enable
 [Register("mvvmcross.platforms.android.MvxCurrentTopActivity")]
 public class MvxCurrentTopActivity
     : Java.Lang.Object, Application.IActivityLifecycleCallbacks, IMvxAndroidCurrentTopActivity
@@ -61,4 +60,3 @@ public class MvxCurrentTopActivity
         // not interested in this
     }
 }
-#nullable restore

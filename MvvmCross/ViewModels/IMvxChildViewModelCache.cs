@@ -6,7 +6,6 @@ using System;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public interface IMvxChildViewModelCache
     {
         int Cache(IMvxViewModel viewModel);
@@ -21,5 +20,4 @@ namespace MvvmCross.ViewModels
 
         bool Exists(Type viewModelType);
     }
-#nullable restore
 }

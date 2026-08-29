@@ -26,12 +26,12 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Lang
         private void DoTest(KeyValuePair<string, MvxSerializableBindingSpecification> testPair)
         {
             var language = new MvxLanguageBindingParser();
-            MvxSerializableBindingSpecification result;
+            MvxSerializableBindingSpecification? result;
             var parsed = language.TryParseBindingSpecification(testPair.Key, out result);
             Assert.True(parsed, "Failed to parse " + testPair.Key);
-            Assert.Single(result);
+            Assert.Single(result!);
             var keyAndDescription = testPair.Value.First();
-            var resultKeyAndDescription = result.First();
+            var resultKeyAndDescription = result!.First();
             var expectedDescription = new MvxSerializableBindingDescription()
             {
                 Path = keyAndDescription.Value.Path ?? "TextSource",

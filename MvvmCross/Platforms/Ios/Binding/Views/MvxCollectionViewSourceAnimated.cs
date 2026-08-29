@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
     public class MvxCollectionViewSourceAnimated : MvxCollectionViewSource
     {
         private readonly object collectionChangedLock = new object();
-        private readonly ILogger<MvxCollectionViewSourceAnimated> _logger;
+        private readonly ILogger<MvxCollectionViewSourceAnimated>? _logger;
 
         private Task runningChangeTask = Task.FromResult(true);
 
@@ -29,7 +29,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         /// hoping they won't be disposed explicitely before the next UICollectionView animation ends.
         /// The best would be a new NotifyCollectionChangedEventArgs with support for multiple changes, and a new async (awaitable) event for changes.
         /// </summary>
-        private IEnumerable itemsSourceBeforeAnimation;
+        private IEnumerable? itemsSourceBeforeAnimation;
 
         /// <summary>
         /// When a collectionchanged event is received, if the number of changed items is over MaxAnimatedItems, the collection will not animate changes.
@@ -49,7 +49,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             _logger = MvxLogHost.GetLog<MvxCollectionViewSourceAnimated>();
         }
 
-        protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        protected override void CollectionChangedOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
         {
             if (!NSThread.IsMain)
             {
@@ -68,7 +68,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
         }
 
-        protected override object GetItemAt(NSIndexPath indexPath)
+        protected override object? GetItemAt(NSIndexPath indexPath)
         {
             var itemsSource = itemsSourceBeforeAnimation ?? ItemsSource;
             return itemsSource?.ElementAt(indexPath.Row);
@@ -92,14 +92,14 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             if (args.NewItems?.Count > MaxAnimatedItems || args.OldItems?.Count > MaxAnimatedItems)
             {
                 //No animation change
-                await CollectionView.PerformBatchUpdatesAsync(() => { });
+                await CollectionView!.PerformBatchUpdatesAsync(() => { });
                 ReloadData();
             }
             else if (args.Action == NotifyCollectionChangedAction.Move)
             {
-                await CollectionView.PerformBatchUpdatesAsync(() =>
+                await CollectionView!.PerformBatchUpdatesAsync(() =>
                 {
-                    if (args.NewItems.Count != 1 && args.OldItems.Count != 1)
+                    if (args.NewItems!.Count != 1 && args.OldItems!.Count != 1)
                     {
                         _logger?.LogTrace("CollectionChanged {action} action called with more than one movement. All data will be reloaded", args.Action);
                         CollectionView.ReloadData();
@@ -113,10 +113,10 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
             else if (args.Action == NotifyCollectionChangedAction.Remove)
             {
-                await CollectionView.PerformBatchUpdatesAsync(() =>
+                await CollectionView!.PerformBatchUpdatesAsync(() =>
                 {
                     int oldStartingIndex = args.OldStartingIndex;
-                    var indexPaths = new NSIndexPath[args.OldItems.Count];
+                    var indexPaths = new NSIndexPath[args.OldItems!.Count];
                     for (int index = 0; index < indexPaths.Length; ++index)
                         indexPaths[index] = NSIndexPath.FromRowSection(oldStartingIndex + index, 0);
                     CollectionView.DeleteItems(indexPaths);
@@ -124,10 +124,10 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
             else if (args.Action == NotifyCollectionChangedAction.Add)
             {
-                await CollectionView.PerformBatchUpdatesAsync(() =>
+                await CollectionView!.PerformBatchUpdatesAsync(() =>
                 {
                     int newStartingIndex = args.NewStartingIndex;
-                    var indexPaths = new NSIndexPath[args.NewItems.Count];
+                    var indexPaths = new NSIndexPath[args.NewItems!.Count];
                     for (int index = 0; index < indexPaths.Length; ++index)
                         indexPaths[index] = NSIndexPath.FromRowSection(newStartingIndex + index, 0);
                     CollectionView.InsertItems(indexPaths);
@@ -135,7 +135,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
             else
             {
-                await CollectionView.PerformBatchUpdatesAsync(() => { });
+                await CollectionView!.PerformBatchUpdatesAsync(() => { });
                 ReloadData();
             }
 

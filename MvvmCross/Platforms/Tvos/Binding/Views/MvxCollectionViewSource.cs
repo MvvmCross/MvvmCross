@@ -16,8 +16,8 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
     public class MvxCollectionViewSource : MvxBaseCollectionViewSource
     {
-        private IEnumerable _itemsSource;
-        private IDisposable _subscription;
+        private IEnumerable? _itemsSource;
+        private IDisposable? _subscription;
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
 
@@ -47,7 +47,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         }
 
         [MvxSetToNullAfterBinding]
-        public virtual IEnumerable ItemsSource
+        public virtual IEnumerable? ItemsSource
         {
             get
             {
@@ -74,7 +74,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             }
         }
 
-        protected override object GetItemAt(NSIndexPath indexPath)
+        protected override object? GetItemAt(NSIndexPath indexPath)
         {
             return ItemsSource?.ElementAt(indexPath.Row);
         }
@@ -87,7 +87,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             return CollectionView.PerformBatchUpdatesAsync(() => { });
         }
 
-        protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        protected virtual void CollectionChangedOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
         {
             ReloadData();
         }

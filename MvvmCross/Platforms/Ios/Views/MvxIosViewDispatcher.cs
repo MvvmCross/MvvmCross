@@ -29,7 +29,7 @@ namespace MvvmCross.Platforms.Ios.Views
             {
                 MvxLogHost.GetLog<MvxIosViewDispatcher>()?.LogTrace(
                     "Navigate requested to {ViewModelType}", request?.ViewModelType);
-                return _presenter.Show(request);
+                return _presenter.Show(request!);
             }
             await ExecuteOnMainThreadAsync(action);
             return true;

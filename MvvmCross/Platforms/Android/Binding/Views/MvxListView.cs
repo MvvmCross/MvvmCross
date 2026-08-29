@@ -20,8 +20,8 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         private bool _itemClickOverloaded;
         private bool _itemLongClickOverloaded;
 
-        private ICommand _itemClick;
-        private ICommand _itemLongClick;
+        private ICommand _itemClick = null!;
+        private ICommand _itemLongClick = null!;
 
         public MvxListView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapter(context))
@@ -49,7 +49,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         public new IMvxAdapter Adapter
         {
-            get => base.Adapter as IMvxAdapter;
+            get => (base.Adapter as IMvxAdapter)!;
             set
             {
                 var existing = Adapter;
@@ -65,7 +65,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 base.Adapter = value;
 
                 if (existing != null)
-                    existing.ItemsSource = null;
+                    existing.ItemsSource = null!;
             }
         }
 
@@ -137,10 +137,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             command.Execute(item);
         }
 
-        private void OnItemClick(object sender, ItemClickEventArgs e)
+        private void OnItemClick(object? sender, ItemClickEventArgs e)
             => ExecuteCommandOnItem(ItemClick, e.Position);
 
-        private void OnItemLongClick(object sender, ItemLongClickEventArgs e)
+        private void OnItemLongClick(object? sender, ItemLongClickEventArgs e)
             => ExecuteCommandOnItem(ItemLongClick, e.Position);
 
         protected override void Dispose(bool disposing)

@@ -43,7 +43,7 @@ namespace MvvmCross.Platforms.Android
             // default processing does nothing
         }
 
-        private void OnMvxIntentResultReceived(object sender, MvxIntentResultEventArgs e)
+        private void OnMvxIntentResultReceived(object? sender, MvxIntentResultEventArgs e)
         {
             MvxLogHost.GetLog<MvxAndroidTask>()?.Log(LogLevel.Trace, "OnMvxIntentResultReceived in MvxAndroidTask");
             // TODO - is this correct - should we always remove the result registration even if this isn't necessarily our result?
@@ -57,11 +57,11 @@ namespace MvvmCross.Platforms.Android
 
             if (ensureOnMainThread)
             {
-                InvokeOnMainThread(() => action(activity));
+                InvokeOnMainThread(() => action(activity!));
             }
             else
             {
-                action(activity);
+                action(activity!);
             }
         }
     }

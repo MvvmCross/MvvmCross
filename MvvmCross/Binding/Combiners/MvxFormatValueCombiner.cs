@@ -10,7 +10,7 @@ namespace MvvmCross.Binding.Combiners
 {
     public class MvxFormatValueCombiner : MvxValueCombiner
     {
-        public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value)
+        public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object? value)
         {
             var list = steps.ToList();
 
@@ -50,7 +50,7 @@ namespace MvvmCross.Binding.Combiners
                 return true;
             }
 
-            value = string.Format(formatString, values);
+            value = string.Format(formatString ?? string.Empty, values);
             return true;
         }
     }

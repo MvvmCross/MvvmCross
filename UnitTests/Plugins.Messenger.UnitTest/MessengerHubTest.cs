@@ -131,7 +131,7 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var message = new TestMessage(null);
+                var message = new TestMessage(null!);
             });
         }
 
@@ -139,7 +139,7 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         public void NullSubscribeCausesException()
         {
             var messenger = new MvxMessengerHub();
-            Assert.Throws<ArgumentNullException>(() => messenger.Subscribe<TestMessage>(null));
+            Assert.Throws<ArgumentNullException>(() => messenger.Subscribe<TestMessage>(null!));
         }
 
         [Fact]
@@ -163,7 +163,7 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
             var messenger = new MvxMessengerHub();
             Assert.Throws<ArgumentNullException>(() =>
             {
-                messenger.Publish<TestMessage>(null);
+                messenger.Publish<TestMessage>(null!);
             });
         }
 
@@ -375,7 +375,7 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         public void SubscribeAndUnsubscribeCauseChangeMessages()
         {
             var messenger = new MvxMessengerHub();
-            MvxSubscriberChangeMessage subscriberChangeMessage = null;
+            MvxSubscriberChangeMessage? subscriberChangeMessage = null;
             var changeToken = messenger.Subscribe<MvxSubscriberChangeMessage>(message => subscriberChangeMessage = message);
             var token = messenger.Subscribe<TestMessage>(m =>
             {
@@ -395,7 +395,7 @@ namespace MvvmCross.Plugin.Messenger.UnitTest
         public void PurgeCausesChangeMessage()
         {
             var messenger = new MvxMessengerHub();
-            MvxSubscriberChangeMessage subscriberChangeMessage = null;
+            MvxSubscriberChangeMessage? subscriberChangeMessage = null;
             var changeToken = messenger.Subscribe<MvxSubscriberChangeMessage>(message => subscriberChangeMessage = message);
             CreateShortLivedSubscription(messenger);
             Assert.NotNull(subscriberChangeMessage);

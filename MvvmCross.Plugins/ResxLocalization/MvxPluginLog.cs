@@ -9,6 +9,6 @@ namespace MvvmCross.Plugin.ResxLocalization
 {
     internal static class MvxPluginLog
     {
-        internal static ILogger Instance { get; } = MvxLogHost.GetLog("MvxPlugin.ResxLocalization");
+        internal static ILogger? Instance { get; } = MvxLogHost.GetLog("MvxPlugin.ResxLocalization");
     }
 }

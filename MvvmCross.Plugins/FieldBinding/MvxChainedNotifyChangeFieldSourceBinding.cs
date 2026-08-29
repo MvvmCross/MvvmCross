@@ -21,7 +21,7 @@ namespace MvvmCross.Plugin.FieldBinding
         public static bool DisableWarnIndexedValueBindingWarning = false;
 
         private readonly List<IMvxPropertyToken> _childTokens;
-        private IMvxSourceBinding _currentChildBinding;
+        private IMvxSourceBinding? _currentChildBinding;
 
         public MvxChainedNotifyChangeFieldSourceBinding(object source, INotifyChange notifyChange,
                                                         List<IMvxPropertyToken> childTokens)
@@ -50,13 +50,13 @@ namespace MvvmCross.Plugin.FieldBinding
                 "Suspicious indexed binding seen to Value[] within INC binding - this may be OK, but is often a result of FluentBinding used on INC<T> - consider using INCList<TValue> or INCDictionary<TKey,TValue> instead - see https://github.com/slodge/MvvmCross/issues/353. This message can be disabled using DisableWarnIndexedValueBindingWarning");
         }
 
-        protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)
+        protected override void NotifyChangeOnChanged(object? sender, EventArgs eventArgs)
         {
             UpdateChildBinding();
             FireChanged();
         }
 
-        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
+        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance!.SourceBindingFactory!;
 
         public override Type SourceType
         {
@@ -96,7 +96,7 @@ namespace MvvmCross.Plugin.FieldBinding
             }
         }
 
-        private void ChildSourceBindingChanged(object sender, EventArgs e)
+        private void ChildSourceBindingChanged(object? sender, EventArgs e)
         {
             FireChanged();
         }

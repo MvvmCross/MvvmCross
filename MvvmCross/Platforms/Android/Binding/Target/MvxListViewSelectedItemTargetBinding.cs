@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-#nullable enable
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
@@ -27,7 +26,7 @@ public class MvxListViewSelectedItemTargetBinding(MvxListView view)
 
         var newValue = listView.Adapter.GetRawItem(itemClickEventArgs.Position);
 
-        if (!newValue.Equals(_currentValue))
+        if (!newValue!.Equals(_currentValue))
         {
             _currentValue = newValue;
             FireValueChanged(newValue);

@@ -7,7 +7,6 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Views
 {
-#nullable enable
     public interface IMvxView
         : IMvxDataConsumer
     {
@@ -19,5 +18,4 @@ namespace MvvmCross.Views
     {
         new TViewModel? ViewModel { get; set; }
     }
-#nullable restore
 }

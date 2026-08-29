@@ -7,7 +7,6 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
 {
-#nullable enable
     public class MvxClosePresentationHint
         : MvxPresentationHint
     {
@@ -27,5 +26,4 @@ namespace MvvmCross.Presenters.Hints
 
         public IMvxViewModel ViewModelToClose { get; }
     }
-#nullable restore
 }

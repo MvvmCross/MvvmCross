@@ -11,7 +11,6 @@ using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders
 {
-#nullable enable
     public static class MvxLayoutInflaterCompat
     {
         internal class FactoryWrapper : Object, LayoutInflater.IFactory
@@ -61,5 +60,4 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             layoutInflater.Factory2 = factory != null ? new FactoryWrapper2(factory) : null;
         }
     }
-#nullable restore
 }

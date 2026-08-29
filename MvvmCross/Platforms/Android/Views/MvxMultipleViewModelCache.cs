@@ -32,20 +32,20 @@ namespace MvvmCross.Platforms.Android.Views
             CurrentViewModels.AddOrUpdate(cachedViewModelType, toCache, (_, _) => toCache);
         }
 
-        public IMvxViewModel GetAndClear(Type viewModelType, string viewModelTag = "singleInstanceCache")
+        public IMvxViewModel? GetAndClear(Type viewModelType, string viewModelTag = "singleInstanceCache")
         {
             if (viewModelType == null) return null;
 
-            IMvxViewModel vm;
+            IMvxViewModel? vm;
             var cachedViewModelType = new CachedViewModelType(viewModelType, viewModelTag);
             CurrentViewModels.TryRemove(cachedViewModelType, out vm);
 
             return vm;
         }
 
-        public T GetAndClear<T>(string viewModelTag = "singleInstanceCache") where T : IMvxViewModel
+        public T? GetAndClear<T>(string viewModelTag = "singleInstanceCache") where T : class, IMvxViewModel
         {
-            return (T)GetAndClear(typeof(T), viewModelTag);
+            return (T?)GetAndClear(typeof(T), viewModelTag);
         }
 
         private class CachedViewModelType
@@ -70,7 +70,7 @@ namespace MvvmCross.Platforms.Android.Views
                 }
             }
 
-            public override bool Equals(object obj)
+            public override bool Equals(object? obj)
             {
                 if (ReferenceEquals(obj, this))
                     return true;

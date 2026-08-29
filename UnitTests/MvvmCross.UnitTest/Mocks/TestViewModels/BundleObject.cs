@@ -8,8 +8,8 @@ namespace MvvmCross.UnitTest.Mocks.TestViewModels
 {
     public class BundleObject
     {
-        public string TheString1 { get; set; }
-        public string TheString2 { get; set; }
+        public string? TheString1 { get; set; }
+        public string? TheString2 { get; set; }
         public bool TheBool1 { get; set; }
         public bool TheBool2 { get; set; }
         public int TheInt1 { get; set; }
@@ -19,10 +19,10 @@ namespace MvvmCross.UnitTest.Mocks.TestViewModels
 
         public override int GetHashCode()
         {
-            return TheString1.GetHashCode();
+            return TheString1?.GetHashCode() ?? 0;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             var rhs = obj as BundleObject;
             if (rhs == null)

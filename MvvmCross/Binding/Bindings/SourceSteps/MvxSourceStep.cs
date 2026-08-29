@@ -13,7 +13,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
         : IMvxSourceStep
     {
         private readonly MvxSourceStepDescription _description;
-        private object _dataContext;
+        private object? _dataContext;
 
         protected MvxSourceStepDescription Description => _description;
 
@@ -33,12 +33,12 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             // nothing to do in the base class
         }
 
-        public virtual Type TargetType { get; set; }
+        public virtual Type TargetType { get; set; } = null!;
 
         public virtual Type SourceType => typeof(object);
 
 
-        public object DataContext
+        public object? DataContext
         {
             get
             {
@@ -61,7 +61,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             // nothing to do in the base class
         }
 
-        public void SetValue(object value)
+        public void SetValue(object? value)
         {
             var sourceValue = ApplyValueConverterTargetToSource(value);
 
@@ -74,12 +74,12 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             SetSourceValue(sourceValue);
         }
 
-        private object ApplyValueConverterTargetToSource(object value)
+        private object? ApplyValueConverterTargetToSource(object? value)
         {
             if (_description.Converter == null)
                 return value;
 
-            return _description.Converter.ConvertBack(value,
+            return _description.Converter.ConvertBack(value!,
                                                       SourceType,
                                                       _description.ConverterParameter,
                                                       CultureInfo.CurrentUICulture);
@@ -113,7 +113,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             return MvxBindingConstant.UnsetValue;
         }
 
-        protected abstract void SetSourceValue(object sourceValue);
+        protected abstract void SetSourceValue(object? sourceValue);
 
         protected virtual void SendSourcePropertyChanged()
         {
@@ -141,7 +141,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             return MvxBindingConstant.UnsetValue;
         }
 
-        private event EventHandler _changed;
+        private event EventHandler? _changed;
 
         public event EventHandler Changed
         {
@@ -173,11 +173,11 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
         public object GetValue()
         {
             var sourceValue = GetSourceValue();
-            var value = ConvertSourceToTarget(sourceValue);
+            var value = ConvertSourceToTarget(sourceValue ?? MvxBindingConstant.UnsetValue);
             return value;
         }
 
-        protected abstract object GetSourceValue();
+        protected abstract object? GetSourceValue();
     }
 
     public abstract class MvxSourceStep<T> : MvxSourceStep

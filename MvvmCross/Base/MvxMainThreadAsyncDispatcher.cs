@@ -9,7 +9,6 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public abstract class MvxMainThreadAsyncDispatcher : MvxMainThreadDispatcher, IMvxMainThreadAsyncDispatcher
     {
         public Task ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true)
@@ -68,5 +67,4 @@ namespace MvvmCross.Base
 
         public abstract override bool IsOnMainThread { get; }
     }
-#nullable restore
 }

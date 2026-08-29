@@ -25,7 +25,7 @@ namespace MvvmCross.Binding.Combiners
             return steps.First().SourceType;
         }
 
-        private static Type GetLookupTypeFor(object value)
+        private static Type? GetLookupTypeFor(object value)
         {
             if (value == null)
                 return null;
@@ -40,16 +40,16 @@ namespace MvvmCross.Binding.Combiners
 
         public class TypeTuple
         {
-            public TypeTuple(Type type1, Type type2)
+            public TypeTuple(Type? type1, Type? type2)
             {
                 Type2 = type2;
                 Type1 = type1;
             }
 
-            public Type Type1 { get; }
-            public Type Type2 { get; }
+            public Type? Type1 { get; }
+            public Type? Type2 { get; }
 
-            public override bool Equals(object obj)
+            public override bool Equals(object? obj)
             {
                 var rhs = obj as TypeTuple;
 
@@ -66,11 +66,11 @@ namespace MvvmCross.Binding.Combiners
             }
         }
 
-        private delegate bool CombinerFunc(out object value);
+        private delegate bool CombinerFunc(out object? value);
 
-        private delegate bool CombinerFunc<in T1>(T1 input1, out object value);
+        private delegate bool CombinerFunc<in T1>(T1 input1, out object? value);
 
-        private delegate bool CombinerFunc<in T1, in T2>(T1 input1, T2 input2, out object value);
+        private delegate bool CombinerFunc<in T1, in T2>(T1 input1, T2 input2, out object? value);
 
         private readonly Dictionary<TypeTuple, CombinerFunc<object, object>> _combinerActions;
 
@@ -102,21 +102,21 @@ namespace MvvmCross.Binding.Combiners
 
         private void AddSingle(CombinerFunc combinerAction)
         {
-            _combinerActions[new TypeTuple(null, null)] = (object x, object y, out object v) => combinerAction(out v);
+            _combinerActions[new TypeTuple(null, null)] = (object x, object y, out object? v) => combinerAction(out v);
         }
 
         private void AddSingle<T1>(CombinerFunc<T1> combinerAction, CombinerFunc<T1> switchedCombinerAction)
         {
             _combinerActions[new TypeTuple(typeof(T1), null)] =
-                (object x, object y, out object v) => combinerAction((T1)x, out v);
+                (object x, object y, out object? v) => combinerAction((T1)x, out v);
             _combinerActions[new TypeTuple(null, typeof(T1))] =
-                (object x, object y, out object v) => switchedCombinerAction((T1)y, out v);
+                (object x, object y, out object? v) => switchedCombinerAction((T1)y, out v);
         }
 
         private void AddSingle<T1, T2>(CombinerFunc<T1, T2> combinerAction)
         {
             _combinerActions[new TypeTuple(typeof(T1), typeof(T2))] =
-                (object x, object y, out object v) => combinerAction((T1)x, (T2)y, out v);
+                (object x, object y, out object? v) => combinerAction((T1)x, (T2)y, out v);
         }
 
         protected virtual object ForceToSimpleValueTypes(object input)
@@ -137,7 +137,7 @@ namespace MvvmCross.Binding.Combiners
             return input;
         }
 
-        public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value)
+        public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object? value)
         {
             var resultPairs = steps.Select(step => step.GetValue()).ToList();
 
@@ -166,7 +166,7 @@ namespace MvvmCross.Binding.Combiners
                 var firstType = GetLookupTypeFor(first);
                 var secondType = GetLookupTypeFor(second);
 
-                CombinerFunc<object, object> combinerFunc;
+                CombinerFunc<object, object>? combinerFunc;
                 if (!_combinerActions.TryGetValue(new TypeTuple(firstType, secondType), out combinerFunc))
                 {
                     MvxLogHost.Default?.Log(LogLevel.Error, "Unknown type pair in Pairwise combiner {firstType}, {secondType}",
@@ -175,7 +175,7 @@ namespace MvvmCross.Binding.Combiners
                     return true;
                 }
 
-                object newValue;
+                object? newValue;
                 var newIsAvailable = combinerFunc(first, second, out newValue);
                 if (!newIsAvailable)
                 {
@@ -184,61 +184,61 @@ namespace MvvmCross.Binding.Combiners
                 }
 
                 resultPairs.RemoveAt(0);
-                resultPairs[0] = newValue;
+                resultPairs[0] = newValue!;
             }
 
             value = resultPairs[0];
             return true;
         }
 
-        protected abstract bool CombineObjectAndDouble(object input1, double input2, out object value);
+        protected abstract bool CombineObjectAndDouble(object input1, double input2, out object? value);
 
-        protected abstract bool CombineObjectAndLong(object input1, long input2, out object value);
+        protected abstract bool CombineObjectAndLong(object input1, long input2, out object? value);
 
-        protected abstract bool CombineObjectAndObject(object object1, object object2, out object value);
+        protected abstract bool CombineObjectAndObject(object object1, object object2, out object? value);
 
-        protected abstract bool CombineObjectAndDecimal(object input1, decimal input2, out object value);
+        protected abstract bool CombineObjectAndDecimal(object input1, decimal input2, out object? value);
 
-        protected abstract bool CombineObjectAndNull(object input1, out object value);
+        protected abstract bool CombineObjectAndNull(object input1, out object? value);
 
-        protected abstract bool CombineDoubleAndObject(double input1, object input2, out object value);
+        protected abstract bool CombineDoubleAndObject(double input1, object input2, out object? value);
 
-        protected abstract bool CombineDoubleAndDouble(double input1, double input2, out object value);
+        protected abstract bool CombineDoubleAndDouble(double input1, double input2, out object? value);
 
-        protected abstract bool CombineDoubleAndLong(double input1, long input2, out object value);
+        protected abstract bool CombineDoubleAndLong(double input1, long input2, out object? value);
 
-        protected abstract bool CombineDoubleAndDecimal(double input1, decimal input2, out object value);
+        protected abstract bool CombineDoubleAndDecimal(double input1, decimal input2, out object? value);
 
-        protected abstract bool CombineDoubleAndNull(double input1, out object value);
+        protected abstract bool CombineDoubleAndNull(double input1, out object? value);
 
-        protected abstract bool CombineLongAndObject(long input1, object input2, out object value);
+        protected abstract bool CombineLongAndObject(long input1, object input2, out object? value);
 
-        protected abstract bool CombineLongAndDouble(long input1, double input2, out object value);
+        protected abstract bool CombineLongAndDouble(long input1, double input2, out object? value);
 
-        protected abstract bool CombineLongAndLong(long input1, long input2, out object value);
+        protected abstract bool CombineLongAndLong(long input1, long input2, out object? value);
 
-        protected abstract bool CombineLongAndDecimal(long input1, decimal input2, out object value);
+        protected abstract bool CombineLongAndDecimal(long input1, decimal input2, out object? value);
 
-        protected abstract bool CombineLongAndNull(long input1, out object value);
+        protected abstract bool CombineLongAndNull(long input1, out object? value);
 
-        protected abstract bool CombineDecimalAndDouble(decimal input1, double input2, out object value);
+        protected abstract bool CombineDecimalAndDouble(decimal input1, double input2, out object? value);
 
-        protected abstract bool CombineDecimalAndLong(decimal input1, long input2, out object value);
+        protected abstract bool CombineDecimalAndLong(decimal input1, long input2, out object? value);
 
-        protected abstract bool CombineDecimalAndObject(decimal object1, object object2, out object value);
+        protected abstract bool CombineDecimalAndObject(decimal object1, object object2, out object? value);
 
-        protected abstract bool CombineDecimalAndDecimal(decimal input1, decimal input2, out object value);
+        protected abstract bool CombineDecimalAndDecimal(decimal input1, decimal input2, out object? value);
 
-        protected abstract bool CombineDecimalAndNull(decimal input1, out object value);
+        protected abstract bool CombineDecimalAndNull(decimal input1, out object? value);
 
-        protected abstract bool CombineNullAndObject(object object1, out object value);
+        protected abstract bool CombineNullAndObject(object object1, out object? value);
 
-        protected abstract bool CombineNullAndDouble(double input2, out object value);
+        protected abstract bool CombineNullAndDouble(double input2, out object? value);
 
-        protected abstract bool CombineNullAndLong(long input2, out object value);
+        protected abstract bool CombineNullAndLong(long input2, out object? value);
 
-        protected abstract bool CombineNullAndDecimal(decimal input2, out object value);
+        protected abstract bool CombineNullAndDecimal(decimal input2, out object? value);
 
-        protected abstract bool CombineTwoNulls(out object value);
+        protected abstract bool CombineTwoNulls(out object? value);
     }
 }

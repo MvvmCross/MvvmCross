@@ -28,7 +28,7 @@ namespace MvvmCross.Plugin.JsonLocalization
             LoadJsonFromText(namespaceKey, typeKey, json);
         }
 
-        protected virtual string GetTextFromEmbeddedResource(string namespaceKey, string resourcePath)
+        protected virtual string? GetTextFromEmbeddedResource(string namespaceKey, string resourcePath)
         {
             string path = namespaceKey + "." + GenerateResourceNameFromPath(resourcePath);
 
@@ -36,7 +36,7 @@ namespace MvvmCross.Plugin.JsonLocalization
             {
                 var assembly = Assembly.Load(new AssemblyName(namespaceKey));
 
-                using Stream stream = assembly.GetManifestResourceStream(path);
+                using Stream? stream = assembly.GetManifestResourceStream(path);
                 if (stream == null)
                     return null;
 

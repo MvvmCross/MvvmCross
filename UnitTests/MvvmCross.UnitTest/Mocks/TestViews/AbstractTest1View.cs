@@ -9,7 +9,7 @@ namespace MvvmCross.UnitTest.Mocks.TestViews
 {
     public abstract class AbstractTest1View : IMvxView
     {
-        public object DataContext { get; set; }
-        public IMvxViewModel ViewModel { get; set; }
+        public object? DataContext { get; set; }
+        public IMvxViewModel? ViewModel { get; set; }
     }
 }

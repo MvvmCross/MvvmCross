@@ -12,7 +12,7 @@ namespace MvvmCross.UnitTest.Base
     {
         public class TestClass
         {
-            public string Foo { get; set; }
+            public string? Foo { get; set; }
 
             public string GetFooExpression()
             {

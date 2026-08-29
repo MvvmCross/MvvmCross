@@ -23,7 +23,7 @@ namespace MvvmCross.UnitTest.Binding.ExtensionMethods
 
         public class MockAutoValueConverters : IMvxAutoValueConverters
         {
-            public IMvxValueConverter Find(Type viewModelType, Type viewType)
+            public IMvxValueConverter? Find(Type viewModelType, Type viewType)
             {
                 return null;
             }
@@ -129,13 +129,13 @@ namespace MvvmCross.UnitTest.Binding.ExtensionMethods
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
-            Assert.False((bool)typeof(bool).MakeSafeValue(0));
-            Assert.False((bool)typeof(bool).MakeSafeValue(null));
-            Assert.True((bool)typeof(bool).MakeSafeValue(1));
-            Assert.True((bool)typeof(bool).MakeSafeValue(-1.0));
-            Assert.True((bool)typeof(bool).MakeSafeValue(1.0));
-            Assert.True((bool)typeof(bool).MakeSafeValue("Dos"));
-            Assert.True((bool)typeof(bool).MakeSafeValue("dOs"));
+            Assert.False((bool)(typeof(bool).MakeSafeValue(0)!));
+            Assert.False((bool)(typeof(bool).MakeSafeValue(null)!));
+            Assert.True((bool)(typeof(bool).MakeSafeValue(1)!));
+            Assert.True((bool)(typeof(bool).MakeSafeValue(-1.0)!));
+            Assert.True((bool)(typeof(bool).MakeSafeValue(1.0)!));
+            Assert.True((bool)(typeof(bool).MakeSafeValue("Dos")!));
+            Assert.True((bool)(typeof(bool).MakeSafeValue("dOs")!));
 
             Assert.False((bool?)typeof(bool?).MakeSafeValue(0));
             Assert.Null((bool?)typeof(bool?).MakeSafeValue(null));

@@ -6,7 +6,6 @@ using MvvmCross.Base;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public class MvxJsonNavigationSerializer : MvxNavigationSerializer
     {
         public MvxJsonNavigationSerializer(IMvxJsonConverter jsonConverter)
@@ -14,5 +13,4 @@ namespace MvvmCross.ViewModels
         {
         }
     }
-#nullable restore
 }

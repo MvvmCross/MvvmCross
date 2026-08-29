@@ -25,7 +25,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             }
         }
 
-        private void HandleEditTextChanged(object sender, EventArgs e)
+        private void HandleEditTextChanged(object? sender, EventArgs e)
         {
             var view = View;
             if (view == null)
@@ -38,7 +38,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object target, object? value)
         {
             base.SetValueImpl(target, value ?? "");
         }

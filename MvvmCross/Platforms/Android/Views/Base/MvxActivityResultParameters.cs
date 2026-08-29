@@ -9,7 +9,7 @@ namespace MvvmCross.Platforms.Android.Views.Base
 {
     public class MvxActivityResultParameters
     {
-        public MvxActivityResultParameters(int requestCode, Result resultCode, Intent data)
+        public MvxActivityResultParameters(int requestCode, Result resultCode, Intent? data)
         {
             Data = data;
             ResultCode = resultCode;
@@ -18,6 +18,6 @@ namespace MvvmCross.Platforms.Android.Views.Base
 
         public int RequestCode { get; private set; }
         public Result ResultCode { get; private set; }
-        public Intent Data { get; private set; }
+        public Intent? Data { get; private set; }
     }
 }
