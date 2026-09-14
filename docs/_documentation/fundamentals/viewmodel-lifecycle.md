@@ -108,6 +108,14 @@ Each platform MvvmCross supports has a different way of handing low memory situa
 
 In order to cope with that, the framework provides you with a way to save your ViewModel's state and a way to restore it later, regardless what might occur with the Views.
 
+> Your app might crash if you won't implement this
+
+When your app goes through state-restoring cycle it recreates your ViewModel. 
+If your ViewModel is consuming any kind of parameters then all of them will be set to default values (meaning int would be equal to 0, guid would be equal to Guid.Empty).
+This will mean that suddenly your app will either crash or when navigating through the app your user will see error messages because app was requesting eg `/api/home/00000000-0000-0000-0000-000000000000`.
+The way to fix it is to either implement SaveStateToBundle/ReloadFromBundle or restart your app when you discover that the app is going through state-restoring cycle.
+
+
 ### Save State
 
 When your app is going through a tombstoning process, MvvmCross will call a specific method from MvxViewModel: SaveStateToBundle, which is protected and receives a `IMvxBundle` as parameter.
@@ -120,6 +128,27 @@ After SaveStateToBundle is returned to the caller, the IMvxBundle will be stored
 Same as before, MvxViewModel has a protected method named ReloadFromBundle, which will be called when your app is coming back to life. ReloadFromBundle has a parameter of type `IMvxBundle`, and you can override this method and ready any string from the bundle (again, you might want to use [JSON serialization](https://www.mvvmcross.com/documentation/plugins/json) for this).
 
 The bundle you receive in ReloadFromBundle will contain all the information you have stored before.
+
+### Testing state restoring
+Since there is a lot of confussion wheter this part works or not it needs special introduction how to actually test it.
+
+Tombstoning is available on both Android and iOS.
+On Android it's enabled out of the box, but on iOS you have to opt-in for it to work in your app.
+[More details about iOS state restorating here](https://developer.apple.com/documentation/uikit/view_controllers/preserving_your_app_s_ui_across_launches)
+
+To test this on Android you have to.
+1. use SaveStateToBundle and actually save something in the bundle (if the bundle is empty `ReloadFromBundle` won't be called)
+2. start the app
+3. open the view which saves data to bundle
+4. push app to background
+5. call this command from CLI `adb shell am kill com.example.yourappid`
+6. go to task list and bring back the app
+
+*Result:* `ReloadFromBundle` will be called 
+
+Mind that when you call `adb shell am kill com.example.yourappid` you will be disconnected from the debugger, this is expected behavior.
+If you want to debug this part, your best bet will be to use `Log.Debug` inside `ReloadFromBundle` and inspect logcat for the messages.
+There is no way to re-attach debugger to test state-restoring because the process is dead at the moment.
 
 ### Reloading state process
 
