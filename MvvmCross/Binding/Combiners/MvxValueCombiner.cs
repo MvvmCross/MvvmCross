@@ -22,7 +22,7 @@ namespace MvvmCross.Binding.Combiners
             // do nothing
         }
 
-        public virtual bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value)
+        public virtual bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object? value)
         {
             value = null;
             return false;

@@ -10,12 +10,12 @@ namespace MvvmCross.Platforms.Android.Binding.BindingContext
 {
     public static class MvxAndroidBindingContextHelpers
     {
-        public static IMvxAndroidBindingContext Current()
+        public static IMvxAndroidBindingContext? Current()
         {
             return Current<IMvxAndroidBindingContext>();
         }
 
-        public static T Current<T>()
+        public static T? Current<T>()
             where T : class, IMvxBindingContext
         {
             var stack = MvxHost.Current?.Services.GetService<IMvxBindingContextStack<T>>();

@@ -7,6 +7,7 @@
 
     <StripSymbols>false</StripSymbols>
 
+    <Nullable>enable</Nullable>
     <NoWarn>$(NoWarn);CS0109;CS0108;CS0618;CS0114;CS1591</NoWarn>
 
     <WarningsAsErrors>$(WarningsAsErrors);NU1608</WarningsAsErrors>

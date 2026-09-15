@@ -6,11 +6,9 @@ using System.ComponentModel;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public interface IMvxInpcInterceptor
     {
         MvxInpcInterceptionResult Intercept(IMvxNotifyPropertyChanged sender, PropertyChangedEventArgs args);
         MvxInpcInterceptionResult Intercept(IMvxNotifyPropertyChanged sender, PropertyChangingEventArgs args);
     }
-#nullable restore
 }

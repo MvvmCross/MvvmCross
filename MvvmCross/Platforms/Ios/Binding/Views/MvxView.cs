@@ -12,7 +12,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         : UIView
         , IMvxBindable
     {
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; } = null!;
 
         // Constructor that will bind managed object to its unmanaged counterpart. This constructor 
         // should not have any implementation and is only used for types that can be created by the
@@ -58,7 +58,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         }
 
         [MvxSetToNullAfterBinding]
-        public object DataContext
+        public object? DataContext
         {
             get { return BindingContext.DataContext; }
             set { BindingContext.DataContext = value; }

@@ -11,7 +11,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
     public class MvxCollectionViewListCell : UICollectionViewListCell, IMvxBindable
     {
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; } = null!;
 
         [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxCollectionViewListCell(string bindingText)
@@ -63,7 +63,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             base.Dispose(disposing);
         }
 
-        public object DataContext
+        public object? DataContext
         {
             get { return BindingContext.DataContext; }
             set { BindingContext.DataContext = value; }

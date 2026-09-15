@@ -79,7 +79,7 @@ namespace MvvmCross.UnitTest.ViewModels
             bundle.Write(testObject);
 
             var method = GetType().GetMethod("TestFunction");
-            var args = bundle.CreateArgumentList(method.GetParameters(), "ignored debug text");
+            var args = bundle.CreateArgumentList(method!.GetParameters(), "ignored debug text");
             var output = method.Invoke(this, args.ToArray());
 
             var expected = new BundleObject

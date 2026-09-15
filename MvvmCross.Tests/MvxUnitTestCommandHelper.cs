@@ -7,7 +7,7 @@ namespace MvvmCross.Tests
 {
     public class MvxUnitTestCommandHelper : IMvxCommandHelper
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
         private readonly Dictionary<object, int> items = new Dictionary<object, int>();
 

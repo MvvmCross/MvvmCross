@@ -67,11 +67,11 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        public event EventHandler ValueChanged;
+        public event EventHandler? ValueChanged;
 
-        public void OnDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth)
+        public void OnDateChanged(DatePicker? view, int year, int monthOfYear, int dayOfMonth)
         {
-            ValueChanged?.Invoke(this, null);
+            ValueChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
                     return result;
             }
 
-            return null;
+            return null!;
         }
     }
 }

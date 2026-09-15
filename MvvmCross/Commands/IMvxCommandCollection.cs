@@ -4,10 +4,8 @@
 
 namespace MvvmCross.Commands
 {
-#nullable enable
     public interface IMvxCommandCollection
     {
         IMvxCommand? this[string name] { get; }
     }
-#nullable restore
 }

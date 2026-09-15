@@ -45,19 +45,19 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         {
         }
 
-        public string TitleText
+        public string? TitleText
         {
             get { return TextLabel.Text; }
             set { TextLabel.Text = value; }
         }
 
-        public string DetailText
+        public string? DetailText
         {
             get { return DetailTextLabel.Text; }
             set { DetailTextLabel.Text = value; }
         }
 
-        public ICommand SelectedCommand { get; set; }
+        public ICommand? SelectedCommand { get; set; }
 
         private bool _isSelected;
 

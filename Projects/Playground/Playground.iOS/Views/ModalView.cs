@@ -24,7 +24,7 @@ namespace Playground.iOS.Views
 
             TransitioningDelegate = new TransitioningDelegate();
 
-            View.BackgroundColor = UIColor.Orange;
+            View!.BackgroundColor = UIColor.Orange;
 
             var set = CreateBindingSet();
             set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
@@ -54,7 +54,7 @@ namespace Playground.iOS.Views
         {
             var inView = transitionContext.ContainerView;
             var toVC = transitionContext.GetViewControllerForKey(UITransitionContext.ToViewControllerKey);
-            var toView = toVC.View;
+            var toView = toVC.View!;
 
             inView.AddSubview(toView);
 

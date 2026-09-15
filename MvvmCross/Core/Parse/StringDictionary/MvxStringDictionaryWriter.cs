@@ -7,7 +7,6 @@ using System.Text;
 
 namespace MvvmCross.Core.Parse.StringDictionary
 {
-#nullable enable
     public class MvxStringDictionaryWriter : IMvxStringDictionaryWriter
     {
         public string Write(IDictionary<string, string>? dictionary)
@@ -57,5 +56,4 @@ namespace MvvmCross.Core.Parse.StringDictionary
             return output.ToString();
         }
     }
-#nullable restore
 }

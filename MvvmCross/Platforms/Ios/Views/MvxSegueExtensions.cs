@@ -15,7 +15,6 @@ using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
 {
-#nullable enable
     internal static class MvxSegueExtensions
     {
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
@@ -71,5 +70,4 @@ namespace MvvmCross.Platforms.Ios.Views
             }
         }
     }
-#nullable restore
 }

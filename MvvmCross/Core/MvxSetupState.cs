@@ -4,7 +4,6 @@
 
 namespace MvvmCross.Core
 {
-#nullable enable
     public enum MvxSetupState
     {
         Uninitialized,
@@ -13,5 +12,4 @@ namespace MvvmCross.Core
         InitializingSecondary,
         Initialized
     }
-#nullable restore
 }

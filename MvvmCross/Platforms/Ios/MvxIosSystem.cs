@@ -10,7 +10,7 @@ namespace MvvmCross.Platforms.Ios
     public class MvxIosSystem
         : IMvxIosSystem
     {
-        public MvxIosVersion Version { get; private set; }
+        public MvxIosVersion Version { get; private set; } = null!;
 
         public MvxIosSystem()
         {

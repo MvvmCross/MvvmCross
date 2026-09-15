@@ -13,7 +13,7 @@ namespace MvvmCross.Plugin.FieldBinding
     public abstract class MvxNotifyChangeFieldSourceBinding
         : MvxSourceBinding
     {
-        private static readonly EventInfo NotifyChangeEventInfo = typeof(INotifyChange).GetEvent("Changed");
+        private static readonly EventInfo? NotifyChangeEventInfo = typeof(INotifyChange).GetEvent("Changed");
 
         private readonly INotifyChange _notifyChange;
         private readonly IDisposable _subscription;
@@ -28,10 +28,10 @@ namespace MvvmCross.Plugin.FieldBinding
             if (notifyChange == null)
                 throw new ArgumentNullException(nameof(notifyChange));
             _notifyChange = notifyChange;
-            _subscription = NotifyChangeEventInfo.WeakSubscribe(_notifyChange, NotifyChangeOnChanged);
+            _subscription = NotifyChangeEventInfo!.WeakSubscribe(_notifyChange, NotifyChangeOnChanged);
         }
 
-        protected abstract void NotifyChangeOnChanged(object sender, EventArgs eventArgs);
+        protected abstract void NotifyChangeOnChanged(object? sender, EventArgs eventArgs);
 
         [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected override void Dispose(bool isDisposing)

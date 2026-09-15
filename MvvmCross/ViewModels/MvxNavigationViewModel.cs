@@ -8,7 +8,6 @@ using MvvmCross.ViewModels.Result;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public abstract class MvxNavigationViewModel
         : MvxViewModel
     {
@@ -124,5 +123,4 @@ namespace MvvmCross.ViewModels
 
         public abstract void Prepare(TParameter parameter);
     }
-#nullable restore
 }

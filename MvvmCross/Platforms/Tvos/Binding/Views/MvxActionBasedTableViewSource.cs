@@ -57,9 +57,9 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             CellModifier = (ignored) => { };
         }
 
-        public Func<UITableView, NSIndexPath, object, MvxStandardTableViewCell> CellCreator { get; set; }
-        public Action<MvxStandardTableViewCell> CellModifier { get; set; }
-        public Func<NSString> CellIdentifierOverride { get; set; }
+        public Func<UITableView, NSIndexPath, object?, MvxStandardTableViewCell> CellCreator { get; set; } = null!;
+        public Action<MvxStandardTableViewCell> CellModifier { get; set; } = null!;
+        public Func<NSString>? CellIdentifierOverride { get; set; }
 
         protected override NSString CellIdentifier
         {
@@ -73,7 +73,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         }
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
-        protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
+        protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object? item)
         {
             var reuse = tableView.DequeueReusableCell(CellIdentifier);
             if (reuse != null)

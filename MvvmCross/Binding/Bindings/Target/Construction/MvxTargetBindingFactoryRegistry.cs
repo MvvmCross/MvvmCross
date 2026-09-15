@@ -13,12 +13,12 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         private readonly Dictionary<int, IMvxPluginTargetBindingFactory> _lookups = [];
 
         [RequiresUnreferencedCode("This method creates bindings using reflection which may not be preserved by trimming")]
-        public virtual IMvxTargetBinding CreateBinding(object target, string targetName)
+        public virtual IMvxTargetBinding? CreateBinding(object target, string targetName)
         {
-            if (TryCreateSpecificFactoryBinding(target, targetName, out IMvxTargetBinding first))
+            if (TryCreateSpecificFactoryBinding(target, targetName, out IMvxTargetBinding? first))
                 return first;
 
-            if (TryCreateReflectionBasedBinding(target, targetName, out IMvxTargetBinding second))
+            if (TryCreateReflectionBasedBinding(target, targetName, out IMvxTargetBinding? second))
                 return second;
 
             return null;
@@ -26,7 +26,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         [RequiresUnreferencedCode("This method uses reflection to access properties and events which may not be preserved by trimming")]
         protected virtual bool TryCreateReflectionBasedBinding(
-            object target, string targetName, out IMvxTargetBinding binding)
+            object target, string targetName, out IMvxTargetBinding? binding)
         {
             if (string.IsNullOrEmpty(targetName))
             {
@@ -65,7 +65,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
         protected virtual bool TryCreateSpecificFactoryBinding(object target, string targetName,
-                                                               out IMvxTargetBinding binding)
+                                                               out IMvxTargetBinding? binding)
         {
             if (target == null)
             {
@@ -89,7 +89,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         {
             foreach (var supported in factory.SupportedTypes)
             {
-                var key = GenerateKey(supported.Type, supported.Name);
+                var key = GenerateKey(supported.Type!, supported.Name!);
                 _lookups[key] = factory;
             }
         }
@@ -101,10 +101,10 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         [UnconditionalSuppressMessage("Trimming", "IL2072:Target parameter argument does not satisfy 'DynamicallyAccessedMembersAttribute' requirements",
             Justification = "The interface types returned by ImplementedInterfaces on a type with DynamicallyAccessedMemberTypes.Interfaces are safe to process")]
-        private IMvxPluginTargetBindingFactory FindSpecificFactory(
+        private IMvxPluginTargetBindingFactory? FindSpecificFactory(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type, string name)
         {
-            IMvxPluginTargetBindingFactory factory;
+            IMvxPluginTargetBindingFactory? factory;
             var key = GenerateKey(type, name);
             if (_lookups.TryGetValue(key, out factory))
             {

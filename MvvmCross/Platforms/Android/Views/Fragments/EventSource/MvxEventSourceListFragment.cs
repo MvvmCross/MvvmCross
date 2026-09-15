@@ -18,31 +18,31 @@ namespace MvvmCross.Platforms.Android.Views.Fragments.EventSource
         : ListFragment
         , IMvxEventSourceFragment
     {
-        public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
+        public event EventHandler<MvxValueEventArgs<Context>>? AttachCalled;
 
-        public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
+        public event EventHandler<MvxValueEventArgs<Bundle?>>? CreateWillBeCalled;
 
-        public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
+        public event EventHandler<MvxValueEventArgs<Bundle?>>? CreateCalled;
 
-        public event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>> CreateViewCalled;
+        public event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>>? CreateViewCalled;
 
-        public event EventHandler StartCalled;
+        public event EventHandler? StartCalled;
 
-        public event EventHandler ResumeCalled;
+        public event EventHandler? ResumeCalled;
 
-        public event EventHandler PauseCalled;
+        public event EventHandler? PauseCalled;
 
-        public event EventHandler StopCalled;
+        public event EventHandler? StopCalled;
 
-        public event EventHandler DestroyViewCalled;
+        public event EventHandler? DestroyViewCalled;
 
-        public event EventHandler DestroyCalled;
+        public event EventHandler? DestroyCalled;
 
-        public event EventHandler DetachCalled;
+        public event EventHandler? DetachCalled;
 
-        public event EventHandler DisposeCalled;
+        public event EventHandler? DisposeCalled;
 
-        public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
+        public event EventHandler<MvxValueEventArgs<Bundle>>? SaveInstanceStateCalled;
 
         protected MvxEventSourceListFragment()
         {
@@ -60,14 +60,14 @@ namespace MvvmCross.Platforms.Android.Views.Fragments.EventSource
             base.OnAttach(context);
         }
 
-        public override void OnCreate(Bundle savedInstanceState)
+        public override void OnCreate(Bundle? savedInstanceState)
         {
             CreateWillBeCalled.Raise(this, savedInstanceState);
             base.OnCreate(savedInstanceState);
             CreateCalled.Raise(this, savedInstanceState);
         }
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        public override View? OnCreateView(LayoutInflater inflater, ViewGroup? container, Bundle? savedInstanceState)
         {
             CreateViewCalled.Raise(this, new MvxCreateViewParameters(inflater, container, savedInstanceState));
             return base.OnCreateView(inflater, container, savedInstanceState);

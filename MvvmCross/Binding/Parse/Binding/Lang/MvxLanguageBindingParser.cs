@@ -11,9 +11,9 @@ namespace MvvmCross.Binding.Parse.Binding.Lang
     {
         public MvxBindingMode DefaultBindingMode { get; set; }
 
-        public string DefaultConverterName { get; set; }
+        public string? DefaultConverterName { get; set; }
 
-        public string DefaultTextSourceName { get; set; }
+        public string? DefaultTextSourceName { get; set; }
 
         public MvxLanguageBindingParser()
         {

@@ -9,7 +9,7 @@ namespace MvvmCross.Binding.BindingContext
 {
     public interface IMvxBindingNameLookup
     {
-        string DefaultFor(
+        string? DefaultFor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type);
     }
 }

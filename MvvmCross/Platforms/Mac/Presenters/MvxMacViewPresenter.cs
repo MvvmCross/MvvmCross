@@ -36,7 +36,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
         public override MvxBasePresentationAttribute CreatePresentationAttribute(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewType)
         {
             MvxLogHost.Default?.Log(LogLevel.Trace, "PresentationAttribute not found for {ViewTypeName}. Assuming new window presentation", viewType.Name);
@@ -49,7 +49,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
-                var viewInstance = this.CreateViewControllerFor(viewType, null) as NSViewController;
+                var viewInstance = this.CreateViewControllerFor(viewType, null!) as NSViewController;
                 using (viewInstance)
                 {
                     var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute(request);
@@ -71,14 +71,14 @@ namespace MvvmCross.Platforms.Mac.Presenters
                 }
             }
 
-            return null;
+            return null!;
         }
 
         protected virtual INSApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
         protected virtual List<NSWindow> Windows { get; } = new List<NSWindow>();
 
-        protected virtual NSWindow MainWindow => NSApplication.SharedApplication.MainWindow;
+        protected virtual NSWindow? MainWindow => NSApplication.SharedApplication.MainWindow;
 
         public MvxMacViewPresenter(INSApplicationDelegate applicationDelegate)
         {
@@ -136,8 +136,8 @@ namespace MvvmCross.Platforms.Mac.Presenters
             MvxWindowPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            NSWindow window = null;
-            MvxWindowController windowController = null;
+            NSWindow? window = null;
+            MvxWindowController? windowController = null;
 
             if (!string.IsNullOrEmpty(attribute.WindowControllerName))
             {
@@ -221,12 +221,12 @@ namespace MvvmCross.Platforms.Mac.Presenters
             if (!string.IsNullOrEmpty(attribute.StoryboardName))
             {
                 // Instantiate from storyboard
-                var storyboard = NSStoryboard.FromName(attribute.StoryboardName, null);
-                windowController = (MvxWindowController)storyboard.InstantiateControllerWithIdentifier(attribute.WindowControllerName);
+                var storyboard = NSStoryboard.FromName(attribute.StoryboardName, null!);
+                windowController = (MvxWindowController)storyboard.InstantiateControllerWithIdentifier(attribute.WindowControllerName!);
             }
             else
             {
-                var controllerType = attribute.WindowControllerType ?? Type.GetType(attribute.WindowControllerName);
+                var controllerType = attribute.WindowControllerType ?? Type.GetType(attribute.WindowControllerName!);
                 if (controllerType is null)
                 {
                     throw new MvxException(
@@ -269,7 +269,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
         {
             var window = FindPresentingWindow(attribute.WindowIdentifier, viewController);
 
-            window.ContentViewController.PresentViewControllerAsModalWindow(viewController);
+            window.ContentViewController!.PresentViewControllerAsModalWindow(viewController);
             return Task.FromResult(true);
         }
 
@@ -280,7 +280,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
         {
             var window = FindPresentingWindow(attribute.WindowIdentifier, viewController);
 
-            window.ContentViewController.PresentViewControllerAsSheet(viewController);
+            window.ContentViewController!.PresentViewControllerAsSheet(viewController);
             return Task.FromResult(true);
         }
 
@@ -298,9 +298,9 @@ namespace MvvmCross.Platforms.Mac.Presenters
             return Task.FromResult(true);
         }
 
-        protected virtual NSWindow FindPresentingWindow(string identifier, NSViewController viewController)
+        protected virtual NSWindow FindPresentingWindow(string? identifier, NSViewController viewController)
         {
-            NSWindow window = null;
+            NSWindow? window = null;
 
             if (!string.IsNullOrEmpty(identifier))
                 window = Windows.Find(w => w.Identifier == identifier);
@@ -331,8 +331,8 @@ namespace MvvmCross.Platforms.Mac.Presenters
                 var controller = window.ContentViewController as MvxViewController;
 
                 // if closing controller is a sheet or modal, it must have a presenting parent
-                var presentedController = controller.PresentedViewControllers?.FirstOrDefault(c => ((MvxViewController)c).ViewModel == viewModel);
-                if (presentedController != null)
+                var presentedController = controller?.PresentedViewControllers?.FirstOrDefault(c => ((MvxViewController)c).ViewModel == viewModel);
+                if (presentedController != null && controller != null)
                 {
                     controller.DismissViewController(presentedController);
                     return Task.FromResult(true);
@@ -350,10 +350,10 @@ namespace MvvmCross.Platforms.Mac.Presenters
             throw new MvxException($"Could not find and close a view for '{viewModel.GetType()}'");
         }
 
-        protected void OnWindowWillCloseNotification(object sender, NSNotificationEventArgs e)
+        protected void OnWindowWillCloseNotification(object? sender, NSNotificationEventArgs e)
         {
             var window = e.Notification.Object as NSWindow;
-            if (Windows.Contains(window))
+            if (window != null && Windows.Contains(window))
                 Windows.Remove(window);
         }
     }

@@ -18,10 +18,10 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
         {
             // this resolver can't handle fully qualified tag names
             if (IsFullyQualified(tagName))
-                return null;
+                return null!;
 
             Registry.TryResolve(tagName, out var type);
-            return type;
+            return type!;
         }
     }
 }

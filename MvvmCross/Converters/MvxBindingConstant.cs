@@ -4,7 +4,6 @@
 
 namespace MvvmCross.Converters
 {
-#nullable enable
     public sealed class MvxBindingConstant
     {
         public static readonly MvxBindingConstant DoNothing = new MvxBindingConstant("DoNothing");
@@ -22,5 +21,4 @@ namespace MvvmCross.Converters
             return "Binding:" + _debug;
         }
     }
-#nullable restore
 }

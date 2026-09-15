@@ -52,8 +52,8 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             base.ViewDidLoad();
 
-            GetNextViewController = (pc, rc) => GetNextViewControllerPage(rc);
-            GetPreviousViewController = (pc, rc) => GetPreviousViewControllerPage(rc);
+            GetNextViewController = (pc, rc) => GetNextViewControllerPage(rc)!;
+            GetPreviousViewController = (pc, rc) => GetPreviousViewControllerPage(rc)!;
         }
 
         public IList<UIViewController> Pages { get; protected set; } = new List<UIViewController>();
@@ -62,9 +62,9 @@ namespace MvvmCross.Platforms.Ios.Views
 
         public virtual bool IsLastPage(UIViewController viewController) => Pages.IndexOf(viewController) == Pages.Count - 1;
 
-        protected virtual UIViewController GetNextViewControllerPage(UIViewController rc) => IsLastPage(rc) ? null : Pages[Pages.IndexOf(rc) + 1];
+        protected virtual UIViewController? GetNextViewControllerPage(UIViewController rc) => IsLastPage(rc) ? null : Pages[Pages.IndexOf(rc) + 1];
 
-        protected virtual UIViewController GetPreviousViewControllerPage(UIViewController rc) => IsFirstPage(rc) ? null : Pages[Pages.IndexOf(rc) - 1];
+        protected virtual UIViewController? GetPreviousViewControllerPage(UIViewController rc) => IsFirstPage(rc) ? null : Pages[Pages.IndexOf(rc) - 1];
 
         public virtual void AddPage(UIViewController viewController, MvxPagePresentationAttribute attribute)
         {
@@ -85,7 +85,7 @@ namespace MvvmCross.Platforms.Ios.Views
 
             var pageToClose = Pages.Where(v => !(v is UINavigationController))
                                               .Select(v => v.GetIMvxIosView())
-                                              .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+                                              .FirstOrDefault(mvxView => mvxView?.ViewModel == viewModel);
 
             if (pageToClose != null)
             {
@@ -136,9 +136,9 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        public new TViewModel ViewModel
+        public new TViewModel? ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
+            get { return (TViewModel?)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 

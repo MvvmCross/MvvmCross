@@ -30,13 +30,13 @@ namespace MvvmCross.Platforms.Tvos.Views
             this.AdaptForBinding();
         }
 
-        public object DataContext
+        public object? DataContext
         {
             get { return BindingContext.DataContext; }
             set { BindingContext.DataContext = value; }
         }
 
-        public IMvxViewModel ViewModel
+        public IMvxViewModel? ViewModel
         {
             get
             {
@@ -67,9 +67,9 @@ namespace MvvmCross.Platforms.Tvos.Views
             set { DataContext = value; }
         }
 
-        public MvxViewModelRequest Request { get; set; }
+        public MvxViewModelRequest Request { get; set; } = null!;
 
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; } = null!;
 
         public override void ViewDidLoad()
         {
@@ -101,17 +101,17 @@ namespace MvvmCross.Platforms.Tvos.Views
             ViewModel?.ViewDisappeared();
         }
 
-        public override void DidMoveToParentViewController(UIViewController parent)
+        public override void DidMoveToParentViewController(UIViewController? parent)
         {
             base.DidMoveToParentViewController(parent);
             if (parent == null)
                 ViewModel?.ViewDestroy();
         }
 
-        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject? sender)
         {
             base.PrepareForSegue(segue, sender);
-            this.ViewModelRequestForSegue(segue, sender);
+            this.ViewModelRequestForSegue(segue, sender!);
         }
     }
 
@@ -133,9 +133,9 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
         }
 
-        public new TViewModel ViewModel
+        public new TViewModel? ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
+            get { return (TViewModel?)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 

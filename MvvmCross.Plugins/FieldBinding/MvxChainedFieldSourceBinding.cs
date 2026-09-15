@@ -20,7 +20,7 @@ namespace MvvmCross.Plugin.FieldBinding
         : MvxFieldSourceBinding
     {
         private readonly IList<IMvxPropertyToken> _childTokens;
-        private IMvxSourceBinding _currentChildBinding;
+        private IMvxSourceBinding? _currentChildBinding;
 
         public MvxChainedFieldSourceBinding(object source, FieldInfo fieldInfo, IList<IMvxPropertyToken> childTokens)
             : base(source, fieldInfo)
@@ -51,9 +51,9 @@ namespace MvvmCross.Plugin.FieldBinding
             }
         }
 
-        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
+        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance!.SourceBindingFactory!;
 
-        private void ChildSourceBindingChanged(object sender, EventArgs e)
+        private void ChildSourceBindingChanged(object? sender, EventArgs e)
         {
             FireChanged();
         }

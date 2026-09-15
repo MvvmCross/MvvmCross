@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-#nullable enable
 using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.OS;
@@ -61,9 +60,9 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 if (Factory != null && view != null && view.GetTag(Resource.Id.MvvmCrossTagId) != TheTruth)
                 {
                     // Bind here.
-                    view = Factory.BindCreatedView(view, context, attrs);
+                    view = Factory.BindCreatedView(view, context!, attrs!);
 
-                    view.SetTag(Resource.Id.MvvmCrossTagId, TheTruth);
+                    view?.SetTag(Resource.Id.MvvmCrossTagId, TheTruth);
                 }
 
                 return view;
@@ -140,7 +139,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 var currentBindingContext = MvxAndroidBindingContextHelpers.Current();
                 if (currentBindingContext != null)
                 {
-                    factory = FactoryFactory?.Create(currentBindingContext.DataContext);
+                    factory = FactoryFactory?.Create(currentBindingContext.DataContext!);
 
                     // Set the current factory used to generate bindings
                     if (factory != null)
@@ -154,7 +153,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 if (currentBindingContext != null)
                 {
                     if (factory != null)
-                        currentBindingContext.RegisterBindingsWithClearKey(view, factory.CreatedBindings);
+                        currentBindingContext.RegisterBindingsWithClearKey(view!, factory.CreatedBindings!);
                 }
 
                 return view;
@@ -185,7 +184,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             if (name != null && Context != null && attrs != null)
                 view = AndroidViewFactory?.CreateView(null, name, Context, attrs);
 
-            view ??= PhoneLayoutInflaterOnCreateView(name, attrs) ?? base.OnCreateView(name, attrs);
+            view ??= PhoneLayoutInflaterOnCreateView(name, attrs) ?? base.OnCreateView(name!, attrs!);
 
             return _bindingVisitor.OnViewCreated(view, Context, attrs);
         }

@@ -19,9 +19,9 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         : UIPickerViewModel
     {
         private readonly UIPickerView _pickerView;
-        private IEnumerable _itemsSource;
-        private IDisposable _subscription;
-        private object _selectedItem;
+        private IEnumerable? _itemsSource;
+        private IDisposable? _subscription;
+        private object? _selectedItem;
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
 
@@ -42,7 +42,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         }
 
         [MvxSetToNullAfterBinding]
-        public virtual IEnumerable ItemsSource
+        public virtual IEnumerable? ItemsSource
         {
             get
             {
@@ -74,7 +74,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
         }
 
-        protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        protected virtual void CollectionChangedOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             MvxLogHost.Default?.LogTrace(
                 "CollectionChanged called inside MvxPickerViewModel - beware that this isn't fully tested - picker might not fully support changes while the picker is visible");
@@ -96,22 +96,22 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             return _itemsSource?.Count() ?? 0;
         }
 
-        public override string GetTitle(UIPickerView pickerView, nint row, nint component)
+        public override string? GetTitle(UIPickerView pickerView, nint row, nint component)
         {
-            return _itemsSource == null ? "-" : RowTitle(row, _itemsSource.ElementAt((int)row));
+            return _itemsSource == null ? "-" : RowTitle(row, _itemsSource.ElementAt((int)row)!);
         }
 
-        protected virtual string RowTitle(nint row, object item)
+        protected virtual string? RowTitle(nint row, object item)
         {
             return item.ToString();
         }
 
         public override void Selected(UIPickerView pickerView, nint row, nint component)
         {
-            if (_itemsSource.Count() == 0)
+            if (_itemsSource!.Count() == 0)
                 return;
 
-            _selectedItem = _itemsSource.ElementAt((int)row);
+            _selectedItem = _itemsSource!.ElementAt((int)row);
 
             var handler = SelectedItemChanged;
             handler?.Invoke(this, EventArgs.Empty);
@@ -121,7 +121,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
                 command.Execute(_selectedItem);
         }
 
-        public object SelectedItem
+        public object? SelectedItem
         {
             get => _selectedItem;
             set
@@ -131,16 +131,16 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
         }
 
-        public event EventHandler SelectedItemChanged;
+        public event EventHandler? SelectedItemChanged;
 
-        public ICommand SelectedChangedCommand { get; set; }
+        public ICommand? SelectedChangedCommand { get; set; }
 
         protected virtual void ShowSelectedItem()
         {
             if (_itemsSource == null)
                 return;
 
-            var position = _itemsSource.GetPosition(_selectedItem);
+            var position = _itemsSource.GetPosition(_selectedItem!);
             if (position < 0)
                 return;
 

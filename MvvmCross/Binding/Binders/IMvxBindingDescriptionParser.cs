@@ -14,9 +14,9 @@ namespace MvvmCross.Binding.Binders
 
         IEnumerable<MvxBindingDescription> LanguageParse(string text);
 
-        MvxBindingDescription ParseSingle(string text);
+        MvxBindingDescription? ParseSingle(string text);
 
-        MvxBindingDescription SerializableBindingToBinding(string targetName,
+        MvxBindingDescription? SerializableBindingToBinding(string? targetName,
                                                            MvxSerializableBindingDescription description);
     }
 }

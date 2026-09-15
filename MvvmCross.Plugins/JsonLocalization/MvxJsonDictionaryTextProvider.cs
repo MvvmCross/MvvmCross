@@ -18,7 +18,7 @@ namespace MvvmCross.Plugin.JsonLocalization
         {
         }
 
-        private IMvxJsonConverter _jsonConvert;
+        private IMvxJsonConverter? _jsonConvert;
         protected IMvxJsonConverter JsonConvert
         {
             get
@@ -35,7 +35,7 @@ namespace MvvmCross.Plugin.JsonLocalization
         public virtual void LoadJsonFromText(string namespaceKey, string typeKey, string rawJson)
         {
             var entries = JsonConvert.DeserializeObject<Dictionary<string, string>>(rawJson);
-            foreach (var kvp in entries)
+            foreach (var kvp in entries!)
             {
                 AddOrReplace(namespaceKey, typeKey, kvp.Key, kvp.Value);
             }

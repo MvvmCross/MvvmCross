@@ -7,11 +7,9 @@ using MvvmCross.Core.Parse.StringDictionary;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public class MvxStringDictionaryNavigationSerializer
         : IMvxNavigationSerializer
     {
         public IMvxTextSerializer Serializer { get; } = new MvxViewModelRequestCustomTextSerializer();
     }
-#nullable restore
 }

@@ -10,7 +10,7 @@ namespace MvvmCross.Platforms.Tvos
     public class MvxTvosSystem
         : IMvxTvosSystem
     {
-        public MvxTvosVersion Version { get; private set; }
+        public MvxTvosVersion Version { get; private set; } = null!;
 
         public MvxTvosSystem()
         {

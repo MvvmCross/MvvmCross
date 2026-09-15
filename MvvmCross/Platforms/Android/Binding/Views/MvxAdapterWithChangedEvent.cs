@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
         }
 
-        public event EventHandler<NotifyCollectionChangedEventArgs> DataSetChanged;
+        public event EventHandler<NotifyCollectionChangedEventArgs>? DataSetChanged;
 
         public override void NotifyDataSetChanged()
         {

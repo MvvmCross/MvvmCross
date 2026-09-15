@@ -13,8 +13,8 @@ namespace MvvmCross.Binding.Bindings
         {
         }
 
-        public MvxBindingDescription(string targetName, string sourcePropertyPath, IMvxValueConverter converter,
-                                     object converterParameter, object fallbackValue, MvxBindingMode mode)
+        public MvxBindingDescription(string? targetName, string sourcePropertyPath, IMvxValueConverter? converter,
+                                     object? converterParameter, object? fallbackValue, MvxBindingMode mode)
         {
             TargetName = targetName;
             Mode = mode;
@@ -27,9 +27,9 @@ namespace MvvmCross.Binding.Bindings
             };
         }
 
-        public string TargetName { get; set; }
+        public string? TargetName { get; set; }
         public MvxBindingMode Mode { get; set; }
-        public MvxSourceStepDescription Source { get; set; }
+        public MvxSourceStepDescription? Source { get; set; }
 
         public override string ToString()
         {

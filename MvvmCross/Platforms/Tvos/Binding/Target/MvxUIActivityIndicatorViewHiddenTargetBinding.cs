@@ -29,17 +29,17 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(bool);
 
-        protected UIActivityIndicatorView View => Target as UIActivityIndicatorView;
+        protected UIActivityIndicatorView? View => Target as UIActivityIndicatorView;
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object? target, object? value)
         {
-            var view = (UIActivityIndicatorView)target;
+            var view = (UIActivityIndicatorView)target!;
             if (view == null)
             {
                 return;
             }
 
-            view.Hidden = (bool)value;
+            view.Hidden = (bool)value!;
 
             if (view.Hidden)
             {

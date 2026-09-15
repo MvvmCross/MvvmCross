@@ -8,6 +8,6 @@ namespace MvvmCross.Platforms.Mac.Presenters.Attributes
 {
     public class MvxSheetPresentationAttribute : MvxBasePresentationAttribute
     {
-        public string WindowIdentifier { get; set; }
+        public string? WindowIdentifier { get; set; }
     }
 }

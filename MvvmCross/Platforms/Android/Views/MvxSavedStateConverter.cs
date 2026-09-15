@@ -20,7 +20,7 @@ namespace MvvmCross.Platforms.Android.Views
     {
         private const string ExtrasKey = "MvxSaved";
 
-        public IMvxBundle Read(Bundle bundle)
+        public IMvxBundle? Read(Bundle bundle)
         {
             var extras = bundle?.GetString(ExtrasKey);
             if (string.IsNullOrEmpty(extras))

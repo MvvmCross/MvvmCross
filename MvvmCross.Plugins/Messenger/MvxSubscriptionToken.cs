@@ -6,7 +6,6 @@ using System;
 
 namespace MvvmCross.Plugin.Messenger
 {
-#nullable enable
     [Preserve(AllMembers = true)]
     public sealed class MvxSubscriptionToken
         : IDisposable
@@ -38,5 +37,4 @@ namespace MvvmCross.Plugin.Messenger
             }
         }
     }
-#nullable restore
 }

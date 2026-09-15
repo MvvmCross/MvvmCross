@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Tvos.Core
         /// <summary>
         /// UIApplicationDelegate.Window doesn't really exist / work. It was added by Xamarin.iOS templates.
         /// </summary>
-        public virtual UIWindow MainWindow { get; set; }
+        public virtual UIWindow? MainWindow { get; set; }
 
         public override void WillEnterForeground(UIApplication application)
         {
@@ -34,7 +34,7 @@ namespace MvvmCross.Platforms.Tvos.Core
             FireLifetimeChanged(MvxLifetimeEvent.Closing);
         }
 
-        public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
+        public event EventHandler<MvxLifetimeEventArgs>? LifetimeChanged;
 
         protected void FireLifetimeChanged(MvxLifetimeEvent which)
         {

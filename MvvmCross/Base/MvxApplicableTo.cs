@@ -4,7 +4,6 @@
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public abstract class MvxApplicableTo<T>
         : MvxApplicable,
           IMvxApplicableTo<T>
@@ -16,5 +15,4 @@ namespace MvvmCross.Base
             SuppressFinalizer();
         }
     }
-#nullable restore
 }

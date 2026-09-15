@@ -45,12 +45,12 @@ namespace Playground.Core.ViewModels
         public override void Prepare()
         {
             var vm = _viewModelLoader.LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as ChildContentViewModel;
-            vm.Test = "Child 1";
+            vm!.Test = "Child 1";
             ChildViewModel1 = vm;
             var bc = _viewModelLoader
                     .LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as
                 ChildContentViewModel;
-            bc.Test = "Child 2";
+            bc!.Test = "Child 2";
             ChildBindingContext2 = bc;
         }
     }

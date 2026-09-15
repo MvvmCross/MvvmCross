@@ -12,7 +12,7 @@ namespace MvvmCross.Platforms.Mac.Views
 {
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxMacView MacView
+        protected IMvxMacView? MacView
         {
             get { return ViewController as IMvxMacView; }
         }
@@ -23,10 +23,11 @@ namespace MvvmCross.Platforms.Mac.Views
             if (!(eventSource is IMvxMacView))
                 throw new ArgumentException(nameof(eventSource), $"{nameof(eventSource)} should be a {nameof(IMvxMacView)}");
 
-            MacView.BindingContext = new MvxBindingContext();
+            if (MacView != null)
+                MacView.BindingContext = new MvxBindingContext();
         }
 
-        public override void HandleDisposeCalled(object sender, EventArgs e)
+        public override void HandleDisposeCalled(object? sender, EventArgs e)
         {
             if (MacView == null)
             {

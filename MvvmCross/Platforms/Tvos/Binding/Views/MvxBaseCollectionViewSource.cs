@@ -14,10 +14,10 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
     public abstract class MvxBaseCollectionViewSource : UICollectionViewSource
     {
-        public static readonly NSString UnknownCellIdentifier = null;
+        public static readonly NSString UnknownCellIdentifier = null!;
 
-        private readonly NSString _cellIdentifier;
-        private readonly UICollectionView _collectionView;
+        private readonly NSString _cellIdentifier = null!;
+        private readonly UICollectionView _collectionView = null!;
 
         protected virtual NSString DefaultCellIdentifier => _cellIdentifier;
 
@@ -35,7 +35,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 
         protected UICollectionView CollectionView => _collectionView;
 
-        public ICommand SelectionChangedCommand { get; set; }
+        public ICommand? SelectionChangedCommand { get; set; }
 
         public virtual void ReloadData()
         {
@@ -51,12 +51,12 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         }
 
         protected virtual UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath,
-                                                                  object item)
+                                                                  object? item)
         {
             return (UICollectionViewCell)collectionView.DequeueReusableCell(DefaultCellIdentifier, indexPath);
         }
 
-        protected abstract object GetItemAt(NSIndexPath indexPath);
+        protected abstract object? GetItemAt(NSIndexPath indexPath);
 
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
@@ -69,9 +69,9 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             SelectedItem = item;
         }
 
-        private object _selectedItem;
+        private object? _selectedItem;
 
-        public object SelectedItem
+        public object? SelectedItem
         {
             get
             {
@@ -87,7 +87,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             }
         }
 
-        public event EventHandler SelectedItemChanged;
+        public event EventHandler? SelectedItemChanged;
 
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {

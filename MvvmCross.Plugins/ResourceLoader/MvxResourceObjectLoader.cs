@@ -38,21 +38,20 @@ namespace MvvmCross.Plugin.ResourceLoader
         {
             var streamLocation = GetStreamLocation(namespaceKey, typeKey, entryKey);
             var resourceLoader = MvxHost.Current!.Services.GetRequiredService<IMvxResourceLoader>();
-            TResource resource = default(TResource);
+            TResource? resource = default(TResource);
             resourceLoader.GetResourceStream(streamLocation, (stream) =>
                 {
                     if (stream != null)
                         resource = Load(stream);
                 });
-            return resource;
+            return resource!;
         }
 
         protected abstract TResource Load(Stream stream);
 
         private string GetStreamLocation(string namespaceKey, string typeKey, string entryKey)
         {
-            string specificRootLocation;
-            if (!_rootLocations.TryGetValue(MakeLookupKey(namespaceKey, typeKey), out specificRootLocation))
+            if (!_rootLocations.TryGetValue(MakeLookupKey(namespaceKey, typeKey), out string? specificRootLocation))
             {
                 specificRootLocation = $"{_generalRootLocation}/{namespaceKey}/{typeKey}";
             }

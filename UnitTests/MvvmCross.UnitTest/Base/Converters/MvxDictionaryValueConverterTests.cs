@@ -48,7 +48,7 @@ namespace MvvmCross.UnitTest.Base.Converters
         [InlineData(TestStates.Completed, StateCompleted)]
         public void Convert_MatchingKeyExcludeFallback_ReturnsDictionaryValue(TestStates state, string expected)
         {
-            var converted = Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, default(string), false), CultureInfo.CurrentUICulture);
+            var converted = Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, string.Empty, false), CultureInfo.CurrentUICulture);
             Assert.Equal(expected, converted);
         }
 
@@ -68,7 +68,7 @@ namespace MvvmCross.UnitTest.Base.Converters
             var state = TestStates.Failed;
 
             Assert.Throws<KeyNotFoundException>(() =>
-                Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, default(string), false), CultureInfo.CurrentUICulture));
+                Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, string.Empty, false), CultureInfo.CurrentUICulture));
         }
 
         [Fact]

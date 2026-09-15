@@ -9,8 +9,8 @@ namespace MvvmCross.UnitTest.Mocks.TestViewModels
 {
     public class Test3ViewModel : MvxViewModel
     {
-        public BundleObject SaveStateBundleObject { get; set; }
-        public Dictionary<string, string> AdditionalSaveStateFields { get; set; }
+        public BundleObject? SaveStateBundleObject { get; set; }
+        public Dictionary<string, string>? AdditionalSaveStateFields { get; set; }
 
         public BundleObject SaveState()
         {

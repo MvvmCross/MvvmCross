@@ -8,7 +8,6 @@ using MvvmCross.Plugin.Messenger.ThreadRunners;
 
 namespace MvvmCross.Plugin.Messenger
 {
-#nullable enable
     // Note - the original inspiration for this code was XPlatUtils from JonathonPeppers
     // - https://github.com/jonathanpeppers/XPlatUtils
     // - inspiration consumed, ripped apart and loved under Ms-PL
@@ -85,7 +84,7 @@ namespace MvvmCross.Plugin.Messenger
             lock (_locker)
             {
                 if (!_subscriptions.TryGetValue(
-                    typeof(TMessage), out Dictionary<Guid, BaseSubscription> messageSubscriptions))
+                    typeof(TMessage), out Dictionary<Guid, BaseSubscription>? messageSubscriptions))
                 {
                     messageSubscriptions = new Dictionary<Guid, BaseSubscription>();
                     _subscriptions[typeof(TMessage)] = messageSubscriptions;
@@ -117,7 +116,7 @@ namespace MvvmCross.Plugin.Messenger
             lock (_locker)
             {
                 if (_subscriptions.TryGetValue(
-                    typeof(TMessage), out Dictionary<Guid, BaseSubscription> messageSubscriptions) &&
+                    typeof(TMessage), out Dictionary<Guid, BaseSubscription>? messageSubscriptions) &&
                     messageSubscriptions.ContainsKey(subscriptionGuid))
                 {
                     MvxPluginLog.Instance?.Log(LogLevel.Trace, "Removing subscription {0}", subscriptionGuid);
@@ -131,7 +130,7 @@ namespace MvvmCross.Plugin.Messenger
         }
 
         protected virtual void PublishSubscriberChangeMessage<TMessage>(
-            Dictionary<Guid, BaseSubscription> messageSubscriptions)
+            Dictionary<Guid, BaseSubscription>? messageSubscriptions)
             where TMessage : MvxMessage
         {
             PublishSubscriberChangeMessage(typeof(TMessage), messageSubscriptions);
@@ -139,7 +138,7 @@ namespace MvvmCross.Plugin.Messenger
 
         protected virtual void PublishSubscriberChangeMessage(
             Type messageType,
-            Dictionary<Guid, BaseSubscription> messageSubscriptions)
+            Dictionary<Guid, BaseSubscription>? messageSubscriptions)
         {
             var newCount = messageSubscriptions?.Count ?? 0;
             Publish(new MvxSubscriberChangeMessage(this, messageType, newCount));
@@ -151,7 +150,7 @@ namespace MvvmCross.Plugin.Messenger
             lock (_locker)
             {
                 if (!_subscriptions.TryGetValue(
-                    typeof(TMessage), out Dictionary<Guid, BaseSubscription> messageSubscriptions))
+                    typeof(TMessage), out Dictionary<Guid, BaseSubscription>? messageSubscriptions))
                 {
                     return false;
                 }
@@ -164,7 +163,7 @@ namespace MvvmCross.Plugin.Messenger
             lock (_locker)
             {
                 if (!_subscriptions.TryGetValue(
-                    typeof(TMessage), out Dictionary<Guid, BaseSubscription> messageSubscriptions))
+                    typeof(TMessage), out Dictionary<Guid, BaseSubscription>? messageSubscriptions))
                 {
                     return 0;
                 }
@@ -172,12 +171,12 @@ namespace MvvmCross.Plugin.Messenger
             }
         }
 
-        public bool HasSubscriptionsForTag<TMessage>(string tag) where TMessage : MvxMessage
+        public bool HasSubscriptionsForTag<TMessage>(string? tag) where TMessage : MvxMessage
         {
             lock (_locker)
             {
                 if (!_subscriptions.TryGetValue(
-                    typeof(TMessage), out Dictionary<Guid, BaseSubscription> messageSubscriptions))
+                    typeof(TMessage), out Dictionary<Guid, BaseSubscription>? messageSubscriptions))
                 {
                     return false;
                 }
@@ -185,12 +184,12 @@ namespace MvvmCross.Plugin.Messenger
             }
         }
 
-        public int CountSubscriptionsForTag<TMessage>(string tag) where TMessage : MvxMessage
+        public int CountSubscriptionsForTag<TMessage>(string? tag) where TMessage : MvxMessage
         {
             lock (_locker)
             {
                 if (!_subscriptions.TryGetValue(
-                    typeof(TMessage), out Dictionary<Guid, BaseSubscription> messageSubscriptions))
+                    typeof(TMessage), out Dictionary<Guid, BaseSubscription>? messageSubscriptions))
                 {
                     return 0;
                 }
@@ -198,14 +197,14 @@ namespace MvvmCross.Plugin.Messenger
             }
         }
 
-        public IList<string> GetSubscriptionTagsFor<TMessage>() where TMessage : MvxMessage
+        public IList<string?> GetSubscriptionTagsFor<TMessage>() where TMessage : MvxMessage
         {
             lock (_locker)
             {
                 if (!_subscriptions.TryGetValue(
-                    typeof(TMessage), out Dictionary<Guid, BaseSubscription> messageSubscriptions))
+                    typeof(TMessage), out Dictionary<Guid, BaseSubscription>? messageSubscriptions))
                 {
-                    return new List<string>(0);
+                    return new List<string?>(0);
                 }
                 return messageSubscriptions.Select(x => x.Value.Tag).ToList();
             }
@@ -238,7 +237,7 @@ namespace MvvmCross.Plugin.Messenger
             List<BaseSubscription>? toNotify = null;
             lock (_locker)
             {
-                if (_subscriptions.TryGetValue(messageType, out Dictionary<Guid, BaseSubscription> messageSubscriptions))
+                if (_subscriptions.TryGetValue(messageType, out Dictionary<Guid, BaseSubscription>? messageSubscriptions))
                 {
                     toNotify = messageSubscriptions.Values.ToList();
                 }
@@ -325,7 +324,7 @@ namespace MvvmCross.Plugin.Messenger
             lock (_locker)
             {
                 if (!_subscriptions.TryGetValue(
-                    type, out Dictionary<Guid, BaseSubscription> messageSubscriptions))
+                    type, out Dictionary<Guid, BaseSubscription>? messageSubscriptions))
                 {
                     return;
                 }
@@ -349,5 +348,4 @@ namespace MvvmCross.Plugin.Messenger
             }
         }
     }
-#nullable restore
 }

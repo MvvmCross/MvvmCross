@@ -10,14 +10,14 @@ namespace MvvmCross.Plugin.Messenger.Subscriptions
     public abstract class BaseSubscription
     {
         public Guid Id { get; private set; }
-        public string Tag { get; private set; }
+        public string? Tag { get; private set; }
         public abstract bool IsAlive { get; }
 
         public abstract bool Invoke(object message);
 
         private readonly IMvxActionRunner _actionRunner;
 
-        protected BaseSubscription(IMvxActionRunner actionRunner, string tag)
+        protected BaseSubscription(IMvxActionRunner actionRunner, string? tag)
         {
             _actionRunner = actionRunner;
             Id = Guid.NewGuid();

@@ -22,7 +22,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         : FrameLayout, IMvxBindingContextOwner
     {
         private readonly int _templateId;
-        private readonly IMvxAndroidBindingContext _bindingContext;
+        private readonly IMvxAndroidBindingContext _bindingContext = null!;
 
         public MvxFrameControl(Context context, IAttributeSet attrs)
             : this(MvxAttributeHelpers.ReadTemplateId(context, attrs), context, attrs)
@@ -63,7 +63,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
         }
 
-        private object _cachedDataContext;
+        private object? _cachedDataContext;
         private bool _isAttachedToWindow;
 
         protected override void Dispose(bool disposing)
@@ -96,9 +96,9 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             _isAttachedToWindow = false;
         }
 
-        private View _content;
+        private View? _content;
 
-        protected View Content
+        protected View? Content
         {
             get
             {
@@ -116,7 +116,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         }
 
         [MvxSetToNullAfterBinding]
-        public object DataContext
+        public object? DataContext
         {
             get
             {

@@ -14,11 +14,11 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
     public class MvxUIControlValueChangedTargetBinding
         : MvxConvertingTargetBinding
     {
-        private ICommand _command;
+        private ICommand? _command;
         private readonly EventHandler<EventArgs> _canExecuteEventHandler;
-        private MvxCanExecuteChangedEventSubscription _canExecuteSubscription;
+        private MvxCanExecuteChangedEventSubscription? _canExecuteSubscription;
 
-        protected UIControl Control => Target as UIControl;
+        protected UIControl? Control => Target as UIControl;
 
         public MvxUIControlValueChangedTargetBinding(UIControl control)
             : base(control)
@@ -36,7 +36,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             _canExecuteEventHandler = OnCanExecuteChanged;
         }
 
-        private void OnValueChanged(object sender, EventArgs e)
+        private void OnValueChanged(object? sender, EventArgs e)
         {
             if (!_command?.CanExecute(null) ?? true)
                 return;
@@ -49,7 +49,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(ICommand);
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object? target, object? value)
         {
             if (_canExecuteSubscription != null)
             {
@@ -73,7 +73,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             view.Enabled = _command?.CanExecute(null) ?? false;
         }
 
-        private void OnCanExecuteChanged(object sender, EventArgs e)
+        private void OnCanExecuteChanged(object? sender, EventArgs e)
         {
             RefreshEnabledState();
         }

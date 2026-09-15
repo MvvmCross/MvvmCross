@@ -12,13 +12,13 @@ namespace MvvmCross.Platforms.Android.Binding.BindingContext
         public static View BindingInflate(this IMvxBindingContextOwner owner, int resourceId, ViewGroup viewGroup)
         {
             var context = (IMvxAndroidBindingContext)owner.BindingContext;
-            return context.BindingInflate(resourceId, viewGroup);
+            return context.BindingInflate(resourceId, viewGroup)!;
         }
 
         public static View BindingInflate(this IMvxBindingContextOwner owner, int resourceId, ViewGroup viewGroup, bool attachToParent)
         {
             var context = (IMvxAndroidBindingContext)owner.BindingContext;
-            return context.BindingInflate(resourceId, viewGroup, attachToParent);
+            return context.BindingInflate(resourceId, viewGroup, attachToParent)!;
         }
     }
 }

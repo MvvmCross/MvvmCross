@@ -13,7 +13,6 @@ using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders
 {
-#nullable enable
     public class MvxAndroidViewFactory
         : IMvxAndroidViewFactory
     {
@@ -56,5 +55,4 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             }
         }
     }
-#nullable restore
 }

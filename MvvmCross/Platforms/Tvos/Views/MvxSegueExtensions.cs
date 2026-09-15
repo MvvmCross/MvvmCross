@@ -22,7 +22,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Runtime type inspection is necessary for segue-based navigation")]
         [UnconditionalSuppressMessage("Trimming", "IL2073", Justification = "PropertyInfo.PropertyType doesn't preserve annotations")]
         [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Runtime property inspection is necessary for ViewModel discovery")]
-        internal static Type GetViewModelType(this IMvxView view)
+        internal static Type? GetViewModelType(this IMvxView view)
         {
             var viewType = view.GetType();
             var props = viewType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -44,17 +44,17 @@ namespace MvvmCross.Platforms.Tvos.Views
                 self.ViewModelRequestForSegueImpl(segue, parameterValues);
         }
 
-        private static void ViewModelRequestForSegueImpl(this IMvxEventSourceViewController self, UIStoryboardSegue segue, object parameterValuesObject)
+        private static void ViewModelRequestForSegueImpl(this IMvxEventSourceViewController self, UIStoryboardSegue segue, object? parameterValuesObject)
         {
-            self.ViewModelRequestForSegueImpl(segue, parameterValuesObject.ToSimplePropertyDictionary());
+            self.ViewModelRequestForSegueImpl(segue, parameterValuesObject?.ToSimplePropertyDictionary());
         }
 
-        private static void ViewModelRequestForSegueImpl(this IMvxEventSourceViewController self, UIStoryboardSegue segue, IDictionary<string, string> parameterValues)
+        private static void ViewModelRequestForSegueImpl(this IMvxEventSourceViewController self, UIStoryboardSegue segue, IDictionary<string, string>? parameterValues)
         {
             self.ViewModelRequestForSegueImpl(segue, new MvxBundle(parameterValues));
         }
 
-        private static void ViewModelRequestForSegueImpl(this IMvxEventSourceViewController _, UIStoryboardSegue segue, IMvxBundle parameterBundle = null)
+        private static void ViewModelRequestForSegueImpl(this IMvxEventSourceViewController _, UIStoryboardSegue segue, IMvxBundle? parameterBundle = null)
         {
             if (segue.DestinationViewController is IMvxTvosView { Request: null } view)
             {

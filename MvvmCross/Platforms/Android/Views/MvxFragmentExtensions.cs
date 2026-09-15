@@ -31,17 +31,17 @@ namespace MvvmCross.Platforms.Android.Views
                     throw new InvalidOperationException($"Your fragment of type {type.FullName} is not generic and it does not have {nameof(MvxFragmentPresentationAttribute)} attribute set!");
 
                 var cacheableFragmentAttribute = type.GetBasePresentationAttribute();
-                if (cacheableFragmentAttribute.ViewModelType == null)
+                if (cacheableFragmentAttribute?.ViewModelType == null)
                     throw new InvalidOperationException($"Your fragment of type {type.FullName} is not generic and it does not use {nameof(MvxFragmentPresentationAttribute)} with ViewModel Type constructor.");
 
-                viewModelType = cacheableFragmentAttribute.ViewModelType;
+                viewModelType = cacheableFragmentAttribute!.ViewModelType;
             }
 
             return viewModelType;
         }
 
         public static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState, Type fragmentParentActivityType,
-            MvxViewModelRequest request = null)
+            MvxViewModelRequest? request = null)
         {
             var viewModelType = fragmentView.FindAssociatedViewModelType(fragmentParentActivityType);
             if (viewModelType == typeof(MvxNullViewModel))
@@ -56,20 +56,20 @@ namespace MvvmCross.Platforms.Android.Views
             }
 
             if (request == null)
-                request = MvxViewModelRequest.GetDefaultRequest(viewModelType);
+                request = MvxViewModelRequest.GetDefaultRequest(viewModelType!);
 
             var viewModelCache = MvxHost.Current!.Services.GetRequiredService<IMvxChildViewModelCache>();
-            if (viewModelCache.Exists(viewModelType))
+            if (viewModelCache.Exists(viewModelType!))
             {
-                var viewModelCached = viewModelCache.Get(viewModelType);
-                viewModelCache.Remove(viewModelType);
-                return viewModelCached;
+                var viewModelCached = viewModelCache.Get(viewModelType!);
+                viewModelCache.Remove(viewModelType!);
+                return viewModelCached!;
             }
 
             var loaderService = MvxHost.Current!.Services.GetRequiredService<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(request, savedState);
 
-            return viewModel;
+            return viewModel!;
         }
 
         [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "ViewModel types are preserved by the navigation infrastructure.")]

@@ -15,8 +15,8 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
     public abstract class MvxTableViewSource : MvxBaseTableViewSource
     {
-        private IEnumerable _itemsSource;
-        private IDisposable _subscription;
+        private IEnumerable? _itemsSource;
+        private IDisposable? _subscription;
 
         protected MvxTableViewSource(UITableView tableView)
             : base(tableView)
@@ -45,7 +45,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         }
 
         [MvxSetToNullAfterBinding]
-        public virtual IEnumerable ItemsSource
+        public virtual IEnumerable? ItemsSource
         {
             get
             {
@@ -75,7 +75,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             }
         }
 
-        protected override object GetItemAt(NSIndexPath indexPath)
+        protected override object? GetItemAt(NSIndexPath indexPath)
         {
             return ItemsSource?.ElementAt(indexPath.Row);
         }
@@ -86,7 +86,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         public UITableViewRowAnimation RemoveAnimation { get; set; }
         public UITableViewRowAnimation ReplaceAnimation { get; set; }
 
-        protected virtual void CollectionChangedOnCollectionChanged(object sender,
+        protected virtual void CollectionChangedOnCollectionChanged(object? sender,
                                                                     NotifyCollectionChangedEventArgs args)
         {
             Action action = () =>
@@ -116,19 +116,19 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             {
                 case NotifyCollectionChangedAction.Add:
                     {
-                        var newIndexPaths = CreateIndexPathArray(args.NewStartingIndex, args.NewItems.Count);
+                        var newIndexPaths = CreateIndexPathArray(args.NewStartingIndex, args.NewItems!.Count);
                         TableView.InsertRows(newIndexPaths, AddAnimation);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Remove:
                     {
-                        var oldIndexPaths = CreateIndexPathArray(args.OldStartingIndex, args.OldItems.Count);
+                        var oldIndexPaths = CreateIndexPathArray(args.OldStartingIndex, args.OldItems!.Count);
                         TableView.DeleteRows(oldIndexPaths, RemoveAnimation);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Move:
                     {
-                        if (args.NewItems.Count != 1 && args.OldItems.Count != 1)
+                        if (args.NewItems!.Count != 1 && args.OldItems!.Count != 1)
                             return false;
 
                         var oldIndexPath = NSIndexPath.FromRowSection(args.OldStartingIndex, 0);
@@ -138,10 +138,10 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
                     }
                 case NotifyCollectionChangedAction.Replace:
                     {
-                        if (args.NewItems.Count != args.OldItems.Count)
+                        if (args.NewItems!.Count != args.OldItems!.Count)
                             return false;
 
-                        var indexPaths = Enumerable.Range(args.NewStartingIndex, args.NewItems.Count)
+                        var indexPaths = Enumerable.Range(args.NewStartingIndex, args.NewItems!.Count)
                             .Select(index => NSIndexPath.FromRowSection(index, 0)).ToArray();
                         TableView.ReloadRows(indexPaths, ReplaceAnimation);
                         return true;

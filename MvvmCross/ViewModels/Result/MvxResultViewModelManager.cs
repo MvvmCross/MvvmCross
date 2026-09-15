@@ -10,7 +10,7 @@ public class MvxResultViewModelManager : IMvxResultViewModelManager
 
     public void RegisterToResult<TResult>(IMvxResultAwaitingViewModel<TResult> viewModel)
     {
-        if (!_registrations.TryGetValue(typeof(TResult), out HashSet<IMvxBaseResultAwaitingViewModel> resultRegistrations))
+        if (!_registrations.TryGetValue(typeof(TResult), out HashSet<IMvxBaseResultAwaitingViewModel>? resultRegistrations))
         {
             resultRegistrations = new();
             _registrations[typeof(TResult)] = resultRegistrations;
@@ -21,7 +21,7 @@ public class MvxResultViewModelManager : IMvxResultViewModelManager
 
     public bool UnregisterToResult<TResult>(IMvxResultAwaitingViewModel<TResult> viewModel)
     {
-        if (_registrations.TryGetValue(typeof(TResult), out HashSet<IMvxBaseResultAwaitingViewModel> resultRegistrations) &&
+        if (_registrations.TryGetValue(typeof(TResult), out HashSet<IMvxBaseResultAwaitingViewModel>? resultRegistrations) &&
             resultRegistrations.Remove(viewModel))
         {
             return true;
@@ -31,7 +31,7 @@ public class MvxResultViewModelManager : IMvxResultViewModelManager
 
     public bool IsRegistered<TResult>(IMvxResultAwaitingViewModel<TResult> viewModel)
     {
-        if (_registrations.TryGetValue(typeof(TResult), out HashSet<IMvxBaseResultAwaitingViewModel> resultRegistrations) &&
+        if (_registrations.TryGetValue(typeof(TResult), out HashSet<IMvxBaseResultAwaitingViewModel>? resultRegistrations) &&
             resultRegistrations.Contains(viewModel))
         {
             return true;
@@ -41,7 +41,7 @@ public class MvxResultViewModelManager : IMvxResultViewModelManager
 
     public void SetResult<TResult>(IMvxResultSettingViewModel<TResult> viewModel, TResult result)
     {
-        if (_registrations.TryGetValue(typeof(TResult), out HashSet<IMvxBaseResultAwaitingViewModel> resultRegistrations))
+        if (_registrations.TryGetValue(typeof(TResult), out HashSet<IMvxBaseResultAwaitingViewModel>? resultRegistrations))
         {
             foreach (var resultRegistration in resultRegistrations.Cast<IMvxResultAwaitingViewModel<TResult>>().ToArray())
             {

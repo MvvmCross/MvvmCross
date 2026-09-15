@@ -13,7 +13,7 @@ namespace MvvmCross.Plugin.JsonLocalization
     public class MvxContentJsonDictionaryTextProvider
         : MvxJsonDictionaryTextProvider
     {
-        private IMvxResourceLoader _resourceLoader;
+        private IMvxResourceLoader? _resourceLoader;
 
         protected IMvxResourceLoader ResourceLoader
         {

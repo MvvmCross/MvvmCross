@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.Ios.Views
             ValueChanged += OnValueChanged;
         }
 
-        private string _message;
+        private string _message = string.Empty;
 
         /// <summary>
         /// Gets or sets the message to display
@@ -68,14 +68,14 @@ namespace MvvmCross.Platforms.Ios.Views
         /// Gets or sets the refresh command.
         /// </summary>
         /// <value>The refresh command.</value>
-        public ICommand RefreshCommand { get; set; }
+        public ICommand? RefreshCommand { get; set; }
 
-        private void OnValueChanged(object sender, EventArgs args)
+        private void OnValueChanged(object? sender, EventArgs args)
         {
             ExecuteRefreshCommand(RefreshCommand);
         }
 
-        protected virtual void ExecuteRefreshCommand(ICommand command)
+        protected virtual void ExecuteRefreshCommand(ICommand? command)
         {
             if (command == null)
                 return;

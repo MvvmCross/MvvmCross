@@ -68,10 +68,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return true;
         }
 
-        public virtual View GetGroupView(int groupPosition, bool isExpanded, View convertView, ViewGroup parent)
+        public virtual View GetGroupView(int groupPosition, bool isExpanded, View? convertView, ViewGroup? parent)
         {
             var item = GetRawGroup(groupPosition);
-            return GetBindableView(convertView, item, parent, GroupTemplateId);
+            return GetBindableView(convertView, item, parent, GroupTemplateId)!;
         }
 
         public virtual long GetGroupId(int groupPosition)
@@ -81,7 +81,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         public virtual Object GetGroup(int groupPosition)
         {
-            return null;
+            return null!;
         }
 
         // Base implementation returns a long (from BaseExpandableListAdapter.java):
@@ -106,19 +106,19 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         public virtual object GetRawItem(int groupPosition, int position)
         {
-            return ((IEnumerable)GetRawGroup(groupPosition)).ElementAt(position);
+            return ((IEnumerable)GetRawGroup(groupPosition)).ElementAt(position)!;
         }
 
         public virtual object GetRawGroup(int groupPosition)
         {
-            return GetRawItem(groupPosition);
+            return GetRawItem(groupPosition)!;
         }
 
-        public virtual View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView, ViewGroup parent)
+        public virtual View GetChildView(int groupPosition, int childPosition, bool isLastChild, View? convertView, ViewGroup? parent)
         {
             var item = GetRawItem(groupPosition, childPosition);
 
-            return GetBindableView(convertView, item, parent, ItemTemplateId);
+            return GetBindableView(convertView, item, parent, ItemTemplateId)!;
         }
 
         public virtual int GetChildrenCount(int groupPosition)
@@ -133,7 +133,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         public virtual Object GetChild(int groupPosition, int childPosition)
         {
-            return null;
+            return null!;
         }
 
         public virtual Tuple<int, int> GetPositions(object childItem)
@@ -149,7 +149,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 groupPosition++;
             }
 
-            return null;
+            return null!;
         }
     }
 }

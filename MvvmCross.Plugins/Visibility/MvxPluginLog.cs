@@ -9,6 +9,6 @@ namespace MvvmCross.Plugin.Visibility
 {
     internal static class MvxPluginLog
     {
-        internal static ILogger Instance { get; } = MvxLogHost.GetLog("MvxPlugin.Visibility");
+        internal static ILogger? Instance { get; } = MvxLogHost.GetLog("MvxPlugin.Visibility");
     }
 }

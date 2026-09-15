@@ -47,9 +47,9 @@ namespace MvvmCross.UnitTest.Binding.Binders
                 }
             }
 
-            private event PropertyChangedEventHandler InternalPropertyChanged;
+            private event PropertyChangedEventHandler? InternalPropertyChanged;
 
-            protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+            protected virtual void RaisePropertyChanged([CallerMemberName] string? propertyName = null)
             {
                 InternalPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
@@ -66,13 +66,13 @@ namespace MvvmCross.UnitTest.Binding.Binders
             private int _intProperty1;
 
             private int _intProperty2;
-            private string _property1;
+            private string? _property1;
 
-            private string _property2;
+            private string? _property2;
 
-            private MySubSource _subSource;
+            private MySubSource? _subSource;
 
-            public string Property1
+            public string? Property1
             {
                 get => _property1;
                 set
@@ -82,7 +82,7 @@ namespace MvvmCross.UnitTest.Binding.Binders
                 }
             }
 
-            public string Property2
+            public string? Property2
             {
                 get => _property2;
                 set
@@ -142,7 +142,7 @@ namespace MvvmCross.UnitTest.Binding.Binders
                 }
             }
 
-            public MySubSource SubSource
+            public MySubSource? SubSource
             {
                 get => _subSource;
                 set
@@ -155,11 +155,11 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
         public class MySubSource : BaseSource
         {
-            private string _property1;
+            private string? _property1;
 
-            private string _property2;
+            private string? _property2;
 
-            public string SubProperty1
+            public string? SubProperty1
             {
                 get => _property1;
                 set
@@ -169,7 +169,7 @@ namespace MvvmCross.UnitTest.Binding.Binders
                 }
             }
 
-            public string SubProperty2
+            public string? SubProperty2
             {
                 get => _property2;
                 set
@@ -182,12 +182,12 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
         public class IntPlus1ValueConverter : MvxValueConverter<int, int>
         {
-            protected override int Convert(int value, Type targetType, object parameter, CultureInfo culture)
+            protected override int Convert(int value, Type? targetType, object? parameter, CultureInfo? culture)
             {
                 return value + 1;
             }
 
-            protected override int ConvertBack(int value, Type targetType, object parameter, CultureInfo culture)
+            protected override int ConvertBack(int value, Type? targetType, object? parameter, CultureInfo? culture)
             {
                 return value - 1;
             }

@@ -37,10 +37,10 @@ namespace MvvmCross.UnitTest.Binding.Mocks
             Changed?.Invoke(this, EventArgs.Empty);
         }
 
-        public event EventHandler Changed;
+        public event EventHandler? Changed;
 
         public bool TryGetValueResult { get; set; }
-        public object TryGetValueValue { get; set; }
+        public object? TryGetValueValue { get; set; }
 
         public object GetValue()
         {

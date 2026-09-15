@@ -51,7 +51,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             get
             {
-                return base.Adapter as IMvxAdapter;
+                return (base.Adapter as IMvxAdapter)!;
             }
             set
             {
@@ -69,7 +69,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 base.Adapter = value;
 
                 if (existing != null)
-                    existing.ItemsSource = null;
+                    existing.ItemsSource = null!;
             }
         }
 
@@ -92,9 +92,9 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             set { Adapter.DropDownItemTemplateId = value; }
         }
 
-        public ICommand HandleItemSelected { get; set; }
+        public ICommand? HandleItemSelected { get; set; }
 
-        private void OnItemSelected(object sender, ItemSelectedEventArgs e)
+        private void OnItemSelected(object? sender, ItemSelectedEventArgs e)
         {
             var position = e.Position;
             HandleSelected(position);

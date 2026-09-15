@@ -13,7 +13,6 @@ using MvvmCross.Hosting;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders
 {
-#nullable enable
     [RequiresUnreferencedCode("This class creates bindings which use reflection and may not be preserved by trimming.")]
     public class MvxBindingLayoutInflaterFactory
         : IMvxLayoutInflaterHolderFactory
@@ -53,5 +52,4 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             return view;
         }
     }
-#nullable restore
 }

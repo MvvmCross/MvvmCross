@@ -12,33 +12,33 @@ namespace MvvmCross.Platforms.Android.Views
     public interface IMvxEventSourceFragment : IMvxDisposeSource
     {
         //Created sate
-        event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
+        event EventHandler<MvxValueEventArgs<Context>>? AttachCalled;
 
-        event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
+        event EventHandler<MvxValueEventArgs<Bundle?>>? CreateWillBeCalled;
 
-        event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
+        event EventHandler<MvxValueEventArgs<Bundle?>>? CreateCalled;
 
-        event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>> CreateViewCalled;
+        event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>>? CreateViewCalled;
 
         //Started state
-        event EventHandler StartCalled;
+        event EventHandler? StartCalled;
 
         //Resumed state
-        event EventHandler ResumeCalled;
+        event EventHandler? ResumeCalled;
 
         //Paused state
-        event EventHandler PauseCalled;
+        event EventHandler? PauseCalled;
 
         //Stopped state
-        event EventHandler StopCalled;
+        event EventHandler? StopCalled;
 
         //Destroyed state
-        event EventHandler DestroyViewCalled;
+        event EventHandler? DestroyViewCalled;
 
-        event EventHandler DestroyCalled;
+        event EventHandler? DestroyCalled;
 
-        event EventHandler DetachCalled;
+        event EventHandler? DetachCalled;
 
-        event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
+        event EventHandler<MvxValueEventArgs<Bundle>>? SaveInstanceStateCalled;
     }
 }

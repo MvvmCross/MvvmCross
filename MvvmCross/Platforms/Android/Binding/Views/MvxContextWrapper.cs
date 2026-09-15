@@ -16,7 +16,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
     [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
     public class MvxContextWrapper : ContextWrapper
     {
-        private LayoutInflater _inflater;
+        private LayoutInflater? _inflater;
         private readonly IMvxBindingContextOwner _bindingContextOwner;
 
         public static ContextWrapper Wrap(Context @base, IMvxBindingContextOwner bindingContextOwner)
@@ -33,15 +33,15 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             _bindingContextOwner = bindingContextOwner;
         }
 
-        public override Object GetSystemService(string name)
+        public override Object GetSystemService(string? name)
         {
             if (string.Equals(name, LayoutInflaterService, StringComparison.InvariantCulture))
             {
                 return _inflater ??=
-                    new MvxLayoutInflater(LayoutInflater.From(BaseContext), this, null, false);
+                    new MvxLayoutInflater(LayoutInflater.From(BaseContext!)!, this, null, false);
             }
 
-            return base.GetSystemService(name);
+            return base.GetSystemService(name)!;
         }
     }
 }

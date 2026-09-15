@@ -7,7 +7,7 @@ namespace MvvmCross.Binding.Parse.Binding.Lang
     public interface IMvxLanguageBindingParser
         : IMvxBindingParser
     {
-        string DefaultConverterName { get; set; }
-        string DefaultTextSourceName { get; set; }
+        string? DefaultConverterName { get; set; }
+        string? DefaultTextSourceName { get; set; }
     }
 }

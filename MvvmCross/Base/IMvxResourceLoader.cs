@@ -7,7 +7,6 @@ using System.IO;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public interface IMvxResourceLoader
     {
         bool ResourceExists(string resourcePath);
@@ -16,5 +15,4 @@ namespace MvvmCross.Base
 
         void GetResourceStream(string resourcePath, Action<Stream> streamAction);
     }
-#nullable restore
 }

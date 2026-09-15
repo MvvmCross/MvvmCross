@@ -30,7 +30,7 @@ namespace MvvmCross.Plugin.Messenger.Subscriptions
             return true;
         }
 
-        public WeakSubscription(IMvxActionRunner actionRunner, Action<TMessage> listener, string tag)
+        public WeakSubscription(IMvxActionRunner actionRunner, Action<TMessage> listener, string? tag)
             : base(actionRunner, tag)
         {
             _weakReference = new WeakReference(listener);

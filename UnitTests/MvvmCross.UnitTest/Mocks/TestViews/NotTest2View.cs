@@ -10,8 +10,8 @@ namespace MvvmCross.UnitTest.Mocks.TestViews
 {
     public class NotTest2View : IMvxView
     {
-        public object DataContext { get; set; }
-        IMvxViewModel IMvxView.ViewModel { get; set; }
-        public Test2ViewModel ViewModel { get; set; }
+        public object? DataContext { get; set; }
+        IMvxViewModel? IMvxView.ViewModel { get; set; }
+        public Test2ViewModel? ViewModel { get; set; }
     }
 }

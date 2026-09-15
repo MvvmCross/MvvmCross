@@ -6,7 +6,6 @@ using System;
 
 namespace MvvmCross.Core
 {
-#nullable enable
     public class MvxSetupStateEventArgs : EventArgs
     {
         public MvxSetupStateEventArgs(MvxSetupState setupState)
@@ -16,5 +15,4 @@ namespace MvvmCross.Core
 
         public MvxSetupState SetupState { get; }
     }
-#nullable restore
 }

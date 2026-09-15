@@ -6,7 +6,6 @@ using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Presenters
 {
-#nullable enable
     public class MvxPopoverPresentationControllerDelegate : UIPopoverPresentationControllerDelegate
     {
         private readonly IMvxIosViewPresenter _presenter;
@@ -31,5 +30,4 @@ namespace MvvmCross.Platforms.Ios.Presenters
             _presenter.ClosedPopoverViewController();
         }
     }
-#nullable restore
 }

@@ -4,10 +4,8 @@
 
 namespace MvvmCross.UI
 {
-#nullable enable
     public interface IMvxNativeColor
     {
         object ToNative(System.Drawing.Color color);
     }
-#nullable restore
 }

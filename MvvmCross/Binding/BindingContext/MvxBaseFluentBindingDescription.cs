@@ -20,12 +20,12 @@ namespace MvvmCross.Binding.BindingContext
         : MvxApplicableTo<TTarget>, IMvxBaseFluentBindingDescription
         where TTarget : class
     {
-        private readonly TTarget _target;
+        private readonly TTarget? _target;
         private readonly IMvxBindingContextOwner _bindingContextOwner;
 
         private readonly MvxBindingDescription _bindingDescription = new MvxBindingDescription();
         private readonly MvxSourceStepDescription _sourceStepDescription = new MvxSourceStepDescription();
-        private ISourceSpec _sourceSpec;
+        private ISourceSpec? _sourceSpec;
 
         public interface ISourceSpec
         {
@@ -68,6 +68,9 @@ namespace MvvmCross.Binding.BindingContext
             {
                 var parser = MvxHost.Current!.Services.GetRequiredService<IMvxBindingDescriptionParser>();
                 var parsedDescription = parser.ParseSingle(_freeText);
+
+                if (parsedDescription == null || parsedDescription.Source == null)
+                    return inputs;
 
                 if (inputs.Converter == null
                     && inputs.FallbackValue == null)
@@ -128,7 +131,7 @@ namespace MvvmCross.Binding.BindingContext
             {
                 var parser = MvxHost.Current!.Services.GetRequiredService<IMvxBindingDescriptionParser>();
                 var innerSteps = _useParser ?
-                    _properties.Select(p => parser.ParseSingle(p).Source) :
+                    _properties.Select(p => parser.ParseSingle(p)?.Source ?? new MvxPathSourceStepDescription { SourcePropertyPath = p }) :
                     _properties.Select(p => new MvxPathSourceStepDescription { SourcePropertyPath = p });
 
                 return new MvxCombinerSourceStepDescription
@@ -158,9 +161,9 @@ namespace MvvmCross.Binding.BindingContext
             }
         }
 
-        protected object ClearBindingKey { get; set; }
+        protected object? ClearBindingKey { get; set; }
 
-        object IMvxBaseFluentBindingDescription.ClearBindingKey
+        object? IMvxBaseFluentBindingDescription.ClearBindingKey
         {
             get => ClearBindingKey;
             set => ClearBindingKey = value;
@@ -202,7 +205,7 @@ namespace MvvmCross.Binding.BindingContext
             _bindingDescription.Mode = bindingDescription.Mode;
             _bindingDescription.TargetName = bindingDescription.TargetName;
 
-            _sourceSpec = new FullySourceSpec(bindingDescription.Source);
+            _sourceSpec = new FullySourceSpec(bindingDescription.Source ?? new MvxSourceStepDescription());
         }
 
         protected void FullOverwrite(MvxBindingDescription bindingDescription)
@@ -210,10 +213,10 @@ namespace MvvmCross.Binding.BindingContext
             if (_sourceSpec != null)
                 throw new MvxException("You cannot set the source path of a Fluent binding more than once");
 
-            _sourceSpec = new FullySourceSpec(bindingDescription.Source);
+            _sourceSpec = new FullySourceSpec(bindingDescription.Source ?? new MvxSourceStepDescription());
         }
 
-        public MvxBaseFluentBindingDescription(IMvxBindingContextOwner bindingContextOwner, TTarget target)
+        public MvxBaseFluentBindingDescription(IMvxBindingContextOwner bindingContextOwner, TTarget? target)
         {
             _bindingContextOwner = bindingContextOwner;
             _target = target;
@@ -221,21 +224,21 @@ namespace MvvmCross.Binding.BindingContext
 
         protected static string TargetPropertyName(Expression<Func<TTarget, object>> targetPropertyPath)
         {
-            var parser = MvxBindingSingletonCache.Instance.PropertyExpressionParser;
-            var targetPropertyName = parser.Parse(targetPropertyPath).Print();
+            var parser = MvxBindingSingletonCache.Instance?.PropertyExpressionParser;
+            var targetPropertyName = parser?.Parse(targetPropertyPath).Print() ?? string.Empty;
             return targetPropertyName;
         }
 
         protected static string SourcePropertyPath<TSource>(Expression<Func<TSource, object>> sourceProperty)
         {
-            var parser = MvxBindingSingletonCache.Instance.PropertyExpressionParser;
-            var sourcePropertyPath = parser.Parse(sourceProperty).Print();
+            var parser = MvxBindingSingletonCache.Instance?.PropertyExpressionParser;
+            var sourcePropertyPath = parser?.Parse(sourceProperty).Print() ?? string.Empty;
             return sourcePropertyPath;
         }
 
-        protected static IMvxValueConverter ValueConverterFromName(string converterName)
+        protected static IMvxValueConverter? ValueConverterFromName(string converterName)
         {
-            var converter = MvxBindingSingletonCache.Instance.ValueConverterLookup.Find(converterName);
+            var converter = MvxBindingSingletonCache.Instance?.ValueConverterLookup?.Find(converterName);
             return converter;
         }
 
@@ -272,7 +275,7 @@ namespace MvvmCross.Binding.BindingContext
         public override void Apply()
         {
             var bindingDescription = CreateBindingDescription();
-            _bindingContextOwner.AddBinding(_target, bindingDescription, ClearBindingKey);
+            _bindingContextOwner.AddBinding(_target!, bindingDescription, ClearBindingKey);
             base.Apply();
         }
 
@@ -290,7 +293,7 @@ namespace MvvmCross.Binding.BindingContext
                 return;
 
             var defaultTargetName =
-                MvxBindingSingletonCache.Instance?.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+                MvxBindingSingletonCache.Instance?.DefaultBindingNameLookup?.DefaultFor(typeof(TTarget));
 
             if (string.IsNullOrEmpty(defaultTargetName))
             {

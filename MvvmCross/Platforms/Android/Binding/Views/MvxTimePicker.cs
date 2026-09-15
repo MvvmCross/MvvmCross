@@ -71,11 +71,11 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        public event EventHandler ValueChanged;
+        public event EventHandler? ValueChanged;
 
-        public void OnTimeChanged(TimePicker view, int hourOfDay, int minute)
+        public void OnTimeChanged(TimePicker? view, int hourOfDay, int minute)
         {
-            ValueChanged?.Invoke(this, null);
+            ValueChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

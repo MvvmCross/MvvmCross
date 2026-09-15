@@ -6,7 +6,6 @@ using System;
 
 namespace MvvmCross.Plugin.Messenger
 {
-#nullable enable
     /// <summary>
     /// Base class for messages that provides weak refrence storage of the sender
     /// </summary>
@@ -29,5 +28,4 @@ namespace MvvmCross.Plugin.Messenger
             Sender = sender;
         }
     }
-#nullable restore
 }

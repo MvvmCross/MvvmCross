@@ -17,7 +17,7 @@ namespace MvvmCross.Plugin.FieldBinding
         {
         }
 
-        protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)
+        protected override void NotifyChangeOnChanged(object? sender, EventArgs eventArgs)
         {
             FireChanged();
         }
@@ -25,20 +25,20 @@ namespace MvvmCross.Plugin.FieldBinding
         public override void SetValue(object value)
         {
             var fieldType = NotifyChange.ValueType;
-            var safeValue = fieldType.MakeSafeValue(value);
+            var safeValue = fieldType!.MakeSafeValue(value);
 
             // if safeValue matches the existing value, then don't call set
-            if (EqualsCurrentValue(safeValue))
+            if (EqualsCurrentValue(safeValue!))
                 return;
 
             NotifyChange.Value = safeValue;
         }
 
-        public override Type SourceType => NotifyChange.ValueType;
+        public override Type SourceType => NotifyChange.ValueType!;
 
         public override object GetValue()
         {
-            return NotifyChange.Value;
+            return NotifyChange.Value!;
         }
     }
 }

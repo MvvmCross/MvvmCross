@@ -9,7 +9,7 @@ namespace MvvmCross.Plugin.Color
     [Preserve(AllMembers = true)]
     public class MvxRGBValueConverter : MvxColorValueConverter<string>
     {
-        protected override System.Drawing.Color Convert(string value, object parameter, CultureInfo culture)
+        protected override System.Drawing.Color Convert(string value, object? parameter, CultureInfo? culture)
             => MvxHexParser.ColorFromHexString(value);
     }
 }

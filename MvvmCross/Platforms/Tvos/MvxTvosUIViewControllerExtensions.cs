@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Tvos
             var uiNavigationParent = controller.ParentViewController as UINavigationController;
             if (uiNavigationParent == null)
             {
-                return controller.View.Window != null;
+                return controller.View?.Window != null;
             }
             else
             {

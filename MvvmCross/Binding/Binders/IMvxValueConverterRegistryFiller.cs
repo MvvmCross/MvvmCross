@@ -11,6 +11,7 @@ using MvvmCross.Converters;
 namespace MvvmCross.Binding.Binders
 {
     public interface IMvxNamedInstanceRegistryFiller<out T>
+        where T : notnull
     {
         string FindName(Type type);
 

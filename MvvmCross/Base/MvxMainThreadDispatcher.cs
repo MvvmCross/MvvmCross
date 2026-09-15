@@ -8,7 +8,6 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public abstract class MvxMainThreadDispatcher : IMvxMainThreadDispatcher
     {
         public static void ExceptionMaskedAction(Action action, bool maskExceptions)
@@ -42,5 +41,4 @@ namespace MvvmCross.Base
 
         public abstract bool IsOnMainThread { get; }
     }
-#nullable restore
 }

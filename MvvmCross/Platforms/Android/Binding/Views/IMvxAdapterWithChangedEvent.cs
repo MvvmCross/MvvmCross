@@ -10,6 +10,6 @@ namespace MvvmCross.Platforms.Android.Binding.Views
     public interface IMvxAdapterWithChangedEvent
         : IMvxAdapter
     {
-        event EventHandler<NotifyCollectionChangedEventArgs> DataSetChanged;
+        event EventHandler<NotifyCollectionChangedEventArgs>? DataSetChanged;
     }
 }

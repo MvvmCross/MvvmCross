@@ -9,7 +9,7 @@ namespace MvvmCross.Platforms.Android.Views
 {
     public class MvxActivityEventArgs : EventArgs
     {
-        public MvxActivityEventArgs(Activity activity, MvxActivityState state, object extras = null)
+        public MvxActivityEventArgs(Activity activity, MvxActivityState state, object? extras = null)
         {
             Activity = activity;
             ActivityState = state;
@@ -18,6 +18,6 @@ namespace MvvmCross.Platforms.Android.Views
 
         public MvxActivityState ActivityState { get; }
         public Activity Activity { get; }
-        public object Extras { get; }
+        public object? Extras { get; }
     }
 }

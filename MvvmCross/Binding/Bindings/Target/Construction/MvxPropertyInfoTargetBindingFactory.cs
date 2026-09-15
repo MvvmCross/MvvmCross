@@ -11,7 +11,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
     public class MvxPropertyInfoTargetBindingFactory
         : IMvxPluginTargetBindingFactory
     {
-        private readonly Func<object, PropertyInfo, IMvxTargetBinding> _bindingCreator;
+        private readonly Func<object, PropertyInfo, IMvxTargetBinding?> _bindingCreator;
         private readonly string _targetName;
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         public MvxPropertyInfoTargetBindingFactory(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type targetType,
             string targetName,
-            Func<object, PropertyInfo, IMvxTargetBinding> bindingCreator)
+            Func<object, PropertyInfo, IMvxTargetBinding?> bindingCreator)
         {
             _targetType = targetType;
             _targetName = targetName;
@@ -37,7 +37,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         };
 
         [RequiresUnreferencedCode("This method uses reflection to get properties which may not be preserved by trimming")]
-        public IMvxTargetBinding CreateBinding(object target, string targetName)
+        public IMvxTargetBinding? CreateBinding(object target, string targetName)
         {
             var targetPropertyInfo = target.GetType().GetProperty(targetName);
             if (targetPropertyInfo != null)

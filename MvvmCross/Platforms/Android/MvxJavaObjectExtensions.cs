@@ -11,7 +11,7 @@ namespace MvvmCross.Platforms.Android
 {
     public static class MvxJavaObjectExtensions
     {
-        public static bool IsNull(this Object @object)
+        public static bool IsNull(this Object? @object)
         {
             if (@object == null)
                 return true;
@@ -22,12 +22,12 @@ namespace MvvmCross.Platforms.Android
             return false;
         }
 
-        public static bool IsActivityDead(this Activity activity)
+        public static bool IsActivityDead(this Activity? activity)
         {
             if (activity.IsNull())
                 return true;
 
-            if (activity.IsFinishing)
+            if (activity!.IsFinishing)
                 return true;
 
             if (activity.IsDestroyed)
@@ -36,6 +36,6 @@ namespace MvvmCross.Platforms.Android
             return false;
         }
 
-        public static bool IsActivityAlive(this Activity activity) => !IsActivityDead(activity);
+        public static bool IsActivityAlive(this Activity? activity) => !IsActivityDead(activity);
     }
 }

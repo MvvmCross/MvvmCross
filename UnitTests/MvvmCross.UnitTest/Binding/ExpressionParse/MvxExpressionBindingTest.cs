@@ -28,44 +28,44 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
 
         public class Child
         {
-            public string Value { get; set; }
+            public string? Value { get; set; }
         }
 
         public class Parent
         {
-            public Child MyChild { get; set; }
+            public Child? MyChild { get; set; }
         }
 
         public class GrandParent
         {
-            public Parent MyChild { get; set; }
+            public Parent? MyChild { get; set; }
         }
 
         public class CollectionClass
         {
-            public List<Child> MyList { get; set; }
-            public Dictionary<string, Child> MyLookup { get; set; }
-            public GrandParent GrandParent { get; set; }
+            public List<Child>? MyList { get; set; }
+            public Dictionary<string, Child>? MyLookup { get; set; }
+            public GrandParent? GrandParent { get; set; }
         }
 
         public class TestDataContext
         {
-            public CollectionClass MyCollection { get; set; }
+            public CollectionClass? MyCollection { get; set; }
         }
 
         public class TestUnderscoreDataContext
         {
-            public CollectionClass MyCollection { get; set; }
+            public CollectionClass? MyCollection { get; set; }
         }
 
         public class SampleValueConverter : IMvxValueConverter
         {
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+            public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
             {
                 throw new NotImplementedException();
             }
 
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
             {
                 throw new NotImplementedException();
             }
@@ -73,21 +73,21 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
 
         public class TestTarget
         {
-            public string Text { get; set; }
+            public string? Text { get; set; }
         }
 
         public class Callback
         {
-            public object Target { get; set; }
-            public object Source { get; set; }
-            public MvxBindingDescription BindingDescription { get; set; }
+            public object? Target { get; set; }
+            public object? Source { get; set; }
+            public MvxBindingDescription? BindingDescription { get; set; }
         }
 
         public class MockBindingContext : IMvxBindingContextOwner
         {
-            public string SimpleValue { get; set; }
-            public TestTarget Target { get; set; }
-            public IMvxBindingContext BindingContext { get; set; }
+            public string? SimpleValue { get; set; }
+            public TestTarget? Target { get; set; }
+            public IMvxBindingContext? BindingContext { get; set; }
         }
 
         [Fact]
@@ -465,7 +465,7 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
             var path = desc.Source as MvxPathSourceStepDescription;
             Assert.True(desc.Source is MvxPathSourceStepDescription);
             var expectedPath = expectedDescription.Source as MvxPathSourceStepDescription;
-            Assert.Equal(expectedPath.ConverterParameter, path.ConverterParameter);
+            Assert.Equal(expectedPath!.ConverterParameter, path!.ConverterParameter);
             Assert.Equal(expectedPath.FallbackValue, path.FallbackValue);
             Assert.Equal(expectedPath.SourcePropertyPath, path.SourcePropertyPath);
             Assert.Equal(expectedDescription.Mode, desc.Mode);
@@ -473,7 +473,7 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
             if (expectedPath.Converter == null)
                 Assert.Null(path.Converter);
             else
-                Assert.Equal(expectedPath.Converter.GetType(), path.Converter.GetType());
+                Assert.Equal(expectedPath.Converter.GetType(), path.Converter!.GetType());
         }
     }
 }

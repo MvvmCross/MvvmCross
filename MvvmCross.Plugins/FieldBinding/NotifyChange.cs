@@ -18,12 +18,12 @@ namespace MvvmCross.Plugin.FieldBinding
             _shouldAlwaysRaiseChangedOnUserInterfaceThread = true;
         }
 
-        protected NotifyChange(object value) : this()
+        protected NotifyChange(object? value) : this()
         {
             _value = value;
         }
 
-        protected NotifyChange(object value, Action<object> valueChanged) : this(value)
+        protected NotifyChange(object? value, Action<object?> valueChanged) : this(value)
         {
             Changed += (s, e) => { valueChanged?.Invoke(Value); };
         }
@@ -38,7 +38,7 @@ namespace MvvmCross.Plugin.FieldBinding
             _shouldAlwaysRaiseChangedOnUserInterfaceThread = value;
         }
 
-        public event EventHandler Changed;
+        public event EventHandler? Changed;
 
         public void RaiseChanged()
         {
@@ -61,8 +61,8 @@ namespace MvvmCross.Plugin.FieldBinding
             }
         }
 
-        private object _value;
-        public object Value
+        private object? _value;
+        public object? Value
         {
             get
             {
@@ -75,7 +75,7 @@ namespace MvvmCross.Plugin.FieldBinding
             }
         }
 
-        public Type ValueType { get; protected set; }
+        public Type? ValueType { get; protected set; }
     }
 
     public class NotifyChange<T>
@@ -83,12 +83,12 @@ namespace MvvmCross.Plugin.FieldBinding
     {
         public new T Value
         {
-            get { return (T)base.Value; }
+            get { return (T)base.Value!; }
             set { base.Value = value; }
         }
 
         public NotifyChange()
-            : this(default(T))
+            : this(default(T)!)
         {
         }
 
@@ -99,7 +99,7 @@ namespace MvvmCross.Plugin.FieldBinding
         }
 
         public NotifyChange(T value, Action<T> valueChanged)
-            : base(value, obj => valueChanged?.Invoke((T)obj))
+            : base(value, obj => valueChanged?.Invoke((T)obj!))
         {
             ValueType = typeof(T);
         }

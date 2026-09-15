@@ -8,7 +8,6 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public abstract class MvxApplicable
         : IMvxApplicable
     {
@@ -38,5 +37,4 @@ namespace MvvmCross.Base
             SuppressFinalizer();
         }
     }
-#nullable restore
 }

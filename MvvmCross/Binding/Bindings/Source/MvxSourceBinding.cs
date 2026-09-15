@@ -18,7 +18,7 @@ namespace MvvmCross.Binding.Bindings.Source
 
         protected object Source => _source;
 
-        public event EventHandler Changed;
+        public event EventHandler? Changed;
 
         public abstract void SetValue(object value);
 

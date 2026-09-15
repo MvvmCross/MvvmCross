@@ -12,7 +12,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
     public class MvxUILabelTextTargetBinding
         : MvxConvertingTargetBinding
     {
-        protected UILabel View => Target as UILabel;
+        protected UILabel? View => Target as UILabel;
 
         public MvxUILabelTextTargetBinding(UILabel target)
             : base(target)
@@ -28,13 +28,13 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(string);
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object? target, object? value)
         {
-            var view = (UILabel)target;
+            var view = (UILabel)target!;
             if (view == null)
                 return;
 
-            view.Text = (string)value;
+            view.Text = (string?)value;
         }
     }
 }

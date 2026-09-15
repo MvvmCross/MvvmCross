@@ -6,6 +6,6 @@ namespace MvvmCross.Binding.BindingContext
 {
     public interface IMvxBaseFluentBindingDescription
     {
-        object ClearBindingKey { get; set; }
+        object? ClearBindingKey { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace MvvmCross.Platforms.Android.Views
         }
 
         public TranslationResult Result { get; private set; }
-        public IMvxViewModel ExistingViewModel { get; private set; }
-        public MvxViewModelRequest ViewModelRequest { get; private set; }
+        public IMvxViewModel? ExistingViewModel { get; private set; }
+        public MvxViewModelRequest? ViewModelRequest { get; private set; }
     }
 }

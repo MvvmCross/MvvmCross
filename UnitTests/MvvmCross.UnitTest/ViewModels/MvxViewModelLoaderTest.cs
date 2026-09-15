@@ -30,7 +30,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var request = new MvxViewModelRequest<MvxNullViewModel>(null, null);
             var state = new MvxBundle();
-            var loader = new MvxViewModelLoader(null);
+            var loader = new MvxViewModelLoader(null!);
             var args = new MvxNavigateEventArgs(NavigationMode.Show);
             var viewModel = loader.LoadViewModel(request, state, args);
 

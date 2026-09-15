@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public interface IMvxNotifyPropertyChanged : INotifyPropertyChanged, INotifyPropertyChanging
     {
         // this ShouldAlwaysRaiseInpcOnUserInterfaceThread is not a Property so as to avoid Inpc pollution
@@ -35,5 +34,4 @@ namespace MvvmCross.ViewModels
         Task RaisePropertyChanged(PropertyChangedEventArgs changedArgs);
 #pragma warning restore CA1030 // Use events where appropriate
     }
-#nullable restore
 }

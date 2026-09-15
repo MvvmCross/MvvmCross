@@ -8,8 +8,8 @@ namespace MvvmCross.Platforms.Mac.Presenters.Attributes
 {
     public class MvxTabPresentationAttribute : MvxBasePresentationAttribute
     {
-        public string WindowIdentifier { get; set; }
+        public string? WindowIdentifier { get; set; }
 
-        public string TabTitle { get; set; }
+        public string? TabTitle { get; set; }
     }
 }

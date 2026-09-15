@@ -12,7 +12,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
 {
     public class MvxNSButtonTitleTargetBinding : MvxMacTargetBinding
     {
-        protected NSButton Button
+        protected NSButton? Button
         {
             get { return base.Target as NSButton; }
         }
@@ -37,13 +37,13 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             get { return typeof(string); }
         }
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object target, object? value)
         {
             var button = this.Button;
             if (button == null)
                 return;
 
-            button.Title = value as string;
+            button.Title = value as string ?? string.Empty;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Android.Binding.Target
     public class MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding
         : MvxAndroidPropertyInfoTargetBinding<MvxAppCompatAutoCompleteTextView>
     {
-        private IDisposable _subscription;
+        private IDisposable? _subscription;
 
         public MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
@@ -27,9 +27,9 @@ namespace MvvmCross.Platforms.Android.Binding.Target
             }
         }
 
-        private void AutoCompleteOnSelectedObjectChanged(object sender, EventArgs eventArgs)
+        private void AutoCompleteOnSelectedObjectChanged(object? sender, EventArgs eventArgs)
         {
-            FireValueChanged(View.SelectedObject);
+            FireValueChanged(View!.SelectedObject);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;

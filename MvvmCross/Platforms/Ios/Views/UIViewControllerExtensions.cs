@@ -8,7 +8,6 @@ using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
 {
-#nullable enable
     public static class UIViewControllerExtensions
     {
         public static IMvxIosView? GetIMvxIosView(this UIViewController? viewController)
@@ -23,5 +22,4 @@ namespace MvvmCross.Platforms.Ios.Views
             return null;
         }
     }
-#nullable restore
 }

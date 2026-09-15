@@ -20,8 +20,8 @@ namespace MvvmCross.Plugin.FieldBinding
         : IMvxSourceBindingFactoryExtension
     {
         [RequiresUnreferencedCode("This method uses reflection to bind to fields which may not be preserved by trimming.")]
-        public bool TryCreateBinding(object source, IMvxPropertyToken currentToken,
-                                     List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+        public bool TryCreateBinding(object? source, IMvxPropertyToken currentToken,
+                                     List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding? result)
         {
             if (source == null)
             {
@@ -53,7 +53,7 @@ namespace MvvmCross.Plugin.FieldBinding
         }
 
         protected bool TryCreateFieldInfoBinding(object source, List<IMvxPropertyToken> remainingTokens,
-                                                 out IMvxSourceBinding result, FieldInfo fieldInfo)
+                                                 out IMvxSourceBinding? result, FieldInfo fieldInfo)
         {
             if (remainingTokens.Any())
             {
@@ -67,7 +67,7 @@ namespace MvvmCross.Plugin.FieldBinding
         }
 
         protected bool TryCreateNotifyChangeBinding(object source, List<IMvxPropertyToken> remainingTokens,
-                                                    out IMvxSourceBinding result,
+                                                    out IMvxSourceBinding? result,
                                                     FieldInfo fieldInfo, MvxPropertyNamePropertyToken propertyNameToken)
         {
             var fieldValue = fieldInfo.GetValue(source) as INotifyChange;
@@ -91,7 +91,7 @@ namespace MvvmCross.Plugin.FieldBinding
         }
 
         [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Field binding plugin intentionally uses reflection to bind to fields at runtime.")]
-        protected FieldInfo FindFieldInfo(object source, string name)
+        protected FieldInfo? FindFieldInfo(object source, string name)
         {
             var fieldInfo = source.GetType()
                                   .GetField(name,

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Core
 {
-#nullable enable
     public interface IMvxSetupMonitor
     {
         Task InitializationComplete();
     }
-#nullable restore
 }

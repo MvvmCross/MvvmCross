@@ -22,14 +22,14 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
     [Register("mvvmcross.platforms.android.views.viewpager.MvxCachingFragmentPagerAdapter")]
     public abstract class MvxCachingFragmentPagerAdapter : PagerAdapter
     {
-        private Fragment _currentPrimaryItem;
-        private FragmentTransaction _curTransaction;
+        private Fragment? _currentPrimaryItem;
+        private FragmentTransaction? _curTransaction;
         private readonly FragmentManager _fragmentManager;
-        private List<string> _savedFragmentTags = new List<string>();
-        private readonly List<Fragment.SavedState> _savedState = new List<Fragment.SavedState>();
+        private List<string?> _savedFragmentTags = new List<string?>();
+        private readonly List<Fragment.SavedState?> _savedState = new List<Fragment.SavedState?>();
 
         protected FragmentFactory FragmentFactory => _fragmentManager.FragmentFactory;
-        protected List<Fragment> Fragments { get; private set; } = new List<Fragment>();
+        protected List<Fragment?> Fragments { get; private set; } = new List<Fragment?>();
 
         protected MvxCachingFragmentPagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -48,7 +48,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 #endif
         }
 
-        public abstract Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null);
+        public abstract Fragment GetItem(int position, Fragment.SavedState? fragmentSavedState = null);
 
         public override void DestroyItem(ViewGroup container, int position, Java.Lang.Object objectValue)
         {
@@ -64,8 +64,8 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 
             while (_savedState.Count <= position)
             {
-                _savedState.Add(null);
-                _savedFragmentTags.Add(null);
+                _savedState.Add(null!);
+                _savedFragmentTags.Add(null!);
             }
 
             _savedState[position] = fragment.IsAdded ? _fragmentManager.SaveFragmentInstanceState(fragment) : null;
@@ -102,7 +102,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 
             var fragmentTag = GetTag(position);
 
-            Fragment.SavedState fss = null;
+            Fragment.SavedState? fss = null;
             if (_savedState.Count > position)
             {
                 var savedTag = _savedFragmentTags.ElementAtOrDefault(position);
@@ -141,12 +141,12 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             return ((Fragment)objectValue).View == view;
         }
 
-        public override void RestoreState(IParcelable state, ClassLoader loader)
+        public override void RestoreState(IParcelable? state, ClassLoader? loader)
         {
             if (state == null)
                 return;
 
-            var bundle = (Bundle)state;
+            var bundle = (Bundle)state!;
             bundle.SetClassLoader(loader);
             var fss = bundle.GetParcelableArray("states");
             _savedState.Clear();
@@ -154,7 +154,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 
             var tags = bundle.GetStringArrayList("tags");
             if (tags != null)
-                _savedFragmentTags = tags.ToList();
+                _savedFragmentTags = tags.Cast<string?>().ToList();
             else
                 _savedFragmentTags.Clear();
 
@@ -163,13 +163,13 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
                 for (var i = 0; i < fss.Length; i++)
                 {
                     var parcelable = fss.ElementAt(i);
-                    var savedState = parcelable.JavaCast<Fragment.SavedState>();
-                    _savedState.Add(savedState);
+                    var savedState = parcelable?.JavaCast<Fragment.SavedState>();
+                    _savedState.Add(savedState!);
                 }
             }
 
             var keys = bundle.KeySet();
-            foreach (var key in keys)
+            foreach (var key in keys!)
             {
                 if (!key.StartsWith('f'))
                     continue;
@@ -182,7 +182,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
                 if (f != null)
                 {
                     while (Fragments.Count() <= index)
-                        Fragments.Add(null);
+                        Fragments.Add(null!);
 
                     f.SetMenuVisibility(false);
                     Fragments[index] = f;
@@ -190,20 +190,19 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             }
         }
 
-        public override IParcelable SaveState()
+        public override IParcelable? SaveState()
         {
-            Bundle state = null;
+            Bundle? state = null;
 
             if (_savedState.Any())
             {
                 state = new Bundle();
 
-                var fss = new IParcelable[_savedState.Count];
+                var fss = new IParcelable?[_savedState.Count];
                 for (var i = 0; i < _savedState.Count; i++)
                     fss[i] = _savedState.ElementAt(i);
-
                 state.PutParcelableArray("states", fss);
-                state.PutStringArrayList("tags", _savedFragmentTags);
+                state.PutStringArrayList("tags", _savedFragmentTags.Cast<string>().ToList());
             }
 
             for (var i = 0; i < Fragments.Count; i++)
@@ -239,7 +238,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             _currentPrimaryItem = fragment;
         }
 
-        protected virtual string GetTag(int position)
+        protected virtual string? GetTag(int position)
         {
             return null;
         }

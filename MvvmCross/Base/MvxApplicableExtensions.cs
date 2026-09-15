@@ -8,7 +8,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public static class MvxApplicableExtensions
     {
         [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
@@ -42,5 +41,4 @@ namespace MvvmCross.Base
                 applicable.ApplyTo(what);
         }
     }
-#nullable restore
 }

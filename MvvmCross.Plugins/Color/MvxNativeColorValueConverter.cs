@@ -9,7 +9,7 @@ namespace MvvmCross.Plugin.Color
     [Preserve(AllMembers = true)]
     public class MvxNativeColorValueConverter : MvxColorValueConverter<System.Drawing.Color>
     {
-        protected override System.Drawing.Color Convert(System.Drawing.Color value, object parameter, CultureInfo culture)
+        protected override System.Drawing.Color Convert(System.Drawing.Color value, object? parameter, CultureInfo? culture)
         {
             return value;
         }

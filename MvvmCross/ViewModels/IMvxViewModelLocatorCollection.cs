@@ -4,10 +4,8 @@
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public interface IMvxViewModelLocatorCollection
     {
         IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request);
     }
-#nullable restore
 }

@@ -26,12 +26,12 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             }
         }
 
-        protected override void SetSourceValue(object sourceValue)
+        protected override void SetSourceValue(object? sourceValue)
         {
             // ignored - there is no way to set the source value
         }
 
-        protected override object GetSourceValue()
+        protected override object? GetSourceValue()
         {
             return Description.Literal;
         }

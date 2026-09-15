@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Ios.Views
 
         private int _tabsCount = 0;
 
-        public virtual UIViewController VisibleUIViewController
+        public virtual UIViewController? VisibleUIViewController
         {
             get
             {
@@ -91,7 +91,7 @@ namespace MvvmCross.Platforms.Ios.Views
         public virtual void ShowTabView(UIViewController viewController, MvxTabPresentationAttribute attribute)
         {
             if (!string.IsNullOrEmpty(attribute.TabAccessibilityIdentifier))
-                viewController.View.AccessibilityIdentifier = attribute.TabAccessibilityIdentifier;
+                viewController.View!.AccessibilityIdentifier = attribute.TabAccessibilityIdentifier;
 
             // setup Tab
             SetTitleAndTabBarItem(viewController, attribute);
@@ -165,7 +165,7 @@ namespace MvvmCross.Platforms.Ios.Views
                 navController.ViewControllers.Any())
             {
                 // if the ViewModel to close if the last in the stack, close it animated
-                if (navController.TopViewController.GetIMvxIosView()?.ViewModel == viewModel)
+                if (navController.TopViewController?.GetIMvxIosView()?.ViewModel == viewModel)
                 {
                     navController.PopViewController(true);
                     return true;
@@ -194,7 +194,7 @@ namespace MvvmCross.Platforms.Ios.Views
             // loop through plain Tabs
             var plainToClose = ViewControllers.Where(v => !(v is UINavigationController))
                                               .Select(v => v.GetIMvxIosView())
-                                              .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+                                              .FirstOrDefault(mvxView => mvxView?.ViewModel == viewModel);
             if (plainToClose != null)
             {
                 RemoveTabController((UIViewController)plainToClose);
@@ -202,11 +202,11 @@ namespace MvvmCross.Platforms.Ios.Views
             }
 
             // loop through nav stack Tabs
-            UIViewController toClose = null;
+            UIViewController? toClose = null;
             foreach (var vc in ViewControllers.Where(v => v is UINavigationController))
             {
-                var root = ((UINavigationController)vc).ViewControllers.FirstOrDefault();
-                if (root != null && root.GetIMvxIosView().ViewModel == viewModel)
+                var root = ((UINavigationController)vc).ViewControllers?.FirstOrDefault();
+                if (root != null && root.GetIMvxIosView()?.ViewModel == viewModel)
                 {
                     toClose = vc;
                     break;
@@ -221,15 +221,15 @@ namespace MvvmCross.Platforms.Ios.Views
             return false;
         }
 
-        public void PresentViewControllerWithNavigation(UIViewController controller, bool animated = true, Action completionHandler = null)
+        public void PresentViewControllerWithNavigation(UIViewController controller, bool animated = true, Action? completionHandler = null)
         {
             PresentViewController(new UINavigationController(controller), animated, completionHandler);
         }
 
         protected virtual void RemoveTabController(UIViewController toClose)
         {
-            var newTabs = ViewControllers.Where(v => v != toClose);
-            ViewControllers = newTabs.ToArray();
+            var newTabs = ViewControllers?.Where(v => v != toClose);
+            ViewControllers = newTabs?.ToArray();
         }
     }
 
@@ -256,9 +256,9 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        public new TViewModel ViewModel
+        public new TViewModel? ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
+            get { return (TViewModel?)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 

@@ -12,7 +12,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
     public class MvxUITextViewTextTargetBinding
         : MvxConvertingTargetBinding
     {
-        protected UITextView View => Target as UITextView;
+        protected UITextView? View => Target as UITextView;
 
         private bool _subscribed;
 
@@ -21,7 +21,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         {
         }
 
-        private void EditTextOnChanged(object sender, EventArgs eventArgs)
+        private void EditTextOnChanged(object? sender, EventArgs eventArgs)
         {
             var view = View;
             if (view == null)
@@ -48,13 +48,13 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(string);
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object? target, object? value)
         {
-            var view = (UITextView)target;
+            var view = (UITextView)target!;
             if (view == null)
                 return;
 
-            view.Text = (string)value;
+            view.Text = (string?)value;
         }
 
         [RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]

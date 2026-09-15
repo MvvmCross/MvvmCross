@@ -21,9 +21,9 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         public Type Resolve(string tagName)
         {
-            Type toReturn;
+            Type? toReturn;
             if (_cache.TryGetValue(tagName, out toReturn))
-                return toReturn;
+                return toReturn!;
 
             toReturn = _resolver.Resolve(tagName);
             _cache[tagName] = toReturn;

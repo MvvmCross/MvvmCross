@@ -12,7 +12,6 @@ using MvvmCross.Hosting;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public static class MvxViewModelExtensions
     {
         [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "Runtime method inspection for generic type parameter with PublicMethods annotation")]
@@ -100,5 +99,4 @@ namespace MvvmCross.ViewModels
             return toReturn;
         }
     }
-#nullable restore
 }

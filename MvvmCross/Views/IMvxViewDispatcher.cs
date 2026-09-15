@@ -9,7 +9,6 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Views
 {
-#nullable enable
     public interface IMvxViewDispatcher : IMvxMainThreadAsyncDispatcher, IMvxMainThreadDispatcher
     {
         [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
@@ -18,5 +17,4 @@ namespace MvvmCross.Views
         [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         Task<bool> ChangePresentation(MvxPresentationHint hint);
     }
-#nullable restore
 }

@@ -11,7 +11,7 @@ namespace MvvmCross.Plugin.Visibility
     [Preserve(AllMembers = true)]
     public class MvxVisibilityValueConverter : MvxBaseVisibilityValueConverter
     {
-        protected override MvxVisibility Convert(object value, object parameter, CultureInfo culture)
+        protected override MvxVisibility Convert(object value, object? parameter, CultureInfo? culture)
         {
             bool visible = value.ConvertToBooleanCore();
             bool hide = parameter.ConvertToBooleanCore();

@@ -14,7 +14,7 @@ namespace MvvmCross.Binding.Combiners
     public class MvxIfValueCombiner
         : MvxValueCombiner
     {
-        public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value)
+        public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object? value)
         {
             var list = steps.ToList();
             switch (list.Count)
@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.Combiners
             }
         }
 
-        private bool TryEvaluateif(IMvxSourceStep testStep, IMvxSourceStep ifStep, IMvxSourceStep elseStep, out object value)
+        private bool TryEvaluateif(IMvxSourceStep testStep, IMvxSourceStep ifStep, IMvxSourceStep? elseStep, out object? value)
         {
             var result = testStep.GetValue();
             if (result == MvxBindingConstant.DoNothing)
@@ -52,7 +52,7 @@ namespace MvvmCross.Binding.Combiners
                 return true;
             }
 
-            value = ReturnSubStepResult(elseStep);
+            value = elseStep == null ? MvxBindingConstant.UnsetValue : ReturnSubStepResult(elseStep);
             return true;
         }
 

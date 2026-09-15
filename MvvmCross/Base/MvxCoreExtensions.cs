@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public static class MvxCoreExtensions
     {
         // core implementation of ConvertToBoolean
@@ -147,5 +146,4 @@ namespace MvvmCross.Base
             }
         }
     }
-#nullable restore
 }

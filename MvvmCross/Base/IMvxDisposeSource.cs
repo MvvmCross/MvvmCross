@@ -6,10 +6,8 @@ using System;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public interface IMvxDisposeSource
     {
         event EventHandler? DisposeCalled;
     }
-#nullable restore
 }

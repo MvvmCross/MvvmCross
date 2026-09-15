@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
         {
         }
 
-        private void HandleValueChanged(object sender, EventArgs e)
+        private void HandleValueChanged(object? sender, EventArgs e)
         {
             var view = View;
             if (view == null)
@@ -60,13 +60,13 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             }
         }
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object target, object? value)
         {
             var view = target as NSTabViewController;
             if (view == null)
                 return;
 
-            view.SelectedTabViewItemIndex = (int)value;
+            view.SelectedTabViewItemIndex = (int)(value ?? 0);
         }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]

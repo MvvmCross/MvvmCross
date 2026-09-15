@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
         {
         }
 
-        public override Type SourceType => PropertyInfo?.PropertyType;
+        public override Type SourceType => PropertyInfo?.PropertyType ?? typeof(object);
 
         protected override void OnBoundPropertyChanged()
         {
@@ -44,7 +44,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
             try
             {
-                return PropertyInfo.GetValue(Source, PropertyIndexParameters());
+                return PropertyInfo.GetValue(Source, PropertyIndexParameters())!;
             }
             catch (TargetInvocationException)
             {
@@ -54,7 +54,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
             }
         }
 
-        protected abstract object[] PropertyIndexParameters();
+        protected abstract object?[] PropertyIndexParameters();
 
         public override void SetValue(object value)
         {
@@ -78,7 +78,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
                 var safeValue = propertyType.MakeSafeValue(value);
 
                 // if safeValue matches the existing value, then don't call set
-                if (EqualsCurrentValue(safeValue))
+                if (EqualsCurrentValue(safeValue!))
                     return;
 
                 PropertyInfo.SetValue(Source, safeValue, PropertyIndexParameters());

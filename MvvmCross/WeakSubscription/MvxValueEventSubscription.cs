@@ -8,7 +8,6 @@ using MvvmCross.Base;
 
 namespace MvvmCross.WeakSubscription
 {
-#nullable enable
     public class MvxValueEventSubscription<TEventArgs>
         : MvxWeakEventSubscription<object, MvxValueEventArgs<TEventArgs>>
     {
@@ -24,5 +23,4 @@ namespace MvvmCross.WeakSubscription
             return new EventHandler<MvxValueEventArgs<TEventArgs>>(OnSourceEvent);
         }
     }
-#nullable restore
 }

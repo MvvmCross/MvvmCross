@@ -9,7 +9,6 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters
 {
-#nullable enable
     public interface IMvxViewPresenter
     {
         [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
@@ -23,5 +22,4 @@ namespace MvvmCross.Presenters
         [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         Task<bool> Close(IMvxViewModel viewModel);
     }
-#nullable restore
 }

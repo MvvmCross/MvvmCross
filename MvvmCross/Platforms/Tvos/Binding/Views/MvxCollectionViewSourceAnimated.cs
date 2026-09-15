@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
     public class MvxCollectionViewSourceAnimated : MvxCollectionViewSource
     {
         private readonly object collectionChangedLock = new object();
-        private Task runningChangeTask = Task.FromResult(true);
+        private Task? runningChangeTask = Task.FromResult(true);
 
         /// <summary>
         /// UICollectionView animations must be synchronized: the itemsSource content must not change until the animation ends.
@@ -25,7 +25,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         /// hoping they won't be disposed explicitely before the next UICollectionView animation ends.
         /// The best would be a new NotifyCollectionChangedEventArgs with support for multiple changes, and a new async (awaitable) event for changes.
         /// </summary>
-        private IEnumerable itemsSourceBeforeAnimation;
+        private IEnumerable? itemsSourceBeforeAnimation;
 
         /// <summary>
         /// When a collectionchanged event is received, if the number of changed items is over MaxAnimatedItems, the collection will not animate changes.
@@ -41,7 +41,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         {
         }
 
-        protected override void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        protected override void CollectionChangedOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
         {
             var itemsSource = (ItemsSource as IEnumerable<object>)?.ToList();
             if (itemsSource == null)
@@ -50,11 +50,11 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             lock (collectionChangedLock)
             {
                 var existingTask = runningChangeTask;
-                runningChangeTask = CollectionChangedOnCollectionChangedAsync(args, existingTask, itemsSource);
+                runningChangeTask = CollectionChangedOnCollectionChangedAsync(args, existingTask!, itemsSource);
             }
         }
 
-        protected override object GetItemAt(NSIndexPath indexPath)
+        protected override object? GetItemAt(NSIndexPath indexPath)
         {
             var itemsSource = itemsSourceBeforeAnimation ?? ItemsSource;
             return itemsSource?.ElementAt(indexPath.Row);
@@ -68,7 +68,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 
         private async Task CollectionChangedOnCollectionChangedAsync(NotifyCollectionChangedEventArgs args, Task existingTask, IEnumerable itemsSource)
         {
-            await existingTask;
+            await existingTask!;
             itemsSourceBeforeAnimation = itemsSource;
 
             if (args.NewItems?.Count > MaxAnimatedItems || args.OldItems?.Count > MaxAnimatedItems)
@@ -81,8 +81,8 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             {
                 await CollectionView.PerformBatchUpdatesAsync(() =>
                 {
-                    var oldCount = args.OldItems.Count;
-                    var newCount = args.NewItems.Count;
+                    var oldCount = args.OldItems!.Count;
+                    var newCount = args.NewItems!.Count;
                     var indexes = new NSIndexPath[oldCount + newCount];
 
                     var startIndex = args.OldStartingIndex;
@@ -100,7 +100,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
                 await CollectionView.PerformBatchUpdatesAsync(() =>
                 {
                     int oldStartingIndex = args.OldStartingIndex;
-                    var indexPaths = new NSIndexPath[args.OldItems.Count];
+                    var indexPaths = new NSIndexPath[args.OldItems!.Count];
                     for (int index = 0; index < indexPaths.Length; ++index)
                         indexPaths[index] = NSIndexPath.FromRowSection(oldStartingIndex + index, 0);
                     CollectionView.DeleteItems(indexPaths);
@@ -111,7 +111,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
                 await CollectionView.PerformBatchUpdatesAsync(() =>
                 {
                     int newStartingIndex = args.NewStartingIndex;
-                    var indexPaths = new NSIndexPath[args.NewItems.Count];
+                    var indexPaths = new NSIndexPath[args.NewItems!.Count];
                     for (int index = 0; index < indexPaths.Length; ++index)
                         indexPaths[index] = NSIndexPath.FromRowSection(newStartingIndex + index, 0);
                     CollectionView.InsertItems(indexPaths);

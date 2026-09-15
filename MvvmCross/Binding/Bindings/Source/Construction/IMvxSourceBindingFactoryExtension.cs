@@ -11,9 +11,9 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
     {
         [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         bool TryCreateBinding(
-            object source,
+            object? source,
             IMvxPropertyToken propertyToken,
             List<IMvxPropertyToken> remainingTokens,
-            out IMvxSourceBinding result);
+            out IMvxSourceBinding? result);
     }
 }

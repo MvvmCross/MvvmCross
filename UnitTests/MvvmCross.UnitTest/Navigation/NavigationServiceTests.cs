@@ -27,9 +27,9 @@ namespace MvvmCross.UnitTest.Navigation
             AdditionalSetup(fixture);
         }
 
-        protected NavigationMockDispatcher MockDispatcher { get; set; }
+        protected NavigationMockDispatcher MockDispatcher { get; set; } = null!;
 
-        protected IMvxViewModelLoader MockLoader { get; set; }
+        protected IMvxViewModelLoader MockLoader { get; set; } = null!;
 
 
         private void AdditionalSetup(MvxTestFixture fixture)

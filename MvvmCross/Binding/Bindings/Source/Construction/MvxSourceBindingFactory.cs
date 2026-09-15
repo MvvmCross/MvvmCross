@@ -16,7 +16,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
         : IMvxSourceBindingFactory
         , IMvxSourceBindingFactoryExtensionHost
     {
-        private IMvxSourcePropertyPathParser _propertyPathParser;
+        private IMvxSourcePropertyPathParser? _propertyPathParser;
 
         protected IMvxSourcePropertyPathParser SourcePropertyPathParser => _propertyPathParser ??= MvxHost.Current!.Services.GetRequiredService<IMvxSourcePropertyPathParser>();
 
@@ -25,7 +25,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
         [RequiresUnreferencedCode("This method uses reflection to create bindings, which may not be preserved in trimming scenarios")]
         protected bool TryCreateBindingFromExtensions(
             object source, IMvxPropertyToken propertyToken,
-            List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
+            List<IMvxPropertyToken> remainingTokens, out IMvxSourceBinding? result)
         {
             foreach (var extension in _extensions)
             {
@@ -56,10 +56,10 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
 
             var currentToken = tokens[0];
             var remainingTokens = tokens.Skip(1).ToList();
-            IMvxSourceBinding extensionResult;
+            IMvxSourceBinding? extensionResult;
             if (TryCreateBindingFromExtensions(source, currentToken, remainingTokens, out extensionResult))
             {
-                return extensionResult;
+                return extensionResult!;
             }
 
             if (source != null)
@@ -70,7 +70,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
                     source.GetType().Name);
             }
 
-            return new MvxMissingSourceBinding(source);
+            return new MvxMissingSourceBinding(source!);
         }
 
         public IList<IMvxSourceBindingFactoryExtension> Extensions => _extensions;

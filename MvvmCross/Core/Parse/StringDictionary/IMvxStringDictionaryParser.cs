@@ -6,10 +6,8 @@ using System.Collections.Generic;
 
 namespace MvvmCross.Core.Parse.StringDictionary
 {
-#nullable enable
     public interface IMvxStringDictionaryParser
     {
         IDictionary<string, string> Parse(string textToParse);
     }
-#nullable restore
 }

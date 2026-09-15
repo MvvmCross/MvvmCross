@@ -4,7 +4,6 @@
 
 namespace MvvmCross.Core
 {
-#nullable enable
     public class MvxSettings : IMvxSettings
     {
         public bool AlwaysRaiseInpcOnUserInterfaceThread { get; set; }
@@ -20,5 +19,4 @@ namespace MvvmCross.Core
             ShouldLogInpc = false;
         }
     }
-#nullable restore
 }

@@ -16,8 +16,8 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
         public MvxCombinerSourceStep(MvxCombinerSourceStepDescription description)
             : base(description)
         {
-            var sourceStepFactory = MvxBindingSingletonCache.Instance.SourceStepFactory;
-            _subSteps = [.. description.InnerSteps.Select(d => sourceStepFactory.Create(d))];
+            var sourceStepFactory = MvxBindingSingletonCache.Instance!.SourceStepFactory!;
+            _subSteps = [.. (description.InnerSteps ?? []).Select(d => sourceStepFactory.Create(d))];
         }
 
         protected override void Dispose(bool isDisposing)
@@ -55,7 +55,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         private void SetSubTypeTargetTypes()
         {
-            var targetTypes = Description.Combiner.SubStepTargetTypes(_subSteps, TargetType);
+            var targetTypes = Description.Combiner!.SubStepTargetTypes(_subSteps, TargetType);
             var targetTypeList = targetTypes.ToList();
             if (targetTypeList.Count != _subSteps.Count)
                 throw new MvxException("Description.Combiner provided incorrect length TargetType list");
@@ -98,7 +98,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             _isSubscribeToChangedEvents = false;
         }
 
-        private void SubStepOnChanged(object sender, EventArgs args)
+        private void SubStepOnChanged(object? sender, EventArgs args)
         {
             SendSourcePropertyChanged();
         }
@@ -113,9 +113,9 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             base.OnDataContextChanged();
         }
 
-        public override Type SourceType => Description.Combiner.SourceType(_subSteps);
+        public override Type SourceType => Description.Combiner!.SourceType(_subSteps);
 
-        protected override void SetSourceValue(object sourceValue)
+        protected override void SetSourceValue(object? sourceValue)
         {
             if (sourceValue == MvxBindingConstant.UnsetValue)
                 return;
@@ -123,13 +123,13 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             if (sourceValue == MvxBindingConstant.DoNothing)
                 return;
 
-            Description.Combiner.SetValue(_subSteps, sourceValue);
+            Description.Combiner!.SetValue(_subSteps, sourceValue!);
         }
 
-        protected override object GetSourceValue()
+        protected override object? GetSourceValue()
         {
-            object value;
-            if (!Description.Combiner.TryGetValue(_subSteps, out value))
+            object? value;
+            if (!Description.Combiner!.TryGetValue(_subSteps, out value))
                 value = MvxBindingConstant.UnsetValue;
 
             return value;

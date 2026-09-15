@@ -18,7 +18,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
         : MvxPropertyInfoSourceBinding
     {
         private readonly IList<IMvxPropertyToken> _childTokens;
-        private IMvxSourceBinding _currentChildBinding;
+        private IMvxSourceBinding? _currentChildBinding;
 
         protected MvxChainedSourceBinding(
             object source,
@@ -41,7 +41,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
             base.Dispose(isDisposing);
         }
 
-        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance.SourceBindingFactory;
+        private IMvxSourceBindingFactory SourceBindingFactory => MvxBindingSingletonCache.Instance!.SourceBindingFactory!;
 
         public override Type SourceType
         {
@@ -81,9 +81,9 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
             }
         }
 
-        protected abstract object[] PropertyIndexParameters();
+        protected abstract object?[] PropertyIndexParameters();
 
-        private void ChildSourceBindingChanged(object sender, EventArgs e)
+        private void ChildSourceBindingChanged(object? sender, EventArgs e)
         {
             FireChanged();
         }

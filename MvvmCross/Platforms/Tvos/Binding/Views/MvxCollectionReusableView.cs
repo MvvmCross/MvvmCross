@@ -12,7 +12,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         : UICollectionReusableView
           , IMvxBindable
     {
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; } = null!;
 
         public MvxCollectionReusableView()
         {
@@ -41,7 +41,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         }
 
         [MvxSetToNullAfterBinding]
-        public object DataContext
+        public object? DataContext
         {
             get { return BindingContext.DataContext; }
             set { BindingContext.DataContext = value; }

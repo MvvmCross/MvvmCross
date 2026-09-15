@@ -13,7 +13,7 @@ namespace MvvmCross.Platforms.Tvos.Views
     public abstract class MvxTvosUIThreadDispatcher
         : MvxMainThreadAsyncDispatcher
     {
-        private readonly SynchronizationContext _uiSynchronizationContext;
+        private readonly SynchronizationContext? _uiSynchronizationContext;
 
         protected MvxTvosUIThreadDispatcher()
         {

@@ -28,7 +28,7 @@ namespace MvvmCross.Platforms.Tvos.Views
             var instanceRequest = tvOSView.Request as MvxViewModelInstanceRequest;
             if (instanceRequest != null)
             {
-                return instanceRequest.ViewModelInstance;
+                return instanceRequest.ViewModelInstance!;
             }
 
             var loader = MvxHost.Current!.Services.GetRequiredService<IMvxViewModelLoader>();

@@ -6,7 +6,6 @@ using System;
 
 namespace MvvmCross.Commands
 {
-#nullable enable
     [AttributeUsage(AttributeTargets.Method)]
     public class MvxCommandAttribute : Attribute
     {
@@ -19,5 +18,4 @@ namespace MvvmCross.Commands
         public string CommandName { get; set; }
         public string? CanExecutePropertyName { get; set; }
     }
-#nullable restore
 }

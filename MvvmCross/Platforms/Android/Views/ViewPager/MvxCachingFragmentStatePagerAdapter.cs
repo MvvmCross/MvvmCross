@@ -41,7 +41,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
         protected MvxCachingFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            _activityType = MvxHost.Current!.Services.GetRequiredService<IMvxAndroidCurrentTopActivity>().Activity.GetType();
+            _activityType = MvxHost.Current!.Services.GetRequiredService<IMvxAndroidCurrentTopActivity>().Activity?.GetType() ?? typeof(Activity);
         }
 
         [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Activity types are preserved by the Android presenter infrastructure.")]
@@ -49,16 +49,16 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             List<MvxViewPagerFragmentInfo> fragmentsInfo) : base(fragmentManager)
         {
             FragmentsInfo = fragmentsInfo;
-            _activityType = MvxHost.Current!.Services.GetRequiredService<IMvxAndroidCurrentTopActivity>().Activity.GetType();
+            _activityType = MvxHost.Current!.Services.GetRequiredService<IMvxAndroidCurrentTopActivity>().Activity?.GetType() ?? typeof(Activity);
         }
 
         [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Fragment types are preserved by the Android presenter infrastructure.")]
-        public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
+        public override Fragment GetItem(int position, Fragment.SavedState? fragmentSavedState = null)
         {
             var fragmentInfo = FragmentsInfo[position];
             var fragmentClass = Class.FromType(fragmentInfo.FragmentType);
             var fragment = FragmentFactory.Instantiate(
-                fragmentClass.ClassLoader,
+                fragmentClass.ClassLoader!,
                 fragmentClass.Name
             );
 
@@ -103,7 +103,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             return FragmentsInfo[position].Tag;
         }
 
-        private static IMvxViewModel GetViewModel(MvxViewPagerFragmentInfo fragmentInfo)
+        private static IMvxViewModel? GetViewModel(MvxViewPagerFragmentInfo fragmentInfo)
         {
             if (fragmentInfo.Request is MvxViewModelInstanceRequest instanceRequest)
             {
@@ -128,16 +128,16 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             return bundle;
         }
 
-        public override IParcelable SaveState()
+        public override IParcelable? SaveState()
         {
             var bundle = base.SaveState() as Bundle;
 
-            SaveFragmentsInfoState(bundle);
+            SaveFragmentsInfoState(bundle!);
 
             return bundle;
         }
 
-        public override void RestoreState(IParcelable state, ClassLoader loader)
+        public override void RestoreState(IParcelable? state, ClassLoader? loader)
         {
             base.RestoreState(state, loader);
 
@@ -181,9 +181,9 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 
             for (var i = 0; i < fragmentInfoParcelables.Length; i++)
             {
-                var parcelable = (ViewPagerFragmentInfoParcelable)fragmentInfoParcelables[i];
+                var parcelable = (ViewPagerFragmentInfoParcelable)fragmentInfoParcelables[i]!;
 
-                MvxViewPagerFragmentInfo fragInfo = null;
+                MvxViewPagerFragmentInfo? fragInfo = null;
 
                 if (i < fragments.Count && fragments[i] is IMvxFragmentView mvxFragment && mvxFragment.ViewModel != null)
                 {
@@ -209,11 +209,11 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 
         private sealed class ViewPagerFragmentInfoParcelable : JavaObject, IParcelable
         {
-            public Type FragmentType { get; init; }
+            public Type FragmentType { get; init; } = null!;
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            public Type ViewModelType { get; init; }
-            public string Title { get; init; }
-            public string Tag { get; init; }
+            public Type ViewModelType { get; init; } = null!;
+            public string Title { get; init; } = null!;
+            public string Tag { get; init; } = null!;
 
             [ExportField("CREATOR")]
             public static ViewPagerFragmentInfoParcelableCreator InitializeCreator()
@@ -228,13 +228,13 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             [UnconditionalSuppressMessage("Trimming", "IL2057", Justification = "Type names are serialized/deserialized for Android Parcelable implementation. Types are preserved through view model registration.")]
             public ViewPagerFragmentInfoParcelable(Parcel source)
             {
-                string fragmentType = source.ReadString();
-                string viewModelType = source.ReadString();
-                Title = source.ReadString();
-                Tag = source.ReadString();
+                string fragmentType = source.ReadString()!;
+                string viewModelType = source.ReadString()!;
+                Title = source.ReadString()!;
+                Tag = source.ReadString()!;
 
-                FragmentType = Type.GetType(fragmentType);
-                ViewModelType = Type.GetType(viewModelType);
+                FragmentType = Type.GetType(fragmentType)!;
+                ViewModelType = Type.GetType(viewModelType)!;
             }
 
             public void WriteToParcel(Parcel dest, ParcelableWriteFlags flags)
@@ -253,9 +253,9 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 
         private sealed class ViewPagerFragmentInfoParcelableCreator : JavaObject, IParcelableCreator
         {
-            public JavaObject CreateFromParcel(Parcel source)
+            public JavaObject? CreateFromParcel(Parcel? source)
             {
-                return new ViewPagerFragmentInfoParcelable(source);
+                return new ViewPagerFragmentInfoParcelable(source!);
             }
 
             public JavaObject[] NewArray(int size)

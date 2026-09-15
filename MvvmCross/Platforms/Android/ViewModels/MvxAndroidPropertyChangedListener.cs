@@ -28,9 +28,9 @@ namespace MvvmCross.Platforms.Android.ViewModels
             _target = new WeakReference<IJavaObject>(target);
         }
 
-        public override void NotificationObjectOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        public override void NotificationObjectOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            IJavaObject target;
+            IJavaObject? target;
 
             if (!_target.TryGetTarget(out target) || target.Handle == IntPtr.Zero)
                 return;

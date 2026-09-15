@@ -21,7 +21,7 @@ namespace MvvmCross.Platforms.Android.Views
             IDictionary<string, string> sharedElements = new Dictionary<string, string>();
             var transitions = bundle.GetString(MvxAndroidViewPresenter.SharedElementsBundleKey);
 
-            foreach (var transition in transitions.Split('|'))
+            foreach (var transition in transitions!.Split('|'))
             {
                 string[] transitionDetails = transition.Split(':');
                 sharedElements.Add(new KeyValuePair<string, string>(transitionDetails[0], transitionDetails[1]));
@@ -39,11 +39,11 @@ namespace MvvmCross.Platforms.Android.Views
         {
             var transitions = bundle.GetString(MvxAndroidViewPresenter.SharedElementsBundleKey);
 
-            foreach (var transition in transitions.Split('|'))
+            foreach (var transition in transitions!.Split('|'))
             {
                 string[] transitionDetails = transition.Split(':');
-                View viewToAnimate = view.FindViewWithTag(transitionDetails[0]);
-                viewToAnimate.SetTransitionNameSupport(transitionDetails[1]);
+                View? viewToAnimate = view.FindViewWithTag(transitionDetails[0]);
+                viewToAnimate!.SetTransitionNameSupport(transitionDetails[1]);
             }
         }
 
@@ -56,11 +56,11 @@ namespace MvvmCross.Platforms.Android.Views
         {
             var transitions = bundle.GetString(MvxAndroidViewPresenter.SharedElementsBundleKey);
 
-            foreach (var transition in transitions.Split('|'))
+            foreach (var transition in transitions!.Split('|'))
             {
                 string[] transitionDetails = transition.Split(':');
-                View viewToAnimate = view.FindViewById(view.Context.Resources.GetIdentifier(transitionDetails[0], "id", view.Context.PackageName));
-                viewToAnimate.SetTransitionNameSupport(transitionDetails[1]);
+                View? viewToAnimate = view.FindViewById(view.Context!.Resources!.GetIdentifier(transitionDetails[0], "id", view.Context!.PackageName));
+                viewToAnimate!.SetTransitionNameSupport(transitionDetails[1]);
             }
         }
 
@@ -79,7 +79,7 @@ namespace MvvmCross.Platforms.Android.Views
         /// </summary>
         /// <param name="view">The <see cref="View"/> to use.</param>
         /// <returns>The name for the transition.</returns>
-        public static string GetTransitionNameSupport(this View view)
+        public static string? GetTransitionNameSupport(this View view)
         {
             return view.TransitionName;
         }

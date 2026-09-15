@@ -36,7 +36,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
         {
             get;
             set;
-        }
+        } = null!;
 
         public override void SetValueForKey(NSObject value, NSString key)
         {

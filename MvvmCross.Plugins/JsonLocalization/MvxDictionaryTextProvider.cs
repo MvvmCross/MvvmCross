@@ -24,11 +24,10 @@ namespace MvvmCross.Plugin.JsonLocalization
             _entries[key] = value;
         }
 
-        public override string GetText(string namespaceKey, string typeKey, string name)
+        public override string? GetText(string? namespaceKey, string? typeKey, string name)
         {
             var key = MakeLookupKey(namespaceKey, typeKey, name);
-            string value;
-            if (_entries.TryGetValue(key, out value))
+            if (_entries.TryGetValue(key, out string? value))
                 return value;
 
             MvxPluginLog.Instance?.Log(LogLevel.Trace, "Text value missing for " + key);
@@ -38,12 +37,15 @@ namespace MvvmCross.Plugin.JsonLocalization
             throw new KeyNotFoundException("Could not find text lookup for " + key);
         }
 
-        public override bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name)
+        public override bool TryGetText(out string textValue, string? namespaceKey, string? typeKey, string name)
         {
             var key = MakeLookupKey(namespaceKey, typeKey, name);
 
-            if (_entries.TryGetValue(key, out textValue))
+            if (_entries.TryGetValue(key, out string? found))
+            {
+                textValue = found;
                 return true;
+            }
 
             MvxPluginLog.Instance?.Log(LogLevel.Trace, "Text value missing for " + key);
 

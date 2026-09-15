@@ -6,12 +6,10 @@ using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Presenters
 {
-#nullable enable
     public interface IMvxPopoverPresentationSourceProvider
     {
         UIView? SourceView { get; set; }
         UIBarButtonItem? SourceBarButtonItem { get; set; }
         public void SetSource(UIPopoverPresentationController popoverPresentationController);
     }
-#nullable restore
 }

@@ -103,7 +103,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             public ICommand OldSchoolCommand { get; set; }
 
-            public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangedEventHandler? PropertyChanged;
 
             public void RaisePropertyChanged(string propertyName)
             {
@@ -140,7 +140,7 @@ namespace MvvmCross.UnitTest.ViewModels
                 }
             }
 
-            public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangedEventHandler? PropertyChanged;
 
             public void RaisePropertyChanged(string propertyName)
             {

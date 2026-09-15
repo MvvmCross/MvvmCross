@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace MvvmCross.ViewModels
 {
-#nullable enable
     public class MvxChildViewModelCache : IMvxChildViewModelCache
     {
         private readonly Dictionary<int, IMvxViewModel> _viewModels = new Dictionary<int, IMvxViewModel>();
@@ -47,5 +46,4 @@ namespace MvvmCross.ViewModels
             _viewModels.Remove(_viewModels.FirstOrDefault(x => x.Value.GetType() == viewModelType).Key);
         }
     }
-#nullable restore
 }

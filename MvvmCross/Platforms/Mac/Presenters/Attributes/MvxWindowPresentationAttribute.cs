@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Mac.Presenters.Attributes
         public static NSWindowTitleVisibility DefaultTitleVisibility = NSWindowTitleVisibility.Visible;
         public static bool DefaultShouldCascadeWindows = true;
 
-        public MvxWindowPresentationAttribute(string windowControllerName = null, string storyboardName = null)
+        public MvxWindowPresentationAttribute(string? windowControllerName = null, string? storyboardName = null)
         {
             WindowControllerName = windowControllerName;
             StoryboardName = storyboardName;
@@ -41,13 +41,13 @@ namespace MvvmCross.Platforms.Mac.Presenters.Attributes
 
         public bool ShouldCascadeWindows { get; set; } = DefaultShouldCascadeWindows;
 
-        public string Identifier { get; set; }
+        public string? Identifier { get; set; }
 
-        public string WindowControllerName { get; set; }
+        public string? WindowControllerName { get; set; }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        public Type WindowControllerType { get; set; }
+        public Type? WindowControllerType { get; set; }
 
-        public string StoryboardName { get; set; }
+        public string? StoryboardName { get; set; }
     }
 }

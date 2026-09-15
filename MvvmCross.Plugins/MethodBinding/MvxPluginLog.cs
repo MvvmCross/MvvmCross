@@ -9,6 +9,6 @@ namespace MvvmCross.Plugin.MethodBinding
 {
     internal static class MvxPluginLog
     {
-        internal static ILogger Instance { get; } = MvxLogHost.GetLog("MvxPlugin.MethodBinding");
+        internal static ILogger? Instance { get; } = MvxLogHost.GetLog("MvxPlugin.MethodBinding");
     }
 }

@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Ios.Views
 {
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxIosView IosView => ViewController as IMvxIosView;
+        protected IMvxIosView? IosView => ViewController as IMvxIosView;
 
         public MvxBindingViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)
@@ -24,10 +24,10 @@ namespace MvvmCross.Platforms.Ios.Views
 
             var bindingContext = MvxHost.Current?.Services.GetService<IMvxBindingContext>();
             if (bindingContext != null)
-                IosView.BindingContext = bindingContext;
+                IosView!.BindingContext = bindingContext;
         }
 
-        public override void HandleDisposeCalled(object sender, EventArgs e)
+        public override void HandleDisposeCalled(object? sender, EventArgs e)
         {
             if (IosView == null)
             {

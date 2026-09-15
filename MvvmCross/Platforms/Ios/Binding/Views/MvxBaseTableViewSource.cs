@@ -16,9 +16,9 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 {
     public abstract class MvxBaseTableViewSource : UITableViewSource
     {
-        public event EventHandler SelectedItemChanged;
-        private object _selectedItem;
-        private readonly WeakReference<UITableView> _tableView;
+        public event EventHandler? SelectedItemChanged;
+        private object? _selectedItem;
+        private readonly WeakReference<UITableView> _tableView = null!;
 
         protected MvxBaseTableViewSource(UITableView tableView)
         {
@@ -32,7 +32,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
                 "MvxBaseTableViewSource NativeHandle constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
-        protected UITableView TableView
+        protected UITableView? TableView
         {
             get
             {
@@ -50,9 +50,9 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
         public bool DeselectChangedEnabled { get; set; }
 
-        public ICommand SelectionChangedCommand { get; set; }
+        public ICommand? SelectionChangedCommand { get; set; }
 
-        public ICommand AccessoryTappedCommand { get; set; }
+        public ICommand? AccessoryTappedCommand { get; set; }
 
         public override void AccessoryButtonTapped(UITableView tableView, NSIndexPath indexPath)
         {
@@ -69,7 +69,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         {
             try
             {
-                TableView.ReloadData();
+                TableView!.ReloadData();
             }
             catch (Exception exception)
             {
@@ -108,7 +108,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
         }
 
-        public object SelectedItem
+        public object? SelectedItem
         {
             get
             {
@@ -146,11 +146,11 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         }
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]
-        protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);
+        protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object? item);
 
-        protected abstract object GetItemAt(NSIndexPath indexPath);
+        protected abstract object? GetItemAt(NSIndexPath indexPath);
 
-        private static void BindCell(UITableView tableView, UITableViewCell cell, object item)
+        private static void BindCell(UITableView tableView, UITableViewCell cell, object? item)
         {
             if (cell is IMvxBindable bindable)
             {
@@ -161,7 +161,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
                 // RunSynchronously must be called before DataContext is set
                 if (isTaskBasedBindingContextAndHasAutomaticDimension)
-                    bindingContext.RunSynchronously = true;
+                    bindingContext!.RunSynchronously = true;
 
                 bindable.DataContext = item;
 

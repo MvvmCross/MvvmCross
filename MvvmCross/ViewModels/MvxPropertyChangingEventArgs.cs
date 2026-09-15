@@ -8,7 +8,7 @@ namespace MvvmCross.ViewModels
 {
     public class MvxPropertyChangingEventArgs<T> : PropertyChangingEventArgs
     {
-        public MvxPropertyChangingEventArgs(string propertyName, T newValue) : base(propertyName)
+        public MvxPropertyChangingEventArgs(string? propertyName, T newValue) : base(propertyName)
         {
             NewValue = newValue;
         }

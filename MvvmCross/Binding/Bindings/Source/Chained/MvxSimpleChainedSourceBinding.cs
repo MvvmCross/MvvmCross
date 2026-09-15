@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
             UpdateChildBinding();
         }
 
-        protected override object[] PropertyIndexParameters()
+        protected override object?[] PropertyIndexParameters()
         {
             return [];
         }

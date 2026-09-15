@@ -8,6 +8,6 @@ namespace MvvmCross.Platforms.Android
 {
     public interface IMvxAndroidCurrentTopActivity
     {
-        Activity Activity { get; }
+        Activity? Activity { get; }
     }
 }

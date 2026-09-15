@@ -24,7 +24,7 @@ namespace MvvmCross.Plugin.FieldBinding
             var safeValue = fieldType.MakeSafeValue(value);
 
             // if safeValue matches the existing value, then don't call set
-            if (EqualsCurrentValue(safeValue))
+            if (EqualsCurrentValue(safeValue!))
                 return;
 
             FieldInfo.SetValue(Source, safeValue);
@@ -34,7 +34,7 @@ namespace MvvmCross.Plugin.FieldBinding
 
         public override object GetValue()
         {
-            return FieldInfo.GetValue(Source);
+            return FieldInfo.GetValue(Source)!;
         }
     }
 }

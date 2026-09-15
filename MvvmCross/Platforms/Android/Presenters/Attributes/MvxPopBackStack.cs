@@ -4,7 +4,6 @@
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes;
 
-#nullable enable
 public enum MvxPopBackStack
 {
     /// <summary>

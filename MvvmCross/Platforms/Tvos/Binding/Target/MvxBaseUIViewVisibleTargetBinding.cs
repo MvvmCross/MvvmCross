@@ -12,7 +12,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
 {
     public abstract class MvxBaseUIViewVisibleTargetBinding : MvxConvertingTargetBinding
     {
-        protected UIView View => (UIView)Target;
+        protected UIView? View => Target as UIView;
 
         protected MvxBaseUIViewVisibleTargetBinding(UIView target)
             : base(target)

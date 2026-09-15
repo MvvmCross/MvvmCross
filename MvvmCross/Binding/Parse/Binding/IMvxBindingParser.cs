@@ -6,8 +6,8 @@ namespace MvvmCross.Binding.Parse.Binding
 {
     public interface IMvxBindingParser
     {
-        bool TryParseBindingDescription(string text, out MvxSerializableBindingDescription requestedDescription);
+        bool TryParseBindingDescription(string text, out MvxSerializableBindingDescription? requestedDescription);
 
-        bool TryParseBindingSpecification(string text, out MvxSerializableBindingSpecification requestedBindings);
+        bool TryParseBindingSpecification(string text, out MvxSerializableBindingSpecification? requestedBindings);
     }
 }

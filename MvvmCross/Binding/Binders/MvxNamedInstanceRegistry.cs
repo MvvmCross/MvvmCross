@@ -15,7 +15,7 @@ namespace MvvmCross.Binding.Binders
         private readonly Dictionary<string, T> _converters =
             new Dictionary<string, T>();
 
-        public T Find(string name)
+        public T? Find(string name)
         {
             if (string.IsNullOrEmpty(name))
                 return null;

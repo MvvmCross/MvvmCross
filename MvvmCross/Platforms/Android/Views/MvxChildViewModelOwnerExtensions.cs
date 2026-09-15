@@ -22,7 +22,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public static Intent CreateIntentFor<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TTargetViewModel>(
                 this IMvxAndroidView view,
-                IDictionary<string, string> parameterValues = null)
+                IDictionary<string, string>? parameterValues = null)
             where TTargetViewModel : class, IMvxViewModel
         {
             var parameterBundle = new MvxBundle(parameterValues);

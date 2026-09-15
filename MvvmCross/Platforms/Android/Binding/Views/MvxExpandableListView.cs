@@ -20,10 +20,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         private bool _itemClickOverloaded;
         private bool _itemLongClickOverloaded;
 
-        private ICommand _itemClick;
-        private ICommand _itemLongClick;
-        private ICommand _groupClick;
-        private ICommand _groupLongClick;
+        private ICommand _itemClick = null!;
+        private ICommand _itemLongClick = null!;
+        private ICommand _groupClick = null!;
+        private ICommand _groupLongClick = null!;
 
         public MvxExpandableListView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxExpandableListAdapter(context))
@@ -54,25 +54,25 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         }
 
         // An expandableListView has ExpandableListAdapter as propertyname, but Adapter still exists but is always null.
-        protected MvxExpandableListAdapter ThisAdapter => ExpandableListAdapter as MvxExpandableListAdapter;
+        protected MvxExpandableListAdapter? ThisAdapter => ExpandableListAdapter as MvxExpandableListAdapter;
 
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return ThisAdapter.ItemsSource; }
-            set { ThisAdapter.ItemsSource = value; }
+            get { return ThisAdapter!.ItemsSource!; }
+            set { ThisAdapter!.ItemsSource = value; }
         }
 
         public int ItemTemplateId
         {
-            get { return ThisAdapter.ItemTemplateId; }
-            set { ThisAdapter.ItemTemplateId = value; }
+            get { return ThisAdapter!.ItemTemplateId; }
+            set { ThisAdapter!.ItemTemplateId = value; }
         }
 
         public int GroupTemplateId
         {
-            get { return ThisAdapter.GroupTemplateId; }
-            set { ThisAdapter.GroupTemplateId = value; }
+            get { return ThisAdapter!.GroupTemplateId; }
+            set { ThisAdapter!.GroupTemplateId = value; }
         }
 
         public new ICommand ItemClick
@@ -139,7 +139,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             ChildClick += ChildOnClick;
         }
 
-        private void ChildOnClick(object sender, ChildClickEventArgs e)
+        private void ChildOnClick(object? sender, ChildClickEventArgs e)
         {
             ExecuteCommandOnItem(ItemClick, e.GroupPosition, e.ChildPosition);
         }
@@ -153,7 +153,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             base.GroupClick += GroupOnClick;
         }
 
-        private void GroupOnClick(object sender, GroupClickEventArgs e)
+        private void GroupOnClick(object? sender, GroupClickEventArgs e)
         {
             ExecuteCommandOnGroup(GroupClick, e.GroupPosition);
             e.Handled = false;
@@ -167,10 +167,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             base.ItemLongClick += ItemOnLongClick;
         }
 
-        private void ItemOnLongClick(object sender, ItemLongClickEventArgs e)
+        private void ItemOnLongClick(object? sender, ItemLongClickEventArgs e)
         {
             var type = GetPackedPositionType(e.Id);
-            long packedPos = ((ExpandableListView)e.Parent).GetExpandableListPosition(e.Position);
+            long packedPos = ((ExpandableListView)e.Parent!).GetExpandableListPosition(e.Position);
             int groupPosition = GetPackedPositionGroup(packedPos);
             int childPosition = GetPackedPositionChild(packedPos);
 
@@ -189,7 +189,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             if (command == null)
                 return;
 
-            var item = ThisAdapter.GetRawItem(groupPosition, position);
+            var item = ThisAdapter!.GetRawItem(groupPosition, position);
             if (item == null)
                 return;
 
@@ -204,7 +204,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             if (command == null)
                 return;
 
-            var item = ThisAdapter.GetRawGroup(groupPosition);
+            var item = ThisAdapter!.GetRawGroup(groupPosition);
             if (item == null)
                 return;
 

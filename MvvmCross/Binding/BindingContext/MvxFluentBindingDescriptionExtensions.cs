@@ -31,9 +31,10 @@ namespace MvvmCross.Binding.BindingContext
                 this MvxFluentBindingDescription<TTarget, TSource> bindingDescription,
                 IDictionary<TFrom, TTo> converterParameter)
                     where TTarget : class
+                    where TFrom : notnull
                 => bindingDescription.WithConversion(
                     new MvxDictionaryValueConverter<TFrom, TTo>(), new Tuple<IDictionary<TFrom, TTo>, TTo, bool>(
-                        converterParameter, default, false))
+                        converterParameter, default!, false))
                         .OneWay();
 
         public static MvxFluentBindingDescription<TTarget, TSource> WithDictionaryConversion<
@@ -42,6 +43,7 @@ namespace MvvmCross.Binding.BindingContext
                 IDictionary<TFrom, TTo> converterParameter,
                 TTo fallback)
                     where TTarget : class
+                    where TFrom : notnull
                 => bindingDescription.WithConversion(
                     new MvxDictionaryValueConverter<TFrom, TTo>(),
                     new Tuple<IDictionary<TFrom, TTo>, TTo, bool>(converterParameter, fallback, true))

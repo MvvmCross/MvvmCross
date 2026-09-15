@@ -28,7 +28,7 @@ namespace MvvmCross.UnitTest.Base
 
             public string GetFullText()
             {
-                return FullText;
+                return FullText!;
             }
 
             public bool GetIsComplete()
@@ -83,7 +83,7 @@ namespace MvvmCross.UnitTest.Base
 
             public object CallReadValue()
             {
-                return ReadValue();
+                return ReadValue()!;
             }
 
             public object CallReadEnumerationValue(Type enumerationType, bool ignoreCase = true)
@@ -269,9 +269,9 @@ namespace MvvmCross.UnitTest.Base
         {
             foreach (var value in Enum.GetValues(typeof(MyEnum)))
             {
-                DoReadEnumerationTest(typeof(MyEnum), value.ToString(), value);
-                DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToUpper(), value);
-                DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToLower(), value);
+                DoReadEnumerationTest(typeof(MyEnum), value.ToString()!, value);
+                DoReadEnumerationTest(typeof(MyEnum), value.ToString()!.ToUpper(), value);
+                DoReadEnumerationTest(typeof(MyEnum), value.ToString()!.ToLower(), value);
             }
         }
 

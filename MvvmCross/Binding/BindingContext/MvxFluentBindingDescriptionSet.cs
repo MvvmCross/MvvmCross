@@ -16,7 +16,7 @@ namespace MvvmCross.Binding.BindingContext
     {
         private readonly List<IMvxApplicable> _applicables = [];
         private readonly TOwningTarget _bindingContextOwner;
-        private readonly string _clearBindingKey;
+        private readonly string? _clearBindingKey;
 
         public MvxFluentBindingDescriptionSet(TOwningTarget bindingContextOwner)
         {

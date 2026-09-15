@@ -14,14 +14,14 @@ namespace MvvmCross.Binding.Binders
         : IMvxBinder
     {
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
-        public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target, string bindingText)
+        public IEnumerable<IMvxUpdateableBinding> Bind(object? source, object target, string bindingText)
         {
-            var bindingDescriptions = MvxBindingSingletonCache.Instance.BindingDescriptionParser.Parse(bindingText);
+            var bindingDescriptions = MvxBindingSingletonCache.Instance!.BindingDescriptionParser!.Parse(bindingText);
             return Bind(source, target, bindingDescriptions);
         }
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
-        public IEnumerable<IMvxUpdateableBinding> Bind(object source, object target,
+        public IEnumerable<IMvxUpdateableBinding> Bind(object? source, object target,
                                                        IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             if (bindingDescriptions == null)
@@ -32,19 +32,19 @@ namespace MvvmCross.Binding.Binders
         }
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
-        public IEnumerable<IMvxUpdateableBinding> LanguageBind(object source, object target, string bindingText)
+        public IEnumerable<IMvxUpdateableBinding> LanguageBind(object? source, object target, string bindingText)
         {
             var bindingDescriptions =
-                MvxBindingSingletonCache.Instance.BindingDescriptionParser.LanguageParse(bindingText);
+                MvxBindingSingletonCache.Instance!.BindingDescriptionParser!.LanguageParse(bindingText);
             return Bind(source, target, bindingDescriptions);
         }
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming")]
-        public IMvxUpdateableBinding BindSingle(object source, object target, string targetPropertyName,
+        public IMvxUpdateableBinding? BindSingle(object source, object target, string targetPropertyName,
                                                 string partialBindingDescription)
         {
             var bindingDescription =
-                MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(partialBindingDescription);
+                MvxBindingSingletonCache.Instance!.BindingDescriptionParser!.ParseSingle(partialBindingDescription);
             if (bindingDescription == null)
                 return null;
 

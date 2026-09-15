@@ -11,13 +11,13 @@ namespace MvvmCross.Platforms.Android.Views.Base
 {
     public interface IMvxEventSourceActivity : IMvxDisposeSource
     {
-        event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
+        event EventHandler<MvxValueEventArgs<Bundle?>> CreateWillBeCalled;
 
-        event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
+        event EventHandler<MvxValueEventArgs<Bundle?>> CreateCalled;
 
         event EventHandler DestroyCalled;
 
-        event EventHandler<MvxValueEventArgs<Intent>> NewIntentCalled;
+        event EventHandler<MvxValueEventArgs<Intent?>> NewIntentCalled;
 
         event EventHandler ResumeCalled;
 

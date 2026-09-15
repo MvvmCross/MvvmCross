@@ -79,9 +79,9 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
         {
             get;
             set;
-        }
+        } = null!;
 
-        public object DataContext
+        public object? DataContext
         {
             get { return this.BindingContext.DataContext; }
             set { this.BindingContext.DataContext = value; }

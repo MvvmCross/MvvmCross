@@ -4,10 +4,8 @@
 
 namespace MvvmCross.UI
 {
-#nullable enable
     public interface IMvxNativeVisibility
     {
         object ToNative(MvxVisibility visibility);
     }
-#nullable restore
 }

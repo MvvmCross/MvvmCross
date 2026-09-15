@@ -47,14 +47,14 @@ namespace Playground.iOS.Views
 
             Add(_tableView);
 
-            _tableView.LeadingAnchor.ConstraintEqualTo(View.LeadingAnchor).Active = true;
+            _tableView.LeadingAnchor.ConstraintEqualTo(View!.LeadingAnchor).Active = true;
             _tableView.TrailingAnchor.ConstraintEqualTo(View.TrailingAnchor).Active = true;
             _tableView.TopAnchor.ConstraintEqualTo(View.SafeAreaLayoutGuide.TopAnchor).Active = true;
             _tableView.BottomAnchor.ConstraintEqualTo(View.SafeAreaLayoutGuide.BottomAnchor).Active = true;
 
             var set = CreateBindingSet();
             set.Bind(_source).To(vm => vm.Sections);
-            set.Bind(_source).For(v => v.HeaderTappedCommand).To(vm => vm.HeaderTappedCommand);
+            set.Bind(_source).For(v => v.HeaderTappedCommand!).To(vm => vm.HeaderTappedCommand);
             set.Apply();
         }
 
@@ -178,7 +178,7 @@ namespace Playground.iOS.Views
 
             protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
             {
-                return TableView.DequeueReusableCell(ItemCell.Identifier);
+                return TableView!.DequeueReusableCell(ItemCell.Identifier)!;
             }
 
             protected override UITableViewCell GetOrCreateHeaderCellFor(UITableView tableView, nint section)

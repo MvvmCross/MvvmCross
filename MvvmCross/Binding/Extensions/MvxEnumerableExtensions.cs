@@ -65,7 +65,7 @@ namespace MvvmCross.Binding.Extensions
             }
         }
 
-        public static object ElementAt(this IEnumerable items, int position)
+        public static object? ElementAt(this IEnumerable items, int position)
         {
             if (items == null)
                 return null;

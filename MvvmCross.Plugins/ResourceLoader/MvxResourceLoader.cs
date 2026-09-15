@@ -13,11 +13,11 @@ namespace MvvmCross.Plugin.ResourceLoader
     {
         #region Implementation of IMvxResourceLoader
 
-        public string GetTextResource(string resourcePath)
+        public string? GetTextResource(string resourcePath)
         {
             try
             {
-                string text = null;
+                string? text = null;
                 GetResourceStream(resourcePath, (stream) =>
                     {
                         if (stream == null)

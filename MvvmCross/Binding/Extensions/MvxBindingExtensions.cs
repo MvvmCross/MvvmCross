@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-#nullable enable
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using MvvmCross.Base;
@@ -60,7 +59,7 @@ public static class MvxBindingExtensions
             return propertyType.CreateDefault();
         }
 
-        var autoConverter = MvxBindingSingletonCache.Instance?.AutoValueConverters.Find(
+        var autoConverter = MvxBindingSingletonCache.Instance?.AutoValueConverters?.Find(
             value.GetType(), propertyType);
         if (autoConverter != null)
         {

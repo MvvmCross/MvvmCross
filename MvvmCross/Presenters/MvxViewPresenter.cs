@@ -10,7 +10,6 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters
 {
-#nullable enable
     public abstract class MvxViewPresenter : IMvxViewPresenter
     {
         private readonly Dictionary<Type, Func<MvxPresentationHint, Task<bool>>> _presentationHintHandlers =
@@ -49,5 +48,4 @@ namespace MvvmCross.Presenters
         [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public abstract Task<bool> Close(IMvxViewModel viewModel);
     }
-#nullable restore
 }

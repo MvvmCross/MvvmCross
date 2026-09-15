@@ -13,7 +13,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
     {
         private readonly UIControlState _state;
 
-        protected UIButton Button => Target as UIButton;
+        protected UIButton? Button => Target as UIButton;
 
         public MvxUIButtonTitleTargetBinding(UIButton button, UIControlState state = UIControlState.Normal)
             : base(button)
@@ -30,9 +30,9 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
         public override Type TargetValueType => typeof(string);
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object? target, object? value)
         {
-            ((UIButton)target).SetTitle(value as string, _state);
+            ((UIButton)target!).SetTitle(value as string, _state);
         }
     }
 }

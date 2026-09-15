@@ -10,9 +10,9 @@ namespace MvvmCross.Plugin.JsonLocalization
     public abstract class MvxTextProvider :
         MvxResourceProvider, IMvxTextProvider
     {
-        public abstract string GetText(string namespaceKey, string typeKey, string name);
+        public abstract string? GetText(string? namespaceKey, string? typeKey, string name);
 
-        public virtual string GetText(string namespaceKey, string typeKey, string name, params object[] formatArgs)
+        public virtual string? GetText(string? namespaceKey, string? typeKey, string name, params object[] formatArgs)
         {
             var baseText = GetText(namespaceKey, typeKey, name);
             if (string.IsNullOrEmpty(baseText))
@@ -24,9 +24,9 @@ namespace MvvmCross.Plugin.JsonLocalization
             return string.Format(baseText, formatArgs);
         }
 
-        public abstract bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name);
+        public abstract bool TryGetText(out string textValue, string? namespaceKey, string? typeKey, string name);
 
-        public virtual bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name, params object[] formatArgs)
+        public virtual bool TryGetText(out string textValue, string? namespaceKey, string? typeKey, string name, params object[] formatArgs)
         {
             if (!TryGetText(out textValue, namespaceKey, typeKey, name)) return false;
 

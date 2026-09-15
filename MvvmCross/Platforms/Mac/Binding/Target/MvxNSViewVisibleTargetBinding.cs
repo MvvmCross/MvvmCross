@@ -11,9 +11,9 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
 {
     public class MvxNSViewVisibleTargetBinding : MvxMacTargetBinding
     {
-        protected NSView View
+        protected NSView? View
         {
-            get { return (NSView)Target; }
+            get { return Target as NSView; }
         }
 
         public MvxNSViewVisibleTargetBinding(NSView target)
@@ -32,13 +32,13 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             get { return typeof(bool); }
         }
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object target, object? value)
         {
             var view = this.View;
             if (view == null)
                 return;
 
-            var visible = (bool)value;
+            var visible = (bool)(value ?? false);
             view.Hidden = !visible;
         }
     }

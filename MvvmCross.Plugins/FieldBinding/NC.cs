@@ -58,7 +58,7 @@ namespace MvvmCross.Plugin.FieldBinding
 
         public int MaxLength { get; private set; }
 
-        private void NCString_Changed(object sender, EventArgs e)
+        private void NCString_Changed(object? sender, EventArgs e)
         {
             if (MaxLength > 0 && Value != null && Value.Length > MaxLength)
                 Value = Value.Remove(MaxLength);

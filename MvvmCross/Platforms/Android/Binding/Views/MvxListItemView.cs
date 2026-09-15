@@ -17,8 +17,8 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         IMvxBindingContextOwner, View.IOnAttachStateChangeListener
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
-        private View _content;
-        private object _cachedDataContext;
+        private View _content = null!;
+        private object? _cachedDataContext;
         private bool _isAttachedToWindow;
 
         public MvxListItemView(Context context,
@@ -27,7 +27,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             _bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
             TemplateId = templateId;
-            Content = _bindingContext.BindingInflate(templateId, parent, false);
+            Content = _bindingContext.BindingInflate(templateId, parent, false)!;
         }
 
         public void OnViewAttachedToWindow(View attachedView)
@@ -61,7 +61,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        public virtual object DataContext
+        public virtual object? DataContext
         {
             get => _bindingContext.DataContext;
             set

@@ -21,7 +21,7 @@ namespace Playground.iOS.Views
         {
             base.ViewDidLoad();
 
-            View.BackgroundColor = UIColor.Yellow;
+            View!.BackgroundColor = UIColor.Yellow;
 
             var set = CreateBindingSet();
             set.Bind(btnClose).To(vm => vm.CloseCommand);

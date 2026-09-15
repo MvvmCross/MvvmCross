@@ -16,8 +16,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 {
     public class MvxCollectionViewSource : MvxBaseCollectionViewSource
     {
-        private IEnumerable _itemsSource;
-        private IDisposable _subscription;
+        private IEnumerable? _itemsSource;
+        private IDisposable? _subscription;
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
 
@@ -33,7 +33,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         }
 
         [MvxSetToNullAfterBinding]
-        public virtual IEnumerable ItemsSource
+        public virtual IEnumerable? ItemsSource
         {
             get
             {
@@ -64,7 +64,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
         }
 
-        protected override object GetItemAt(NSIndexPath indexPath)
+        protected override object? GetItemAt(NSIndexPath indexPath)
         {
             if (indexPath == null)
                 return null;
@@ -77,10 +77,10 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         /// </summary>
         public Task WaitAnimationsCompletedAsync()
         {
-            return CollectionView.PerformBatchUpdatesAsync(() => { });
+            return CollectionView!.PerformBatchUpdatesAsync(() => { });
         }
 
-        protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        protected virtual void CollectionChangedOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
         {
             ReloadData();
         }

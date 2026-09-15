@@ -10,7 +10,7 @@ namespace MvvmCross.Platforms.Tvos.Views
 {
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {
-        protected IMvxTvosView TvosView => ViewController as IMvxTvosView;
+        protected IMvxTvosView? TvosView => ViewController as IMvxTvosView;
 
         public MvxViewControllerAdapter(IMvxEventSourceViewController eventSource)
             : base(eventSource)
@@ -19,15 +19,15 @@ namespace MvvmCross.Platforms.Tvos.Views
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxTvosView");
         }
 
-        public override void HandleViewDidLoadCalled(object sender, EventArgs e)
+        public override void HandleViewDidLoadCalled(object? sender, EventArgs e)
         {
-            TvosView.OnViewCreate();
+            TvosView?.OnViewCreate();
             base.HandleViewDidLoadCalled(sender, e);
         }
 
-        public override void HandleDisposeCalled(object sender, EventArgs e)
+        public override void HandleDisposeCalled(object? sender, EventArgs e)
         {
-            TvosView.OnViewDestroy();
+            TvosView?.OnViewDestroy();
             base.HandleDisposeCalled(sender, e);
         }
     }

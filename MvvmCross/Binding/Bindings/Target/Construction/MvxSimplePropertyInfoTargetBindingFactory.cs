@@ -30,7 +30,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         public IEnumerable<MvxTypeAndNamePair> SupportedTypes => _innerFactory.SupportedTypes;
 
         [RequiresUnreferencedCode("This method creates target bindings using reflection-based binding creation which may not be preserved by trimming")]
-        public IMvxTargetBinding CreateBinding(object target, string targetName)
+        public IMvxTargetBinding? CreateBinding(object target, string targetName)
         {
             return _innerFactory.CreateBinding(target, targetName);
         }
@@ -38,7 +38,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         #endregion IMvxPluginTargetBindingFactory Members
 
         [RequiresUnreferencedCode("This method uses Activator.CreateInstance to create binding instances, which may not be preserved by trimming")]
-        private IMvxTargetBinding CreateTargetBinding(object target, PropertyInfo targetPropertyInfo)
+        private IMvxTargetBinding? CreateTargetBinding(object target, PropertyInfo targetPropertyInfo)
         {
             var targetBindingCandidate = Activator.CreateInstance(_bindingType, target, targetPropertyInfo);
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;

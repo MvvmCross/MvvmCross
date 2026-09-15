@@ -13,7 +13,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
     {
         private bool _subscribed;
 
-        protected NSDatePicker DatePicker
+        protected NSDatePicker? DatePicker
         {
             get { return base.Target as NSDatePicker; }
         }
@@ -38,7 +38,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             this._subscribed = true;
         }
 
-        private void HandleActivated(object sender, EventArgs e)
+        private void HandleActivated(object? sender, EventArgs e)
         {
             var view = this.DatePicker;
             if (view == null)

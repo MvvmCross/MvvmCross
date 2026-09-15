@@ -13,7 +13,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
         : NSView
         , IMvxBindable
     {
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBindingContext BindingContext { get; set; } = null!;
 
         [RequiresUnreferencedCode("This constructor creates bindings which use reflection and may not be preserved by trimming.")]
         public MvxView()
@@ -51,7 +51,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
             base.Dispose(disposing);
         }
 
-        public object DataContext
+        public object? DataContext
         {
             get { return this.BindingContext.DataContext; }
             set { this.BindingContext.DataContext = value; }

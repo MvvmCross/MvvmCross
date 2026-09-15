@@ -40,7 +40,7 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
             { '^', "XOr" }
         };
 
-        private char[] _terminatingCharacters;
+        private char[]? _terminatingCharacters;
 
         protected override IEnumerable<char> TerminatingCharacters() =>
             _terminatingCharacters ?? (_terminatingCharacters = base.TerminatingCharacters().Union(OperatorCharacters).ToArray());
@@ -50,7 +50,7 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
             if (IsComplete)
                 return;
 
-            object literal;
+            object? literal;
             if (TryReadValue(AllowNonQuotedText.DoNotAllow, out literal))
             {
                 // for null, replace with LiteralNull
@@ -99,11 +99,11 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
             description.Sources = sources.ToArray();
         }
 
-        private Tuple<uint, string> ParseTwoCharacterOperator()
+        private Tuple<uint, string?> ParseTwoCharacterOperator()
         {
             uint moveFowards = 0;
             var twoCharacterOperatorString = SafePeekString(2);
-            var gotCombinerName = TwoCharacterOperatorCombinerNames.TryGetValue(twoCharacterOperatorString, out string combinerName);
+            var gotCombinerName = TwoCharacterOperatorCombinerNames.TryGetValue(twoCharacterOperatorString, out string? combinerName);
             if (gotCombinerName)
                 moveFowards = 2;
 
@@ -119,9 +119,12 @@ namespace MvvmCross.Binding.Parse.Binding.Tibet
 
             if (combinerName == null)
             {
-                var gotCombinerName = SingleCharacterOperatorCombinerNames.TryGetValue(CurrentChar, out combinerName);
+                var gotCombinerName = SingleCharacterOperatorCombinerNames.TryGetValue(CurrentChar, out string? singleCombinerName);
                 if (gotCombinerName)
+                {
+                    combinerName = singleCombinerName;
                     moveForwards = 1;
+                }
             }
 
             if (combinerName == null)

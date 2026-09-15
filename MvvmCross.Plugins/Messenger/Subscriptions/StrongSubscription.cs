@@ -20,7 +20,7 @@ namespace MvvmCross.Plugin.Messenger.Subscriptions
             return true;
         }
 
-        public StrongSubscription(IMvxActionRunner actionRunner, Action<TMessage> action, string tag)
+        public StrongSubscription(IMvxActionRunner actionRunner, Action<TMessage> action, string? tag)
             : base(actionRunner, tag)
         {
             _action = action;

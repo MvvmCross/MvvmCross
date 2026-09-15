@@ -8,6 +8,6 @@ namespace MvvmCross.Platforms.Ios.Views
 {
     public interface IMvxCurrentRequest
     {
-        MvxViewModelRequest CurrentRequest { get; }
+        MvxViewModelRequest? CurrentRequest { get; }
     }
 }

@@ -18,16 +18,16 @@ namespace MvvmCross.Platforms.Ios.Binding
     public class MvxIosBindingBuilder
         : MvxBindingBuilder
     {
-        private readonly Action<IMvxTargetBindingFactoryRegistry> _fillRegistryAction;
-        private readonly Action<IMvxValueConverterRegistry> _fillValueConvertersAction;
-        private readonly Action<IMvxBindingNameRegistry> _fillBindingNamesAction;
+        private readonly Action<IMvxTargetBindingFactoryRegistry>? _fillRegistryAction;
+        private readonly Action<IMvxValueConverterRegistry>? _fillValueConvertersAction;
+        private readonly Action<IMvxBindingNameRegistry>? _fillBindingNamesAction;
         private readonly MvxUnifiedTypesValueConverter _unifiedValueTypesConverter;
-        private readonly Action<IMvxValueCombinerRegistry> _fillValueCombinersAction;
+        private readonly Action<IMvxValueCombinerRegistry>? _fillValueCombinersAction;
 
-        public MvxIosBindingBuilder(Action<IMvxTargetBindingFactoryRegistry> fillRegistryAction = null,
-                                    Action<IMvxValueConverterRegistry> fillValueConvertersAction = null,
-                                    Action<IMvxValueCombinerRegistry> fillValueCombinersAction = null,
-                                    Action<IMvxBindingNameRegistry> fillBindingNamesAction = null)
+        public MvxIosBindingBuilder(Action<IMvxTargetBindingFactoryRegistry>? fillRegistryAction = null,
+                                    Action<IMvxValueConverterRegistry>? fillValueConvertersAction = null,
+                                    Action<IMvxValueCombinerRegistry>? fillValueCombinersAction = null,
+                                    Action<IMvxBindingNameRegistry>? fillBindingNamesAction = null)
         {
             _fillRegistryAction = fillRegistryAction;
             _fillValueConvertersAction = fillValueConvertersAction;
@@ -151,7 +151,7 @@ namespace MvvmCross.Platforms.Ios.Binding
 
             registry.RegisterCustomBindingFactory<UIDatePicker>(
                 MvxIosPropertyBinding.UIDatePicker_Time,
-                view => new MvxUIDatePickerTimeTargetBinding(view, typeof(UIDatePicker).GetProperty(MvxIosPropertyBinding.UIDatePicker_Date)));
+                view => new MvxUIDatePickerTimeTargetBinding(view, typeof(UIDatePicker).GetProperty(MvxIosPropertyBinding.UIDatePicker_Date)!));
 
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxUIDatePickerCountDownDurationTargetBinding),

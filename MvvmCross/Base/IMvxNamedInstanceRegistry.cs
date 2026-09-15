@@ -7,7 +7,6 @@ using System.Reflection;
 
 namespace MvvmCross.Base
 {
-#nullable enable
     public interface IMvxNamedInstanceRegistry<in T>
         where T : notnull
     {
@@ -16,5 +15,4 @@ namespace MvvmCross.Base
         [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         void AddOrOverwriteFrom(Assembly assembly);
     }
-#nullable restore
 }

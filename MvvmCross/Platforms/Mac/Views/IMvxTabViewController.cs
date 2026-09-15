@@ -9,7 +9,7 @@ namespace MvvmCross.Platforms.Mac.Views
 {
     public interface IMvxTabViewController
     {
-        void ShowTabView(NSViewController viewController, string tabTitle);
+        void ShowTabView(NSViewController viewController, string? tabTitle);
 
         bool CloseTabView(IMvxViewModel viewModel);
     }
