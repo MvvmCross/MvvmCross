@@ -6,7 +6,7 @@ category: Platforms
 
 To start your App using SceneDelegate. MvvmCross as of version 9.4.0 supports starting an iOS app using SceneDelegates.
 
-For now there is only support for a single Window, the same as if using AppDelegate.
+The example below uses a single window. For multi-window setup, see [iOS multiple windows](ios-multi-window).
 
 To adopt SceneDelegates you will need to do the following.
 

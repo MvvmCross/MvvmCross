@@ -22,6 +22,13 @@ namespace MvvmCross.Platforms.Ios.Hosting;
 public class MvxIosHostBuilder : MvxHostBuilder
 {
     /// <summary>
+    /// Creates a host for multiple scenes. Build and start it once per application, then
+    /// register each scene's window with <see cref="MvxIosMultiWindowViewPresenter"/>.
+    /// Configure AddMvxCore without StartWith and navigate explicitly when each scene connects.
+    /// </summary>
+    public static MvxIosHostBuilder CreateBuilder() => new(null);
+
+    /// <summary>
     /// Creates an <see cref="MvxIosHostBuilder"/> with the given <see cref="UIWindow"/>.
     /// The window is registered as a singleton so the view presenter can resolve it.
     /// </summary>
@@ -31,12 +38,19 @@ public class MvxIosHostBuilder : MvxHostBuilder
         return new MvxIosHostBuilder(window);
     }
 
-    private MvxIosHostBuilder(UIWindow window)
+    private MvxIosHostBuilder(UIWindow? window)
     {
-        Services.TryAddSingleton(window);
-
-        // View presenter (wraps UIWindow for navigation)
-        Services.TryAddSingleton<IMvxIosViewPresenter>(new MvxIosViewPresenter(window));
+        if (window == null)
+        {
+            Services.TryAddSingleton<IMvxIosViewPresenter, MvxIosMultiWindowViewPresenter>();
+            Services.TryAddSingleton(sp =>
+                (MvxIosMultiWindowViewPresenter)sp.GetRequiredService<IMvxIosViewPresenter>());
+        }
+        else
+        {
+            Services.TryAddSingleton(window);
+            Services.TryAddSingleton<IMvxIosViewPresenter>(new MvxIosViewPresenter(window));
+        }
         Services.TryAddSingleton<IMvxViewPresenter>(
             sp => sp.GetRequiredService<IMvxIosViewPresenter>());
 

@@ -7,6 +7,10 @@ public class Application
     {
         // if you want to use a different Application Delegate class from "AppDelegate"
         // you can specify it here.
+#if MVX_MULTI_WINDOW_DEMO
+        UIApplication.Main(args, null, "MultiWindowAppDelegate");
+#else
         UIApplication.Main(args, null, "AppDelegate");
+#endif
     }
 }

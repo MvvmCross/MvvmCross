@@ -25,21 +25,23 @@ namespace MvvmCross.Platforms.Ios.Views
         [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
-            Task action()
+            var shown = false;
+            async Task action()
             {
                 MvxLogHost.GetLog<MvxIosViewDispatcher>()?.LogTrace(
                     "Navigate requested to {ViewModelType}", request?.ViewModelType);
-                return _presenter.Show(request);
+                shown = await _presenter.Show(request);
             }
             await ExecuteOnMainThreadAsync(action);
-            return true;
+            return shown;
         }
 
         [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            await ExecuteOnMainThreadAsync(() => _presenter.ChangePresentation(hint));
-            return true;
+            var changed = false;
+            await ExecuteOnMainThreadAsync(async () => changed = await _presenter.ChangePresentation(hint));
+            return changed;
         }
     }
 }

@@ -33,4 +33,12 @@
     <!-- needed otherwise debugger detaches immediately on launch -->
     <UseInterpreter>true</UseInterpreter>
   </PropertyGroup>
+
+  <!-- Build with -p:MvxMultiWindowDemo=true to run the scene-routing demonstration. -->
+  <PropertyGroup Condition=" '$(MvxMultiWindowDemo)' == 'true' ">
+    <DefineConstants>$(DefineConstants);MVX_MULTI_WINDOW_DEMO</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(MvxMultiWindowDemo)' == 'true' ">
+    <PartialAppManifest Include="MultiWindow/Info.plist" Overwrite="true" />
+  </ItemGroup>
 </Project>

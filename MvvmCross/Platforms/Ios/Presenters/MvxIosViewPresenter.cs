@@ -28,6 +28,9 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
 
     public UIViewController? PopoverViewController { get; protected set; }
 
+    /// <summary>Popover anchors for this presenter. Uses the shared provider when unset.</summary>
+    public IMvxPopoverPresentationSourceProvider? PopoverPresentationSourceProvider { get; set; }
+
     public List<UIViewController> ModalViewControllers { get; } = [];
 
     public IMvxTabBarViewController? TabBarViewController { get; protected set; }
@@ -267,6 +270,9 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         UIViewController viewController, MvxRootPresentationAttribute attribute,
         IMvxTabBarViewController tabBarController)
     {
+        if (tabBarController is MvxTabBarViewController mvxTabBarController)
+            mvxTabBarController.Presenter = new WeakReference<MvxIosViewPresenter>(this);
+
         TabBarViewController = tabBarController;
 
         // set root
@@ -511,7 +517,8 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         if (presentationController != null)
         {
             presentationController.PermittedArrowDirections = attribute.PermittedArrowDirections;
-            var sourceProvider = MvxHost.Current?.Services.GetService<IMvxPopoverPresentationSourceProvider>();
+            var sourceProvider = PopoverPresentationSourceProvider
+                ?? MvxHost.Current?.Services.GetService<IMvxPopoverPresentationSourceProvider>();
             sourceProvider?.SetSource(presentationController);
             presentationController.Delegate = new MvxPopoverPresentationControllerDelegate(this);
         }
@@ -757,6 +764,9 @@ public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresent
         UINavigationController navigationController, UIViewController viewController, MvxChildPresentationAttribute attribute)
     {
         ValidateArguments(navigationController, attribute);
+
+        if (viewController is MvxTabBarViewController mvxTabBarController)
+            mvxTabBarController.Presenter = new WeakReference<MvxIosViewPresenter>(this);
 
         navigationController.PushViewController(viewController, attribute.Animated);
 
