@@ -10,11 +10,10 @@ using MvvmCross.Base;
 using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
 using MvvmCross.ViewModels;
-using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxNotifyPropertyChangedTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -78,8 +77,8 @@ namespace MvvmCross.UnitTest.ViewModels
             }
         }
 
-        [Fact]
-        public void Test_RaisePropertyChangingForExpression()
+        [Test]
+        public async Task Test_RaisePropertyChangingForExpression()
         {
             _fixture.ClearAll();
             var dispatcher = new InlineMockMainThreadDispatcher();
@@ -95,13 +94,13 @@ namespace MvvmCross.UnitTest.ViewModels
             };
             t.RaisePropertyChanging("Foobar", () => t.Foo);
 
-            Assert.True(notified.Count == 1);
-            Assert.True(notified[0] == "Foo");
-            Assert.Equal("Foobar", newValue);
+            await Assert.That(notified.Count == 1).IsTrue();
+            await Assert.That(notified[0] == "Foo").IsTrue();
+            await Assert.That(newValue).IsEqualTo("Foobar");
         }
 
-        [Fact]
-        public void Test_RaisePropertyChangingForName()
+        [Test]
+        public async Task Test_RaisePropertyChangingForName()
         {
             _fixture.ClearAll();
             var dispatcher = new InlineMockMainThreadDispatcher();
@@ -117,13 +116,13 @@ namespace MvvmCross.UnitTest.ViewModels
             };
             t.RaisePropertyChanging("Foobar", "Foo");
 
-            Assert.True(notified.Count == 1);
-            Assert.True(notified[0] == "Foo");
-            Assert.Equal("Foobar", newValue);
+            await Assert.That(notified.Count == 1).IsTrue();
+            await Assert.That(notified[0] == "Foo").IsTrue();
+            await Assert.That(newValue).IsEqualTo("Foobar");
         }
 
-        [Fact]
-        public void Test_RaisePropertyChangingDirect()
+        [Test]
+        public async Task Test_RaisePropertyChangingDirect()
         {
             _fixture.ClearAll();
             var dispatcher = new InlineMockMainThreadDispatcher();
@@ -139,12 +138,12 @@ namespace MvvmCross.UnitTest.ViewModels
             };
             t.RaisePropertyChanging(new MvxPropertyChangingEventArgs<string>("Foo", "Foobar"));
 
-            Assert.True(notified.Count == 1);
-            Assert.True(notified[0] == "Foo");
-            Assert.Equal("Foobar", newValue);
+            await Assert.That(notified.Count == 1).IsTrue();
+            await Assert.That(notified[0] == "Foo").IsTrue();
+            await Assert.That(newValue).IsEqualTo("Foobar");
         }
 
-        [Fact]
+        [Test]
         public async Task Test_RaisePropertyChangedForExpression()
         {
             _fixture.ClearAll();
@@ -156,11 +155,11 @@ namespace MvvmCross.UnitTest.ViewModels
             t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
             await t.RaisePropertyChanged(() => t.Foo);
 
-            Assert.True(notified.Count == 1);
-            Assert.True(notified[0] == "Foo");
+            await Assert.That(notified.Count == 1).IsTrue();
+            await Assert.That(notified[0] == "Foo").IsTrue();
         }
 
-        [Fact]
+        [Test]
         public async Task Test_RaisePropertyChangedForName()
         {
             _fixture.ClearAll();
@@ -172,11 +171,11 @@ namespace MvvmCross.UnitTest.ViewModels
             t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
             await t.RaisePropertyChanged("Foo");
 
-            Assert.True(notified.Count == 1);
-            Assert.True(notified[0] == "Foo");
+            await Assert.That(notified.Count == 1).IsTrue();
+            await Assert.That(notified[0] == "Foo").IsTrue();
         }
 
-        [Fact]
+        [Test]
         public async Task Test_RaisePropertyChangedDirect()
         {
             _fixture.ClearAll();
@@ -188,12 +187,12 @@ namespace MvvmCross.UnitTest.ViewModels
             t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
             await t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
 
-            Assert.True(notified.Count == 1);
-            Assert.True(notified[0] == "Foo");
+            await Assert.That(notified.Count == 1).IsTrue();
+            await Assert.That(notified[0] == "Foo").IsTrue();
         }
 
-        [Fact]
-        public void Test_SetPropertyChangeValue()
+        [Test]
+        public async Task Test_SetPropertyChangeValue()
         {
             _fixture.ClearAll();
             var dispatcher = new InlineMockMainThreadDispatcher();
@@ -204,13 +203,13 @@ namespace MvvmCross.UnitTest.ViewModels
             t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
             t.Foo = "Foobar";
 
-            Assert.True(notified.Count == 1);
-            Assert.True(notified[0] == "Foo");
-            Assert.Equal("Foobar", t.Foo);
+            await Assert.That(notified.Count == 1).IsTrue();
+            await Assert.That(notified[0] == "Foo").IsTrue();
+            await Assert.That(t.Foo).IsEqualTo("Foobar");
         }
 
-        [Fact]
-        public void Test_SetPropertyNoValueChange()
+        [Test]
+        public async Task Test_SetPropertyNoValueChange()
         {
             _fixture.ClearAll();
             var dispatcher = new InlineMockMainThreadDispatcher();
@@ -222,12 +221,12 @@ namespace MvvmCross.UnitTest.ViewModels
             t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
             t.Foo = "Foobar";
 
-            Assert.True(notified.Count == 0);
-            Assert.Equal("Foobar", t.Foo);
+            await Assert.That(notified.Count == 0).IsTrue();
+            await Assert.That(t.Foo).IsEqualTo("Foobar");
         }
 
-        [Fact]
-        public void Test_SetPropertyChangeValueCancelled()
+        [Test]
+        public async Task Test_SetPropertyChangeValueCancelled()
         {
             _fixture.ClearAll();
             var dispatcher = new InlineMockMainThreadDispatcher();
@@ -240,11 +239,11 @@ namespace MvvmCross.UnitTest.ViewModels
             t.PropertyChanged += (sender, args) => notified.Add(args.PropertyName);
             t.Foo = "Foobar";
 
-            Assert.True(notified.Count == 0);
-            Assert.Equal("Default value", t.Foo);
+            await Assert.That(notified.Count == 0).IsTrue();
+            await Assert.That(t.Foo).IsEqualTo("Default value");
         }
 
-        [Fact]
+        [Test]
         public async Task Test_TurnOffUIThread()
         {
             _fixture.ClearAll();
@@ -257,47 +256,47 @@ namespace MvvmCross.UnitTest.ViewModels
             t.ShouldAlwaysRaiseInpcOnUserInterfaceThread(false);
             await t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
 
-            Assert.True(dispatcher.Count == 0);
-            Assert.True(notified.Count == 1);
-            Assert.True(notified[0] == "Foo");
+            await Assert.That(dispatcher.Count == 0).IsTrue();
+            await Assert.That(notified.Count == 1).IsTrue();
+            await Assert.That(notified[0] == "Foo").IsTrue();
 
             t.ShouldAlwaysRaiseInpcOnUserInterfaceThread(true);
             await t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
 
-            Assert.Equal(1, dispatcher.Count);
-            Assert.True(notified.Count == 2);
-            Assert.True(notified[0] == "Foo");
+            await Assert.That(dispatcher.Count).IsEqualTo(1);
+            await Assert.That(notified.Count == 2).IsTrue();
+            await Assert.That(notified[0] == "Foo").IsTrue();
         }
 
-        [Fact]
-        public void Test_SetPropertyAfterActionCalledAfterPropertyChanged()
+        [Test]
+        public async Task Test_SetPropertyAfterActionCalledAfterPropertyChanged()
         {
             _fixture.ClearAll();
             var dispatcher = new InlineMockMainThreadDispatcher();
             _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
 
             var t2 = new TestInpc2();
-            Assert.Equal(0, t2.TestActionValue);
+            await Assert.That(t2.TestActionValue).IsEqualTo(0);
             t2.Foo = "Foo";
-            Assert.Equal(1, t2.TestActionValue);
+            await Assert.That(t2.TestActionValue).IsEqualTo(1);
             t2.Foo = "Foo";
-            Assert.Equal(1, t2.TestActionValue);
+            await Assert.That(t2.TestActionValue).IsEqualTo(1);
             t2.Foo = "Foobar";
-            Assert.Equal(2, t2.TestActionValue);
-            Assert.NotEqual(0, t2.TestActionValue);
+            await Assert.That(t2.TestActionValue).IsEqualTo(2);
+            await Assert.That(t2.TestActionValue).IsNotEqualTo(0);
 
             var t3 = new TestInpc3();
-            Assert.Equal(0, t3.TestActionValue);
+            await Assert.That(t3.TestActionValue).IsEqualTo(0);
             t3.Foo = "Foo";
-            Assert.Equal(1, t3.TestActionValue);
+            await Assert.That(t3.TestActionValue).IsEqualTo(1);
             t3.Foo = "Foo";
-            Assert.Equal(1, t3.TestActionValue);
+            await Assert.That(t3.TestActionValue).IsEqualTo(1);
             t3.Foo = "Foobar";
-            Assert.Equal(2, t3.TestActionValue);
-            Assert.NotEqual(0, t3.TestActionValue);
+            await Assert.That(t3.TestActionValue).IsEqualTo(2);
+            await Assert.That(t3.TestActionValue).IsNotEqualTo(0);
 
             var t4 = new TestInpc4();
-            Assert.Equal(0, t4.TestActionValue);
+            await Assert.That(t4.TestActionValue).IsEqualTo(0);
             Assert.Throws<ArgumentException>(() => t4.Foo = "Foo");
             t4.IncreaseTestActionValue = setPropertyResult =>
             {
@@ -307,12 +306,12 @@ namespace MvvmCross.UnitTest.ViewModels
                 }
             };
             t4.Foo = "Foo";
-            Assert.Equal(1, t4.TestActionValue);
+            await Assert.That(t4.TestActionValue).IsEqualTo(1);
             t4.Foo = "Foo";
-            Assert.Equal(1, t4.TestActionValue);
+            await Assert.That(t4.TestActionValue).IsEqualTo(1);
             t4.Foo = "Foobar";
-            Assert.Equal(2, t4.TestActionValue);
-            Assert.NotEqual(0, t4.TestActionValue);
+            await Assert.That(t4.TestActionValue).IsEqualTo(2);
+            await Assert.That(t4.TestActionValue).IsNotEqualTo(0);
         }
 
         public class Interceptor : IMvxInpcInterceptor
@@ -331,7 +330,7 @@ namespace MvvmCross.UnitTest.ViewModels
             }
         }
 
-        [Fact]
+        [Test]
         public async Task Test_Interceptor()
         {
             _fixture.ClearAll();
@@ -349,19 +348,19 @@ namespace MvvmCross.UnitTest.ViewModels
             interceptor.Handler = (s, e) => MvxInpcInterceptionResult.RaisePropertyChanged;
             await t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
 
-            Assert.True(dispatcher.Count == 1);
+            await Assert.That(dispatcher.Count == 1).IsTrue();
 
             interceptor.Handler = (s, e) => MvxInpcInterceptionResult.DoNotRaisePropertyChanged;
             interceptor.ChangingHandler = (s, e) => MvxInpcInterceptionResult.RaisePropertyChanging;
             await t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
 
-            Assert.True(dispatcher.Count == 1);
+            await Assert.That(dispatcher.Count == 1).IsTrue();
 
             interceptor.Handler = (s, e) => MvxInpcInterceptionResult.RaisePropertyChanged;
             interceptor.ChangingHandler = (s, e) => MvxInpcInterceptionResult.RaisePropertyChanging;
             await t.RaisePropertyChanged(new PropertyChangedEventArgs("Foo"));
 
-            Assert.True(dispatcher.Count == 2);
+            await Assert.That(dispatcher.Count == 2).IsTrue();
         }
     }
 }

@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Tests;
 using MvvmCross.ViewModels;
-using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxObservableCollectionTest
     {
         readonly NavigationTestFixture _fixture;
@@ -40,8 +39,8 @@ namespace MvvmCross.UnitTest.ViewModels
             }
         }
 
-        [Fact]
-        public void AddRangeSuppressesChangesTest()
+        [Test]
+        public async Task AddRangeSuppressesChangesTest()
         {
             var collection = new MvxObservableCollection<string>();
             var invokeCount = 0;
@@ -52,72 +51,64 @@ namespace MvvmCross.UnitTest.ViewModels
 
             collection.Add("Foo");
 
-            Assert.Equal(1, invokeCount);
-            Assert.Contains("Foo", collection);
+            await Assert.That(invokeCount).IsEqualTo(1);
+            await Assert.That(collection).Contains("Foo");
 
             var newItems = new[] { "Bar", "Baz", "Herp", "Derp" };
             collection.AddRange(newItems);
 
-            Assert.Equal(2, invokeCount);
+            await Assert.That(invokeCount).IsEqualTo(2);
 
             foreach (var item in newItems)
-                Assert.Contains(item, collection);
+                await Assert.That(collection).Contains(item);
         }
 
-        [Fact]
-        public void AddRangeIsAddActionTest()
+        [Test]
+        public async Task AddRangeIsAddActionTest()
         {
             var collection = new MvxObservableCollection<string>();
-            collection.CollectionChanged += (s, e) =>
-            {
-                Assert.Equal(NotifyCollectionChangedAction.Add, e.Action);
-            };
+            var events = new List<NotifyCollectionChangedEventArgs>();
+            collection.CollectionChanged += (s, e) => events.Add(e);
             collection.AddRange(new[] { "Bar", "Baz", "Herp", "Derp" });
+            var change = await Assert.That(events).HasSingleItem();
+            await Assert.That(change.Action).IsEqualTo(NotifyCollectionChangedAction.Add);
         }
 
-        [Fact]
-        public void ValidateStartingIndexOnAddRangeTest()
+        [Test]
+        public async Task ValidateStartingIndexOnAddRangeTest()
         {
             var collection = new MvxObservableCollection<string>();
             var newItems = new[] { "Bar", "Baz", "Herp", "Derp" };
 
-            NotifyCollectionChangedEventHandler handler = (s, a) =>
-            {
-                Assert.Equal(0, a.NewStartingIndex);
-                Assert.Equal(newItems.Length, a.NewItems.Count);
-                Assert.Null(a.OldItems);
-            };
-
-            collection.CollectionChanged += handler;
+            var events = new List<NotifyCollectionChangedEventArgs>();
+            collection.CollectionChanged += (s, e) => events.Add(e);
 
             collection.AddRange(newItems);
+            var firstChange = await Assert.That(events).HasSingleItem();
+            await Assert.That(firstChange.NewStartingIndex).IsEqualTo(0);
+            await Assert.That(firstChange.NewItems.Count).IsEqualTo(newItems.Length);
+            await Assert.That(firstChange.OldItems).IsNull();
             var newStartIndex = collection.Count;
 
-            collection.CollectionChanged -= handler;
-
-            handler = (s, a) =>
-            {
-                Assert.Equal(newStartIndex, a.NewStartingIndex);
-                Assert.Equal(newItems.Length, a.NewItems.Count);
-            };
-
-            collection.CollectionChanged += handler;
-
+            events.Clear();
             collection.AddRange(newItems);
+            var secondChange = await Assert.That(events).HasSingleItem();
+            await Assert.That(secondChange.NewStartingIndex).IsEqualTo(newStartIndex);
+            await Assert.That(secondChange.NewItems.Count).IsEqualTo(newItems.Length);
         }
 
-        [Fact]
+        [Test]
         public void AddRangeThrowsArgumentNullExceptionOnNullInput()
         {
             var collection = new MvxObservableCollection<string>();
             Assert.Throws<ArgumentNullException>(() => collection.AddRange(null));
         }
 
-        [Theory]
-        [InlineData(-1, 0, new[] { "foo" })]
-        [InlineData(0, 4, new[] { "foo", "bar", "baz" })]
-        [InlineData(0, 0, new[] { "foo" })]
-        [InlineData(0, -1, new[] { "foo" })]
+        [Test]
+        [Arguments(-1, 0, new[] { "foo" })]
+        [Arguments(0, 4, new[] { "foo", "bar", "baz" })]
+        [Arguments(0, 0, new[] { "foo" })]
+        [Arguments(0, -1, new[] { "foo" })]
         public void RemoveRangeThrowsArgumentOutOfRangeTest(int start, int count, string[] items)
         {
             var collection = new MvxObservableCollection<string>(items);
@@ -125,7 +116,7 @@ namespace MvvmCross.UnitTest.ViewModels
             Assert.Throws<ArgumentOutOfRangeException>(() => collection.RemoveRange(start, count));
         }
 
-        [Fact]
+        [Test]
         public void RemoveItemThrowsArgumentNullTest()
         {
             var collection = new MvxObservableCollection<string>(new[] { "foo" });

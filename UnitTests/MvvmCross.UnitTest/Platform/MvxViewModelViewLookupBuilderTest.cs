@@ -6,11 +6,10 @@ using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.UnitTest.Mocks.TestViews;
 using MvvmCross.ViewModels;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Platform
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxViewModelViewLookupBuilderTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -20,8 +19,8 @@ namespace MvvmCross.UnitTest.Platform
             _fixture = fixture;
         }
 
-        [Fact]
-        public void Test_Builder()
+        [Test]
+        public async Task Test_Builder()
         {
             _fixture.ClearAll();
 
@@ -35,11 +34,11 @@ namespace MvvmCross.UnitTest.Platform
             var builder = new MvxViewModelViewLookupBuilder();
             var result = builder.Build(new[] { assembly });
 
-            Assert.Equal(4, result.Count);
-            Assert.Equal(typeof(Test1View), result[typeof(Test1ViewModel)]);
-            Assert.Equal(typeof(NotTest2View), result[typeof(Test2ViewModel)]);
-            Assert.Equal(typeof(NotTest3View), result[typeof(Test3ViewModel)]);
-            Assert.Equal(typeof(OddNameOddness), result[typeof(OddNameViewModel)]);
+            await Assert.That(result.Count).IsEqualTo(4);
+            await Assert.That(result[typeof(Test1ViewModel)]).IsEqualTo(typeof(Test1View));
+            await Assert.That(result[typeof(Test2ViewModel)]).IsEqualTo(typeof(NotTest2View));
+            await Assert.That(result[typeof(Test3ViewModel)]).IsEqualTo(typeof(NotTest3View));
+            await Assert.That(result[typeof(OddNameViewModel)]).IsEqualTo(typeof(OddNameOddness));
         }
     }
 }

@@ -6,18 +6,9 @@ using MvvmCross.Navigation;
 using MvvmCross.Tests;
 using MvvmCross.ViewModels;
 using NSubstitute;
-using Xunit;
 
 namespace MvvmCross.UnitTest
 {
-    [CollectionDefinition("MvxTest")]
-    public class MvxTestCollection : ICollectionFixture<NavigationTestFixture>
-    {
-        // This class has no code, and is never created. Its purpose is simply
-        // to be the place to apply [CollectionDefinition] and all the
-        // ICollectionFixture<> interfaces.
-    }
-
     public class NavigationTestFixture : MvxTestFixture
     {
         protected override void AdditionalSetup()
