@@ -14,7 +14,6 @@ using MvvmCross.UnitTest.Mocks.ViewModels;
 using MvvmCross.UnitTest.Stubs;
 using MvvmCross.ViewModels;
 using NSubstitute;
-using Xunit;
 
 [assembly: MvxNavigation(typeof(ViewModelA), @"https?://mvvmcross.com/blog")]
 [assembly: MvxNavigation(typeof(ViewModelB), @"mvx://test/\?id=00000000000000000000000000000000$")]
@@ -23,7 +22,7 @@ using Xunit;
 
 namespace MvvmCross.UnitTest.Navigation
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class RoutingServiceTests
     {
         protected NavigationMockDispatcher MockDispatcher;
@@ -36,7 +35,7 @@ namespace MvvmCross.UnitTest.Navigation
             _fixture.ClearAll();
 
             // ReSharper disable once AssignNullToNotNullAttribute
-            Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            Environment.CurrentDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
             AdditionalSetup(fixture);
         }
@@ -71,47 +70,47 @@ namespace MvvmCross.UnitTest.Navigation
             fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
         }
 
-        [Fact]
+        [Test]
         public async Task TestFailAsync()
         {
             var url = "mvx://fail/?id=" + Guid.NewGuid();
 
             var canNavigate = await RoutingService.CanNavigate(url);
-            Assert.False(canNavigate);
+            await Assert.That(canNavigate).IsFalse();
 
             await Assert.ThrowsAsync<MvxException>(() => RoutingService.Navigate(url));
 
-            Assert.Empty(MockDispatcher.Requests);
+            await Assert.That(MockDispatcher.Requests).IsEmpty();
         }
 
-        [Fact]
+        [Test]
         public async Task TestDirectMatchRegexAsync()
         {
             await RoutingService.Navigate("mvx://test/?id=" + Guid.Empty.ToString("N"),
-                cancellationToken: TestContext.Current.CancellationToken);
+                cancellationToken: TestContext.Current.Execution.CancellationToken);
 
-            Assert.Single(MockDispatcher.Requests);
-            Assert.Equal(typeof(ViewModelB), MockDispatcher.Requests[0].ViewModelType);
+            await Assert.That(MockDispatcher.Requests).HasSingleItem();
+            await Assert.That(MockDispatcher.Requests[0].ViewModelType).IsEqualTo(typeof(ViewModelB));
         }
 
-        [Fact]
+        [Test]
         public async Task TestRegexWithParametersAsync()
         {
             await RoutingService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N"),
-                cancellationToken: TestContext.Current.CancellationToken);
+                cancellationToken: TestContext.Current.Execution.CancellationToken);
 
-            Assert.Single(MockDispatcher.Requests);
-            Assert.Equal(typeof(ViewModelC), MockDispatcher.Requests[0].ViewModelType);
+            await Assert.That(MockDispatcher.Requests).HasSingleItem();
+            await Assert.That(MockDispatcher.Requests[0].ViewModelType).IsEqualTo(typeof(ViewModelC));
         }
 
-        [Fact]
+        [Test]
         public async Task TestFacadeAsync()
         {
             await RoutingService.Navigate("mvx://facade/?id=a",
-                cancellationToken: TestContext.Current.CancellationToken);
+                cancellationToken: TestContext.Current.Execution.CancellationToken);
 
-            Assert.Single(MockDispatcher.Requests);
-            Assert.Equal(typeof(ViewModelA), MockDispatcher.Requests[0].ViewModelType);
+            await Assert.That(MockDispatcher.Requests).HasSingleItem();
+            await Assert.That(MockDispatcher.Requests[0].ViewModelType).IsEqualTo(typeof(ViewModelA));
         }
     }
 }

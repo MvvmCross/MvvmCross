@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using MvvmCross.Converters;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Base.Converters
 {
@@ -34,35 +33,35 @@ namespace MvvmCross.UnitTest.Base.Converters
             };
         }
 
-        [Theory]
-        [InlineData(TestStates.Running, StateRunning)]
-        [InlineData(TestStates.Completed, StateCompleted)]
-        public void Convert_MatchingKeyIncludeFallback_ReturnsDictionaryValue(TestStates state, string expected)
+        [Test]
+        [Arguments(TestStates.Running, StateRunning)]
+        [Arguments(TestStates.Completed, StateCompleted)]
+        public async Task Convert_MatchingKeyIncludeFallback_ReturnsDictionaryValue(TestStates state, string expected)
         {
             var converted = Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, Fallback, true), CultureInfo.CurrentUICulture);
-            Assert.Equal(expected, converted);
+            await Assert.That(converted).IsEqualTo(expected);
         }
 
-        [Theory]
-        [InlineData(TestStates.Running, StateRunning)]
-        [InlineData(TestStates.Completed, StateCompleted)]
-        public void Convert_MatchingKeyExcludeFallback_ReturnsDictionaryValue(TestStates state, string expected)
+        [Test]
+        [Arguments(TestStates.Running, StateRunning)]
+        [Arguments(TestStates.Completed, StateCompleted)]
+        public async Task Convert_MatchingKeyExcludeFallback_ReturnsDictionaryValue(TestStates state, string expected)
         {
             var converted = Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, default(string), false), CultureInfo.CurrentUICulture);
-            Assert.Equal(expected, converted);
+            await Assert.That(converted).IsEqualTo(expected);
         }
 
-        [Fact]
-        public void Convert_NoMatchingDictionaryKeyIncludeFallback_ReturnsFallback()
+        [Test]
+        public async Task Convert_NoMatchingDictionaryKeyIncludeFallback_ReturnsFallback()
         {
             var state = TestStates.Failed;
 
             var result = Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, Fallback, true), CultureInfo.CurrentUICulture);
 
-            Assert.Equal(Fallback, result);
+            await Assert.That(result).IsEqualTo(Fallback);
         }
 
-        [Fact]
+        [Test]
         public void Convert_NoMatchingDictionaryKeyExcludeFallback_ThrowKeyNotFoundException()
         {
             var state = TestStates.Failed;
@@ -71,7 +70,7 @@ namespace MvvmCross.UnitTest.Base.Converters
                 Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, default(string), false), CultureInfo.CurrentUICulture));
         }
 
-        [Fact]
+        [Test]
         public void Convert_InvalidParamterType_ThrowArgumentException()
         {
             var state = TestStates.Running;

@@ -16,7 +16,6 @@ using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using NSubstitute;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Hosting
 {
@@ -31,19 +30,19 @@ namespace MvvmCross.UnitTest.Hosting
 
         #region UseNavigationService
 
-        [Fact]
-        public void UseNavigationService_Generic_ResolvesCustomImplementation()
+        [Test]
+        public async Task UseNavigationService_Generic_ResolvesCustomImplementation()
         {
             var builder = CreateTestBuilder();
             builder.UseNavigationService<CustomNavigationService>();
 
             var provider = builder.Services.BuildServiceProvider();
 
-            Assert.IsType<CustomNavigationService>(provider.GetRequiredService<IMvxNavigationService>());
+            await Assert.That(provider.GetRequiredService<IMvxNavigationService>()).IsTypeOf<CustomNavigationService>();
         }
 
-        [Fact]
-        public void UseNavigationService_Factory_ResolvesViaFactory()
+        [Test]
+        public async Task UseNavigationService_Factory_ResolvesViaFactory()
         {
             var instance = Substitute.For<IMvxNavigationService>();
             var builder = CreateTestBuilder();
@@ -51,12 +50,12 @@ namespace MvvmCross.UnitTest.Hosting
 
             var provider = builder.Services.BuildServiceProvider();
 
-            Assert.Same(instance, provider.GetRequiredService<IMvxNavigationService>());
+            await Assert.That(provider.GetRequiredService<IMvxNavigationService>()).IsSameReferenceAs(instance);
         }
 
-        [Fact]
+        [Test]
         [RequiresUnreferencedCode("Uses AddMvxCore which stores types via reflection.")]
-        public void UseNavigationService_CalledBeforeStartWith_WinsOverDefault()
+        public async Task UseNavigationService_CalledBeforeStartWith_WinsOverDefault()
         {
             var builder = CreateTestBuilder();
 
@@ -66,12 +65,12 @@ namespace MvvmCross.UnitTest.Hosting
 
             var provider = builder.Services.BuildServiceProvider();
 
-            Assert.IsType<CustomNavigationService>(provider.GetRequiredService<IMvxNavigationService>());
+            await Assert.That(provider.GetRequiredService<IMvxNavigationService>()).IsTypeOf<CustomNavigationService>();
         }
 
-        [Fact]
+        [Test]
         [RequiresUnreferencedCode("Uses AddMvxCore which stores types via reflection.")]
-        public void UseNavigationService_CalledAfterStartWith_WinsOverDefault()
+        public async Task UseNavigationService_CalledAfterStartWith_WinsOverDefault()
         {
             var builder = CreateTestBuilder();
 
@@ -81,11 +80,11 @@ namespace MvvmCross.UnitTest.Hosting
 
             var provider = builder.Services.BuildServiceProvider();
 
-            Assert.IsType<CustomNavigationService>(provider.GetRequiredService<IMvxNavigationService>());
+            await Assert.That(provider.GetRequiredService<IMvxNavigationService>()).IsTypeOf<CustomNavigationService>();
         }
 
-        [Fact]
-        public void UseNavigationService_CalledTwice_LastOneWins()
+        [Test]
+        public async Task UseNavigationService_CalledTwice_LastOneWins()
         {
             var builder = CreateTestBuilder();
             builder.UseNavigationService<CustomNavigationService>();
@@ -93,42 +92,41 @@ namespace MvvmCross.UnitTest.Hosting
 
             var provider = builder.Services.BuildServiceProvider();
 
-            Assert.IsType<AnotherCustomNavigationService>(provider.GetRequiredService<IMvxNavigationService>());
+            await Assert.That(provider.GetRequiredService<IMvxNavigationService>()).IsTypeOf<AnotherCustomNavigationService>();
         }
 
-        [Fact]
+        [Test]
         public void UseNavigationService_NullFactory_Throws()
         {
             var builder = CreateTestBuilder();
-            Assert.Throws<ArgumentNullException>(
-                () => builder.UseNavigationService<IMvxNavigationService>(null!));
+            Assert.Throws<ArgumentNullException>(() => builder.UseNavigationService<IMvxNavigationService>(null!));
         }
 
-        [Fact]
-        public void UseNavigationService_ReturnsBuilderForChaining()
+        [Test]
+        public async Task UseNavigationService_ReturnsBuilderForChaining()
         {
             var builder = CreateTestBuilder();
             var result = builder.UseNavigationService<CustomNavigationService>();
-            Assert.Same(builder, result);
+            await Assert.That(result).IsSameReferenceAs(builder);
         }
 
         #endregion
 
         #region UsePresenter
 
-        [Fact]
-        public void UsePresenter_Generic_ResolvesCustomImplementation()
+        [Test]
+        public async Task UsePresenter_Generic_ResolvesCustomImplementation()
         {
             var builder = CreateTestBuilder();
             builder.UsePresenter<CustomViewPresenter>();
 
             var provider = builder.Services.BuildServiceProvider();
 
-            Assert.IsType<CustomViewPresenter>(provider.GetRequiredService<IMvxViewPresenter>());
+            await Assert.That(provider.GetRequiredService<IMvxViewPresenter>()).IsTypeOf<CustomViewPresenter>();
         }
 
-        [Fact]
-        public void UsePresenter_Factory_ResolvesViaFactory()
+        [Test]
+        public async Task UsePresenter_Factory_ResolvesViaFactory()
         {
             var instance = Substitute.For<IMvxViewPresenter>();
             var builder = CreateTestBuilder();
@@ -136,42 +134,41 @@ namespace MvvmCross.UnitTest.Hosting
 
             var provider = builder.Services.BuildServiceProvider();
 
-            Assert.Same(instance, provider.GetRequiredService<IMvxViewPresenter>());
+            await Assert.That(provider.GetRequiredService<IMvxViewPresenter>()).IsSameReferenceAs(instance);
         }
 
-        [Fact]
+        [Test]
         public void UsePresenter_NullFactory_Throws()
         {
             var builder = CreateTestBuilder();
-            Assert.Throws<ArgumentNullException>(
-                () => builder.UsePresenter<IMvxViewPresenter>(null!));
+            Assert.Throws<ArgumentNullException>(() => builder.UsePresenter<IMvxViewPresenter>(null!));
         }
 
-        [Fact]
-        public void UsePresenter_ReturnsBuilderForChaining()
+        [Test]
+        public async Task UsePresenter_ReturnsBuilderForChaining()
         {
             var builder = CreateTestBuilder();
             var result = builder.UsePresenter<CustomViewPresenter>();
-            Assert.Same(builder, result);
+            await Assert.That(result).IsSameReferenceAs(builder);
         }
 
         #endregion
 
         #region UseAppStart
 
-        [Fact]
-        public void UseAppStart_Generic_ResolvesCustomImplementation()
+        [Test]
+        public async Task UseAppStart_Generic_ResolvesCustomImplementation()
         {
             var builder = CreateTestBuilder();
             builder.UseAppStart<CustomAppStart>();
 
             var provider = builder.Services.BuildServiceProvider();
 
-            Assert.IsType<CustomAppStart>(provider.GetRequiredService<IMvxAppStart>());
+            await Assert.That(provider.GetRequiredService<IMvxAppStart>()).IsTypeOf<CustomAppStart>();
         }
 
-        [Fact]
-        public void UseAppStart_Factory_ResolvesViaFactory()
+        [Test]
+        public async Task UseAppStart_Factory_ResolvesViaFactory()
         {
             var instance = Substitute.For<IMvxAppStart>();
             var builder = CreateTestBuilder();
@@ -179,12 +176,12 @@ namespace MvvmCross.UnitTest.Hosting
 
             var provider = builder.Services.BuildServiceProvider();
 
-            Assert.Same(instance, provider.GetRequiredService<IMvxAppStart>());
+            await Assert.That(provider.GetRequiredService<IMvxAppStart>()).IsSameReferenceAs(instance);
         }
 
-        [Fact]
+        [Test]
         [RequiresUnreferencedCode("Uses AddMvxCore which stores types via reflection.")]
-        public void UseAppStart_CalledBeforeStartWith_WinsOverDefault()
+        public async Task UseAppStart_CalledBeforeStartWith_WinsOverDefault()
         {
             var builder = CreateTestBuilder();
             builder.UseAppStart<CustomAppStart>();
@@ -192,12 +189,12 @@ namespace MvvmCross.UnitTest.Hosting
 
             var provider = builder.Services.BuildServiceProvider();
 
-            Assert.IsType<CustomAppStart>(provider.GetRequiredService<IMvxAppStart>());
+            await Assert.That(provider.GetRequiredService<IMvxAppStart>()).IsTypeOf<CustomAppStart>();
         }
 
-        [Fact]
+        [Test]
         [RequiresUnreferencedCode("Uses AddMvxCore which stores types via reflection.")]
-        public void UseAppStart_CalledAfterStartWith_WinsOverDefault()
+        public async Task UseAppStart_CalledAfterStartWith_WinsOverDefault()
         {
             var builder = CreateTestBuilder();
             builder.StartWith<StubViewModel>();
@@ -205,11 +202,11 @@ namespace MvvmCross.UnitTest.Hosting
 
             var provider = builder.Services.BuildServiceProvider();
 
-            Assert.IsType<CustomAppStart>(provider.GetRequiredService<IMvxAppStart>());
+            await Assert.That(provider.GetRequiredService<IMvxAppStart>()).IsTypeOf<CustomAppStart>();
         }
 
-        [Fact]
-        public void UseAppStart_CalledTwice_LastOneWins()
+        [Test]
+        public async Task UseAppStart_CalledTwice_LastOneWins()
         {
             var builder = CreateTestBuilder();
             builder.UseAppStart<CustomAppStart>();
@@ -217,53 +214,52 @@ namespace MvvmCross.UnitTest.Hosting
 
             var provider = builder.Services.BuildServiceProvider();
 
-            Assert.IsType<AnotherCustomAppStart>(provider.GetRequiredService<IMvxAppStart>());
+            await Assert.That(provider.GetRequiredService<IMvxAppStart>()).IsTypeOf<AnotherCustomAppStart>();
         }
 
-        [Fact]
+        [Test]
         public void UseAppStart_NullFactory_Throws()
         {
             var builder = CreateTestBuilder();
-            Assert.Throws<ArgumentNullException>(
-                () => builder.UseAppStart<IMvxAppStart>(null!));
+            Assert.Throws<ArgumentNullException>(() => builder.UseAppStart<IMvxAppStart>(null!));
         }
 
-        [Fact]
-        public void UseAppStart_ReturnsBuilderForChaining()
+        [Test]
+        public async Task UseAppStart_ReturnsBuilderForChaining()
         {
             var builder = CreateTestBuilder();
             var result = builder.UseAppStart<CustomAppStart>();
-            Assert.Same(builder, result);
+            await Assert.That(result).IsSameReferenceAs(builder);
         }
 
         #endregion
 
         #region Default logging
 
-        [Fact]
-        public void AddMvxCore_WithoutExplicitAddLogging_ILoggerFactory_ResolvesSuccessfully()
+        [Test]
+        public async Task AddMvxCore_WithoutExplicitAddLogging_ILoggerFactory_ResolvesSuccessfully()
         {
             var host = new CustomHostBuilder()
                 .StartWith<StubViewModel>()
                 .Build();
 
             var loggerFactory = host.Services.GetService<ILoggerFactory>();
-            Assert.NotNull(loggerFactory);
+            await Assert.That(loggerFactory).IsNotNull();
         }
 
-        [Fact]
-        public void AddMvxCore_WithoutExplicitAddLogging_ILoggerT_ResolvesSuccessfully()
+        [Test]
+        public async Task AddMvxCore_WithoutExplicitAddLogging_ILoggerT_ResolvesSuccessfully()
         {
             var host = new CustomHostBuilder()
                 .StartWith<StubViewModel>()
                 .Build();
 
             var logger = host.Services.GetService<ILogger<StubViewModel>>();
-            Assert.NotNull(logger);
+            await Assert.That(logger).IsNotNull();
         }
 
-        [Fact]
-        public void AddMvxCore_UserAddLogging_DoesNotBreakFramework()
+        [Test]
+        public async Task AddMvxCore_UserAddLogging_DoesNotBreakFramework()
         {
             var host = new CustomHostBuilder()
                 .StartWith<StubViewModel>()
@@ -272,15 +268,15 @@ namespace MvvmCross.UnitTest.Hosting
 
             // ILoggerFactory must still be resolvable after user customisation.
             var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
-            Assert.NotNull(loggerFactory);
+            await Assert.That(loggerFactory).IsNotNull();
         }
 
         #endregion
 
         #region UseViewDispatcher
 
-        [Fact]
-        public void UseViewDispatcher_Generic_ResolvesCustomImplementation()
+        [Test]
+        public async Task UseViewDispatcher_Generic_ResolvesCustomImplementation()
         {
             var host = new CustomHostBuilder()
                 .UseViewDispatcher<CustomViewDispatcher>()
@@ -288,11 +284,11 @@ namespace MvvmCross.UnitTest.Hosting
                 .Build();
 
             var dispatcher = host.Services.GetRequiredService<IMvxViewDispatcher>();
-            Assert.IsType<CustomViewDispatcher>(dispatcher);
+            await Assert.That(dispatcher).IsTypeOf<CustomViewDispatcher>();
         }
 
-        [Fact]
-        public void UseViewDispatcher_Factory_ResolvesViaFactory()
+        [Test]
+        public async Task UseViewDispatcher_Factory_ResolvesViaFactory()
         {
             var expected = new CustomViewDispatcher();
             var host = new CustomHostBuilder()
@@ -301,35 +297,35 @@ namespace MvvmCross.UnitTest.Hosting
                 .Build();
 
             var dispatcher = host.Services.GetRequiredService<IMvxViewDispatcher>();
-            Assert.Same(expected, dispatcher);
+            await Assert.That(dispatcher).IsSameReferenceAs(expected);
         }
 
-        [Fact]
+        [Test]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("")]
-        public void UseViewDispatcher_CalledBeforeStartWith_WinsOverDefault()
+        public async Task UseViewDispatcher_CalledBeforeStartWith_WinsOverDefault()
         {
             var host = new CustomHostBuilder()
                 .UseViewDispatcher<CustomViewDispatcher>()
                 .StartWith<StubViewModel>()
                 .Build();
 
-            Assert.IsType<CustomViewDispatcher>(host.Services.GetRequiredService<IMvxViewDispatcher>());
+            await Assert.That(host.Services.GetRequiredService<IMvxViewDispatcher>()).IsTypeOf<CustomViewDispatcher>();
         }
 
-        [Fact]
+        [Test]
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("")]
-        public void UseViewDispatcher_CalledAfterStartWith_WinsOverDefault()
+        public async Task UseViewDispatcher_CalledAfterStartWith_WinsOverDefault()
         {
             var host = new CustomHostBuilder()
                 .StartWith<StubViewModel>()
                 .UseViewDispatcher<CustomViewDispatcher>()
                 .Build();
 
-            Assert.IsType<CustomViewDispatcher>(host.Services.GetRequiredService<IMvxViewDispatcher>());
+            await Assert.That(host.Services.GetRequiredService<IMvxViewDispatcher>()).IsTypeOf<CustomViewDispatcher>();
         }
 
-        [Fact]
-        public void UseViewDispatcher_CalledTwice_LastOneWins()
+        [Test]
+        public async Task UseViewDispatcher_CalledTwice_LastOneWins()
         {
             var host = new CustomHostBuilder()
                 .UseViewDispatcher<CustomViewDispatcher>()
@@ -337,10 +333,10 @@ namespace MvvmCross.UnitTest.Hosting
                 .StartWith<StubViewModel>()
                 .Build();
 
-            Assert.IsType<AnotherCustomViewDispatcher>(host.Services.GetRequiredService<IMvxViewDispatcher>());
+            await Assert.That(host.Services.GetRequiredService<IMvxViewDispatcher>()).IsTypeOf<AnotherCustomViewDispatcher>();
         }
 
-        [Fact]
+        [Test]
         public void UseViewDispatcher_NullFactory_Throws()
         {
             var builder = new CustomHostBuilder();
@@ -348,32 +344,32 @@ namespace MvvmCross.UnitTest.Hosting
                 builder.UseViewDispatcher((Func<IServiceProvider, CustomViewDispatcher>)null!));
         }
 
-        [Fact]
-        public void UseViewDispatcher_ReturnsBuilderForChaining()
+        [Test]
+        public async Task UseViewDispatcher_ReturnsBuilderForChaining()
         {
             var builder = new CustomHostBuilder();
             var result = builder.UseViewDispatcher<CustomViewDispatcher>();
-            Assert.Same(builder, result);
+            await Assert.That(result).IsSameReferenceAs(builder);
         }
 
         #endregion
 
         #region MvxHost subclassing
 
-        [Fact]
-        public void MvxHost_CanBeSubclassed_AndCreatedWithPublicConstructor()
+        [Test]
+        public async Task MvxHost_CanBeSubclassed_AndCreatedWithPublicConstructor()
         {
             var services = new ServiceCollection().BuildServiceProvider();
             var host = new CustomMvxHost(services);
-            Assert.NotNull(host);
+            await Assert.That(host).IsNotNull();
         }
 
-        [Fact]
-        public void CreateHost_Override_ReturnsCustomSubclass()
+        [Test]
+        public async Task CreateHost_Override_ReturnsCustomSubclass()
         {
             var builder = new CustomHostBuilder();
             var host = builder.Build();
-            Assert.IsType<CustomMvxHost>(host);
+            await Assert.That(host).IsTypeOf<CustomMvxHost>();
         }
 
         #endregion

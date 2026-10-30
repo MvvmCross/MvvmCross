@@ -5,11 +5,11 @@
 using System.Collections.Generic;
 using MvvmCross.Plugin.JsonLocalization.UnitTest.TestClasses;
 using MvvmCross.Tests;
-using Xunit;
 
 namespace MvvmCross.Plugin.JsonLocalization.UnitTest
 {
-    public class MvxDictionaryTextProviderTest : IClassFixture<MvxTestFixture>
+    [ClassDataSource<MvxTestFixture>(Shared = SharedType.PerClass)]
+    public class MvxDictionaryTextProviderTest
     {
         private readonly MvxTestFixture _fixture;
 
@@ -18,8 +18,8 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
             _fixture = fixture;
         }
 
-        [Fact]
-        public void GetTextWithExistingValueReturnsTheValueWhenMaskingErrors()
+        [Test]
+        public async Task GetTextWithExistingValueReturnsTheValueWhenMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
             var expected = "DummyValue";
@@ -29,11 +29,11 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
                 TestDictionaryTextProvider.TypeKey,
                 "DummyKey");
 
-            Assert.Equal(expected, actual);
+            await Assert.That(actual).IsEqualTo(expected);
         }
 
-        [Fact]
-        public void GetTextWithNonExistingValueReturnsTheKeyWhenMaskingErrors()
+        [Test]
+        public async Task GetTextWithNonExistingValueReturnsTheKeyWhenMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
             var expected = $"{TestDictionaryTextProvider.LocalizationNamespace}|{TestDictionaryTextProvider.TypeKey}|NonExistingKey";
@@ -43,11 +43,11 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
                 TestDictionaryTextProvider.TypeKey,
                 "NonExistingKey");
 
-            Assert.Equal(expected, actual);
+            await Assert.That(actual).IsEqualTo(expected);
         }
 
-        [Fact]
-        public void GetTextWithExistingValueReturnsTheValueWhenNotMaskingErrors()
+        [Test]
+        public async Task GetTextWithExistingValueReturnsTheValueWhenNotMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
             var expected = "DummyValue";
@@ -57,10 +57,10 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
                 TestDictionaryTextProvider.TypeKey,
                 "DummyKey");
 
-            Assert.Equal(expected, actual);
+            await Assert.That(actual).IsEqualTo(expected);
         }
 
-        [Fact]
+        [Test]
         public void GetTextWithNonExistingValueThrowsKeyNotFoundExceptionWhenNotMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
@@ -71,44 +71,44 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
                 "NonExistingKey"));
         }
 
-        [Fact]
-        public void TryGetTextForExistingValueReturnsTrueWhenMaskingErrors()
+        [Test]
+        public async Task TryGetTextForExistingValueReturnsTrueWhenMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
 
             string value;
-            Assert.True(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "DummyKey"));
+            await Assert.That(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "DummyKey")).IsTrue();
         }
 
-        [Fact]
-        public void TryGetTextForExistingValueReturnsTrueWhenNotMaskingErrors()
+        [Test]
+        public async Task TryGetTextForExistingValueReturnsTrueWhenNotMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
 
             string value;
-            Assert.True(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "DummyKey"));
+            await Assert.That(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "DummyKey")).IsTrue();
         }
 
-        [Fact]
-        public void TryGetTextForNonExistingValueReturnsFalseWhenMaskingErrors()
+        [Test]
+        public async Task TryGetTextForNonExistingValueReturnsFalseWhenMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
 
             string value;
-            Assert.False(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "NonExistingKey"));
+            await Assert.That(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "NonExistingKey")).IsFalse();
         }
 
-        [Fact]
-        public void TryGetTextForNonExistingValueReturnsFalseWhenNotMaskingErrors()
+        [Test]
+        public async Task TryGetTextForNonExistingValueReturnsFalseWhenNotMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
 
             string value;
-            Assert.False(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "NonExistingKey"));
+            await Assert.That(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "NonExistingKey")).IsFalse();
         }
 
-        [Fact]
-        public void TryGetTextForNonExistingValueShouldOutputKeyWhenMaskingErrors()
+        [Test]
+        public async Task TryGetTextForNonExistingValueShouldOutputKeyWhenMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
             var expected = $"{TestDictionaryTextProvider.LocalizationNamespace}|{TestDictionaryTextProvider.TypeKey}|NonExistingKey";
@@ -118,11 +118,11 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
                 TestDictionaryTextProvider.LocalizationNamespace,
                 TestDictionaryTextProvider.TypeKey, "NonExistingKey");
 
-            Assert.Equal(expected, actual);
+            await Assert.That(actual).IsEqualTo(expected);
         }
 
-        [Fact]
-        public void TryGetTextForNonExistingValueShouldOutputKeyWhenNotMaskingErrors()
+        [Test]
+        public async Task TryGetTextForNonExistingValueShouldOutputKeyWhenNotMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
             var expected = $"{TestDictionaryTextProvider.LocalizationNamespace}|{TestDictionaryTextProvider.TypeKey}|NonExistingKey";
@@ -132,7 +132,7 @@ namespace MvvmCross.Plugin.JsonLocalization.UnitTest
                 TestDictionaryTextProvider.LocalizationNamespace,
                 TestDictionaryTextProvider.TypeKey, "NonExistingKey");
 
-            Assert.Equal(expected, actual);
+            await Assert.That(actual).IsEqualTo(expected);
         }
     }
 }

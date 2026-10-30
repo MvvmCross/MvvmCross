@@ -10,11 +10,10 @@ using MvvmCross.Navigation.EventArguments;
 using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.ViewModels;
-using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxDefaultViewModelLocatorTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -24,8 +23,8 @@ namespace MvvmCross.UnitTest.ViewModels
             _fixture = fixture;
         }
 
-        [Fact]
-        public void Test_NoReloadState()
+        [Test]
+        public async Task Test_NoReloadState()
         {
             _fixture.ClearAll();
 
@@ -53,24 +52,24 @@ namespace MvvmCross.UnitTest.ViewModels
 
             IMvxViewModel viewModel = toTest.Load(typeof(Test1ViewModel), bundle, null, args);
 
-            Assert.NotNull(viewModel);
+            await Assert.That(viewModel).IsNotNull();
             var typedViewModel = (Test1ViewModel)viewModel;
-            Assert.Equal(bundle, typedViewModel.BundleInit);
-            Assert.Null(typedViewModel.BundleState);
-            Assert.Equal(testThing, typedViewModel.Thing);
-            Assert.Equal(testObject, typedViewModel.TheInitBundleSet);
-            Assert.Null(typedViewModel.TheReloadBundleSet);
-            Assert.Equal(testObject.TheGuid1, typedViewModel.TheInitGuid1Set);
-            Assert.Equal(testObject.TheGuid2, typedViewModel.TheInitGuid2Set);
-            Assert.Equal(testObject.TheString1, typedViewModel.TheInitString1Set);
-            Assert.Equal(Guid.Empty, typedViewModel.TheReloadGuid1Set);
-            Assert.Equal(Guid.Empty, typedViewModel.TheReloadGuid2Set);
-            Assert.Null(typedViewModel.TheReloadString1Set);
-            Assert.True(typedViewModel.StartCalled);
+            await Assert.That(typedViewModel.BundleInit).IsEqualTo(bundle);
+            await Assert.That(typedViewModel.BundleState).IsNull();
+            await Assert.That(typedViewModel.Thing).IsEqualTo(testThing);
+            await Assert.That(typedViewModel.TheInitBundleSet).IsEqualTo(testObject);
+            await Assert.That(typedViewModel.TheReloadBundleSet).IsNull();
+            await Assert.That(typedViewModel.TheInitGuid1Set).IsEqualTo(testObject.TheGuid1);
+            await Assert.That(typedViewModel.TheInitGuid2Set).IsEqualTo(testObject.TheGuid2);
+            await Assert.That(typedViewModel.TheInitString1Set).IsEqualTo(testObject.TheString1);
+            await Assert.That(typedViewModel.TheReloadGuid1Set).IsEqualTo(Guid.Empty);
+            await Assert.That(typedViewModel.TheReloadGuid2Set).IsEqualTo(Guid.Empty);
+            await Assert.That(typedViewModel.TheReloadString1Set).IsNull();
+            await Assert.That(typedViewModel.StartCalled).IsTrue();
         }
 
-        [Fact]
-        public void Test_WithReloadState()
+        [Test]
+        public async Task Test_WithReloadState()
         {
             _fixture.ClearAll();
 
@@ -111,23 +110,23 @@ namespace MvvmCross.UnitTest.ViewModels
             var args = new MvxNavigateEventArgs(NavigationMode.Show);
             IMvxViewModel viewModel = toTest.Load(typeof(Test1ViewModel), initBundle, reloadBundle, args);
 
-            Assert.NotNull(viewModel);
+            await Assert.That(viewModel).IsNotNull();
             var typedViewModel = (Test1ViewModel)viewModel;
-            Assert.Equal(initBundle, typedViewModel.BundleInit);
-            Assert.Equal(reloadBundle, typedViewModel.BundleState);
-            Assert.Equal(testThing, typedViewModel.Thing);
-            Assert.Equal(initBundleObject, typedViewModel.TheInitBundleSet);
-            Assert.Equal(reloadBundleObject, typedViewModel.TheReloadBundleSet);
-            Assert.Equal(initBundleObject.TheGuid1, typedViewModel.TheInitGuid1Set);
-            Assert.Equal(initBundleObject.TheGuid2, typedViewModel.TheInitGuid2Set);
-            Assert.Equal(initBundleObject.TheString1, typedViewModel.TheInitString1Set);
-            Assert.Equal(reloadBundleObject.TheGuid1, typedViewModel.TheReloadGuid1Set);
-            Assert.Equal(reloadBundleObject.TheGuid2, typedViewModel.TheReloadGuid2Set);
-            Assert.Equal(reloadBundleObject.TheString1, typedViewModel.TheReloadString1Set);
-            Assert.True(typedViewModel.StartCalled);
+            await Assert.That(typedViewModel.BundleInit).IsEqualTo(initBundle);
+            await Assert.That(typedViewModel.BundleState).IsEqualTo(reloadBundle);
+            await Assert.That(typedViewModel.Thing).IsEqualTo(testThing);
+            await Assert.That(typedViewModel.TheInitBundleSet).IsEqualTo(initBundleObject);
+            await Assert.That(typedViewModel.TheReloadBundleSet).IsEqualTo(reloadBundleObject);
+            await Assert.That(typedViewModel.TheInitGuid1Set).IsEqualTo(initBundleObject.TheGuid1);
+            await Assert.That(typedViewModel.TheInitGuid2Set).IsEqualTo(initBundleObject.TheGuid2);
+            await Assert.That(typedViewModel.TheInitString1Set).IsEqualTo(initBundleObject.TheString1);
+            await Assert.That(typedViewModel.TheReloadGuid1Set).IsEqualTo(reloadBundleObject.TheGuid1);
+            await Assert.That(typedViewModel.TheReloadGuid2Set).IsEqualTo(reloadBundleObject.TheGuid2);
+            await Assert.That(typedViewModel.TheReloadString1Set).IsEqualTo(reloadBundleObject.TheString1);
+            await Assert.That(typedViewModel.StartCalled).IsTrue();
         }
 
-        [Fact]
+        [Test]
         public void Test_MissingDependency()
         {
             _fixture.ClearAll();
@@ -142,7 +141,7 @@ namespace MvvmCross.UnitTest.ViewModels
             });
         }
 
-        [Fact]
+        [Test]
         public void Test_FailingDependency()
         {
             _fixture.ClearAll();
@@ -160,7 +159,7 @@ namespace MvvmCross.UnitTest.ViewModels
             });
         }
 
-        [Fact]
+        [Test]
         public void Test_FailingInitialisation()
         {
             _fixture.ClearAll();

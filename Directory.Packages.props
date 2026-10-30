@@ -12,10 +12,10 @@
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.1.0" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.12.0" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.CtrfReport" Version="1.0.0-alpha.26527.6" />
     <PackageVersion Include="Microsoft.Testing.Extensions.GitHubActionsReport" Version="1.0.0-alpha.26377.5" />
-    <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="2.3.3" />
+    <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="2.5.2" />
     <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.2705" />
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="2.5.1" />
     <PackageVersion Include="NSubstitute.Analyzers.CSharp" Version="1.0.17" />
@@ -29,6 +29,8 @@
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
     <PackageVersion Include="Serilog" Version="4.4.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.33.0.1635" />
+    <PackageVersion Include="TUnit" Version="1.76.45" />
+    <PackageVersion Include="TUnit.Core" Version="1.76.45" />
     <PackageVersion Include="Xamarin.Android.Glide" Version="5.0.9" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.7.1.4" />
     <PackageVersion Include="Xamarin.AndroidX.CardView" Version="1.0.0.39" />
@@ -41,8 +43,6 @@
     <PackageVersion Include="Xamarin.AndroidX.ViewPager" Version="1.1.0.7" />
     <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.14.0.6" />
     <PackageVersion Include="Xamarin.GooglePlayServices.Location" Version="121.4.0" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
-    <PackageVersion Include="xunit.v3.mtp-v2" Version="4.0.0-pre.154" />
     <PackageVersion Include="Cake.Frosting" Version="6.2.0" />
     <PackageVersion Include="Cake.GitVersioning" Version="3.9.50" />
   </ItemGroup>

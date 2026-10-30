@@ -4,7 +4,6 @@
 
 using MvvmCross.Plugin.ResxLocalization;
 using MvvmCross.Plugin.ResxLocalization.UnitTest.Mocks;
-using Xunit;
 
 namespace MvvmCross.Plugin.ResxLocalization.UnitTest
 {
@@ -19,107 +18,107 @@ namespace MvvmCross.Plugin.ResxLocalization.UnitTest
             _resourceManager = new MockResourceManager();
         }
 
-        [Fact]
-        public void GetTextForExistingValueSupplyingNameOnlyReturnsDummyName()
+        [Test]
+        public async Task GetTextForExistingValueSupplyingNameOnlyReturnsDummyName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
             var expected = MockResourceManager.DummyName;
 
             var actual = textProvider.GetText(null, null, MockResourceManager.DummyName);
-            Assert.Equal(expected, actual);
+            await Assert.That(actual).IsEqualTo(expected);
         }
 
-        [Fact]
-        public void GetTextSupplyingNamespaceAndNameReturnsValueMatchingNamespaceAndName()
+        [Test]
+        public async Task GetTextSupplyingNamespaceAndNameReturnsValueMatchingNamespaceAndName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
             var expected = $"{MockResourceManager.LocalizationNamespace}.{MockResourceManager.DummyName}";
 
             var actual = textProvider.GetText(MockResourceManager.LocalizationNamespace, null, MockResourceManager.DummyName);
-            Assert.Equal(expected, actual);
+            await Assert.That(actual).IsEqualTo(expected);
         }
 
-        [Fact]
-        public void GetTextSupplyingTypeKeyAndNameReturnsValueMatchingTypeKeyAndName()
+        [Test]
+        public async Task GetTextSupplyingTypeKeyAndNameReturnsValueMatchingTypeKeyAndName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
             var expected = $"{MockResourceManager.TypeKey}.{MockResourceManager.DummyName}";
 
             var actual = textProvider.GetText(null, MockResourceManager.TypeKey, MockResourceManager.DummyName);
-            Assert.Equal(expected, actual);
+            await Assert.That(actual).IsEqualTo(expected);
         }
 
-        [Fact]
-        public void GetTextSupplyingNamespaceAndTypeKeyAndNameReturnsValueMatchingNamespaceAndTypeKeyAndName()
+        [Test]
+        public async Task GetTextSupplyingNamespaceAndTypeKeyAndNameReturnsValueMatchingNamespaceAndTypeKeyAndName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
             var expected = $"{MockResourceManager.LocalizationNamespace}.{MockResourceManager.TypeKey}.{MockResourceManager.DummyName}";
 
             var actual = textProvider.GetText(MockResourceManager.LocalizationNamespace, MockResourceManager.TypeKey, MockResourceManager.DummyName);
-            Assert.Equal(expected, actual);
+            await Assert.That(actual).IsEqualTo(expected);
         }
 
-        [Fact]
-        public void GetTextForNonExistingValueReturnsNull()
+        [Test]
+        public async Task GetTextForNonExistingValueReturnsNull()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
 
             var actual = textProvider.GetText(null, null, "NonExistingKey");
-            Assert.Null(actual);
+            await Assert.That(actual).IsNull();
         }
 
-        [Fact]
-        public void TryGetTextForExistingValueSupplyingNameOnlyReturnsTrue()
+        [Test]
+        public async Task TryGetTextForExistingValueSupplyingNameOnlyReturnsTrue()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
             var expected = MockResourceManager.DummyName;
 
             string actual;
-            Assert.True(textProvider.TryGetText(out actual, null, null, MockResourceManager.DummyName));
-            Assert.Equal(expected, actual);
+            await Assert.That(textProvider.TryGetText(out actual, null, null, MockResourceManager.DummyName)).IsTrue();
+            await Assert.That(actual).IsEqualTo(expected);
         }
 
-        [Fact]
-        public void TryGetTextSupplyingNamespaceAndNameOutputsValueMatchingNamespaceAndName()
+        [Test]
+        public async Task TryGetTextSupplyingNamespaceAndNameOutputsValueMatchingNamespaceAndName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
             var expected = $"{MockResourceManager.LocalizationNamespace}.{MockResourceManager.DummyName}";
 
             string actual;
-            Assert.True(textProvider.TryGetText(out actual, MockResourceManager.LocalizationNamespace, null, MockResourceManager.DummyName));
-            Assert.Equal(expected, actual);
+            await Assert.That(textProvider.TryGetText(out actual, MockResourceManager.LocalizationNamespace, null, MockResourceManager.DummyName)).IsTrue();
+            await Assert.That(actual).IsEqualTo(expected);
         }
 
-        [Fact]
-        public void TryGetTextSupplyingTypeKeyAndNameOutputsValueMatchingTypeKeyAndName()
+        [Test]
+        public async Task TryGetTextSupplyingTypeKeyAndNameOutputsValueMatchingTypeKeyAndName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
             var expected = $"{MockResourceManager.TypeKey}.{MockResourceManager.DummyName}";
 
             string actual;
-            Assert.True(textProvider.TryGetText(out actual, null, MockResourceManager.TypeKey, MockResourceManager.DummyName));
-            Assert.Equal(expected, actual);
+            await Assert.That(textProvider.TryGetText(out actual, null, MockResourceManager.TypeKey, MockResourceManager.DummyName)).IsTrue();
+            await Assert.That(actual).IsEqualTo(expected);
         }
 
-        [Fact]
-        public void TryGetTextSupplyingNamespaceAndTypeKeyAndNameOutputsValueMatchingNamespaceAndTypeKeyAndName()
+        [Test]
+        public async Task TryGetTextSupplyingNamespaceAndTypeKeyAndNameOutputsValueMatchingNamespaceAndTypeKeyAndName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
             var expected = $"{MockResourceManager.LocalizationNamespace}.{MockResourceManager.TypeKey}.{MockResourceManager.DummyName}";
 
             string actual;
-            Assert.True(textProvider.TryGetText(out actual, MockResourceManager.LocalizationNamespace, MockResourceManager.TypeKey, MockResourceManager.DummyName));
-            Assert.Equal(expected, actual);
+            await Assert.That(textProvider.TryGetText(out actual, MockResourceManager.LocalizationNamespace, MockResourceManager.TypeKey, MockResourceManager.DummyName)).IsTrue();
+            await Assert.That(actual).IsEqualTo(expected);
         }
 
-        [Fact]
-        public void TryGetTextForNonExistingValueReturnsFalse()
+        [Test]
+        public async Task TryGetTextForNonExistingValueReturnsFalse()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
 
             string actual;
-            Assert.False(textProvider.TryGetText(out actual, null, null, "NonExistingKey"));
-            Assert.Null(actual);
+            await Assert.That(textProvider.TryGetText(out actual, null, null, "NonExistingKey")).IsFalse();
+            await Assert.That(actual).IsNull();
         }
     }
 }

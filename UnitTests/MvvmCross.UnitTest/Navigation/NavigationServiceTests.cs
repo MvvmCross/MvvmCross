@@ -11,11 +11,10 @@ using MvvmCross.UnitTest.Mocks.Dispatchers;
 using MvvmCross.UnitTest.Mocks.ViewModels;
 using MvvmCross.ViewModels;
 using NSubstitute;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Navigation
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class NavigationServiceTests
     {
         private readonly NavigationTestFixture _fixture;
@@ -73,7 +72,7 @@ namespace MvvmCross.UnitTest.Navigation
             return vm;
         }
 
-        [Fact]
+        [Test]
         public async Task Test_NavigateNoBundle()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
@@ -86,11 +85,11 @@ namespace MvvmCross.UnitTest.Navigation
                     Arg.Is<MvxViewModelRequest>(val => val.ViewModelType == typeof(SimpleTestViewModel)),
                     Arg.Any<IMvxBundle>(), Arg.Any<IMvxNavigateEventArgs>());
 
-            Assert.Single(MockDispatcher.Requests);
-            Assert.Equal(typeof(SimpleTestViewModel), MockDispatcher.Requests[0].ViewModelType);
+            await Assert.That(MockDispatcher.Requests).HasSingleItem();
+            await Assert.That(MockDispatcher.Requests[0].ViewModelType).IsEqualTo(typeof(SimpleTestViewModel));
         }
 
-        [Fact]
+        [Test]
         public async Task Test_NavigateWithBundle()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
@@ -106,14 +105,14 @@ namespace MvvmCross.UnitTest.Navigation
             //mockVm.Verify(vm => vm.Init(Arg.Is<string>(s => s == "world")), Times.Once);
         }
 
-        [Fact]
+        [Test]
         public async Task Test_NavigateViewModelInstance()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
 
             var mockVm = new ViewModelMock<SimpleTestViewModel>();
 
-            await navigationService.Navigate(mockVm.Object, cancellationToken: TestContext.Current.CancellationToken);
+            await navigationService.Navigate(mockVm.Object, cancellationToken: TestContext.Current.Execution.CancellationToken);
 
             MockLoader
                 .Received()
@@ -122,18 +121,18 @@ namespace MvvmCross.UnitTest.Navigation
                     Arg.Any<MvxViewModelRequest>(), Arg.Any<IMvxBundle>(),
                     Arg.Any<IMvxNavigateEventArgs>());
 
-            Assert.Single(MockDispatcher.Requests);
-            Assert.Equal(mockVm.Object.GetType(), MockDispatcher.Requests[0].ViewModelType);
+            await Assert.That(MockDispatcher.Requests).HasSingleItem();
+            await Assert.That(MockDispatcher.Requests[0].ViewModelType).IsEqualTo(mockVm.Object.GetType());
         }
 
-        [Fact]
+        [Test]
         public async Task Test_NavigateWithParameter()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
 
             var parameter = "hello";
             await navigationService.Navigate<SimpleParameterTestViewModel, SimpleParameter>(
-                new SimpleParameter { Hello = parameter }, cancellationToken: TestContext.Current.CancellationToken);
+                new SimpleParameter { Hello = parameter }, cancellationToken: TestContext.Current.Execution.CancellationToken);
 
             MockLoader
                 .Received()
@@ -143,11 +142,11 @@ namespace MvvmCross.UnitTest.Navigation
                     Arg.Any<IMvxBundle>(),
                     Arg.Any<IMvxNavigateEventArgs>());
 
-            Assert.Single(MockDispatcher.Requests);
-            Assert.Equal(typeof(SimpleParameterTestViewModel), MockDispatcher.Requests[0].ViewModelType);
+            await Assert.That(MockDispatcher.Requests).HasSingleItem();
+            await Assert.That(MockDispatcher.Requests[0].ViewModelType).IsEqualTo(typeof(SimpleParameterTestViewModel));
         }
 
-        [Fact]
+        [Test]
         public async Task Test_NavigateViewModelInstanceWithParameter()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
@@ -156,7 +155,7 @@ namespace MvvmCross.UnitTest.Navigation
 
             var parameter = new SimpleParameter { Hello = "hello" };
             await navigationService.Navigate<SimpleParameter>(
-                mockVm.Object, parameter, cancellationToken: TestContext.Current.CancellationToken);
+                mockVm.Object, parameter, cancellationToken: TestContext.Current.Execution.CancellationToken);
 
             MockLoader
                 .Received()
@@ -167,11 +166,11 @@ namespace MvvmCross.UnitTest.Navigation
                     Arg.Any<IMvxBundle>(),
                     Arg.Any<IMvxNavigateEventArgs>());
 
-            Assert.Single(MockDispatcher.Requests);
-            Assert.Equal(mockVm.Object.GetType(), MockDispatcher.Requests[0].ViewModelType);
+            await Assert.That(MockDispatcher.Requests).HasSingleItem();
+            await Assert.That(MockDispatcher.Requests[0].ViewModelType).IsEqualTo(mockVm.Object.GetType());
         }
 
-        [Fact]
+        [Test]
         public async Task Test_NavigateTypeOfNoBundle()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
@@ -185,11 +184,12 @@ namespace MvvmCross.UnitTest.Navigation
                     Arg.Any<IMvxBundle>(),
                     Arg.Any<IMvxNavigateEventArgs>());
 
-            Assert.Single(MockDispatcher.Requests);
-            Assert.Equal(typeof(SimpleTestViewModel), MockDispatcher.Requests[0].ViewModelType);
+            await Assert.That(MockDispatcher.Requests).HasSingleItem();
+            await Assert.That(MockDispatcher.Requests[0].ViewModelType).IsEqualTo(typeof(SimpleTestViewModel));
         }
 
-        [Fact(Skip = "Need to fix this")]
+        [Test]
+        [Skip("Need to fix this")]
         public async Task Test_NavigateTypeOfWithBundle()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
@@ -203,7 +203,7 @@ namespace MvvmCross.UnitTest.Navigation
             //mockVm.Verify(vm => vm.Init(Arg.Is<string>(s => s == "world")), Times.Once);
         }
 
-        [Fact]
+        [Test]
         public async Task Test_NavigateTypeOfWithParameter()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
@@ -219,11 +219,11 @@ namespace MvvmCross.UnitTest.Navigation
                     Arg.Any<IMvxBundle>(),
                     Arg.Any<IMvxNavigateEventArgs>());
 
-            Assert.Single(MockDispatcher.Requests);
-            Assert.Equal(typeof(SimpleParameterTestViewModel), MockDispatcher.Requests[0].ViewModelType);
+            await Assert.That(MockDispatcher.Requests).HasSingleItem();
+            await Assert.That(MockDispatcher.Requests[0].ViewModelType).IsEqualTo(typeof(SimpleParameterTestViewModel));
         }
 
-        [Fact]
+        [Test]
         public async Task Test_NavigateCallbacks()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
@@ -243,11 +243,11 @@ namespace MvvmCross.UnitTest.Navigation
             await Task.WhenAll(tasks);
             await Task.Delay(200);
 
-            Assert.Equal(tasks.Length, beforeNavigate);
-            Assert.Equal(tasks.Length, afterNavigate);
+            await Assert.That(beforeNavigate).IsEqualTo(tasks.Length);
+            await Assert.That(afterNavigate).IsEqualTo(tasks.Length);
         }
 
-        [Fact]
+        [Test]
         public async Task Test_CloseCallbacks()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
@@ -263,12 +263,12 @@ namespace MvvmCross.UnitTest.Navigation
             };
             await Task.WhenAll(tasks);
 
-            Assert.Equal(tasks.Length, beforeClose);
-            Assert.Equal(tasks.Length, afterClose);
+            await Assert.That(beforeClose).IsEqualTo(tasks.Length);
+            await Assert.That(afterClose).IsEqualTo(tasks.Length);
         }
 
-        [Fact]
-        public void Test_ChangePresentationCallbacks()
+        [Test]
+        public async Task Test_ChangePresentationCallbacks()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
 
@@ -277,10 +277,10 @@ namespace MvvmCross.UnitTest.Navigation
             navigationService.WillChangePresentation += (sender, e) => beforeChangePresentation++;
             navigationService.DidChangePresentation += (sender, e) => afterChangePresentation++;
 
-            navigationService.ChangePresentation(new MvxClosePresentationHint(new SimpleTestViewModel()));
+            await navigationService.ChangePresentation(new MvxClosePresentationHint(new SimpleTestViewModel()));
 
-            Assert.Equal(1, beforeChangePresentation);
-            Assert.Equal(1, afterChangePresentation);
+            await Assert.That(beforeChangePresentation).IsEqualTo(1);
+            await Assert.That(afterChangePresentation).IsEqualTo(1);
         }
     }
 }

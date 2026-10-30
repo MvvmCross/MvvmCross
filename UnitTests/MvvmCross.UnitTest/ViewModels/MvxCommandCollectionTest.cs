@@ -7,11 +7,10 @@ using System.Windows.Input;
 using MvvmCross.Base;
 using MvvmCross.Commands;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
-using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxCommandCollectionTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -148,8 +147,8 @@ namespace MvvmCross.UnitTest.ViewModels
             }
         }
 
-        [Fact]
-        public void Test_Conventional_Command()
+        [Test]
+        public async Task Test_Conventional_Command()
         {
             _fixture.ClearAll();
 
@@ -158,18 +157,18 @@ namespace MvvmCross.UnitTest.ViewModels
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["My"];
-            Assert.NotNull(myCommand);
-            CheckCounts(testObject);
+            await Assert.That(myCommand).IsNotNull();
+            await CheckCounts(testObject);
             myCommand.Execute();
-            CheckCounts(testObject, 1, 1);
+            await CheckCounts(testObject, 1, 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            CheckCounts(testObject, 4, 4);
+            await CheckCounts(testObject, 4, 4);
         }
 
-        [Fact]
-        public void Test_Conventional_Command_CanExecute()
+        [Test]
+        public async Task Test_Conventional_Command_CanExecute()
         {
             _fixture.ClearAll();
 
@@ -178,18 +177,18 @@ namespace MvvmCross.UnitTest.ViewModels
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["My"];
-            Assert.NotNull(myCommand);
-            CheckCounts(testObject);
+            await Assert.That(myCommand).IsNotNull();
+            await CheckCounts(testObject);
             var result = myCommand.CanExecute();
-            CheckCounts(testObject, countCanExecuteMyCalled: 1);
+            await CheckCounts(testObject, countCanExecuteMyCalled: 1);
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
-            CheckCounts(testObject, countCanExecuteMyCalled: 4);
+            await CheckCounts(testObject, countCanExecuteMyCalled: 4);
         }
 
-        [Fact]
-        public void Test_Conventional_Parameter_Command()
+        [Test]
+        public async Task Test_Conventional_Parameter_Command()
         {
             _fixture.ClearAll();
 
@@ -198,18 +197,18 @@ namespace MvvmCross.UnitTest.ViewModels
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["MyEx"];
-            Assert.NotNull(myCommand);
-            CheckCounts(testObject);
+            await Assert.That(myCommand).IsNotNull();
+            await CheckCounts(testObject);
             myCommand.Execute();
-            CheckCounts(testObject, countMyExCalled: 1, countCanExecuteMyExCalled: 1);
+            await CheckCounts(testObject, countMyExCalled: 1, countCanExecuteMyExCalled: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            CheckCounts(testObject, countMyExCalled: 4, countCanExecuteMyExCalled: 4);
+            await CheckCounts(testObject, countMyExCalled: 4, countCanExecuteMyExCalled: 4);
         }
 
-        [Fact]
-        public void Test_Conventional_Parameter_Command_CanExecute()
+        [Test]
+        public async Task Test_Conventional_Parameter_Command_CanExecute()
         {
             _fixture.ClearAll();
 
@@ -218,18 +217,18 @@ namespace MvvmCross.UnitTest.ViewModels
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["MyEx"];
-            Assert.NotNull(myCommand);
-            CheckCounts(testObject);
+            await Assert.That(myCommand).IsNotNull();
+            await CheckCounts(testObject);
             var result = myCommand.CanExecute();
-            CheckCounts(testObject, countCanExecuteMyExCalled: 1);
+            await CheckCounts(testObject, countCanExecuteMyExCalled: 1);
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
-            CheckCounts(testObject, countCanExecuteMyExCalled: 4);
+            await CheckCounts(testObject, countCanExecuteMyExCalled: 4);
         }
 
-        [Fact]
-        public void Test_IntReturning_Command()
+        [Test]
+        public async Task Test_IntReturning_Command()
         {
             _fixture.ClearAll();
 
@@ -238,18 +237,18 @@ namespace MvvmCross.UnitTest.ViewModels
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["AnIntReturning"];
-            Assert.NotNull(myCommand);
-            CheckCounts(testObject);
+            await Assert.That(myCommand).IsNotNull();
+            await CheckCounts(testObject);
             myCommand.Execute();
-            CheckCounts(testObject, countIntReturningCalled: 1);
+            await CheckCounts(testObject, countIntReturningCalled: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            CheckCounts(testObject, countIntReturningCalled: 4);
+            await CheckCounts(testObject, countIntReturningCalled: 4);
         }
 
-        [Fact]
-        public void Test_Attribute1_Command()
+        [Test]
+        public async Task Test_Attribute1_Command()
         {
             _fixture.ClearAll();
 
@@ -258,18 +257,18 @@ namespace MvvmCross.UnitTest.ViewModels
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["CalledByAttr"];
-            Assert.NotNull(myCommand);
-            CheckCounts(testObject);
+            await Assert.That(myCommand).IsNotNull();
+            await CheckCounts(testObject);
             myCommand.Execute();
-            CheckCounts(testObject, countAttributedCalled: 1);
+            await CheckCounts(testObject, countAttributedCalled: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            CheckCounts(testObject, countAttributedCalled: 4);
+            await CheckCounts(testObject, countAttributedCalled: 4);
         }
 
-        [Fact]
-        public void Test_Attribute2_Command()
+        [Test]
+        public async Task Test_Attribute2_Command()
         {
             _fixture.ClearAll();
 
@@ -278,18 +277,18 @@ namespace MvvmCross.UnitTest.ViewModels
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["CalledByAttr2"];
-            Assert.NotNull(myCommand);
-            CheckCounts(testObject);
+            await Assert.That(myCommand).IsNotNull();
+            await CheckCounts(testObject);
             myCommand.Execute();
-            CheckCounts(testObject, countAttributed2Called: 1, countCanExecuteAttributed2Called: 1);
+            await CheckCounts(testObject, countAttributed2Called: 1, countCanExecuteAttributed2Called: 1);
             myCommand.Execute();
             myCommand.Execute();
             myCommand.Execute();
-            CheckCounts(testObject, countAttributed2Called: 4, countCanExecuteAttributed2Called: 4);
+            await CheckCounts(testObject, countAttributed2Called: 4, countCanExecuteAttributed2Called: 4);
         }
 
-        [Fact]
-        public void Test_Attribute2_Command_CanExecute()
+        [Test]
+        public async Task Test_Attribute2_Command_CanExecute()
         {
             _fixture.ClearAll();
 
@@ -298,18 +297,18 @@ namespace MvvmCross.UnitTest.ViewModels
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["CalledByAttr2"];
-            Assert.NotNull(myCommand);
-            CheckCounts(testObject);
+            await Assert.That(myCommand).IsNotNull();
+            await CheckCounts(testObject);
             var result = myCommand.CanExecute();
-            CheckCounts(testObject, countCanExecuteAttributed2Called: 1);
+            await CheckCounts(testObject, countCanExecuteAttributed2Called: 1);
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
             result = myCommand.CanExecute();
-            CheckCounts(testObject, countCanExecuteAttributed2Called: 4);
+            await CheckCounts(testObject, countCanExecuteAttributed2Called: 4);
         }
 
-        [Fact]
-        public void Test_PropertyChanged_Raises_CanExecuteChange()
+        [Test]
+        public async Task Test_PropertyChanged_Raises_CanExecuteChange()
         {
             _fixture.ClearAll();
 
@@ -321,52 +320,52 @@ namespace MvvmCross.UnitTest.ViewModels
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["My"];
-            Assert.NotNull(myCommand);
+            await Assert.That(myCommand).IsNotNull();
             var countMy = 0;
             myCommand.CanExecuteChanged += (sender, args) => countMy++;
 
             var myExCommand = collection["MyEx"];
-            Assert.NotNull(myExCommand);
+            await Assert.That(myExCommand).IsNotNull();
             var countMyEx = 0;
             myExCommand.CanExecuteChanged += (sender, args) => countMyEx++;
 
             var calledByAttrCommand = collection["CalledByAttr"];
-            Assert.NotNull(calledByAttrCommand);
+            await Assert.That(calledByAttrCommand).IsNotNull();
             var countAttr = 0;
             calledByAttrCommand.CanExecuteChanged += (sender, args) => countAttr++;
 
             var calledByAttr2Command = collection["CalledByAttr2"];
-            Assert.NotNull(calledByAttr2Command);
+            await Assert.That(calledByAttr2Command).IsNotNull();
             var countAttr2 = 0;
             calledByAttr2Command.CanExecuteChanged += (sender, args) => countAttr2++;
 
-            CheckCounts(testObject);
+            await CheckCounts(testObject);
 
             testObject.RaisePropertyChanged("CanExecuteAttributed2");
-            Assert.Equal(0, countMy);
-            Assert.Equal(0, countMyEx);
-            Assert.Equal(0, countAttr);
-            Assert.Equal(1, countAttr2);
+            await Assert.That(countMy).IsEqualTo(0);
+            await Assert.That(countMyEx).IsEqualTo(0);
+            await Assert.That(countAttr).IsEqualTo(0);
+            await Assert.That(countAttr2).IsEqualTo(1);
 
             testObject.RaisePropertyChanged("CanExecuteAttributed2");
-            Assert.Equal(0, countMy);
-            Assert.Equal(0, countMyEx);
-            Assert.Equal(0, countAttr);
-            Assert.Equal(2, countAttr2);
+            await Assert.That(countMy).IsEqualTo(0);
+            await Assert.That(countMyEx).IsEqualTo(0);
+            await Assert.That(countAttr).IsEqualTo(0);
+            await Assert.That(countAttr2).IsEqualTo(2);
 
             testObject.RaisePropertyChanged("CanExecuteAttributed");
-            Assert.Equal(0, countMy);
-            Assert.Equal(0, countMyEx);
-            Assert.Equal(0, countAttr);
-            Assert.Equal(2, countAttr2);
+            await Assert.That(countMy).IsEqualTo(0);
+            await Assert.That(countMyEx).IsEqualTo(0);
+            await Assert.That(countAttr).IsEqualTo(0);
+            await Assert.That(countAttr2).IsEqualTo(2);
 
             testObject.RaisePropertyChanged("CanExecuteMyCommand");
             testObject.RaisePropertyChanged("CanExecuteMyCommand");
             testObject.RaisePropertyChanged("CanExecuteMyCommand");
-            Assert.Equal(3, countMy);
-            Assert.Equal(0, countMyEx);
-            Assert.Equal(0, countAttr);
-            Assert.Equal(2, countAttr2);
+            await Assert.That(countMy).IsEqualTo(3);
+            await Assert.That(countMyEx).IsEqualTo(0);
+            await Assert.That(countAttr).IsEqualTo(0);
+            await Assert.That(countAttr2).IsEqualTo(2);
 
             testObject.RaisePropertyChanged("CanExecuteMyExCommand");
             testObject.RaisePropertyChanged("CanExecuteMyCommand");
@@ -376,14 +375,14 @@ namespace MvvmCross.UnitTest.ViewModels
             testObject.RaisePropertyChanged("CanExecuteMyExCommand");
             testObject.RaisePropertyChanged("CanExecuteMyExCommand");
             testObject.RaisePropertyChanged("CanExecuteMyExCommand");
-            Assert.Equal(5, countMy);
-            Assert.Equal(6, countMyEx);
-            Assert.Equal(0, countAttr);
-            Assert.Equal(2, countAttr2);
+            await Assert.That(countMy).IsEqualTo(5);
+            await Assert.That(countMyEx).IsEqualTo(6);
+            await Assert.That(countAttr).IsEqualTo(0);
+            await Assert.That(countAttr2).IsEqualTo(2);
         }
 
-        [Fact]
-        public void Test_PropertyChanged_Raises_Multiple_CanExecuteChange()
+        [Test]
+        public async Task Test_PropertyChanged_Raises_Multiple_CanExecuteChange()
         {
             _fixture.ClearAll();
 
@@ -395,25 +394,25 @@ namespace MvvmCross.UnitTest.ViewModels
                 .BuildCollectionFor(testObject);
 
             var calledByAttrCommand = collection["CalledByAttr"];
-            Assert.NotNull(calledByAttrCommand);
+            await Assert.That(calledByAttrCommand).IsNotNull();
             var countAttr = 0;
             calledByAttrCommand.CanExecuteChanged += (sender, args) => countAttr++;
 
             var calledByAttr2Command = collection["CalledByAttr2"];
-            Assert.NotNull(calledByAttr2Command);
+            await Assert.That(calledByAttr2Command).IsNotNull();
             var countAttr2 = 0;
             calledByAttr2Command.CanExecuteChanged += (sender, args) => countAttr2++;
 
             testObject.RaisePropertyChanged("CanExecuteAttributed");
-            Assert.Equal(1, countAttr);
-            Assert.Equal(1, countAttr2);
+            await Assert.That(countAttr).IsEqualTo(1);
+            await Assert.That(countAttr2).IsEqualTo(1);
 
             testObject.RaisePropertyChanged("CanExecuteAttributed");
-            Assert.Equal(2, countAttr);
-            Assert.Equal(2, countAttr2);
+            await Assert.That(countAttr).IsEqualTo(2);
+            await Assert.That(countAttr2).IsEqualTo(2);
         }
 
-        private void CheckCounts(
+        private async Task CheckCounts(
             CommandTestClass testObject,
             int countMyCalled = 0,
             int countCanExecuteMyCalled = 0,
@@ -425,15 +424,15 @@ namespace MvvmCross.UnitTest.ViewModels
             int countCanExecuteAttributed2Called = 0,
             int countIntReturningCalled = 0)
         {
-            Assert.Equal(countMyCalled, testObject.CountMyCommandCalled);
-            Assert.Equal(countCanExecuteMyCalled, testObject.CountCanExecuteMyCommandCalled);
-            Assert.Equal(countMyExCalled, testObject.CountMyExCommandCalled);
-            Assert.Equal(countCanExecuteMyExCalled, testObject.CountCanExecuteMyExCommandCalled);
-            Assert.Equal(countNotACalled, testObject.CountNotACmdCalled);
-            Assert.Equal(countAttributedCalled, testObject.CountAttributedCalled);
-            Assert.Equal(countAttributed2Called, testObject.CountAttributed2Called);
-            Assert.Equal(countCanExecuteAttributed2Called, testObject.CountCanExecuteAttributed2Called);
-            Assert.Equal(countIntReturningCalled, testObject.CountAnIntReturningCalled);
+            await Assert.That(testObject.CountMyCommandCalled).IsEqualTo(countMyCalled);
+            await Assert.That(testObject.CountCanExecuteMyCommandCalled).IsEqualTo(countCanExecuteMyCalled);
+            await Assert.That(testObject.CountMyExCommandCalled).IsEqualTo(countMyExCalled);
+            await Assert.That(testObject.CountCanExecuteMyExCommandCalled).IsEqualTo(countCanExecuteMyExCalled);
+            await Assert.That(testObject.CountNotACmdCalled).IsEqualTo(countNotACalled);
+            await Assert.That(testObject.CountAttributedCalled).IsEqualTo(countAttributedCalled);
+            await Assert.That(testObject.CountAttributed2Called).IsEqualTo(countAttributed2Called);
+            await Assert.That(testObject.CountCanExecuteAttributed2Called).IsEqualTo(countCanExecuteAttributed2Called);
+            await Assert.That(testObject.CountAnIntReturningCalled).IsEqualTo(countIntReturningCalled);
         }
     }
 }
