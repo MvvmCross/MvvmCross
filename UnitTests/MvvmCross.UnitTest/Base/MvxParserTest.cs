@@ -8,7 +8,6 @@ using System.Globalization;
 using System.Linq;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Base
 {
@@ -109,26 +108,26 @@ namespace MvvmCross.UnitTest.Base
 
         }
 
-        [Fact]
-        public void Test_Reset_Clears_And_Sets_All_Properties()
+        [Test]
+        public async Task Test_Reset_Clears_And_Sets_All_Properties()
         {
             var tokeniser = new Parser();
-            Assert.Null(tokeniser.GetFullText());
-            Assert.Equal(0, tokeniser.GetCurrentIndex());
+            await Assert.That(tokeniser.GetFullText()).IsNull();
+            await Assert.That(tokeniser.GetCurrentIndex()).IsEqualTo(0);
             var testString1 = @"1 test";
             tokeniser.CallReset(testString1);
-            Assert.Equal(testString1, tokeniser.GetFullText());
-            Assert.Equal(0, tokeniser.GetCurrentIndex());
-            Assert.Equal(testString1[0], tokeniser.GetCurrentChar());
+            await Assert.That(tokeniser.GetFullText()).IsEqualTo(testString1);
+            await Assert.That(tokeniser.GetCurrentIndex()).IsEqualTo(0);
+            await Assert.That(tokeniser.GetCurrentChar()).IsEqualTo(testString1[0]);
             var testString2 = @"2 test";
             tokeniser.CallReset(testString2);
-            Assert.Equal(testString2, tokeniser.GetFullText());
-            Assert.Equal(0, tokeniser.GetCurrentIndex());
-            Assert.Equal(testString2[0], tokeniser.GetCurrentChar());
+            await Assert.That(tokeniser.GetFullText()).IsEqualTo(testString2);
+            await Assert.That(tokeniser.GetCurrentIndex()).IsEqualTo(0);
+            await Assert.That(tokeniser.GetCurrentChar()).IsEqualTo(testString2[0]);
         }
 
-        [Fact]
-        public void Test_CallReadQuotedString_Reads_Strings()
+        [Test]
+        public async Task Test_CallReadQuotedString_Reads_Strings()
         {
             var testStrings = new Dictionary<string, string>
                 {
@@ -147,13 +146,13 @@ namespace MvvmCross.UnitTest.Base
                 var tokeniser = new Parser();
                 tokeniser.CallReset(testString.Key);
                 var result = tokeniser.CallReadQuotedString();
-                Assert.Equal(testString.Value, result);
-                Assert.True(tokeniser.GetIsComplete());
+                await Assert.That(result).IsEqualTo(testString.Value);
+                await Assert.That(tokeniser.GetIsComplete()).IsTrue();
             }
         }
 
-        [Fact]
-        public void Test_CallReadUnsignedInteger_Reads_Numbers()
+        [Test]
+        public async Task Test_CallReadUnsignedInteger_Reads_Numbers()
         {
             var testStrings = new Dictionary<string, uint>
                 {
@@ -168,13 +167,13 @@ namespace MvvmCross.UnitTest.Base
                 var tokeniser = new Parser();
                 tokeniser.CallReset(testString.Key);
                 var result = tokeniser.CallReadUnsignedInteger();
-                Assert.Equal(testString.Value, result);
-                Assert.True(tokeniser.GetIsComplete());
+                await Assert.That(result).IsEqualTo(testString.Value);
+                await Assert.That(tokeniser.GetIsComplete()).IsTrue();
             }
         }
 
-        [Fact]
-        public void Test_ReadValue_Reads_Quoted_Strings()
+        [Test]
+        public async Task Test_ReadValue_Reads_Quoted_Strings()
         {
             var tests = new Dictionary<string, object>
                 {
@@ -183,26 +182,26 @@ namespace MvvmCross.UnitTest.Base
                     { "\'Foo \\\' \\\" Bar\'", "Foo \' \" Bar" },
                     { "\"Foo \\\' \\\" Bar\"", "Foo \' \" Bar" },
                 };
-            DoReadValueTests(tests);
+            await DoReadValueTests(tests);
         }
 
-        private void DoReadValueTests(Dictionary<string, object> tests)
+        private async Task DoReadValueTests(Dictionary<string, object> tests)
         {
             foreach (var t in tests)
-                DoReadValueTest(t.Key, t.Value);
+                await DoReadValueTest(t.Key, t.Value);
         }
 
-        private void DoReadValueTest(string input, object expectedOutput)
+        private async Task DoReadValueTest(string input, object expectedOutput)
         {
             var parser = new Parser();
             parser.CallReset(input);
             var output = parser.CallReadValue();
-            Assert.Equal(expectedOutput, output);
-            Assert.True(parser.GetIsComplete());
+            await Assert.That(output).IsEqualTo(expectedOutput);
+            await Assert.That(parser.GetIsComplete()).IsTrue();
         }
 
-        [Fact]
-        public void Test_ReadValue_Reads_Booleans()
+        [Test]
+        public async Task Test_ReadValue_Reads_Booleans()
         {
             var tests = new Dictionary<string, object>
                 {
@@ -213,11 +212,11 @@ namespace MvvmCross.UnitTest.Base
                     { "FALSE", false },
                     { "false", false }
                 };
-            DoReadValueTests(tests);
+            await DoReadValueTests(tests);
         }
 
-        [Fact]
-        public void Test_ReadTextUntilWhitespaceOr_ReadsText()
+        [Test]
+        public async Task Test_ReadTextUntilWhitespaceOr_ReadsText()
         {
             var tests = new string[] { "fred;", "fred life;", "fred@test;", "fred", "fred\tlife;", "fred\n" };
             foreach (var test in tests)
@@ -225,27 +224,27 @@ namespace MvvmCross.UnitTest.Base
                 var parser = new Parser();
                 parser.CallReset(test);
                 var output = parser.CallReadTextUntilWhitespaceOr('@', ';', ')');
-                Assert.Equal("fred", output);
+                await Assert.That(output).IsEqualTo("fred");
             }
         }
 
-        [Fact]
-        public void Test_ReadValue_Reads_Integers()
+        [Test]
+        public async Task Test_ReadValue_Reads_Integers()
         {
             var tests = new[] { 0, 1, 2, 3, -123, -1, long.MinValue, long.MaxValue };
             var dict = tests.ToDictionary(x => x.ToString(CultureInfo.InvariantCulture),
                                           x => (object)x);
-            DoReadValueTests(dict);
+            await DoReadValueTests(dict);
         }
 
-        [Fact]
-        public void Test_ReadValue_Reads_Doubles()
+        [Test]
+        public async Task Test_ReadValue_Reads_Doubles()
         {
             // note - we don't run any tests on things like double.MinValue - those would fail due to rounding errors.
             var tests = new[] { 0.001, 1.123, 2.2343, -123.1232, -1.2323, -99999.93454, 9999.343455 };
             var dict = tests.ToDictionary(x => x.ToString(CultureInfo.InvariantCulture),
                                           x => (object)x);
-            DoReadValueTests(dict);
+            await DoReadValueTests(dict);
         }
 
         public enum MyEnum
@@ -255,28 +254,28 @@ namespace MvvmCross.UnitTest.Base
             MyEnumValue3Foo
         }
 
-        private void DoReadEnumerationTest(Type enumerationType, string input, object expectedOutput)
+        private async Task DoReadEnumerationTest(Type enumerationType, string input, object expectedOutput)
         {
             var parser = new Parser();
             parser.CallReset(input);
             var output = parser.CallReadEnumerationValue(enumerationType, true /* ignoreCase */);
-            Assert.Equal(expectedOutput, output);
-            Assert.True(parser.GetIsComplete());
+            await Assert.That(output).IsEqualTo(expectedOutput);
+            await Assert.That(parser.GetIsComplete()).IsTrue();
         }
 
-        [Fact]
-        public void Test_ReadEnumeration_Reads_Enumerations()
+        [Test]
+        public async Task Test_ReadEnumeration_Reads_Enumerations()
         {
             foreach (var value in Enum.GetValues(typeof(MyEnum)))
             {
-                DoReadEnumerationTest(typeof(MyEnum), value.ToString(), value);
-                DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToUpper(), value);
-                DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToLower(), value);
+                await DoReadEnumerationTest(typeof(MyEnum), value.ToString(), value);
+                await DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToUpper(), value);
+                await DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToLower(), value);
             }
         }
 
-        [Fact]
-        public void Test_ReadValidCSharpName_Succeeds()
+        [Test]
+        public async Task Test_ReadValidCSharpName_Succeeds()
         {
             var names = new[]
                 {
@@ -297,19 +296,19 @@ namespace MvvmCross.UnitTest.Base
                 var parser = new Parser();
                 parser.CallReset(name);
                 var result = parser.CallReadValidCSharpName();
-                Assert.Equal(name, result);
-                Assert.True(parser.GetIsComplete());
+                await Assert.That(result).IsEqualTo(name);
+                await Assert.That(parser.GetIsComplete()).IsTrue();
 
                 var parser2 = new Parser();
                 parser2.CallReset("\t " + name + " \r \t");
                 var result2 = parser2.CallReadValidCSharpName();
-                Assert.Equal(name, result2);
-                Assert.False(parser2.GetIsComplete());
+                await Assert.That(result2).IsEqualTo(name);
+                await Assert.That(parser2.GetIsComplete()).IsFalse();
             }
         }
 
-        [Fact]
-        public void Test_ReadValidCSharpName_Fails()
+        [Test]
+        public async Task Test_ReadValidCSharpName_Fails()
         {
             var names = new[]
                 {
@@ -332,63 +331,63 @@ namespace MvvmCross.UnitTest.Base
                 {
                     exceptionThrown = true;
                 }
-                Assert.True(exceptionThrown);
+                await Assert.That(exceptionThrown).IsTrue();
             }
         }
 
-        [Fact]
-        public void Reset_Resets_FullText_And_Index()
+        [Test]
+        public async Task Reset_Resets_FullText_And_Index()
         {
             var parser = new Parser();
             parser.CallReset("derp");
 
-            Assert.Equal(0, parser.GetCurrentIndex());
-            Assert.Equal("derp", parser.GetFullText());
+            await Assert.That(parser.GetCurrentIndex()).IsEqualTo(0);
+            await Assert.That(parser.GetFullText()).IsEqualTo("derp");
         }
 
-        [Theory]
-        [InlineData('a')]
-        [InlineData('b')]
-        [InlineData('c')]
-        [InlineData('d')]
-        [InlineData('e')]
-        [InlineData('f')]
-        [InlineData('g')]
-        [InlineData('_')]
-        [InlineData('Z')]
-        [InlineData('Æ')]
-        [InlineData('ø')]
-        [InlineData('ä')]
-        [InlineData('µ')]
-        public void TestIsValidFirstCharacterOfCSharpName_OK(char character)
+        [Test]
+        [Arguments('a')]
+        [Arguments('b')]
+        [Arguments('c')]
+        [Arguments('d')]
+        [Arguments('e')]
+        [Arguments('f')]
+        [Arguments('g')]
+        [Arguments('_')]
+        [Arguments('Z')]
+        [Arguments('Æ')]
+        [Arguments('ø')]
+        [Arguments('ä')]
+        [Arguments('µ')]
+        public async Task TestIsValidFirstCharacterOfCSharpName_OK(char character)
         {
             var parser = new Parser();
             var result = parser.CallIsValidFirstCharacterOfCSharpName(character);
-            Assert.True(result);
+            await Assert.That(result).IsTrue();
         }
 
-        [Theory]
-        [InlineData('1')]
-        [InlineData(' ')]
-        [InlineData('-')]
-        [InlineData('\\')]
-        [InlineData('^')]
-        [InlineData('%')]
-        [InlineData('$')]
-        [InlineData('#')]
-        [InlineData('@')]
-        [InlineData('!')]
-        [InlineData('&')]
-        [InlineData('*')]
-        [InlineData('(')]
-        [InlineData(')')]
-        [InlineData('+')]
-        [InlineData('=')]
-        public void TestIsValidFirstCharacterOfCSharpName_Fail(char character)
+        [Test]
+        [Arguments('1')]
+        [Arguments(' ')]
+        [Arguments('-')]
+        [Arguments('\\')]
+        [Arguments('^')]
+        [Arguments('%')]
+        [Arguments('$')]
+        [Arguments('#')]
+        [Arguments('@')]
+        [Arguments('!')]
+        [Arguments('&')]
+        [Arguments('*')]
+        [Arguments('(')]
+        [Arguments(')')]
+        [Arguments('+')]
+        [Arguments('=')]
+        public async Task TestIsValidFirstCharacterOfCSharpName_Fail(char character)
         {
             var parser = new Parser();
             var result = parser.CallIsValidFirstCharacterOfCSharpName(character);
-            Assert.False(result);
+            await Assert.That(result).IsFalse();
         }
     }
 }

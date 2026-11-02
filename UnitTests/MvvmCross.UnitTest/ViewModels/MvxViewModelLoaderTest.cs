@@ -8,11 +8,10 @@ using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.ViewModels;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
-using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxViewModelLoaderTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -23,8 +22,8 @@ namespace MvvmCross.UnitTest.ViewModels
         }
 
 
-        [Fact]
-        public void Test_LoaderForNull()
+        [Test]
+        public async Task Test_LoaderForNull()
         {
             _fixture.ClearAll();
 
@@ -34,11 +33,11 @@ namespace MvvmCross.UnitTest.ViewModels
             var args = new MvxNavigateEventArgs(NavigationMode.Show);
             var viewModel = loader.LoadViewModel(request, state, args);
 
-            Assert.IsType<MvxNullViewModel>(viewModel);
+            await Assert.That(viewModel).IsTypeOf<MvxNullViewModel>();
         }
 
-        [Fact]
-        public void Test_NormalViewModel()
+        [Test]
+        public async Task Test_NormalViewModel()
         {
             _fixture.ClearAll();
 
@@ -64,10 +63,10 @@ namespace MvvmCross.UnitTest.ViewModels
             var args = new MvxNavigateEventArgs(NavigationMode.Show);
             var viewModel = loader.LoadViewModel(request, state, args);
 
-            Assert.Equal(outViewModel, viewModel);
+            await Assert.That(viewModel).IsEqualTo(outViewModel);
         }
 
-        [Fact]
+        [Test]
         public void Test_FailedViewModel()
         {
             _fixture.ClearAll();
@@ -95,7 +94,7 @@ namespace MvvmCross.UnitTest.ViewModels
             });
         }
 
-        [Fact]
+        [Test]
         public void Test_FailedViewModelLocatorCollection()
         {
             _fixture.ClearAll();

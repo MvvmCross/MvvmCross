@@ -54,11 +54,9 @@
     },
     {
       "matchPackagePatterns": [
-        "xunit.*",
-        "xunit",
-        "XunitXml.TestLogger",
+        "TUnit",
+        "TUnit.*",
         "Microsoft.Testing.*",
-        "Microsoft.NET.Test.Sdk",
         "NSubstitute",
         "NSubstitute.*"
       ],

@@ -7,11 +7,10 @@ using MvvmCross.Core.Parse.StringDictionary;
 using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.ViewModels;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Parse
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxStringDictionaryTextSerializerTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -26,8 +25,8 @@ namespace MvvmCross.UnitTest.Parse
             _fixture.Ioc.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelNameLookup);
         }
 
-        [Fact]
-        public void Test_Round_Trip_Works_For_Normal_ViewModel_Requests()
+        [Test]
+        public async Task Test_Round_Trip_Works_For_Normal_ViewModel_Requests()
         {
             var parameterBundle = new MvxBundle(new Dictionary<string, string> { { "On'e", "1'\\" }, { "Two", "2" } });
             var presentationBundle =
@@ -40,17 +39,17 @@ namespace MvvmCross.UnitTest.Parse
             var deserializer = new MvxViewModelRequestCustomTextSerializer();
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
-            Assert.Equal(typeof(Test1ViewModel), deserialized.ViewModelType);
-            Assert.Equal(2, deserialized.PresentationValues.Count);
-            Assert.Equal(2, deserialized.ParameterValues.Count);
-            Assert.Equal("1'\\", deserialized.ParameterValues["On'e"]);
-            Assert.Equal("2", deserialized.ParameterValues["Two"]);
-            Assert.Equal("3\"\'\\", deserialized.PresentationValues["Thre\"\'\\e"]);
-            Assert.Null(deserialized.PresentationValues["Four"]);
+            await Assert.That(deserialized.ViewModelType).IsEqualTo(typeof(Test1ViewModel));
+            await Assert.That(deserialized.PresentationValues.Count).IsEqualTo(2);
+            await Assert.That(deserialized.ParameterValues.Count).IsEqualTo(2);
+            await Assert.That(deserialized.ParameterValues["On'e"]).IsEqualTo("1'\\");
+            await Assert.That(deserialized.ParameterValues["Two"]).IsEqualTo("2");
+            await Assert.That(deserialized.PresentationValues["Thre\"\'\\e"]).IsEqualTo("3\"\'\\");
+            await Assert.That(deserialized.PresentationValues["Four"]).IsNull();
         }
 
-        [Fact]
-        public void Test_Round_Trip_Works_For_Part_Empty_ViewModel_Requests()
+        [Test]
+        public async Task Test_Round_Trip_Works_For_Part_Empty_ViewModel_Requests()
         {
             var parameterBundle = new MvxBundle();
             var presentationBundle = new MvxBundle();
@@ -62,9 +61,9 @@ namespace MvvmCross.UnitTest.Parse
             var deserializer = new MvxViewModelRequestCustomTextSerializer();
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
-            Assert.Equal(typeof(Test1ViewModel), deserialized.ViewModelType);
-            Assert.Empty(deserialized.PresentationValues);
-            Assert.Empty(deserialized.ParameterValues);
+            await Assert.That(deserialized.ViewModelType).IsEqualTo(typeof(Test1ViewModel));
+            await Assert.That(deserialized.PresentationValues).IsEmpty();
+            await Assert.That(deserialized.ParameterValues).IsEmpty();
         }
     }
 }

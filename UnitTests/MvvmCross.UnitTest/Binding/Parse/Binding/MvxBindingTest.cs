@@ -4,45 +4,44 @@
 
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Tests;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding
 {
-    public abstract class MvxBindingTest : IClassFixture<MvxTestFixture>
+    public abstract class MvxBindingTest
     {
         protected MvxBindingTest(MvxTestFixture fixture)
         {
             fixture.ClearAll();
         }
 
-        protected void AssertAreEquivalent(MvxSerializableBindingSpecification expected,
+        protected async Task AssertAreEquivalent(MvxSerializableBindingSpecification expected,
                                          MvxSerializableBindingSpecification actual)
         {
-            Assert.Equal(expected.Count, actual.Count);
+            await Assert.That(actual.Count).IsEqualTo(expected.Count);
             foreach (var kvp in expected)
             {
-                Assert.True(actual.ContainsKey(kvp.Key));
-                AssertAreEquivalent(kvp.Value, actual[kvp.Key]);
+                await Assert.That(actual.ContainsKey(kvp.Key)).IsTrue();
+                await AssertAreEquivalent(kvp.Value, actual[kvp.Key]);
             }
         }
 
-        protected void AssertAreEquivalent(MvxSerializableBindingDescription expected,
+        protected async Task AssertAreEquivalent(MvxSerializableBindingDescription expected,
                                          MvxSerializableBindingDescription actual)
         {
-            Assert.Equal(expected.Converter, actual.Converter);
-            Assert.Equal(expected.ConverterParameter, actual.ConverterParameter);
-            Assert.Equal(expected.FallbackValue, actual.FallbackValue);
-            Assert.Equal(expected.Mode, actual.Mode);
-            Assert.Equal(expected.Path, actual.Path);
-            Assert.Equal(expected.Function, actual.Function);
-            Assert.Equal(expected.Literal, actual.Literal);
+            await Assert.That(actual.Converter).IsEqualTo(expected.Converter);
+            await Assert.That(actual.ConverterParameter).IsEqualTo(expected.ConverterParameter);
+            await Assert.That(actual.FallbackValue).IsEqualTo(expected.FallbackValue);
+            await Assert.That(actual.Mode).IsEqualTo(expected.Mode);
+            await Assert.That(actual.Path).IsEqualTo(expected.Path);
+            await Assert.That(actual.Function).IsEqualTo(expected.Function);
+            await Assert.That(actual.Literal).IsEqualTo(expected.Literal);
             if (expected.Sources == null)
-                Assert.Null(actual.Sources);
+                await Assert.That(actual.Sources).IsNull();
             else
             {
-                Assert.Equal(expected.Sources.Count, actual.Sources.Count);
+                await Assert.That(actual.Sources.Count).IsEqualTo(expected.Sources.Count);
                 for (var i = 0; i < expected.Sources.Count; i++)
-                    AssertAreEquivalent(expected.Sources[i], actual.Sources[i]);
+                    await AssertAreEquivalent(expected.Sources[i], actual.Sources[i]);
             }
         }
     }

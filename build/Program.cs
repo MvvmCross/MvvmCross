@@ -157,7 +157,7 @@ public sealed class SonarStartTask : FrostingTask<BuildContext>
     public override void Run(BuildContext context)
     {
         var testReportFolder = context.MakeAbsolute(context.OutputDir.Combine("Tests/"));
-        var xunitReportsPaths = testReportFolder + "/*.xunit.xml";
+        var testReportsPaths = testReportFolder + "/*.trx";
         var corverageReportsPaths = testReportFolder + "/*.coverage";
 
         var settings = new DotNetToolSettings
@@ -167,7 +167,7 @@ public sealed class SonarStartTask : FrostingTask<BuildContext>
                 .Append("/key:{0}", context.SonarKey)
                 .Append("/o:{0}", context.SonarOrg)
                 .Append("/d:sonar.host.url={0}", "https://sonarcloud.io")
-                .Append("/d:sonar.cs.xunit.reportsPaths=\"{0}\"", xunitReportsPaths)
+                .Append("/d:sonar.cs.vstest.reportsPaths=\"{0}\"", testReportsPaths)
                 .Append("/d:sonar.cs.cobertura.reportPaths=\"{0}\"", corverageReportsPaths)
                 .AppendSecret("/d:sonar.token={0}", context.SonarToken)
         };
@@ -195,8 +195,10 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
     {
         var testReportFolder = context.OutputDir.Combine("Tests/");
         context.EnsureDirectoryExists(testReportFolder);
+        context.EnsureDirectoryExists(context.CtrfDir);
 
         var testPaths = context.GetFiles($"{context.AppFileRoot}/UnitTests/*.UnitTest/*.UnitTest.csproj");
+        var failedProjects = new List<string>();
         foreach (var project in testPaths)
         {
             var projectName = project.GetFilenameWithoutExtension();
@@ -207,9 +209,9 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
                 Verbosity = context.VerbosityDotNet,
                 ArgumentCustomization = args => args
                     .Append("-- ")
-                    .Append($"--report-xunit-trx --report-xunit-trx-filename {projectName}.xunit.trx")
-                    .Append($"--report-xunit-xml --report-xunit-xml-filename {projectName}.xunit.xml")
-                    .Append($"--report-xunit-ctrf --report-xunit-ctrf-filename {projectName}.ctrf.json")
+                    .Append("--results-directory").AppendQuoted(context.MakeAbsolute(testReportFolder).FullPath)
+                    .Append($"--report-trx --report-trx-filename {projectName}.trx")
+                    .Append($"--report-ctrf --report-ctrf-filename {projectName}.ctrf.json")
                     .Append($"--coverage --coverage-output {projectName}.coverage --coverage-output-format cobertura")
                     .Append("--report-gh")
             };
@@ -218,22 +220,19 @@ public sealed class UnitTestTask : FrostingTask<BuildContext>
             {
                 context.DotNetRun(project.FullPath, runSettings);
             }
-            catch
+            catch (Exception exception)
             {
-                // ignore
+                context.Error("Tests failed for {0}: {1}", projectName, exception.Message);
+                failedProjects.Add(projectName.ToString());
             }
 
-            var testTrxFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.trx");
-            var testXmlFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.xml");
-            var coverageFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.coverage");
-            context.CopyFiles(testTrxFiles, testReportFolder);
-            context.CopyFiles(testXmlFiles, testReportFolder);
-            context.CopyFiles(coverageFiles, testReportFolder);
-
-            var testCtrfFiles = context.GetFiles($"{context.AppFileRoot}/**/TestResults/*.ctrf.json");
-            context.EnsureDirectoryExists(context.CtrfDir);
-            context.CopyFiles(testCtrfFiles, context.CtrfDir);
+            var report = context.MakeAbsolute(testReportFolder.CombineWithFilePath($"{projectName}.ctrf.json"));
+            if (context.FileExists(report))
+                context.CopyFileToDirectory(report, context.CtrfDir);
         }
+
+        if (failedProjects.Count > 0)
+            throw new CakeException($"Unit tests failed: {string.Join(", ", failedProjects)}");
     }
 }
 

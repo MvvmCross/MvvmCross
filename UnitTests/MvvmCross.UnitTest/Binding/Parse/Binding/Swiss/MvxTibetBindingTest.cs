@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Tibet;
 using MvvmCross.Tests;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
+    [InheritsTests]
     public class MvxTibetBindingTest
         : MvxBaseSwissBindingTest<MvxTibetBindingParser>
     {
@@ -19,8 +19,8 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
         {
         }
 
-        [Fact]
-        public void TestFunctionalValueConverterBinding()
+        [Test]
+        public async Task TestFunctionalValueConverterBinding()
         {
             var text = "Target ConvertThis(Foo)";
             var expected = new MvxSerializableBindingSpecification()
@@ -40,11 +40,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestFunctionalValueConverterWithParameterBinding()
+        [Test]
+        public async Task TestFunctionalValueConverterWithParameterBinding()
         {
             var text = "Target ConvertThis(Foo, 12)";
             var expected = new MvxSerializableBindingSpecification()
@@ -68,11 +68,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestFunctionalValueConverterWithParameterBinding2()
+        [Test]
+        public async Task TestFunctionalValueConverterWithParameterBinding2()
         {
             var text = "Target ConvertThis(Foo, 12.45)";
             var expected = new MvxSerializableBindingSpecification()
@@ -96,11 +96,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestFunctionalValueConverterWithParameterBinding3()
+        [Test]
+        public async Task TestFunctionalValueConverterWithParameterBinding3()
         {
             var text = "Target ConvertThis(Foo, true)";
             var expected = new MvxSerializableBindingSpecification()
@@ -124,11 +124,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestFunctionalValueConverterWithParameterBinding4()
+        [Test]
+        public async Task TestFunctionalValueConverterWithParameterBinding4()
         {
             var text = "Target ConvertThis(Foo, 'Hello World')";
             var expected = new MvxSerializableBindingSpecification()
@@ -152,11 +152,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestSimpleCombinerBinding()
+        [Test]
+        public async Task TestSimpleCombinerBinding()
         {
             var text = "Target CombineThis(Foo, Foo2)";
             var expected = new MvxSerializableBindingSpecification()
@@ -180,11 +180,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestAdvancedCombinerBinding()
+        [Test]
+        public async Task TestAdvancedCombinerBinding()
         {
             var text = "Target CombineThis(First(Foo1, 'param1'), (Foo2, Converter=Second, FallbackValue=23), 'test this', 23)";
             var expected = new MvxSerializableBindingSpecification()
@@ -236,11 +236,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestOperatorCombinerBinding()
+        [Test]
+        public async Task TestOperatorCombinerBinding()
         {
             var text = "Target First(Foo1, 'param1') + (Foo2, Converter=Second, FallbackValue=23) - 'test this'";
             var expected = new MvxSerializableBindingSpecification()
@@ -295,11 +295,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestOperatorWithPathCombinerBinding()
+        [Test]
+        public async Task TestOperatorWithPathCombinerBinding()
         {
             var text = "Target First(Foo1, 'param1') + (Foo2, Converter=Second, FallbackValue=23) - Life.Like.That";
             var expected = new MvxSerializableBindingSpecification()
@@ -354,11 +354,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestAllOperators()
+        [Test]
+        public async Task TestAllOperators()
         {
             var operators = new Dictionary<string, string>()
                 {
@@ -401,12 +401,12 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                                 }
                         }
                     };
-                PerformTest(text, expected);
+                await PerformTest(text, expected);
             }
         }
 
-        [Fact]
-        public void TestLiteralBinding()
+        [Test]
+        public async Task TestLiteralBinding()
         {
             var text = "Target 'James'";
             var expected = new MvxSerializableBindingSpecification()
@@ -419,11 +419,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestLiteralNullBinding()
+        [Test]
+        public async Task TestLiteralNullBinding()
         {
             var text = "Target null";
             var expected = new MvxSerializableBindingSpecification()
@@ -436,11 +436,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestValueConverterNullBinding()
+        [Test]
+        public async Task TestValueConverterNullBinding()
         {
             var text = "Target Conv(null)";
             var expected = new MvxSerializableBindingSpecification()
@@ -460,20 +460,20 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Theory]
-        [InlineData("Null")]
-        [InlineData("null")]
-        [InlineData("NULL")]
-        [InlineData("True")]
-        [InlineData("true")]
-        [InlineData("TRUE")]
-        [InlineData("False")]
-        [InlineData("false")]
-        [InlineData("FALSE")]
-        public void TestFunctionalValueConverterWithKEYWORDInTheName(string keyword)
+        [Test]
+        [Arguments("Null")]
+        [Arguments("null")]
+        [Arguments("NULL")]
+        [Arguments("True")]
+        [Arguments("true")]
+        [Arguments("TRUE")]
+        [Arguments("False")]
+        [Arguments("false")]
+        [Arguments("FALSE")]
+        public async Task TestFunctionalValueConverterWithKEYWORDInTheName(string keyword)
         {
             var text = "Target " + keyword + "This(Foo, 'Hello World')";
             var expected = new MvxSerializableBindingSpecification()
@@ -497,11 +497,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestCommandParameterSpecialBinding()
+        [Test]
+        public async Task TestCommandParameterSpecialBinding()
         {
             var text = "Target CommandParameter(One, Two)";
             var expected = new MvxSerializableBindingSpecification()
@@ -525,7 +525,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
     }
 }

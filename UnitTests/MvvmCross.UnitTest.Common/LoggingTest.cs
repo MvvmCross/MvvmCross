@@ -1,13 +1,16 @@
-﻿using MvvmCross.Tests;
-using Xunit.Abstractions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using MvvmCross.Tests;
+using TUnit.Core;
 
 namespace MvvmCross.UnitTest.Common
 {
     public abstract class LoggingTest
     {
-        protected LoggingTest(string logName, MvxTestFixture fixture, ITestOutputHelper testOuputHelper)
+        protected LoggingTest(MvxTestFixture fixture, TestContext testContext)
         {
-            fixture.SetupTestLogger(new XunitTestLogger(logName, testOuputHelper));
+            fixture.ServiceCollection.AddLogging(builder =>
+                builder.AddProvider(new TUnitTestLoggerProvider(testContext)));
         }
     }
 }

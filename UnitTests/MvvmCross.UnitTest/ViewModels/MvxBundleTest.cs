@@ -7,11 +7,10 @@ using System.Linq;
 using MvvmCross.Core;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.ViewModels;
-using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxBundleTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -21,8 +20,8 @@ namespace MvvmCross.UnitTest.ViewModels
             _fixture = fixture;
         }
 
-        [Fact]
-        public void Test_RoundTrip()
+        [Test]
+        public async Task Test_RoundTrip()
         {
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
@@ -43,9 +42,10 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var output = bundle.Read<BundleObject>();
 
-            Assert.Equal(testObject, output);
+            await Assert.That(output).IsEqualTo(testObject);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "TUnit0014", Justification = "Public method invoked by reflection to test bundle argument binding.")]
         public BundleObject TestFunction(string TheString1, string missing, int TheInt2, bool TheBool2, Guid TheGuid2)
         {
             return new BundleObject
@@ -58,8 +58,8 @@ namespace MvvmCross.UnitTest.ViewModels
             };
         }
 
-        [Fact]
-        public void Test_FillArguments()
+        [Test]
+        public async Task Test_FillArguments()
         {
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
@@ -93,7 +93,7 @@ namespace MvvmCross.UnitTest.ViewModels
                 TheString1 = "Hello World",
                 TheString2 = string.Empty
             };
-            Assert.Equal(expected, output);
+            await Assert.That(output).IsEqualTo(expected);
         }
     }
 }

@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Base;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Base
 {
@@ -20,20 +19,20 @@ namespace MvvmCross.UnitTest.Base
             }
         }
 
-        [Fact]
-        public void TestPropertyExpression()
+        [Test]
+        public async Task TestPropertyExpression()
         {
             var t = new TestClass();
             var result = t.GetFooExpression();
-            Assert.Equal("Foo", result);
+            await Assert.That(result).IsEqualTo("Foo");
         }
 
-        [Fact]
-        public void TestUnaryPropertyExpression()
+        [Test]
+        public async Task TestUnaryPropertyExpression()
         {
             var t = new TestClass();
             var result = t.GetPropertyNameFromExpression(() => t.Foo);
-            Assert.Equal("Foo", result);
+            await Assert.That(result).IsEqualTo("Foo");
         }
     }
 }

@@ -4,11 +4,10 @@
 
 using MvvmCross.Tests;
 using MvvmCross.UI;
-using Xunit;
 
 namespace MvvmCross.Plugin.Color.UnitTest
 {
-    public class MvxColorValueConverterTest : IClassFixture<MvxTestFixture>
+    public abstract class MvxColorValueConverterTest
     {
         public MvxTestFixture Fixture { get; }
 

@@ -7,67 +7,66 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
 {
     public class MvxSourcePropertyPathParserTest
     {
-        [Fact]
-        public void TestTokeniser_OnEmpty()
+        [Test]
+        public async Task TestTokeniser_OnEmpty()
         {
             foreach (var test in new[] { null, string.Empty, ".", "\t", " .\r\n" })
             {
                 var result = Tokenise(test);
-                Assert.Single(result);
-                Assert.IsType<MvxEmptyPropertyToken>(result[0]);
+                await Assert.That(result).HasSingleItem();
+                await Assert.That(result[0]).IsTypeOf<MvxEmptyPropertyToken>();
             }
         }
 
-        [Fact]
-        public void TestTokeniser_OnWhitespace()
+        [Test]
+        public async Task TestTokeniser_OnWhitespace()
         {
             var result = Tokenise(" \t\r \n ");
-            Assert.Single(result);
-            Assert.IsType<MvxEmptyPropertyToken>(result[0]);
+            await Assert.That(result).HasSingleItem();
+            await Assert.That(result[0]).IsTypeOf<MvxEmptyPropertyToken>();
         }
 
-        [Fact]
-        public void TestTokeniser_OnSimpleProperty()
+        [Test]
+        public async Task TestTokeniser_OnSimpleProperty()
         {
             var text = "Hello";
             var result = Tokenise(text);
-            Assert.Single(result);
-            AssertIsSimplePropertyToken(result[0], text);
+            await Assert.That(result).HasSingleItem();
+            await AssertIsSimplePropertyToken(result[0], text);
 
             var result2 = Tokenise(AddWhitespace(text));
-            Assert.Single(result2);
-            AssertIsSimplePropertyToken(result2[0], text);
+            await Assert.That(result2).HasSingleItem();
+            await AssertIsSimplePropertyToken(result2[0], text);
         }
 
-        [Fact]
-        public void TestTokeniser_OnChainedSimpleProperty()
+        [Test]
+        public async Task TestTokeniser_OnChainedSimpleProperty()
         {
             var text = "Hello.World.Good.Morning.Foo.Bar";
             var split = text.Split('.');
 
             var result = Tokenise(text);
-            Assert.Equal(6, result.Count);
+            await Assert.That(result.Count).IsEqualTo(6);
             for (var i = 0; i < split.Length; i++)
             {
-                AssertIsSimplePropertyToken(result[i], split[i]);
+                await AssertIsSimplePropertyToken(result[i], split[i]);
             }
 
             var result2 = Tokenise(AddWhitespace(text));
-            Assert.Equal(6, result2.Count);
+            await Assert.That(result2.Count).IsEqualTo(6);
             for (var i = 0; i < split.Length; i++)
             {
-                AssertIsSimplePropertyToken(result2[i], split[i]);
+                await AssertIsSimplePropertyToken(result2[i], split[i]);
             }
         }
 
-        [Fact]
-        public void TestTokeniser_OnIntegerPropertyIndexer()
+        [Test]
+        public async Task TestTokeniser_OnIntegerPropertyIndexer()
         {
             var toTest = new[] { 0, 1, 123, int.MaxValue };
             foreach (var u in toTest)
@@ -75,17 +74,17 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
                 var text = "[" + u + "]";
 
                 var result = Tokenise(text);
-                Assert.Single(result);
-                AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result[0], u);
+                await Assert.That(result).HasSingleItem();
+                await AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result[0], u);
 
                 var result2 = Tokenise(AddWhitespace(text));
-                Assert.Single(result2);
-                AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result2[0], u);
+                await Assert.That(result2).HasSingleItem();
+                await AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result2[0], u);
             }
         }
 
-        [Fact]
-        public void TestTokeniser_OnStringPropertyIndexer()
+        [Test]
+        public async Task TestTokeniser_OnStringPropertyIndexer()
         {
             var toTest = new[] { "One", "", "Foo\\Bar", "Hello\r\n" };
             var quotes = new[] { "\"", "'" };
@@ -97,72 +96,72 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
                     text = text.Replace("\\", "\\\\");
 
                     var result = Tokenise(text);
-                    Assert.Single(result);
-                    AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[0], s);
+                    await Assert.That(result).HasSingleItem();
+                    await AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[0], s);
 
                     var result2 = Tokenise(AddWhitespace(text));
-                    Assert.Single(result2);
-                    AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result2[0], s);
+                    await Assert.That(result2).HasSingleItem();
+                    await AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result2[0], s);
                 }
             }
         }
 
-        [Fact]
-        public void TestTokeniser_OnChainedSimplePropertyWithUnderscore()
+        [Test]
+        public async Task TestTokeniser_OnChainedSimplePropertyWithUnderscore()
         {
             var text = "Hello_World.Good.Mor_ning.Foo.Bar";
             var split = text.Split('.');
 
             var result = Tokenise(text);
-            Assert.Equal(5, result.Count);
+            await Assert.That(result.Count).IsEqualTo(5);
             for (var i = 0; i < split.Length; i++)
             {
-                AssertIsSimplePropertyToken(result[i], split[i]);
+                await AssertIsSimplePropertyToken(result[i], split[i]);
             }
 
             var result2 = Tokenise(AddWhitespace(text));
-            Assert.Equal(5, result2.Count);
+            await Assert.That(result2.Count).IsEqualTo(5);
             for (var i = 0; i < split.Length; i++)
             {
-                AssertIsSimplePropertyToken(result2[i], split[i]);
+                await AssertIsSimplePropertyToken(result2[i], split[i]);
             }
         }
 
-        [Fact]
-        public void TestTokeniser_OnChainedSimplePropertyWithInitialUnderscore()
+        [Test]
+        public async Task TestTokeniser_OnChainedSimplePropertyWithInitialUnderscore()
         {
             var text = "_Hello_World.Good._Mor_ning.Foo._Bar";
             var split = text.Split('.');
 
             var result = Tokenise(text);
-            Assert.Equal(5, result.Count);
+            await Assert.That(result.Count).IsEqualTo(5);
             for (var i = 0; i < split.Length; i++)
             {
-                AssertIsSimplePropertyToken(result[i], split[i]);
+                await AssertIsSimplePropertyToken(result[i], split[i]);
             }
 
             var result2 = Tokenise(AddWhitespace(text));
-            Assert.Equal(5, result2.Count);
+            await Assert.That(result2.Count).IsEqualTo(5);
             for (var i = 0; i < split.Length; i++)
             {
-                AssertIsSimplePropertyToken(result2[i], split[i]);
+                await AssertIsSimplePropertyToken(result2[i], split[i]);
             }
         }
 
-        [Fact]
-        public void TestTokeniser_SmokeTest()
+        [Test]
+        public async Task TestTokeniser_SmokeTest()
         {
             var testString = "I [ 'Like - it hot -' ] .\tNew. York[1972]. In .Summer [\"\"]";
             var result = Tokenise(testString);
-            Assert.Equal(8, result.Count);
-            AssertIsSimplePropertyToken(result[0], "I");
-            AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[1], "Like - it hot -");
-            AssertIsSimplePropertyToken(result[2], "New");
-            AssertIsSimplePropertyToken(result[3], "York");
-            AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result[4], 1972);
-            AssertIsSimplePropertyToken(result[5], "In");
-            AssertIsSimplePropertyToken(result[6], "Summer");
-            AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[7], "");
+            await Assert.That(result.Count).IsEqualTo(8);
+            await AssertIsSimplePropertyToken(result[0], "I");
+            await AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[1], "Like - it hot -");
+            await AssertIsSimplePropertyToken(result[2], "New");
+            await AssertIsSimplePropertyToken(result[3], "York");
+            await AssertIsIndexerPropertyToken<int, MvxIntegerIndexerPropertyToken>(result[4], 1972);
+            await AssertIsSimplePropertyToken(result[5], "In");
+            await AssertIsSimplePropertyToken(result[6], "Summer");
+            await AssertIsIndexerPropertyToken<string, MvxStringIndexerPropertyToken>(result[7], "");
         }
 
         private string AddWhitespace(string text)
@@ -174,17 +173,17 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
             return "\t" + toReturn + "  \r \n  \t ";
         }
 
-        private static void AssertIsSimplePropertyToken(IMvxPropertyToken token, string text)
+        private static async Task AssertIsSimplePropertyToken(IMvxPropertyToken token, string text)
         {
-            Assert.IsAssignableFrom<MvxPropertyNamePropertyToken>(token);
-            Assert.Equal(text, ((MvxPropertyNamePropertyToken)token).PropertyName);
+            await Assert.That(token).IsAssignableTo<MvxPropertyNamePropertyToken>();
+            await Assert.That(((MvxPropertyNamePropertyToken)token).PropertyName).IsEqualTo(text);
         }
 
-        private static void AssertIsIndexerPropertyToken<T, TSpecific>(IMvxPropertyToken token, T value)
+        private static async Task AssertIsIndexerPropertyToken<T, TSpecific>(IMvxPropertyToken token, T value)
         {
-            Assert.IsAssignableFrom<MvxIndexerPropertyToken<T>>(token);
-            Assert.IsAssignableFrom<TSpecific>(token);
-            Assert.Equal(value, ((MvxIndexerPropertyToken<T>)token).Key);
+            await Assert.That(token).IsAssignableTo<MvxIndexerPropertyToken<T>>();
+            await Assert.That(token).IsAssignableTo<TSpecific>();
+            await Assert.That(((MvxIndexerPropertyToken<T>)token).Key).IsEqualTo(value);
         }
 
         private IList<IMvxPropertyToken> Tokenise(string text)
@@ -193,8 +192,8 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
             return tokeniser.Parse(text);
         }
 
-        [Fact]
-        public void TestTokeniser_ReturnsParsedValueSimilarToOriginalValueForSimpleExpressions()
+        [Test]
+        public async Task TestTokeniser_ReturnsParsedValueSimilarToOriginalValueForSimpleExpressions()
         {
             var random = new Random(123);
             for (int i = 0; i < 100_000; i++)
@@ -205,7 +204,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
                 var actual = string.Join<string>(".",
                     mvxPropertyTokens.Cast<MvxPropertyNamePropertyToken>().Select(t => t.PropertyName));
 
-                Assert.Equal(originalExpression, actual);
+                await Assert.That(actual).IsEqualTo(originalExpression);
             }
         }
 

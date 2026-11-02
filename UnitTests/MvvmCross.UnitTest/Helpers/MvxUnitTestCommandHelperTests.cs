@@ -1,21 +1,20 @@
 using System;
 using MvvmCross.Commands;
 using MvvmCross.Tests;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Helpers
 {
     public class MvxUnitTestCommandHelperTests
     {
-        [Fact]
-        public void Helper_Can_Construct_Test()
+        [Test]
+        public async Task Helper_Can_Construct_Test()
         {
             var helper = new MvxUnitTestCommandHelper();
-            Assert.IsType<MvxUnitTestCommandHelper>(helper);
+            await Assert.That(helper).IsTypeOf<MvxUnitTestCommandHelper>();
         }
 
-        [Fact]
-        public void Can_Add_Item_To_Helper_Test()
+        [Test]
+        public async Task Can_Add_Item_To_Helper_Test()
         {
             var helper = new MvxUnitTestCommandHelper();
 
@@ -25,10 +24,10 @@ namespace MvvmCross.UnitTest.Helpers
 
             helper.RaiseCanExecuteChanged(fakeCommand);
 
-            Assert.True(helper.HasCalledRaisePropertyChangedFor(fakeCommand));
+            await Assert.That(helper.HasCalledRaisePropertyChangedFor(fakeCommand)).IsTrue();
         }
 
-        [Fact]
+        [Test]
         public void Testing_Unregistered_Item_Will_Throw_Test()
         {
             var helper = new MvxUnitTestCommandHelper();

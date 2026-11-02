@@ -12,11 +12,10 @@ using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.ExpressionParse;
 using MvvmCross.Converters;
 using NSubstitute;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.ExpressionParse
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxExpressionBindingTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -90,8 +89,8 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
             public IMvxBindingContext BindingContext { get; set; }
         }
 
-        [Fact]
-        public void TestLongExpression()
+        [Test]
+        public async Task TestLongExpression()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -108,11 +107,11 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            await DoTest(test, expectedDesc);
         }
 
-        [Fact]
-        public void TestLongExpressionWithUnderscores()
+        [Test]
+        public async Task TestLongExpressionWithUnderscores()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -129,11 +128,11 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                     .To<TestUnderscoreDataContext>(source => source.MyCollection.GrandParent.MyChild.MyChild.Value)
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            await DoTest(test, expectedDesc);
         }
 
-        [Fact]
-        public void TestExtraParameters()
+        [Test]
+        public async Task TestExtraParameters()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -158,11 +157,11 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                     .TwoWay()
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            await DoTest(test, expectedDesc);
         }
 
-        [Fact]
-        public void TestExtraParametersNamedConverter()
+        [Test]
+        public async Task TestExtraParametersNamedConverter()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -187,11 +186,11 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                     .TwoWay()
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            await DoTest(test, expectedDesc);
         }
 
-        [Fact]
-        public void TestExtraParametersUnknownConverter()
+        [Test]
+        public async Task TestExtraParametersUnknownConverter()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -216,11 +215,11 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                     .TwoWay()
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            await DoTest(test, expectedDesc);
         }
 
-        [Fact]
-        public void TestExtraParametersStringConverter()
+        [Test]
+        public async Task TestExtraParametersStringConverter()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -245,11 +244,11 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                     .TwoWay()
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            await DoTest(test, expectedDesc);
         }
 
-        [Fact]
-        public void TestNumberIndexedExpression()
+        [Test]
+        public async Task TestNumberIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -266,11 +265,11 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyList[0].Value)
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            await DoTest(test, expectedDesc);
         }
 
-        [Fact]
-        public void TestStringIndexedExpression()
+        [Test]
+        public async Task TestStringIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -287,11 +286,11 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyLookup["Fred"].Value)
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            await DoTest(test, expectedDesc);
         }
 
-        [Fact]
-        public void TestNumberVariableIndexedExpression()
+        [Test]
+        public async Task TestNumberVariableIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -309,13 +308,13 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyList[index].Value)
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            await DoTest(test, expectedDesc);
         }
 
         private static readonly int Zero = 0;
 
-        [Fact]
-        public void TestNumberStaticVariableIndexedExpression()
+        [Test]
+        public async Task TestNumberStaticVariableIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -332,11 +331,11 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                 .To<TestDataContext>(source => source.MyCollection.MyList[Zero].Value)
                 .Apply();
 
-            DoTest(test, expectedDesc);
+            await DoTest(test, expectedDesc);
         }
 
-        [Fact]
-        public void TestNumberPropertyIndexedExpression()
+        [Test]
+        public async Task TestNumberPropertyIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -354,11 +353,11 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                 .To<TestDataContext>(source => source.MyCollection.MyList[obj.Index].Value)
                 .Apply();
 
-            DoTest(test, expectedDesc);
+            await DoTest(test, expectedDesc);
         }
 
-        [Fact]
-        public void TestStringVariableIndexedExpression()
+        [Test]
+        public async Task TestStringVariableIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -376,11 +375,11 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyLookup[index].Value)
                     .Apply();
 
-            DoTest(test, expectedDesc);
+            await DoTest(test, expectedDesc);
         }
 
-        [Fact]
-        public void TestDirectToObjectExpression()
+        [Test]
+        public async Task TestDirectToObjectExpression()
         {
             var expectedDesc = new MvxBindingDescription
             {
@@ -397,17 +396,17 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
                     .To<TestDataContext>(source => source.MyCollection.MyLookup["Fred"].Value)
                     .Apply();
 
-            DoTest(test, mock => mock, expectedDesc);
+            await DoTest(test, mock => mock, expectedDesc);
         }
 
-        private void DoTest(
+        private async Task DoTest(
             Action<MockBindingContext> action,
             MvxBindingDescription expectedDescription)
         {
-            DoTest(action, (context) => context.Target, expectedDescription);
+            await DoTest(action, (context) => context.Target, expectedDescription);
         }
 
-        private void DoTest(
+        private async Task DoTest(
             Action<MockBindingContext> action,
             Func<MockBindingContext, object> findTargetObjectFunc,
             MvxBindingDescription expectedDescription)
@@ -454,26 +453,26 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
 
             action(testTarget);
 
-            Assert.Single(callbacksSeen);
+            await Assert.That(callbacksSeen).HasSingleItem();
             var callback = callbacksSeen[0];
             var expectedTarget = findTargetObjectFunc(testTarget);
-            Assert.Equal(expectedTarget, callback.Target);
-            Assert.Equal(dataContext, callback.Source);
+            await Assert.That(callback.Target).IsEqualTo(expectedTarget);
+            await Assert.That(callback.Source).IsEqualTo(dataContext);
 
             var desc = callback.BindingDescription;
-            Assert.True(expectedDescription.Source is MvxPathSourceStepDescription);
+            await Assert.That(expectedDescription.Source is MvxPathSourceStepDescription).IsTrue();
             var path = desc.Source as MvxPathSourceStepDescription;
-            Assert.True(desc.Source is MvxPathSourceStepDescription);
+            await Assert.That(desc.Source is MvxPathSourceStepDescription).IsTrue();
             var expectedPath = expectedDescription.Source as MvxPathSourceStepDescription;
-            Assert.Equal(expectedPath.ConverterParameter, path.ConverterParameter);
-            Assert.Equal(expectedPath.FallbackValue, path.FallbackValue);
-            Assert.Equal(expectedPath.SourcePropertyPath, path.SourcePropertyPath);
-            Assert.Equal(expectedDescription.Mode, desc.Mode);
-            Assert.Equal(expectedDescription.TargetName, desc.TargetName);
+            await Assert.That(path.ConverterParameter).IsEqualTo(expectedPath.ConverterParameter);
+            await Assert.That(path.FallbackValue).IsEqualTo(expectedPath.FallbackValue);
+            await Assert.That(path.SourcePropertyPath).IsEqualTo(expectedPath.SourcePropertyPath);
+            await Assert.That(desc.Mode).IsEqualTo(expectedDescription.Mode);
+            await Assert.That(desc.TargetName).IsEqualTo(expectedDescription.TargetName);
             if (expectedPath.Converter == null)
-                Assert.Null(path.Converter);
+                await Assert.That(path.Converter).IsNull();
             else
-                Assert.Equal(expectedPath.Converter.GetType(), path.Converter.GetType());
+                await Assert.That(path.Converter.GetType()).IsEqualTo(expectedPath.Converter.GetType());
         }
     }
 }

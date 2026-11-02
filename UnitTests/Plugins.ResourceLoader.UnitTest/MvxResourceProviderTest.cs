@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Plugin.ResourceLoader;
-using Xunit;
 
 namespace MvvmCross.Plugin.ResourceLoader.UnitTest
 {
@@ -17,67 +16,67 @@ namespace MvvmCross.Plugin.ResourceLoader.UnitTest
             }
         }
 
-        [Fact]
-        public void ICanGenerateResourceNameWithNumbers()
+        [Test]
+        public async Task ICanGenerateResourceNameWithNumbers()
         {
             MvxResourceProviderStub stub = new MvxResourceProviderStub();
             string numberPath = stub.GetResourceNameForPath("123");
 
-            Assert.Equal("_123", numberPath);
+            await Assert.That(numberPath).IsEqualTo("_123");
         }
 
-        [Fact]
-        public void ICanGenerateResourceNameWithDots()
+        [Test]
+        public async Task ICanGenerateResourceNameWithDots()
         {
             MvxResourceProviderStub stub = new MvxResourceProviderStub();
             string numberPath = stub.GetResourceNameForPath("abc.def");
 
-            Assert.Equal("abc.def", numberPath);
+            await Assert.That(numberPath).IsEqualTo("abc.def");
         }
 
-        [Fact]
-        public void ICanGenerateResourceNameWithSlashes()
+        [Test]
+        public async Task ICanGenerateResourceNameWithSlashes()
         {
             MvxResourceProviderStub stub = new MvxResourceProviderStub();
             string numberPath = stub.GetResourceNameForPath("abc/def");
 
-            Assert.Equal("abc.def", numberPath);
+            await Assert.That(numberPath).IsEqualTo("abc.def");
         }
 
-        [Fact]
-        public void ICanGenerateResourceNameWithVersionNumbers()
+        [Test]
+        public async Task ICanGenerateResourceNameWithVersionNumbers()
         {
             MvxResourceProviderStub stub = new MvxResourceProviderStub();
             string numberPath = stub.GetResourceNameForPath("abc1.2.3");
 
-            Assert.Equal("abc1._2._3", numberPath);
+            await Assert.That(numberPath).IsEqualTo("abc1._2._3");
         }
 
-        [Fact]
-        public void ICanGenerateResourceNameWithNumberFolders()
+        [Test]
+        public async Task ICanGenerateResourceNameWithNumberFolders()
         {
             MvxResourceProviderStub stub = new MvxResourceProviderStub();
             string numberPath = stub.GetResourceNameForPath("abc1/2/3");
 
-            Assert.Equal("abc1._2._3", numberPath);
+            await Assert.That(numberPath).IsEqualTo("abc1._2._3");
         }
 
-        [Fact]
-        public void ICanGenerateResourceNameWithInvalidCharacters()
+        [Test]
+        public async Task ICanGenerateResourceNameWithInvalidCharacters()
         {
             MvxResourceProviderStub stub = new MvxResourceProviderStub();
             string numberPath = stub.GetResourceNameForPath("abc1-2~3");
 
-            Assert.Equal("abc1_2_3", numberPath);
+            await Assert.That(numberPath).IsEqualTo("abc1_2_3");
         }
 
-        [Fact]
-        public void ICanGenerateResourceNameWithDoubleSlashes()
+        [Test]
+        public async Task ICanGenerateResourceNameWithDoubleSlashes()
         {
             MvxResourceProviderStub stub = new MvxResourceProviderStub();
             string numberPath = stub.GetResourceNameForPath("abc//def");
 
-            Assert.Equal("abc.def", numberPath);
+            await Assert.That(numberPath).IsEqualTo("abc.def");
         }
     }
 }

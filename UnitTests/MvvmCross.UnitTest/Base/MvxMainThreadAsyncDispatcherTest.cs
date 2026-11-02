@@ -5,7 +5,6 @@
 using System;
 using System.Threading.Tasks;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Base
 {
@@ -13,40 +12,43 @@ namespace MvvmCross.UnitTest.Base
     {
         private const int TestTimeoutMs = 10_000;
 
-        [Fact(Timeout = TestTimeoutMs)]
-        public async Task ExecuteOnMainThreadAsync_ActionCompletes_ReturnedTaskCompletes()
+        [Test]
+        [Timeout(TestTimeoutMs)]
+        public async Task ExecuteOnMainThreadAsync_ActionCompletes_ReturnedTaskCompletes(CancellationToken cancellationToken)
         {
             var dispatcher = new InlineMockMainThreadDispatcher();
             var executed = false;
 
-            await dispatcher.ExecuteOnMainThreadAsync(() => { executed = true; });
+            await dispatcher.ExecuteOnMainThreadAsync(() => { executed = true; }).WaitAsync(cancellationToken);
 
-            Assert.True(executed);
+            await Assert.That(executed).IsTrue();
         }
 
-        [Fact(Timeout = TestTimeoutMs)]
-        public async Task ExecuteOnMainThreadAsync_ActionThrows_WithMaskExceptionsFalse_ReturnedTaskFaults()
+        [Test]
+        [Timeout(TestTimeoutMs)]
+        public async Task ExecuteOnMainThreadAsync_ActionThrows_WithMaskExceptionsFalse_ReturnedTaskFaults(CancellationToken cancellationToken)
         {
             var dispatcher = new InlineMockMainThreadDispatcher();
             Action action = () => throw new InvalidOperationException("boom");
 
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: false));
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: false).WaitAsync(cancellationToken));
 
-            Assert.Equal("boom", exception.Message);
+            await Assert.That(exception.Message).IsEqualTo("boom");
         }
 
-        [Fact(Timeout = TestTimeoutMs)]
-        public async Task ExecuteOnMainThreadAsync_ActionThrows_WithMaskExceptionsTrue_ReturnedTaskCompletes()
+        [Test]
+        [Timeout(TestTimeoutMs)]
+        public async Task ExecuteOnMainThreadAsync_ActionThrows_WithMaskExceptionsTrue_ReturnedTaskCompletes(CancellationToken cancellationToken)
         {
             var dispatcher = new InlineMockMainThreadDispatcher();
             Action action = () => throw new InvalidOperationException("boom");
 
-            await dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: true);
+            await dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: true).WaitAsync(cancellationToken);
         }
 
-        [Fact(Timeout = TestTimeoutMs)]
-        public async Task ExecuteOnMainThreadAsync_AsyncActionThrowsAfterAwait_WithMaskExceptionsFalse_ReturnedTaskFaults()
+        [Test]
+        [Timeout(TestTimeoutMs)]
+        public async Task ExecuteOnMainThreadAsync_AsyncActionThrowsAfterAwait_WithMaskExceptionsFalse_ReturnedTaskFaults(CancellationToken cancellationToken)
         {
             var dispatcher = new InlineMockMainThreadDispatcher();
             Func<Task> action = async () =>
@@ -55,14 +57,14 @@ namespace MvvmCross.UnitTest.Base
                 throw new InvalidOperationException("boom");
             };
 
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: false));
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: false).WaitAsync(cancellationToken));
 
-            Assert.Equal("boom", exception.Message);
+            await Assert.That(exception.Message).IsEqualTo("boom");
         }
 
-        [Fact(Timeout = TestTimeoutMs)]
-        public async Task ExecuteOnMainThreadAsync_AsyncActionThrowsAfterAwait_WithMaskExceptionsTrue_ReturnedTaskCompletes()
+        [Test]
+        [Timeout(TestTimeoutMs)]
+        public async Task ExecuteOnMainThreadAsync_AsyncActionThrowsAfterAwait_WithMaskExceptionsTrue_ReturnedTaskCompletes(CancellationToken cancellationToken)
         {
             var dispatcher = new InlineMockMainThreadDispatcher();
             Func<Task> action = async () =>
@@ -71,43 +73,46 @@ namespace MvvmCross.UnitTest.Base
                 throw new InvalidOperationException("boom");
             };
 
-            await dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: true);
+            await dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: true).WaitAsync(cancellationToken);
         }
 
-        [Fact(Timeout = TestTimeoutMs)]
-        public async Task ExecuteOnMainThreadAsync_ActionCompletes_WhenDispatchedFromBackgroundThread_ReturnedTaskCompletes()
+        [Test]
+        [Timeout(TestTimeoutMs)]
+        public async Task ExecuteOnMainThreadAsync_ActionCompletes_WhenDispatchedFromBackgroundThread_ReturnedTaskCompletes(CancellationToken cancellationToken)
         {
             var dispatcher = new BackgroundMockMainThreadDispatcher();
             var executed = false;
 
-            await dispatcher.ExecuteOnMainThreadAsync(() => { executed = true; });
+            await dispatcher.ExecuteOnMainThreadAsync(() => { executed = true; }).WaitAsync(cancellationToken);
 
-            Assert.True(executed);
+            await Assert.That(executed).IsTrue();
         }
 
-        [Fact(Timeout = TestTimeoutMs)]
-        public async Task ExecuteOnMainThreadAsync_ActionThrows_WhenDispatchedFromBackgroundThread_ReturnedTaskFaults()
+        [Test]
+        [Timeout(TestTimeoutMs)]
+        public async Task ExecuteOnMainThreadAsync_ActionThrows_WhenDispatchedFromBackgroundThread_ReturnedTaskFaults(CancellationToken cancellationToken)
         {
             var dispatcher = new BackgroundMockMainThreadDispatcher();
             Action action = () => throw new InvalidOperationException("boom");
 
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: false));
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: false).WaitAsync(cancellationToken));
 
-            Assert.Equal("boom", exception.Message);
+            await Assert.That(exception.Message).IsEqualTo("boom");
         }
 
-        [Fact(Timeout = TestTimeoutMs)]
-        public async Task ExecuteOnMainThreadAsync_ActionThrows_WhenDispatchedFromBackgroundThread_WithMaskExceptionsTrue_ReturnedTaskCompletes()
+        [Test]
+        [Timeout(TestTimeoutMs)]
+        public async Task ExecuteOnMainThreadAsync_ActionThrows_WhenDispatchedFromBackgroundThread_WithMaskExceptionsTrue_ReturnedTaskCompletes(CancellationToken cancellationToken)
         {
             var dispatcher = new BackgroundMockMainThreadDispatcher();
             Action action = () => throw new InvalidOperationException("boom");
 
-            await dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: true);
+            await dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: true).WaitAsync(cancellationToken);
         }
 
-        [Fact(Timeout = TestTimeoutMs)]
-        public async Task ExecuteOnMainThreadAsync_AsyncActionThrows_WhenDispatchedFromBackgroundThread_ReturnedTaskFaults()
+        [Test]
+        [Timeout(TestTimeoutMs)]
+        public async Task ExecuteOnMainThreadAsync_AsyncActionThrows_WhenDispatchedFromBackgroundThread_ReturnedTaskFaults(CancellationToken cancellationToken)
         {
             var dispatcher = new BackgroundMockMainThreadDispatcher();
             Func<Task> action = async () =>
@@ -116,14 +121,14 @@ namespace MvvmCross.UnitTest.Base
                 throw new InvalidOperationException("boom");
             };
 
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: false));
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: false).WaitAsync(cancellationToken));
 
-            Assert.Equal("boom", exception.Message);
+            await Assert.That(exception.Message).IsEqualTo("boom");
         }
 
-        [Fact(Timeout = TestTimeoutMs)]
-        public async Task ExecuteOnMainThreadAsync_AsyncActionThrows_WhenDispatchedFromBackgroundThread_WithMaskExceptionsTrue_ReturnedTaskCompletes()
+        [Test]
+        [Timeout(TestTimeoutMs)]
+        public async Task ExecuteOnMainThreadAsync_AsyncActionThrows_WhenDispatchedFromBackgroundThread_WithMaskExceptionsTrue_ReturnedTaskCompletes(CancellationToken cancellationToken)
         {
             var dispatcher = new BackgroundMockMainThreadDispatcher();
             Func<Task> action = async () =>
@@ -132,7 +137,7 @@ namespace MvvmCross.UnitTest.Base
                 throw new InvalidOperationException("boom");
             };
 
-            await dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: true);
+            await dispatcher.ExecuteOnMainThreadAsync(action, maskExceptions: true).WaitAsync(cancellationToken);
         }
     }
 }

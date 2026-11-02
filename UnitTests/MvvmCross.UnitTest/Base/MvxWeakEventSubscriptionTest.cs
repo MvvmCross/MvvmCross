@@ -1,5 +1,4 @@
 using MvvmCross.WeakSubscription;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Base
 {
@@ -34,8 +33,8 @@ namespace MvvmCross.UnitTest.Base
             }
         }
 
-        [Fact]
-        public void DisposeWeakEventSubscription_OnDisposedObject_DoesNotThrow()
+        [Test]
+        public async Task DisposeWeakEventSubscription_OnDisposedObject_DoesNotThrow()
         {
             var disposableClass = new DisposableClass();
 
@@ -44,9 +43,7 @@ namespace MvvmCross.UnitTest.Base
             });
 
             disposableClass.Dispose();
-            subscription.Dispose();
-
-            Assert.True(true);
+            await Assert.That(() => subscription.Dispose()).ThrowsNothing();
         }
     }
 }

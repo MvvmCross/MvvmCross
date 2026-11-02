@@ -10,12 +10,11 @@ using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
 using NSubstitute;
 using NSubstitute.Extensions;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Presenters;
 
 [RequiresUnreferencedCode("Tests exercise presentation with statically referenced ViewModels and substitute presenters.")]
-[Collection("Window presenter lifetime")]
+[NotInParallel]
 public class MvxWindowViewPresenterTests
 {
     private sealed class Presenter : MvxWindowViewPresenter
@@ -43,20 +42,20 @@ public class MvxWindowViewPresenterTests
             PresentationValues = windowId == null ? null : new MvxWindowPresentationBundle(windowId).Data
         };
 
-    [Fact]
+    [Test]
     public async Task UnqualifiedNavigationRequiresExactlyOneWindow()
     {
         var router = new Presenter();
         var first = CreatePresenter();
-        Assert.False(await router.Show(Request()));
+        await Assert.That(await router.Show(Request())).IsFalse();
         router.Register("first", first);
-        Assert.True(await router.Show(Request()));
+        await Assert.That(await router.Show(Request())).IsTrue();
         router.Register("second", CreatePresenter());
-        Assert.False(await router.Show(Request()));
+        await Assert.That(await router.Show(Request())).IsFalse();
         await first.Received(1).Show(Arg.Any<MvxViewModelRequest>());
     }
 
-    [Fact]
+    [Test]
     public async Task ExplicitWindowReceivesOriginalRequestAndOtherPresentationValues()
     {
         var router = new Presenter();
@@ -67,16 +66,16 @@ public class MvxWindowViewPresenterTests
         var request = Request("second");
         request.PresentationValues!["OtherHint"] = "value";
 
-        Assert.True(await router.Show(request));
+        await Assert.That(await router.Show(request)).IsTrue();
         await second.Received(1).Show(request);
         await first.DidNotReceive().Show(Arg.Any<MvxViewModelRequest>());
-        Assert.Equal("value", request.PresentationValues["OtherHint"]);
+        await Assert.That(request.PresentationValues["OtherHint"]).IsEqualTo("value");
     }
 
-    [Theory]
-    [InlineData("missing")]
-    [InlineData("")]
-    [InlineData("FIRST")]
+    [Test]
+    [Arguments("missing")]
+    [Arguments("")]
+    [Arguments("FIRST")]
     public async Task InvalidExplicitWindowNeverFallsBack(string id)
     {
         var router = new Presenter();
@@ -84,11 +83,11 @@ public class MvxWindowViewPresenterTests
         router.Register("first", first);
         var request = Request();
         request.PresentationValues = new Dictionary<string, string> { [MvxWindowPresentationBundle.WindowIdKey] = id };
-        Assert.False(await router.Show(request));
+        await Assert.That(await router.Show(request)).IsFalse();
         await first.DidNotReceive().Show(Arg.Any<MvxViewModelRequest>());
     }
 
-    [Fact]
+    [Test]
     public async Task CloseUsesInstanceOwnershipEvenWhenHintNamesAnotherWindow()
     {
         var router = new Presenter();
@@ -101,16 +100,16 @@ public class MvxWindowViewPresenterTests
         await router.Show(Request("first", firstModel));
         await router.Show(Request("second", secondModel));
 
-        Assert.True(await router.ChangePresentation(new MvxClosePresentationHint(firstModel,
-            new MvxWindowPresentationBundle("second"))));
-        Assert.True(await router.Close(secondModel));
-        Assert.False(await router.Close(new ViewModel()));
+        await Assert.That(await router.ChangePresentation(new MvxClosePresentationHint(firstModel,
+            new MvxWindowPresentationBundle("second")))).IsTrue();
+        await Assert.That(await router.Close(secondModel)).IsTrue();
+        await Assert.That(await router.Close(new ViewModel())).IsFalse();
         await first.Received(1).Close(firstModel);
         await second.Received(1).Close(secondModel);
         await second.DidNotReceive().Close(firstModel);
     }
 
-    [Fact]
+    [Test]
     public async Task PendingPresentationKeepsItsWindowWhenAnotherWindowNavigates()
     {
         var router = new Presenter();
@@ -122,17 +121,17 @@ public class MvxWindowViewPresenterTests
         router.Register("second", second);
         var request = Request("first");
         var firstTask = router.Show(request);
-        Assert.True(await router.Show(Request("second")));
+        await Assert.That(await router.Show(Request("second"))).IsTrue();
         pending.SetResult(true);
-        Assert.True(await firstTask);
-        Assert.True(await router.Close(request.ViewModelInstance!));
+        await Assert.That(await firstTask).IsTrue();
+        await Assert.That(await router.Close(request.ViewModelInstance!)).IsTrue();
         await first.Received(1).Close(request.ViewModelInstance!);
         await second.DidNotReceive().Close(Arg.Any<IMvxViewModel>());
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
+    [Test]
+    [Arguments(true)]
+    [Arguments(false)]
     public async Task SameInstanceCannotOverlapPresentations(bool succeeds)
     {
         var router = new Presenter();
@@ -146,16 +145,16 @@ public class MvxWindowViewPresenterTests
         var overlap = await router.Show(Request("first", model));
         pending.SetResult(succeeds);
 
-        Assert.Equal(succeeds, await showing);
-        Assert.False(overlap);
+        await Assert.That(await showing).IsEqualTo(succeeds);
+        await Assert.That(overlap).IsFalse();
         await first.Received(1).Show(Arg.Any<MvxViewModelRequest>());
-        Assert.Equal(succeeds, await router.Close(model));
-        Assert.Equal(!succeeds, await router.Show(Request("second", model)));
+        await Assert.That(await router.Close(model)).IsEqualTo(succeeds);
+        await Assert.That(await router.Show(Request("second", model))).IsEqualTo(!succeeds);
         if (succeeds)
-            Assert.True(await router.Show(Request("first", model)));
+            await Assert.That(await router.Show(Request("first", model))).IsTrue();
     }
 
-    [Fact]
+    [Test]
     public async Task ThrowingPendingPresentationAllowsRetry()
     {
         var router = new Presenter();
@@ -170,15 +169,15 @@ public class MvxWindowViewPresenterTests
         pending.SetException(new InvalidOperationException());
 
         await Assert.ThrowsAsync<InvalidOperationException>(() => showing);
-        Assert.False(overlap);
-        Assert.False(await router.Close(model));
-        Assert.True(await router.Show(Request("second", model)));
+        await Assert.That(overlap).IsFalse();
+        await Assert.That(await router.Close(model)).IsFalse();
+        await Assert.That(await router.Show(Request("second", model))).IsTrue();
     }
 
-    [Theory]
-    [InlineData(true, false)]
-    [InlineData(false, false)]
-    [InlineData(false, true)]
+    [Test]
+    [Arguments(true, false)]
+    [Arguments(false, false)]
+    [Arguments(false, true)]
     public async Task DisconnectDuringPresentationDoesNotResurrectOwnership(bool succeeds, bool throws)
     {
         var router = new Presenter();
@@ -188,8 +187,8 @@ public class MvxWindowViewPresenterTests
         router.Register("scene", first);
         var request = Request("scene");
         var showing = router.Show(request);
-        Assert.True(router.UnregisterWindow("scene"));
-        Assert.False(router.UnregisterWindow("scene"));
+        await Assert.That(router.UnregisterWindow("scene")).IsTrue();
+        await Assert.That(router.UnregisterWindow("scene")).IsFalse();
         var replacement = CreatePresenter();
         router.Register("scene", replacement);
         if (throws)
@@ -200,14 +199,14 @@ public class MvxWindowViewPresenterTests
         if (throws)
             await Assert.ThrowsAsync<InvalidOperationException>(() => showing);
         else
-            Assert.False(await showing);
-        Assert.False(await router.Close(request.ViewModelInstance!));
-        Assert.False(await router.Show(request));
-        Assert.True(await router.Show(Request("scene")));
+            await Assert.That(await showing).IsFalse();
+        await Assert.That(await router.Close(request.ViewModelInstance!)).IsFalse();
+        await Assert.That(await router.Show(request)).IsFalse();
+        await Assert.That(await router.Show(Request("scene"))).IsTrue();
         await replacement.DidNotReceive().Close(Arg.Any<IMvxViewModel>());
     }
 
-    [Fact]
+    [Test]
     public async Task SameInstanceCannotBePresentedInTwoWindows()
     {
         var router = new Presenter();
@@ -215,14 +214,14 @@ public class MvxWindowViewPresenterTests
         var second = CreatePresenter();
         router.Register("second", second);
         var model = new ViewModel();
-        Assert.True(await router.Show(Request("first", model)));
-        Assert.False(await router.Show(Request("second", model)));
+        await Assert.That(await router.Show(Request("first", model))).IsTrue();
+        await Assert.That(await router.Show(Request("second", model))).IsFalse();
         await second.DidNotReceive().Show(Arg.Any<MvxViewModelRequest>());
     }
 
-    [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
+    [Test]
+    [Arguments(false)]
+    [Arguments(true)]
     public async Task FailedPresentationDoesNotClaimViewModel(bool throws)
     {
         var router = new Presenter();
@@ -237,13 +236,13 @@ public class MvxWindowViewPresenterTests
         if (throws)
             await Assert.ThrowsAsync<InvalidOperationException>(() => router.Show(Request("first", model)));
         else
-            Assert.False(await router.Show(Request("first", model)));
+            await Assert.That(await router.Show(Request("first", model))).IsFalse();
 
-        Assert.False(await router.Close(model));
-        Assert.True(await router.Show(Request("second", model)));
+        await Assert.That(await router.Close(model)).IsFalse();
+        await Assert.That(await router.Show(Request("second", model))).IsTrue();
     }
 
-    [Fact]
+    [Test]
     public async Task OwnershipIsAvailableInsideViewLifecycleCallbacks()
     {
         var router = new Presenter();
@@ -251,11 +250,11 @@ public class MvxWindowViewPresenterTests
         router.Register("first", first);
         var request = Request("first");
         first.Show(request).Returns(_ => router.Close(request.ViewModelInstance!));
-        Assert.True(await router.Show(request));
+        await Assert.That(await router.Show(request)).IsTrue();
         await first.Received(1).Close(request.ViewModelInstance!);
     }
 
-    [Fact]
+    [Test]
     public async Task HintsRequireWindowContextAndCustomHandlersStillWork()
     {
         var router = new Presenter();
@@ -263,16 +262,16 @@ public class MvxWindowViewPresenterTests
         var second = CreatePresenter();
         router.Register("first", first);
         router.Register("second", second);
-        Assert.False(await router.ChangePresentation(new Hint()));
+        await Assert.That(await router.ChangePresentation(new Hint())).IsFalse();
         var hint = new Hint(new MvxWindowPresentationBundle("second"));
-        Assert.True(await router.ChangePresentation(hint));
+        await Assert.That(await router.ChangePresentation(hint)).IsTrue();
         await second.Received(1).ChangePresentation(hint);
         await first.DidNotReceive().ChangePresentation(Arg.Any<MvxPresentationHint>());
         router.AddPresentationHintHandler<Hint>(_ => Task.FromResult(true));
-        Assert.True(await router.ChangePresentation(new Hint()));
+        await Assert.That(await router.ChangePresentation(new Hint())).IsTrue();
     }
 
-    [Fact]
+    [Test]
     public void DuplicateWindowCannotReplaceExistingPresenter()
     {
         var router = new Presenter();
@@ -280,7 +279,7 @@ public class MvxWindowViewPresenterTests
         Assert.Throws<ArgumentException>(() => router.Register("scene", CreatePresenter()));
     }
 
-    [Fact]
+    [Test]
     public async Task CloseHintPreservesTheOwningPresentersCustomHandler()
     {
         var router = new Presenter();
@@ -291,32 +290,32 @@ public class MvxWindowViewPresenterTests
         await router.Show(Request("first", model));
         var hint = new MvxClosePresentationHint(model);
         first.Configure().ChangePresentation(hint).Returns(false);
-        Assert.False(await router.ChangePresentation(hint));
+        await Assert.That(await router.ChangePresentation(hint)).IsFalse();
         await first.Received(1).ChangePresentation(hint);
     }
 
-    [Fact]
+    [Test]
     [SuppressMessage("Major Code Smell", "S1215", Justification = "Verifies that disconnected windows are collectable while their ViewModels remain alive.")]
-    public void DisconnectReleasesPresenterWhileItsViewModelIsStillAlive()
+    public async Task DisconnectReleasesPresenterWhileItsViewModelIsStillAlive()
     {
         var router = new Presenter();
         var model = new ViewModel();
-        var reference = RegisterAndDisconnect(router, model);
+        var reference = await RegisterAndDisconnect(router, model);
         GC.Collect();
         GC.WaitForPendingFinalizers();
         GC.Collect();
-        Assert.False(reference.IsAlive);
+        await Assert.That(reference.IsAlive).IsFalse();
         GC.KeepAlive(router);
         GC.KeepAlive(model);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static WeakReference RegisterAndDisconnect(Presenter router, IMvxViewModel model)
+    private static async Task<WeakReference> RegisterAndDisconnect(Presenter router, IMvxViewModel model)
     {
         var window = new StatelessPresenter();
         var reference = new WeakReference(window);
         router.Register("scene", window);
-        Assert.True(router.Show(Request("scene", model)).GetAwaiter().GetResult());
+        await Assert.That(await router.Show(Request("scene", model))).IsTrue();
         router.UnregisterWindow("scene");
         return reference;
     }
@@ -331,7 +330,3 @@ public class MvxWindowViewPresenterTests
         public override Task<bool> ChangePresentation(MvxPresentationHint hint) => Task.FromResult(true);
     }
 }
-
-// Forced collection in the lifetime test must not run alongside other tests using weak references.
-[CollectionDefinition("Window presenter lifetime", DisableParallelization = true)]
-public class WindowPresenterLifetimeCollection;
