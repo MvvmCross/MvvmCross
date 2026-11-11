@@ -5,7 +5,28 @@
     <AssemblyName>Playground.Droid</AssemblyName>
     <RootNamespace>Playground.Droid</RootNamespace>
     <OutputType>Exe</OutputType>
+
+    <ApplicationId>com.mvvmcross.playground.droid</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion>
+
     <SupportedOSPlatformVersion>24.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+
+    <AndroidCreateProguardMappingFile>True</AndroidCreateProguardMappingFile>
+    <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
+    <AndroidDexTool>d8</AndroidDexTool>
+    <AndroidLinkTool>r8</AndroidLinkTool>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <RuntimeIdentifier>android-arm64</RuntimeIdentifier>
+    <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
   </PropertyGroup>
 
   <ItemGroup>
