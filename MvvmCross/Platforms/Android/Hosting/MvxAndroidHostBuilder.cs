@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Android.App;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,19 @@ namespace MvvmCross.Platforms.Android.Hosting;
 /// </summary>
 public class MvxAndroidHostBuilder : MvxHostBuilder
 {
+    protected override MvxHost CreateHost(IServiceProvider serviceProvider)
+        => new MvxAndroidHost(serviceProvider);
+
+    private sealed class MvxAndroidHost(IServiceProvider services) : MvxHost(services)
+    {
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
+        public override Task Start()
+        {
+            SetAsCurrent();
+            return Task.CompletedTask;
+        }
+    }
+
 
     /// <summary>
     /// Creates an <see cref="MvxAndroidHostBuilder"/> for the given Android <see cref="Application"/>.
@@ -127,7 +141,7 @@ public class MvxAndroidHostBuilder : MvxHostBuilder
     /// <see cref="MvxHostBuilder.StartWith{TViewModel}"/> or
     /// <see cref="MvxHostBuilder.ConfigureServices"/> to keep the platform-typed fluent chain.
     /// </remarks>
-    public MvxAndroidHostBuilder UsePresenter<T>()
+    public MvxAndroidHostBuilder UsePresenter<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>()
         where T : class, IMvxAndroidViewPresenter
     {
         Services.RemoveAll<IMvxAndroidViewPresenter>();

@@ -67,6 +67,12 @@ public class MainApplication : MvxAndroidApplication
 }
 ```
 
+On Android, the host's `Start()` only sets `MvxHost.Current`; it does not navigate.
+Use a launcher activity derived from `MvxStartActivity` to run `IMvxAppStart` when
+the activity resumes. This ensures initial navigation starts from a foreground
+activity rather than from `Application.OnCreate`, where Android can block the
+activity launch.
+
 ---
 
 ## App.cs / MvxApplication
