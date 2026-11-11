@@ -25,7 +25,6 @@ runs:
       with:
         dotnet-version: ${{ inputs.dotnet-version }}
         workloads: android, ios, tvos, macos, maccatalyst
-        cache: true
 
     - name: Restore .NET tools
       shell: pwsh
