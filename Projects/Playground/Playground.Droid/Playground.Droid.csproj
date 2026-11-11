@@ -5,7 +5,7 @@
     <AssemblyName>Playground.Droid</AssemblyName>
     <RootNamespace>Playground.Droid</RootNamespace>
     <OutputType>Exe</OutputType>
-    <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>24.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
