@@ -16,6 +16,8 @@ using Playground.Core;
 using Playground.Droid.Bindings;
 using Playground.Droid.Controls;
 using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.Xamarin;
 
 namespace Playground.Droid
 {
@@ -30,10 +32,19 @@ namespace Playground.Droid
         {
             base.OnCreate();
 
+            const string outputTemplate =
+                "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} {SourceContext:l}:#{ThreadId} [{Level}] {Message}{NewLine}{Exception}";
+
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
-                .WriteTo.Async(a => a.AndroidLog())
-                .WriteTo.Async(a => a.Trace())
+                .WriteTo.Async(a => a.AndroidLog(
+                    LogEventLevel.Verbose,
+                    outputTemplate
+                ))
+                .WriteTo.Async(a => a.Trace(
+                    LogEventLevel.Verbose,
+                    outputTemplate
+                ))
                 .CreateLogger();
 
             MvxAndroidHostBuilder.CreateBuilder(this)

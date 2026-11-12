@@ -13,6 +13,7 @@ env:
   DOTNET_NOLOGO: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 
 permissions:
   contents: read
@@ -43,7 +44,7 @@ jobs:
       run: dotnet run --project build/Build.csproj -- --verbosity=Minimal --artifactsDir="${{ github.workspace }}\output"
 
     - name: Install sign tool
-      run: dotnet tool install --tool-path . sign --version 0.9.1-beta.25379.1
+      run: dotnet tool install --tool-path . sign --version 0.9.1-beta.26552.4
 
     - name: 'Az CLI login'
       uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
