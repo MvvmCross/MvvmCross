@@ -13,6 +13,7 @@ env:
   DOTNET_NOLOGO: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 
 permissions:
   contents: read
@@ -24,7 +25,7 @@ jobs:
       contents: read
     steps:
     - name: Harden the runner (Audit all outbound calls)
-      uses: step-security/harden-runner@46b06cea07f9e64621fdf066ba77ac6915163d43 # v2.22.3
+      uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
       with:
         egress-policy: audit
 
@@ -34,10 +35,11 @@ jobs:
         fetch-depth: 0
         fetch-tags: true  
 
-    - name: Install .NET 10.0.300
+    - name: Install .NET 11.0.100
       uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
       with:
-        dotnet-version: 10.0.300
+        dotnet-version: 11.0.100
+        workloads: android
 
     - name: Restore .NET tools
       shell: pwsh
@@ -57,10 +59,6 @@ jobs:
         dotnet --version
         dotnet --info
         dotnet workload --info
-
-    - name: Install .NET workloads
-      shell: pwsh
-      run: dotnet workload install android
 
     - name: Reset tracked files to clean workspace
       shell: bash
