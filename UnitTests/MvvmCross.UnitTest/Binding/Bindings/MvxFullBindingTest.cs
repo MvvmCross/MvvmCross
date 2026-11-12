@@ -381,6 +381,87 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         }
 
         [Test]
+        public async Task TestSourceNotificationAfterDispose_ShouldBeIgnored()
+        {
+            using var binding = TestSetupSourceStep(out var sourceStep, out var targetBinding);
+            EventHandler sourceChanged = null;
+            sourceStep.When(s => s.Changed -= Arg.Any<EventHandler>())
+                .Do(call => sourceChanged = call.Arg<EventHandler>());
+
+            binding.Dispose();
+            sourceStep.ClearReceivedCalls();
+            targetBinding.ClearReceivedCalls();
+
+            await Assert.That(() => sourceChanged(sourceStep, EventArgs.Empty)).ThrowsNothing();
+            await Assert.That(() => binding.DataContext = new object()).ThrowsNothing();
+
+            sourceStep.DidNotReceive().GetValue();
+            targetBinding.DidNotReceive().SetValue(Arg.Any<object>());
+        }
+
+        [Test]
+        public async Task TestDisposeDuringSourceRead_ShouldCancelTargetUpdate()
+        {
+            using var binding = TestSetupSourceStep(out var sourceStep, out var targetBinding);
+            sourceStep.GetValue().Returns(_ =>
+            {
+                binding.Dispose();
+                return "Value after disposal";
+            });
+            targetBinding.ClearReceivedCalls();
+
+            await Assert.That(() =>
+            {
+                sourceStep.Changed += Raise.Event<EventHandler>(sourceStep, EventArgs.Empty);
+            }).ThrowsNothing();
+
+            targetBinding.DidNotReceive().SetValue(Arg.Any<object>());
+        }
+
+        [Test]
+        public async Task TestConcurrentDataContextChangesAndDispose_ShouldNotThrow()
+        {
+            for (var i = 0; i < 100; i++)
+            {
+                using var binding = TestSetupSourceStep(out _, out _);
+                using var start = new ManualResetEventSlim();
+                var update = Task.Run(() =>
+                {
+                    start.Wait();
+                    for (var j = 0; j < 100; j++)
+                        binding.DataContext = new object();
+                }, TestContext.Current.Execution.CancellationToken);
+                var dispose = Task.Run(() =>
+                {
+                    start.Wait();
+                    binding.Dispose();
+                }, TestContext.Current.Execution.CancellationToken);
+
+                start.Set();
+                await Task.WhenAll(update, dispose);
+            }
+        }
+
+        private MvxFullBinding TestSetupSourceStep(out IMvxSourceStep sourceStep, out IMvxTargetBinding targetBinding)
+        {
+            _fixture.ClearAll();
+            _fixture.Ioc.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(new InlineMockMainThreadDispatcher());
+            sourceStep = Substitute.For<IMvxSourceStep>();
+            var sourceStepFactory = Substitute.For<IMvxSourceStepFactory>();
+            sourceStepFactory.Create(Arg.Any<MvxSourceStepDescription>()).Returns(sourceStep);
+            _fixture.Ioc.RegisterSingleton(sourceStepFactory);
+
+            targetBinding = Substitute.For<IMvxTargetBinding>();
+            targetBinding.TargetValueType.Returns(typeof(object));
+            var targetBindingFactory = Substitute.For<IMvxTargetBindingFactory>();
+            targetBindingFactory.CreateBinding(Arg.Any<object>(), Arg.Any<string>()).Returns(targetBinding);
+            _fixture.Ioc.RegisterSingleton(targetBindingFactory);
+
+            return new MvxFullBinding(new MvxBindingRequest(new object(), new object(),
+                new MvxBindingDescription { Mode = MvxBindingMode.OneWay }));
+        }
+
+        [Test]
         public async Task TestConcurrentDataContextChanges_ShouldNotThrow()
         {
             // Arrange
