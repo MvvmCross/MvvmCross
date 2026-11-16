@@ -122,6 +122,62 @@ namespace MvvmCross.UnitTest.ViewModels
             var collection = new MvxObservableCollection<string>(new[] { "foo" });
 
             Assert.Throws<ArgumentNullException>(() => collection.RemoveItems(null));
+
         }
+
+        [Test]
+        public async Task ReplaceRangeRaisesReplaceNotResetTest()
+        {
+            var collection = new MvxObservableCollection<string>(new[] { "foo", "bar", "baz" });
+            var events = new List<NotifyCollectionChangedEventArgs>();
+            collection.CollectionChanged += (s, e) => events.Add(e);
+
+            collection.ReplaceRange(new[] { "one", "two" }, 0, 2);
+
+            var change = await Assert.That(events).HasSingleItem();
+            await Assert.That(change.Action).IsEqualTo(NotifyCollectionChangedAction.Replace);
+            await Assert.That(change.NewStartingIndex).IsEqualTo(0);
+            await Assert.That(change.NewItems.Count).IsEqualTo(2);
+            await Assert.That(change.OldItems.Count).IsEqualTo(2);
+            await Assert.That(collection[0]).IsEqualTo("one");
+            await Assert.That(collection[1]).IsEqualTo("two");
+            await Assert.That(collection[2]).IsEqualTo("baz");
+        }
+
+        [Test]
+        public async Task ReplaceRangeWithExtraItemsRaisesReplaceThenAddTest()
+        {
+            var collection = new MvxObservableCollection<string>(new[] { "foo", "bar" });
+            var events = new List<NotifyCollectionChangedEventArgs>();
+            collection.CollectionChanged += (s, e) => events.Add(e);
+
+            collection.ReplaceRange(new[] { "one", "two", "three" }, 0, 2);
+
+            await Assert.That(events.Count).IsEqualTo(2);
+            await Assert.That(events[0].Action).IsEqualTo(NotifyCollectionChangedAction.Replace);
+            await Assert.That(events[1].Action).IsEqualTo(NotifyCollectionChangedAction.Add);
+            await Assert.That(events[1].NewStartingIndex).IsEqualTo(2);
+            await Assert.That(collection.Count).IsEqualTo(3);
+        }
+
+        [Test]
+        public async Task RemoveItemsRaisesRemoveNotResetTest()
+        {
+            var collection = new MvxObservableCollection<string>(new[] { "foo", "bar", "baz" });
+            var events = new List<NotifyCollectionChangedEventArgs>();
+            collection.CollectionChanged += (s, e) => events.Add(e);
+
+            collection.RemoveItems(new[] { "foo", "baz" });
+
+            await Assert.That(events.Count).IsEqualTo(2);
+            foreach (var change in events)
+            {
+                await Assert.That(change.Action).IsEqualTo(NotifyCollectionChangedAction.Remove);
+            }
+            await Assert.That(collection.Count).IsEqualTo(1);
+            await Assert.That(collection[0]).IsEqualTo("bar");
+        }
+
+
     }
 }

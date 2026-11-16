@@ -160,17 +160,27 @@ namespace MvvmCross.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
+            var itemsList = items.ToList();
+            var startIndex = firstIndex;
+            var replacedCount = Math.Min(itemsList.Count, oldSize);
+
+            var oldItems = new List<T>(replacedCount);
+            for (var i = 0; i < replacedCount; i++)
+            {
+                oldItems.Add(this[startIndex + i]);
+            }
+
             using (SuppressEvents())
             {
                 var lastIndex = firstIndex + oldSize - 1;
 
                 // If there are more items in the previous list, remove them.
-                while (firstIndex + items.Count() <= lastIndex)
+                while (firstIndex + itemsList.Count <= lastIndex)
                 {
                     RemoveAt(lastIndex--);
                 }
 
-                foreach (var item in items)
+                foreach (var item in itemsList)
                 {
                     if (firstIndex <= lastIndex)
                         SetItem(firstIndex++, item);
@@ -179,10 +189,22 @@ namespace MvvmCross.ViewModels
                 }
             }
 
-            // TODO: Emit up to two OnCollectionChangedEvents:
-            //   1. Replace for those items replaced.
-            //   2. Add for items added beyond the original size.
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            if (replacedCount > 0)
+            {
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(
+                    NotifyCollectionChangedAction.Replace,
+                    itemsList.Take(replacedCount).ToList(),
+                    oldItems,
+                    startIndex));
+            }
+
+            if (itemsList.Count > replacedCount)
+            {
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(
+                    NotifyCollectionChangedAction.Add,
+                    itemsList.Skip(replacedCount).ToList(),
+                    startIndex + replacedCount));
+            }
         }
 
         /// <summary>
@@ -232,15 +254,31 @@ namespace MvvmCross.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
+            var itemsList = items.ToList();
+            var removedItems = new List<(T Item, int Index)>();
+
             using (SuppressEvents())
             {
-                foreach (var item in items)
+                foreach (var item in itemsList)
                 {
+                    var index = IndexOf(item);
+                    if (index < 0)
+                    {
+                        continue;
+                    }
+
+                    removedItems.Add((item, index));
                     Remove(item);
                 }
             }
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+
+            foreach (var (removedItem, index) in removedItems)
+            {
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(
+                    NotifyCollectionChangedAction.Remove, removedItem, index));
+            }
         }
+
 
         /// <summary>
         /// Removes the current <see cref="MvxObservableCollection{T}"/> instance items of the ones specified in the range, raising the minimum required change events.
