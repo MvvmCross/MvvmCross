@@ -4,14 +4,15 @@
 
 using System;
 using System.Windows;
-using MvvmCross.Base;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
-using MvvmCross.IoC;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Wpf.Binding.MvxBinding;
 using MvvmCross.Platforms.Wpf.Binding.MvxBinding.Target;
 using MvvmCross.Platforms.Wpf.Binding.WindowsBinding;
@@ -46,13 +47,13 @@ namespace MvvmCross.Platforms.Wpf.Binding
             _bindingType = bindingType;
         }
 
-        public override void DoRegistration(IMvxIoCProvider iocProvider)
+        public override void DoRegistration(IServiceCollection services)
         {
-            base.DoRegistration(iocProvider);
-            InitializeBindingCreator();
+            base.DoRegistration(services);
+            RegisterBindingCreator(services);
         }
 
-        protected override void RegisterBindingFactories(IMvxIoCProvider iocProvider)
+        protected override void RegisterBindingFactories(IServiceCollection services)
         {
             switch (_bindingType)
             {
@@ -61,12 +62,18 @@ namespace MvvmCross.Platforms.Wpf.Binding
                     break;
 
                 case BindingType.MvvmCross:
-                    base.RegisterBindingFactories(iocProvider);
+                    base.RegisterBindingFactories(services);
                     break;
 
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private void RegisterBindingCreator(IServiceCollection services)
+        {
+            var creator = CreateBindingCreator();
+            services.TryAddSingleton<IMvxBindingCreator>(_ => creator);
         }
 
         protected override IMvxTargetBindingFactoryRegistry CreateTargetBindingRegistry()
@@ -82,12 +89,6 @@ namespace MvvmCross.Platforms.Wpf.Binding
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        private void InitializeBindingCreator()
-        {
-            var creator = CreateBindingCreator();
-            Mvx.IoCProvider.RegisterSingleton(creator);
         }
 
         protected virtual IMvxBindingCreator CreateBindingCreator()
@@ -109,9 +110,9 @@ namespace MvvmCross.Platforms.Wpf.Binding
         {
             base.FillValueConverters(registry);
 
-            if (MvxSingleton<IMvxWindowsAssemblyCache>.Instance != null)
+            if (MvxWindowsAssemblyCache.Instance != null)
             {
-                foreach (var assembly in MvxSingleton<IMvxWindowsAssemblyCache>.Instance.Assemblies)
+                foreach (var assembly in MvxWindowsAssemblyCache.Instance.Assemblies)
                 {
                     registry.Fill(assembly);
                 }
@@ -124,9 +125,9 @@ namespace MvvmCross.Platforms.Wpf.Binding
         {
             base.FillValueCombiners(registry);
 
-            if (MvxSingleton<IMvxWindowsAssemblyCache>.Instance != null)
+            if (MvxWindowsAssemblyCache.Instance != null)
             {
-                foreach (var assembly in MvxSingleton<IMvxWindowsAssemblyCache>.Instance.Assemblies)
+                foreach (var assembly in MvxWindowsAssemblyCache.Instance.Assemblies)
                 {
                     registry.Fill(assembly);
                 }

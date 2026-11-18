@@ -7,11 +7,10 @@ using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.UnitTest.Mocks.TestViews;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Platform
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxViewModelViewTypeFinderTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -21,8 +20,8 @@ namespace MvvmCross.UnitTest.Platform
             _fixture = fixture;
         }
 
-        [Fact]
-        public void Test_MvxViewModelViewTypeFinder()
+        [Test]
+        public async Task Test_MvxViewModelViewTypeFinder()
         {
             _fixture.ClearAll();
 
@@ -34,23 +33,23 @@ namespace MvvmCross.UnitTest.Platform
 
             // test for positives
             var result = test.FindTypeOrNull(typeof(Test1View));
-            Assert.Equal(typeof(Test1ViewModel), result);
+            await Assert.That(result).IsEqualTo(typeof(Test1ViewModel));
             result = test.FindTypeOrNull(typeof(NotTest2View));
-            Assert.Equal(typeof(Test2ViewModel), result);
+            await Assert.That(result).IsEqualTo(typeof(Test2ViewModel));
             result = test.FindTypeOrNull(typeof(NotTest3View));
-            Assert.Equal(typeof(Test3ViewModel), result);
+            await Assert.That(result).IsEqualTo(typeof(Test3ViewModel));
             result = test.FindTypeOrNull(typeof(OddNameOddness));
-            Assert.Equal(typeof(OddNameViewModel), result);
+            await Assert.That(result).IsEqualTo(typeof(OddNameViewModel));
 
             // test for negatives
             result = test.FindTypeOrNull(typeof(AbstractTest1View));
-            Assert.Null(result);
+            await Assert.That(result).IsNull();
             result = test.FindTypeOrNull(typeof(NotReallyAView));
-            Assert.Null(result);
+            await Assert.That(result).IsNull();
         }
 
-        [Fact]
-        public void Test_FindTypeOrNull_WithRuntimeType_FindsConcreteViewType()
+        [Test]
+        public async Task Test_FindTypeOrNull_WithRuntimeType_FindsConcreteViewType()
         {
             _fixture.ClearAll();
 
@@ -64,23 +63,23 @@ namespace MvvmCross.UnitTest.Platform
             // but we need to find the ViewModel based on the concrete type
             IMvxView view1 = new Test1View();
             var result = test.FindTypeOrNull(view1.GetType());
-            Assert.Equal(typeof(Test1ViewModel), result);
+            await Assert.That(result).IsEqualTo(typeof(Test1ViewModel));
 
             IMvxView view2 = new NotTest2View();
             result = test.FindTypeOrNull(view2.GetType());
-            Assert.Equal(typeof(Test2ViewModel), result);
+            await Assert.That(result).IsEqualTo(typeof(Test2ViewModel));
 
             IMvxView view3 = new NotTest3View();
             result = test.FindTypeOrNull(view3.GetType());
-            Assert.Equal(typeof(Test3ViewModel), result);
+            await Assert.That(result).IsEqualTo(typeof(Test3ViewModel));
 
             IMvxView view4 = new OddNameOddness();
             result = test.FindTypeOrNull(view4.GetType());
-            Assert.Equal(typeof(OddNameViewModel), result);
+            await Assert.That(result).IsEqualTo(typeof(OddNameViewModel));
         }
 
-        [Fact]
-        public void Test_FindTypeOrNull_WithInterfaceType_FailsToFindViewModel()
+        [Test]
+        public async Task Test_FindTypeOrNull_WithInterfaceType_FailsToFindViewModel()
         {
             _fixture.ClearAll();
 
@@ -93,11 +92,11 @@ namespace MvvmCross.UnitTest.Platform
             // This test demonstrates the bug: if we pass the interface type instead of
             // the concrete type, we cannot find the associated ViewModel
             var result = test.FindTypeOrNull(typeof(IMvxView));
-            Assert.Null(result);
+            await Assert.That(result).IsNull();
         }
 
-        [Fact]
-        public void Test_FindAssociatedViewModelTypeOrNull_UsesConcreteType()
+        [Test]
+        public async Task Test_FindAssociatedViewModelTypeOrNull_UsesConcreteType()
         {
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxViewModelTypeFinder>(CreateViewModelTypeFinder());
@@ -106,15 +105,15 @@ namespace MvvmCross.UnitTest.Platform
             // not the compile-time generic type
             IMvxView view1 = new Test1View();
             var result = view1.FindAssociatedViewModelTypeOrNull();
-            Assert.Equal(typeof(Test1ViewModel), result);
+            await Assert.That(result).IsEqualTo(typeof(Test1ViewModel));
 
             IMvxView view2 = new NotTest2View();
             result = view2.FindAssociatedViewModelTypeOrNull();
-            Assert.Equal(typeof(Test2ViewModel), result);
+            await Assert.That(result).IsEqualTo(typeof(Test2ViewModel));
 
             IMvxView view3 = new NotTest3View();
             result = view3.FindAssociatedViewModelTypeOrNull();
-            Assert.Equal(typeof(Test3ViewModel), result);
+            await Assert.That(result).IsEqualTo(typeof(Test3ViewModel));
         }
 
         private IMvxViewModelTypeFinder CreateViewModelTypeFinder()

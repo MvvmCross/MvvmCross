@@ -4,6 +4,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -74,7 +76,8 @@ public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
         bool setAsPrimaryFragment = false
     )
     {
-        if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidGlobals globals) == true &&
+        IMvxAndroidGlobals? globals = null;
+        if ((globals = MvxHost.Current?.Services.GetService<IMvxAndroidGlobals>()) != null &&
             globals.ApplicationContext.Resources != null)
         {
             var context = globals.ApplicationContext;

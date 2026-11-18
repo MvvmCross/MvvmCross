@@ -6,9 +6,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MvvmCross.Base;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
 
@@ -59,7 +60,7 @@ public static class MvxSimplePropertyDictionaryExtensions
             if (!data.TryGetValue(propertyInfo.Name, out var textValue))
                 continue;
 
-            var typedValue = MvxSingletonCache.Instance?.Parser?.ReadValue(
+            var typedValue = MvxHost.Current?.Services.GetService<IMvxStringToTypeParser>()?.ReadValue(
                 textValue, propertyInfo.PropertyType, propertyInfo.Name);
             if (typedValue != null)
                 propertyInfo.SetValue(t, typedValue, []);
@@ -104,7 +105,7 @@ public static class MvxSimplePropertyDictionaryExtensions
             parameterValue = string.Empty;
         }
 
-        return MvxSingletonCache.Instance?.Parser?.ReadValue(
+        return MvxHost.Current?.Services.GetService<IMvxStringToTypeParser>()?.ReadValue(
             parameterValue, requiredParameter.ParameterType, requiredParameter.Name);
     }
 
@@ -125,7 +126,7 @@ public static class MvxSimplePropertyDictionaryExtensions
             select new
             {
                 CanSerialize =
-                    MvxSingletonCache.Instance?.Parser?.TypeSupported(property.PropertyType) ?? false,
+                    MvxHost.Current?.Services.GetService<IMvxStringToTypeParser>()?.TypeSupported(property.PropertyType) ?? false,
                 Property = property
             };
 

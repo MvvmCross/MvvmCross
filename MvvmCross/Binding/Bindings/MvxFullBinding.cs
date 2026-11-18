@@ -5,10 +5,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Base;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Converters;
-using MvvmCross.IoC;
 
 [assembly: InternalsVisibleTo("MvvmCross.UnitTest")]
 
@@ -92,37 +92,42 @@ namespace MvvmCross.Binding.Bindings
 
         private void OnSourceBindingChanged(object sender, EventArgs e)
         {
-            var value = _sourceStep.GetValue();
+            object value;
             CancellationToken cancel;
             lock (_lock)
             {
+                if (_sourceStep == null || _cancelSource == null)
+                    return;
+
                 cancel = _cancelSource.Token;
+                value = _sourceStep.GetValue();
             }
             UpdateTargetFromSource(value, cancel);
         }
 
         private void UpdateTargetOnBind()
         {
-            if (NeedToUpdateTargetOnBind && _sourceStep != null)
+            try
             {
+                object currentValue;
                 CancellationToken cancel;
                 lock (_lock)
                 {
+                    if (!NeedToUpdateTargetOnBind || _sourceStep == null || _cancelSource == null)
+                        return;
+
                     _cancelSource.Cancel();
                     _cancelSource.Dispose();
                     _cancelSource = new CancellationTokenSource();
                     cancel = _cancelSource.Token;
+                    currentValue = _sourceStep.GetValue();
                 }
 
-                try
-                {
-                    var currentValue = _sourceStep.GetValue();
-                    UpdateTargetFromSource(currentValue, cancel);
-                }
-                catch (Exception exception)
-                {
-                    MvxBindingLog.Instance?.LogTrace(exception, "Exception masked in UpdateTargetOnBind");
-                }
+                UpdateTargetFromSource(currentValue, cancel);
+            }
+            catch (Exception exception)
+            {
+                MvxBindingLog.Instance?.LogTrace(exception, "Exception masked in UpdateTargetOnBind");
             }
         }
 

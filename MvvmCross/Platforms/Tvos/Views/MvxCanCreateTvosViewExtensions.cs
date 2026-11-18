@@ -3,7 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Core;
+using MvvmCross.Hosting;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Tvos.Views
@@ -36,14 +38,14 @@ namespace MvvmCross.Platforms.Tvos.Views
             MvxViewModelRequest request)
                 where TTargetViewModel : class, IMvxViewModel
         {
-            return Mvx.IoCProvider.Resolve<IMvxTvosViewCreator>().CreateView(request);
+            return MvxHost.Current!.Services.GetRequiredService<IMvxTvosViewCreator>().CreateView(request);
         }
 
         public static IMvxTvosView CreateViewControllerFor(
             this IMvxCanCreateTvosView view,
             MvxViewModelRequest request)
         {
-            return Mvx.IoCProvider.Resolve<IMvxTvosViewCreator>().CreateView(request);
+            return MvxHost.Current!.Services.GetRequiredService<IMvxTvosViewCreator>().CreateView(request);
         }
 
         public static IMvxTvosView CreateViewControllerFor(
@@ -51,14 +53,14 @@ namespace MvvmCross.Platforms.Tvos.Views
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewtype,
             MvxViewModelRequest request)
         {
-            return Mvx.IoCProvider.Resolve<IMvxTvosViewCreator>().CreateViewOfType(viewtype, request);
+            return MvxHost.Current!.Services.GetRequiredService<IMvxTvosViewCreator>().CreateViewOfType(viewtype, request);
         }
 
         public static IMvxTvosView CreateViewControllerFor(
             this IMvxCanCreateTvosView view,
             IMvxViewModel viewModel)
         {
-            return Mvx.IoCProvider.Resolve<IMvxTvosViewCreator>().CreateView(viewModel);
+            return MvxHost.Current!.Services.GetRequiredService<IMvxTvosViewCreator>().CreateView(viewModel);
         }
     }
 }

@@ -4,22 +4,21 @@
 
 using System;
 using MvvmCross.Exceptions;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Base.Exceptions
 {
     public class MvxExceptionTest
     {
-        [Fact]
-        public void MvxWrap_Is_MvxException()
+        [Test]
+        public async Task MvxWrap_Is_MvxException()
         {
             var ex = new Exception("hello");
             var wrapped = ex.MvxWrap();
 
-            Assert.IsType<MvxException>(wrapped);
+            await Assert.That(wrapped).IsTypeOf<MvxException>();
         }
 
-        [Fact]
+        [Test]
         public void MvxWrap_Is_Thrown_As_MvxException()
         {
             var ex = new Exception("hello");
@@ -33,18 +32,18 @@ namespace MvvmCross.UnitTest.Base.Exceptions
             }
         }
 
-        [Fact]
-        public void MvxWrap_Has_InnerException()
+        [Test]
+        public async Task MvxWrap_Has_InnerException()
         {
             var ex = new Exception("hello");
             var wrapped = ex.MvxWrap();
 
-            Assert.NotNull(wrapped.InnerException);
-            Assert.Equal(ex, wrapped.InnerException);
+            await Assert.That(wrapped.InnerException).IsNotNull();
+            await Assert.That(wrapped.InnerException).IsEqualTo(ex);
         }
 
-        [Fact]
-        public void MvxWrap_Wraps_Only_One_Level()
+        [Test]
+        public async Task MvxWrap_Wraps_Only_One_Level()
         {
             var ex = new Exception("hello");
             var wrapped = ex.MvxWrap();
@@ -52,7 +51,7 @@ namespace MvvmCross.UnitTest.Base.Exceptions
             for (var i = 0; i < 10; i++)
                 wrapped = wrapped.MvxWrap();
 
-            Assert.Equal(ex, wrapped.InnerException);
+            await Assert.That(wrapped.InnerException).IsEqualTo(ex);
         }
     }
 }

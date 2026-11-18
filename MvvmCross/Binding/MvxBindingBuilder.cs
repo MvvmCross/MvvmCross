@@ -3,11 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.IoC;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Binding
@@ -15,32 +16,32 @@ namespace MvvmCross.Binding
     public class MvxBindingBuilder : MvxCoreBindingBuilder
     {
         [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
-        public override void DoRegistration(IMvxIoCProvider iocProvider)
+        public override void DoRegistration(IServiceCollection services)
         {
-            base.DoRegistration(iocProvider);
-            RegisterBindingFactories(iocProvider);
+            base.DoRegistration(services);
+            RegisterBindingFactories(services);
         }
 
         [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
-        protected virtual void RegisterBindingFactories(IMvxIoCProvider iocProvider)
+        protected virtual void RegisterBindingFactories(IServiceCollection services)
         {
-            RegisterMvxBindingFactories(iocProvider);
+            RegisterMvxBindingFactories(services);
         }
 
         [RequiresUnreferencedCode("This method registers source steps that may not be preserved by trimming")]
-        protected virtual void RegisterMvxBindingFactories(IMvxIoCProvider iocProvider)
+        protected virtual void RegisterMvxBindingFactories(IServiceCollection services)
         {
-            RegisterSourceStepFactory(iocProvider);
-            RegisterSourceFactory(iocProvider);
-            RegisterTargetFactory(iocProvider);
+            RegisterSourceStepFactory(services);
+            RegisterSourceFactory(services);
+            RegisterTargetFactory(services);
         }
 
-        protected virtual void RegisterSourceStepFactory(IMvxIoCProvider iocProvider)
+        protected virtual void RegisterSourceStepFactory(IServiceCollection services)
         {
             var sourceStepFactory = CreateSourceStepFactoryRegistry();
             FillSourceStepFactory(sourceStepFactory);
-            iocProvider.RegisterSingleton<IMvxSourceStepFactoryRegistry>(sourceStepFactory);
-            iocProvider.RegisterSingleton<IMvxSourceStepFactory>(sourceStepFactory);
+            services.TryAddSingleton<IMvxSourceStepFactoryRegistry>(sourceStepFactory);
+            services.TryAddSingleton<IMvxSourceStepFactory>(sourceStepFactory);
         }
 
         protected virtual void FillSourceStepFactory(IMvxSourceStepFactoryRegistry registry)
@@ -55,15 +56,15 @@ namespace MvvmCross.Binding
             return new MvxSourceStepFactory();
         }
 
-        protected virtual void RegisterSourceFactory(IMvxIoCProvider iocProvider)
+        protected virtual void RegisterSourceFactory(IServiceCollection services)
         {
             var sourceFactory = CreateSourceBindingFactory();
-            iocProvider.RegisterSingleton<IMvxSourceBindingFactory>(sourceFactory);
+            services.TryAddSingleton<IMvxSourceBindingFactory>(sourceFactory);
             var extensionHost = sourceFactory as IMvxSourceBindingFactoryExtensionHost;
             if (extensionHost != null)
             {
                 RegisterSourceBindingFactoryExtensions(extensionHost);
-                iocProvider.RegisterSingleton<IMvxSourceBindingFactoryExtensionHost>(extensionHost);
+                services.TryAddSingleton<IMvxSourceBindingFactoryExtensionHost>(extensionHost);
             }
             else
                 MvxLogHost.Default?.Log(LogLevel.Trace, "source binding factory extension host not provided - so no source extensions will be used");
@@ -80,12 +81,12 @@ namespace MvvmCross.Binding
         }
 
         [RequiresUnreferencedCode("This method registers target bindings that may not be preserved by trimming")]
-        protected virtual void RegisterTargetFactory(IMvxIoCProvider iocProvider)
+        protected virtual void RegisterTargetFactory(IServiceCollection services)
         {
             var targetRegistry = CreateTargetBindingRegistry();
             FillTargetFactories(targetRegistry);
-            iocProvider.RegisterSingleton<IMvxTargetBindingFactoryRegistry>(targetRegistry);
-            iocProvider.RegisterSingleton<IMvxTargetBindingFactory>(targetRegistry);
+            services.TryAddSingleton<IMvxTargetBindingFactoryRegistry>(targetRegistry);
+            services.TryAddSingleton<IMvxTargetBindingFactory>(targetRegistry);
         }
 
         protected virtual IMvxTargetBindingFactoryRegistry CreateTargetBindingRegistry()
@@ -98,5 +99,6 @@ namespace MvvmCross.Binding
         {
             // base class has nothing to register
         }
+
     }
 }

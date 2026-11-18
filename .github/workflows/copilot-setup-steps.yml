@@ -9,6 +9,12 @@ on:
     paths:
       - .github/workflows/copilot-setup-steps.yml
 
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
 permissions:
   contents: read
 
@@ -19,20 +25,21 @@ jobs:
       contents: read
     steps:
     - name: Harden the runner (Audit all outbound calls)
-      uses: step-security/harden-runner@df199fb7be9f65074067a9eb93f12bb4c5547cf2 # v2.13.3
+      uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
       with:
         egress-policy: audit
 
     - name: Checkout
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
       with:
         fetch-depth: 0
         fetch-tags: true  
 
-    - name: Install .NET 10.0.100
-      uses: actions/setup-dotnet@2016bd2012dba4e32de620c46fe006a3ac9f0602 # v5.0.1
+    - name: Install .NET 11.0.100
+      uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
       with:
-        dotnet-version: 10.0.100
+        dotnet-version: 11.0.100
+        workloads: android
 
     - name: Restore .NET tools
       shell: pwsh
@@ -52,10 +59,6 @@ jobs:
         dotnet --version
         dotnet --info
         dotnet workload --info
-
-    - name: Install .NET workloads
-      shell: pwsh
-      run: dotnet workload install android
 
     - name: Reset tracked files to clean workspace
       shell: bash

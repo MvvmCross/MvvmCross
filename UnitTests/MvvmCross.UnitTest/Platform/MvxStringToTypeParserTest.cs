@@ -6,11 +6,10 @@ using System;
 using System.Collections.Generic;
 using MvvmCross.Core;
 using MvvmCross.Tests;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Platform
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxStringToTypeParserTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -22,171 +21,171 @@ namespace MvvmCross.UnitTest.Platform
             _fixture.SetInvariantCulture();
         }
 
-        [Fact]
-        public void Test_AllTypesAreSupported()
+        [Test]
+        public async Task Test_AllTypesAreSupported()
         {
             var parser = new MvxStringToTypeParser();
-            Assert.True(parser.TypeSupported(typeof(string)));
-            Assert.True(parser.TypeSupported(typeof(int)));
-            Assert.True(parser.TypeSupported(typeof(long)));
-            Assert.True(parser.TypeSupported(typeof(short)));
-            Assert.True(parser.TypeSupported(typeof(float)));
-            Assert.True(parser.TypeSupported(typeof(uint)));
-            Assert.True(parser.TypeSupported(typeof(ulong)));
-            Assert.True(parser.TypeSupported(typeof(ushort)));
-            Assert.True(parser.TypeSupported(typeof(double)));
-            Assert.True(parser.TypeSupported(typeof(bool)));
-            Assert.True(parser.TypeSupported(typeof(Guid)));
-            Assert.True(parser.TypeSupported(typeof(StringSplitOptions)));
+            await Assert.That(parser.TypeSupported(typeof(string))).IsTrue();
+            await Assert.That(parser.TypeSupported(typeof(int))).IsTrue();
+            await Assert.That(parser.TypeSupported(typeof(long))).IsTrue();
+            await Assert.That(parser.TypeSupported(typeof(short))).IsTrue();
+            await Assert.That(parser.TypeSupported(typeof(float))).IsTrue();
+            await Assert.That(parser.TypeSupported(typeof(uint))).IsTrue();
+            await Assert.That(parser.TypeSupported(typeof(ulong))).IsTrue();
+            await Assert.That(parser.TypeSupported(typeof(ushort))).IsTrue();
+            await Assert.That(parser.TypeSupported(typeof(double))).IsTrue();
+            await Assert.That(parser.TypeSupported(typeof(bool))).IsTrue();
+            await Assert.That(parser.TypeSupported(typeof(Guid))).IsTrue();
+            await Assert.That(parser.TypeSupported(typeof(StringSplitOptions))).IsTrue();
         }
 
-        [Theory]
-        [InlineData("Hello, World")]
-        [InlineData("Foo Bar Baz")]
-        [InlineData("Z͚̭͖͟A͖̘̪L̻̯̥̬ͅG̞̰̭͍͖ͅͅO̘!̜")]
-        [InlineData("")]
-        [InlineData(null)]
-        public void Test_StringCanBeRead(string testData)
+        [Test]
+        [Arguments("Hello, World")]
+        [Arguments("Foo Bar Baz")]
+        [Arguments("Z͚̭͖͟A͖̘̪L̻̯̥̬ͅG̞̰̭͍͖ͅͅO̘!̜")]
+        [Arguments("")]
+        [Arguments(null)]
+        public async Task Test_StringCanBeRead(string testData)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.Equal(testData, parser.ReadValue(testData, typeof(string), "ignored"));
+            await Assert.That(parser.ReadValue(testData, typeof(string), "ignored")).IsEqualTo(testData);
         }
 
-        [Theory]
-        [InlineData("-123", -123.0)]
-        [InlineData("1.23", 1.23)]
-        [InlineData("1,23", 123.0)]
-        [InlineData("1,230.00", 1230.0)]
-        [InlineData("1.230,0", 0)]
-        [InlineData("garbage", 0)]
-        [InlineData("", 0)]
-        [InlineData(null, 0)]
-        public void Test_DoubleCanBeRead(string testData, double expected)
+        [Test]
+        [Arguments("-123", -123.0)]
+        [Arguments("1.23", 1.23)]
+        [Arguments("1,23", 123.0)]
+        [Arguments("1,230.00", 1230.0)]
+        [Arguments("1.230,0", 0)]
+        [Arguments("garbage", 0)]
+        [Arguments("", 0)]
+        [Arguments(null, 0)]
+        public async Task Test_DoubleCanBeRead(string testData, double expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.Equal(expected, parser.ReadValue(testData, typeof(double), "ignored"));
+            await Assert.That(parser.ReadValue(testData, typeof(double), "ignored")).IsEqualTo(expected);
         }
 
-        [Theory]
-        [InlineData("-123", -123.0f)]
-        [InlineData("1.23", 1.23f)]
-        [InlineData("1,23", 123.0f)]
-        [InlineData("1,230.00", 1230.0f)]
-        [InlineData("1.230,0", 0f)]
-        [InlineData("garbage", 0f)]
-        [InlineData("", 0f)]
-        [InlineData(null, 0f)]
-        public void Test_FloatCanBeRead(string testData, float expected)
+        [Test]
+        [Arguments("-123", -123.0f)]
+        [Arguments("1.23", 1.23f)]
+        [Arguments("1,23", 123.0f)]
+        [Arguments("1,230.00", 1230.0f)]
+        [Arguments("1.230,0", 0f)]
+        [Arguments("garbage", 0f)]
+        [Arguments("", 0f)]
+        [Arguments(null, 0f)]
+        public async Task Test_FloatCanBeRead(string testData, float expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.Equal(expected, parser.ReadValue(testData, typeof(float), "ignored"));
+            await Assert.That(parser.ReadValue(testData, typeof(float), "ignored")).IsEqualTo(expected);
         }
 
-        [Theory]
-        [InlineData("-123", -123)]
-        [InlineData("123", 123)]
-        [InlineData("1.23", 0)]
-        [InlineData("garbage", 0)]
-        [InlineData("", 0)]
-        [InlineData(null, 0)]
-        public void Test_IntCanBeRead(string testData, int expected)
+        [Test]
+        [Arguments("-123", -123)]
+        [Arguments("123", 123)]
+        [Arguments("1.23", 0)]
+        [Arguments("garbage", 0)]
+        [Arguments("", 0)]
+        [Arguments(null, 0)]
+        public async Task Test_IntCanBeRead(string testData, int expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.Equal(expected, parser.ReadValue(testData, typeof(int), "ignored"));
+            await Assert.That(parser.ReadValue(testData, typeof(int), "ignored")).IsEqualTo(expected);
         }
 
-        [Theory]
-        [InlineData("-123", -123L)]
-        [InlineData("123", 123L)]
-        [InlineData("1.23", 0L)]
-        [InlineData("garbage", 0L)]
-        [InlineData("", 0L)]
-        [InlineData(null, 0L)]
-        public void Test_LongCanBeRead(string testData, long expected)
+        [Test]
+        [Arguments("-123", -123L)]
+        [Arguments("123", 123L)]
+        [Arguments("1.23", 0L)]
+        [Arguments("garbage", 0L)]
+        [Arguments("", 0L)]
+        [Arguments(null, 0L)]
+        public async Task Test_LongCanBeRead(string testData, long expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.Equal(expected, parser.ReadValue(testData, typeof(long), "ignored"));
+            await Assert.That(parser.ReadValue(testData, typeof(long), "ignored")).IsEqualTo(expected);
         }
 
-        [Theory]
-        [InlineData("123", 123ul)]
-        [InlineData("1.23", 0ul)]
-        [InlineData("garbage", 0ul)]
-        [InlineData("", 0ul)]
-        [InlineData(null, 0ul)]
-        public void Test_ULongCanBeRead(string testData, ulong expected)
+        [Test]
+        [Arguments("123", 123ul)]
+        [Arguments("1.23", 0ul)]
+        [Arguments("garbage", 0ul)]
+        [Arguments("", 0ul)]
+        [Arguments(null, 0ul)]
+        public async Task Test_ULongCanBeRead(string testData, ulong expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.Equal(expected, parser.ReadValue(testData, typeof(ulong), "ignored"));
+            await Assert.That(parser.ReadValue(testData, typeof(ulong), "ignored")).IsEqualTo(expected);
         }
 
-        [Theory]
-        [InlineData("123", (ushort)123)]
-        [InlineData("1.23", (ushort)0)]
-        [InlineData("garbage", (ushort)0)]
-        [InlineData("", (ushort)0)]
-        [InlineData(null, (ushort)0)]
-        public void Test_UShortCanBeRead(string testData, ushort expected)
+        [Test]
+        [Arguments("123", (ushort)123)]
+        [Arguments("1.23", (ushort)0)]
+        [Arguments("garbage", (ushort)0)]
+        [Arguments("", (ushort)0)]
+        [Arguments(null, (ushort)0)]
+        public async Task Test_UShortCanBeRead(string testData, ushort expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.Equal(expected, parser.ReadValue(testData, typeof(ushort), "ignored"));
+            await Assert.That(parser.ReadValue(testData, typeof(ushort), "ignored")).IsEqualTo(expected);
         }
 
-        [Theory]
-        [InlineData("true", true)]
-        [InlineData("True", true)]
-        [InlineData("tRue", true)]
-        [InlineData("trUe", true)]
-        [InlineData("truE", true)]
-        [InlineData("TRUE", true)]
-        [InlineData("false", false)]
-        [InlineData("False", false)]
-        [InlineData("fAlse", false)]
-        [InlineData("faLse", false)]
-        [InlineData("falSe", false)]
-        [InlineData("falsE", false)]
-        [InlineData("FALSE", false)]
-        [InlineData("1.23", false)]
-        [InlineData("garbage", false)]
-        [InlineData("", false)]
-        [InlineData(null, false)]
-        public void Test_BoolCanBeRead(string testData, bool expected)
+        [Test]
+        [Arguments("true", true)]
+        [Arguments("True", true)]
+        [Arguments("tRue", true)]
+        [Arguments("trUe", true)]
+        [Arguments("truE", true)]
+        [Arguments("TRUE", true)]
+        [Arguments("false", false)]
+        [Arguments("False", false)]
+        [Arguments("fAlse", false)]
+        [Arguments("faLse", false)]
+        [Arguments("falSe", false)]
+        [Arguments("falsE", false)]
+        [Arguments("FALSE", false)]
+        [Arguments("1.23", false)]
+        [Arguments("garbage", false)]
+        [Arguments("", false)]
+        [Arguments(null, false)]
+        public async Task Test_BoolCanBeRead(string testData, bool expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.Equal(expected, parser.ReadValue(testData, typeof(bool), "ignored"));
+            await Assert.That(parser.ReadValue(testData, typeof(bool), "ignored")).IsEqualTo(expected);
         }
 
-        public static IEnumerable<object[]> GuidCases()
+        public static IEnumerable<(string, Guid)> GuidCases()
         {
-            yield return new object[] { "{C3CF9078-0122-41BD-9E2D-D3199E937285}", Guid.Parse("{C3CF9078-0122-41BD-9E2D-D3199E937285}") };
-            yield return new object[] { "{C3CF9078-0122-41BD-9E2D-D3199E937285}".ToLowerInvariant(), Guid.Parse("{C3CF9078-0122-41BD-9E2D-D3199E937285}") };
-            yield return new object[] { "{8-0122-41BD-9E2D-D3199E937285}", Guid.Empty }; // invalid
-            yield return new object[] { Guid.Empty.ToString(), Guid.Empty };
-            yield return new object[] { "", Guid.Empty };
-            yield return new object[] { "garbage", Guid.Empty };
-            yield return new object[] { null, Guid.Empty };
+            yield return ("{C3CF9078-0122-41BD-9E2D-D3199E937285}", Guid.Parse("{C3CF9078-0122-41BD-9E2D-D3199E937285}"));
+            yield return ("{C3CF9078-0122-41BD-9E2D-D3199E937285}".ToLowerInvariant(), Guid.Parse("{C3CF9078-0122-41BD-9E2D-D3199E937285}"));
+            yield return ("{8-0122-41BD-9E2D-D3199E937285}", Guid.Empty); // invalid
+            yield return (Guid.Empty.ToString(), Guid.Empty);
+            yield return ("", Guid.Empty);
+            yield return ("garbage", Guid.Empty);
+            yield return (null, Guid.Empty);
         }
 
 
-        [Theory]
-        [MemberData(nameof(GuidCases))]
-        public void Test_GuidCanBeRead(string testData, Guid expected)
-        {
-            var parser = new MvxStringToTypeParser();
-            Assert.Equal(expected, parser.ReadValue(testData, typeof(Guid), "ignored"));
-        }
-
-        [Theory]
-        [InlineData("RemoveEmptyEntries", StringSplitOptions.RemoveEmptyEntries)]
-        [InlineData("None", StringSplitOptions.None)]
-        [InlineData("none", StringSplitOptions.None)]
-        [InlineData("garbage", StringSplitOptions.None)]
-        [InlineData("", StringSplitOptions.None)]
-        [InlineData(null, StringSplitOptions.None)]
-        public void Test_EnumTypeCanBeRead(string testData, StringSplitOptions expected)
+        [Test]
+        [MethodDataSource(nameof(GuidCases))]
+        public async Task Test_GuidCanBeRead(string testData, Guid expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.Equal(expected, parser.ReadValue(testData, typeof(StringSplitOptions), "ignored"));
+            await Assert.That(parser.ReadValue(testData, typeof(Guid), "ignored")).IsEqualTo(expected);
+        }
+
+        [Test]
+        [Arguments("RemoveEmptyEntries", StringSplitOptions.RemoveEmptyEntries)]
+        [Arguments("None", StringSplitOptions.None)]
+        [Arguments("none", StringSplitOptions.None)]
+        [Arguments("garbage", StringSplitOptions.None)]
+        [Arguments("", StringSplitOptions.None)]
+        [Arguments(null, StringSplitOptions.None)]
+        public async Task Test_EnumTypeCanBeRead(string testData, StringSplitOptions expected)
+        {
+            var parser = new MvxStringToTypeParser();
+            await Assert.That(parser.ReadValue(testData, typeof(StringSplitOptions), "ignored")).IsEqualTo(expected);
         }
     }
 }

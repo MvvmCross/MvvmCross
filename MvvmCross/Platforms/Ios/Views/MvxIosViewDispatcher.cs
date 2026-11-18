@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
@@ -21,22 +22,26 @@ namespace MvvmCross.Platforms.Ios.Views
             _presenter = presenter;
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
-            Task action()
+            var shown = false;
+            async Task action()
             {
                 MvxLogHost.GetLog<MvxIosViewDispatcher>()?.LogTrace(
                     "Navigate requested to {ViewModelType}", request?.ViewModelType);
-                return _presenter.Show(request);
+                shown = await _presenter.Show(request);
             }
             await ExecuteOnMainThreadAsync(action);
-            return true;
+            return shown;
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            await ExecuteOnMainThreadAsync(() => _presenter.ChangePresentation(hint));
-            return true;
+            var changed = false;
+            await ExecuteOnMainThreadAsync(async () => changed = await _presenter.ChangePresentation(hint));
+            return changed;
         }
     }
 }

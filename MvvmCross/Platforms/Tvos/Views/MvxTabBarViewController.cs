@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Tvos.Presenters;
 using MvvmCross.Platforms.Tvos.Presenters.Attributes;
 using MvvmCross.ViewModels;
@@ -40,8 +42,8 @@ namespace MvvmCross.Platforms.Tvos.Views
 
             if (IsMovingFromParentViewController)
             {
-                if (Mvx.IoCProvider?.TryResolve(out IMvxTvosViewPresenter iPresenter) == true
-                    && iPresenter is MvxTvosViewPresenter mvxTvosViewPresenter)
+                var iPresenter = MvxHost.Current?.Services.GetService<IMvxTvosViewPresenter>();
+                if (iPresenter is MvxTvosViewPresenter mvxTvosViewPresenter)
                 {
                     mvxTvosViewPresenter.CloseTabBarViewController();
                 }

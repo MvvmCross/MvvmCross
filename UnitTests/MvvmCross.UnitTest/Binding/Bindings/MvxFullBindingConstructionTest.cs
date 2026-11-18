@@ -13,11 +13,10 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Converters;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
 using NSubstitute;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Bindings
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxFullBindingConstructionTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -69,7 +68,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             }
         }
 
-        [Fact]
+        [Test]
         public void Test_Creating_A_Binding_Calls_The_Source_And_Target_Factories()
         {
             TestCommon(MvxBindingMode.TwoWay, true, true);

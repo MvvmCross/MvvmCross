@@ -7,11 +7,10 @@ using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Extensions;
 using MvvmCross.Converters;
 using MvvmCross.Tests;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.ExtensionMethods
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MakeSafeValueTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -34,52 +33,52 @@ namespace MvvmCross.UnitTest.Binding.ExtensionMethods
             }
         }
 
-        [Fact]
-        public void TestIntValues()
+        [Test]
+        public async Task TestIntValues()
         {
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
-            Assert.Equal(0, typeof(int).MakeSafeValue(0));
-            Assert.Equal(0, typeof(int).MakeSafeValue(null));
-            Assert.Equal(1, typeof(int).MakeSafeValue(1));
-            Assert.Equal(0, typeof(int?).MakeSafeValue(0));
-            Assert.Null(typeof(int?).MakeSafeValue(null));
-            Assert.Equal(1, typeof(int?).MakeSafeValue(1));
-            Assert.Equal(0, typeof(int?).MakeSafeValue(0.0));
-            Assert.Equal(1, typeof(int?).MakeSafeValue(1.0));
+            await Assert.That(typeof(int).MakeSafeValue(0)).IsEqualTo(0);
+            await Assert.That(typeof(int).MakeSafeValue(null)).IsEqualTo(0);
+            await Assert.That(typeof(int).MakeSafeValue(1)).IsEqualTo(1);
+            await Assert.That(typeof(int?).MakeSafeValue(0)).IsEqualTo(0);
+            await Assert.That(typeof(int?).MakeSafeValue(null)).IsNull();
+            await Assert.That(typeof(int?).MakeSafeValue(1)).IsEqualTo(1);
+            await Assert.That(typeof(int?).MakeSafeValue(0.0)).IsEqualTo(0);
+            await Assert.That(typeof(int?).MakeSafeValue(1.0)).IsEqualTo(1);
         }
 
-        [Fact]
-        public void TestDoubleValues()
+        [Test]
+        public async Task TestDoubleValues()
         {
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
-            Assert.Equal(0.0, typeof(double).MakeSafeValue(0.0));
-            Assert.Equal(0.0, typeof(double).MakeSafeValue(null));
-            Assert.Equal(1.0, typeof(double).MakeSafeValue(1.0));
-            Assert.Equal(0.0, typeof(double?).MakeSafeValue(0.0));
-            Assert.Null(typeof(double?).MakeSafeValue(null));
-            Assert.Equal(1.0, typeof(double?).MakeSafeValue(1.0));
-            Assert.Equal(1.0, typeof(double).MakeSafeValue(1));
-            Assert.Equal(0.0, typeof(double?).MakeSafeValue(0));
+            await Assert.That(typeof(double).MakeSafeValue(0.0)).IsEqualTo(0.0);
+            await Assert.That(typeof(double).MakeSafeValue(null)).IsEqualTo(0.0);
+            await Assert.That(typeof(double).MakeSafeValue(1.0)).IsEqualTo(1.0);
+            await Assert.That(typeof(double?).MakeSafeValue(0.0)).IsEqualTo(0.0);
+            await Assert.That(typeof(double?).MakeSafeValue(null)).IsNull();
+            await Assert.That(typeof(double?).MakeSafeValue(1.0)).IsEqualTo(1.0);
+            await Assert.That(typeof(double).MakeSafeValue(1)).IsEqualTo(1.0);
+            await Assert.That(typeof(double?).MakeSafeValue(0)).IsEqualTo(0.0);
         }
 
-        [Fact]
-        public void TestFloatValues()
+        [Test]
+        public async Task TestFloatValues()
         {
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
-            Assert.Equal(0.0f, typeof(float).MakeSafeValue(0.0f));
-            Assert.Equal(0.0f, typeof(float).MakeSafeValue(null));
-            Assert.Equal(1.0f, typeof(float).MakeSafeValue(1.0f));
-            Assert.Equal(0.0f, typeof(float?).MakeSafeValue(0.0f));
-            Assert.Null(typeof(double?).MakeSafeValue(null));
-            Assert.Equal(1.0f, typeof(float?).MakeSafeValue(1.0f));
-            Assert.Equal(1.0f, typeof(float).MakeSafeValue(1f));
-            Assert.Equal(0.0f, typeof(float?).MakeSafeValue(0f));
+            await Assert.That(typeof(float).MakeSafeValue(0.0f)).IsEqualTo(0.0f);
+            await Assert.That(typeof(float).MakeSafeValue(null)).IsEqualTo(0.0f);
+            await Assert.That(typeof(float).MakeSafeValue(1.0f)).IsEqualTo(1.0f);
+            await Assert.That(typeof(float?).MakeSafeValue(0.0f)).IsEqualTo(0.0f);
+            await Assert.That(typeof(double?).MakeSafeValue(null)).IsNull();
+            await Assert.That(typeof(float?).MakeSafeValue(1.0f)).IsEqualTo(1.0f);
+            await Assert.That(typeof(float).MakeSafeValue(1f)).IsEqualTo(1.0f);
+            await Assert.That(typeof(float?).MakeSafeValue(0f)).IsEqualTo(0.0f);
         }
 
         public class MyTest
@@ -90,17 +89,17 @@ namespace MvvmCross.UnitTest.Binding.ExtensionMethods
             }
         }
 
-        [Fact]
-        public void TestStringValues()
+        [Test]
+        public async Task TestStringValues()
         {
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
-            Assert.Equal("0", typeof(string).MakeSafeValue(0.0));
-            Assert.Null(typeof(string).MakeSafeValue(null));
-            Assert.Equal("1", typeof(string).MakeSafeValue(1.0));
-            Assert.Equal("Hello", typeof(string).MakeSafeValue("Hello"));
-            Assert.Equal("Hello", typeof(string).MakeSafeValue(new MyTest()));
+            await Assert.That(typeof(string).MakeSafeValue(0.0)).IsEqualTo("0");
+            await Assert.That(typeof(string).MakeSafeValue(null)).IsNull();
+            await Assert.That(typeof(string).MakeSafeValue(1.0)).IsEqualTo("1");
+            await Assert.That(typeof(string).MakeSafeValue("Hello")).IsEqualTo("Hello");
+            await Assert.That(typeof(string).MakeSafeValue(new MyTest())).IsEqualTo("Hello");
         }
 
         public enum SampleEnum
@@ -110,40 +109,40 @@ namespace MvvmCross.UnitTest.Binding.ExtensionMethods
             Dos
         }
 
-        [Fact]
-        public void TestEnumValues()
+        [Test]
+        public async Task TestEnumValues()
         {
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
-            Assert.Equal(SampleEnum.Defaulto, typeof(SampleEnum).MakeSafeValue(0));
-            Assert.Equal(SampleEnum.Defaulto, typeof(SampleEnum).MakeSafeValue(null));
-            Assert.Equal(SampleEnum.Uno, typeof(SampleEnum).MakeSafeValue(1));
-            Assert.Equal(SampleEnum.Dos, typeof(SampleEnum).MakeSafeValue("Dos"));
-            Assert.Equal(SampleEnum.Dos, typeof(SampleEnum).MakeSafeValue("dOs"));
+            await Assert.That(typeof(SampleEnum).MakeSafeValue(0)).IsEqualTo(SampleEnum.Defaulto);
+            await Assert.That(typeof(SampleEnum).MakeSafeValue(null)).IsEqualTo(SampleEnum.Defaulto);
+            await Assert.That(typeof(SampleEnum).MakeSafeValue(1)).IsEqualTo(SampleEnum.Uno);
+            await Assert.That(typeof(SampleEnum).MakeSafeValue("Dos")).IsEqualTo(SampleEnum.Dos);
+            await Assert.That(typeof(SampleEnum).MakeSafeValue("dOs")).IsEqualTo(SampleEnum.Dos);
         }
 
-        [Fact]
-        public void TestBoolValues()
+        [Test]
+        public async Task TestBoolValues()
         {
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
-            Assert.False((bool)typeof(bool).MakeSafeValue(0));
-            Assert.False((bool)typeof(bool).MakeSafeValue(null));
-            Assert.True((bool)typeof(bool).MakeSafeValue(1));
-            Assert.True((bool)typeof(bool).MakeSafeValue(-1.0));
-            Assert.True((bool)typeof(bool).MakeSafeValue(1.0));
-            Assert.True((bool)typeof(bool).MakeSafeValue("Dos"));
-            Assert.True((bool)typeof(bool).MakeSafeValue("dOs"));
+            await Assert.That((bool)typeof(bool).MakeSafeValue(0)).IsFalse();
+            await Assert.That((bool)typeof(bool).MakeSafeValue(null)).IsFalse();
+            await Assert.That((bool)typeof(bool).MakeSafeValue(1)).IsTrue();
+            await Assert.That((bool)typeof(bool).MakeSafeValue(-1.0)).IsTrue();
+            await Assert.That((bool)typeof(bool).MakeSafeValue(1.0)).IsTrue();
+            await Assert.That((bool)typeof(bool).MakeSafeValue("Dos")).IsTrue();
+            await Assert.That((bool)typeof(bool).MakeSafeValue("dOs")).IsTrue();
 
-            Assert.False((bool?)typeof(bool?).MakeSafeValue(0));
-            Assert.Null((bool?)typeof(bool?).MakeSafeValue(null));
-            Assert.True((bool?)typeof(bool?).MakeSafeValue(1));
-            Assert.True((bool?)typeof(bool?).MakeSafeValue(-1.0));
-            Assert.True((bool?)typeof(bool?).MakeSafeValue(1.0));
-            Assert.True((bool?)typeof(bool?).MakeSafeValue("Dos"));
-            Assert.True((bool?)typeof(bool?).MakeSafeValue("dOs"));
+            await Assert.That((bool?)typeof(bool?).MakeSafeValue(0)).IsFalse();
+            await Assert.That((bool?)typeof(bool?).MakeSafeValue(null)).IsNull();
+            await Assert.That((bool?)typeof(bool?).MakeSafeValue(1)).IsTrue();
+            await Assert.That((bool?)typeof(bool?).MakeSafeValue(-1.0)).IsTrue();
+            await Assert.That((bool?)typeof(bool?).MakeSafeValue(1.0)).IsTrue();
+            await Assert.That((bool?)typeof(bool?).MakeSafeValue("Dos")).IsTrue();
+            await Assert.That((bool?)typeof(bool?).MakeSafeValue("dOs")).IsTrue();
         }
 
         public class FooBase
@@ -154,18 +153,18 @@ namespace MvvmCross.UnitTest.Binding.ExtensionMethods
         {
         }
 
-        [Fact]
-        public void TestObjectValues()
+        [Test]
+        public async Task TestObjectValues()
         {
             _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             var foo = new Foo();
-            Assert.Equal(foo, typeof(FooBase).MakeSafeValue(foo));
+            await Assert.That(typeof(FooBase).MakeSafeValue(foo)).IsEqualTo(foo);
             var fooBase = new FooBase();
-            Assert.Equal(fooBase, typeof(FooBase).MakeSafeValue(fooBase));
+            await Assert.That(typeof(FooBase).MakeSafeValue(fooBase)).IsEqualTo(fooBase);
             fooBase = null;
-            Assert.Null(typeof(FooBase).MakeSafeValue(null));
+            await Assert.That(typeof(FooBase).MakeSafeValue(null)).IsNull();
         }
     }
 }

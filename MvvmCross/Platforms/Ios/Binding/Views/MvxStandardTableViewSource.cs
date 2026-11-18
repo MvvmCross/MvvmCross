@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Foundation;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Binders;
+using MvvmCross.Hosting;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Logging;
@@ -91,7 +93,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             if (string.IsNullOrEmpty(bindingText))
                 return DefaultBindingDescription;
 
-            return Mvx.IoCProvider.Resolve<IMvxBindingDescriptionParser>().Parse(bindingText);
+            return MvxHost.Current!.Services.GetRequiredService<IMvxBindingDescriptionParser>().Parse(bindingText);
         }
 
         [RequiresUnreferencedCode("This method creates bindings which use reflection and may not be preserved by trimming.")]

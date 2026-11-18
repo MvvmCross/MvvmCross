@@ -4,7 +4,9 @@
 #nullable enable
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.Presenters.Hints;
@@ -16,10 +18,10 @@ namespace MvvmCross.Presenters;
 public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttributeViewPresenter
 {
     private readonly Lazy<IMvxViewModelTypeFinder?> _viewModelTypeFinder =
-        new(() => Mvx.IoCProvider?.Resolve<IMvxViewModelTypeFinder>());
+        new(() => MvxHost.Current?.Services.GetService<IMvxViewModelTypeFinder>());
 
     private readonly Lazy<IMvxViewsContainer?> _viewsContainer =
-        new(() => Mvx.IoCProvider?.Resolve<IMvxViewsContainer>());
+        new(() => MvxHost.Current?.Services.GetService<IMvxViewsContainer>());
 
     private IDictionary<Type, MvxPresentationAttributeAction>? _attributeTypesActionsDictionary;
 
@@ -29,6 +31,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
 
     public virtual IDictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
     {
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         get
         {
             if (_attributeTypesActionsDictionary == null)
@@ -40,8 +43,10 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
         }
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public abstract void RegisterAttributeTypes();
 
+    [RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
     public abstract MvxBasePresentationAttribute CreatePresentationAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewModelType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type? viewType);
@@ -95,6 +100,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
         }
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute uses type hierarchy checks and may call CreatePresentationAttribute which requires unreferenced code.")]
     public virtual MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
     {
         if (request == null)
@@ -132,6 +138,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
         return CreatePresentationAttribute(request.ViewModelType, viewType);
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     protected virtual MvxPresentationAttributeAction GetPresentationAttributeAction(
         MvxViewModelRequest request, out MvxBasePresentationAttribute attribute)
     {
@@ -164,6 +171,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
         throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
     {
         if (await HandlePresentationChange(hint).ConfigureAwait(true))
@@ -178,6 +186,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
         return false;
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override Task<bool> Close(IMvxViewModel viewModel)
     {
         return GetPresentationAttributeAction(
@@ -186,6 +195,7 @@ public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttribut
             .Invoke(viewModel, attribute) ?? Task.FromResult(false);
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public override Task<bool> Show(MvxViewModelRequest request)
     {
         var attributeAction = GetPresentationAttributeAction(request, out var attribute);

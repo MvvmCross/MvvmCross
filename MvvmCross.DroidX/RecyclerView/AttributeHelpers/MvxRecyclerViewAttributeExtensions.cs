@@ -7,8 +7,10 @@ using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.Content.Res;
 using Android.Util;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.DroidX.RecyclerView.ItemTemplates;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
 {
@@ -100,8 +102,8 @@ namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
             try
             {
 #if NET7_0
-                if (Mvx.IoCProvider?.TryResolve(
-                    out MvvmCross.Platforms.Android.Binding.ResourceHelpers.IMvxAppResourceTypeFinder? resourceTypeFinder) != true)
+                var resourceTypeFinder = MvxHost.Current?.Services.GetService<MvvmCross.Platforms.Android.Binding.ResourceHelpers.IMvxAppResourceTypeFinder>();
+                if (resourceTypeFinder == null)
                 {
                     selectorGroup = [];
                     selector = 0;

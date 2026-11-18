@@ -12,4 +12,8 @@ This package contains the 'Test Helpers' for MvvmCross</Description>
   <ItemGroup>
     <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+  </ItemGroup>
 </Project>

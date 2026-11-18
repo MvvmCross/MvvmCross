@@ -4,7 +4,9 @@
 #nullable enable
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Core;
+using MvvmCross.Hosting;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Ios.Views;
@@ -32,19 +34,19 @@ public static class MvxCanCreateIosViewExtensions
         this IMvxCanCreateIosView view,
         MvxViewModelRequest request)
     {
-        return Mvx.IoCProvider?.Resolve<IMvxIosViewCreator>()?.CreateView(request);
+        return MvxHost.Current?.Services.GetService<IMvxIosViewCreator>()?.CreateView(request);
     }
 
     public static IMvxIosView? CreateViewControllerFor(
         this IMvxCanCreateIosView view, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type viewType)
     {
-        return Mvx.IoCProvider?.Resolve<IMvxIosViewCreator>()?.CreateViewOfType(viewType);
+        return MvxHost.Current?.Services.GetService<IMvxIosViewCreator>()?.CreateViewOfType(viewType);
     }
 
     public static IMvxIosView? CreateViewControllerFor(
         this IMvxCanCreateIosView view,
         IMvxViewModel viewModel)
     {
-        return Mvx.IoCProvider?.Resolve<IMvxIosViewCreator>()?.CreateView(viewModel);
+        return MvxHost.Current?.Services.GetService<IMvxIosViewCreator>()?.CreateView(viewModel);
     }
 }

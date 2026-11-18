@@ -4,9 +4,11 @@
 
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views.Base;
@@ -40,8 +42,9 @@ public static class MvxActivityViewExtensions
         androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity, bundle));
 
         IMvxViewModel? cached = null;
-        if (Mvx.IoCProvider?.TryResolve<IMvxSingleViewModelCache>(out var cache) == true)
-            cached = cache?.GetAndClear(bundle);
+        var cache = MvxHost.Current?.Services.GetService<IMvxSingleViewModelCache>();
+        if (cache != null)
+            cached = cache.GetAndClear(bundle);
 
         var view = (IMvxView)androidView;
         var savedState = GetSavedStateFromBundle(bundle);
@@ -53,7 +56,8 @@ public static class MvxActivityViewExtensions
         if (bundle == null)
             return null;
 
-        if (Mvx.IoCProvider?.TryResolve<IMvxSavedStateConverter>(out var converter) != true || converter == null)
+        var converter = MvxHost.Current?.Services.GetService<IMvxSavedStateConverter>();
+        if (converter == null)
         {
             MvxLogHost.Default?.Log(LogLevel.Trace, "No saved state converter available - this is OK if seen during start");
             return null;
@@ -73,9 +77,9 @@ public static class MvxActivityViewExtensions
         var view = androidView as IMvxView;
         view.OnViewDestroy();
 
-        if (Mvx.IoCProvider?.TryResolve<IMvxAppStart>(out var appStart) != true ||
-            Mvx.IoCProvider?.TryResolve<IMvxAndroidCurrentTopActivity>(out var topActivity) != true ||
-            appStart == null || topActivity == null)
+        var appStart = MvxHost.Current?.Services.GetService<IMvxAppStart>();
+        var topActivity = MvxHost.Current?.Services.GetService<IMvxAndroidCurrentTopActivity>();
+        if (appStart == null || topActivity == null)
         {
             return;
         }
@@ -128,8 +132,8 @@ public static class MvxActivityViewExtensions
         this IMvxAndroidView androidView,
         Action<IMvxAndroidActivityLifetimeListener, Activity> report)
     {
-        if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidActivityLifetimeListener? activityLifetimeListener) == true &&
-            activityLifetimeListener != null)
+        var activityLifetimeListener = MvxHost.Current?.Services.GetService<IMvxAndroidActivityLifetimeListener>();
+        if (activityLifetimeListener != null)
         {
             report(activityLifetimeListener, androidView.ToActivity());
         }
@@ -160,8 +164,8 @@ public static class MvxActivityViewExtensions
                 androidView.GetType().Name);
         }
 
-        if (Mvx.IoCProvider?.TryResolve(out IMvxAndroidViewModelLoader? viewModelLoader) == true &&
-            viewModelLoader != null)
+        var viewModelLoader = MvxHost.Current?.Services.GetService<IMvxAndroidViewModelLoader>();
+        if (viewModelLoader != null)
         {
             return viewModelLoader.Load(activity.Intent, savedState, viewModelType);
         }

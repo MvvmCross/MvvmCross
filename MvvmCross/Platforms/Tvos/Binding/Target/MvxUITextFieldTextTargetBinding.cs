@@ -1,6 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
+#nullable enable
 
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         : MvxConvertingTargetBinding
         , IMvxEditableTextView
     {
-        protected UITextField View => Target as UITextField;
+        protected UITextField? View => Target as UITextField;
 
         private bool _subscribed;
 
@@ -23,7 +24,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
         {
         }
 
-        private void HandleEditTextValueChanged(object sender, EventArgs e)
+        private void HandleEditTextValueChanged(object? sender, EventArgs e)
         {
             var view = View;
             if (view == null)
@@ -56,7 +57,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             return this.ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(target, value);
         }
 
-        protected override void SetValueImpl(object target, object value)
+        protected override void SetValueImpl(object target, object? value)
         {
             var view = (UITextField)target;
             if (view == null)
@@ -82,7 +83,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Target
             base.Dispose(isDisposing);
         }
 
-        public string CurrentText
+        public string? CurrentText
         {
             get
             {

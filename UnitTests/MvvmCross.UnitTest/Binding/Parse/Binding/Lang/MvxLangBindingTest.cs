@@ -6,30 +6,29 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Lang;
 using MvvmCross.Tests;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding.Lang
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxLangBindingTest
         : MvxBindingTest
     {
-        [Fact]
-        public void TestAll()
+        [Test]
+        public async Task TestAll()
         {
             foreach (var testPair in _toTest)
             {
-                DoTest(testPair);
+                await DoTest(testPair);
             }
         }
 
-        private void DoTest(KeyValuePair<string, MvxSerializableBindingSpecification> testPair)
+        private async Task DoTest(KeyValuePair<string, MvxSerializableBindingSpecification> testPair)
         {
             var language = new MvxLanguageBindingParser();
             MvxSerializableBindingSpecification result;
             var parsed = language.TryParseBindingSpecification(testPair.Key, out result);
-            Assert.True(parsed, "Failed to parse " + testPair.Key);
-            Assert.Single(result);
+            await Assert.That(parsed).IsTrue();
+            await Assert.That(result).HasSingleItem();
             var keyAndDescription = testPair.Value.First();
             var resultKeyAndDescription = result.First();
             var expectedDescription = new MvxSerializableBindingDescription()
@@ -41,8 +40,8 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Lang
                 Mode = MvxBindingMode.OneTime
             };
 
-            Assert.Equal(keyAndDescription.Key, resultKeyAndDescription.Key);
-            AssertAreEquivalent(expectedDescription, resultKeyAndDescription.Value);
+            await Assert.That(resultKeyAndDescription.Key).IsEqualTo(keyAndDescription.Key);
+            await AssertAreEquivalent(expectedDescription, resultKeyAndDescription.Value);
         }
 
         private readonly Dictionary<string, MvxSerializableBindingSpecification> _toTest = new Dictionary<string, MvxSerializableBindingSpecification>()

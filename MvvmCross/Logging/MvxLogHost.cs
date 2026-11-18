@@ -1,5 +1,7 @@
 #nullable enable
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Logging;
 
@@ -10,12 +12,8 @@ public static class MvxLogHost
     public static ILogger? Default => _defaultLogger ??= GetLog("Default");
 
     public static ILogger<T>? GetLog<T>() =>
-        Mvx.IoCProvider?.TryResolve<ILoggerFactory>(out var loggerFactory) == true
-            ? loggerFactory?.CreateLogger<T>()
-            : null;
+        MvxHost.Current?.Services.GetService<ILoggerFactory>()?.CreateLogger<T>();
 
     public static ILogger? GetLog(string categoryName) =>
-        Mvx.IoCProvider?.TryResolve<ILoggerFactory>(out var loggerFactory) == true
-            ? loggerFactory?.CreateLogger(categoryName)
-            : null;
+        MvxHost.Current?.Services.GetService<ILoggerFactory>()?.CreateLogger(categoryName);
 }

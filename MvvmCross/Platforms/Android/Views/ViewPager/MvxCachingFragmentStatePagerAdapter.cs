@@ -14,6 +14,8 @@ using AndroidX.Core.OS;
 using AndroidX.Fragment.App;
 using Java.Interop;
 using Java.Lang;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.ViewModels;
@@ -39,7 +41,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
         protected MvxCachingFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-            _activityType = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType();
+            _activityType = MvxHost.Current!.Services.GetRequiredService<IMvxAndroidCurrentTopActivity>().Activity.GetType();
         }
 
         [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Activity types are preserved by the Android presenter infrastructure.")]
@@ -47,7 +49,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             List<MvxViewPagerFragmentInfo> fragmentsInfo) : base(fragmentManager)
         {
             FragmentsInfo = fragmentsInfo;
-            _activityType = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType();
+            _activityType = MvxHost.Current!.Services.GetRequiredService<IMvxAndroidCurrentTopActivity>().Activity.GetType();
         }
 
         [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Fragment types are preserved by the Android presenter infrastructure.")]
@@ -108,14 +110,14 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
                 return instanceRequest.ViewModelInstance;
             }
 
-            var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
+            var viewModelLoader = MvxHost.Current!.Services.GetRequiredService<IMvxViewModelLoader>();
 
             return viewModelLoader.LoadViewModel(fragmentInfo.Request, null);
         }
 
         private static Bundle GetArguments(MvxViewPagerFragmentInfo fragmentInfo)
         {
-            var navigationSerializer = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
+            var navigationSerializer = MvxHost.Current!.Services.GetRequiredService<IMvxNavigationSerializer>();
 
             var serializedRequest = navigationSerializer.Serializer.SerializeObject(fragmentInfo.Request);
 

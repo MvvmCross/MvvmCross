@@ -38,6 +38,7 @@ public class MvxViewModelLoader
     }
 
     public IMvxViewModel ReloadViewModel<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, MvxViewModelRequest request, IMvxBundle? savedState, IMvxNavigateEventArgs? navigationArgs = null)
+        where TParameter : notnull
     {
         var viewModelLocator = FindViewModelLocator(request);
 
@@ -76,6 +77,7 @@ public class MvxViewModelLoader
 
     public IMvxViewModel LoadViewModel<TParameter>(
         MvxViewModelRequest request, TParameter param, IMvxBundle? savedState, IMvxNavigateEventArgs? navigationArgs = null)
+        where TParameter : notnull
     {
         if (request.ViewModelType == typeof(MvxNullViewModel))
         {

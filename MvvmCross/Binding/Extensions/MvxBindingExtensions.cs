@@ -5,7 +5,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using MvvmCross.Base;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Binding.Extensions;
 

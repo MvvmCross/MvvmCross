@@ -6,6 +6,7 @@ namespace MvvmCross.Platforms.Ios.Binding
 {
     internal static class MvxIosPropertyBinding
     {
+        public const string UIControl_Selected = "Selected";
         public const string UIControl_TouchDown = "TouchDown";
         public const string UIControl_TouchDownRepeat = "TouchDownRepeat";
         public const string UIControl_TouchDragInside = "TouchDragInside";

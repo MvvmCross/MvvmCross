@@ -1,0 +1,7 @@
+<Project>
+  <Import Project="../Directory.Build.props" />
+
+  <ItemGroup Condition="'$(MSBuildProjectName)' != 'MvvmCross.UnitTest.Common'">
+    <Compile Include="$(MSBuildThisFileDirectory)TestAssemblyConfiguration.cs" Link="TestAssemblyConfiguration.cs" />
+  </ItemGroup>
+</Project>

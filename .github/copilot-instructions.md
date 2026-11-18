@@ -39,8 +39,8 @@ MvvmCross is a cross-platform MVVM framework for .NET supporting Android, iOS, M
 Always run these commands after cloning:
 
 ```bash
-# Install .NET 10.0.100 (used in CI/CD)
-curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 10.0.100
+# Install .NET 10.0.300 (used in CI/CD)
+curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --version 10.0.300
 
 # Install JDK 21 (required for Android development)
 # Use Eclipse Temurin distribution consistently across all platforms:

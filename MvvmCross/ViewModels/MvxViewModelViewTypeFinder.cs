@@ -6,7 +6,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
-using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Views;
 
@@ -22,9 +21,6 @@ public class MvxViewModelViewTypeFinder(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties)] Type candidateType)
     {
         if (!CheckCandidateTypeIsAView(candidateType))
-            return null;
-
-        if (!candidateType.IsConventional())
             return null;
 
         var typeByAttribute = LookupAttributedViewModelType(candidateType);

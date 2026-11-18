@@ -248,6 +248,17 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjZ-uO-EUj">
+                                <rect key="frame" x="185.66666666666666" y="440" width="22" height="22"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="star" catalog="system"/>
+                                <state key="selected" image="star.fill" catalog="system"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78N-Mf-XE4">
+                                <rect key="frame" x="169" y="486" width="55" height="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Set Star"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -263,12 +274,18 @@
                             <constraint firstItem="157" firstAttribute="top" secondItem="155" secondAttribute="bottom" constant="33" id="407"/>
                             <constraint firstItem="11854" firstAttribute="centerX" secondItem="125" secondAttribute="centerX" id="11855"/>
                             <constraint firstItem="11854" firstAttribute="top" secondItem="157" secondAttribute="bottom" constant="33" id="11856"/>
+                            <constraint firstItem="78N-Mf-XE4" firstAttribute="centerX" secondItem="125" secondAttribute="centerX" id="7kK-ep-PLr"/>
+                            <constraint firstItem="78N-Mf-XE4" firstAttribute="top" secondItem="bjZ-uO-EUj" secondAttribute="bottom" constant="24" id="DY8-BF-8ZF"/>
+                            <constraint firstItem="bjZ-uO-EUj" firstAttribute="centerX" secondItem="125" secondAttribute="centerX" id="mEh-Ar-Jgb"/>
+                            <constraint firstItem="bjZ-uO-EUj" firstAttribute="top" secondItem="11854" secondAttribute="bottom" constant="24" id="veR-nT-WxJ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnChild" destination="157" id="name-outlet-157"/>
                         <outlet property="btnModal" destination="155" id="name-outlet-155"/>
                         <outlet property="btnNavModal" destination="156" id="name-outlet-156"/>
+                        <outlet property="btnSetStar" destination="78N-Mf-XE4" id="vIJ-Sj-zNL"/>
+                        <outlet property="btnStar" destination="bjZ-uO-EUj" id="nQZ-JS-hNz"/>
                         <outlet property="btnTab2" destination="11854" id="name-outlet-11854"/>
                     </connections>
                 </viewController>
@@ -749,4 +766,8 @@
             <point key="canvasLocation" x="2616" y="2101"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="star" catalog="system" width="128" height="116"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
+    </resources>
 </document>

@@ -4,7 +4,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Converters;
+using MvvmCross.Hosting;
 using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Visibility
@@ -25,7 +27,7 @@ namespace MvvmCross.Plugin.Visibility
     {
         private IMvxNativeVisibility _nativeVisibility;
 
-        private IMvxNativeVisibility NativeVisibility => _nativeVisibility ??= Mvx.IoCProvider.Resolve<IMvxNativeVisibility>();
+        private IMvxNativeVisibility NativeVisibility => _nativeVisibility ??= MvxHost.Current!.Services.GetRequiredService<IMvxNativeVisibility>();
 
         protected abstract MvxVisibility Convert(object value, object parameter, CultureInfo culture);
 

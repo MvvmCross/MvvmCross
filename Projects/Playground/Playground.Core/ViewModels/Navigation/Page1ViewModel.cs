@@ -15,10 +15,13 @@ namespace Playground.Core.ViewModels
     public class Page1ViewModel : MvxNavigationViewModel
     {
         public MvxCommand<int> HeaderTappedCommand { get; }
+        private readonly ILogger<Page1ViewModel> _logger;
 
         public Page1ViewModel(ILoggerFactory logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
+            _logger = logProvider.CreateLogger<Page1ViewModel>();
+
             HeaderTappedCommand = new MvxCommand<int>(DoHeaderTappedCommand);
 
             var random = new Random();
@@ -49,6 +52,7 @@ namespace Playground.Core.ViewModels
         private void DoHeaderTappedCommand(int index)
         {
             System.Diagnostics.Debug.WriteLine($"Header {index} tapped");
+            _logger.LogInformation("Header {Index} tapped", index);
         }
 
         public class SectionViewModel : MvxNotifyPropertyChanged, IEnumerable<SectionItemViewModel>

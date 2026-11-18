@@ -4,12 +4,7 @@
 
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using Microsoft.Extensions.Logging;
-using MvvmCross.Base;
-using MvvmCross.Core;
-using MvvmCross.IoC;
-using MvvmCross.Platforms.Wpf.Core;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Platforms.Wpf
 {
@@ -36,39 +31,8 @@ namespace MvvmCross.Platforms.Wpf
 
         public static void Initialize()
         {
-            if (!IsInDesignTime)
-                return;
-
-            if (MvxSingleton<IMvxIoCProvider>.Instance == null)
-            {
-                var iocProvider = MvxIoCProvider.Initialize();
-                Mvx.IoCProvider.RegisterSingleton(iocProvider);
-            }
-
-            MvxSetup.RegisterSetupType<Setup>(System.Reflection.Assembly.GetExecutingAssembly());
-            var instance = MvxWpfSetupSingleton.EnsureSingletonAvailable(Application.Current.Dispatcher, new Content());
-            instance.EnsureInitialized();
-        }
-
-        private class App : ViewModels.MvxApplication
-        {
-        }
-
-        private class Content : ContentControl
-        {
-        }
-
-        private class Setup : MvxWpfSetup<App>
-        {
-            protected override ILoggerFactory CreateLogFactory()
-            {
-                return null;
-            }
-
-            protected override ILoggerProvider CreateLogProvider()
-            {
-                return null;
-            }
+            // Design-time initialization is no longer needed with the host builder pattern.
+            // If you need design-time data, create a view model directly in your XAML designer.
         }
     }
 }

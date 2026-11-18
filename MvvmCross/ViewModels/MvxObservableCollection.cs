@@ -9,7 +9,9 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Base;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.ViewModels
 {
@@ -290,10 +292,10 @@ namespace MvvmCross.ViewModels
             if (_dispatcher != null)
                 return _dispatcher.ExecuteOnMainThreadAsync(action);
 
-            if (Mvx.IoCProvider?.TryResolve(out IMvxMainThreadAsyncDispatcher dispatcher) != true || dispatcher == null)
+            _dispatcher = MvxHost.Current?.Services.GetService<IMvxMainThreadAsyncDispatcher>();
+            if (_dispatcher == null)
                 return Task.CompletedTask;
 
-            _dispatcher = dispatcher;
             return _dispatcher.ExecuteOnMainThreadAsync(action);
         }
 

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
@@ -13,6 +14,7 @@ using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.Parse.Binding.Lang;
 using MvvmCross.Binding.Parse.Binding.Tibet;
 using MvvmCross.Converters;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Binding.Parse.Binding
 {
@@ -26,7 +28,7 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _bindingParser ??= Mvx.IoCProvider.Resolve<IMvxBindingParser>();
+                _bindingParser ??= MvxHost.Current!.Services.GetRequiredService<IMvxBindingParser>();
                 return _bindingParser;
             }
         }
@@ -37,7 +39,7 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _languageBindingParser ??= Mvx.IoCProvider.Resolve<IMvxLanguageBindingParser>();
+                _languageBindingParser ??= MvxHost.Current!.Services.GetRequiredService<IMvxLanguageBindingParser>();
                 return _languageBindingParser;
             }
         }
@@ -46,7 +48,7 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _valueConverterLookup ??= Mvx.IoCProvider.Resolve<IMvxValueConverterLookup>();
+                _valueConverterLookup ??= MvxHost.Current!.Services.GetRequiredService<IMvxValueConverterLookup>();
                 return _valueConverterLookup;
             }
         }

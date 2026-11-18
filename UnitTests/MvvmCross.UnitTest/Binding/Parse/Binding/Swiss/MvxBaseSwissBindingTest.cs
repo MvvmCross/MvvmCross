@@ -8,7 +8,6 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Swiss;
 using MvvmCross.Tests;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
 {
@@ -22,8 +21,8 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
 
         }
 
-        [Fact]
-        public void TestPathBinding()
+        [Test]
+        public async Task TestPathBinding()
         {
             var text = "Target James.T.Kirk";
             var expected = new MvxSerializableBindingSpecification()
@@ -36,11 +35,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                             }
                     }
                 };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestCommandParameterStringBinding()
+        [Test]
+        public async Task TestCommandParameterStringBinding()
         {
             var text = "Click MyCommand, CommandParameter=Foo";
             var expected = new MvxSerializableBindingSpecification()
@@ -55,11 +54,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestCommandParameterQuotedStringBinding()
+        [Test]
+        public async Task TestCommandParameterQuotedStringBinding()
         {
             var text = "Click MyCommand, CommandParameter=\"Love Converter=;Fred,It\"";
             var expected = new MvxSerializableBindingSpecification()
@@ -74,11 +73,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestCommandParameterNumberBinding()
+        [Test]
+        public async Task TestCommandParameterNumberBinding()
         {
             var text = "Tap Bar, CommandParameter=-12.12";
             var expected = new MvxSerializableBindingSpecification()
@@ -93,11 +92,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestCommandParameterBooleanBinding()
+        [Test]
+        public async Task TestCommandParameterBooleanBinding()
         {
             var text = "Life Love, CommandParameter=false";
             var expected = new MvxSerializableBindingSpecification()
@@ -112,11 +111,11 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestCommandParameterNullBinding()
+        [Test]
+        public async Task TestCommandParameterNullBinding()
         {
             var text = "Life Love, CommandParameter=null";
             var expected = new MvxSerializableBindingSpecification()
@@ -131,30 +130,30 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                     }
                 }
             };
-            PerformTest(text, expected);
+            await PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestSimpleBinding()
+        [Test]
+        public async Task TestSimpleBinding()
         {
             foreach (var parameterSet in GenerateAllTestParameters())
             {
-                PerformParseTest(parameterSet);
+                await PerformParseTest(parameterSet);
             }
         }
 
-        [Fact]
-        public void TestTupleBinding()
+        [Test]
+        public async Task TestTupleBinding()
         {
             foreach (var parameterSet1 in GenerateSampledTestParameters(101, 20))
                 foreach (var parameterSet2 in GenerateSampledTestParameters(23, 20))
                 {
-                    PerformParseTest(parameterSet1, parameterSet2);
+                    await PerformParseTest(parameterSet1, parameterSet2);
                 }
         }
 
-        [Fact]
-        public void TestLongTupleBinding()
+        [Test]
+        public async Task TestLongTupleBinding()
         {
             foreach (var parameterSet1 in GenerateSampledTestParameters(79, 5))
                 foreach (var parameterSet2 in GenerateSampledTestParameters(23, 5))
@@ -162,7 +161,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                         foreach (var parameterSet4 in GenerateSampledTestParameters(103, 5))
                             foreach (var parameterSet5 in GenerateSampledTestParameters(71, 5))
                             {
-                                PerformParseTest(parameterSet1, parameterSet2, parameterSet3, parameterSet4,
+                                await PerformParseTest(parameterSet1, parameterSet2, parameterSet3, parameterSet4,
                                                  parameterSet5);
                             }
         }
@@ -365,7 +364,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
             public KeyValuePair<string, object> FallbackValue => _fallbackValue;
         }
 
-        private void PerformParseTest(params PerformSimpleTestParams[] testParamsArray)
+        private async Task PerformParseTest(params PerformSimpleTestParams[] testParamsArray)
         {
             var text = CreateText(testParamsArray);
 
@@ -375,7 +374,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
                 expectedLookup[testParams.Target] = CreateExpectedDesciption(testParams);
             }
 
-            PerformTest(text, expectedLookup);
+            await PerformTest(text, expectedLookup);
         }
 
         private MvxSerializableBindingDescription CreateExpectedDesciption(PerformSimpleTestParams testParams)
@@ -395,15 +394,15 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
             return string.Join(";", testParams.Select(CreateText));
         }
 
-        protected void PerformTest(string text, MvxSerializableBindingSpecification expectedLookup)
+        protected async Task PerformTest(string text, MvxSerializableBindingSpecification expectedLookup)
         {
             var theParser = new TParser();
             MvxSerializableBindingSpecification specification;
             var result = theParser.TryParseBindingSpecification(text, out specification);
             if (!result)
                 Debug.WriteLine("Failed on: " + text);
-            Assert.True(result);
-            AssertAreEquivalent(expectedLookup, specification);
+            await Assert.That(result).IsTrue();
+            await AssertAreEquivalent(expectedLookup, specification);
         }
     }
 }

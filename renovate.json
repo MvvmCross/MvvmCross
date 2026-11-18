@@ -26,6 +26,7 @@
     },
     {
       "matchPackagePatterns": [
+        "Xamarin.Google.Android.Material",
         "Xamarin.GooglePlayServices.*",
         "Xamarin.Google.Android.Play.*",
         "Xamarin.Android.*"
@@ -53,11 +54,9 @@
     },
     {
       "matchPackagePatterns": [
-        "xunit.*",
-        "xunit",
-        "XunitXml.TestLogger",
+        "TUnit",
+        "TUnit.*",
         "Microsoft.Testing.*",
-        "Microsoft.NET.Test.Sdk",
         "NSubstitute",
         "NSubstitute.*"
       ],

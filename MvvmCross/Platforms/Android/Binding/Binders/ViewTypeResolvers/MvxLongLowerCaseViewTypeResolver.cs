@@ -5,23 +5,21 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Android.Views;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {
     public abstract class MvxLongLowerCaseViewTypeResolver : MvxReflectionViewTypeResolver
     {
-        protected MvxLongLowerCaseViewTypeResolver(IMvxTypeCache typeCache)
-            : base(typeCache)
+        protected MvxLongLowerCaseViewTypeResolver(IMvxViewTypeRegistry registry)
+            : base(registry)
         {
         }
 
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         protected Type ResolveLowerCaseTypeName(string longLowerCaseName)
         {
-            Type toReturn;
-            TypeCache.LowerCaseFullNameCache.TryGetValue(longLowerCaseName, out toReturn);
-            return toReturn;
+            Registry.TryResolve(longLowerCaseName, out var type);
+            return type;
         }
     }
 }

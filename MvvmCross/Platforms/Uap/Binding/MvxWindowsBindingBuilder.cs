@@ -3,13 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Converters;
-using MvvmCross.IoC;
 using MvvmCross.Platforms.Uap.Binding.MvxBinding;
 using MvvmCross.Platforms.Uap.Binding.MvxBinding.Target;
 using Windows.UI.Xaml;
@@ -32,13 +31,13 @@ namespace MvvmCross.Platforms.Uap.Binding
             _bindingType = bindingType;
         }
 
-        public override void DoRegistration(IMvxIoCProvider iocProvider)
+        public override void DoRegistration(IServiceCollection services)
         {
-            base.DoRegistration(iocProvider);
-            InitializeBindingCreator();
+            base.DoRegistration(services);
+            RegisterBindingCreator(services);
         }
 
-        protected override void RegisterBindingFactories(IMvxIoCProvider iocProvider)
+        protected override void RegisterBindingFactories(IServiceCollection services)
         {
             switch (_bindingType)
             {
@@ -47,7 +46,7 @@ namespace MvvmCross.Platforms.Uap.Binding
                     break;
 
                 case BindingType.MvvmCross:
-                    base.RegisterBindingFactories(iocProvider);
+                    base.RegisterBindingFactories(services);
                     break;
 
                 default:
@@ -70,10 +69,10 @@ namespace MvvmCross.Platforms.Uap.Binding
             }
         }
 
-        private void InitializeBindingCreator()
+        private void RegisterBindingCreator(IServiceCollection services)
         {
             var creator = CreateBindingCreator();
-            Mvx.IoCProvider.RegisterSingleton(creator);
+            services.TryAddSingleton<IMvxBindingCreator>(_ => creator);
         }
 
         protected virtual IMvxBindingCreator CreateBindingCreator()
@@ -95,9 +94,9 @@ namespace MvvmCross.Platforms.Uap.Binding
         {
             base.FillValueConverters(registry);
 
-            if (MvxSingleton<IMvxWindowsAssemblyCache>.Instance != null)
+            if (MvxWindowsAssemblyCache.Instance != null)
             {
-                foreach (var assembly in MvxSingleton<IMvxWindowsAssemblyCache>.Instance.Assemblies)
+                foreach (var assembly in MvxWindowsAssemblyCache.Instance.Assemblies)
                 {
                     registry.Fill(assembly);
                 }
@@ -108,9 +107,9 @@ namespace MvvmCross.Platforms.Uap.Binding
         {
             base.FillValueCombiners(registry);
 
-            if (MvxSingleton<IMvxWindowsAssemblyCache>.Instance != null)
+            if (MvxWindowsAssemblyCache.Instance != null)
             {
-                foreach (var assembly in MvxSingleton<IMvxWindowsAssemblyCache>.Instance.Assemblies)
+                foreach (var assembly in MvxWindowsAssemblyCache.Instance.Assemblies)
                 {
                     registry.Fill(assembly);
                 }

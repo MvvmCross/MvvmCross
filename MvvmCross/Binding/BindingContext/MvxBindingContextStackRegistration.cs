@@ -3,7 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Binding.BindingContext
@@ -11,7 +13,7 @@ namespace MvvmCross.Binding.BindingContext
     public class MvxBindingContextStackRegistration<TBindingContext>
         : IDisposable
     {
-        protected IMvxBindingContextStack<TBindingContext> Stack => Mvx.IoCProvider.Resolve<IMvxBindingContextStack<TBindingContext>>();
+        protected IMvxBindingContextStack<TBindingContext> Stack => MvxHost.Current!.Services.GetRequiredService<IMvxBindingContextStack<TBindingContext>>();
 
         public MvxBindingContextStackRegistration(TBindingContext toRegister)
         {

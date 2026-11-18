@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes;
 
@@ -49,12 +51,18 @@ public class MvxTabLayoutPresentationAttribute : MvxViewPagerFragmentPresentatio
               fragmentHostViewType,
               isCacheableFragment)
     {
-        if (!string.IsNullOrEmpty(tabLayoutResourceName) &&
-            Mvx.IoCProvider?.TryResolve(out IMvxAndroidGlobals globals) == true &&
-            globals.ApplicationContext.Resources != null)
+        if (!string.IsNullOrEmpty(tabLayoutResourceName))
         {
-            TabLayoutResourceId = globals.ApplicationContext.Resources.GetIdentifier(
-                tabLayoutResourceName, "id", globals.ApplicationContext.PackageName);
+            IMvxAndroidGlobals? globals = null;
+            if ((globals = MvxHost.Current?.Services.GetService<IMvxAndroidGlobals>()) != null && globals.ApplicationContext.Resources != null)
+            {
+                TabLayoutResourceId = globals.ApplicationContext.Resources.GetIdentifier(
+                    tabLayoutResourceName, "id", globals.ApplicationContext.PackageName);
+            }
+            else
+            {
+                TabLayoutResourceId = global::Android.Resource.Id.Content;
+            }
         }
         else
         {

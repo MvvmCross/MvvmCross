@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 #nullable enable
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
@@ -31,6 +32,7 @@ public abstract class MvxBaseConsoleContainer
         return Task.FromResult(false);
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public abstract Task<bool> Show(MvxViewModelRequest request);
 
     public abstract Task<bool> GoBack();
@@ -39,6 +41,7 @@ public abstract class MvxBaseConsoleContainer
 
     public abstract bool CanGoBack();
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public virtual async Task<bool> ChangePresentation(MvxPresentationHint hint)
     {
         if (await HandlePresentationChange(hint)) return true;
@@ -48,5 +51,6 @@ public abstract class MvxBaseConsoleContainer
         return false;
     }
 
+    [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
     public abstract Task<bool> Close(IMvxViewModel viewModel);
 }

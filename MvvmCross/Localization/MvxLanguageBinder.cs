@@ -3,7 +3,9 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Localization;
 
@@ -25,10 +27,11 @@ public class MvxLanguageBinder(string? namespaceName = null, string? typeName = 
             if (_cachedTextProvider != null)
                 return _cachedTextProvider;
 
-            if (Mvx.IoCProvider?.TryResolve(out IMvxTextProvider? cachedTextProvider) != true)
+            var cachedTextProvider = MvxHost.Current?.Services.GetService<IMvxTextProvider>();
+            if (cachedTextProvider == null)
             {
                 throw new MvxException(
-                    "Missing text provider - please initialize IoC with a suitable IMvxTextProvider");
+                    "Missing text provider - please register IMvxTextProvider with AddMvxResxLocalization or AddMvxJsonLocalization");
             }
 
             return _cachedTextProvider = cachedTextProvider;

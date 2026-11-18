@@ -34,6 +34,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
         /// </summary>
         protected readonly ConditionalWeakTable<NSWindow, NSWindowController> _windowsToWindowControllers = new();
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Creates presentation attributes based on runtime view types; type hierarchy checks may not be preserved during trimming.")]
         public override MvxBasePresentationAttribute CreatePresentationAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewType)
@@ -85,6 +86,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             NSWindow.Notifications.ObserveWillClose(OnWindowWillCloseNotification);
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Register<MvxWindowPresentationAttribute>(
@@ -312,6 +314,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             return window;
         }
 
+        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public override Task<bool> Close(IMvxViewModel viewModel)
         {
             for (int i = Windows.Count - 1; i >= 0; i--)

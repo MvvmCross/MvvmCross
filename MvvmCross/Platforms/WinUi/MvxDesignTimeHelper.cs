@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Base;
-using MvvmCross.IoC;
+using MvvmCross.Hosting;
 using Windows.ApplicationModel;
 
 namespace MvvmCross.Platforms.WinUi
@@ -15,10 +14,9 @@ namespace MvvmCross.Platforms.WinUi
             if (!IsInDesignTool)
                 return;
 
-            if (MvxSingleton<IMvxIoCProvider>.Instance == null)
+            if (MvxHost.Current == null)
             {
-                var iocProvider = MvxIoCProvider.Initialize();
-                Mvx.IoCProvider.RegisterSingleton(iocProvider);
+                // Design-time host initialization is handled by the host builder.
             }
         }
 

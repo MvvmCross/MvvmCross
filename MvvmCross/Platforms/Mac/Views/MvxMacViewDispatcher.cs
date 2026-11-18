@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
@@ -23,6 +24,7 @@ namespace MvvmCross.Platforms.Mac.Views
             _presenter = presenter;
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
             Func<Task> action = () =>
@@ -34,6 +36,7 @@ namespace MvvmCross.Platforms.Mac.Views
             return true;
         }
 
+        [RequiresUnreferencedCode("Getting presentation attribute action uses type hierarchy checks and may call GetPresentationAttribute/CreatePresentationAttribute which require unreferenced code.")]
         public async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
             Func<Task> action = () =>

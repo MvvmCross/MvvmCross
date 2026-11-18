@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Base;
-using MvvmCross.IoC;
 using Windows.ApplicationModel;
 
 namespace MvvmCross.Platforms.Uap
@@ -12,14 +10,6 @@ namespace MvvmCross.Platforms.Uap
     {
         protected MvxDesignTimeHelper()
         {
-            if (!IsInDesignTool)
-                return;
-
-            if (MvxSingleton<IMvxIoCProvider>.Instance == null)
-            {
-                var iocProvider = MvxIoCProvider.Initialize();
-                Mvx.IoCProvider.RegisterSingleton(iocProvider);
-            }
         }
 
         private static bool? _isInDesignTime;

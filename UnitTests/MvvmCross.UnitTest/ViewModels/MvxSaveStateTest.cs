@@ -8,11 +8,10 @@ using MvvmCross.Core;
 using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.ViewModels;
-using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxSaveStateTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -22,8 +21,8 @@ namespace MvvmCross.UnitTest.ViewModels
             _fixture = fixture;
         }
 
-        [Fact]
-        public void Test_SaveState()
+        [Test]
+        public async Task Test_SaveState()
         {
             _fixture.ClearAll();
 
@@ -52,20 +51,20 @@ namespace MvvmCross.UnitTest.ViewModels
             var bundle = viewModel.SaveStateBundle();
 
             var extracted = bundle.Read<BundleObject>();
-            Assert.Equal(viewModel.SaveStateBundleObject, extracted);
-            Assert.Equal("John", bundle.Data["Life1"]);
-            Assert.Equal("Jane", bundle.Data["Life2"]);
+            await Assert.That(extracted).IsEqualTo(viewModel.SaveStateBundleObject);
+            await Assert.That(bundle.Data["Life1"]).IsEqualTo("John");
+            await Assert.That(bundle.Data["Life2"]).IsEqualTo("Jane");
         }
 
-        [Fact]
-        public void Test_NullSaveState()
+        [Test]
+        public async Task Test_NullSaveState()
         {
             _fixture.ClearAll();
 
             var viewModel = new Test3ViewModel();
 
             var bundle = viewModel.SaveStateBundle();
-            Assert.Empty(bundle.Data);
+            await Assert.That(bundle.Data).IsEmpty();
         }
     }
 }

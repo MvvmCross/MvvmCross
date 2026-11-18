@@ -43,6 +43,7 @@ namespace MvvmCross.DroidX.Material.Behaviors
                    base.OnStartNestedScroll(coordinatorLayout, child, directTargetChild, target, axes, type);
         }
 
+        [Obsolete("OnNestedScroll(CoordinatorLayout, Object, View, int, int, int, int, int) is deprecated in Android API 30+. Consider migrating to NestedScrollingChild3/NestedScrollingParent3.")]
         public override void OnNestedScroll(CoordinatorLayout coordinatorLayout, Object child, View target,
             int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type)
         {

@@ -3,7 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Navigation.EventArguments;
 
 namespace MvvmCross.ViewModels
@@ -25,7 +27,10 @@ namespace MvvmCross.ViewModels
             IMvxViewModel viewModel;
             try
             {
-                viewModel = (IMvxViewModel)Mvx.IoCProvider.IoCConstruct(viewModelType);
+                var services = MvxHost.Current?.Services
+                    ?? throw new InvalidOperationException(
+                        "MvxHost has not been started. Ensure MvxHost.Start() is called before navigating.");
+                viewModel = (IMvxViewModel)ActivatorUtilities.CreateInstance(services, viewModelType);
             }
             catch (Exception exception)
             {
@@ -43,6 +48,7 @@ namespace MvvmCross.ViewModels
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
             IMvxNavigateEventArgs? navigationArgs = null)
+            where TParameter : notnull
         {
             if (viewModelType == null)
                 throw new ArgumentNullException(nameof(viewModelType));
@@ -50,7 +56,10 @@ namespace MvvmCross.ViewModels
             IMvxViewModel<TParameter> viewModel;
             try
             {
-                viewModel = (IMvxViewModel<TParameter>)Mvx.IoCProvider.IoCConstruct(viewModelType);
+                var services = MvxHost.Current?.Services
+                    ?? throw new InvalidOperationException(
+                        "MvxHost has not been started. Ensure MvxHost.Start() is called before navigating.");
+                viewModel = (IMvxViewModel<TParameter>)ActivatorUtilities.CreateInstance(services, viewModelType);
             }
             catch (Exception exception)
             {

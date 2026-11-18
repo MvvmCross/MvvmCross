@@ -7,6 +7,12 @@ on:
       - develop
   workflow_dispatch:
 
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
 permissions:
   contents: read
 
@@ -20,8 +26,13 @@ jobs:
     runs-on: windows-latest
     
     steps:
+    - name: Harden the runner (Audit all outbound calls)
+      uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+      with:
+        egress-policy: audit
+
     - name: Checkout
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
       with:
         fetch-depth: 0
         fetch-tags: true  
@@ -37,7 +48,7 @@ jobs:
         dir ${{ github.workspace }}\ctrf
     
     - name: Publish Test Report
-      uses: ctrf-io/github-test-reporter@024bc4b64d997ca9da86833c6b9548c55c620e40 # v1.0.26
+      uses: ctrf-io/github-test-reporter@dbb08957b5b2af918b39136ab2c5532002c7649b # v1.3.2
       with:
         report-path: ${{ github.workspace }}/ctrf/*.ctrf.json
         summary-report: true
@@ -49,7 +60,7 @@ jobs:
       if: always()
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: build-artifacts
         path: ${{ github.workspace }}\output

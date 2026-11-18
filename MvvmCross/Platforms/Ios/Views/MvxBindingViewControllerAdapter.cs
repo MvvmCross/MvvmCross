@@ -3,8 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios.Views.Base;
 
@@ -20,7 +22,8 @@ namespace MvvmCross.Platforms.Ios.Views
             if (!(eventSource is IMvxIosView))
                 throw new ArgumentException($"{nameof(eventSource)} should be a {nameof(IMvxIosView)}", nameof(eventSource));
 
-            if (Mvx.IoCProvider?.TryResolve<IMvxBindingContext>(out var bindingContext) == true)
+            var bindingContext = MvxHost.Current?.Services.GetService<IMvxBindingContext>();
+            if (bindingContext != null)
                 IosView.BindingContext = bindingContext;
         }
 

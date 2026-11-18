@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 #nullable enable
 using Android.Views;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {
@@ -11,8 +10,8 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
     {
         public IList<string> Namespaces { get; }
 
-        public MvxNamespaceListViewTypeResolver(IMvxTypeCache typeCache)
-            : base(typeCache)
+        public MvxNamespaceListViewTypeResolver(IMvxViewTypeRegistry registry)
+            : base(registry)
         {
             Namespaces = new List<string>();
         }
@@ -37,7 +36,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
             foreach (var ns in Namespaces)
             {
                 var candidateName = ns + lowerTagName;
-                if (TypeCache.LowerCaseFullNameCache.TryGetValue(candidateName, out var type))
+                if (Registry.TryResolve(candidateName, out var type))
                     return type;
             }
 

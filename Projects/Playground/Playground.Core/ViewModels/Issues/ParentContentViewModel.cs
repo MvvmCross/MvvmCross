@@ -1,4 +1,7 @@
-using MvvmCross;
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MS-PL license.
+// See the LICENSE file in the project root for more information.
+
 using MvvmCross.Commands;
 using MvvmCross.ViewModels;
 
@@ -6,33 +9,34 @@ namespace Playground.Core.ViewModels
 {
     public class ParentContentViewModel : MvxViewModel
     {
+        private readonly IMvxViewModelLoader _viewModelLoader;
+
+        public ParentContentViewModel(IMvxViewModelLoader viewModelLoader)
+        {
+            _viewModelLoader = viewModelLoader;
+        }
+
         private ChildContentViewModel _childViewModel1;
         public ChildContentViewModel ChildViewModel1
         {
             get => _childViewModel1;
-            set
-            {
-                SetProperty(ref _childViewModel1, value);
-            }
+            set => SetProperty(ref _childViewModel1, value);
         }
+
         private ChildContentViewModel _childBindingContext2;
         public ChildContentViewModel ChildBindingContext2
         {
             get => _childBindingContext2;
-            set
-            {
-                SetProperty(ref _childBindingContext2, value);
-            }
+            set => SetProperty(ref _childBindingContext2, value);
         }
+
         private bool _childViewModelEnabled;
         public bool ChildViewModelEnabled
         {
             get => _childViewModelEnabled;
-            set
-            {
-                SetProperty(ref _childViewModelEnabled, value);
-            }
+            set => SetProperty(ref _childViewModelEnabled, value);
         }
+
         public IMvxCommand ChangeButtonCmd1 => new MvxCommand(() => ChildViewModel1.Test = (ChildViewModel1.Test == "Bound Text 1" ? "Bound Text 2" : "Bound Text 1"));
         public IMvxCommand ToggleChild1EnabledCmd => new MvxCommand(() => ChildViewModelEnabled = !ChildViewModelEnabled);
 
@@ -40,10 +44,10 @@ namespace Playground.Core.ViewModels
 
         public override void Prepare()
         {
-            var vm = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>().LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as ChildContentViewModel;
+            var vm = _viewModelLoader.LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as ChildContentViewModel;
             vm.Test = "Child 1";
             ChildViewModel1 = vm;
-            var bc = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>()
+            var bc = _viewModelLoader
                     .LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as
                 ChildContentViewModel;
             bc.Test = "Child 2";

@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
@@ -20,7 +22,7 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
             if (tvOSView.Request == null)
             {
-                tvOSView.Request = Mvx.IoCProvider.Resolve<IMvxCurrentRequest>().CurrentRequest;
+                tvOSView.Request = MvxHost.Current!.Services.GetRequiredService<IMvxCurrentRequest>().CurrentRequest;
             }
 
             var instanceRequest = tvOSView.Request as MvxViewModelInstanceRequest;
@@ -29,7 +31,7 @@ namespace MvvmCross.Platforms.Tvos.Views
                 return instanceRequest.ViewModelInstance;
             }
 
-            var loader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
+            var loader = MvxHost.Current!.Services.GetRequiredService<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(tvOSView.Request, null /* no saved state on tvOS currently */);
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + tvOSView.Request.ViewModelType);

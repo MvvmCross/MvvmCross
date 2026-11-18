@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Foundation;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.ViewModels;
@@ -17,6 +19,8 @@ namespace MvvmCross.Platforms.Ios.Views
 {
     public class MvxTabBarViewController : MvxBaseTabBarViewController, IMvxTabBarViewController
     {
+        internal WeakReference<MvxIosViewPresenter> Presenter { get; set; }
+
         public MvxTabBarViewController() : base()
         {
             // WORKAROUND: UIKit makes a first ViewDidLoad call, because a TabViewController expects it's view (tabs) to be drawn 
@@ -78,8 +82,10 @@ namespace MvvmCross.Platforms.Ios.Views
 
             if (IsMovingFromParentViewController)
             {
-                if (Mvx.IoCProvider?.TryResolve(out IMvxIosViewPresenter iPresenter) == true
-                    && iPresenter is MvxIosViewPresenter mvxIosViewPresenter)
+                var iPresenter = Presenter != null && Presenter.TryGetTarget(out var owner)
+                    ? owner
+                    : MvxHost.Current?.Services.GetService<IMvxIosViewPresenter>();
+                if (iPresenter is MvxIosViewPresenter mvxIosViewPresenter)
                 {
                     mvxIosViewPresenter.CloseTabBarViewController();
                 }

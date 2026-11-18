@@ -15,11 +15,10 @@ using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Converters;
 using MvvmCross.Tests;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Binders
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxSourceStepTests
     {
         private readonly NavigationTestFixture _fixture;
@@ -234,8 +233,8 @@ namespace MvvmCross.UnitTest.Binding.Binders
             return sourceStepFactory;
         }
 
-        [Fact]
-        public void TestCombinerPropertiesMissingBinding()
+        [Test]
+        public async Task TestCombinerPropertiesMissingBinding()
         {
             var realSourceStepFactory = SetupSourceStepFactory();
 
@@ -267,41 +266,41 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(typeof(double), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(double));
 
             var value = sourceStep.GetValue();
-            Assert.Equal($"{doubleProperty}It was missing", value);
+            await Assert.That(value).IsEqualTo($"{doubleProperty}It was missing");
 
             var changes = new List<object>();
             sourceStep.Changed += (sender, args) => { changes.Add(sourceStep.GetValue()); };
 
             source.DoubleProperty1 = doubleProperty = 11.11;
 
-            Assert.Single(changes);
-            Assert.Equal($"{doubleProperty}It was missing", changes[0]);
+            await Assert.That(changes).HasSingleItem();
+            await Assert.That(changes[0]).IsEqualTo($"{doubleProperty}It was missing");
 
             value = sourceStep.GetValue();
-            Assert.Equal($"{doubleProperty}It was missing", value);
+            await Assert.That(value).IsEqualTo($"{doubleProperty}It was missing");
 
             source.DoubleProperty1 = doubleProperty = 12.11;
 
-            Assert.Equal(2, changes.Count);
-            Assert.Equal($"{doubleProperty}It was missing", changes[1]);
+            await Assert.That(changes.Count).IsEqualTo(2);
+            await Assert.That(changes[1]).IsEqualTo($"{doubleProperty}It was missing");
 
             value = sourceStep.GetValue();
-            Assert.Equal($"{doubleProperty}It was missing", value);
+            await Assert.That(value).IsEqualTo($"{doubleProperty}It was missing");
 
             source.SubSource = new MySubSource { SubProperty1 = "Hello" };
 
-            Assert.Equal(3, changes.Count);
-            Assert.Equal($"{doubleProperty}Hello", changes[2]);
+            await Assert.That(changes.Count).IsEqualTo(3);
+            await Assert.That(changes[2]).IsEqualTo($"{doubleProperty}Hello");
 
             value = sourceStep.GetValue();
-            Assert.Equal($"{doubleProperty}Hello", value);
+            await Assert.That(value).IsEqualTo($"{doubleProperty}Hello");
         }
 
-        [Fact]
-        public void TestCombinerPropertiesMissingBinding_Part2()
+        [Test]
+        public async Task TestCombinerPropertiesMissingBinding_Part2()
         {
             var realSourceStepFactory = SetupSourceStepFactory();
 
@@ -333,41 +332,41 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(typeof(object), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(object));
 
             var value = sourceStep.GetValue();
-            Assert.Equal($"It was missing{doubleProperty}", value);
+            await Assert.That(value).IsEqualTo($"It was missing{doubleProperty}");
 
             var changes = new List<object>();
             sourceStep.Changed += (sender, args) => { changes.Add(sourceStep.GetValue()); };
 
             source.DoubleProperty1 = doubleProperty = 11.11;
 
-            Assert.Single(changes);
-            Assert.Equal($"It was missing{doubleProperty}", changes[0]);
+            await Assert.That(changes).HasSingleItem();
+            await Assert.That(changes[0]).IsEqualTo($"It was missing{doubleProperty}");
 
             value = sourceStep.GetValue();
-            Assert.Equal($"It was missing{doubleProperty}", value);
+            await Assert.That(value).IsEqualTo($"It was missing{doubleProperty}");
 
             source.DoubleProperty1 = doubleProperty = 12.11;
 
-            Assert.Equal(2, changes.Count);
-            Assert.Equal($"It was missing{doubleProperty}", changes[1]);
+            await Assert.That(changes.Count).IsEqualTo(2);
+            await Assert.That(changes[1]).IsEqualTo($"It was missing{doubleProperty}");
 
             value = sourceStep.GetValue();
-            Assert.Equal($"It was missing{doubleProperty}", value);
+            await Assert.That(value).IsEqualTo($"It was missing{doubleProperty}");
 
             source.SubSource = new MySubSource { SubProperty1 = "Hello" };
 
-            Assert.Equal(3, changes.Count);
-            Assert.Equal($"Hello{doubleProperty}", changes[2]);
+            await Assert.That(changes.Count).IsEqualTo(3);
+            await Assert.That(changes[2]).IsEqualTo($"Hello{doubleProperty}");
 
             value = sourceStep.GetValue();
-            Assert.Equal($"Hello{doubleProperty}", value);
+            await Assert.That(value).IsEqualTo($"Hello{doubleProperty}");
         }
 
-        [Fact]
-        public void TestCombinerPropertiesPresentBinding()
+        [Test]
+        public async Task TestCombinerPropertiesPresentBinding()
         {
             var realSourceStepFactory = SetupSourceStepFactory();
 
@@ -397,33 +396,33 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(typeof(double), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(double));
 
             var value = sourceStep.GetValue();
-            Assert.Equal(35.79, value);
+            await Assert.That(value).IsEqualTo(35.79);
 
             var changes = new List<object>();
             sourceStep.Changed += (sender, args) => { changes.Add(sourceStep.GetValue()); };
 
             source.DoubleProperty1 = 11.11;
 
-            Assert.Single(changes);
-            Assert.Equal(34.56, changes[0]);
+            await Assert.That(changes).HasSingleItem();
+            await Assert.That(changes[0]).IsEqualTo(34.56);
 
             value = sourceStep.GetValue();
-            Assert.Equal(34.56, value);
+            await Assert.That(value).IsEqualTo(34.56);
 
             source.DoubleProperty2 = 12.11;
 
-            Assert.Equal(2, changes.Count);
-            Assert.Equal(23.22, changes[1]);
+            await Assert.That(changes.Count).IsEqualTo(2);
+            await Assert.That(changes[1]).IsEqualTo(23.22);
 
             value = sourceStep.GetValue();
-            Assert.Equal(23.22, value);
+            await Assert.That(value).IsEqualTo(23.22);
         }
 
-        [Fact]
-        public void TestIndedexedChangePropagationBinding()
+        [Test]
+        public async Task TestIndedexedChangePropagationBinding()
         {
             var realSourceStepFactory = SetupSourceStepFactory();
 
@@ -439,49 +438,49 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(typeof(string), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(string));
 
             var value = sourceStep.GetValue();
-            Assert.Equal("Initial", value);
+            await Assert.That(value).IsEqualTo("Initial");
 
             var changes = new List<object>();
             sourceStep.Changed += (sender, args) => { changes.Add(sourceStep.GetValue()); };
 
             source.Collection[0] = "Changed to 17";
 
-            Assert.Single(changes);
-            Assert.Equal("Changed to 17", changes[0]);
+            await Assert.That(changes).HasSingleItem();
+            await Assert.That(changes[0]).IsEqualTo("Changed to 17");
 
             value = sourceStep.GetValue();
-            Assert.Equal("Changed to 17", value);
+            await Assert.That(value).IsEqualTo("Changed to 17");
 
             sourceStep.DataContext = new MySource();
 
             value = sourceStep.GetValue();
-            Assert.Equal(MvxBindingConstant.UnsetValue, value);
+            await Assert.That(value).IsEqualTo(MvxBindingConstant.UnsetValue);
 
             source.Collection[0] = "Changed again 19";
 
-            Assert.Single(changes);
+            await Assert.That(changes).HasSingleItem();
 
             sourceStep.DataContext = source;
 
-            Assert.Single(changes);
+            await Assert.That(changes).HasSingleItem();
 
             value = sourceStep.GetValue();
-            Assert.Equal("Changed again 19", value);
+            await Assert.That(value).IsEqualTo("Changed again 19");
 
             source.Collection[0] = "Changed again again 19";
 
-            Assert.Equal(2, changes.Count);
-            Assert.Equal("Changed again again 19", changes[1]);
+            await Assert.That(changes.Count).IsEqualTo(2);
+            await Assert.That(changes[1]).IsEqualTo("Changed again again 19");
 
             value = sourceStep.GetValue();
-            Assert.Equal("Changed again again 19", value);
+            await Assert.That(value).IsEqualTo("Changed again again 19");
         }
 
-        [Fact]
-        public void TestLiteralDoubleBinding()
+        [Test]
+        public async Task TestLiteralDoubleBinding()
         {
             var realSourceStepFactory = SetupSourceStepFactory();
 
@@ -499,14 +498,14 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(typeof(double), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(double));
 
             var value = sourceStep.GetValue();
-            Assert.Equal(13.72, value);
+            await Assert.That(value).IsEqualTo(13.72);
         }
 
-        [Fact]
-        public void TestLiteralStringBinding()
+        [Test]
+        public async Task TestLiteralStringBinding()
         {
             var realSourceStepFactory = SetupSourceStepFactory();
 
@@ -524,14 +523,14 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(typeof(string), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(string));
 
             var value = sourceStep.GetValue();
-            Assert.Equal("Love it", value);
+            await Assert.That(value).IsEqualTo("Love it");
         }
 
-        [Fact]
-        public void TestSimpleChangePropagationBinding()
+        [Test]
+        public async Task TestSimpleChangePropagationBinding()
         {
             var source = new MySource
             {
@@ -540,49 +539,49 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             var sourceStep = SetupSimpleBindingTest(source, "Property1");
 
-            Assert.Equal(typeof(string), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(string));
 
             var value = sourceStep.GetValue();
-            Assert.Equal("Test 42", value);
+            await Assert.That(value).IsEqualTo("Test 42");
 
             var changes = new List<object>();
             sourceStep.Changed += (sender, args) => { changes.Add(sourceStep.GetValue()); };
 
             source.Property1 = "Changed to 17";
 
-            Assert.Single(changes);
-            Assert.Equal("Changed to 17", changes[0]);
+            await Assert.That(changes).HasSingleItem();
+            await Assert.That(changes[0]).IsEqualTo("Changed to 17");
 
             value = sourceStep.GetValue();
-            Assert.Equal("Changed to 17", value);
+            await Assert.That(value).IsEqualTo("Changed to 17");
 
             sourceStep.DataContext = new MySource();
 
             value = sourceStep.GetValue();
-            Assert.Null(value);
+            await Assert.That(value).IsNull();
 
             source.Property1 = "Changed again 19";
 
-            Assert.Single(changes);
+            await Assert.That(changes).HasSingleItem();
 
             sourceStep.DataContext = source;
 
-            Assert.Single(changes);
+            await Assert.That(changes).HasSingleItem();
 
             value = sourceStep.GetValue();
-            Assert.Equal("Changed again 19", value);
+            await Assert.That(value).IsEqualTo("Changed again 19");
 
             source.Property1 = "Changed again again 19";
 
-            Assert.Equal(2, changes.Count);
-            Assert.Equal("Changed again again 19", changes[1]);
+            await Assert.That(changes.Count).IsEqualTo(2);
+            await Assert.That(changes[1]).IsEqualTo("Changed again again 19");
 
             value = sourceStep.GetValue();
-            Assert.Equal("Changed again again 19", value);
+            await Assert.That(value).IsEqualTo("Changed again again 19");
         }
 
-        [Fact]
-        public void TestSimpleCollectionBinding()
+        [Test]
+        public async Task TestSimpleCollectionBinding()
         {
             var realSourceStepFactory = SetupSourceStepFactory();
 
@@ -598,21 +597,21 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(typeof(string), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(string));
 
             var value = sourceStep.GetValue();
-            Assert.Equal("Pah", value);
+            await Assert.That(value).IsEqualTo("Pah");
 
             source.Collection.Add("Hi there");
             value = sourceStep.GetValue();
-            Assert.Equal("Hi there", value);
+            await Assert.That(value).IsEqualTo("Hi there");
 
             sourceStep.SetValue("New value");
-            Assert.Equal("New value", source.Collection[0]);
+            await Assert.That(source.Collection[0]).IsEqualTo("New value");
         }
 
-        [Fact]
-        public void TestSimpleDoubleBinding()
+        [Test]
+        public async Task TestSimpleDoubleBinding()
         {
             var source = new MySource
             {
@@ -621,18 +620,18 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             var sourceStep = SetupSimpleBindingTest(source, "DoubleProperty1");
 
-            Assert.Equal(typeof(double), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(double));
 
             var value = sourceStep.GetValue();
-            Assert.Equal(42.21, value);
+            await Assert.That(value).IsEqualTo(42.21);
 
             sourceStep.SetValue(13.72);
 
-            Assert.Equal(13.72, source.DoubleProperty1);
+            await Assert.That(source.DoubleProperty1).IsEqualTo(13.72);
         }
 
-        [Fact]
-        public void TestSimpleIntBinding()
+        [Test]
+        public async Task TestSimpleIntBinding()
         {
             var realSourceStepFactory = SetupSourceStepFactory();
 
@@ -650,21 +649,21 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(typeof(int), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(int));
 
             var value = sourceStep.GetValue();
-            Assert.Equal(42, value);
+            await Assert.That(value).IsEqualTo(42);
 
             sourceStep.SetValue(72);
 
-            Assert.Equal(72, source.IntProperty1);
+            await Assert.That(source.IntProperty1).IsEqualTo(72);
 
             sourceStep.SetValue("101");
-            Assert.Equal(101, source.IntProperty1);
+            await Assert.That(source.IntProperty1).IsEqualTo(101);
         }
 
-        [Fact]
-        public void TestSimpleIntWithValueConversionBinding()
+        [Test]
+        public async Task TestSimpleIntWithValueConversionBinding()
         {
             var realSourceStepFactory = SetupSourceStepFactory();
 
@@ -683,26 +682,26 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(typeof(int), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(int));
 
             var value = sourceStep.GetValue();
-            Assert.Equal(43, value);
+            await Assert.That(value).IsEqualTo(43);
 
             var changed = -99;
             sourceStep.Changed += (sender, args) => changed = (int)sourceStep.GetValue();
 
             source.IntProperty1 = 71;
-            Assert.Equal(72, changed);
+            await Assert.That(changed).IsEqualTo(72);
 
             value = sourceStep.GetValue();
-            Assert.Equal(72, value);
+            await Assert.That(value).IsEqualTo(72);
 
             sourceStep.SetValue(101);
-            Assert.Equal(100, source.IntProperty1);
+            await Assert.That(source.IntProperty1).IsEqualTo(100);
         }
 
-        [Fact]
-        public void TestSimpleStringBinding()
+        [Test]
+        public async Task TestSimpleStringBinding()
         {
             var source = new MySource
             {
@@ -711,18 +710,18 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             var sourceStep = SetupSimpleBindingTest(source, "Property1");
 
-            Assert.Equal(typeof(string), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(string));
 
             var value = sourceStep.GetValue();
-            Assert.Equal("Test 42", value);
+            await Assert.That(value).IsEqualTo("Test 42");
 
             sourceStep.SetValue("Life line");
 
-            Assert.Equal("Life line", source.Property1);
+            await Assert.That(source.Property1).IsEqualTo("Life line");
         }
 
-        [Fact]
-        public void TestSimpleSubObjectChangePropagationBinding()
+        [Test]
+        public async Task TestSimpleSubObjectChangePropagationBinding()
         {
             var realSourceStepFactory = SetupSourceStepFactory();
 
@@ -740,43 +739,43 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(typeof(string), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(string));
 
             var value = sourceStep.GetValue();
-            Assert.Equal("Test 42", value);
+            await Assert.That(value).IsEqualTo("Test 42");
 
             var changes = new List<object>();
             sourceStep.Changed += (sender, args) => { changes.Add(sourceStep.GetValue()); };
 
             source.SubSource.SubProperty1 = "Changed to 17";
 
-            Assert.Single(changes);
-            Assert.Equal("Changed to 17", changes[0]);
+            await Assert.That(changes).HasSingleItem();
+            await Assert.That(changes[0]).IsEqualTo("Changed to 17");
 
             value = sourceStep.GetValue();
-            Assert.Equal("Changed to 17", value);
+            await Assert.That(value).IsEqualTo("Changed to 17");
 
             var oldSubSource = source.SubSource;
             source.SubSource = new MySubSource { SubProperty1 = "New Sub object" };
 
-            Assert.Equal(2, changes.Count);
-            Assert.Equal("New Sub object", changes[1]);
+            await Assert.That(changes.Count).IsEqualTo(2);
+            await Assert.That(changes[1]).IsEqualTo("New Sub object");
 
             value = sourceStep.GetValue();
-            Assert.Equal("New Sub object", value);
+            await Assert.That(value).IsEqualTo("New Sub object");
 
             oldSubSource.SubProperty1 = "Should not fire";
 
-            Assert.Equal(2, changes.Count);
+            await Assert.That(changes.Count).IsEqualTo(2);
 
             source.SubSource.SubProperty1 = "Should fire";
 
-            Assert.Equal(3, changes.Count);
-            Assert.Equal("Should fire", changes[2]);
+            await Assert.That(changes.Count).IsEqualTo(3);
+            await Assert.That(changes[2]).IsEqualTo("Should fire");
         }
 
-        [Fact]
-        public void TestSimpleSubPropertyBinding()
+        [Test]
+        public async Task TestSimpleSubPropertyBinding()
         {
             var realSourceStepFactory = SetupSourceStepFactory();
 
@@ -794,25 +793,25 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(typeof(string), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(string));
 
             var value = sourceStep.GetValue();
-            Assert.Equal("Hello World", value);
+            await Assert.That(value).IsEqualTo("Hello World");
 
             source.SubSource.SubProperty2 = "Hello Mum";
 
-            Assert.Equal(typeof(string), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(string));
 
             value = sourceStep.GetValue();
-            Assert.Equal("Hello Mum", value);
+            await Assert.That(value).IsEqualTo("Hello Mum");
             source.SubSource.SubProperty2 = "Hello Mum";
 
             source.SubSource = null;
 
-            Assert.Equal(typeof(object), sourceStep.SourceType);
+            await Assert.That(sourceStep.SourceType).IsEqualTo(typeof(object));
 
             value = sourceStep.GetValue();
-            Assert.Equal(MvxBindingConstant.UnsetValue, value);
+            await Assert.That(value).IsEqualTo(MvxBindingConstant.UnsetValue);
         }
     }
 }

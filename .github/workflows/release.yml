@@ -9,6 +9,12 @@ on:
       - hotfix/**
   workflow_dispatch:
 
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
 permissions:
   contents: read
 
@@ -17,12 +23,19 @@ jobs:
     permissions:
       id-token: write
       attestations: write
+      artifact-metadata: write
+      packages: write
 
     runs-on: windows-latest
 
     steps:
+    - name: Harden the runner (Audit all outbound calls)
+      uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
+      with:
+        egress-policy: audit
+  
     - name: Checkout
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
       with:
         fetch-depth: 0
         fetch-tags: true
@@ -32,11 +45,8 @@ jobs:
     - name: Build
       run: dotnet run --project build/Build.csproj -- --verbosity=Minimal --artifactsDir="${{ github.workspace }}\output"
 
-    - name: Install sign tool
-      run: dotnet tool install --tool-path . sign --version 0.9.1-beta.25379.1
-
     - name: 'Az CLI login'
-      uses: azure/login@a457da9ea143d694b1b9c7c869ebb04ebe844ef5 #v2.3.0
+      uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
       with:
         client-id: ${{ secrets.SIGN_AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.SIGN_AZURE_TENANT_ID }}
@@ -45,7 +55,7 @@ jobs:
     - name: Sign artifacts
       shell: pwsh
       run: >
-        ./sign code azure-key-vault
+        dnx sign@0.9.1-beta.26552.4 code azure-key-vault
         **/*.nupkg
         --base-directory "${{ github.workspace }}/output"
         --publisher-name "MvvmCross"
@@ -55,20 +65,19 @@ jobs:
         --azure-key-vault-certificate "${{ secrets.SIGN_AZURE_KEY_VAULT_CERTIFICATE_ID }}"
 
     - name: Attest NuGet packages
-      uses: actions/attest-sbom@4651f806c01d8637787e274ac3bdf724ef169f34 # v3.0.0
+      uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
       with:
         subject-path: ${{ github.workspace }}\output\NuGet\*.nupkg
         sbom-path: ${{ github.workspace }}\output\sbom\MvvmCross.sbom.json
-        push-to-registry: true
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: build-artifacts
         path: ${{ github.workspace }}\output
 
     - name: NuGet login (OIDC → temp API key)
-      uses: NuGet/login@d22cc5f58ff5b88bf9bd452535b4335137e24544 #v1
+      uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1
       id: login
       with:
         user: ${{ secrets.NUGET_USER }}
@@ -82,7 +91,7 @@ jobs:
 
     - name: GitHub Packages Push
       env:
-        NUGET_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_API_KEY }}
+        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SOURCE_URL: https://nuget.pkg.github.com/mvvmcross/index.json
       run: |
         dotnet nuget push -s ${{ env.SOURCE_URL }} -k ${{ env.NUGET_AUTH_TOKEN }} ${{ github.workspace }}\output\**\*.nupkg           

@@ -4,8 +4,10 @@
 #nullable enable
 using System.Diagnostics.CodeAnalysis;
 using Android.Views;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.ViewModels;
@@ -28,7 +30,7 @@ public static class MvxFragmentExtensions
     public static void OnCreate(this IMvxFragmentView fragmentView, IMvxBundle bundle, MvxViewModelRequest? request = null)
     {
         IMvxMultipleViewModelCache? cache = null;
-        if (Mvx.IoCProvider?.TryResolve(out cache) == true && fragmentView.ViewModel != null)
+        if ((cache = MvxHost.Current?.Services.GetService<IMvxMultipleViewModelCache>()) != null && fragmentView.ViewModel != null)
         {
             // check if ViewModel instance was cached. If so, clear it and ignore previous instance
             cache!.GetAndClear(fragmentView.ViewModel.GetType(), fragmentView.UniqueImmutableCacheTag);
@@ -63,7 +65,7 @@ public static class MvxFragmentExtensions
 
         if (fragment.BindingContext == null)
         {
-            fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Activity,
+            fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Activity!,
                 new MvxSimpleLayoutInflaterHolder(inflater),
                 fragment.DataContext);
         }
@@ -81,7 +83,7 @@ public static class MvxFragmentExtensions
 
         if (fragment.BindingContext == null)
         {
-            fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Context,
+            fragment.BindingContext = new MvxAndroidBindingContext(actualFragment.Context!,
                 new MvxSimpleLayoutInflaterHolder(
                     actualFragment.LayoutInflater),
                 fragment.DataContext);
@@ -133,7 +135,7 @@ public static class MvxFragmentExtensions
 
     public static void LoadViewModelFrom(this IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle? savedState = null)
     {
-        if (Mvx.IoCProvider?.TryResolve(out IMvxViewModelLoader? loader) != true)
+        if (MvxHost.Current?.Services.GetService<IMvxViewModelLoader>() is not { } loader)
             return;
 
         var viewModel = loader?.LoadViewModel(request, savedState);

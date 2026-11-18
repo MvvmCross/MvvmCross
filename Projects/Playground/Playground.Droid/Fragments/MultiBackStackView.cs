@@ -5,7 +5,10 @@
 using System.Diagnostics.CodeAnalysis;
 using Android.Views;
 using Google.Android.Material.Navigation;
-using MvvmCross;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Hosting;
 using MvvmCross.Navigation;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -64,7 +67,7 @@ public sealed class MultiBackStackView : MvxFragment<MultiBackStackViewModel>
                 if (!_navigatedToTab2)
                 {
                     _navigatedToTab2 = true;
-                    Mvx.IoCProvider.Resolve<IMvxNavigationService>().Navigate(typeof(MultiBackStackTab2ViewModel));
+                    MvxHost.Current?.Services.GetRequiredService<IMvxNavigationService>().Navigate(typeof(MultiBackStackTab2ViewModel));
                 }
                 else
                 {

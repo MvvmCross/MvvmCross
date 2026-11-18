@@ -8,10 +8,10 @@
 using System;
 using System.Windows;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Base;
 using MvvmCross.Binding;
-using MvvmCross.Core;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.Platforms.Wpf.Binding
 {
@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Wpf.Binding
         {
             get
             {
-                _bindingCreator = _bindingCreator ?? Mvx.IoCProvider.Resolve<IMvxBindingCreator>();
+                _bindingCreator = _bindingCreator ?? MvxHost.Current?.Services.GetService<IMvxBindingCreator>();
                 return _bindingCreator;
             }
         }
@@ -69,10 +69,8 @@ namespace MvvmCross.Platforms.Wpf.Binding
 
         private static IEnumerable<MvxBindingDescription> ParseBindingDescriptions(string languageText)
         {
-            if (MvxSingleton<IMvxBindingSingletonCache>.Instance == null)
-                return null;
-
-            return MvxSingleton<IMvxBindingSingletonCache>.Instance.BindingDescriptionParser.LanguageParse(languageText);
+            return MvxHost.Current?.Services.GetService<IMvxBindingSingletonCache>()
+                ?.BindingDescriptionParser.LanguageParse(languageText);
         }
     }
 }

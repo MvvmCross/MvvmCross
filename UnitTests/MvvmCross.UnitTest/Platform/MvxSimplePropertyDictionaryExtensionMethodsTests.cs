@@ -5,11 +5,10 @@
 using System.Collections.Generic;
 using MvvmCross.Core;
 using MvvmCross.Tests;
-using Xunit;
 
 namespace MvvmCross.UnitTest.Platform
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxSimplePropertyDictionaryExtensionMethodsTests
     {
         private readonly NavigationTestFixture _fixture;
@@ -20,8 +19,8 @@ namespace MvvmCross.UnitTest.Platform
             fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
         }
 
-        [Fact]
-        public void Read_ObjectHasValidPropertiesInBaseClass_BaseClassPropertiesAreDeserialized()
+        [Test]
+        public async Task Read_ObjectHasValidPropertiesInBaseClass_BaseClassPropertiesAreDeserialized()
         {
             const string value = "42";
             var dictionary = new Dictionary<string, string>
@@ -33,9 +32,9 @@ namespace MvvmCross.UnitTest.Platform
 
             var deserialized = dictionary.Read<ObjectWithValidPropertiesInBaseClass>();
 
-            Assert.Equal(value, deserialized.ChildProperty);
-            Assert.Equal(value, deserialized.BasePropertyInternalSet);
-            Assert.Equal(value, deserialized.BasePropertyPublicSet);
+            await Assert.That(deserialized.ChildProperty).IsEqualTo(value);
+            await Assert.That(deserialized.BasePropertyInternalSet).IsEqualTo(value);
+            await Assert.That(deserialized.BasePropertyPublicSet).IsEqualTo(value);
         }
 
         private class ObjectWithValidPropertiesInBaseClass : ObjectWithValidPropertiesInBaseClassBase

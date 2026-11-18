@@ -6,11 +6,10 @@ using System.Globalization;
 using MvvmCross.Plugin.Visibility;
 using MvvmCross.Tests;
 using MvvmCross.UI;
-using Xunit;
 
 namespace MvvmCross.Plugin.Visibility.UnitTest
 {
-    [Collection("Visibility")]
+    [ClassDataSource<MvxTestFixture>(Shared = SharedType.Keyed, Key = "Visibility")]
     public class VisibilityValueConverterTest
     {
         MvxTestFixture _fixture;
@@ -23,28 +22,28 @@ namespace MvvmCross.Plugin.Visibility.UnitTest
             _fixture.Ioc.RegisterSingleton<IMvxNativeVisibility>(new MockNativeVisibility());
         }
 
-        [Theory]
-        [InlineData(true, false, MvxVisibility.Visible)]
-        [InlineData(true, true, MvxVisibility.Visible)]
-        [InlineData(false, false, MvxVisibility.Collapsed)]
-        [InlineData(false, true, MvxVisibility.Hidden)]
-        public void VisibilityValueConverter_Test(bool visible, bool hide, MvxVisibility expected)
+        [Test]
+        [Arguments(true, false, MvxVisibility.Visible)]
+        [Arguments(true, true, MvxVisibility.Visible)]
+        [Arguments(false, false, MvxVisibility.Collapsed)]
+        [Arguments(false, true, MvxVisibility.Hidden)]
+        public async Task VisibilityValueConverter_Test(bool visible, bool hide, MvxVisibility expected)
         {
             var converter = new MvxVisibilityValueConverter();
             var result = converter.Convert(visible, typeof(bool), hide, CultureInfo.CurrentUICulture);
-            Assert.Equal(expected, result);
+            await Assert.That(result).IsEqualTo(expected);
         }
 
-        [Theory]
-        [InlineData(true, false, MvxVisibility.Collapsed)]
-        [InlineData(true, true, MvxVisibility.Hidden)]
-        [InlineData(false, false, MvxVisibility.Visible)]
-        [InlineData(false, true, MvxVisibility.Visible)]
-        public void InvertedVisibilityValueConverter_Test(bool visible, bool hide, MvxVisibility expected)
+        [Test]
+        [Arguments(true, false, MvxVisibility.Collapsed)]
+        [Arguments(true, true, MvxVisibility.Hidden)]
+        [Arguments(false, false, MvxVisibility.Visible)]
+        [Arguments(false, true, MvxVisibility.Visible)]
+        public async Task InvertedVisibilityValueConverter_Test(bool visible, bool hide, MvxVisibility expected)
         {
             var converter = new MvxInvertedVisibilityValueConverter();
             var result = converter.Convert(visible, typeof(bool), hide, CultureInfo.CurrentUICulture);
-            Assert.Equal(expected, result);
+            await Assert.That(result).IsEqualTo(expected);
         }
 
         public class MockNativeVisibility : IMvxNativeVisibility

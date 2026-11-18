@@ -26,13 +26,13 @@ namespace MvvmCross.ViewModels
             return _viewModels.Values.Any(x => x.GetType() == viewModelType);
         }
 
-        public IMvxViewModel Get(int index)
+        public IMvxViewModel? Get(int index)
         {
-            _viewModels.TryGetValue(index, out IMvxViewModel viewModel);
+            _viewModels.TryGetValue(index, out IMvxViewModel? viewModel);
             return viewModel;
         }
 
-        public IMvxViewModel Get(Type viewModelType)
+        public IMvxViewModel? Get(Type viewModelType)
         {
             return _viewModels.Values.FirstOrDefault(x => x.GetType() == viewModelType);
         }

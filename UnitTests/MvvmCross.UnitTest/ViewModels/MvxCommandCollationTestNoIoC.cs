@@ -4,11 +4,10 @@
 
 using System;
 using MvvmCross.Commands;
-using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels
 {
-    [Collection("MvxTest")]
+    [ClassDataSource<NavigationTestFixture>(Shared = SharedType.Keyed, Key = "MvxTest")]
     public class MvxCommandCollationTestNoIoC
     {
         private readonly NavigationTestFixture _fixture;
@@ -20,35 +19,35 @@ namespace MvvmCross.UnitTest.ViewModels
             fixture.Reset();
         }
 
-        [Fact]
-        public void CanConstructCommand()
+        [Test]
+        public async Task CanConstructCommand()
         {
             var command = new MvxCommand(() => {/* nothing to see here */});
 
-            Assert.NotNull(command);
+            await Assert.That(command).IsNotNull();
         }
 
-        [Fact]
-        public void CanExecuteCommand()
+        [Test]
+        public async Task CanExecuteCommand()
         {
             var i = 0;
             var command = new MvxCommand(() => { ++i; });
 
-            Assert.NotNull(command);
+            await Assert.That(command).IsNotNull();
 
             command.Execute();
 
-            Assert.Equal(1, i);
+            await Assert.That(i).IsEqualTo(1);
         }
 
-        [Fact]
-        public void CanExecuteChanged()
+        [Test]
+        public async Task CanExecuteChanged()
         {
             var canExecute = false;
 
             var command = new MvxCommand(() => { }, () => canExecute);
 
-            Assert.False(command.CanExecute());
+            await Assert.That(command.CanExecute()).IsFalse();
 
             var i = 0;
             command.CanExecuteChanged += (s, e) =>
@@ -59,8 +58,8 @@ namespace MvvmCross.UnitTest.ViewModels
             canExecute = true;
             command.RaiseCanExecuteChanged();
 
-            Assert.True(command.CanExecute());
-            Assert.Equal(1, i);
+            await Assert.That(command.CanExecute()).IsTrue();
+            await Assert.That(i).IsEqualTo(1);
         }
     }
 }

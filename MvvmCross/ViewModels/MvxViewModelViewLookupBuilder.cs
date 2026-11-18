@@ -5,8 +5,10 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Base;
 using MvvmCross.Exceptions;
-using MvvmCross.IoC;
+using MvvmCross.Hosting;
 
 namespace MvvmCross.ViewModels;
 
@@ -16,14 +18,14 @@ public class MvxViewModelViewLookupBuilder
     [RequiresUnreferencedCode("This method uses reflection to check for referenced assemblies, which may not be preserved by trimming")]
     public virtual IDictionary<Type, Type> Build(IEnumerable<Assembly> sourceAssemblies)
     {
-        var associatedTypeFinder = Mvx.IoCProvider?.Resolve<IMvxViewModelTypeFinder>();
+        var associatedTypeFinder = MvxHost.Current?.Services.GetService<IMvxViewModelTypeFinder>();
 
         var views = sourceAssemblies
             .SelectMany(assembly => assembly.ExceptionSafeGetTypes(),
                 (assembly, candidateViewType) => new { assembly, candidateViewType })
             .Select(t => new { t, viewModelType = associatedTypeFinder?.FindTypeOrNull(t.candidateViewType) })
             .Where(t => t.viewModelType != null)
-            .Select(t => (t.viewModelType, t.t.candidateViewType));
+            .Select(t => (t.viewModelType!, t.t.candidateViewType));
 
         var filteredViews = FilterViews(views);
 

@@ -20,6 +20,9 @@ namespace MvvmCross.Platforms.Android.Views
 {
     [Register("mvvmcross.platforms.android.views.MvxTabsFragmentActivity")]
     [RequiresUnreferencedCode("MvxBindings require unreferenced code")]
+    [System.Runtime.Versioning.ObsoletedOSPlatform("android30.0",
+        "TabHost and related APIs are obsolete since Android API 30. " +
+        "Consider migrating to ViewPager2 with TabLayout for modern tab navigation.")]
     public abstract class MvxTabsFragmentActivity
         : MvxActivity, TabHost.IOnTabChangeListener
     {

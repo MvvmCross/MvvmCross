@@ -78,6 +78,7 @@ namespace MvvmCross.Navigation
         /// <param name="viewModel"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> Close(IMvxViewModel viewModel, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -86,6 +87,7 @@ namespace MvvmCross.Navigation
         /// <param name="hint"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> ChangePresentation(MvxPresentationHint hint, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -95,6 +97,7 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle">(optional) presentation bundle</param>
         /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns>Boolean indicating successful navigation</returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> Navigate(IMvxViewModel viewModel, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -106,8 +109,10 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle">(optional) presentation bundle</param>
         /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns>Boolean indicating successful navigation</returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param,
-            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default);
+            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TParameter : notnull;
 
         /// <summary>
         /// Navigates to a ViewModel Type
@@ -116,6 +121,7 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle"></param>
         /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns>Boolean indicating successful navigation</returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> Navigate([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -127,7 +133,9 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle"></param>
         /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <returns>Boolean indicating successful navigation</returns>
-        Task<bool> Navigate<TParameter>([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType, TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default);
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
+        Task<bool> Navigate<TParameter>([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType, TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TParameter : notnull;
 
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
@@ -151,7 +159,8 @@ namespace MvvmCross.Navigation
         /// <returns>Boolean indicating successful navigation</returns>
         [RequiresUnreferencedCode("This method uses reflection which may not be preserved during trimming")]
         Task<bool> Navigate<TParameter>(string path, TParameter param,
-            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default);
+            IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
+            where TParameter : notnull;
 
         /// <summary>
         /// Navigate to a ViewModel determined by its type
@@ -160,6 +169,7 @@ namespace MvvmCross.Navigation
         /// <param name="cancellationToken">CancellationToken to cancel the navigation</param>
         /// <typeparam name="TViewModel">Type of <see cref="IMvxViewModel"/></typeparam>
         /// <returns>Boolean indicating successful navigation</returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(
             IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
             where TViewModel : IMvxViewModel;
@@ -173,9 +183,11 @@ namespace MvvmCross.Navigation
         /// <typeparam name="TViewModel">Type of <see cref="IMvxViewModel{Parameter}"/></typeparam>
         /// <typeparam name="TParameter">Parameter passed to ViewModel</typeparam>
         /// <returns>Boolean indicating successful navigation</returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel, TParameter>(
             TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
-                where TViewModel : IMvxViewModel<TParameter>;
+                where TViewModel : IMvxViewModel<TParameter>
+                where TParameter : notnull;
 
         /// <summary>
         ///     Loads a view model targeting the window for the given source.
@@ -190,6 +202,7 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle">The presentation bungle.</param>
         /// <param name="cancellationToken">Any cancellation token.</param>
         /// <returns>True if navigation was successful.</returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel, TParameter>(TParameter param, IMvxViewModel source, IMvxBundle? presentationBundle = null,
             CancellationToken cancellationToken = default) where TViewModel : IMvxViewModel<TParameter>
             where TParameter : notnull;
@@ -207,6 +220,7 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle">The presentation bungle.</param>
         /// <param name="cancellationToken">Any cancellation token.</param>
         /// <returns>True if navigation was successful.</returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> Navigate<TParameter>([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType, TParameter param, IMvxViewModel source, IMvxBundle? presentationBundle = null,
             CancellationToken cancellationToken = default)
             where TParameter : notnull;
@@ -222,6 +236,7 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle">A presentation bundle.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> Navigate([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type viewModelType, IMvxViewModel source, IMvxBundle? presentationBundle = null,
             CancellationToken cancellationToken = default);
 
@@ -236,6 +251,7 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle">The presentation bundle.</param>
         /// <param name="cancellationToken">Any cancellation token.</param>
         /// <returns>True if successful, false otherwise.</returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> Navigate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TViewModel>(IMvxViewModel source,
             IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
             where TViewModel : IMvxViewModel;
@@ -251,6 +267,7 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle">The presentation bundle.</param>
         /// <param name="cancellationToken">Any cancellation token.</param>
         /// <returns>True if successful, false otherwise.</returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> Navigate(
             IMvxViewModel viewModel, IMvxViewModel source, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default);
 
@@ -267,6 +284,7 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle">The presentation bundle.</param>
         /// <param name="cancellationToken">Any cancellation token.</param>
         /// <returns>True if successful, false otherwise.</returns>
+        [RequiresUnreferencedCode("Navigation uses presentation attributes and view type lookups that may not be preserved during trimming.")]
         Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxViewModel source,
             IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default)
             where TParameter : notnull;

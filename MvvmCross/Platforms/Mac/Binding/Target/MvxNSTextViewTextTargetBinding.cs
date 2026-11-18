@@ -1,42 +1,41 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
+#nullable enable
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platforms.Mac.Binding.Target
 {
-    public class MvxNSTextViewTextTargetBinding : MvxConvertingTargetBinding<NSTextView, string>
+    public class MvxNSTextViewTextTargetBinding : MvxPropertyInfoTargetBinding<NSTextView>
     {
-        public MvxNSTextViewTextTargetBinding(NSTextView target)
-            : base(target)
+        private readonly IDisposable? _subscription;
+
+        public MvxNSTextViewTextTargetBinding(NSTextView target, PropertyInfo targetPropertyInfo)
+            : base(target, targetPropertyInfo)
         {
-            var editText = Target;
+            var editText = View;
             if (editText == null)
             {
                 MvxBindingLog.Instance?.LogError(
                                       "NSTextView is null in MvxNSTextViewTextTargetBinding");
             }
+            else
+            {
+                // Todo: Perhaps we want to trigger on editing complete rather than didChange
+                _subscription = editText.WeakSubscribe(nameof(NSTextView.TextDidChange), EditTextDidChange);
+            }
         }
 
-        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("This method may use reflection to subscribe to events which may not be preserved by trimming")]
-        public override void SubscribeToEvents()
+        private void EditTextDidChange(object? sender, EventArgs eventArgs)
         {
-            base.SubscribeToEvents();
-            // Todo: Perhaps we want to trigger on editing complete rather than didChange
-            if (Target is { } editText)
-                editText.TextDidChange += EditTextDidChange;
-        }
-
-        private void EditTextDidChange(object sender, EventArgs eventArgs)
-        {
-            var view = Target;
+            var view = View;
             if (view == null)
                 return;
-            FireValueChanged(view.TextStorage.Value);
+            FireValueChanged(view.Value);
         }
 
         public override MvxBindingMode DefaultMode
@@ -44,9 +43,9 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             get { return MvxBindingMode.TwoWay; }
         }
 
-        protected override void SetValueImpl(NSTextView target, string value)
+        protected override void SetValueImpl(object target, object? value)
         {
-            target?.TextStorage.SetString(new NSAttributedString(value ?? string.Empty));
+            base.SetValueImpl(target, value ?? "");
         }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("Binding functionality accesses members dynamically through reflection.")]
@@ -55,11 +54,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Target
             base.Dispose(isDisposing);
             if (isDisposing)
             {
-                var editText = Target;
-                if (editText != null)
-                {
-                    editText.TextDidChange -= EditTextDidChange;
-                }
+                _subscription?.Dispose();
             }
         }
     }

@@ -5,7 +5,9 @@
 using System.Diagnostics.CodeAnalysis;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross;
+using Microsoft.Extensions.DependencyInjection;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Hosting;
 using MvvmCross.Platforms.Android;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -38,8 +40,8 @@ namespace Playground.Droid.Fragments
 
         public override void OnPause()
         {
-            var top = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>();
-            var activity = top.Activity;
+            var top = MvxHost.Current?.Services.GetService<IMvxAndroidCurrentTopActivity>();
+            var activity = top?.Activity;
 
             base.OnPause();
         }

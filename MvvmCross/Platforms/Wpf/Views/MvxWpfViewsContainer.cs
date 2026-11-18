@@ -4,7 +4,9 @@
 
 using System;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Exceptions;
+using MvvmCross.Hosting;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
@@ -28,7 +30,7 @@ namespace MvvmCross.Platforms.Wpf.Views
             }
             else
             {
-                var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
+                var viewModelLoader = MvxHost.Current?.Services.GetRequiredService<IMvxViewModelLoader>();
                 wpfView.ViewModel = viewModelLoader.LoadViewModel(request, null);
             }
 

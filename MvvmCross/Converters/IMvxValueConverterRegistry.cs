@@ -3,11 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Base;
+using MvvmCross.Binding.Binders;
 
 namespace MvvmCross.Converters
 {
 #nullable enable
-    public interface IMvxValueConverterRegistry : IMvxNamedInstanceRegistry<IMvxValueConverter>
+    public interface IMvxValueConverterRegistry
+        : IMvxNamedInstanceRegistry<IMvxValueConverter>, IMvxValueConverterLookup
     {
     }
 #nullable restore

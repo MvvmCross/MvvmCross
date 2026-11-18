@@ -4,7 +4,7 @@
 
 namespace MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers
 {
-    public interface IMvxNamespaceListViewTypeResolver
+    public interface IMvxNamespaceListViewTypeResolver : IMvxViewTypeResolver
     {
         void Add(string namespaceName);
     }
