@@ -23,6 +23,7 @@ jobs:
     permissions:
       id-token: write
       attestations: write
+      artifact-metadata: write
 
     runs-on: windows-latest
 
@@ -70,7 +71,6 @@ jobs:
       with:
         subject-path: ${{ github.workspace }}\output\NuGet\*.nupkg
         sbom-path: ${{ github.workspace }}\output\sbom\MvvmCross.sbom.json
-        push-to-registry: true
 
     - name: Upload artifacts
       uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
