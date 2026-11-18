@@ -8,10 +8,12 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using MvvmCross.Base;
 using MvvmCross.Hosting;
+
 
 namespace MvvmCross.ViewModels
 {
@@ -160,17 +162,29 @@ namespace MvvmCross.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
+            var newItems = ToSpan(items);
+            var startIndex = firstIndex;
+            var replacedCount = Math.Min(newItems.Length, oldSize);
+
+            // The event args need the replaced items after they have been
+            // overwritten, so snapshot just that segment into an array.
+            var oldItems = new T[replacedCount];
+            for (var i = 0; i < replacedCount; i++)
+            {
+                oldItems[i] = this[startIndex + i];
+            }
+
             using (SuppressEvents())
             {
                 var lastIndex = firstIndex + oldSize - 1;
 
                 // If there are more items in the previous list, remove them.
-                while (firstIndex + items.Count() <= lastIndex)
+                while (firstIndex + newItems.Length <= lastIndex)
                 {
                     RemoveAt(lastIndex--);
                 }
 
-                foreach (var item in items)
+                foreach (var item in newItems)
                 {
                     if (firstIndex <= lastIndex)
                         SetItem(firstIndex++, item);
@@ -179,11 +193,24 @@ namespace MvvmCross.ViewModels
                 }
             }
 
-            // TODO: Emit up to two OnCollectionChangedEvents:
-            //   1. Replace for those items replaced.
-            //   2. Add for items added beyond the original size.
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            if (replacedCount > 0)
+            {
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(
+                    NotifyCollectionChangedAction.Replace,
+                    newItems.Slice(0, replacedCount).ToArray(),
+                    oldItems,
+                    startIndex));
+            }
+
+            if (newItems.Length > replacedCount)
+            {
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(
+                    NotifyCollectionChangedAction.Add,
+                    newItems.Slice(replacedCount).ToArray(),
+                    startIndex + replacedCount));
+            }
         }
+
 
         /// <summary>
         /// Switches the current <see cref="MvxObservableCollection{T}"/> instance items with the ones specified in the items collection, raising the minimum required change events.
@@ -232,15 +259,32 @@ namespace MvvmCross.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
+            var itemsToRemove = ToSpan(items);
+            var removedItems = new List<(T Item, int Index)>();
+
             using (SuppressEvents())
             {
-                foreach (var item in items)
+                foreach (var item in itemsToRemove)
                 {
+                    var index = IndexOf(item);
+                    if (index < 0)
+                    {
+                        continue;
+                    }
+
+                    removedItems.Add((item, index));
                     Remove(item);
                 }
             }
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+
+            foreach (var (removedItem, index) in removedItems)
+            {
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(
+                    NotifyCollectionChangedAction.Remove, removedItem, index));
+            }
         }
+
+
 
         /// <summary>
         /// Removes the current <see cref="MvxObservableCollection{T}"/> instance items of the ones specified in the range, raising the minimum required change events.
@@ -283,6 +327,24 @@ namespace MvvmCross.ViewModels
 
             OnCollectionChanged(
                 new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItems, start));
+        }
+
+        // Returns a span over the items without copying when the source is
+        // an array or a list. Any other IEnumerable<T> has to be enumerated
+        // to be indexed into, so it is materialized into an array once.
+        private static ReadOnlySpan<T> ToSpan(IEnumerable<T> items)
+        {
+            if (items is T[] itemsArray)
+            {
+                return itemsArray;
+            }
+
+            if (items is List<T> list)
+            {
+                return CollectionsMarshal.AsSpan(list);
+            }
+
+            return items.ToArray();
         }
 
         private IMvxMainThreadAsyncDispatcher _dispatcher;
