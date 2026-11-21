@@ -21,7 +21,7 @@
     <PackageVersion Include="NSubstitute.Analyzers.CSharp" Version="1.0.17" />
     <PackageVersion Include="NSubstitute" Version="6.2.0" />
     <PackageVersion Include="Roslynator.Analyzers" Version="5.0.1" />
-    <PackageVersion Include="Serilog.Extensions.Logging" Version="10.0.0" />
+    <PackageVersion Include="Serilog.Extensions.Logging" Version="11.0.0" />
     <PackageVersion Include="Serilog.Sinks.Async" Version="2.1.0" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageVersion Include="Serilog.Sinks.Debug" Version="3.0.0" />
