@@ -48,7 +48,7 @@ jobs:
         dir ${{ github.workspace }}\ctrf
     
     - name: Publish Test Report
-      uses: ctrf-io/github-test-reporter@dbb08957b5b2af918b39136ab2c5532002c7649b # v1.3.2
+      uses: ctrf-io/github-test-reporter@c2e2997afb89a9a515d83121ce7499e272630446 # v1.4.0
       with:
         report-path: ${{ github.workspace }}/ctrf/*.ctrf.json
         summary-report: true
